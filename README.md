@@ -62,7 +62,7 @@ I think it's a challenging beginner course. These days Python is the preferred l
 ### <a name="softcons"></a> Software Construction 1, 2
 ### <a name="crypt"></a> Cryptography 1
 ### <a name="cs50-2"></a> CS50, second half, Final Project
-OK, this was a total mess. 
+OK, this was a total mess. (Apparently they improved it later with "tracks" you can follow, like Android, game, web, iOS.)
 
 They throw so many languages at you all at once, and you don't really have time to learn any of them properly: Python, HTML, CSS, JavaScript, SQL, Jinja (templating language), the Flask web framework for Python, holy hell. I already knew some Python so all was well on that front. But the learning curve gets SUPER STEEP all of a sudden after 6 weeks of C. You'll want to go back to pointers, if you can believe it!
 
@@ -74,7 +74,7 @@ I had some ideas. First I was going to make an interactive Game Theory web app w
 
 Here's my project: https://number-python.herokuapp.com/
 
-PLEASE PLEASE check out the source code of that page. It's beautiful! You'll never see HTML like that anywhere. I wrote it like I was writing nice, styled code in a proper programming language. In fact I wrote a Python script to generate the HTML code automatically from other text/script files. I FELT SUPER SMART! I automated stuff and nobody even taught me or told me to do it!
+Check out the source code of that page. It's beautiful! You'll never see HTML like that anywhere. I wrote it like I was writing nice, styled code in a proper programming language. In fact I wrote a Python script to generate the HTML code automatically from other text/script files. I FELT SUPER SMART! I automated stuff and nobody even taught me or told me to do it!
 
 Looking for options on an interactive Python console that can be embedded in a web page, I came across [Brython](https://brython.info). Not only it provided an easily embeddable fully functional Python console that had way more modules of the Python library and performed much better than any other alternatives, it let me write Python DIRECTLY INSIDE HTML! Bye bye JavaScript! No need for Flask or any other web framework either. Just straight up HTML. Everything is client-side, no server/user-login involved. You can see the Python scripts in the source code. Brython is SUPER SLOW on initial load (has to translate a large chunk of Python standard library to JS), but once loaded, there are no page-reloads afterwards (all client-side) so the interaction is fast.
 
@@ -82,7 +82,7 @@ I had to figure out how to use LaTeX (mathematical typesetting) on a web page. T
 
 I spent about 5 weeks making my project after "finishing" CS50. I'm pretty sure I spent one entire week on trying to figure out something called Window.getComputedStyle() to do a certain animation/user-input update thing. Only to learn later that the W3 School made a custom CSS template that does it automatically... I still have a list of improvements I was going to do. Like learn how to use HTML5 local storage so the next time a user visits the page, it remembers where they left off. I realized that I could keep spending MONTHS on polishing this project. So I decided to move on.
 
-*Spam's recommendation:* Take it only if you like messy challenges. This is the world of web programming, where nothing makes sense, and code from multiple languages are meshed together in spaghetti and it's all raining on your head, meatballs and all. I liked it but it was super frustrating. For me it replaces the Software Engineering Capstone Project which I did not take due to paywall.
+*Spam's recommendation:* Take it only if you like messy challenges. This is the world of web programming, where nothing makes sense, and code from multiple languages are meshed together in spaghetti and it's all raining on your head, meatballs and all.  I liked it but it was super frustrating. For me it replaces the Software Engineering Capstone Project which I did not take due to paywall.
 
 ### <a name="softproc"></a> Software Processes
 ### <a name="softarch"></a> Software Architecture
