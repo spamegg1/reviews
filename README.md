@@ -1,7 +1,7 @@
 # Spam's CS Corner: Course Reviews
 DISCLAIMER: These are my subjective personal opinions! Make your own judgment. Also, I will talk a lot about my feelings! You are warned.
 
-- [Harvard's CS50](#cs50)
+- [Harvard's CS50 (first half)](#cs50)
 - [How to Code 1 & 2](#how-to-code)
 - [Programming Languages A, B, C](#plabc)
 - [Learn Prolog Now!](#lpn)
@@ -28,7 +28,10 @@ DISCLAIMER: These are my subjective personal opinions! Make your own judgment. A
 - [Software Architecture](#softarch)
 - [Functional Programming in Haskell](#haskell)
 
-### <a name="cs50"></a> Harvard's CS50 
+### <a name="cs50"></a> Harvard's CS50 (first half)
+This was my first course. In 2018 this was the "intro/beginner" course on OSSU curriculum. For the sake of completeness I took the whole course at once, including the [second half](#cs50-2).
+
+
 ### <a name="how-to-code"></a> How to Code 1 & 2
 ### <a name="plabc"></a> Programming Languages A, B, C
 ### <a name="lpn"></a> Learn Prolog Now!
