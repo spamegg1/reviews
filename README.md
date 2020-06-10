@@ -54,6 +54,8 @@ https://www.coursera.org/learn/programming-languages
 https://www.coursera.org/learn/programming-languages-part-b
 https://www.coursera.org/learn/programming-languages-part-c
 
+*Spam's recommendation:* Drop what you are doing and take these now! 
+
 ### <a name="lpn"></a> Learn Prolog Now!
 https://lpn.swi-prolog.org/lpnpage.php?pageid=top
 This is a text-only course, like a textbook. There is a book version of it too I believe. No videos.
@@ -72,7 +74,13 @@ Originally Prolog was created by a linguist, so the main application is studying
 
 ### <a name="hpffp"></a> Haskell Programming from First Principles
 https://haskellbook.com/
-I didn't pay for this. $59? Are you kidding? My Specialization cost me $0, please. In my country I can eat for a month with $59. It's a great book though. Although SUPER SUPER SUPER LONG! Like 1900 pages. I think I quit at page 1700 or so, after Applicative. This was by far the most useful thing for my Specialization. Scala totally rips off Haskell in so many ways, even the syntax is mostly the same. Even though I never saw a single line of Scala code before starting my Spec, I flew through Martin Odersky's courses.
+I didn't pay for this. $59? Are you kidding? My Specialization cost me $0, please. In my country I can eat for a month with $59 (local currency crap against the mighty dollar). It's a great book though. Although SUPER SUPER SUPER LONG! Like 1900 pages. I think I quit at page 1700 or so, after Applicative. 
+
+This was by far the most useful thing for my Specialization. Scala totally rips off Haskell in so many ways, even the syntax is mostly the same. Even though I never saw a single line of Scala code before starting my Spec, I flew through Martin Odersky's courses.
+
+I love Haskell! It's awesome. Most of your time, like 95%, will be spent battling the type checker. It's like martial arts practice. I call it "Type-Kata". The type checker will reject almost all of your code. Just when you think you wisened up and grasped a concept, the type checker will throw it back in your face; and remind you of what a useless, incompetent piece of garbage you are. Go back to Python, you loser. But magically, if your code passes the type checker, it will be usually correct and bug-free. That's why they call it *The Venerable Glasgow Haskell Compiler*.
+
+Did I already tell you that this is hard? It's very hard. The book is full of code though, and I typed all of it. Many of the exercises are of the "guess the correct type" type. (Did I just make a pun?) It also takes you step by step through creating and compiling projects using Haskell's build tool, Stack.
 
 *Spam's recommendation:* I'm gonna say... don't take it. Unless you are an evil pirate like me who is also into masochism. It's super duper hard anyways, and definitely not worth $59. It will take you a LONG TIME to get through this book. But if you do, your Functional Scala Specialization will be a total cakewalk.
 
