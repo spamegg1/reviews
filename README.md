@@ -1,7 +1,7 @@
 # Spam's CS Corner: Course Reviews
 DISCLAIMER: These are my subjective personal opinions! Make your own judgment. Also, I will talk a lot about my feelings! You are warned.
 
-- [Harvard's CS50 (first half)](#cs50)
+- [Harvard's CS50 (first half)](#cs50) https://cs50.harvard.edu/
 - [How to Code 1 & 2](#how-to-code)
 - [Programming Languages A, B, C](#plabc)
 - [Learn Prolog Now!](#lpn)
@@ -29,7 +29,6 @@ DISCLAIMER: These are my subjective personal opinions! Make your own judgment. A
 - [Functional Programming in Haskell](#haskell)
 
 ### <a name="cs50"></a> Harvard's CS50 (first half)
-https://cs50.harvard.edu/
 This was my first course. In 2018 this was the "intro/beginner" course on OSSU curriculum. For the sake of completeness I took the whole course at once, including the [second half](#cs50-2). It's pretty challenging for a beginner course, because that's how Harvard does it. In terms of college course numbering, they go with 050 but it feels more like a 200-level class.
 
 The course uses an online IDE which was really top-notch in my opinion. They even invented their own version of the C compiler that gives more "beginner-friendly" and more helpful error messages. They created a much more beginner-friendly version of the "man-pages" for C. They even teach you how to use "valgrind", a code analysis/memory leak detection tool that even some pros don't know or use.
