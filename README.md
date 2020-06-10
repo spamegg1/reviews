@@ -28,6 +28,7 @@ DISCLAIMER: These are my subjective personal opinions! Make your own judgment. A
 - [Software Processes](#softproc)
 - [Software Architecture](#softarch)
 - [Functional Programming in Haskell](#haskell)
+- [Udacity CS 212](#cs212)
 
 ### <a name="cs50"></a> Harvard's CS50 (first half)
 https://cs50.harvard.edu/
@@ -99,7 +100,7 @@ Part 1 makes you build basic logic gates, then bigger chips, then eventually an 
 
 Part 2 is much more software focused, longer and harder. You will write code that translates a Java Virtual Machine-like pseudo VM-code to assembly code. Then you will write a compiler for a made-up programming language called Jack, which looks like C and Java. Both of these are spread to multiple assignments. Lastly you write some code for the "OS" of your Hack computer, which is really just a Jack library providing some basic functions. Again, all the simulators and test cases are provided. Eventually you can run some complicated program on it, like Tetris or Pong. You can even write your own Jack program! I remember writing a guess-the-word game with a small dictionary loaded into memory.
 
-I have nothing bad to say about this course, maybe except that in Part 2, towards the end, with the Hack OS, Jack-to-VM compiler and VM-to-assembly translator, things can get really difficult to debug. Thankfully the instructors thought of this and provided "reference solution" Hack OS modules, Jack compiler and VM translator. So you can compare the output of yours to the reference. I found it easiest to just compare my output with "correct" output line by line. The instructors even provide a TextComparer application to do that!
+I have nothing bad to say about this course, maybe except that in Part 2, towards the end, with the Hack OS, Jack-to-VM compiler and VM-to-assembly translator, things can get really difficult to debug. Thankfully the instructors thought of this and provided "reference solution" Hack OS modules, Jack compiler and VM translator. I found it easiest to just compare my output with correct output line by line. The instructors even provide a TextComparer application to do that!
 
 These courses gave me the best feeling! I felt euphoric, like I just flashed through computing history and built everything from the ground up. I felt like I could do anything. Very empowering stuff. It's quite challenging but you get a taste of every level of programming, from low-level assembly all the way up to operating systems and applications.
 
@@ -107,20 +108,30 @@ These courses gave me the best feeling! I felt euphoric, like I just flashed thr
 
 ### <a name="intro-to-net"></a> Intro to Networking
 
-This course was a major bummer coming off the euphoric high of Nand2Tetris. It's very long, technical, academic, hard and boring. It has no programming assignments. The two instructors (one of which keeps appearing with a different hair color every lecture) don't do a very good job of explaining things. This course is a HUGE, many metric tons of info dump on your brain.
+This course was a major bummer coming off the euphoric high of Nand2Tetris. It's very long, technical, academic, hard and boring. It has no programming assignments. The two instructors (one of which keeps appearing with a different hair color every lecture) don't do a very good job of explaining things. Lecture videos are usually very long. This course is a HUGE, many metric tons of info dump on your brain.
 
 The quizzes and exams are very difficult, the questions are hard to understand, very wordy and vague (like what students call "word problems" in math classes), and very difficult to get feedback on. I finished with a 79/100 overall on the course. The exams don't let you try again, also don't give feedback on right/wrong answers. The quizzes let you try as many times as you want, but sometimes I had to do blind-guessing for 100 different values just so I could see the correct answer explanation. They are not multiple-choice. These questions are so difficult, riddled with so many different unit conversions and constants, it's so hard to know even when I'm doing something right.
 
 The best parts were those about Internet history, earlier versions of TCP and so on. There were also some routing algorithms like Dijkstra, Bellman-Ford which I relearned later in Algorithms. Those were good too. There were some interviews with what I assume important people in networking, but the video/audio quality is so poor on these it actually hurt my ears and eyes.
 
-Each topic had so many nitty gritty technical details, it's impossible to keep them all in mind. Routing, queuing algorithms, IP addresses, NAT translations, DHCP systems, DNS systems, Encodings on the physical layer, all the different speeds in different versions of TCP, dozens of separate bits and parts of a typical TCP/IP package, and so on... the textbook they chose (Kurose) is so long, wordy and unreadable I found it to be of no help. Before quizzes/exams I had to re-read PDF slides and try to make questions look like those on the slides.
+Each topic had so many nitty gritty technical details, it's impossible to keep them all in mind. Routing, queuing algorithms, IP addresses, NAT translations, DHCP systems, DNS systems, Encodings on the physical layer, all the different speeds in different versions of TCP, dozens of separate bits and parts of a typical TCP/IP package, security and cryptography, and so on... the textbook they chose (Kurose) is so long, wordy and unreadable I found it to be of no help. Before quizzes/exams I had to re-read PDF slides and try to make questions look like those on the slides.
 
 *Spam's recommendation:* Skip this. There has to be a better, more practical way to learn Networking. I don't know what it is though. 
 
 ### <a name="ostep"></a> Operating Systems: Three Easy Pieces
 http://pages.cs.wisc.edu/~remzi/OSTEP/
+
+*Spam's recommendation:* This is THE book if you want to understand operating systems.
+
 ### <a name="mit6001x"></a> Intro to CS and Programming with Python
 https://www.edx.org/course/introduction-computer-science-mitx-6-00-1x-10
+
+This is probably the best intro course ever. This is much gentler than CS50 as an intro class, obviously. I took it one year into my studies, because it got added to the OSSU curriculum one year after I started, and I wanted to do it for completeness. Obviously at that point I was not a beginner so this course was very easy and fun. I think it took me 6 days. It went so quickly because I was having so much fun.
+
+Although it was easy for me, it's not so easy from a beginner's perspective. I found the challenge level to be just right. Even with 1 year experience, the assignments made me think for a bit. It packs a lot into just 6-7 weeks and finds a perfect balance of programming and computer science, theory and practice. Starts all the way from the beginning, basic data types, integers, strings, lists, dictionaries and so on... then includes the big-O notation and runtime analysis of basic sorting algorithms, object-oriented programming, even data visualization. The instructor Eric Grimson is very nice. Friendly and good at explaining things.
+
+*Spam's recommendation:* TAKE THIS! BEST intro course ever. Ignore the other "intro/beginner" stuff like Py4e or Fundamentals of Computing (nothing against those courses).
+
 ### <a name="coretheory"></a> Algorithms (Tim Roughgarden)
 https://www.coursera.org/learn/algorithms-divide-conquer
 https://www.coursera.org/learn/algorithms-graphs-data-structures
@@ -258,3 +269,15 @@ https://www.futurelearn.com/courses/functional-programming-haskell
 This was a 6-week "course" that cannot really be called a course. It was more like a few short tutorials put together. It was so insanely short I finished it in one day. I think the last "week" was just some interview videos with some academics. In week 6 they jump into Monads (which you won't understand), because for some reason FP people MUST mention Monads! What's cool is that it's from U of Glasgow, the creators of Haskell. You get to meet Simon Peyton Jones. They talk about the history of the ML-family of languages from the 70s and 80s. They talk about Alonzo Church, Stephen Kleene and lambda calculus too. History is cool.
 
 *Spam's recommendation:* Well, I'm a sucker for computing history. I also like Scottish nerds. If you have a few hours of spare time and interested in Functional Programming, its people and its history, go for it.
+
+### <a name="cs212"></a> Udacity CS212
+
+I took this course twice! Once a few years ago before I started OSSU. I had to quit because it was too hard and I was frustrated. The second time around I finished it.
+
+The instructor Peter Norvig is a super smart guy leading Google AI Research (at the time, 2013?). His teaching style is very tough and definitely not for most people. He leaves A LOT up to you: he wants you to think through the problem, go to Python website and look up functions from the Python library to solve the problem, and not only that, but to solve it in a clever, short, elegant way. The first time I took it, a lot of students were really butthurt in the forums complaining about him.
+
+But the course is incredibly valuable. It teaches you so many "high-level" programming ideas and tricks. I first learned the concept of Refactoring here. It's a purely problem-solving, puzzle-solving course, except for the language theory section in the middle. That part just didn't click even the second time around. You solve the famous Zebra puzzle, the Pouring problem (from Die Hard 3 with Bruce Willis and Samuel Jackson), create a Poker game, solve a parking problem, among others. Norvig teaches you the concepts from breadth-first-search and depth-first-search, the problem space, the "frontier", and uses all kinds of functional programming tricks available in Python to make the code short and elegant.
+
+The assignments are very hard. Definitely up there with Algorithms or even Advanced Programming. Interestingly my Scala Specialization mentioned the Pouring problem, and Martin Odersky offered a Scala solution after praising Norvig's Python solution as "elegant".
+
+*Spam's recommendation:* Take it only if you want a real challenge, you're OK with a very indirect instructor, and you are self-driven to do your own searches through documentation and figure things out.
