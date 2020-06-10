@@ -47,7 +47,7 @@ I think it's a challenging beginner course. These days Python is the preferred l
 https://www.edx.org/course/how-to-code-simple-data
 https://www.edx.org/course/how-to-code-complex-data
 
-*Spam's recommendation:* I am personally biased to like these courses. Definitely take if you are interested in pursuing functional programming. If you already had an introductory course, you can skip these and go to Programming Languages A, B, C. PLB already uses the same language, Racket.
+*Spam's recommendation:* I am personally biased to like these courses. Definitely take if you are interested in pursuing functional programming. If you already had an introductory course, you can skip these and go to Programming Languages A, B, C. PLA uses ML to teach very similar functional programming principles, and PLB already uses the same language, Racket.
 
 ### <a name="plabc"></a> Programming Languages A, B, C
 https://www.coursera.org/learn/programming-languages
@@ -60,11 +60,13 @@ This is a text-only course, like a textbook. There is a book version of it too I
 
 If you are one of those people who like to debate programming languages and paradigms, well... The others are pretty similar, but the only "truly different" programming paradigm in my opinion is this one: Logic Programming. 
 
-It is so very different! You have to think in a completely different way: Unification and Backtracking. You have to think in terms of search trees. Even some simple exercises will trip you up. It helps that it has recursion, so it has some familiarity at least. But I must admit that Logic programming is not suitable for most problems out there. It's super cool though.
+It is so very different! You have to think in a completely different way: Unification and Backtracking. You have to think in terms of search trees. Even some simple exercises will trip you up. It helps that it has recursion, so it has some familiarity at least. Also you think of your programs as knowledge bases, to which you make queries: a bit database-like, declarative-style programming. So there is some familiarity there too if you used SQL. But I must admit that Logic programming is not suitable for most problems out there. It can also be computationally inefficient. It's super cool though.
 
-This was right up my alley, because the language works exactly like a [proof tree](https://www.quora.com/What-are-proof-trees) which I studied in Mathematical Logic. Oh and the Cut Rule! Goes back to Gentzen's 1934 [theorem](https://en.wikipedia.org/wiki/Cut-elimination_theorem).
+Backtracking is used in some "normal" programs in "normal" (non-Logic) languages though. For example you will write a brute-force Sudoku puzzle solver in How to Code 2 and then also in Udacity's Software Testing. The straightforward, non-clever solution necessitates backtracking. Another example of backtracking in "normal" programs is maze solvers: https://github.com/mikepound/mazesolving and https://www.youtube.com/watch?v=rop0W4QDOUI
 
-Originally Prolog was created by a linguist, so the main application is studying Grammars. That will be your "final project". You'll probably never use Prolog in the real world. The website claims it is coded in Prolog though!
+This was right up my alley, because the language works exactly like a [proof tree](https://www.quora.com/What-are-proof-trees) which I studied in Mathematical Logic. Oh and the Cut Rule! (to stop backtracking) Goes back to Gentzen's 1934 [theorem](https://en.wikipedia.org/wiki/Cut-elimination_theorem).
+
+Originally Prolog was created by a linguist, so the main application is studying Grammars. The course will teach you context free grammars and definite clause grammars. Very important stuff if you want to go into parsing and compilers! That will be your "final project". You'll probably never use Prolog in the real world. The website claims it is coded in Prolog though!
 
 *Spam's recommendation:* Take it only if you like complex mathematical algorithmic thinking, or have strong interest/background in Mathematical Logic/Proof Theory/Linguistics. But the Logic Programming's way of thinking can be VERY USEFUL if you plan to go into an area of CS with hard problems. 
 
@@ -93,11 +95,22 @@ https://www.coursera.org/learn/algorithms-npcomplete
 https://www.edx.org/course/computer-graphics-uc-san-diegox-cse167x
 ### <a name="ml"></a> Machine Learning
 https://www.coursera.org/learn/machine-learning
+Wow, this was one of the BEST courses I took ever. So good. The instructor Andrew Ng is, if I understand correctly, the founder of Coursera. His teaching style is great. The material, PDFs/notes, videos, assignments are all top-notch quality. They also introduced me to the free MATLAB alternative, GNU Octave.
+
+You learn a lot in this course (single/multivariate linear regression, gradient descent algorithms, neural networks, supervised/unsupervised learning, PCA: principle component analysis, K-means clustering), and it's all applied immediately with the programming assignments. Moreover what you learn is directly applicable in the real world. You can take these "basics of ML" and immediately start solving problems with them! The PAs are very cool: handwritten digit recognition, spam filtering, predicting housing prices, OCR detection, movie recommendations, and so on. You also learn how to analyze a poorly performing ML algorithm, how to diagnose its problems, how to play around with parameters and so on.
+
+The mathematics/linear algebra is complicated, the formulas look super dense, and admittedly this course (and ML in general) has a SERIOUS notation problem. Subscripts, superscripts, all over the place. The formulas are very difficult to read sometimes. But surprisingly you actually don't need to know any partial derivatives or serious linear algebra! The instructor explains everything clearly. 
+
+You also need to spend some time thinking about how to correctly "vectorize" the formulas. Quite often in contrast to how they are presented in the slides, you have to switch rows and columns of matrices when you write the code. Thankfully the PA instructions make that very clear.
+
+*Spam's recommendation:* What are you waiting for? TAKE IT RIGHT NOW!
+
 ### <a name="compilers"></a> Compilers
 https://www.udacity.com/course/compilers-theory-and-practice--ud168
 I took this because the Stanford compilers course became unavailable. This course has no programming assignments, only quizzes, which was OK by me. I'm interested in compilers but not that much. It's a pretty good course. Especially the beginning parts that teach you the theory of regular expressions and deterministic/non-deterministic finite state machines, and later, context-free grammars. It's a very long course, and it gets super complicated towards the end when you deal with low-level code generation matters. However the problems involved are extremely interesting and hard, like parse trees, register allocation and control flow graphs.
 
-*Spam's recommendation:* Don't take it. What, are you crazy enough to write a compiler? Nobody is gonna write a compiler in their career. Take Nand2Tetris Part 2 instead.
+*Spam's recommendation:* Don't take it. What, are you crazy enough to write a compiler? Nobody is gonna write a compiler in their career. If you want to write a "fun compiler" take Nand2Tetris Part 2 instead. You'll probably have to write a simple parser at some point in your life though, so you can take the beginning part (regex, FSMs, parsing).
+
 ### <a name="debug"></a> Software Debugging
 https://www.udacity.com/course/software-debugging--cs259
 ### <a name="test"></a> Software Testing
