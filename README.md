@@ -17,7 +17,7 @@ DISCLAIMER: These are my subjective personal opinions! Make your own judgment. A
 - [Compilers](#compilers)
 - [Software Debugging](#debug)
 - [Software Testing](#test)
-- [Software Architecture & Design](#)
+- [Software Architecture & Design](#softdesg)
 - [LAFF - On programming for Correctness](#laff)
 - [Intro to Parallel Programming](#cs344)
 - [Functional Programming in Scala (5 courses)](#scala)
@@ -29,27 +29,27 @@ DISCLAIMER: These are my subjective personal opinions! Make your own judgment. A
 - [Functional Programming in Haskell](#haskell)
 
 ### <a name="cs50"></a> Harvard's CS50 
-### <a name="cs50"></a> How to Code 1 & 2
-### <a name="cs50"></a> Programming Languages A, B, C
-### <a name="cs50"></a> Learn Prolog Now!
-### <a name="cs50"></a> Haskell Programming from First Principles
-### <a name="cs50"></a> Nand2Tetris 1,2
-### <a name="cs50"></a> Intro to Networking
-### <a name="cs50"></a> Intro to CS and Programming with Python
-### <a name="cs50"></a> Algorithms (Tim Roughgarden)
-### <a name="cs50"></a> Databases
-### <a name="cs50"></a> Computer Graphics
-### <a name="cs50"></a> Machine Learning
-### <a name="cs50"></a> Compilers
-### <a name="cs50"></a> Software Debugging
-### <a name="cs50"></a> Software Testing
-### <a name="cs50"></a> Software Architecture & Design
-### <a name="cs50"></a> LAFF - On programming for Correctness
-### <a name="cs50"></a> Intro to Parallel Programming
-### <a name="cs50"></a> Functional Programming in Scala (5 courses)
-### <a name="cs50"></a> Software Construction 1, 2
-### <a name="cs50"></a> Cryptography 1
-### <a name="cs50"></a> CS50, second half, Final Project
-### <a name="cs50"></a> Software Processes
-### <a name="cs50"></a> Software Architecture
-### <a name="cs50"></a> Functional Programming in Haskell
+### <a name="how-to-code"></a> How to Code 1 & 2
+### <a name="plabc"></a> Programming Languages A, B, C
+### <a name="lpn"></a> Learn Prolog Now!
+### <a name="hpffp"></a> Haskell Programming from First Principles
+### <a name="n2t"></a> Nand2Tetris 1,2
+### <a name="intro-to-net"></a> Intro to Networking
+### <a name="mit6001x"></a> Intro to CS and Programming with Python
+### <a name="coretheory"></a> Algorithms (Tim Roughgarden)
+### <a name="db"></a> Databases
+### <a name="graphics"></a> Computer Graphics
+### <a name="ml"></a> Machine Learning
+### <a name="compilers"></a> Compilers
+### <a name="debug"></a> Software Debugging
+### <a name="test"></a> Software Testing
+### <a name="softdesg"></a> Software Architecture & Design
+### <a name="laff"></a> LAFF - On programming for Correctness
+### <a name="cs344"></a> Intro to Parallel Programming
+### <a name="scala"></a> Functional Programming in Scala (5 courses)
+### <a name="softcons"></a> Software Construction 1, 2
+### <a name="crypt"></a> Cryptography 1
+### <a name="cs50-2"></a> CS50, second half, Final Project
+### <a name="softproc"></a> Software Processes
+### <a name="softarch"></a> Software Architecture
+### <a name="haskell"></a> Functional Programming in Haskell
