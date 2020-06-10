@@ -161,6 +161,20 @@ The courses are supposed to have 2 instructors but we only see one. The other la
 *Spam's recommendation:* They are OK courses. You don't learn too much or do much coding at all. But they are a TOLERABLE way to get through Java concepts. Definitely preferable to Udacity's Software Architecture and Design, and Coursera's Software Architecture. These courses have actual code you can download and look at.
 ### <a name="crypt"></a> Cryptography 1
 https://www.coursera.org/learn/crypto/
+Wow this course was HARD. The easiest part for me was close to the ending where it goes into number theory (Euler phi function and such). The last part of the course is just setting you up for Cryptography 2, the next course, which I'm told is even more math heavy. Yikes! 
+
+Even though I used to teach math, this course was really hard for me because the math is done in a non-rigorous, hand-wavy fashion. All the definitions (of semantic security, security against existential forgery, and MANY other definitions) are in terms of "negligible" probabilities; so you never make precise probability calculations; instead you say "well this looks negligible, so that will be negligible" and so on. It was so vague and hand-wavy I could not deal with it. 
+
+There is a companion textbook but it is so wordy it's unreadable. The explanations in the videos are somewhat quick and gloss over the details so they went over my head. To do the exams I had to keep re-reading the PDF slides many many times over and over. You can attempt the exams only 3 times within 24 hours, and each time some questions are randomized/changed. THAT SUCKS.
+
+You learn the design of many, many, many ciphers. It's super technical and complicated and hard to understand and sometimes boring. You learn about secrecy, integrity, authenticity, and other cryptography concepts.
+
+This course scared me so much that I am afraid of using any cryptography at all. No matter what you do it's always unsafe :( The course says not to DESIGN your own ciphers, and not to IMPLEMENT your own ciphers based on someone else's design, and to be CAREFUL when using well researched, publicly implemented/tested ciphers, but it's so scary it makes you not wanna USE ANY ciphers ever at all.
+
+Stuff I said above sounds all very negative, but it's a good course and the instructor Dan Boneh is also really good (he was a "guest interview" in Intro to Networking too!) There are some optional but really cool and hard programming exercises (which I did in Python) where you break ciphers, implement some well-known attacks against websites, and so on. For one of the assignments they even created a fake Stanford website that you can attack. Super cool!
+
+*Spam's recommendation:* Probably don't take it. This is a hard MATH course, it doesn't really teach you about security (well it does, but in painful mathematical technical detail, not in simple practical terms).
+
 ### <a name="cs50-2"></a> CS50, second half, Final Project
 https://cs50.harvard.edu/
 OK, this was a total mess. (Apparently they improved it later with "tracks" you can follow, like Android, game, web, iOS.)
@@ -183,14 +197,28 @@ I had to figure out how to use LaTeX (mathematical typesetting) on a web page. T
 
 I spent about 5 weeks making my project after "finishing" CS50. I'm pretty sure I spent one entire week on trying to figure out something called Window.getComputedStyle() to do a certain animation/user-input update thing. Only to learn later that the W3 School made a custom CSS template that does it automatically... I still have a list of improvements I was going to do. Like learn how to use HTML5 local storage so the next time a user visits the page, it remembers where they left off. I realized that I could keep spending MONTHS on polishing this project. So I decided to move on.
 
-*Spam's recommendation:* Take it only if you like messy challenges. This is the world of web programming, where nothing makes sense, and code from multiple languages are meshed together in spaghetti and it's all raining on your head, meatballs and all. I liked it but it was super frustrating. For me it replaces the Software Engineering Capstone Project which I did not take due to paywall.
+*Spam's recommendation:* Take it only if you like messy challenges. This is the world of web programming, where nothing makes sense, and code from multiple languages are meshed together in spaghetti and it's all raining on your head, meatballs and all. I liked it but it was super frustrating. For me it replaces the [Software Engineering Capstone Project](https://www.edx.org/course/software-development-capstone-project-ubcx-softengprjx) which I did not take due to paywall.
 
 ### <a name="softproc"></a> Software Processes
 https://www.coursera.org/learn/software-processes
+I decided to take this when I realized [Software Engineering: Introduction](https://www.edx.org/course/software-engineering-introduction-ubcx-softeng1x) is behind a paywall. That course was talking about Software Methodologies, so I took this.
+
+Another verbal course. You learn about all the cool catchphrases, ahem, I mean, Software Methodologies used in software companies. Waterfall, Agile, Kanban, Sashimi, Iterative model, Incremental Model, Requirements, Specification, Reusability, Extensibility, Coupling, Cohesion, Modularity, Encapsulation, Information Hiding, and sooooo many other words. There are some practice quizzes, and some "real" quizzes behind a paywall. There are some "scenario" questions where you are given a client and their needs, and you must write an essay describing the best approach to solve their software problems.
+
+*Spam's recommendation:* Skip it. The exams are behind a paywall anyway. You can see the questions though. Just can't submit.
+
 ### <a name="softarch"></a> Software Architecture
 https://www.coursera.org/learn/software-architecture
+I decided to take this when I realized [Software Engineering: Introduction](https://www.edx.org/course/software-engineering-introduction-ubcx-softeng1x) is behind a paywall.
+
+Another verbal course. It's like a literature class. [Words, words, words, words, words.](https://www.youtube.com/watch?v=-lqqDvWF45w) They hired a nice young acting or dance major student to read all the text from the teleprompter for a nice presentation. She clearly has no idea what she is saying.
+
+This one makes you draw a ton of UML diagrams using some online tools. There are more than 20 kinds of UML diagrams. Oh my god. I felt like I was taking an art class. I made my diagrams [reeeeaaal pretty](https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/_4b8b74b11840729713d3725d2f08b997_Deployment_Diagram.png?expiry=1591920000000&hmac=8NXnWXX6LIzSv2I1Aagnm-ZBo7VoAQ4ToxpYKAYT6GY). It was kinda fun. These assignments are all peer-graded. You get a free certificate at the end, no paywall, but it's pretty meaningless. 
+
+*Spam's recommendation:* What do you think? Skip it, of course.
+
 ### <a name="haskell"></a> Functional Programming in Haskell
 https://www.futurelearn.com/courses/functional-programming-haskell
 This was a 6-week "course" that cannot really be called a course. It was more like a few short tutorials put together. It was so insanely short I finished it in one day. I think the last "week" was just some interview videos with some academics. In week 6 they jump into Monads (which you won't understand), because for some reason FP people MUST mention Monads! What's cool is that it's from U of Glasgow, the creators of Haskell. You get to meet Simon Peyton Jones. They talk about the history of the ML-family of languages from the 70s and 80s. They talk about Alonzo Church, Stephen Kleene and lambda calculus too. History is cool.
 
-*Spam's recommendation:* Well, I'm a sucker for computing history. If you have a few hours of spare time and interested in Functional Programming, its people and its history, go for it.
+*Spam's recommendation:* Well, I'm a sucker for computing history. I also like Scottish nerds. If you have a few hours of spare time and interested in Functional Programming, its people and its history, go for it.
