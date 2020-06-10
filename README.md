@@ -28,29 +28,28 @@ DISCLAIMER: These are my subjective personal opinions! Make your own judgment. A
 - [Software Architecture](#softarch)
 - [Functional Programming in Haskell](#haskell)
 
-(#cs50)
-### Harvard's CS50 
-### How to Code 1 & 2
-### Programming Languages A, B, C
-### Learn Prolog Now!
-### Haskell Programming from First Principles
-### Nand2Tetris 1,2
-### Intro to Networking
-### Intro to CS and Programming with Python
-### Algorithms (Tim Roughgarden)
-### Databases
-### Computer Graphics
-### Machine Learning
-### Compilers
-### Software Debugging
-### Software Testing
-### Software Architecture & Design
-### LAFF - On programming for Correctness
-### Intro to Parallel Programming
-### Functional Programming in Scala (5 courses)
-### Software Construction 1, 2
-### Cryptography 1
-### CS50, second half, Final Project
-### Software Processes
-### Software Architecture
-### Functional Programming in Haskell
+### <a name="cs50"></a> Harvard's CS50 
+### <a name="cs50"></a> How to Code 1 & 2
+### <a name="cs50"></a> Programming Languages A, B, C
+### <a name="cs50"></a> Learn Prolog Now!
+### <a name="cs50"></a> Haskell Programming from First Principles
+### <a name="cs50"></a> Nand2Tetris 1,2
+### <a name="cs50"></a> Intro to Networking
+### <a name="cs50"></a> Intro to CS and Programming with Python
+### <a name="cs50"></a> Algorithms (Tim Roughgarden)
+### <a name="cs50"></a> Databases
+### <a name="cs50"></a> Computer Graphics
+### <a name="cs50"></a> Machine Learning
+### <a name="cs50"></a> Compilers
+### <a name="cs50"></a> Software Debugging
+### <a name="cs50"></a> Software Testing
+### <a name="cs50"></a> Software Architecture & Design
+### <a name="cs50"></a> LAFF - On programming for Correctness
+### <a name="cs50"></a> Intro to Parallel Programming
+### <a name="cs50"></a> Functional Programming in Scala (5 courses)
+### <a name="cs50"></a> Software Construction 1, 2
+### <a name="cs50"></a> Cryptography 1
+### <a name="cs50"></a> CS50, second half, Final Project
+### <a name="cs50"></a> Software Processes
+### <a name="cs50"></a> Software Architecture
+### <a name="cs50"></a> Functional Programming in Haskell
