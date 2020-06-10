@@ -97,7 +97,7 @@ https://www.coursera.org/learn/machine-learning
 https://www.udacity.com/course/compilers-theory-and-practice--ud168
 I took this because the Stanford compilers course became unavailable. This course has no programming assignments, only quizzes, which was OK by me. I'm interested in compilers but not that much. It's a pretty good course. Especially the beginning parts that teach you the theory of regular expressions and deterministic/non-deterministic finite state machines, and later, context-free grammars. It's a very long course, and it gets super complicated towards the end when you deal with low-level code generation matters. However the problems involved are extremely interesting and hard, like parse trees, register allocation and control flow graphs.
 
-*Spam's recommendation:* Don't take it. What, are you crazy enough to write a compiler? Nobody is gonna write a compiler in their career.
+*Spam's recommendation:* Don't take it. What, are you crazy enough to write a compiler? Nobody is gonna write a compiler in their career. Take Nand2Tetris Part 2 instead.
 ### <a name="debug"></a> Software Debugging
 https://www.udacity.com/course/software-debugging--cs259
 ### <a name="test"></a> Software Testing
@@ -140,6 +140,7 @@ https://classroom.udacity.com/courses/cs344
 https://www.coursera.org/specializations/scala
 ### <a name="softcons"></a> Software Construction 1, 2
 https://www.edx.org/course/software-construction-data-abstraction
+https://www.edx.org/course/software-construction-object-oriented-design
 These were the follow-up courses to How to Code 1,2. They have NOTHING in common with HtC courses. They do not follow up on or build up on HtC in any way. Completely orthogonal. I think that was the intention actually.
 
 The courses are supposed to have 2 instructors but we only see one. The other lady with the short hair appears only once or twice in an interview style video.
