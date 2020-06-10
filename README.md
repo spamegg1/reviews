@@ -29,6 +29,7 @@ DISCLAIMER: These are my subjective personal opinions! Make your own judgment. A
 - [Functional Programming in Haskell](#haskell)
 
 ### <a name="cs50"></a> Harvard's CS50 (first half)
+https://cs50.harvard.edu/
 This was my first course. In 2018 this was the "intro/beginner" course on OSSU curriculum. For the sake of completeness I took the whole course at once, including the [second half](#cs50-2). It's pretty challenging for a beginner course, because that's how Harvard does it. In terms of college course numbering, they go with 050 but it feels more like a 200-level class.
 
 The course uses an online IDE which was really top-notch in my opinion. They even invented their own version of the C compiler that gives more "beginner-friendly" and more helpful error messages. They created a much more beginner-friendly version of the "man-pages" for C. They even teach you how to use "valgrind", a code analysis/memory leak detection tool that even some pros don't know or use.
@@ -42,8 +43,19 @@ I think it's a challenging beginner course. These days Python is the preferred l
 *Spam's Recommendation:* Take it. It's good!
 
 ### <a name="how-to-code"></a> How to Code 1 & 2
+https://www.edx.org/course/how-to-code-simple-data
+https://www.edx.org/course/how-to-code-complex-data
+
+*Spam's recommendation:* I am personally biased to like these courses. Definitely take if you are interested in pursuing functional programming. If you already had an introductory course, you can skip these and go to Programming Languages A, B, C. PLB already uses the same language, Racket.
+
 ### <a name="plabc"></a> Programming Languages A, B, C
 ### <a name="lpn"></a> Learn Prolog Now!
+If you are one of those people who like to debate programming languages and paradigms, well... The others are pretty similar, but the only "truly different" programming paradigm in my opinion is this one: Logic Programming. 
+
+It is so very different! You have to think in a completely different way: Unification and Backtracking. It helps that it has recursion, so it has some familiarity at least. But I must admit that Logic programming is not suitable for most problems out there. It's super cool though.
+
+Originally Prolog was created by a linguist, so the main application is studying Grammars.
+
 ### <a name="hpffp"></a> Haskell Programming from First Principles
 ### <a name="n2t"></a> Nand2Tetris 1,2
 ### <a name="intro-to-net"></a> Intro to Networking
