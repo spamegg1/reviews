@@ -1,13 +1,14 @@
 # Spam's CS Corner: Course Reviews
 DISCLAIMER: These are my subjective personal opinions! Make your own judgment. Also, I will talk a lot about my feelings! You are warned.
 
-- [Harvard's CS50 (first half)](#cs50) https://cs50.harvard.edu/
+- [Harvard's CS50 (first half)](#cs50)
 - [How to Code 1 & 2](#how-to-code)
 - [Programming Languages A, B, C](#plabc)
 - [Learn Prolog Now!](#lpn)
 - [Haskell Programming from First Principles](#hpffp)
 - [Nand2Tetris 1,2](#n2t)
 - [Intro to Networking](#intro-to-net)
+- [Operating Systems: Three Easy Pieces](#ostep)
 - [Hack the Kernel](https://github.com/ossu/computer-science/issues/690)
 - [Intro to CS and Programming with Python](#mit6001x)
 - [Algorithms (Tim Roughgarden)](#coretheory)
@@ -29,6 +30,7 @@ DISCLAIMER: These are my subjective personal opinions! Make your own judgment. A
 - [Functional Programming in Haskell](#haskell)
 
 ### <a name="cs50"></a> Harvard's CS50 (first half)
+https://cs50.harvard.edu/
 This was my first course. In 2018 this was the "intro/beginner" course on OSSU curriculum. For the sake of completeness I took the whole course at once, including the [second half](#cs50-2). It's pretty challenging for a beginner course, because that's how Harvard does it. In terms of college course numbering, they go with 050 but it feels more like a 200-level class.
 
 The course uses an online IDE which was really top-notch in my opinion. They even invented their own version of the C compiler that gives more "beginner-friendly" and more helpful error messages. They created a much more beginner-friendly version of the "man-pages" for C. They even teach you how to use "valgrind", a code analysis/memory leak detection tool that even some pros don't know or use.
@@ -48,25 +50,70 @@ https://www.edx.org/course/how-to-code-complex-data
 *Spam's recommendation:* I am personally biased to like these courses. Definitely take if you are interested in pursuing functional programming. If you already had an introductory course, you can skip these and go to Programming Languages A, B, C. PLB already uses the same language, Racket.
 
 ### <a name="plabc"></a> Programming Languages A, B, C
+https://www.coursera.org/learn/programming-languages
+https://www.coursera.org/learn/programming-languages-part-b
+https://www.coursera.org/learn/programming-languages-part-c
+
 ### <a name="lpn"></a> Learn Prolog Now!
+https://lpn.swi-prolog.org/lpnpage.php?pageid=top
+This is a text-only course, like a textbook. There is a book version of it too I believe. No videos.
+
 If you are one of those people who like to debate programming languages and paradigms, well... The others are pretty similar, but the only "truly different" programming paradigm in my opinion is this one: Logic Programming. 
 
-It is so very different! You have to think in a completely different way: Unification and Backtracking. It helps that it has recursion, so it has some familiarity at least. But I must admit that Logic programming is not suitable for most problems out there. It's super cool though.
+It is so very different! You have to think in a completely different way: Unification and Backtracking. You have to think in terms of search trees. Even some simple exercises will trip you up. It helps that it has recursion, so it has some familiarity at least. But I must admit that Logic programming is not suitable for most problems out there. It's super cool though.
 
-Originally Prolog was created by a linguist, so the main application is studying Grammars.
+This was right up my alley, because the language works exactly like a [proof tree](https://www.quora.com/What-are-proof-trees) which I studied in Mathematical Logic. Oh and the Cut Rule! Goes back to Gentzen's 1934 [theorem](https://en.wikipedia.org/wiki/Cut-elimination_theorem).
+
+Originally Prolog was created by a linguist, so the main application is studying Grammars. That will be your "final project". You'll probably never use Prolog in the real world. The website claims it is coded in Prolog though!
+
+*Spam's recommendation:* Take it only if you like complex mathematical algorithmic thinking, or have strong interest/background in Mathematical Logic/Proof Theory/Linguistics. But the Logic Programming's way of thinking can be VERY USEFUL if you plan to go into an area of CS with hard problems. 
 
 ### <a name="hpffp"></a> Haskell Programming from First Principles
+https://haskellbook.com/
+I didn't pay for this. $59? Are you kidding? My Specialization cost me $0, please. In my country I can eat for a month with $59. It's a great book though. Although SUPER SUPER SUPER LONG! Like 1900 pages. I think I quit at page 1700 or so, after Applicative. This was by far the most useful thing for my Specialization. Scala totally rips off Haskell in so many ways, even the syntax is mostly the same. Even though I never saw a single line of Scala code before starting my Spec, I flew through Martin Odersky's courses.
+
+*Spam's recommendation:* I'm gonna say... don't take it. Unless you are an evil pirate like me who is also into masochism. It's super duper hard anyways, and definitely not worth $59. It will take you a LONG TIME to get through this book. But if you do, your Functional Scala Specialization will be a total cakewalk.
+
+You might try [Learn You a Haskell for a Great Good!](http://www.learnyouahaskell.com/) if you MUST learn Haskell.
+
 ### <a name="n2t"></a> Nand2Tetris 1,2
+https://www.nand2tetris.org/
 ### <a name="intro-to-net"></a> Intro to Networking
+### <a name="ostep"></a> Operating Systems: Three Easy Pieces
+http://pages.cs.wisc.edu/~remzi/OSTEP/
 ### <a name="mit6001x"></a> Intro to CS and Programming with Python
+https://www.edx.org/course/introduction-computer-science-mitx-6-00-1x-10
 ### <a name="coretheory"></a> Algorithms (Tim Roughgarden)
+https://www.coursera.org/learn/algorithms-divide-conquer
+https://www.coursera.org/learn/algorithms-graphs-data-structures
+https://www.coursera.org/learn/algorithms-greedy
+https://www.coursera.org/learn/algorithms-npcomplete
 ### <a name="db"></a> Databases
 ### <a name="graphics"></a> Computer Graphics
+https://www.edx.org/course/computer-graphics-uc-san-diegox-cse167x
 ### <a name="ml"></a> Machine Learning
+https://www.coursera.org/learn/machine-learning
 ### <a name="compilers"></a> Compilers
+https://www.udacity.com/course/compilers-theory-and-practice--ud168
+I took this because the Stanford compilers course became unavailable. This course has no programming assignments, only quizzes, which was OK by me. I'm interested in compilers but not that much. It's a pretty good course. Especially the beginning parts that teach you the theory of regular expressions and deterministic/non-deterministic finite state machines, and later, context-free grammars. It's a very long course, and it gets super complicated towards the end when you deal with low-level code generation matters. However the problems involved are extremely interesting and hard, like parse trees, register allocation and control flow graphs.
+
+*Spam's recommendation:* Don't take it. What, are you crazy enough to write a compiler? Nobody is gonna write a compiler in their career.
 ### <a name="debug"></a> Software Debugging
+https://www.udacity.com/course/software-debugging--cs259
 ### <a name="test"></a> Software Testing
+https://www.udacity.com/course/software-testing--cs258
 ### <a name="softdesg"></a> Software Architecture & Design
+https://www.udacity.com/course/software-architecture-design--ud821
+This was quite atrocious. There are 30 Lessons, each with 25-50 videos. Some videos are so short (like 3 seconds) it gets incredibly annoying to go through the in-between-video transitions.
+
+You basically listen to a nice old man read tons and tons of definitions from some Software Architecture textbook. He constantly shifts his eyes between the camera and the teleprompter from which he is reading. It's one of THOSE courses where they try to sound super cool and talk about famous architects, buildings, designers etc.
+
+This is a purely verbal course. No programming assignments, no homeworks, just a few quizzes here and there that are very, very subjective. It's like a super long, boring audio-book to put you to sleep. Maybe you can figure out a way to listen to it when you are jogging or something. Personally I had the videos playing in the background while I was doing pushups and ab crunches in front of my PC.
+
+There was only one useful Lesson. It's a scenario where two instructors are play-acting as software engineer and client. They go through the design decisions of a Library ID card/book checkout system. It actually made a lot of sense. This was extremely similar to what they did in the Software Construction 1,2 classes.
+
+*Spam's recommendation:* Do not take this. Total waste of time. But let me know if you figure out the audio-book version!
+
 ### <a name="laff"></a> LAFF - On programming for Correctness
 This course was very strange and uneven. It has 6 weeks. Week 1 is purely dedicated to Logic review, which I skipped. Week 2 starts with the core idea of the course: obtaining correctness proofs of algorithms along with deriving the algorithm itself, hand in hand. 
 
@@ -87,6 +134,7 @@ Correctness proofs are provided only for EXTREMELY SIMPLE algorithms that all fo
 *Spam's recommendation:* DO NOT take this course! Don't do it. It's "optional" and of interest to researchers and specialists. No use to you.
 
 ### <a name="cs344"></a> Intro to Parallel Programming
+https://classroom.udacity.com/courses/cs344
 ### <a name="scala"></a> Functional Programming in Scala (5 courses)
 ### <a name="softcons"></a> Software Construction 1, 2
 ### <a name="crypt"></a> Cryptography 1
