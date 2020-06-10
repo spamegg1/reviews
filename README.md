@@ -1,4 +1,4 @@
-# Spam's CS Corner: Course Reviews
+# Spam's CS Corner: Course Reviews (IN PROGRESS)
 DISCLAIMER: These are my subjective personal opinions! Make your own judgment. Also, I will talk a lot about my feelings! You are warned.
 
 - [Harvard's CS50 (first half)](#cs50)
