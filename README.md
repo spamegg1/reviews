@@ -64,3 +64,4 @@ Here's my project: https://number-python.herokuapp.com/
 ### <a name="softproc"></a> Software Processes
 ### <a name="softarch"></a> Software Architecture
 ### <a name="haskell"></a> Functional Programming in Haskell
+This was a 6-week "course" that cannot really be called a course. It was more like a few short tutorials put together. It was so insanely short I finished it in one day. I think the last "week" was just some interview videos with some academics. In week 6 they jump into Monads (which you won't understand), because for some reason FP people MUST mention Monads! What's cool is that it's from U of Glasgow, the creators of Haskell. You get to meet Simon Peyton Jones. They talk about the history of the ML-family of languages from the 70s and 80s. Well, I'm a sucker for computing history. If you have some spare time and interested in Functional Programming and its history, go for it.
