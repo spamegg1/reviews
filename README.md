@@ -115,6 +115,7 @@ There was only one useful Lesson. It's a scenario where two instructors are play
 *Spam's recommendation:* Do not take this. Total waste of time. But let me know if you figure out the audio-book version!
 
 ### <a name="laff"></a> LAFF - On programming for Correctness
+https://www.edx.org/course/laff-on-programming-for-correctness
 This course was very strange and uneven. It has 6 weeks. Week 1 is purely dedicated to Logic review, which I skipped. Week 2 starts with the core idea of the course: obtaining correctness proofs of algorithms along with deriving the algorithm itself, hand in hand. 
 
 It starts with the concepts of weakest-precondition that must hold true before a code statement, and a post-condition that must hold after the code statement is executed. First formulas for these conditions for simple assignment statements are derived. Then conditions for simple if-else-statements. In Week 3 invariant conditions for while-loops are discussed. Each one of these code statements come with a theorem for its weakest-precondition and post-condition. This is all very mathematical, technical, notation-heavy and complicated. It was easy for me due to my logic background.
@@ -136,9 +137,18 @@ Correctness proofs are provided only for EXTREMELY SIMPLE algorithms that all fo
 ### <a name="cs344"></a> Intro to Parallel Programming
 https://classroom.udacity.com/courses/cs344
 ### <a name="scala"></a> Functional Programming in Scala (5 courses)
+https://www.coursera.org/specializations/scala
 ### <a name="softcons"></a> Software Construction 1, 2
+https://www.edx.org/course/software-construction-data-abstraction
+These were the follow-up courses to How to Code 1,2. They have NOTHING in common with HtC courses. They do not follow up on or build up on HtC in any way. Completely orthogonal. I think that was the intention actually.
+
+The courses are supposed to have 2 instructors but we only see one. The other lady with the short hair appears only once or twice in an interview style video.
+
+*Spam's recommendation:* They are OK courses. You don't learn too much or do much coding at all. But they are a TOLERABLE way to get through Java concepts. Definitely preferable to Udacity's Software Architecture and Design, and Coursera's Software Architecture. These courses have actual code you can download and look at.
 ### <a name="crypt"></a> Cryptography 1
+https://www.coursera.org/learn/crypto/
 ### <a name="cs50-2"></a> CS50, second half, Final Project
+https://cs50.harvard.edu/
 OK, this was a total mess. (Apparently they improved it later with "tracks" you can follow, like Android, game, web, iOS.)
 
 They throw so many languages at you all at once, and you don't really have time to learn any of them properly: Python, HTML, CSS, JavaScript, SQL, Jinja (templating language), the Flask web framework for Python, holy hell. I already knew some Python so all was well on that front. But the learning curve gets SUPER STEEP all of a sudden after 6 weeks of C. You'll want to go back to pointers, if you can believe it!
@@ -159,11 +169,14 @@ I had to figure out how to use LaTeX (mathematical typesetting) on a web page. T
 
 I spent about 5 weeks making my project after "finishing" CS50. I'm pretty sure I spent one entire week on trying to figure out something called Window.getComputedStyle() to do a certain animation/user-input update thing. Only to learn later that the W3 School made a custom CSS template that does it automatically... I still have a list of improvements I was going to do. Like learn how to use HTML5 local storage so the next time a user visits the page, it remembers where they left off. I realized that I could keep spending MONTHS on polishing this project. So I decided to move on.
 
-*Spam's recommendation:* Take it only if you like messy challenges. This is the world of web programming, where nothing makes sense, and code from multiple languages are meshed together in spaghetti and it's all raining on your head, meatballs and all.  I liked it but it was super frustrating. For me it replaces the Software Engineering Capstone Project which I did not take due to paywall.
+*Spam's recommendation:* Take it only if you like messy challenges. This is the world of web programming, where nothing makes sense, and code from multiple languages are meshed together in spaghetti and it's all raining on your head, meatballs and all. I liked it but it was super frustrating. For me it replaces the Software Engineering Capstone Project which I did not take due to paywall.
 
 ### <a name="softproc"></a> Software Processes
+https://www.coursera.org/learn/software-processes
 ### <a name="softarch"></a> Software Architecture
+https://www.coursera.org/learn/software-architecture
 ### <a name="haskell"></a> Functional Programming in Haskell
-This was a 6-week "course" that cannot really be called a course. It was more like a few short tutorials put together. It was so insanely short I finished it in one day. I think the last "week" was just some interview videos with some academics. In week 6 they jump into Monads (which you won't understand), because for some reason FP people MUST mention Monads! What's cool is that it's from U of Glasgow, the creators of Haskell. You get to meet Simon Peyton Jones. They talk about the history of the ML-family of languages from the 70s and 80s. 
+https://www.futurelearn.com/courses/functional-programming-haskell
+This was a 6-week "course" that cannot really be called a course. It was more like a few short tutorials put together. It was so insanely short I finished it in one day. I think the last "week" was just some interview videos with some academics. In week 6 they jump into Monads (which you won't understand), because for some reason FP people MUST mention Monads! What's cool is that it's from U of Glasgow, the creators of Haskell. You get to meet Simon Peyton Jones. They talk about the history of the ML-family of languages from the 70s and 80s. They talk about Alonzo Church, Stephen Kleene and lambda calculus too. History is cool.
 
-*Spam's recommendation:* Well, I'm a sucker for computing history. If you have a few hours of spare time and interested in Functional Programming and its history, go for it.
+*Spam's recommendation:* Well, I'm a sucker for computing history. If you have a few hours of spare time and interested in Functional Programming, its people and its history, go for it.
