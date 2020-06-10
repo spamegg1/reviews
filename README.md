@@ -28,7 +28,7 @@ DISCLAIMER: These are my subjective personal opinions! Make your own judgment. A
 - [Software Architecture](#softarch)
 - [Functional Programming in Haskell](#haskell)
 
-### Harvard's CS50 (#cs50)
+###Harvard's CS50 (#cs50)
 ### How to Code 1 & 2
 ### Programming Languages A, B, C
 ### Learn Prolog Now!
