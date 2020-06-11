@@ -1,6 +1,8 @@
 # Spam's CS Corner: Course Reviews (IN PROGRESS)
 DISCLAIMER: These are my subjective personal opinions! Make your own judgment. Also, I will talk a lot about my feelings! You are warned.
 
+Originally written June 2020
+
 - [Harvard's CS50 (first half)](#cs50)
 - [CS50, second half, Final Project](#cs50-2)
 - [How to Code 1 & 2](#how-to-code)
@@ -119,7 +121,7 @@ First course uses ML (statically typed) to teach language features from function
 
 Second one uses Racket (which is dynamically typed) to introduce more features, like thunking and laziness (delaying evaluation), mutation, and so on. It makes us write a language inside another language (Racket): really excellent programming assignment! If you took How to Code 1,2 this should be a piece of cake. If not, it's challenging but doable.
 
-Third course uses Ruby to teach OOP concepts: classes, inheritance, multiple inheritance via Mixins, double dispatch, dynamic dispatch and so on. It has a PA writing a Tetris game using some graphical Ruby library. Then it has an excellent FP vs OOP compare and contrast PA where we write the same program in ML and in Ruby. It's about 5 kinds of geometric objects and their intersections, so there are 25 total combinations. In Ruby, committing fully to the OOP style (with Double Dispatch), this is done by creating 5 kinds of classes and writing 5 methods for each; whereas in ML we write one big function with 25 cases of pattern matching (functional decomposition). It's also interesting to note that Ruby has some functional-style inspired features; in fact its creator Yukihiro Matsumoto said that Ruby was "a Lisp" at its core.
+Third course uses Ruby to teach OOP concepts: classes, inheritance, multiple inheritance via Mixins, double dispatch, dynamic dispatch and so on. It has a PA writing a Tetris game using some graphical Ruby library. Then it has an excellent FP vs OOP compare and contrast PA where we write the same program in ML and in Ruby. It's about 5 kinds of geometric objects and their intersections, so there are 25 total combinations. In Ruby, committing fully to the OOP style (with Double Dispatch), this is done by creating 5 kinds of classes and writing 5 methods for each; whereas in ML we write one big function with 25 cases of pattern matching (functional decomposition). There is also the EXTREMELY IMPORTANT discussion of subtyping, covariance and contravariance (super important in Scala for me later!) It's also interesting to note that Ruby has some functional-style inspired features; in fact its creator Yukihiro Matsumoto said that Ruby was "a Lisp" at its core.
 
 Each week there are some community contributed resources with extra problems. These are nice but I did not do them. In each course there are some optional videos touching upon languages not covered in the courses, such as Java, C or C++. This seems to be a point of confusion because some experience in Java/C/C++ is mentioned as a prerequisite, really scaring some people away. NO, THESE ARE OPTIONAL VIDEOS. Plus you can still understand them even if you never saw Java or C++.
 
@@ -130,7 +132,7 @@ The concepts I learned here carried me all the way through; in fact in my Scala 
 ### <a name="lpn"></a> Learn Prolog Now!
 https://lpn.swi-prolog.org/lpnpage.php?pageid=top
 
-This is a text-only course, like a textbook. There is a book version of it too I believe. No videos. There are some interactive widgets that can run Prolog code but they did not work well on my browser. I resorted to [this IDE for Windows](https://arbeitsplattform.bildung.hessen.de/fach/informatik/swiprolog/indexe.html).
+This is a text-only course, like a textbook. There is a book version of it too I believe. No videos. There are some interactive widgets that can run Prolog code but they did not work well on my browser. I resorted to [this IDE for Windows](https://arbeitsplattform.bildung.hessen.de/fach/informatik/swiprolog/indexe.html). For Mac and Linux there is an Eclipse plugin.
 
 If you are one of those people who like to debate programming languages and paradigms, well... The others are pretty similar, but the only "truly different" programming paradigm in my opinion is this one: Logic Programming. 
 
@@ -142,18 +144,18 @@ This was right up my alley, because the language works exactly like a [proof tre
 
 Originally Prolog was created by a linguist, so the main application is studying Grammars. The course will teach you context free grammars and definite clause grammars. Very important stuff if you want to go into parsing and compilers! That will be your "final project". You'll probably never use Prolog in the real world. The website claims it is coded in Prolog though!
 
-*Spam's recommendation:* Take it only if you like complex mathematical algorithmic thinking, or have strong interest/background in Mathematical Logic/Proof Theory/Linguistics. But the Logic Programming's way of thinking can be VERY USEFUL if you plan to go into an area of CS with hard problems. 
+*Spam's recommendation:* Take it only if you like complex mathematical algorithmic thinking, or have strong interest/background in Mathematical Logic/Proof Theory/Linguistics. But the Logic Programming's way of thinking can be VERY USEFUL if you plan to go into an area of CS with hard problems. Study backtracking and search trees.
 
 ### <a name="cs212"></a> Udacity CS212
 https://www.udacity.com/course/design-of-computer-programs--cs212
 
-I took this course twice! Once a few years before I started OSSU. I had to quit because it was too hard and I was frustrated. The second time around I finished it.
+I took this course twice! Once a few years before I started OSSU. I had to quit because it was too hard and I was frustrated. It totally kicked my ass and wiped the floor with it. The second time around I finished it.
 
 The instructor Peter Norvig is a super smart guy leading Google AI Research (at the time, 2013?). His teaching style is very tough and definitely not for most people. He leaves A LOT up to you: he wants you to think through the problem, go to Python website and look up functions from the Python library to solve the problem, and not only that, but to solve it in a clever, short, elegant way. The first time I took it, a lot of students were really butthurt in the forums complaining about him. Later the TAs added some extra exercises and videos to explain some of those high-level, functional Python features unfamiliar to beginners, such as the itertools module.
 
 But the course is incredibly valuable. It teaches you so many "high-level" programming ideas and tricks. I first learned the concept of Refactoring and Memoization here. It's a purely problem-solving, puzzle-solving course, except for the language theory section in the middle. That part just didn't click even the second time around. You solve the famous Zebra puzzle, the Pouring problem (from Die Hard 3 with Bruce Willis and Samuel Jackson), create a Poker game, solve a parking problem, among others. Norvig teaches you the concepts from breadth-first-search and depth-first-search, the problem space, the "frontier", and uses all kinds of functional programming tricks available in Python to make the code short and elegant.
 
-The assignments are very hard. Definitely up there with Algorithms or even Advanced Programming. Interestingly my Scala Specialization mentioned the Pouring problem, and Martin Odersky offered a Scala solution after praising Norvig's Python solution as "elegant".
+The assignments are very hard. Definitely up there with Algorithms or even Advanced Programming. Interestingly years later my Scala Specialization mentioned the Pouring problem, and Martin Odersky offered a Scala solution after praising Norvig's Python solution as "elegant".
 
 *Spam's recommendation:* Take it only if you want a real challenge, you're OK with a very indirect instructor, and you are self-driven to do your own searches through documentation and figure things out.
 
@@ -167,13 +169,13 @@ This was a 6-week "course" that cannot really be called a course. It was more li
 ### <a name="hpffp"></a> Haskell Programming from First Principles
 https://haskellbook.com/
 
-I didn't pay for this. $59? Are you kidding? My Specialization cost me $0, please. In my country I can eat for a month with $59 (local currency crap against the mighty dollar). It's a great book though. Although SUPER SUPER SUPER LONG! Like 1900 pages. I think I quit at page 1700 or so, after Applicative. 
+I didn't pay for this. $59? Are you kidding? My Specialization cost me $0, please. In my country I can eat for a month with $59 (local currency crap against the mighty dollar). It's a great book though. Although SUPER SUPER SUPER LONG! Like 1900 pages. I think I quit at page 1700 or so, after Applicative. I already knew about and used Monads.
 
-This was by far the most useful thing for my Specialization. Scala totally rips off Haskell in so many ways, even the syntax is mostly the same. Even though I never saw a single line of Scala code before starting my Spec, I flew through Martin Odersky's courses.
+This was by far the most useful thing for my Specialization. Scala totally rips off Haskell in so many ways, even the syntax is mostly the same. Even though I never saw a single line of Scala code before starting my Spec, I flew through the Spec.
 
 I love Haskell! It's awesome. Most of your time, like 95%, will be spent battling the type checker. It's like martial arts practice. I call it "Type-Kata". The type checker will reject almost all of your code. Just when you think you wisened up and grasped a concept, the type checker will throw it back in your face; and remind you of what a useless, incompetent piece of garbage you are. Go back to Python, you loser. But magically, if your code passes the type checker, it will be usually correct and bug-free. That's why they call it *The Venerable Glasgow Haskell Compiler*.
 
-Did I already tell you that this is hard? It's very hard. The book is full of code though, and I typed all of it. Many of the exercises are of the "guess the correct type" type. (Did I just make a pun?) It also takes you step by step through creating and compiling projects using Haskell's build tool, Stack. 
+Did I already tell you that this is hard? It's very hard. The book is full of code though, and I typed all of it. Many of the exercises are of the "guess the correct type" type. (Did I just make a pun?) It also takes you step by step through creating and compiling projects using Haskell's build tool, Stack. It's difficult to explain what you learn because it's so long and it's in book format.
 
 *Spam's recommendation:* I'm gonna say... don't take it. Unless you are an evil pirate like me who is also into masochism. It's super duper hard anyways, and definitely not worth $59. It will take you a LONG TIME to get through this book. But if you do, your Functional Scala Specialization will be a total cakewalk.
 
@@ -182,11 +184,11 @@ You might try (I haven't) [Learn You a Haskell for a Great Good!](http://www.lea
 ### <a name="n2t"></a> Nand2Tetris 1,2
 https://www.nand2tetris.org/
 
-This was my favorite course ever! It's purely project focused. No lectures or academic topics. It probably won't be directly useful in real life, but the ideas/systems will indirectly help you understand machine instructions/assembly/VM/compilers.
+This was my favorite course ever (until I took Algorithms)! It's purely project focused. No lectures or academic topics, no quizzes or exams. It probably won't be directly useful in real life, but the ideas/systems will indirectly help you understand computers at every level: machine instructions/assembly/VM/compilers.
 
 It's quite tough and there is a huge gap of time and difficulty between parts 1 and 2. I can understand the instructors' decision to split it that way; they cut off the first course where the "hardware stuff" ends so that people who are only interested in those parts can take only the first course.
 
-The goal is to build a 16-bit single-tasking toy computer with 32K RAM called Hack that was designed by the instructors. It's actually 15-bit, the instruction set does not use one of the bits. Only 24K RAM is used.
+The goal is to build a 16-bit single-tasking toy computer (in a hardware simulator program) with 32K RAM called Hack that was designed by the instructors. It's actually 15-bit, the instruction set does not use one of the bits. Only 24K RAM is used.
 
 Part 1 makes you build basic logic gates, then bigger chips, then eventually an ALU (Arithmetic Logic Unit), a CPU and RAM chips in a Hardware Simulator. You use a hardware description language to do this. (Editors like Sublime Text and VS Code have syntax highlighting plugins for this HDL.) Then you write some code that translates a simplified pseudo-assembly language (with only 3 registers) to 16-bit machine instructions specified by the instructors. The hardware simulator, and all the tests for your chips/assembler are provided.
 
@@ -242,6 +244,22 @@ https://www.coursera.org/learn/algorithms-npcomplete
 https://algorithmsilluminated.org
 
 These courses are right up there with Nand2Tetris and PLABC as THE BEST. I took this right after my 6 month long Hack the Kernel fiasco, and boy, what a soul-saver this was! Super awesome amazing courses. Filled with mathematical beauty that brings tears to my eyes.
+
+You MUST get Tim's textbooks. Fourth book was not out when I was taking the classes, but it will be out this month! (June 2020) They are EXCELLENT, better than the videos. I actually went through the books and came back to the videos only after having done all the exercises in the textbook.
+
+First course is all about... divide and conquer.
+
+Second course is all about... graphs. Probably the most important part for computer science. Almost everything is modeled with graphs.
+
+Third course is about greedy algorithms (which are sometimes INCORRECT), and dynamic programming (this is like induction on steroids).
+
+Fourth course is the most theoretical. What to do when problems are just too hard? Where are the natural limitations of computer science? You learn the million dollar question: P versus NP.
+
+*Exact math requirements:* Course 1: you must be BULLETPROOF when it comes to the Principle of Mathematical Induction. Exercise writing a lot of proofs by induction. Then, you need to do a discrete probability analysis using some random variables that are independent. These are all covered in the Appendices of Roughgarden's textbook.
+
+Course 2: Same regarding induction. Graph theory is covered in the course/textbook. Having taken Math for CS would be nice but it's not necessary.
+
+Course 3:
 
 *Spam's recommendation:* TAKE THEM! Also get Roughgarden's books. They are EXCELLENT.
 
