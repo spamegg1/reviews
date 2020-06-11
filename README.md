@@ -68,24 +68,28 @@ https://www.coursera.org/learn/programming-languages
 https://www.coursera.org/learn/programming-languages-part-b
 https://www.coursera.org/learn/programming-languages-part-c
 
-I loved these courses! These were right around the time of my grandmother passing away, so they really helped me pick up my spirits afterwards. Dan Grossman (Mr. PhD in programming languages LOL) is an awesome instructor! Congrats to him and his wife on their baby boy.
+I loved these courses! These were right around the time of my grandmother passing away, so they really helped me pick up my spirits afterwards. Dan Grossman (Mr. PhD in programming languages jumping up and down waving his arms LOL) is an awesome instructor! He is rated as a Top Instructor on Coursera (4.9/5.0). Congrats to him and his wife on their baby boy. Grossman explains very well why he chose ML, Racket and Ruby (and not Haskell or Java), why there are 3 courses, and why there is a strong bias towards functional languages (in Week 4 of first course), which was an awesome surprise for me; because I love them due to my math background but I thought that the world considered FP to be some useless academic thing.
 
-The installation is a bit tricky. For the first course which uses the ML language, you have to install Emacs and an ML-plugin for it. If you've never used Emacs before and you are a typical Windows/Mac user, you're gonna take 
+The installation is a bit tricky. For the first course which uses the ML language, you have to install Emacs and an ML-plugin for it. I had a lot of trouble at this stage due to Emacs' weird plugin and internet connection system. If you've never used Emacs before and you are a typical Windows/Mac user, you're gonna take some time getting used to all the weird keyboard shortcuts. You can't even Ctrl+C like usual.
 
-The classes are very much in a college-class format. You get lengthy lecture notes and assignments on PDF files. You gotta read a lot. I normally dislike that, but thankfully these notes were actually excellent. There are some severe restrictions though. You can submit your code, or your multiple choice "midterm exam" only once per 24 hours. I understand Grossman's reasoning: he wants you to really be thorough, and resist the urge to do blind-guessing. I disliked the midterm exams. Some of the multiple choice questions are very nitpicky and detailed. At least there are PRACTICE midterm exams before you attempt the real thing. That was super useful.
+The classes are very much in a college-class format. You get lengthy lecture notes and assignments on PDF files. You gotta read a lot. I normally dislike that, but thankfully these notes were actually excellent. There are some severe restrictions though. You can submit your code, or your multiple choice "midterm exam" only once per 24 hours. I understand Grossman's reasoning: he wants you to really be thorough, and resist the urge to do blind-guessing. I disliked the midterm exams. Some of the multiple choice questions are very nitpicky and detailed. I still don't get some of them. At least there are PRACTICE midterm exams before you attempt the real thing. That was super useful.
 
-First course uses ML to teach language features from functional programming. A lot of emphasis on ML's type checker, currying, immutability, parametric types and so on. Second one uses Racket (which is dynamically typed) to introduce more features, like thunking and laziness (delaying evaluation), mutation, and so on. Third course uses Ruby to teach OOP concepts: classes, inheritance, multiple inheritance via Mixins, double dispatch, dynamic dispatch and so on. 
+First course uses ML (statically typed) to teach language features from functional programming. A lot of emphasis on ML's type checker, HOFs, lexical scope and closures, currying, immutability, pattern matching, parametric types, accumulators and tail recursion, and so on. PAs of the first course are about writing... functions. A LOT of functions. You might get sick and tired of writing functions, but keep at it, they are usually short.
 
-Second course makes us write a language inside another language (Racket): really excellent programming assignment!
+Second one uses Racket (which is dynamically typed) to introduce more features, like thunking and laziness (delaying evaluation), mutation, and so on. It makes us write a language inside another language (Racket): really excellent programming assignment! If you took How to Code 1,2 this should be a piece of cake. If not, it's challenging but doable.
 
-Grossman explains why he chose these languages and why there is a strong bias towards functional languages:
+Third course uses Ruby to teach OOP concepts: classes, inheritance, multiple inheritance via Mixins, double dispatch, dynamic dispatch and so on. It has a PA writing a Tetris game using some graphical Ruby library. Then it has an excellent FP vs OOP compare and contrast PA where we write the same program in ML and in Ruby. It's about 5 kinds of geometric objects and their intersections, so there are 25 total combinations. In Ruby, committing fully to the OOP style (with Double Dispatch), this is done by creating 5 kinds of classes and writing 5 methods for each; whereas in ML we write one big function with 25 cases of pattern matching (functional decomposition). It's also interesting to note that Ruby has some functional-style inspired features; in fact its creator Yukihiro Matsumoto said that Ruby was "a Lisp" at its core.
+
+Each week there are some community contributed resources with extra problems. These are nice but I did not do them. In each course there are some optional videos touching upon languages not covered in the courses, such as Java, C or C++. This seems to be a point of confusion because some experience in Java/C/C++ is mentioned as a prerequisite, really scaring some people away. NO, THESE ARE OPTIONAL VIDEOS. Plus you can still understand them even if you never saw Java or C++.
+
+The concepts I learned here carried me all the way through; in fact in my Scala Spec, the first two courses by Martin Odersky were pretty much a repetition of these three courses. I was able to do the PAs of my Scala Spec without even watching Odersky's lecture videos!
 
 *Spam's recommendation:* Drop what you are doing and take these now! They will serve you forever.
 
 ### <a name="lpn"></a> Learn Prolog Now!
 https://lpn.swi-prolog.org/lpnpage.php?pageid=top
 
-This is a text-only course, like a textbook. There is a book version of it too I believe. No videos.
+This is a text-only course, like a textbook. There is a book version of it too I believe. No videos. There are some interactive widgets that can run Prolog code but they did not work well on my browser. I resorted to [this IDE for Windows](https://arbeitsplattform.bildung.hessen.de/fach/informatik/swiprolog/indexe.html).
 
 If you are one of those people who like to debate programming languages and paradigms, well... The others are pretty similar, but the only "truly different" programming paradigm in my opinion is this one: Logic Programming. 
 
@@ -93,7 +97,7 @@ It is so very different! You have to think in a completely different way: Unific
 
 Backtracking is used in some "normal" programs in "normal" (non-Logic) languages though. For example you will write a brute-force Sudoku puzzle solver in How to Code 2 and then also in Udacity's Software Testing. The straightforward, non-clever solution necessitates backtracking. Another example of backtracking in "normal" programs is maze solvers: https://github.com/mikepound/mazesolving and https://www.youtube.com/watch?v=rop0W4QDOUI
 
-This was right up my alley, because the language works exactly like a [proof tree](https://www.quora.com/What-are-proof-trees) which I studied in Mathematical Logic. Oh and the Cut Rule! (to stop backtracking) Goes back to Gentzen's 1934 [theorem](https://en.wikipedia.org/wiki/Cut-elimination_theorem).
+This was right up my alley, because the language works exactly like a [proof tree](https://www.quora.com/What-are-proof-trees) which I studied in Mathematical Logic. Oh and the Cut Rule! (to stop backtracking) goes back to Gentzen's 1934 [theorem](https://en.wikipedia.org/wiki/Cut-elimination_theorem).
 
 Originally Prolog was created by a linguist, so the main application is studying Grammars. The course will teach you context free grammars and definite clause grammars. Very important stuff if you want to go into parsing and compilers! That will be your "final project". You'll probably never use Prolog in the real world. The website claims it is coded in Prolog though!
 
@@ -152,7 +156,9 @@ This is a textbook, not a course. But it became a course and replaced Hack the K
 
 The book is written in a very friendly, conversational style. It makes all kinds of otherwise difficult research papers very easy to understand. The author really has a gift here. The chapters are usually very short. You can download code for the homework assignments at the end of each chapter. Many of these are simply reading text output that describes a situation (assembly code, multiple threads executing, disk I/O etc.) and answering questions about them. A few of the exercises require you to write some code.
 
-You should definitely type the C code snippets in each chapter by hand. The book spends a few chapters to teach you the C thread API (which HtK DID NOT!). You can even compile and run these code snippets on your machine. The book covers A LOT of things. It's split into 3 easy pieces: Virtualization (deals with process API, system calls, kernel traps/context switches, Scheduling Theory and algorithms, virtual memory systems, paging), Concurrency (threads, synchronization primitives like semaphores, condition variables, locks) and Persistence (data/file/I/O systems). The book is long but very very easy to read. I finished the first two of the three easy pieces in about a month.
+You should definitely type the C code snippets in each chapter by hand. The book spends a few chapters to teach you the C thread API (which HtK DID NOT!). You can even compile and run these code snippets on your machine. The book covers A LOT of things. It's split into 3 easy pieces: Virtualization (deals with process API, system calls, kernel traps/context switches, Scheduling Theory and algorithms, virtual memory systems, paging), Concurrency (threads, synchronization primitives like semaphores, condition variables, locks) and Persistence (data/file/I/O systems). The book is long (600 pages) but very very easy to read. I finished the first two of the three easy pieces in about a month. 
+
+Check the author's site as he is planning an update and some other excellent free books.
 
 *Spam's recommendation:* Look no further. This is THE BOOK if you want to understand operating systems. It's OK if you don't.
 
@@ -173,7 +179,17 @@ https://www.coursera.org/learn/algorithms-graphs-data-structures
 https://www.coursera.org/learn/algorithms-greedy
 https://www.coursera.org/learn/algorithms-npcomplete
 
+These courses are right up there with Nand2Tetris and PLABC as THE BEST. I took this right after my 6 month long Hack the Kernel fiasco, and boy, what a soul-saver this was! Super awesome amazing courses.
+
 ### <a name="db"></a> Databases
+
+Yet another Stanford course that disappeared with the shutdown of Lagunita. I took it RIGHT BEFORE the shutdown. These are 14 mini-courses on... so many database topics. I'll be honest I can't remember some of them. These are very dull, boring, technical and there are A LOT of exercises. It's not the instructor's (Jennifer Widom) fault though. I actually liked her, she was pretty good, but the subject itself is very boring and difficult to make interesting without a more applied context.
+
+The database world is a mess. So many different query languages and syntaxes out there. RA, XPath, XSLT, XML, XQuery, SQL, JSON, OLAP... oh my god. The software side of these was also a huge pain. Had to install so many different programs buried out there on the internet. [DBeaver](https://dbeaver.io/) is free and really excellent to run SQLite, MySQL, PostGreSQL on your local machine (although you'll have to track down some Stackoverflow answers to get them installed and working properly on your PC). I also had to install [BaseX](https://basex.org/) and [Saxon](https://www.saxonica.com/welcome/welcome.xml). Processing RA was even more difficult, I think I just used an online tool for that. There were also some tools pre-installed on my Linux system to process some of the other formats.
+
+You will write TONS AND TONS of queries. Some of the exercises are quite hard! Mainly because query languages are so unexpressive, while these hard exercises are asking you to do things in a more general-purpose-programming-language kind of way. You will get sick and tired of these queries. Some of the mini-courses don't have any exercises, they are just over in half an hour or so.
+
+/*Spam's recommendation:*/ Don't take it, even when it comes back online on edX. I think this (writing hundreds and thousands of query exercises) is the wrong way to learn databases. Learn it by doing a web project instead.
 
 ### <a name="graphics"></a> Computer Graphics
 https://www.edx.org/course/computer-graphics-uc-san-diegox-cse167x
@@ -214,7 +230,7 @@ You also need to spend some time thinking about how to correctly "vectorize" the
 ### <a name="compilers"></a> Compilers
 https://www.udacity.com/course/compilers-theory-and-practice--ud168
 
-I took this because the Stanford compilers course became unavailable. This course has no programming assignments, only quizzes, which was OK by me. I'm interested in compilers but not that much. It's a pretty good course. Especially the beginning parts that teach you the theory of regular expressions and deterministic/non-deterministic finite state machines, and later, context-free grammars. It's a very long course, and it gets super complicated towards the end when you deal with low-level code generation matters. However the problems involved are extremely interesting and hard, like parse trees, register allocation and control flow graphs.
+I took this because the Stanford compilers course became unavailable. This course has no programming assignments, only quizzes, which was OK by me. I'm interested in compilers but not that much. It's a pretty good course. Especially the beginning parts that teach you the theory of regular expressions and deterministic/non-deterministic finite state machines, and later, context-free grammars. It's a very long course, and it gets super complicated towards the end when you deal with low-level code generation matters. However the problems involved are extremely interesting and hard, like parse trees, register allocation and control flow graphs. This is some truly hardcore Computer Science. I will learn these properly WHEN I GROW UP!
 
 *Spam's recommendation:* Don't take it. What, are you crazy enough to write a compiler? Nobody is gonna write a compiler in their career. If you want to write a "fun compiler" take Nand2Tetris Part 2 instead. You'll probably have to write a simple parser at some point in your life though, so you can take the beginning part (regex, FSMs, parsing).
 
@@ -235,7 +251,7 @@ This is a purely verbal course. No programming assignments, no homeworks, just a
 
 There was only one useful Lesson. It's a scenario where two instructors are play-acting as software engineer and client. They go through the design decisions of a Library ID card/book checkout system. It actually made a lot of sense. This was extremely similar to what they did in the Software Construction 1,2 classes.
 
-*Spam's recommendation:* Do not take this. Total waste of time. But let me know if you figure out the audio-book version!
+*Spam's recommendation:* Do not take this. Total waste of time. You can listen to The Joy of Painting with Bob Ross if you have trouble going to sleep.
 
 ### <a name="laff"></a> LAFF - On programming for Correctness
 https://www.edx.org/course/laff-on-programming-for-correctness
@@ -272,9 +288,13 @@ This was the hardest course after Hack the Kernel. But it's insanely cool! Howev
 
 Finally some nice folks on GitHub created a Google Colab page (uses Google's GPU sharing) with the homework assignments, but the final exam is missing. They wrapped the C++/CUDA code in some iPython notebooks with correct reference solutions that automatically compiles and checks your code against it. But it's impossible to debug or know what you are doing wrong... so I was forced to peek at a few solutions on Github.
 
-The course is about CUDA programming specifically on the GPU. Lots of GPU-only special considerations are given, like warp size, cache size, local/shared/global memory and their speeds, and so on. (These were completely absent from the Parallel Programming course in Scala specialization.) The homework assignments are written by folks at Nvidia. It's very rare for a course to be so closely integrated with industry. And these assignments were much, much, much better than those in Hack the Kernel, even though they both deal with low-levels, memory allocation, pointers etc.
+The course is about CUDA programming specifically on the GPU. Lots of GPU-only special considerations are given, like warp size, cache size, local/shared/global memory and their speeds, and so on. (These were completely absent from the Parallel Programming course in Scala Specialization.) The homework assignments are written by folks at Nvidia. It's very rare for a course to be so closely integrated with industry. And these assignments were much, much, much better than those in Hack the Kernel, even though they both deal with low-levels, memory allocation, pointers etc. It's my theory that industry people are better at creating learning content than academics.
 
-*Spam's recommendation:* DO NOT TAKE THIS! It's abandonware. You'll go through so much pain and frustration. It's too bad though, because it's actually an awesome course.
+You will go through the fundamentals of parallel programming and learn/implement all the fundamental parallel algorithms: scan, reduce, and so on. The assignments are super cool and interesting (assuming you can DO THEM AT ALL!): image blurring, turning an image to B&W, red eye reduction, normalizing an image's shininess (so that super bright/super dark portions become more visible), Radix Sort, Jacobi filtering. I could not even do the final exam's PAs, I assume they were even harder.
+
+The instructors are great! I always thought Udacity is the only one that got online pedagogy right: short videos, tons of questions in between videos (fully utilizing the Socratic method) instead of long boring info dumps. However the TAs totally suck. The TAs are tasked with the "explain HW assignment" videos, and they do a terrible job. There is one main instructor and some guests from Nvidia. They got the main CUDA guy from Nvidia to give a guest lecture (without any assignments) on the CUDA programming model. Don't worry, it does NOT play like a commercial. The only issue is that the main instructor gets into super nitty gritty details of optimizing parallel code for the GPU... while it's cool to have industry people teaching you the tricks directly, these felt like totally out of reach unless you work in the industry yourself.
+
+*Spam's recommendation:* DO NOT TAKE THIS! It's abandonware. Super hard, and you are all alone. You'll go through so much pain and frustration. It's too bad though, because it's actually an awesome course.
 
 ### <a name="scala"></a> Functional Programming in Scala (5 courses)
 https://www.coursera.org/specializations/scala
