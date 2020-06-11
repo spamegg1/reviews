@@ -96,7 +96,7 @@ This was by far the most useful thing for my Specialization. Scala totally rips 
 
 I love Haskell! It's awesome. Most of your time, like 95%, will be spent battling the type checker. It's like martial arts practice. I call it "Type-Kata". The type checker will reject almost all of your code. Just when you think you wisened up and grasped a concept, the type checker will throw it back in your face; and remind you of what a useless, incompetent piece of garbage you are. Go back to Python, you loser. But magically, if your code passes the type checker, it will be usually correct and bug-free. That's why they call it *The Venerable Glasgow Haskell Compiler*.
 
-Did I already tell you that this is hard? It's very hard. The book is full of code though, and I typed all of it. Many of the exercises are of the "guess the correct type" type. (Did I just make a pun?) It also takes you step by step through creating and compiling projects using Haskell's build tool, Stack.
+Did I already tell you that this is hard? It's very hard. The book is full of code though, and I typed all of it. Many of the exercises are of the "guess the correct type" type. (Did I just make a pun?) It also takes you step by step through creating and compiling projects using Haskell's build tool, Stack. 
 
 *Spam's recommendation:* I'm gonna say... don't take it. Unless you are an evil pirate like me who is also into masochism. It's super duper hard anyways, and definitely not worth $59. It will take you a LONG TIME to get through this book. But if you do, your Functional Scala Specialization will be a total cakewalk.
 
@@ -123,7 +123,7 @@ These courses gave me the best feeling! I felt euphoric, like I just flashed thr
 
 ### <a name="intro-to-net"></a> Intro to Networking
 
-This course was a major bummer coming off the euphoric high of Nand2Tetris. It's very long, technical, academic, hard and boring. It has no programming assignments. The two instructors (one of which keeps appearing with a different hair color every lecture) don't do a very good job of explaining things. Lecture videos are usually very long. This course is a HUGE, many metric tons of info dump on your brain.
+This course was a major bummer coming off the euphoria of Nand2Tetris. It's very long, technical, academic, hard and boring. It has no programming assignments. The two instructors (one of which keeps appearing with a different hair color every lecture) don't do a very good job of explaining things. Lecture videos are usually very long. This course is a HUGE, many metric tons of info dump on your brain.
 
 The quizzes and exams are very difficult, the questions are hard to understand, very wordy and vague (like what students call "word problems" in math classes), and very difficult to get feedback on. I finished with a 79/100 overall on the course. The exams don't let you try again, also don't give feedback on right/wrong answers. The quizzes let you try as many times as you want, but sometimes I had to do blind-guessing for 100 different values just so I could see the correct answer explanation. They are not multiple-choice. These questions are so difficult, riddled with so many different unit conversions and constants, it's so hard to know even when I'm doing something right.
 
@@ -165,6 +165,26 @@ https://www.coursera.org/learn/algorithms-npcomplete
 
 ### <a name="graphics"></a> Computer Graphics
 https://www.edx.org/course/computer-graphics-uc-san-diegox-cse167x
+
+This course was very uneven. Some great parts and some awful parts. Also at the time I took it, edX started doing this thing: they cut off your audit access in one month. So I was under a lot of time pressure to finish this quickly, but it's actually tough material. Also you can't submit assignments for grading unless you pay (I didn't, even students who paid were complaining about their experiences with the grader). The discussion boards under the videos were full of unanswered questions from frustrated students. It's possible to test with the provided code but it requires some eye-balling: you have to stare at your images versus the reference solution images.
+
+The instructor Ravi Ravamoorthi is a brilliant and leading man in his field. He is extremely well spoken and good at explaining things. Despite all that, the videos were long, boring and not very helpful. He has many, many videos where he goes over the OpenGL code for the second assignment which is nice, but they were so long and numerous I could not concentrate after a while (especially with the time pressure from edX). For assignments I would have to go back to the PDF slides. 
+
+When he goes through some calculations, he is using a screen-marker pen that must be from the late 1990s, it has no smoothing whatsoever that everything he writes is completely angular/straight, it looks like it was written by a 3 year old. Impossible to read or follow, and very annoying. In later videos, he quickly cuts to the version of the formula that was typeset instead of handwritten.
+
+The OpenGL pipeline is pretty complicated. There are so many parts, and I had real trouble understanding how and in what order they are connected. The math is really involved. I found it possible, but really hard, to follow the derivations of the formulas for various calculations: shading, lighting, tracing, projection, rotation, transformation, dilation, translation, and so on... For the assignments I just ignored the derivations and extracted the final formulas from the PDF slides without really understanding them fully. You really need to be on point with your vector and matrix algebra (dot/cross products, normalization, matrix-vector and matrix-matrix multiplications), but you don't need to take an entire linear algebra or an entire multivariable calculus class.
+
+The first assignment was very nice and doable. You write a bunch of matrices to do transformations. Then you test this on a provided OpenGL rendering of a 3D teapot. The testing tool provided is interactive, you can rotate, dilate, shift the teapot. If you did everything correctly, the testing script will output a bunch of snapshots of the teapot after a particular sequence of transformations, and you can compare them to the correct results. However sometimes your solution is wrong and it's extremely subtle. You can't tell what's wrong from the interactive tool.
+
+In the second assignment you actually have to write the code that renders the 3D teapot. The geometry is provided but you have to implement all the lighting, shading, coloring etc. This was quite challenging but still doable. You have to work across a lot of different files. Read a TON of different formulas from the slides and put the calculations in the right files in the right places. In addition to C++ you have to learn to use GLSL: GL Shading Language. Thankfully Assignment 0 has working, correct sample code that you can look at and imitate. 
+
+The TAs did something extremely useful: they provided guides from students who successfully completed the assignments. These were FAR MORE USEFUL than the assignment texts themselves.
+
+The third assignment was getting close to Hack the Kernel levels of difficulty. It says: "hey, go ahead and implement a Ray Tracer!" OK... No skeleton code is provided. There is a long, wordy specification and some links to sites with "ray tracer design ideas". OK... Also you can't use the OpenGL libraries from previous assignments, because the ray tracer is software rendering only, it doesn't use any hardware acceleration. OK... Also, rendering each of the test images with your ray tracer will take hours of CPU intensive computing. OK... 
+
+I took a look at some people's solutions and holy hell... it would have taken me at least 1-2 months to do that. Here the TAs joke that with each assignment the time required to finish goes up exponentially. They had a formula, something like (n+1)^n hours: Assignment 0 would take 1 hour, Assignment 1 would take 2, Assignment 2 would take 3^2 = 9 and Assignment 3 takes 4^3 = 64 hours. With the added time pressure from edX and no way to even test things I gave up (thanks to HtK I was beginning to master *The Art of Moving On*).
+
+*Spam's recommendation:* Do the first two assignments, if you really want to learn computer graphics and OpenGL. Otherwise skip it. But wait... if you really want to go into computer graphics, there are probably much better ways to learn this stuff. Do those instead.
 
 ### <a name="ml"></a> Machine Learning
 https://www.coursera.org/learn/machine-learning
