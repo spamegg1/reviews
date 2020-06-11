@@ -221,8 +221,29 @@ Correctness proofs are provided only for EXTREMELY SIMPLE algorithms that all fo
 ### <a name="cs344"></a> Intro to Parallel Programming
 https://classroom.udacity.com/courses/cs344
 
+This was the hardest course after Hack the Kernel. But it's insanely cool! However, this course is deprecated/abandoned by Udacity (you can't find it in their course catalog, only accessible if you know a certain URL). So there is no support at all. The auto-graders do not work (the GPU time-sharing they rented from Amazon no longer exists, the back-end of the grader is GONE). The forums are dead (I searched through thousands of posts to find anything relevant at all). The other MANY ways I tried to run the code on my machine did not work either:
+
+- using Nvidia CUDA Toolkit (requires an Nvidia GPU but I had AMD),
+- using Coriander (an open source project that converts CUDA to OpenCL to run on AMD cards),
+- using Ocelot (something similar),
+- tricking your computer into believing that your CPU is a GPU by installing certain specific OpenCL drivers,
+- following Udacity's own instructions to install Hydrazine (the code is abandoned/unmaintained by Google, and the links are dead),
+- a few other things I can't remember.
+
+Finally some nice folks on GitHub created a Google Colab page (uses Google's GPU sharing) with the homework assignments, but the final exam is missing. They wrapped the C++/CUDA code in some iPython notebooks with correct reference solutions that automatically compiles and checks your code against it. But it's impossible to debug or know what you are doing wrong... so I was forced to peek at a few solutions on Github.
+
+The course is about CUDA programming specifically on the GPU. Lots of GPU-only special considerations are given, like warp size, cache size, local/shared/global memory and their speeds, and so on. (These were completely absent from the Parallel Programming course in Scala specialization.) The homework assignments are written by folks at Nvidia. It's very rare for a course to be so closely integrated with industry. And these assignments were much, much, much better than those in Hack the Kernel, even though they both deal with low-levels, memory allocation, pointers etc.
+
+*Spam's recommendation:* DO NOT TAKE THIS! It's abandonware. You'll go through so much pain and frustration. It's too bad though, because it's actually an awesome course.
+
 ### <a name="scala"></a> Functional Programming in Scala (5 courses)
 https://www.coursera.org/specializations/scala
+
+OK, this was the big finish line. From the very first day I came across OSSU I've been eyeing this as my eventual goal. I set my browser homepage to the Scala wikipedia entry for over a year, so I would see it everyday and stay motivated. I had never seen a single line of Scala code up to this point. 
+
+Unfortunately I came across too many outside issues when I started this. I was under quarantine, and starting to lose my mind from boredom and mild depression. Then to top it all off my PC broke (first GPU, then motherboard's CPU socket burned). I had to take a break in the middle of my Spec to go out looking for hardware in a pandemic taking some huge risk and being super bummed and depressed.
+
+*Spam's recommendation:* If you are into FP, definitely take it! You know what, JUST TAKE IT. An entire specialization that you can audit FOR FREE and even submit your code for grading! Super super awesome. You can take it after 1 year, probably even earlier (just after PLABC or the Haskell book).
 
 ### <a name="softcons"></a> Software Construction 1, 2
 https://www.edx.org/course/software-construction-data-abstraction
@@ -239,9 +260,9 @@ https://www.coursera.org/learn/crypto/
 
 Wow this course was HARD. The easiest part for me was close to the ending where it goes into number theory (Euler phi function and such). The last part of the course is just setting you up for Cryptography 2, the next course, which I'm told is even more math heavy. Yikes! 
 
-Even though I used to teach math, this course was really hard for me because the math is done in a non-rigorous, hand-wavy fashion. All the definitions (of semantic security, security against existential forgery, and MANY other definitions) are in terms of "negligible" probabilities; so you never make precise probability calculations; instead you say "well this looks negligible, so that will be negligible" and so on. It was so vague and hand-wavy I could not deal with it. 
+Even though I used to teach math, this course was really hard for me because the math is done in a non-rigorous, hand-wavy fashion. All the definitions (of semantic security, security against existential forgery, and MANY other definitions) are in terms of "negligible" probabilities; so you never make precise probability calculations; instead you say "well this looks negligible, so that will be negligible" and so on. It was so vague and hand-wavy I could not deal with it. It relies on "intuitive probability" but I just don't get probability; I'm impossible to build intuition for it.
 
-There is a companion textbook but it is so wordy it's unreadable. The explanations in the videos are somewhat quick and gloss over the details so they went over my head. To do the exams I had to keep re-reading the PDF slides many many times over and over. You can attempt the exams only 3 times within 24 hours, and each time some questions are randomized/changed. THAT SUCKS.
+There is a companion textbook but it is so wordy it's unreadable. The explanations in the videos are somewhat quick and gloss over the details so they went over my head. To do the exams I had to keep re-reading the PDF slides many many times over and over. You can attempt the exams only 3 times within 24 hours, and each time some questions are randomized/changed. THAT SUCKS. Really hard questions too: in some questions there are 6-8 check-boxes, all optional, and you have to get ALL of them right (all the ones that should be checked should be checked, and all the ones that should not be checked should not be checked).
 
 You learn the design of many, many, many ciphers. It's super technical and complicated and hard to understand and sometimes boring. You learn about secrecy, integrity, authenticity, and other cryptography concepts.
 
@@ -249,7 +270,7 @@ This course scared me so much that I am afraid of using any cryptography at all.
 
 Stuff I said above sounds all very negative, but it's a good course and the instructor Dan Boneh is also really good (he was a "guest interview" in Intro to Networking too!) There are some optional but really cool and hard programming exercises (which I did in Python) where you break ciphers, implement some well-known attacks against websites, and so on. For one of the assignments they even created a fake Stanford website that you can attack. Super cool!
 
-*Spam's recommendation:* Probably don't take it. This is a hard MATH course, it doesn't really teach you about security (well it does, but in painful mathematical technical detail, not in simple practical terms).
+*Spam's recommendation:* Probably don't take it. This is a very hard MATH course, it doesn't really teach you about security (well it does, but in painful mathematical technical detail, not in simple practical terms).
 
 ### <a name="cs50-2"></a> CS50, second half, Final Project
 https://cs50.harvard.edu/
@@ -262,11 +283,11 @@ Assignments were pretty hard: text comparison, genetic edit distance (this is ac
 
 And the final project. They give you so much freedom, you can literally do anything. From archealogical image-reconstruction of artifacts with missing/destroyed pieces, to machine learning algorithms for emoji detection... There is an [Expo](https://expo.cs50.net/) for the projects. It's all very celebratory and encouraging actually. The freedom was both... freeing, and scary because of too many options.
 
-I had some ideas. First I was going to make an interactive Game Theory web app where you can play the classic games like Prisoner's Dilemma etc. It was going to have adjustable AI opponents and everything. Then I found out that such sites already exist. Then I decided to make a math learning site with an interactive Python console inside it.
+I had some ideas. First I was going to make an interactive Game Theory web app where you can play the classic games like Prisoner's Dilemma etc. It was going to have adjustable AI opponents and everything. Then I found out that such sites already exist. Then I decided to make a math learning site with an interactive Python console inside it. (I know, those exist too.)
 
-Here's my project: https://number-python.herokuapp.com/
+Here's my project: https://number-python.herokuapp.com/ (don't laugh at me please!)
 
-Check out the source code of that page. It's beautiful! You'll never see HTML like that anywhere. I wrote it like I was writing nice, styled code in a proper programming language. In fact I wrote a Python script to generate the HTML code automatically from other text/script files. I FELT SUPER SMART! I automated stuff and nobody even taught me or told me to do it!
+Check out the source code of that page. It's beautiful! You'll never see HTML like that anywhere. I wrote it like I was writing nice, styled code in a proper programming language. In fact I wrote a Python script to generate the HTML code automatically from other text/script files. I FELT SUPER SMART! I automated stuff and nobody even taught me or told me to do it! This feeling ranks up there with finishing Nand2Tetris 2 and Kruskal's MST algorithm.
 
 Looking for options on an interactive Python console that can be embedded in a web page, I came across [Brython](https://brython.info). Not only it provided an easily embeddable fully functional Python console that had way more modules of the Python library and performed much better than any other alternatives, it let me write Python DIRECTLY INSIDE HTML! Bye bye JavaScript! No need for Flask or any other web framework either. Just straight up HTML. Everything is client-side, no server/user-login involved. You can see the Python scripts in the source code. Brython is SUPER SLOW on initial load (has to translate a large chunk of Python standard library to JS), but once loaded, there are no page-reloads afterwards (all client-side) so the interaction is fast.
 
@@ -288,9 +309,10 @@ Another verbal course. You learn about all the cool catchphrases, ahem, I mean, 
 ### <a name="softarch"></a> Software Architecture
 https://www.coursera.org/learn/software-architecture
 
-I decided to take this when I realized [Software Engineering: Introduction](https://www.edx.org/course/software-engineering-introduction-ubcx-softeng1x) is behind a paywall.
+I decided to take this when I realized [Software Engineering: Introduction](https://www.edx.org/course/software-engineering-introduction-ubcx-softeng1x) is behind a paywall. I didn't know at the time but this is a repetition of Software Construction 1 and Udacity's Software Architecture and Design.
 
 Another verbal course. It's like a literature class. [Words, words, words, words, words.](https://www.youtube.com/watch?v=-lqqDvWF45w) They hired a nice young acting or dance major student to read all the text from the teleprompter for a nice presentation. She clearly has no idea what she is saying.
+
 
 This one makes you draw a ton of UML diagrams using some online tools. There are more than 20 kinds of UML diagrams. Oh my god. I felt like I was taking an art class. I made my diagrams [reeeeaaal pretty](https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/_4b8b74b11840729713d3725d2f08b997_Deployment_Diagram.png?expiry=1591920000000&hmac=8NXnWXX6LIzSv2I1Aagnm-ZBo7VoAQ4ToxpYKAYT6GY). It was kinda fun. These assignments are all peer-graded. You get a free certificate at the end, no paywall, but it's pretty meaningless. 
 
