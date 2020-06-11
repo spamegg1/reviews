@@ -245,9 +245,11 @@ https://algorithmsilluminated.org
 
 These courses are right up there with Nand2Tetris and PLABC as THE BEST. I took this right after my 6 month long Hack the Kernel fiasco, and boy, what a soul-saver this was! Super awesome amazing courses. Filled with mathematical beauty that brings tears to my eyes.
 
-You MUST get Tim's textbooks. Fourth book was not out when I was taking the classes, but it will be out this month! (June 2020) They are EXCELLENT, better than the videos. I actually went through the books and came back to the videos only after having done all the exercises in the textbook.
+You MUST get Tim's textbooks. Fourth book was not out when I was taking the classes, but it will be out this month! (June 2020) They are EXCELLENT, better than the videos. They are like the "...for Dummies" books of algorithms. Very accessible, clear, easy to read. I actually went through the books and came back to the videos only after having done all the exercises in the textbook.
 
 First course is all about... divide and conquer.
+
+The optional material is the hardest: the proof of correctness for Closest Pair Search, the runtime analyses of randomized Quicksort and Deterministic Linear Time Selection. You can skip these. The proofs are pretty hard. I enjoyed them a lot. 
 
 Second course is all about... graphs. Probably the most important part for computer science. Almost everything is modeled with graphs.
 
@@ -255,7 +257,7 @@ Third course is about greedy algorithms (which are sometimes INCORRECT), and dyn
 
 Fourth course is the most theoretical. What to do when problems are just too hard? Where are the natural limitations of computer science? You learn the million dollar question: P versus NP.
 
-*Exact math requirements:* Course 1: you must be BULLETPROOF when it comes to the Principle of Mathematical Induction. Exercise writing a lot of proofs by induction. Then, you need to do a discrete probability analysis using some random variables that are independent. These are all covered in the Appendices of Roughgarden's textbook.
+*Exact math requirements:* Course 1: You need the big-O notation, but this is one of the first chapters of the textbook. You must know the Principle of Mathematical Induction. Exercise writing some proofs by induction. Then OPTIONALLY, you need to do a [discrete probability analysis](https://en.wikibooks.org/wiki/High_School_Mathematics_Extensions/Discrete_Probability) using some random variables that are independent, exploiting the Linearity of Expectation. Both of these are covered in the Appendices of Roughgarden's textbook and you don't need to take a math course.
 
 Course 2: Same regarding induction. Graph theory is covered in the course/textbook. Having taken Math for CS would be nice but it's not necessary.
 
