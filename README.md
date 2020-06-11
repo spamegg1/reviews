@@ -68,7 +68,19 @@ https://www.coursera.org/learn/programming-languages
 https://www.coursera.org/learn/programming-languages-part-b
 https://www.coursera.org/learn/programming-languages-part-c
 
-*Spam's recommendation:* Drop what you are doing and take these now! 
+I loved these courses! These were right around the time of my grandmother passing away, so they really helped me pick up my spirits afterwards. Dan Grossman (Mr. PhD in programming languages LOL) is an awesome instructor! Congrats to him and his wife on their baby boy.
+
+The installation is a bit tricky. For the first course which uses the ML language, you have to install Emacs and an ML-plugin for it. If you've never used Emacs before and you are a typical Windows/Mac user, you're gonna take 
+
+The classes are very much in a college-class format. You get lengthy lecture notes and assignments on PDF files. You gotta read a lot. I normally dislike that, but thankfully these notes were actually excellent. There are some severe restrictions though. You can submit your code, or your multiple choice "midterm exam" only once per 24 hours. I understand Grossman's reasoning: he wants you to really be thorough, and resist the urge to do blind-guessing. I disliked the midterm exams. Some of the multiple choice questions are very nitpicky and detailed. At least there are PRACTICE midterm exams before you attempt the real thing. That was super useful.
+
+First course uses ML to teach language features from functional programming. A lot of emphasis on ML's type checker, currying, immutability, parametric types and so on. Second one uses Racket (which is dynamically typed) to introduce more features, like thunking and laziness (delaying evaluation), mutation, and so on. Third course uses Ruby to teach OOP concepts: classes, inheritance, multiple inheritance via Mixins, double dispatch, dynamic dispatch and so on. 
+
+Second course makes us write a language inside another language (Racket): really excellent programming assignment!
+
+Grossman explains why he chose these languages and why there is a strong bias towards functional languages:
+
+*Spam's recommendation:* Drop what you are doing and take these now! They will serve you forever.
 
 ### <a name="lpn"></a> Learn Prolog Now!
 https://lpn.swi-prolog.org/lpnpage.php?pageid=top
