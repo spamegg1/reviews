@@ -2,9 +2,13 @@
 DISCLAIMER: These are my subjective personal opinions! Make your own judgment. Also, I will talk a lot about my feelings! You are warned.
 
 - [Harvard's CS50 (first half)](#cs50)
+- [CS50, second half, Final Project](#cs50-2)
 - [How to Code 1 & 2](#how-to-code)
+- [Software Construction 1, 2](#softcons)
 - [Programming Languages A, B, C](#plabc)
 - [Learn Prolog Now!](#lpn)
+- [Udacity CS 212](#cs212)
+- [Functional Programming in Haskell](#haskell)
 - [Haskell Programming from First Principles](#hpffp)
 - [Nand2Tetris 1,2](#n2t)
 - [Intro to Networking](#intro-to-net)
@@ -15,6 +19,9 @@ DISCLAIMER: These are my subjective personal opinions! Make your own judgment. A
 - [Databases](#db)
 - [Computer Graphics](#graphics)
 - [Machine Learning](#ml)
+- [Cryptography 1](#crypt)
+- [Software Processes](#softproc)
+- [Software Architecture](#softarch)
 - [Compilers](#compilers)
 - [Software Debugging](#debug)
 - [Software Testing](#test)
@@ -22,13 +29,6 @@ DISCLAIMER: These are my subjective personal opinions! Make your own judgment. A
 - [LAFF - On programming for Correctness](#laff)
 - [Intro to Parallel Programming](#cs344)
 - [Functional Programming in Scala (5 courses)](#scala)
-- [Software Construction 1, 2](#softcons)
-- [Cryptography 1](#crypt)
-- [CS50, second half, Final Project](#cs50-2)
-- [Software Processes](#softproc)
-- [Software Architecture](#softarch)
-- [Functional Programming in Haskell](#haskell)
-- [Udacity CS 212](#cs212)
 
 ### <a name="cs50"></a> Harvard's CS50 (first half)
 https://cs50.harvard.edu/
@@ -44,6 +44,31 @@ The instructor David Malan is very energetic and fun, but I really disliked the 
 I think it's a challenging beginner course. These days Python is the preferred language for beginner courses (which is covered in the second half), but if you want to baptize yourself in fire, you can jump into this course.
 
 *Spam's Recommendation:* Take it. It's good!
+
+### <a name="cs50-2"></a> CS50, second half, Final Project
+https://cs50.harvard.edu/
+
+OK, this was a total mess. (Apparently they improved it later with "tracks" you can follow, like Android, game, web, iOS.)
+
+They throw so many languages at you all at once, and you don't really have time to learn any of them properly: Python, HTML, CSS, JavaScript, SQL, Jinja (templating language), the Flask web framework for Python, holy hell. I already knew some Python so all was well on that front. But the learning curve gets SUPER STEEP all of a sudden after 6 weeks of C. You'll want to go back to pointers, if you can believe it!
+
+Assignments were pretty hard: text comparison, genetic edit distance (this is actually a pretty hard algorithm that you will learn later in Algorithms/Dynamic Programming), and some kind of location-map Web-App. Once again, that's how Harvard does it: HARD! They should call it HARDvard. (OK I'll let myself out.)
+
+And the final project. They give you so much freedom, you can literally do anything. From archealogical image-reconstruction of artifacts with missing/destroyed pieces, to machine learning algorithms for emoji detection... There is an [Expo](https://expo.cs50.net/) for the projects. It's all very celebratory and encouraging actually. The freedom was both... freeing, and scary because of too many options.
+
+I had some ideas. First I was going to make an interactive Game Theory web app where you can play the classic games like Prisoner's Dilemma etc. It was going to have adjustable AI opponents and everything. Then I found out that such sites already exist. Then I decided to make a math learning site with an interactive Python console inside it. (I know, those exist too.)
+
+Here's my project: https://number-python.herokuapp.com/ (don't laugh at me please!)
+
+Check out the source code of that page. It's beautiful! You'll never see HTML like that anywhere. I wrote it like I was writing nice, styled code in a proper programming language. In fact I wrote a Python script to generate the HTML code automatically from other text/script files. I FELT SUPER SMART! I automated stuff and nobody even taught me or told me to do it! This feeling ranks up there with finishing Nand2Tetris 2 and Kruskal's MST algorithm.
+
+Looking for options on an interactive Python console that can be embedded in a web page, I came across [Brython](https://brython.info). Not only it provided an easily embeddable fully functional Python console that had way more modules of the Python library and performed much better than any other alternatives, it let me write Python DIRECTLY INSIDE HTML! Bye bye JavaScript! No need for Flask or any other web framework either. Just straight up HTML. Everything is client-side, no server/user-login involved. You can see the Python scripts in the source code. Brython is SUPER SLOW on initial load (has to translate a large chunk of Python standard library to JS), but once loaded, there are no page-reloads afterwards (all client-side) so the interaction is fast.
+
+I had to figure out how to use LaTeX (mathematical typesetting) on a web page. The go-to "industry standard" is considered to be [MathJaX](https://www.mathjax.org/) but actually it performed so slowly that my CSS animations would trigger earlier than MathJaX could render math symbols, so they would not show up. Then I found a much better alternative called [KaTeX](https://katex.org/) which performs WAY faster and it worked.
+
+I spent about 5 weeks making my project after "finishing" CS50. I'm pretty sure I spent one entire week on trying to figure out something called Window.getComputedStyle() to do a certain animation/user-input update thing. Only to learn later that the W3 School made a custom CSS template that does it automatically... I still have a list of improvements I was going to do. Like learn how to use HTML5 local storage so the next time a user visits the page, it remembers where they left off. I realized that I could keep spending MONTHS on polishing this project. So I decided to move on.
+
+*Spam's recommendation:* Take it only if you like messy challenges. This is the world of web programming, where nothing makes sense, and code from multiple languages are meshed together in spaghetti and it's all raining on your head, meatballs and all. I liked it but it was super frustrating. For me it replaces the [Software Engineering Capstone Project](https://www.edx.org/course/software-development-capstone-project-ubcx-softengprjx) which I did not take due to paywall.
 
 ### <a name="how-to-code"></a> How to Code 1 & 2
 https://www.edx.org/course/how-to-code-simple-data
@@ -62,6 +87,22 @@ Second course teaches you generic recipes and formulas for building bigger, more
 First course ends with a Space Invaders type game (it's cool that Racket has a built-in way of doing events/mutation), while second course ends with a very difficult programming assignment of brute-force solving a scheduling problem for TAs and office hours. You will also write other fun and challenging stuff like a Sudoku solver, a fractal image generator, and so on. This is recursion on steroids basically. There are no auto-graders to which you submit your code. You'll be the judge of the correctness of your code. I'm told you can pay edX to have your final exam graded by the instructor, but don't do that.
 
 *Spam's recommendation:* I am personally biased to like these courses. Definitely take if you are interested in pursuing functional programming. You can also take them as your first programming course. If you already had an introductory course, you can skip these and go to Programming Languages A, B, C. PLA uses ML to teach very similar functional programming principles, and PLB already uses the same language, Racket.
+
+### <a name="softcons"></a> Software Construction 1, 2
+https://www.edx.org/course/software-construction-data-abstraction
+https://www.edx.org/course/software-construction-object-oriented-design
+
+These were the follow-up courses to How to Code 1,2. They have NOTHING in common with HtC courses. They do not follow up on or build up on HtC in any way. Completely orthogonal. I think that was the intention actually. Functional versus OOP. The courses are supposed to have 2 instructors but we only see one. The other lady with the short hair appears only once or twice in an interview style video.
+
+You download the code from their Github repo and open it up in IntelliJ. First few assignments are all about DRAWING. Yep, drawing UML diagrams of projects with already complete code. Afterwards you go through a few more example projects that you open up in IntelliJ and answer various questions about them on edX. There is almost no coding involved. These are just teaching some OOP concepts such as control flow, data abstraction, encapsulation and so on. There are some extra optional practice assignments, but it's very boring. I did them anyway. These are various apps like a Library membership management, a beauty salon appointment program, a Gym membership program, a Ferry service/schedule program, and so on. These are all very small, short projects that are quickly forgotten afterwards. There is one video that teaches you to use IntelliJ's debugger and find some really obvious, deliberate bug in the code, and fix it.
+
+The first course finishes with a project that is a music playing GUI. You just need to write a few lines of code here and there marked as *TODO*. Almost all of the code is done for you already. You can't have it graded unless you pay.
+
+The second course gets into more serious OOP concepts: class hierarchy, associations, sequence diagrams, robustness, design principles: Single Responsibility principle, Liskov Substitution principle, Coupling, Refactoring; Design Patterns: Observer/Observable, Composite pattern, Iterator Pattern; and some more practical things: HashMap in Java, overriding the Equals, Exception handling, Assertions. The format is the same. You download code, don't write much at all, read and answer multiple choice questions on edX.
+
+The second course finishes with a project that is some sort of Twitter app. You need to complete code, using the Observer/Observable pattern. 
+
+*Spam's recommendation:* I'd say skip them. They are OK courses I guess. You don't learn too much or do much coding at all. But they are a TOLERABLE way to get through Java concepts. Definitely preferable to Udacity's Software Architecture and Design, and Coursera's Software Architecture. These courses have actual code you can download and look at.
 
 ### <a name="plabc"></a> Programming Languages A, B, C
 https://www.coursera.org/learn/programming-languages
@@ -102,6 +143,26 @@ This was right up my alley, because the language works exactly like a [proof tre
 Originally Prolog was created by a linguist, so the main application is studying Grammars. The course will teach you context free grammars and definite clause grammars. Very important stuff if you want to go into parsing and compilers! That will be your "final project". You'll probably never use Prolog in the real world. The website claims it is coded in Prolog though!
 
 *Spam's recommendation:* Take it only if you like complex mathematical algorithmic thinking, or have strong interest/background in Mathematical Logic/Proof Theory/Linguistics. But the Logic Programming's way of thinking can be VERY USEFUL if you plan to go into an area of CS with hard problems. 
+
+### <a name="cs212"></a> Udacity CS212
+https://www.udacity.com/course/design-of-computer-programs--cs212
+
+I took this course twice! Once a few years before I started OSSU. I had to quit because it was too hard and I was frustrated. The second time around I finished it.
+
+The instructor Peter Norvig is a super smart guy leading Google AI Research (at the time, 2013?). His teaching style is very tough and definitely not for most people. He leaves A LOT up to you: he wants you to think through the problem, go to Python website and look up functions from the Python library to solve the problem, and not only that, but to solve it in a clever, short, elegant way. The first time I took it, a lot of students were really butthurt in the forums complaining about him. Later the TAs added some extra exercises and videos to explain some of those high-level, functional Python features unfamiliar to beginners, such as the itertools module.
+
+But the course is incredibly valuable. It teaches you so many "high-level" programming ideas and tricks. I first learned the concept of Refactoring and Memoization here. It's a purely problem-solving, puzzle-solving course, except for the language theory section in the middle. That part just didn't click even the second time around. You solve the famous Zebra puzzle, the Pouring problem (from Die Hard 3 with Bruce Willis and Samuel Jackson), create a Poker game, solve a parking problem, among others. Norvig teaches you the concepts from breadth-first-search and depth-first-search, the problem space, the "frontier", and uses all kinds of functional programming tricks available in Python to make the code short and elegant.
+
+The assignments are very hard. Definitely up there with Algorithms or even Advanced Programming. Interestingly my Scala Specialization mentioned the Pouring problem, and Martin Odersky offered a Scala solution after praising Norvig's Python solution as "elegant".
+
+*Spam's recommendation:* Take it only if you want a real challenge, you're OK with a very indirect instructor, and you are self-driven to do your own searches through documentation and figure things out.
+
+### <a name="haskell"></a> Functional Programming in Haskell
+https://www.futurelearn.com/courses/functional-programming-haskell
+
+This was a 6-week "course" that cannot really be called a course. It was more like a few short tutorials put together. It was so insanely short I finished it in one day. I think the last "week" was just some interview videos with some academics. In week 6 they jump into Monads (which you won't understand), because for some reason FP people MUST mention Monads! What's cool is that it's from U of Glasgow, the creators of Haskell. You get to meet Simon Peyton Jones. They talk about the history of the ML-family of languages from the 70s and 80s. They talk about Alonzo Church, Stephen Kleene and lambda calculus too. History is cool.
+
+*Spam's recommendation:* Well, I'm a sucker for computing history. I also like Scottish nerds. If you have a few hours of spare time and interested in Functional Programming, its people and its history, go for it.
 
 ### <a name="hpffp"></a> Haskell Programming from First Principles
 https://haskellbook.com/
@@ -178,8 +239,11 @@ https://www.coursera.org/learn/algorithms-divide-conquer
 https://www.coursera.org/learn/algorithms-graphs-data-structures
 https://www.coursera.org/learn/algorithms-greedy
 https://www.coursera.org/learn/algorithms-npcomplete
+https://algorithmsilluminated.org
 
-These courses are right up there with Nand2Tetris and PLABC as THE BEST. I took this right after my 6 month long Hack the Kernel fiasco, and boy, what a soul-saver this was! Super awesome amazing courses.
+These courses are right up there with Nand2Tetris and PLABC as THE BEST. I took this right after my 6 month long Hack the Kernel fiasco, and boy, what a soul-saver this was! Super awesome amazing courses. Filled with mathematical beauty that brings tears to my eyes.
+
+*Spam's recommendation:* TAKE THEM! Also get Roughgarden's books. They are EXCELLENT.
 
 ### <a name="db"></a> Databases
 
@@ -187,7 +251,7 @@ Yet another Stanford course that disappeared with the shutdown of Lagunita. I to
 
 The database world is a mess. So many different query languages and syntaxes out there. RA, XPath, XSLT, XML, XQuery, SQL, JSON, OLAP... oh my god. The software side of these was also a huge pain. Had to install so many different programs buried out there on the internet. [DBeaver](https://dbeaver.io/) is free and really excellent to run SQLite, MySQL, PostGreSQL on your local machine (although you'll have to track down some Stackoverflow answers to get them installed and working properly on your PC). I also had to install [BaseX](https://basex.org/) and [Saxon](https://www.saxonica.com/welcome/welcome.xml). Processing RA was even more difficult, I think I just used an online tool for that. There were also some tools pre-installed on my Linux system to process some of the other formats.
 
-You will write TONS AND TONS of queries. Some of the exercises are quite hard! Mainly because query languages are so unexpressive, while these hard exercises are asking you to do things in a more general-purpose-programming-language kind of way. You will get sick and tired of these queries. Some of the mini-courses don't have any exercises, they are just over in half an hour or so.
+You will write TONS AND TONS of queries. Some of the exercises are quite hard! Mainly because query languages are so unexpressive, while these hard exercises are asking you to do things in a more general-purpose-programming-language kind of way. You will get sick and tired of these queries. Some of the mini-courses don't have any exercises, they are just over in half an hour or so. Some courses have multiple choice quizzes and exams. They let you try as many times as you want.
 
 /*Spam's recommendation:*/ Don't take it, even when it comes back online on edX. I think this (writing hundreds and thousands of query exercises) is the wrong way to learn databases. Learn it by doing a web project instead.
 
@@ -206,13 +270,13 @@ The first assignment was very nice and doable. You write a bunch of matrices to 
 
 In the second assignment you actually have to write the code that renders the 3D teapot. The geometry is provided but you have to implement all the lighting, shading, coloring etc. This was quite challenging but still doable. You have to work across a lot of different files. Read a TON of different formulas from the slides and put the calculations in the right files in the right places. In addition to C++ you have to learn to use GLSL: GL Shading Language. Thankfully Assignment 0 has working, correct sample code that you can look at and imitate. 
 
-The TAs did something extremely useful: they provided guides from students who successfully completed the assignments. These were FAR MORE USEFUL than the assignment texts themselves.
+They did something extremely useful: they provided guides from students who successfully completed the assignments. These were FAR MORE USEFUL than the assignment texts themselves.
 
 The third assignment was getting close to Hack the Kernel levels of difficulty. It says: "hey, go ahead and implement a Ray Tracer!" OK... No skeleton code is provided. There is a long, wordy specification and some links to sites with "ray tracer design ideas". OK... Also you can't use the OpenGL libraries from previous assignments, because the ray tracer is software rendering only, it doesn't use any hardware acceleration. OK... Also, rendering each of the test images with your ray tracer will take hours of CPU intensive computing. OK... 
 
 I took a look at some people's solutions and holy hell... it would have taken me at least 1-2 months to do that. Here the TAs joke that with each assignment the time required to finish goes up exponentially. They had a formula, something like (n+1)^n hours: Assignment 0 would take 1 hour, Assignment 1 would take 2, Assignment 2 would take 3^2 = 9 and Assignment 3 takes 4^3 = 64 hours. With the added time pressure from edX and no way to even test things I gave up (thanks to HtK I was beginning to master *The Art of Moving On*).
 
-*Spam's recommendation:* Do the first two assignments, if you really want to learn computer graphics and OpenGL. Otherwise skip it. But wait... if you really want to go into computer graphics, there are probably much better ways to learn this stuff. Do those instead.
+*Spam's recommendation:* Do the first two assignments, if you really want to learn computer graphics and OpenGL. Otherwise skip it. 
 
 ### <a name="ml"></a> Machine Learning
 https://www.coursera.org/learn/machine-learning
@@ -227,18 +291,84 @@ You also need to spend some time thinking about how to correctly "vectorize" the
 
 *Spam's recommendation:* What are you waiting for? TAKE IT RIGHT NOW!
 
+
+
+### <a name="crypt"></a> Cryptography 1
+https://www.coursera.org/learn/crypto/
+
+Wow this course was HARD. The easiest part for me was close to the ending where it goes into number theory (Euler phi function and such). The last part of the course is just setting you up for Cryptography 2, the next course, which I'm told is even more math heavy. Yikes! 
+
+Even though I used to teach math, this course was really hard for me because the math is done in a non-rigorous, hand-wavy fashion. All the definitions (of semantic security, security against existential forgery, and MANY other definitions) are in terms of "negligible" probabilities; so you never make precise probability calculations; instead you say "well this looks negligible, so that will be negligible" and so on. It was so vague and hand-wavy I could not deal with it. It relies on "intuitive probability" but I just don't get probability; I'm impossible to build intuition for it.
+
+There is a companion textbook but it is so wordy it's unreadable. The explanations in the videos are somewhat quick and gloss over the details so they went over my head. To do the exams I had to keep re-reading the PDF slides many many times over and over. You can attempt the exams only 3 times within 24 hours, and each time some questions are randomized/changed. THAT SUCKS. Really hard questions too: in some questions there are 6-8 check-boxes, all optional, and you have to get ALL of them right (all the ones that should be checked should be checked, and all the ones that should not be checked should not be checked).
+
+You learn the design of many, many, many ciphers. It's super technical and complicated and hard to understand and sometimes boring. You learn about secrecy, integrity, authenticity, and other cryptography concepts.
+
+This course scared me so much that I am afraid of using any cryptography at all. No matter what you do it's always unsafe :( The course says not to DESIGN your own ciphers, and not to IMPLEMENT your own ciphers based on someone else's design, and to be CAREFUL when using well researched, publicly implemented/tested ciphers, but it's so scary it makes you not wanna USE ANY ciphers ever at all.
+
+Stuff I said above sounds all very negative, but it's a good course and the instructor Dan Boneh is also really good (he was a "guest interview" in Intro to Networking too!) There are some optional but really cool and hard programming exercises (which I did in Python) where you break ciphers, implement some well-known attacks against websites, and so on. For one of the assignments they even created a fake Stanford website that you can attack. Super cool!
+
+*Spam's recommendation:* Probably don't take it. This is a very hard MATH course, it doesn't really teach you about security (well it does, but in painful mathematical technical detail, not in simple practical terms).
+
+### <a name="softproc"></a> Software Processes
+https://www.coursera.org/learn/software-processes
+
+I decided to take this when I realized [Software Engineering: Introduction](https://www.edx.org/course/software-engineering-introduction-ubcx-softeng1x) is behind a paywall. That course was talking about Software Methodologies, so I took this.
+
+Another verbal course. You learn about all the cool catchphrases, ahem, I mean, Software Methodologies used in software companies. Waterfall, Agile, Kanban, Sashimi, Iterative model, Incremental Model, Requirements, Specification, Reusability, Extensibility, Coupling, Cohesion, Modularity, Encapsulation, Information Hiding, and sooooo many other words. There are some practice quizzes, and some "real" quizzes behind a paywall. There are some "scenario" questions where you are given a client and their needs, and you must write an essay describing the best approach to solve their software problems.
+
+*Spam's recommendation:* Skip it. The exams are behind a paywall anyway. You can see the questions though. Just can't submit.
+
+### <a name="softarch"></a> Software Architecture
+https://www.coursera.org/learn/software-architecture
+
+I decided to take this when I realized [Software Engineering: Introduction](https://www.edx.org/course/software-engineering-introduction-ubcx-softeng1x) is behind a paywall. I didn't know at the time but this is a repetition of Software Construction 1 and Udacity's Software Architecture and Design.
+
+Another verbal course. It's like a literature class. [Words, words, words, words, words.](https://www.youtube.com/watch?v=-lqqDvWF45w) They hired a nice young acting or dance major student to read all the text from the teleprompter for a nice presentation. She clearly has no idea what she is saying.
+
+
+This one makes you draw a ton of UML diagrams using some online tools. There are more than 20 kinds of UML diagrams. Oh my god. I felt like I was taking an art class. I made my diagrams [reeeeaaal pretty](https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/_4b8b74b11840729713d3725d2f08b997_Deployment_Diagram.png?expiry=1591920000000&hmac=8NXnWXX6LIzSv2I1Aagnm-ZBo7VoAQ4ToxpYKAYT6GY). It was kinda fun. These assignments are all peer-graded. You get a free certificate at the end, no paywall, but it's pretty meaningless. 
+
+*Spam's recommendation:* What do you think? Skip it, of course.
+
 ### <a name="compilers"></a> Compilers
 https://www.udacity.com/course/compilers-theory-and-practice--ud168
 
 I took this because the Stanford compilers course became unavailable. This course has no programming assignments, only quizzes, which was OK by me. I'm interested in compilers but not that much. It's a pretty good course. Especially the beginning parts that teach you the theory of regular expressions and deterministic/non-deterministic finite state machines, and later, context-free grammars. It's a very long course, and it gets super complicated towards the end when you deal with low-level code generation matters. However the problems involved are extremely interesting and hard, like parse trees, register allocation and control flow graphs. This is some truly hardcore Computer Science. I will learn these properly WHEN I GROW UP!
 
-*Spam's recommendation:* Don't take it. What, are you crazy enough to write a compiler? Nobody is gonna write a compiler in their career. If you want to write a "fun compiler" take Nand2Tetris Part 2 instead. You'll probably have to write a simple parser at some point in your life though, so you can take the beginning part (regex, FSMs, parsing).
+*Spam's recommendation:* Don't take it. What, are you crazy enough to write a compiler? Nobody is gonna write a compiler in their career. If you want to write a "fun compiler" take Nand2Tetris Part 2 instead. You'll probably have to write a simple lexer/parser at some point in your life though, so you can take the beginning part (regex, FSMs, parsing).
 
 ### <a name="debug"></a> Software Debugging
 https://www.udacity.com/course/software-debugging--cs259
 
+Short sweet course. The instructor is great! Very funny guy with lots of interesting stories. For example, did you know that a software bug killed people by giving them an overdose of radiation? He is some sort of debugging expert and wrote books on the subject. I was surprised that [DDD](https://savannah.gnu.org/projects/ddd) that I have installed on my PC came from him and one of his PhD students years ago! There are also some other pioneers in [automated bug fixing](https://web.eecs.umich.edu/~weimerw/) (he taught [CS262](https://www.udacity.com/course/programming-languages--cs262)).
+
+Instead of using a debugger from an IDE or something like that, in this course you write your own very primitive text-based debugger. In one programming assignment you create an Invariant checker: it tracks the seen values of a variable, and creates assertions about that variable: what values should it be in between to assure correctness? In another PA you are given a large input, a mystery test function, and tasked to find the minimum portion of the input that fails. In another PA you write a tracer: a program that traces the execution of another program. Another PA records function calls. There are even ways to numerically quantify the likelihood of lines in code being the cause of failure, using [Phi Coefficients](https://en.wikipedia.org/wiki/Phi_coefficient) from statistics.
+
+In the final exam you put everything together to create a fully automated bug finder and reasoner that explains the bug, tracking the chain of causation in the code. Really cool, advanced debugging ideas. Particularly interesting one is the idea of [Delta Debugging](https://en.wikipedia.org/wiki/Delta_debugging): taking a test input that breaks down code, systematically narrowing down code to its minimum portion that breaks. Unfortunately it never feels like you can use them in the real world beyond the scope of the simple functions that are tested in these assignments.
+
+It's an old course so it uses Python2. I usually translate them to Python3 and do them that way on my PC, but this time it was impossible, because Python's sys.settrace API (used throughout the whole course) changed significantly from 2 to 3. So the 2to3 conversion tool fails to produce a working version.
+
+Some of the programming assignments have issues and bugs. There are some notes below the PA videos, telling you "this code is wrong/has a typo, it should be like this", but those are also wrong. The grader seems to be broken on many occasions. I spent some time reading old forum posts to figure things out. Another issue is that most PAs use the same "buggy code example" from the beginning of the course, over and over again.
+
+*Spam's recommendation:* You can't really lose much by taking it. It's pretty short. It has some very cool ideas I haven't seen elsewhere. Too bad it doesn't really deliver on its promise.
+
 ### <a name="test"></a> Software Testing
 https://www.udacity.com/course/software-testing--cs258
+
+Another short sweet course. Very closely tied to Software Debugging. 
+
+It starts with Assertions. You try to find the bug in some functions with the minimum number of inputs and calls. A programming assignment makes you do the same thing, but on a buggy Mystery function that you do not see the code of. You are required to catch all the bugs by making some assertions fail, in as few calls as possible.
+
+Then is the concept of coverage. You do some exercises on provided code to achieve 100% statement coverage ("hitting" all the statements in a code with tests) with as few tests as possible. There is also the concept of parameter value coverage: "hitting" all the values in the valid input range. There is the concept of Regression testing (a particular sequence of inputs/function calls that cause a certain result).
+
+The rest of the course is dedicated to Random Testing, the instructor's favorite. You will write "fuzzers" that take known good input and randomly but slightly change it, and hold the code against a battery of such fuzzed input to try to find bugs. Apparently a guy named Charlie Miller found security vulnerabilities in Adobe software by running 5 lines of Python code for a few days on his computer. I did it against a bunch of PDF readers on my PC. 
+
+Random Testing is difficult to create programming assignments for that can be checked for correctness by a grader, so there are some seemingly irrelevant programming assignments here: implementing a credit card number checking algorithm, and making a Sudoku puzzle checker (for validity), and a Sudoku solver.
+
+In the final exam you write a fuzzer/random tester for a text viewing application and a given program, achieve full statement and parameter value coverage for strings, integers and Booleans on a given program, write a Regression tester for a program and finding all the bugs. Very easily done and fun.
+
+*Spam's recommendation:* You can't really lose much by taking it. It's pretty short. Really cool ideas.
 
 ### <a name="softdesg"></a> Software Architecture & Design
 https://www.udacity.com/course/software-architecture-design--ud821
@@ -304,96 +434,3 @@ OK, this was the big finish line. From the very first day I came across OSSU I'v
 Unfortunately I came across too many outside issues when I started this. I was under quarantine, and starting to lose my mind from boredom and mild depression. Then to top it all off my PC broke (first GPU, then motherboard's CPU socket burned). I had to take a break in the middle of my Spec to go out looking for hardware in a pandemic taking some huge risk and being super bummed and depressed.
 
 *Spam's recommendation:* If you are into FP, definitely take it! You know what, JUST TAKE IT. An entire specialization that you can audit FOR FREE and even submit your code for grading! Super super awesome. You can take it after 1 year, probably even earlier (just after PLABC or the Haskell book).
-
-### <a name="softcons"></a> Software Construction 1, 2
-https://www.edx.org/course/software-construction-data-abstraction
-https://www.edx.org/course/software-construction-object-oriented-design
-
-These were the follow-up courses to How to Code 1,2. They have NOTHING in common with HtC courses. They do not follow up on or build up on HtC in any way. Completely orthogonal. I think that was the intention actually.
-
-The courses are supposed to have 2 instructors but we only see one. The other lady with the short hair appears only once or twice in an interview style video.
-
-*Spam's recommendation:* They are OK courses. You don't learn too much or do much coding at all. But they are a TOLERABLE way to get through Java concepts. Definitely preferable to Udacity's Software Architecture and Design, and Coursera's Software Architecture. These courses have actual code you can download and look at.
-
-### <a name="crypt"></a> Cryptography 1
-https://www.coursera.org/learn/crypto/
-
-Wow this course was HARD. The easiest part for me was close to the ending where it goes into number theory (Euler phi function and such). The last part of the course is just setting you up for Cryptography 2, the next course, which I'm told is even more math heavy. Yikes! 
-
-Even though I used to teach math, this course was really hard for me because the math is done in a non-rigorous, hand-wavy fashion. All the definitions (of semantic security, security against existential forgery, and MANY other definitions) are in terms of "negligible" probabilities; so you never make precise probability calculations; instead you say "well this looks negligible, so that will be negligible" and so on. It was so vague and hand-wavy I could not deal with it. It relies on "intuitive probability" but I just don't get probability; I'm impossible to build intuition for it.
-
-There is a companion textbook but it is so wordy it's unreadable. The explanations in the videos are somewhat quick and gloss over the details so they went over my head. To do the exams I had to keep re-reading the PDF slides many many times over and over. You can attempt the exams only 3 times within 24 hours, and each time some questions are randomized/changed. THAT SUCKS. Really hard questions too: in some questions there are 6-8 check-boxes, all optional, and you have to get ALL of them right (all the ones that should be checked should be checked, and all the ones that should not be checked should not be checked).
-
-You learn the design of many, many, many ciphers. It's super technical and complicated and hard to understand and sometimes boring. You learn about secrecy, integrity, authenticity, and other cryptography concepts.
-
-This course scared me so much that I am afraid of using any cryptography at all. No matter what you do it's always unsafe :( The course says not to DESIGN your own ciphers, and not to IMPLEMENT your own ciphers based on someone else's design, and to be CAREFUL when using well researched, publicly implemented/tested ciphers, but it's so scary it makes you not wanna USE ANY ciphers ever at all.
-
-Stuff I said above sounds all very negative, but it's a good course and the instructor Dan Boneh is also really good (he was a "guest interview" in Intro to Networking too!) There are some optional but really cool and hard programming exercises (which I did in Python) where you break ciphers, implement some well-known attacks against websites, and so on. For one of the assignments they even created a fake Stanford website that you can attack. Super cool!
-
-*Spam's recommendation:* Probably don't take it. This is a very hard MATH course, it doesn't really teach you about security (well it does, but in painful mathematical technical detail, not in simple practical terms).
-
-### <a name="cs50-2"></a> CS50, second half, Final Project
-https://cs50.harvard.edu/
-
-OK, this was a total mess. (Apparently they improved it later with "tracks" you can follow, like Android, game, web, iOS.)
-
-They throw so many languages at you all at once, and you don't really have time to learn any of them properly: Python, HTML, CSS, JavaScript, SQL, Jinja (templating language), the Flask web framework for Python, holy hell. I already knew some Python so all was well on that front. But the learning curve gets SUPER STEEP all of a sudden after 6 weeks of C. You'll want to go back to pointers, if you can believe it!
-
-Assignments were pretty hard: text comparison, genetic edit distance (this is actually a pretty hard algorithm that you will learn later in Algorithms/Dynamic Programming), and some kind of location-map Web-App. Once again, that's how Harvard does it: HARD! They should call it HARDvard. (OK I'll let myself out.)
-
-And the final project. They give you so much freedom, you can literally do anything. From archealogical image-reconstruction of artifacts with missing/destroyed pieces, to machine learning algorithms for emoji detection... There is an [Expo](https://expo.cs50.net/) for the projects. It's all very celebratory and encouraging actually. The freedom was both... freeing, and scary because of too many options.
-
-I had some ideas. First I was going to make an interactive Game Theory web app where you can play the classic games like Prisoner's Dilemma etc. It was going to have adjustable AI opponents and everything. Then I found out that such sites already exist. Then I decided to make a math learning site with an interactive Python console inside it. (I know, those exist too.)
-
-Here's my project: https://number-python.herokuapp.com/ (don't laugh at me please!)
-
-Check out the source code of that page. It's beautiful! You'll never see HTML like that anywhere. I wrote it like I was writing nice, styled code in a proper programming language. In fact I wrote a Python script to generate the HTML code automatically from other text/script files. I FELT SUPER SMART! I automated stuff and nobody even taught me or told me to do it! This feeling ranks up there with finishing Nand2Tetris 2 and Kruskal's MST algorithm.
-
-Looking for options on an interactive Python console that can be embedded in a web page, I came across [Brython](https://brython.info). Not only it provided an easily embeddable fully functional Python console that had way more modules of the Python library and performed much better than any other alternatives, it let me write Python DIRECTLY INSIDE HTML! Bye bye JavaScript! No need for Flask or any other web framework either. Just straight up HTML. Everything is client-side, no server/user-login involved. You can see the Python scripts in the source code. Brython is SUPER SLOW on initial load (has to translate a large chunk of Python standard library to JS), but once loaded, there are no page-reloads afterwards (all client-side) so the interaction is fast.
-
-I had to figure out how to use LaTeX (mathematical typesetting) on a web page. The go-to "industry standard" is considered to be [MathJaX](https://www.mathjax.org/) but actually it performed so slowly that my CSS animations would trigger earlier than MathJaX could render math symbols, so they would not show up. Then I found a much better alternative called [KaTeX](https://katex.org/) which performs WAY faster and it worked.
-
-I spent about 5 weeks making my project after "finishing" CS50. I'm pretty sure I spent one entire week on trying to figure out something called Window.getComputedStyle() to do a certain animation/user-input update thing. Only to learn later that the W3 School made a custom CSS template that does it automatically... I still have a list of improvements I was going to do. Like learn how to use HTML5 local storage so the next time a user visits the page, it remembers where they left off. I realized that I could keep spending MONTHS on polishing this project. So I decided to move on.
-
-*Spam's recommendation:* Take it only if you like messy challenges. This is the world of web programming, where nothing makes sense, and code from multiple languages are meshed together in spaghetti and it's all raining on your head, meatballs and all. I liked it but it was super frustrating. For me it replaces the [Software Engineering Capstone Project](https://www.edx.org/course/software-development-capstone-project-ubcx-softengprjx) which I did not take due to paywall.
-
-### <a name="softproc"></a> Software Processes
-https://www.coursera.org/learn/software-processes
-
-I decided to take this when I realized [Software Engineering: Introduction](https://www.edx.org/course/software-engineering-introduction-ubcx-softeng1x) is behind a paywall. That course was talking about Software Methodologies, so I took this.
-
-Another verbal course. You learn about all the cool catchphrases, ahem, I mean, Software Methodologies used in software companies. Waterfall, Agile, Kanban, Sashimi, Iterative model, Incremental Model, Requirements, Specification, Reusability, Extensibility, Coupling, Cohesion, Modularity, Encapsulation, Information Hiding, and sooooo many other words. There are some practice quizzes, and some "real" quizzes behind a paywall. There are some "scenario" questions where you are given a client and their needs, and you must write an essay describing the best approach to solve their software problems.
-
-*Spam's recommendation:* Skip it. The exams are behind a paywall anyway. You can see the questions though. Just can't submit.
-
-### <a name="softarch"></a> Software Architecture
-https://www.coursera.org/learn/software-architecture
-
-I decided to take this when I realized [Software Engineering: Introduction](https://www.edx.org/course/software-engineering-introduction-ubcx-softeng1x) is behind a paywall. I didn't know at the time but this is a repetition of Software Construction 1 and Udacity's Software Architecture and Design.
-
-Another verbal course. It's like a literature class. [Words, words, words, words, words.](https://www.youtube.com/watch?v=-lqqDvWF45w) They hired a nice young acting or dance major student to read all the text from the teleprompter for a nice presentation. She clearly has no idea what she is saying.
-
-
-This one makes you draw a ton of UML diagrams using some online tools. There are more than 20 kinds of UML diagrams. Oh my god. I felt like I was taking an art class. I made my diagrams [reeeeaaal pretty](https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/_4b8b74b11840729713d3725d2f08b997_Deployment_Diagram.png?expiry=1591920000000&hmac=8NXnWXX6LIzSv2I1Aagnm-ZBo7VoAQ4ToxpYKAYT6GY). It was kinda fun. These assignments are all peer-graded. You get a free certificate at the end, no paywall, but it's pretty meaningless. 
-
-*Spam's recommendation:* What do you think? Skip it, of course.
-
-### <a name="haskell"></a> Functional Programming in Haskell
-https://www.futurelearn.com/courses/functional-programming-haskell
-
-This was a 6-week "course" that cannot really be called a course. It was more like a few short tutorials put together. It was so insanely short I finished it in one day. I think the last "week" was just some interview videos with some academics. In week 6 they jump into Monads (which you won't understand), because for some reason FP people MUST mention Monads! What's cool is that it's from U of Glasgow, the creators of Haskell. You get to meet Simon Peyton Jones. They talk about the history of the ML-family of languages from the 70s and 80s. They talk about Alonzo Church, Stephen Kleene and lambda calculus too. History is cool.
-
-*Spam's recommendation:* Well, I'm a sucker for computing history. I also like Scottish nerds. If you have a few hours of spare time and interested in Functional Programming, its people and its history, go for it.
-
-### <a name="cs212"></a> Udacity CS212
-https://www.udacity.com/course/design-of-computer-programs--cs212
-
-I took this course twice! Once a few years before I started OSSU. I had to quit because it was too hard and I was frustrated. The second time around I finished it.
-
-The instructor Peter Norvig is a super smart guy leading Google AI Research (at the time, 2013?). His teaching style is very tough and definitely not for most people. He leaves A LOT up to you: he wants you to think through the problem, go to Python website and look up functions from the Python library to solve the problem, and not only that, but to solve it in a clever, short, elegant way. The first time I took it, a lot of students were really butthurt in the forums complaining about him. Later the TAs added some extra exercises and videos to explain some of those high-level, functional Python features unfamiliar to beginners, such as the itertools module.
-
-But the course is incredibly valuable. It teaches you so many "high-level" programming ideas and tricks. I first learned the concept of Refactoring and Memoization here. It's a purely problem-solving, puzzle-solving course, except for the language theory section in the middle. That part just didn't click even the second time around. You solve the famous Zebra puzzle, the Pouring problem (from Die Hard 3 with Bruce Willis and Samuel Jackson), create a Poker game, solve a parking problem, among others. Norvig teaches you the concepts from breadth-first-search and depth-first-search, the problem space, the "frontier", and uses all kinds of functional programming tricks available in Python to make the code short and elegant.
-
-The assignments are very hard. Definitely up there with Algorithms or even Advanced Programming. Interestingly my Scala Specialization mentioned the Pouring problem, and Martin Odersky offered a Scala solution after praising Norvig's Python solution as "elegant".
-
-*Spam's recommendation:* Take it only if you want a real challenge, you're OK with a very indirect instructor, and you are self-driven to do your own searches through documentation and figure things out.
