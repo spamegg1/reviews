@@ -437,6 +437,8 @@ This was the hardest course after Hack the Kernel. But it's insanely cool! Howev
 - following Udacity's own instructions to install Hydrazine (the code is abandoned/unmaintained by Google, and the links are dead),
 - a few other things I can't remember.
 
+Oh I forgot to mention: my GPU died right at the beginning of this course! Ironic, isn't it? But I had a SPARE GPU! Ha ha, take that, irony! I win.
+
 Finally some nice folks on GitHub created a Google Colab page (uses Google's GPU sharing) with the homework assignments, but the final exam is missing. They wrapped the C++/CUDA code in some iPython notebooks with correct reference solutions that automatically compiles and checks your code against it. But it's impossible to debug or know what you are doing wrong... so I was forced to peek at a few solutions on Github.
 
 The course is about CUDA programming specifically on the GPU. Lots of GPU-only special considerations are given, like warp size, cache size, local/shared/global memory and their speeds, and so on. (These were completely absent from the Parallel Programming course in Scala Specialization.) The homework assignments are written by folks at Nvidia. It's very rare for a course to be so closely integrated with industry. And these assignments were much, much, much better than those in Hack the Kernel, even though they both deal with low-levels, memory allocation, pointers etc. It's my theory that industry people are better at creating learning content than academics.
