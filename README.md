@@ -1,4 +1,4 @@
-# Spam's CS Corner: Course Reviews (IN PROGRESS)
+# Spam's CS Corner: Course Reviews
 DISCLAIMER: These are my subjective personal opinions! Make your own judgment. Also, I will talk a lot about my feelings! You are warned.
 
 Originally written June 2020
