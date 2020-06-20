@@ -9,7 +9,7 @@ Originally written June 2020
 - [Software Construction 1, 2](#softcons)
 - [Programming Languages A, B, C](#plabc)
 - [Learn Prolog Now!](#lpn)
-- [Udacity CS 212](#cs212)
+- [Design of Computer Programs](#cs212)
 - [Functional Programming in Haskell](#haskell)
 - [Haskell Programming from First Principles](#hpffp)
 - [Nand2Tetris 1,2](#n2t)
@@ -151,9 +151,11 @@ https://www.udacity.com/course/design-of-computer-programs--cs212
 
 I took this course twice! Once a few years before I started OSSU. I had to quit because it was too hard and I was frustrated. It totally kicked my ass and wiped the floor with it. The second time around I finished it.
 
-The instructor Peter Norvig is a super smart guy leading Google AI Research (at the time, 2013?). His teaching style is very tough and definitely not for most people. He leaves A LOT up to you: he wants you to think through the problem, go to Python website and look up functions from the Python library to solve the problem, and not only that, but to solve it in a clever, short, elegant way. The first time I took it, a lot of students were really butthurt in the forums complaining about him. Later the TAs added some extra exercises and videos to explain some of those high-level, functional Python features unfamiliar to beginners, such as the itertools module.
+The instructor Peter Norvig is a super smart guy leading Google AI Research (at the time, 2013?). His teaching style is very tough and definitely not for most people. He leaves A LOT up to you: he wants you to think through the problem, go to Python website and look up functions from the Python library to solve the problem, and not only that, but to solve it in a clever, short, elegant way. The first time I took it, a lot of students were really butthurt in the forums complaining about him. Later the TAs added some extra exercises and videos to explain some of those high-level, functional Python features unfamiliar to beginners, such as the itertools module. They also added "Office Hours" videos where Norvig and a TA answer questions submitted by students.
 
-But the course is incredibly valuable. It teaches you so many "high-level" programming ideas and tricks. I first learned the DRY Principle (Don't Repeat Yourself), the concepts of Refactoring and Memoization here. It's a purely problem-solving, puzzle-solving course, except for the language theory section in the middle. That part just didn't click even the second time around. You solve the famous Zebra puzzle, the Pouring problem (from Die Hard 3 with Bruce Willis and Samuel Jackson), create a Poker game, solve a parking problem, among others. Norvig teaches you the concepts from breadth-first-search and depth-first-search, the problem space, the "frontier", profiling, looking under the hood of program execution to optimize performance with memoization, and uses all kinds of functional programming tricks (list comprehensions etc.) available in Python to make the code short and elegant.
+But the course is incredibly valuable. It teaches you so many "high-level" programming ideas and tricks. I first learned the DRY Principle (Don't Repeat Yourself), the concepts of Refactoring and Memoization here. It's a purely problem-solving, puzzle-solving course, except for the language theory section in the middle. That part just didn't click even the second time around. 
+
+You solve the famous Zebra puzzle, the Pouring problem (from Die Hard 3 with Bruce Willis and Samuel Jackson), create a Poker game, solve a parking problem, word searches, finding palindromes, among others. Norvig teaches you the concepts from breadth-first-search and depth-first-search, the problem space, the "frontier", profiling, looking under the hood of program execution to optimize performance with memoization, and uses all kinds of functional programming tricks (list comprehensions etc.) available in Python to make the code short and elegant.
 
 The assignments are very hard. Definitely up there with Algorithms or even Advanced Programming (the final exam solutions are available on the course pages!). Interestingly years later my Scala Specialization mentioned the Pouring problem, and Martin Odersky offered a Scala solution after praising Norvig's Python solution as "elegant".
 
