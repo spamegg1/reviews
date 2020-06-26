@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Symbol</th>
+            <th>Shares</th>
+            <th>Price</th>
+            <th>TOTAL</th>
+        </tr>
+    </thead>
+
+    <tfoot>
+        <tr>
+            <td colspan="3"></td>
+            <td>{{ total | usd }}</td>
+        </tr>
+    </tfoot>
+
+    <tbody>
+
+        {% for i in range(stocks | length) %}
+            <tr>
+                <td>{{ symbols[i] }}</td>
+                <td>{{ shares[i] }}</td>
+                <td>{{ prices[i] | usd }}</td>
+                <td>{{ (shares[i] * prices[i]) | usd }}</td>
+            </tr>
+        {% endfor %}
+
+        <tr>
+            <td>CASH</td>
+            <td></td>
+            <td></td>
+            <td>{{ cash | usd }}</td>
+        </tr>
+
+    </tbody>
+
+</table>
+{% endblock %}
