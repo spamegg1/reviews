@@ -1,0 +1,28 @@
+Welcome to Guess The Word!
+Enter the secret word of phrase:
+Alas, poor Yorick!
+Secret word:
+----, ---- ------!
+9 incorrect guess(es) left.
+Enter the letter you want uncovered:
+A
+Secret word:
+A-a-, ---- ------!
+9 incorrect guess(es) left.
+Enter the letter you want uncovered:
+y
+Secret word:
+A-a-, ---- Y-----!
+9 incorrect guess(es) left.
+Enter the letter you want uncovered:
+a
+I'm sorry, but that's not a valid letter.
+Secret word:
+A-a-, ---- Y-----!
+9 incorrect guess(es) left.
+Enter the letter you want uncovered:
+,
+I'm sorry, but that's not a valid letter.
+Secret word:
+A-a-, ---- Y-----!
+9 incorrect guess(es) left.
