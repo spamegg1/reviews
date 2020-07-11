@@ -216,7 +216,7 @@ The best parts were those about Internet history, earlier versions of TCP and so
 
 Each topic had so many nitty gritty technical details, it's impossible to keep them all in mind. Routing, queuing algorithms, IP addresses, NAT translations, DHCP systems, DNS systems, Encodings on the physical layer, all the different speeds in different versions of TCP, dozens of separate bits and parts of a typical TCP/IP package, security and cryptography, and so on... the textbook they chose (Kurose) is so long, wordy and unreadable I found it to be of no help. Before quizzes/exams I had to re-read PDF slides and try to make questions look like those on the slides.
 
-*Spam's recommendation:* Skip this. There has to be a better, more practical way to learn Networking. I don't know what it is though. 
+*Spam's recommendation:* I can't recommend this in good conscience, but Networking is an important topic. A better alternative might be [this](https://www.coursera.org/learn/computer-networking) or [this](https://www.udacity.com/course/computer-networking--ud436). 
 
 ### <a name="ostep"></a> Operating Systems: Three Easy Pieces
 http://pages.cs.wisc.edu/~remzi/OSTEP/
