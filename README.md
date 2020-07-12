@@ -210,13 +210,13 @@ The same applies to Programming Languages A, B, C (all three cover programming l
 
 This course was a major bummer coming off the euphoria of Nand2Tetris. I could feel my dopamine levels dropping. It's very long, technical, academic, hard and boring. It has no programming assignments. The two instructors (one of which keeps appearing with a different hair color every lecture) don't do a very good job of explaining things. Lecture videos are usually very long. This course is a HUGE, many metric tons of info dump on your brain.
 
-The quizzes and exams are very difficult, the questions are hard to understand, very wordy and vague (like what students call "word problems" in math classes), and very difficult to get feedback on. I finished with a 79/100 overall on the course. The exams don't let you try again, also don't give feedback on right/wrong answers. The quizzes let you try as many times as you want, but sometimes I had to do blind-guessing for 100 different values just so I could see the correct answer explanation. They are not multiple-choice. These questions are so difficult, riddled with so many different unit conversions and constants, it's so hard to know even when I'm doing something right.
+The quizzes and exams are very difficult, the questions are hard to understand, very wordy and vague (like what students call "word problems" in math classes), and very difficult to get feedback on. I finished with a 79/100 overall on the course. The exams don't let you try again, also don't give feedback on right/wrong answers. The quizzes let you try as many times as you want, but sometimes I had to do blind-guessing for 100 different values just so I could see the correct answer explanation. Many are not multiple-choice. These questions are so difficult, riddled with so many different unit conversions and constants, it's so hard to know even when I'm doing something right.
 
 The best parts were those about Internet history, earlier versions of TCP and so on. There were also some routing algorithms like Dijkstra, Bellman-Ford which I relearned later in Algorithms. Those were good too. There were some interviews with what I assume important people in networking, but the video/audio quality is so poor on these it actually hurt my ears and eyes.
 
-Each topic had so many nitty gritty technical details, it's impossible to keep them all in mind. Routing, queuing algorithms, IP addresses, NAT translations, DHCP systems, DNS systems, Encodings on the physical layer, all the different speeds in different versions of TCP, dozens of separate bits and parts of a typical TCP/IP package, security and cryptography, and so on... the textbook they chose (Kurose) is so long, wordy and unreadable I found it to be of no help. Before quizzes/exams I had to re-read PDF slides and try to make questions look like those on the slides.
+Each topic had so many nitty gritty technical details, it's impossible to keep them all in mind. Routing, queuing algorithms, IP addresses, NAT translations, DHCP systems, DNS systems, Encodings on the physical layer, all the different speeds in different versions of TCP, dozens of separate bits and parts of a typical TCP/IP package, security and cryptography, and so on... the textbook they chose (Kurose) is so long, wordy and unreadable I found it to be of no help. Now this might be my fault, as the text comes very highly recommended. Before quizzes/exams I had to re-read PDF slides and try to make questions look like those on the slides.
 
-*Spam's recommendation:* I can't recommend this in good conscience, but Networking is an important topic. A better alternative might be [this](https://www.coursera.org/learn/computer-networking) or [this](https://www.udacity.com/course/computer-networking--ud436). 
+*Spam's recommendation:* I can't recommend this in good conscience, but Networking is an important topic. A better alternative might be [this](https://www.coursera.org/learn/computer-networking) or [this](https://www.udacity.com/course/computer-networking--ud436). If you want to learn networking by programming instead, you can take a look [here](https://github.com/PrincetonUniversity/COS461-Public). This is probably the best way.
 
 ### <a name="ostep"></a> Operating Systems: Three Easy Pieces
 http://pages.cs.wisc.edu/~remzi/OSTEP/
@@ -281,7 +281,7 @@ The database world is a mess. So many different query languages and syntaxes out
 
 You will write TONS AND TONS of queries. Some of the exercises are quite hard! Mainly because query languages are so unexpressive, while these hard exercises are asking you to do things in a more general-purpose-programming-language kind of way. You will get sick and tired of these queries. Some of the mini-courses don't have any exercises, they are just over in half an hour or so. Some courses have multiple choice quizzes and exams. They let you try as many times as you want.
 
-*Spam's recommendation:* Don't take it, even when it comes back online on edX. I think this (writing hundreds and thousands of query exercises) is the wrong way to learn databases. Learn it by doing a web project instead.
+*Spam's recommendation:* Probably this is as good as a pure Databases course can be made. But I think this (writing hundreds and thousands of query exercises) is a wrong way to learn databases. Learn it by doing a web project instead. You don't have to take all 14 mini-courses; take the most relevant, important ones (SQL, JSON).
 
 ### <a name="graphics"></a> Computer Graphics
 https://www.edx.org/course/computer-graphics-uc-san-diegox-cse167x
@@ -333,9 +333,9 @@ You learn the design of many, many, many ciphers. It's super technical and compl
 
 This course scared me so much that I am afraid of using any cryptography at all. No matter what you do it's always unsafe :( The course says not to DESIGN your own ciphers, and not to IMPLEMENT your own ciphers based on someone else's design, and to be CAREFUL when using well researched, publicly implemented/tested ciphers, but it's so scary it makes you not wanna USE ANY ciphers ever at all.
 
-What I said above sounds all very negative, but it's a good course and the instructor Dan Boneh is also really good (he was a "guest interview" in Intro to Networking too!) There are some optional but really cool and hard programming exercises (which I did in Python) where you break ciphers, implement some well-known attacks against websites, and so on. For one of the assignments they even created a fake Stanford website that you can attack. Super cool!
+What I said above sounds all very negative, but it's a really good course and the instructor Dan Boneh is also really good (he was a "guest interview" in Intro to Networking too!) There are some optional but really cool and hard programming exercises (which I did in Python) where you break ciphers, implement some well-known attacks against websites, and so on. For one of the assignments they even created a fake Stanford website that you can attack. Super cool! But they are very hard and very little support is provided. You have to figure out which libraries from your favorite programming language you need to use.
 
-*Spam's recommendation:* Probably don't take it. This is a very hard MATH course, it doesn't really teach you about security (well it does, but in painful mathematical technical detail, not in simple practical terms).
+*Spam's recommendation:* Probably don't take it. This is a very hard MATH course, it doesn't really teach you about security (well it does, but in painful mathematical technical detail, not in simple practical terms). You should definitely learn the core security concepts though.
 
 ### <a name="softproc"></a> Software Processes
 https://www.coursera.org/learn/software-processes
@@ -354,7 +354,7 @@ I decided to take this when I realized [Software Engineering: Introduction](http
 Another verbal course. It's like a literature class. [Words, words, words, words, words.](https://www.youtube.com/watch?v=-lqqDvWF45w) They hired a nice young acting or dance major student to read all the text from the teleprompter for a nice presentation. She clearly has no idea what she is saying.
 
 
-This one makes you draw a ton of UML diagrams using some online tools. There are more than 20 kinds of UML diagrams. Oh my god. I felt like I was taking an art class. I made my diagrams [reeeeaaal pretty](https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/_4b8b74b11840729713d3725d2f08b997_Deployment_Diagram.png?expiry=1591920000000&hmac=8NXnWXX6LIzSv2I1Aagnm-ZBo7VoAQ4ToxpYKAYT6GY). It was kinda fun. These assignments are all peer-graded. You get a free certificate at the end, no paywall, but it's pretty meaningless. 
+This one makes you draw a ton of UML diagrams using some online tools. There are more than 20 kinds of UML diagrams. Oh my god. I felt like I was taking an art class. It was kinda fun at first. These assignments are all peer-graded. You get a free certificate at the end, no paywall, but it feels pretty meaningless. 
 
 *Spam's recommendation:* What do you think? Skip it, of course.
 
@@ -363,7 +363,7 @@ https://www.udacity.com/course/compilers-theory-and-practice--ud168
 
 I took this because the Stanford compilers course became unavailable. This course has no programming assignments, only quizzes, which was OK by me. I'm interested in compilers but not that much. It's a pretty good course. Especially the beginning parts that teach you the theory of regular expressions and deterministic/non-deterministic finite state machines, and later, context-free grammars. It's a very long course, and it gets super complicated towards the end when you deal with low-level code generation matters. However the problems involved are extremely interesting and hard, like parse trees, register allocation and control flow graphs. This is some truly hardcore Computer Science. I will learn these properly WHEN I GROW UP!
 
-*Spam's recommendation:* Don't take it. What are you, crazy? Crazy enough to write a compiler? Nobody is gonna write a compiler in their career. If you want to write an ad-hoc "fun compiler" take Nand2Tetris Part 2 instead. You'll probably have to write a simple lexer/parser at some point in your life though, so you can take the beginning part (regex, FSMs, parsing).
+*Spam's recommendation:* Don't take it. What are you, crazy? Crazy enough to write a compiler? Nobody is gonna write a compiler in their career. If you want to write an ad-hoc "fun compiler" take Nand2Tetris Part 2 instead. You'll probably have to write a simple lexer/parser at some point in your life though, so you should take the beginning part (regex, FSMs, parsing).
 
 ### <a name="debug"></a> Software Debugging
 https://www.udacity.com/course/software-debugging--cs259
