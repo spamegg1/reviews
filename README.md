@@ -453,7 +453,7 @@ You will go through the fundamentals of parallel programming and learn/implement
 
 The instructors are great! I always thought Udacity is the only one that got online pedagogy right: short videos, tons of questions in between videos (fully utilizing the Socratic method) instead of long boring info dumps. However the TAs totally suck. The TAs are tasked with the "explain HW assignment" videos, and they do a terrible job. There is one main instructor and some guests from Nvidia. They got the main CUDA guy from Nvidia to give a guest lecture (without any assignments) on the CUDA programming model. Don't worry, it does NOT play like a commercial. The only issue is that the main instructor gets into super nitty gritty details of optimizing parallel code for the GPU... while it's cool to have industry people teaching you the tricks directly, these felt like totally out of reach unless you work in the industry yourself. There is a "Histogramming for Speed" programming assignment but the optimizations you can do there are very simple and limited.
 
-*Spam's recommendation:* DO NOT TAKE THIS! It's abandonware. Super hard, and you are all alone. You'll go through so much pain and frustration. It's too bad though, because it's actually an awesome course. Very sad, and shame on Udacity.
+*Spam's recommendation:* DO NOT TAKE THIS! It's abandonware. Super hard, and you are all alone. You'll go through so much pain and frustration. It's too bad though, because it's actually an awesome course. Very sad, and shame on Udacity. Take [Parallel Programming](https://www.coursera.org/learn/parprog1).
 
 ### <a name="scala"></a> Functional Programming in Scala (5 courses)
 https://www.coursera.org/specializations/scala
