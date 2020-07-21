@@ -73,6 +73,7 @@ I spent about 5 weeks making my project after "finishing" CS50. I'm pretty sure 
 *Spam's recommendation:* Take it only if you like messy challenges. This is the world of web programming, where nothing makes sense, and code from multiple languages are meshed together in spaghetti and it's all raining on your head, meatballs and all. I liked it but it was super frustrating. For me it replaces the [Software Engineering Capstone Project](https://www.edx.org/course/software-development-capstone-project-ubcx-softengprjx) which I did not take due to paywall.
 
 ### <a name="how-to-code"></a> How to Code 1 & 2
+
 https://www.edx.org/course/how-to-code-simple-data
 https://www.edx.org/course/how-to-code-complex-data
 
