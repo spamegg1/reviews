@@ -1,0 +1,754 @@
+Answers to Algorithms Illuminated Part 1
+========================================
+(Chapter 1)
+    (Problem 1.1) 2 is in the 7th position: [1, 3, 5, 8, 9, 0, 2, 4, 6, 7]
+    (Problem 1.2) It would still be nlog(n).
+        Exact same recursive tree analysis that we used in Mergesort proves it.
+        Assume n is a power of 3, etc.
+    (Problem 1.3) It would be nk^2.
+        First merge takes two lists of size n, so it would take 2n time.
+        Second merge takes a list of size 2n and a list of size n, so it would take 3n time.
+        Eventually, (k-1)st merge takes lists of size (k-1)n and n, so it would take kn time.
+        Summing up, 2n + 3n + ... + kn = nk(k+1)/2 - n = n(k^2 + k - 2)/2, which is O(nk^2).
+    (Problem 1.4) It would take nklog(k).
+        Assume k is a power of 2, say k = 2^m.
+        At level 1, 2^(m-1) pairs (and merge calls). Each pair has total sum of lengths: 2n.
+        At level 2, 2^(m-2) pairs (and merge calls). Each pair has total sum of lengths: 4n.
+        At level m, 2^(m-m) pairs (and merge calls). Each pair has total sum of lengths: n*2^m.
+        So on level j (where 1 <= j <= m) merging would take 2^j * n * 2^(m-j) = n*2^m = nk.
+        This is independent of the level j. There are m = log(k) levels.
+        So total time would be nklog(k).
+    (Problem 1.5) Implemented in Python in secondlargest.py
+    (Problem 1.6) Implemented in Python in karatsuba.py
+(Chapter 2)
+    (Problem 2.1) (a) Yes, for all such f, g and c.
+        If f = O(g) and both f and g are at least 1 and non decreasing, then
+        it follows that log(f) = O(log(g)):
+            there are c0, n0 such that f(n) <= c0g(n) for all n >= n0.
+            Since log is increasing and both f,g are at least 1,
+            log(f(n)) <= log(c0g(n)) = log(c0) + log(g(n)).
+            Case 1. There is d > 0 such that g(n) <= d for all n.
+                Let d be least such, i.e. d = max(g).
+                Let n1 be least such that g(n1) = d.
+                Since g is nondecreasing, g(n) = d for all n >= n1.
+                Then log(c0) + log(g(n)) = log(c0)log(g(n))/log(g(n)) + log(g(n))
+                = log(g(n))[log(c0)/log(g(n)) + 1] = log(g(n))[log(c0)/d + 1] for all n >= n1.
+                So let e = [log(c0)/d + 1] and n2 = max(n0, n1).
+                We showed that for all n >= n2, log(f(n)) <= elog(g(n)).
+            Case 2. g is unbounded, i.e. lim g(n) = infinity.
+                Then there exists n1 such that g(n) >= c0 for all n >= n1.
+                Let c1 = 2 and n2 = max(n0, n1).
+                So log(f(n)) <= log(c0) + log(g(n)) <= c1log(g(n)) for all n >= n2.
+        Since c is positive, log(f^c) = clog(f) = O(log(g)).
+        In general if a = O(b) and c = O(d) then ac = O(bd).
+        Therefore flog(f^c) = O(glog(g)).
+    (Problem 2.2) (c) and (d): Sometimes yes, sometimes no, depending on the functions f and g,
+        and Yes, whenever f(n) <= g(n) for all sufficiently large n.
+        To explain first answer, suppose f(n) = g(n) = n for all n.
+        Then it's obvious that f = O(g) and 2^f = O(2^g).
+        Now suppose f(n) = 2n, g(n) = n for all n. Then for all c > 0 there exists n0 such that
+        2^(f(n)) = 4^(g(n)) > c2^(g(n)) for all n >= n0 (just choose n0 > log_2(c)).
+        This means 2^f is NOT O(2^g).
+        To explain second answer, assume f(n) <= g(n) for all sufficiently large n.
+        Since f and g are both positive and 2^x is an increasing function on positive input,
+        we have 2^(f(n)) <= 2^(g(n)) for all sufficiently large n.
+        Therefore 2^f = O(2^g).
+    (Problem 2.3) 2^(sqrt(log_2(n))) << sqrt(n) << n^(1.5) << n^(5/3) << 10^n
+    (Problem 2.4) n^2 << n^2log_2(n) << n^(log_2(n)) << 2^n << 2^(2^n)
+    (Problem 2.5) 2^(log_2(n)) << n^2log_2(n) << n^(5/2) << 2^(2^(log_2(n))) << 2^(n^2)
+(Chapter 3)
+    (Problem 3.1) FastPower implemented in Python in fastpower.py, running time is O(log(n)).
+        To be precise it uses exactly 2log_2(n) multiplications and divisions total.
+    (Problem 3.2) Unimodal algorithm implemented in Python in unimodal.py, running time O(logn).
+    (Problem 3.3) Implemented in Python in fixedpoint.py
+    (Problem 3.4) Skip for now.
+    (Problem 3.5) Implemented in Python in inversions.py. 2407905288.
+(Chapter 4)
+    (Problem 4.1) (d) The rate at which work per subproblem is shrinking is b^d.
+    (Problem 4.2) (b) O(n^2). a = 7, b = 3, d = 2. So a = 7 < 9 = b^d (Case 2), so O(n^d).
+    (Problem 4.3) (c) O(n^2logn). a = 9, b = 3, d = 2. So a = 9 = b^d (Case 1), so O(n^dlogn).
+    (Problem 4.4) (c) O(n^log_3(5)). a = 5, b = 3, d = 1. So a = 5 > 3 = b^d (Case 3), so O(n^log_b(a))
+    (Problem 4.5) Answer is O(loglogn).
+        T(1) = 1
+        T(2^(2^0)) = T(2) <= T(floor(sqrt(2))) + 1 = T(1) + 1 = 2
+        T(2^(2^1)) = T(4) <= T(2) + 1 = 3
+        T(2^(2^2)) = T(16) <= T(4) + 1 = 5
+        In general T(2^(2^k)) <= k+2 = O(k).
+        If we let n = 2^(2^k) then k = loglogn.
+(Chapter 5)
+    (Problem 5.1) [3, 1, 2, 4, 5, 8, 7, 6, 9]: 4, 5, 9 could have been the pivot.
+    (Problem 5.2) (c) 1 - 2alpha.
+        Let a denote alpha. Let 1 <= i <= n.
+        Imagine ith least element got picked as pivot.
+        This will split the original n-sized array into two: one of size i, one of size n - i.
+        We want both to be greater than na.
+        So i >= na, and n - i >= na. So na <= i <= n - na.
+        So out of all i in 1, ..., n, only the i between na and n-na satisfy this condition.
+        The probability of randomly picking such an i is the ratio of the size of the interval
+        [na, n - na] to the size of the whole interval n.
+        (n - na - na) / n = 1 - 2a is the answer.
+        (In the question alpha was chosen < 1/2, otherwise [na, n - na] would be empty.)
+    (Problem 5.3) (b) -ln(n) / ln(alpha) <= d <= -ln(n) / ln(1 - alpha).
+        At level 1, subarray size L satisfies: alpha*n <= L <= (1-alpha)n
+        At level d, subarray size L satisfies: n(alpha^d) <= L <= n(1-alpha)^d
+        At this point we trigger base cases, so L = 1.
+        So n(alpha^d) <= 1. So ln(n) + dln(alpha) <= 0 (because ln is increasing).
+        So dln(alpha) <= -ln(n). So d >= -ln(n)/ln(alpha)
+        (ln(alpha) is negative, dividing by a negative number reverses inequality).
+        So 1 <= n(1-alpha)^d. So 0 <= ln(n) + dln(1-alpha) (because ln is increasing).
+        So -ln(n) <= dln(1-alpha). So -ln(n)/ln(1-alpha) >= d
+        (ln(1-alpha) is negative, dividing by a negative number reverses inequality).
+    (Problem 5.4) (b) min: O(logn) max: O(n)
+    (Problem 5.5) Skipped.
+    (Problem 5.6) Implemented in Python in quicksort.py; 162085, 164123, 138382
+(Chapter 6)
+    (Problem 6.1) 2*alpha - 1.
+        |-----------|-------------|------------|------------|
+        0         (1-a)n         n/2          an            n
+        pivot must be in [(1-alpha)n, alpha*n],
+        so probability is (alpha*n - (1-alpha)n)/n = 2*alpha - 1.
+    (Problem 6.2) -ln(n) / ln(alpha). At level d, subarray <= n*alpha^d. Set equal to 1, solve.
+    (Problem 6.3) Implemented in Python in weightedmedians.py
+    (Problem 6.4) Yes it does. Skipped for now.
+    (Problem 6.5) Implemented in Python in rselect.py.
+        Challenges: 5469, 4715 and 5048608250 (median of first 100000 digits of pi converted to
+        10000 10-digit integers)
+    (Bonus Challenge) Implemented in Python in dselect.py.
+
+Answers to Algorithms Illuminated Part 2
+========================================
+(Chapter 7)
+    (Problem 7.1)
+        (a) By both some sparse graphs and some dense graphs.
+            Consider a graph with no edges. Clearly this is sparse. It satisfies the requirement
+            (at least one vertex has degree <= 10) because all vertices have degree 0.
+            Consider a dense graph where one vertex has degree zero, and the rest n-1 vertices
+            have all the possible edges between them. Clearly this is dense: (n-1)(n-2)/2 edges total.
+            It also satisfies the requirement (at least one vertex has degree <= 10) because it has
+            one vertex with degree 0.
+        (b) Only by sparse graphs.
+            If all vertices of G have <= 10 degree, then |E| <= 45000.
+            Since n >= 10000, n^2 >= 100000000.
+            So 45000 is nowhere near dense (quadratic). It's sparse.
+        (c) By both some sparse graphs and some dense graphs.
+            Consider a graph with exactly n-1 edges all from one vertex. This is sparse.
+            Consider the complete graph with all n(n-1)/2 possible edges. This is dense.
+            These both satisfy the requirement (at least one vertex has degree n-1).
+        (d) Only by the complete graph (dense).
+    (Problem 7.2) (c) Theta(n) operations.
+        We need to go through one row (or column) of adjacency matrix.
+    (Problem 7.3) Theta(m) operations.
+    (Optional Problems from Stanford Course)
+        We showed in an optional video lecture that every undirected graph has only polynomially
+        (in the number of vertices) different minimum cuts. Is this also true for directed graphs?
+        Prove it or give a counterexample.
+            YES. Same argument works for undirected and directed graphs.
+        For a parameter , an alpha-minimum cut is one for which the number of crossing edges is
+        at most alpha times that of a minimum cut. How many alpha-minimum cuts can an undirected
+        graph have, as a function of alpha and the number of vertices? Prove the best upper bound
+        that you can.
+            Skipped for now.
+(Chapter 8)
+    (Problem 8.1) (a), (b), (c), (d) all true.
+    (Problem 8.2) (d) Big Theta of n^2
+    (Problem 8.3) (b) and (c): d/2 <= r <= d
+    (Problem 8.4) (c)
+    (Problem 8.5) (c)
+    (Problem 8.6) (a) and (c) (verified true via Stanford)
+    (Problem 8.7) (a) FALSE, (b) FALSE, (c) TRUE, (d) FALSE
+        (c) first pass (computing the "magical" topological ordering) REQUIRES DFS.
+        In the second pass, any kind of GenericSearch will work.
+    (Problem 8.8) (a) TRUE, (b) TRUE, (c) FALSE, (d) FALSE
+        (a) the order in which vertices are considered in second pass isn't changed, so it works.
+        (b) is the same as running Kosaraju on the reverse of the input graph.
+        (c) reverses the order in which vertices are considered in second pass, there is a
+        counterexample for that in the textbook.
+        (d) is the same as (c). It reverses vertex consideration order in second pass.
+    (Problem 8.9) (2SAT Problem) Implemented in Python in twosat.py
+        Let there be n variables for our clauses. We will have 2n nodes.
+        Let x1, x2, ..., xn, NOTx1, NOTx2, ... NOTxn be nodes.
+        Let there be m clauses of the form a V b. We will have 2m edges.
+        a V b is logically equivalent to: (NOTa -> b) /\ (NOTb ->a)
+        For each clause a V b let there be two edges: from NOTa to b, and from NOTb to a.
+        Our m clauses are satisfiable iff there are no paths from a to NOTa and from NOTa to a,
+        for any a among x1, ..., xn, NOTx1, ..., NOTxn.
+        So our m clauses are satisfiable iff no SCC of this graph contains a and NOTa for some a.
+    (Problem 8.10) Implemented in Python in kosaraju.py
+        Challenge: the 5 largest SCC sizes are: 434821, 968, 459, 313, 211.
+(Chapter 9)
+    (Problem 9.1)
+        (a) is TRUE: consider a graph that is just a straight path, where s and t are the
+        starting and ending nodes.
+        (b) is TRUE: if an s-t path has loops, we can obtain a shorter loop by removing the loops.
+        (c) and (d) are both FALSE: consider a graph with 4 nodes: s, t, x and y. There is one edge
+        from s to t, and one edge from x to y, and that's it. If we let the s->t edge have weight 2
+        and the x->y edge weight 1, this disproves (c) and (d).
+    (Problem 9.2)
+        (a) is NOT a guarantee: let s->t have weight 3, s->v 1, and v->t 2.
+        There are two paths s->t both of which have length 3.
+        (b) is a guarantee, because binary representation of nonnegative integers is unique.
+        (c) is NOT a guarantee, counterexample from part (a) works.
+        (d) FALSE, because (b) is correct.
+    (Problem 9.3)
+        (a) is FALSE: let s->t have weight 4, s->v 1, and v->t 2.
+        Shortest s->t path is: s->v->t (length 3).
+        Now we add 10 to each edge length.
+        So s->t has weight 14, s->v 10, and v->t 12.
+        Now shortest path is s->t (length 14). The other path has length 22.
+        (b) is FALSE: let s->t have weight 1, s->v 2, and v->t 3.
+        Shortest path is s->t (length 1).
+        Now we add 10 to each edge length.
+        So s->t has weight 11, s->v 12, and v->t 13.
+        Now shortest path is STILL s->t (length 11). The other path has length 25.
+        (c) is TRUE: see examples in (a) and (b) above.
+        (d) is TRUE: the one-edge s->t path would increase in length by 10, whereas any other
+        more-than-one-edge s->t path would increase by at least 20.
+    (Problem 9.4)
+        (a) is TRUE:
+        Let s1, s2, ..., sk be all the immediate neighbors of s.
+        Let ei be the edge (s, si) for 1 <= i <= k.
+        If we remove s and e1, ..., ek from the graph G, Dijkstra will correctly calculate true
+        shortest path lengths of s1->t, s2->t, ..., sk->t for any t in G - s;
+        because there are no negative edges in G - s.
+        Since s has no incoming edges, for any t in G - s, true shortest path length of s->t is:
+            min(ei + shortest(si->t): 1 <= i <= k).
+        Therefore Dijkstra will correctly calculate true shortest path length from s to any t in G - s.
+        Moreover Dijkstra will correctly calculate true shortest path length from any t in G - s to
+        any other u in G (including s), since there are no incoming edges to s.
+        (b) is FALSE (see (a))
+        (c) is FALSE (see (a))
+        (d) is FALSE (see (a))
+    (Problem 9.5)
+        (a) is FALSE: Dijkstra will always halt, because in each iteration of the main while loop,
+        one vertex is ALWAYS added to the set X, and eventually all vertices will be covered.
+        (b) is FALSE; it is possible to run Dijkstra with negative edge lengths (example from text).
+        (c) is TRUE: the counterexample given in the text (s->v = 1, v->t = -5, s->t = -2) has no
+        negative directed cycles, and Dijkstra computes some lengths incorrectly.
+        (d) is TRUE: if we are in the case of Problem 9.4, Dijkstra will compute all correct distances.
+    (Problem 9.6)
+        (a) is FALSE: Dijkstra will always halt, because in each iteration of the main while loop,
+        one vertex is ALWAYS added to the set X, and eventually all vertices will be covered.
+        (b) is FALSE; it is possible to run Dijkstra with negative edge lengths (example from text).
+        (c) is TRUE: the counterexample given in the text (s->v = 1, v->t = -5, s->t = -2) has no
+        negative directed cycles, and Dijkstra computes some lengths incorrectly.
+        (d) is FALSE: why?
+    (Problem 9.7) Implemented in Python in bottleneck.py, runs in O(mn) time.
+    (Problem 9.8) Implemented in Python in dijkstra.py, runs in O(mn) time.
+        Challenge: the shortest-path distances between vertex 1 and vertices
+        7,37,59,82,99,115,133,165,188,197 are (in order):
+        2599, 2610, 2947, 2052, 2367, 2399, 2029, 2442, 2505, 3068.
+(Chapter 10)
+    (Problem 10.1) (b) and (c).
+    (Problem 10.2) (b):
+            INSERT: O(n) (worst case requires checking all nodes),
+        EXTRACTMIN: O(1) (now min is last elt in array, can remove it w/o violating heap condition).
+    (Problem 10.3) (a):
+            INSERT: O(1) (since array is unsorted, just insert at the end of array),
+        EXTRACTMIN: O(n) (if the array is unsorted, worst case requires all nodes).
+    (Problem 10.4) (a): 5 ExtractMin operations, runs in O(1) time.
+        (b) and (c) can take O(n) in worst case.
+    (Problem 10.5) Implemented in Python in bottleheap.py.
+    (Problem 10.6) Skipped. (Hint: use RSelect!)
+    (Problem 10.7) Skipped. (Need to read research paper to implement this.)
+    (Problem 10.8) Implemented in Python in dijkheap.py.
+        Challenge: the shortest-path distances between vertex 1 and vertices
+        7,37,59,82,99,115,133,165,188,197 are (in order):
+        2599, 2610, 2947, 2052, 2367, 2399, 2029, 2442, 2505, 3068.
+(Chapter 11)
+    (Problem 11.1)
+        (a) TRUE: with height k, the largest number of nodes a BST can have is n = 2^(k+1) - 1.
+        Solving we get k = log_2(n+1) - 1. Can this be smaller than log(n)? NO, because
+        log_2(n+1) - 1 = log(n+1)/log(2) - 1, and log(2) = 0.3 apprx., so
+        log_2(n+1) - 1 > 10/3 log(n+1) > log(n).
+        (b) FALSE: if binary search tree is not balanced. The height can be as big as n-1.
+        (c) FALSE: the heap property cannot be compared to the search property.
+        (d) FALSE: sorted arrays are preferable if we will do a lot of min computations (in O(1)).
+    (Problem 11.2) (b) it's Big Theta of n, because every node has to be visited and its size value
+        assigned. Also we recursively compute sizes of left and right subtrees, and use the formula
+        size(x) = 1 + size(y) + size(z).
+    (Problem 11.3)
+        (a) Implemented in Python in medianmaintenance.py
+        (b) Implemented in Python in medianmaintenance2.py
+        Two heaps are faster. Challenge data set: last 4 digits of sum of kth medians is 1213.
+(Chapter 12)
+    (Problem 12.1) (a) I would not expect a good hash function to spread "every" data set evenly.
+        (b), (c) and (d) are expected.
+    (Problem 12.2) (b) 1/n. There are n choices for each of the two keys' locations. There are
+        a total of n^2 combinations of the first and second keys. Only n of these are collisions.
+    (Problem 12.3) (b). When b = 8, textbook says the false positive rate is 2%. Indeed,
+        (1/2)^(b*ln2) = (1/2)^(8ln2) = (1/2)^(5.545) = 0.0214 which is 2.14%. Using same formula,
+        (1/2)^(16ln2) = (1/2)^(11.09) = 0.00045875 which is 0.045875%, which is less than 0.1%
+        but not less than 0.01%.
+    (Problem 12.4) Implemented in Python in twosum.py. For the challenge data set
+        (with 1 million integers, [-10000, 10000] range) the answer is 427.
+    (Optional Theory Problem from Stanford) SKIPPED for now.
+        Recall that a set H of hash functions (mapping the elements of a universe U to the buckets
+        {0, 1, 2, ..., n - 1}) is universal if for every distinc x,y in U, the probability
+        P[h(x) = h(y)] that x and y collide, assuming that the hash function h is chosen uniformly
+        at random from H, is at most 1/n.
+        In this proble, you will prove that a collision of probability 1/n is essentially the best
+        possible. Precisely, suppose that H is a family of hash functions mapping U to
+        {0, 1, 2, ..., n - 1} as above. Show that there must be a pair x,y in U of distinct elements
+        such that, if h is chosen uniformly at random from H, then P[h(x) = h(y)] >= 1/n - 1/|U|.
+
+Answers to Algorithms Illuminated Part 3
+========================================
+(Chapter 13)
+    (Problem 13.1) (a) TRUE: typical exchange argument works.
+        (b) FALSE: Counterexample: pairs are length, deadline pairs:
+        (1,3), (2,2), (3,1) ordered in increasing order of processing time.
+        Delays are: 0, 1, 5, max delay is 5.
+        If they are ordered in reverse, (3,1), (2,2), (1,3):
+        then the delays are 2, 3, 3, max delay is 3.
+        So ordering in increasing order of processing time does not minimize max delay.
+        (c) FALSE: Counterexample: (1,3), (3,1), (2,2) ordered in increasing order of product.
+        Ties are broken in favor of shorter job length.
+        Here the delays are: 0, 3, 4. Max delay is 4.
+        If they are ordered as (3,1), (2,2), (1,3):
+        then the delays are 2, 3, 3, max delay is 3.
+        So ordering in increasing order of the product of length and deadline
+        does not minimize max delay.
+    (Problem 13.2) (a) TRUE: typical exchange argument works.
+        (b) FALSE: Counterexample: pairs are length, deadline pairs:
+        (1,6), (2,5), (3,3) ordered in increasing order of processing time.
+        Delays are: 0, 0, 3, total delay is 3.
+        If they are ordered in reverse, (3,3), (2,5), (1,6):
+        then the delays are 0, 0, 0, total delay is 0.
+        So ordering in increasing order of processing time does not minimize total delay.
+        (c) FALSE: Counterexample: (1,6), (3,3), (2,5) ordered in increasing order of product.
+        Here the delays are: 0, 1, 1. Total delay is 2.
+        If they are ordered as (3,3), (2,5), (1,6):
+        then the delays are 0, 0, 0, total delay is 0.
+        So ordering in increasing order of the product of length and deadline
+        does not minimize total delay.
+    (Problem 13.3) Skipped for now. I'M NOT SURE OF THE ARGUMENTS IN (a), (b), (d) BELOW!
+        HINT: Let Si denote the set of jobs with the ith earliest finish times. Prove by
+        induction on i that your greedy algorithm of choice selects the maximum-possible number of
+        non-conflicting jobs from Si.
+        (a) TRUE (GA chooses job with earliest finish).
+        Since we are assuming no ties, |Si| = 1 for all i = 1, 2, ..., n.
+        Since in each iteration the greedy algorithm picks one job, it picks the maximum-possible
+        number of non-conflicting jobs from Si (which is 1).
+        (b) FALSE (GA picks job with earliest start)
+        (c) FALSE: (shortest length)
+            ex: [0,3], [2,4], [3,7]  -> result is [0,3] and [3,7], but the algorith picks:
+            [2,4] (remove [0,3] and [3,7])
+        (d) FALSE (least conflicted)
+    (Problem 13.4) Implemented in Python in greedy.py.
+        Challenge data set: diff: 68615, 69119377652 ratio: 67247, 67311454237
+(Chapter 14)
+    (Problem 14.1) (a) 2.23
+        Follow Huffman's algorithm, it gives A=00, B=01, C=10, D=110, E=111
+        So 2*0.32 + 2*0.25 + 2*0.20 + 3*0.18 + 3*0.05 = 2.23
+    (Problem 14.2) (a) 2.11
+        Follow Huffman's algorithm, it gives A=001, B=0000, C=1, D=0001, E=01
+        So 3*0.16 + 4*0.08 + 1*0.35 + 4*0.07 + 2*0.34 = 2.11
+    (Problem 14.3) (c) n - 1.
+        In the above Problem 14.2, the alphabet size is n=5 and B and D both use 4 bits to encode.
+        So n - 1 is a lower bound for the maximum possible number of bits Huffman might use.
+        More generally, let p1, p2, ..., pn be the frequencies of the symbols in the alphabet.
+        Let s1, s2, ..., sn be the corresponding symbols in the alphabet.
+        If pi = 2^(i-1) for each i=1,...,n (so the frequencies are 1, 2, 4, 8, ..., 2^(n-1)),
+        then Huffman would merge s1 and s2 first (which sum up to 3, which is less than 4),
+        which now makes this merge and s3 the two smallest frequencies,
+        then merge that with s3 (which sum up to 7, which is less than 8),
+        which now makes this merge and s4 the two smallest frequencies,
+        then merge that with s4 (which sum up to 15, which is less than 16),
+        and so on.
+        There would be n-1 merges. This means the maximum-possible bits Huffman might use is
+        AT LEAST n-1.
+        We need to prove that this maximum is AT MOST n-1.
+        This is obvious, since a binary tree produced by Huffman has exactly n leaves,
+        and therefore can have maximum depth of n-1.
+    (Problem 14.4)
+        (a) is FALSE: let the frequencies of alphabet {A, B, C} be 0.4, 0.05, 0.55 respectively.
+        First A and B get merged. Then this gets merged with C. One possible optimal encoding is:
+        A=00, B=01, C=1.
+        (b) is TRUE: a letter with frequency >= 0.5 will always be merged in the VERY LAST MERGE.
+        Therefore it will be encoded by a single bit.
+        (c) is TRUE: if all letters have frequency less than 0.33, then any letter
+        MUST participate in at least one merge before the very last merge.
+        To see this, argue by contradiction and assume that a letter L with frequency f < 0.33
+        participates ONLY in the very last merge.
+        This means the sum of frequencies of all the other letters except L is > 0.66.
+        Since L did not participate in the second to last merge, the two participants of the second
+        to last merge must each have frequency <= f < 0.33.
+        Therefore the sum of the frequencies of these two participants is < 0.66,
+        which is a contradiction.
+        (d) is FALSE: Problem 14.2 gives us a counterexample, where C is encoded with only one bit.
+    (Problem 14.5) Implemented in Python in huffman.py.
+        Challenge answers for the 1000 symbol alphabet: min:9, max:19
+    (Problem 14.6) Implemented in Python in huffmanheap.py
+        Challenge answers for the 1000 symbol alphabet: min:9, max:19
+(Chapter 15)
+    (Problem 15.1) (b) TRUE, (a), (c), (d) FALSE
+        T remains an MST, P may not be a shortest path.
+        Hint: To reason about T, use Corollary 15.8
+        or the minimum bottleneck property (page 70). To reason about P,
+        think about two s-t paths with different numbers of edges.
+        P may not remain a shortest path:
+            Say P is an s->t path with 3 edges, each of cost 1.
+            Say there is another s-> path P' with 1 edge of cost 4.
+            After each edge cost goes up by 1, the first path's cost is now 6,
+            while the second path's cost is now 5.
+            So P' becomes the shortest path, P is no longer a shortest path.
+        T remains THE MST:
+            First, since edge costs are distinct, T is the unique MST of G.
+            Obviously T is still a spanning tree of G'. Why is it still THE minimal one of G'?
+            Argue by contradiction and assume T' is THE MST of G' where T' != T.
+            This means cost(T') < cost(T) in G'.
+            Reduce edge costs by 1. Since all MSTs have n-1 edges, where n is the number of
+            vertices of G, both cost(T') and cost(T) go down exactly by n-1.
+            So cost(T') < cost(T) in G.
+            Then T is not an MST of G, a contradiction.
+    (Problem 15.2) (d) is TRUE: the algorithm always outputs an MST.
+        Hint: Use Lemma 15.7 to prove that the output is a spanning tree.
+        Prove that every edge that fails to satisfy the minimum bottleneck property (page 70)
+        is excluded from the final output and use Theorem 15.6.
+        During the iteration in which an edge is removed, it was on a cycle C of T.
+        By the sorted ordering, it must be the maximum-cost edge of C.
+        By an exchange argument, it cannot be a member of any minimum spanning tree.
+        Since every edge deleted by the algorithm belongs to no MST,
+        and its output is a spanning tree
+        (no cycles by construction, connected by the Lonely Cut Corollary),
+        its output must be the (unique) MST.
+    (Problem 15.3) Hint: Three of the four problems reduce easily to the MST problem.
+        For one of them, use the fact that ln(x · y) = ln x + ln y for x, y > 0.
+        (a) reduces to the MST problem:
+            negate edge costs, run Prim or Kruskal.
+        (b) reduces to the MST problem:
+            take logarithm of the product PROD_(e in T) c_e:
+            ln(PROD_(e in T) c_e) = SUM_(e in T) ln(c_e).
+            Obtain T' from T by replacing edge cost c_e with ln(c_e).
+            Solve MST problem. Then exponentiate the total cost of an MST to obtain
+            the minimum product.
+        (c) does NOT reduce to the MST problem.
+        (d) reduces to the MST problem: this is the complement of a maximum cost
+            spanning tree.
+    (Problem 15.4) Assume T is an MST of a graph with real-valued edge costs.
+        Want to prove: every edge of T satisfies the minimum bottleneck property (MBP).
+        Assume an edge e = (v, w) of T does not satisfy the MBP.
+        Let P be a v->w path in G in which every edge has cost less than c_e.
+        Removing e from T creates two connected components S1 (containing v) and S2 (w).
+        P includes some edge e' = (x, y) with x in S1, y in S2.
+        Let T' = T - {e} U {e'}. T' is a spanning tree with less cost than T, contradiction!
+    (Problem 15.5) Prove correctness of Prim and Kruskal where edge costs are NOT distinct.
+        This is for Kruskal; Prim's is similar. Let G = (V, E) be undirected and connected.
+        Let m = |E| and n = |V|.
+        WLOG assume not all STs have the same cost (otherwise all STs are MSTs, nothing to do).
+        WLOG assume not all edges have the same cost (otherwise all STs have same cost).
+        Let d1 denote the smallest strictly positive difference between two edges' costs.
+        Let M* be the cost of an MST. Let M be the cost of a suboptimal (non-minimal) ST.
+        Let d2 = M - M* and let d = min(d1, d2) > 0.
+        Let ei be the ith edge considered by Kruskal
+        (after breaking ties arbitrarily in its preprocessing step).
+        Obtain G' from G by increasing cost of each edge ei from c_ei to c_ei' = c_ei + d/2^(m-i+1).
+        The cost of each ST can increase at most by SUM_{i=1}^{m} d/2^(m-i+1) = d(1 - 1/2^m) < d.
+        Since d2 <= d, an MST T of G' must also be an MST of G.
+        Since d1 <= d, the edges of G' have all distinct costs, with ei the ith cheapest edge of G'.
+        Kruskal examines G and G' edges in the same order, outputs the same ST T* in both cases.
+        Since Kruskal is correct for distinct edge lengths, it is correct.
+    (Problem 15.6) Prove: undirected, connected, distinct edge costs => there is a unique MST.
+        Hint: follow the proof of Theorem 15.6.
+        Let G = (V, E) be undirected and connected with distinct edge costs; let m = |E|, n = |V|.
+        Let T, T* be two MSTs of G. Argue by contradiction and assume T != T*.
+        By Problem 15.4, every edge of both T and T* satisfy the minimum bottleneck property (MBP).
+        By Corollary 15.6 each has n-1 edges. So T must contain at least one edge e1 = (v,w)
+        that is not in T*. Adding e1 to T* creates a cycle C that contains e1.
+        Since e1 satisfies MBP (as an edge of T), there is at least one edge e2 = (x,y) in the v->w
+        path C - {e1} with cost at least c_e1. Since we assumed edge costs are distinct, the cost of
+        e2 must be strictly larger: c_e2 > c_e1.
+        Let T' = T* U {e1} - {e2}. T' has n-1 edges and is connected just like T*.
+        By Corollary 15.9 T' is acyclic. Therefore T' is a spanning tree.
+        But total cost of T' is strictly smaller than T*, contradiction!
+    (Problem 15.7)
+        (a) Assume T is an MST of G.
+        Assume edge e = (u,v) is the cheapest edge crossing a cut (A, B) of G.
+        Argue by contradiction and assume e does not belong to T.
+        Consider T U {e}. This must have a cycle:
+        Since T is a spanning tree, T contains a path from u to v.
+        Since T does not include e, T U {e} has a cycle C containing u and v,
+        namely the path from u to v in T, plus the edge e.
+        By the Double Crossing Lemma, this cycle must include another edge
+        e' = (u', v') in T that crosses the cut (A, B).
+        By definition of e, cost(e') > cost(e).
+        Consider T' = T U {e} - {e'}.
+        We claim T' is a spanning tree of G.
+        This will be a contradiction to the minimality of T, since cost(e') > cost(e).
+        T' spans G:
+            Let x,y be two nodes in G. We claim T' contains a path from x to y.
+            Unless x = u' AND y = v', T - {e'} already contains a path from x to y.
+            Now consider the case x = u' AND y = v'. These two nodes lie on the cycle C.
+            Therefore C - {e'} (which is in T') is a path from x to y.
+        T' contains no cycles:
+            Argue by contradiction and assume T' contains a cycle C'.
+            (Case 1) The cycle does not contain e.
+                Then the cycle lies entirely in T, a contradiction.
+            (Case 2) The cycle contains e.
+                By the Double Crossing Lemma, the cycle contains another edge f in T'
+                crossing the cut (A, B).
+                We know f != e'. We know f != e. Therefore f is in T.
+                Now we have two cycles containing u and v: namely C and C'.
+                C = the path from u to v in T, plus the edge e.
+                C contains e and e'.
+                C' = a path from u to v in T', plus the edge e.
+                C' contains e and f, does not contain e'.
+                Then C' U {e'} - {e} is a cycle in T, a contradiction.
+        (b) By induction on the size of X (the set of "explored nodes so far") we see that
+            the tree T outputted by Prim spans X.
+            Algorithm always halts with X = V. If X != V, it's impossible to get stuck.
+            If at any point we get stuck, there are no crossing edges for the cut (X, V - X),
+            which would imply that G is disconnected, a contradiction.
+            T is free of cycles: at any stage, the edge e added to T is the ONLY edge
+            crossing the cut
+            (X, V-X) at that point.
+            By (contrapositive) Double Crossing Lemma, T does not contain cycles.
+            Since at every step, Prim's algorithm chooses the cheapest edge crossing some cut
+            (X, V - X) of G, every edge chosen by Prim satisfies the Cut Property.
+            (Here the set X is the set of nodes that are "explored so far" by Prim.)
+            By the Cut Property, Prim produces an MST of G.
+        (c) Similar. At every step, each edge added by Kruskal is the cheapest with endpoints
+            in distinct connected components of the solution so far. If edge e = (v, w) is
+            added at a step, where A is v's connected component, then e is cheapest crossing
+            the cut (A, V - A). Therefore e must belong to an MST of G.
+            Let T be the output of Kruskal. By above, every edge of T crosses some cut of G.
+            Clearly T has no cycles. Also, T is connected:
+            argue by contradiction and assume T is not connected.
+            Let T1, T2 be two connected components of T. Since G is connected,
+            there is an edge e in G - T that connects a node in T1 to a node in T2.
+            Adding the edge e to T does not create any cycles in T.
+            But then e SHOULD have been added by Kruskal, a contradiction!
+    (Problem 15.8) Skipped for now. Hints:
+        (a): the high-level idea is to perform
+            a binary search for the bottleneck of an MBST. Compute the median
+            edge cost in the input graph G. (How do you do this in linear time?
+            See Chapter 6 of Part 1.) Obtain G0 from G by throwing out all the
+            edges with cost higher than the median. Proceed by recursing on
+            a graph with half as many edges as G. (The easy case is when G0
+            is connected; how do you recurse if G0 is not connected?) For the
+            running time analysis, use induction or case 2 of the master method
+            (described in Chapter 4 of Part 1).
+        (b): the answer appears to be no.
+            (Every MST is an MBST but not conversely, as you should check.)
+            MST => MBST: from the correctness proof of Prim's algorithm, for every edge e
+                of the MST, there is a cut (A, B) for which e is the cheapest edge crossing it.
+                This implies that every other spanning tree has maximum edge cost at least as large.
+                So the MST is a MBST.
+            MBST !=> MST: Consider triangle with one extra high cost edge attached.
+            The question of whether there is a deterministic linear-time algorithm for
+            the MST problem remains open to this day; see the bonus video at
+            www.algorithmsilluminated.org for the full story.
+    (Problem 15.9) Implemented in Python in prim.py, primheap.py, kruskal.py and kruskaluf.py.
+        Challenge Data Set: total cost of MST is -3612829.
+    (Theory Problems from Stanford Course)
+        (1) Consider a connected undirected graph G with not necessarily distinct edge costs.
+        Consider two different minimum-cost spanning trees of G, T and T'.
+        Is there necessarily a sequence of minimum-cost spanning trees
+            T = T0, T1, T2, ..., Tr = T'
+        with the property that each consecutive pair of MSTs differ by only a single edge swap?
+        Prove the statement or exhibit a counterexample.
+        (2) Consider the following algorithm. The input is a connected undirected graph with edge
+        costs (distinct, if you prefer). The algorithm proceeds in iterations. If the current graph
+        is a spanning tree, then the algorithm halts. Otherwise, it picks an arbitrary cycle of the
+        current graph and deletes the most expensive edge on the cycle. Is this algorithm guaranteed
+        to compute a minimum-cost spanning tree? Prove it or exhibit a counterexample.
+        (3) Consider the following algorithm. The input is a connected undirected graph with edge
+        costs (distinct, if you prefer). The algorithm proceeds in phases. Each phase adds some edges
+        to a tree-so-far and reduces the number of vertices in the graph (when there is only 1 vertex
+        left, the MST is just the empty set). In a phase, we identify the cheapest edge e_v incident
+        on each vertex v of the current graph. Let F = {e_v} be the collection of all such edges in
+        the current phase. Obtain a new (smaller) graph by contracting all of the edges in F
+        --- so that each connected component of F becomes a single vertex in the new graph ---
+        discarding any self-loops that result. Let T denote the union of all edges that ever get
+        contracted in a phase of this algorithm. Is T guaranteed to be a minimum-cost spanning tree?
+        Prove it or exhibit a counterexample.
+        (4) Recall the definition of a minimum bottleneck spanning tree from Problem Set #1. Give a
+        linear-time (i.e., O(m)) algorithm for computing a minimum bottleneck spanning tree of a
+        connected undirected graph. [Hint: make use of a non-trivial linear-time algorithm discussed
+        in Part 1.]
+        (5) Suppose T is a minimum spanning tree of the connected graph G. Let H be a connected
+        induced subgraph of G. (I.e., H is obtained from by taking some subset S of vertices V,
+        and taking all edges of E that have both endpoints in S. Also, assume H is connected.)
+        Which of the following is true about the edges of T that lie in H?
+        You can assume that edge costs are distinct, if you wish.
+        [Choose the strongest true statement.]
+            (a) For every G and H and spanning tree Th of H, at least one of these edges
+                is missing from Th.
+                FALSE
+            (b) For every G and H, these edges form a minimum spanning tree of H.
+                FALSE
+            (c) For every G and H, these edges form a spanning tree
+                (but not necessary minimum-cost) of H.
+                FALSE
+            (d) For every G and H, these edges are contained in some minimum spanning tree of H.
+                TRUE
+        (6) Consider a connected undirected graph G with edge costs, which need not be distinct.
+        Prove the following statement or provide a counterexample:
+        for every MST T of G, there exists a way to sort G's edges in nondecreasing order of cost
+        so that Kruskal's algorithm outputs the tree T.
+        (7) Consider a connected undirected graph G with distinct edge costs that are positive
+        integers between 1 and n^3, where n is the number of vertices of G.
+        How fast can you compute the MST of G?
+        (8) Read about matroids.
+        Prove that the greedy algorithm correctly computes a maximum-weight basis.
+        For the matroid of spanning trees of a graph, this algorithm becomes Kruskal's algorithm.
+        Can you formulate an analog of Prim's MST algorithm for matroids?
+        (9) Prove that our analysis of union-find with lazy unions and union by rank
+        (but without path compression) is asymptotically optimal
+        (i.e., there are sequences of operations where you do O(logn) work on most of the operations).
+        (10) Prove that in our union-find data structure with lazy unions, union by rank,
+        and path compression, some operations might require O(logn) time.
+(Chapter 16)
+    (Problem 16.1) Path graph: 5--3--1--7--2--4--6
+        A = [0, 5, 5, 6, 12, 12, 16, 18]
+        Vertices of MWIS: first (5), fourth (7), last (6).
+    (Problem 16.2)
+        (a) FALSE: consider path graph: 1---2---1 where the max weight vertex (2) is not in MWIS.
+        (b) FALSE: consider path graph: 2---4---3 where MWIS = {2,3} includes min weight vertex (2).
+        (c) FALSE: consider path graph: 1--4--5--4.
+            The second vertex (4) does not belong to the MWIS {5, 1} of G_3.
+            But the MWIS of G is {4, 4} to which 4 does belong.
+        (d) TRUE: Argue by induction and by contradiction.
+            Assume claim is true up to i - 1 and any vertex v.
+            Assume there exists a vertex v that does not belong to MWIS of G_(i-1) or G_i,
+            but v belongs to an MWIS of one of G_(i+1), ..., G_n.
+            If v does not belong to the MWIS of G_(i-2), we get a contradiction and we are done:
+            by induction hypothesis (for i-1) v cannot belong to an MWIS of G_i, G_(i+1), ..., G_n.
+            So assume v belongs to G_(i-2).
+            Let v1, ..., vn enumerate vertices of G in order, meaning,
+            G_i = {v1, ..., vi} for each i = 1, ..., n.
+            Since v belongs to the MWIS S of G_(i-2), v is among v1, ..., v(i-2).
+            By Lemma 16.1, the MWIS of G_i is either an MWIS of G_(i-1) (to which v cannot belong),
+            or S U {vi}. Therefore it must be S U {vi}.
+            But this is a contradiction! v belongs to S, so v belongs to S U {vi}.
+    (Problem 16.3) Skipped for now. Hint:
+        If G is a tree, root it at an arbitrary vertex and define one subproblem
+        for each subtree. For an arbitrary graph G, what would your subproblems be?
+        (a) FALSE: Formula is always correct on path graphs.
+        (b) FALSE: Formula is always correct on trees.
+        (c) TRUE
+        (d) FALSE: Formula is sometimes false on arbitrary graphs.
+        (e) TRUE: Linear time on trees.
+        (f) FALSE: Exponential on arbitrary graphs.
+    (Problem 16.4) Items: (1,1), (2,3), (3,2), (4,5), (5,4)
+        Table: 0 1 3 6 8 10              Optimal: {(2,3), (3,2), (5,4)}
+               0 1 3 6 8 9
+               0 1 3 6 7 9
+               0 1 3 6 6 8
+               0 1 3 5 5 6
+               0 1 3 4 4 5
+               0 1 2 4 4 4
+               0 1 1 3 3 3
+               0 1 1 1 1 1
+               0 0 0 0 0 0
+    (Problem 16.5)
+        (a) Just use normal knapsack algorithm.
+            At each stage of building up the 2D matrix of solutions, exclude "optimal" solutions
+            whose total size is not exactly C. Would run the same as normal knapsack: O(nC).
+        (b) Just use normal knapsack algorithm with an additional
+            parameter. Exclude "optimal" solutions that contain more than k items.
+            Would run the same as normal knapsack: O(nC).
+        (c) Just use normal knapsack algorithm with an additional
+            parameter. Instead of C, use C1 and C2. Run normal knapsack 2 times: once on each set.
+            It would run in O(n1*C1 + n2*C2) where n1, n2 are set sizes.
+        (d) Generalize (c), it would run in O(n1*C1 + ... + nm*Cm).
+            If m is allowed to be O(n) this is NP-complete.
+    (Problem 16.6) Implemented in Python in wis.py. Challenge: 2955353732.
+    (Problem 16.7) Implemented in Python in knapsack.py. Challenge: 4243395
+(Chapter 17)
+    (Problem 17.1) Columns indexed by i, rows by j:
+        6 |6 5 4 5 4 5 4
+        5 |5 4 5 4 3 4 5
+        4 |4 3 4 3 4 5 6
+        3 |3 2 3 4 3 4 5
+        2 |2 1 2 3 4 3 4
+        1 |1 0 1 2 3 4 5
+        0 |0 1 2 3 4 5 6
+           ⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻
+           0 1 2 3 4 5 6
+    (Problem 17.2) Both NW and Knapsack remain correct after switching for loops.
+    (Problem 17.3)
+        (a) Generalize NW.
+            Keep track of whether an inserted gap is the first in a sequence of gaps or not.
+            For each pair of prefixes of input strings, compute total cost of three alignments:
+                best one with no gaps in final column;
+                best one with a gap in upper final column;
+                best one with a gap in lower final column.
+            Number of subproblems and work-per-subproblem blow up by a constant factor.
+            Running time is O(mn).
+        (b) Can be solved in O(mn) by algorithm similar to NW.
+            One subproblem per pair of X_i, Y_j input string prefixes.
+            Alternatively, reduces to sequence alignment problem by setting:
+                gap penalty to 1, and
+                matching penalty to a very large number.
+        (c) Solve without dynamic programming.
+            Count the frequency of each symbol in each string.
+            The permutation exists iff every symbol appears exactly the same number of times
+            in each string. This is a linear time algorithm (O(m+n)).
+        (d) Can be solved in O(mn) by algorithm similar to NW.
+            One subproblem per pair of X_i, Y_j input string prefixes.
+    (Problem 17.4)
+        7|223 158 143 99  74  31  25  0
+        6|151 105  90 46  26   3   0
+        5|142  97  84 40  20   0
+        4| 92  47  37 10   0
+        3| 69  27  17  0
+        2| 30   5   0
+        1| 20   0
+        0|  0
+          ⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻
+           1   2   3   4   5   6   7   8
+    (Problem 17.5) (c) WIS: O(1), NW: O(n), OptBST: O(n^2)
+    (Problem 17.6) Simply avoid solving subproblems for prefixes whose sizes
+        differ more than k.
+    (Problem 17.7) Skipped for now.
+    (Problem 17.8) Implemented in Python in seqalign.py and optbst.py
+(Chapter 18)
+    (Problem 18.1)
+        x|inf|inf| 5 | 5 | 5 |-1 |
+        w|inf|inf|inf|-4 |-4 |-4 |
+        v|inf|inf| -1|-1 |-1 |-7 |
+        u|inf| 1 | 1 | 1 |-5 |-5 |
+        s| 0 | 0 | 0 | 0 | 0 | 0 |
+        ⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻
+        i| 0 | 1 | 2 | 3 | 4 | 5 |
+    (Problem 18.2) FALSE. See above (18.1). For example, vertices x, v and u.
+    (Problem 18.3) (b) O(kn) because the outer for loop only has to go to k.
+    (Problem 18.4) Done on computer. Verified by answer in back of book.
+    (Problem 18.5) Done on computer. Verified by answer in back of book.
+    (Problem 18.6) Modify the input graph G = (V, E) by adding a new source
+        vertex s and a new zero-length edge from s to each vertex v in V.
+        This new graph G' has a negative cycle reachable from s iff G has a
+        negative cycle. Run the Bellman-Ford algorithm on G' with source vertex
+        s to check whether G contains a negative cycle. If not, run Floyd-
+        Warshall algorithm on G.
+    (Problem 18.7)
+        (a) YES. Nonnegative edge lengths -> no negative cycles.
+        Run Floyd-Warshall in O(n^3) to get all pairs' distances.
+        Then do a linear pass through the output in O(n^2) to find the max.
+        (b) YES. Negate edge costs of G (there are no cycles), run Floyd-Warshall.
+        (c) NO. Hamiltonian path problem (NP-complete) reduces to this.
+        (d) NO. Hamiltonian path problem (NP-complete) reduces to this.
+    (Problem 18.8) Implemented in Python in bellmanford.py and floydwarshall.py
+
+Answers to Algorithms Illuminated Part 4
+========================================
+(Optional Theory Problem from Stanford Course)
+    Consider an undirected graph G = (V, E) with nonnegative edge costs.
+    You are given a subset T of V, consisting of k vertices called terminals.
+    A Steiner tree is a subset F of E  that contains a path between each pair
+    of terminals. For example, if T = V, then the Steiner trees are the same as
+    the connected subgraphs. It is a fact that the decision version of the
+    Steiner tree problem is NP-complete. Give a dynamic programming algorithm
+    for this problem (i.e., for computing a Steiner tree with the fewest number
+    of edges) that has running time of the form O(c^k*poly(n)) where c is a
+    constant (like 4) and poly is some polynomial function.
+(Chapter 19)
+    (Problem 19.1)
+    (Problem 19.2)
+    (Problem 19.3)
+    (Problem 19.4)
+    (Problem 19.5)
+    (Problem 19.6)
+    (Problem 19.7)
+    (Problem 19.8)
