@@ -1,0 +1,241 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/12/Screen.jack
+
+/**
+ * A library of functions for displaying graphics on the screen.
+ * The Hack physical screen consists of 512 rows (indexed 0..511, top to bottom)
+ * of 256 pixels each (indexed 0..255, left to right). The top left pixel on
+ * the screen is indexed (0,0).
+ */
+class Screen {
+    static boolean color;
+
+    /** Initializes the Screen. */
+    function void init() {
+        let color = true;  // black
+        return;
+    }
+
+    /** Erases the entire screen. */
+    function void clearScreen() {
+        var int i;
+        let i = 0;
+        while (i < 8192) { // screen RAM is from 16384 to 24575
+            do Memory.poke(16384 + i, false); // set it to white = false
+            let i = i + 1;
+        }
+        return;
+    }
+
+    /** Sets the current color, to be used for all subsequent drawXXX commands.
+     *  Black is represented by true (-1), white by false (0).
+     *  true is 1111111111111111, false is 0000000000000000. */
+    function void setColor(boolean b) {
+        let color = b;
+        return;
+    }
+
+    /** Draws the (x,y) pixel, using the current color. */
+    function void drawPixel(int x, int y) {
+        var int address, quotient, remainder, value, pixelColor;
+        var boolean sameColor;
+        let quotient = x / 16; // so that we don't have to redo the division
+        let address = (y * 32) + quotient;  // on-screen location of 16-bits that contain pixel
+        let address = 16384 + address; // same location, on RAM
+        let value = Memory.peek(address);  // the 16-bits that contain pixel
+
+        let remainder = x & 15;  // = x % 16 (location of pixel in 16-bits)
+        // pixelColor is true if the (x%16)th bit of value is 1, false otherwise
+        let pixelColor = Math.bit(value, remainder);
+        let sameColor = (pixelColor & (color)) | (~(pixelColor) & ~(color));
+
+        // set the (x%16)th bit of value to the current color
+        if (sameColor) {
+            return; // pixel has the same color as current color, no need to change
+        }
+        // pixel color is different than current color
+        if (pixelColor & (~color)) {
+            let value = value & (~Math.twoToTheJ(remainder));
+        }
+        if ((~pixelColor) & color) {
+            let value = value | Math.twoToTheJ(remainder);
+        }
+        do Memory.poke(address, value);  // change pixel color
+        return;
+    }
+
+    /** Draws a line from pixel (x1,y1) to pixel (x2,y2), using the current color.
+      * Horizontal or vertical lines are handled by other functions. */
+    function void drawLine(int x1, int y1, int x2, int y2) {
+        var int a, b, dx, dy, diff, temp;
+        // first make sure that x1 < x2, otherwise swap the pixels
+        if (x2 < x1) {
+            do Screen.drawLine(x2, y2, x1, y1);
+            return;
+        }
+        if (x1 = x2) {
+            do Screen.drawVertLine(x1, y1, y2);
+            return;
+        }
+        if (y1 = y2) {
+            do Screen.drawHorizLine(y1, x1, x2);
+            return;
+        }
+        let dx = x2 - x1; // how far we need to go RIGHT (dx > 0)
+        let dy = y2 - y1; // how far we need to go UP/DOWN (might be negative)
+        let a = 0; // keeps track of how many pixels we've gone RIGHT
+        let b = 0; // keeps track of how many pixels we've gone UP/DOWN
+        let diff = 0; // stands for a*dy-b*dx
+
+        if (dy > 0) {
+            while ((a < (dx + 1)) & (b < (dy + 1))) {
+                do Screen.drawPixel(x1 + a, y1 + b);
+                if (diff < 0) {
+                    let a = a + 1; // going RIGHT
+                    let diff = diff + dy;
+                }
+                else {
+                    let b = b + 1; // going DOWN
+                    let diff = diff - dx;
+                }
+            }
+        }
+        else { // dy < 0
+            while ((a < (dx + 1)) & (b > (dy - 1))) {
+                do Screen.drawPixel(x1 + a, y1 + b);
+                if (diff > 0) {
+                    let a = a + 1; // going RIGHT
+                    let diff = diff + dy;
+                }
+                else {
+                    let b = b - 1; // going UP
+                    let diff = diff + dx;
+                }
+            }
+        }
+        return;
+    }
+
+    /** Draws horizontal line from (x1,y) to (x2,y) using current color.
+      * Assumes that x1 < x2 and that x2 - x1 < 512. */
+    function void drawHorizLine(int y, int x1, int x2) {
+        var int x1Quotient, x1Remainder, x1BlockStart, x1BlockEnd;
+        var int x2Quotient, x2Remainder, x2BlockStart, x2BlockEnd;
+        var int draw16AtATimeStart, draw16AtATimeEnd, i;
+        // if x1 = x2, line is just a dot
+        if (x1 = x2) {
+            do Screen.drawPixel(x1, y);
+            return;
+        }
+        let x1Quotient = x1 / 16;
+        let x1Remainder = x1 & 15; // = x1 % 16
+        let x1BlockStart = 16384 + (y * 32) + x1Quotient; // address of x1's 16-bit-block
+        let x1BlockEnd = x1BlockStart + 1; // next memory address
+
+        let x2Quotient = x2 / 16;
+        let x2Remainder = x2 & 15; // = x2 % 16
+        let x2BlockStart = 16384 + (y * 32) + x2Quotient; // address of x2's 16-bit-block
+        let x2BlockEnd = x2BlockStart + 1; // next memory address
+
+        // if x1 and x2 are in the same 16-bit block, draw pixels one at a time
+        if (x1BlockStart = x2BlockStart) {
+            while (x1 < (x2 + 1)) {
+                do Screen.drawPixel(x1, y);
+                let x1 = x1 + 1;
+            }
+            return;
+        }
+
+        // is x1 the very first pixel within its 16-bit block?
+        if (x1Remainder = 0) {
+            let draw16AtATimeStart = x1BlockStart;
+        }
+        else {
+            let draw16AtATimeStart = x1BlockEnd;
+            // draw the necessary pixels within x1's 16-bit-block
+            // these are from, and including, (x1,y), to the end of the block
+            let i = 0;
+            while (i < (16 - x1Remainder)) {
+                do Screen.drawPixel(x1 + i, y);
+                let i = i + 1;
+            }
+        }
+        // is x2 the very last pixel within its 16-bit block?
+        if (x2Remainder = 15) {
+            let draw16AtATimeEnd = x2BlockEnd;
+        }
+        else {
+            let draw16AtATimeEnd = x2BlockStart;
+            // draw pixels within x2's 16-bit-block
+            // these are from the start of the block, up to and including (x2,y)
+            let i = 0;
+            while (i < (x2Remainder + 1)) {
+                do Screen.drawPixel(x2 - i, y);
+                let i = i + 1;
+            }
+        }
+        // now draw everything in between, 16-bit at a time (faster than pixel)
+        let i = draw16AtATimeStart;
+        while (i < draw16AtATimeEnd) {
+            do Memory.poke(i, color);
+            let i = i + 1;
+        }
+        return;
+    }
+
+    /** Draws vertical line from (x,y1) to (x,y2) using current color. */
+    function void drawVertLine(int x, int y1, int y2) {
+        var int i, temp;
+        // make sure y1 < y2, otherwise swap points
+        if (y2 < y1) {
+            do Screen.drawVertLine(x, y2, y1);
+            return;
+        }
+        // if y1 = y2, line is just a dot
+        if (y1 = y2) {
+            do Screen.drawPixel(x, y1);
+            return;
+        }
+        let i = y1;
+        while (i < (y2 + 1)) {
+            do Screen.drawPixel(x, i);
+            let i = i + 1;
+        }
+        return;
+    }
+
+    /** Draws a filled rectangle whose top left corner is (x1, y1)
+     *  and bottom right corner is (x2,y2), using the current color.
+     *  This assumes x1 < x2, y1 < y2. */
+    function void drawRectangle(int x1, int y1, int x2, int y2) {
+        var int y;
+        let y = y1;
+        while (y < (y2 + 1)) {
+            do Screen.drawHorizLine(y, x1, x2);
+            let y = y + 1;
+        }
+        return;
+    }
+
+    /** Draws a filled circle of radius r<=181 around (x,y), using the current color. */
+    function void drawCircle(int x, int y, int r) {
+        var int dy, dySqr, rSqr, x1, x2, y1, y2, sqrt;
+        if (r > 181) {
+            return;
+        }
+        let dy = -r;
+        let rSqr = r * r; // so we don't have to redo multiplication
+        while (dy < (r + 1)) {
+            let dySqr = dy * dy; // so we don't have to redo multiplication
+            let sqrt = Math.sqrt(rSqr - dySqr); // so we don't redo sqrt
+            let x1 = x - sqrt;
+            let y1 = y + dy;
+            let x2 = x + sqrt;
+            do Screen.drawHorizLine(y1, x1, x2);
+            let dy = dy + 1;
+        }
+        return;
+    }
+}

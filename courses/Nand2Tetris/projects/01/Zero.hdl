@@ -1,0 +1,19 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/Or.hdl
+
+ /**
+ * Zero16 Constant gate:
+ * out = 1111111111111111 if sel == 1
+ *       0000000000000000 otherwise
+ */
+
+CHIP Zero {
+    IN sel;
+    OUT out[16];
+
+    PARTS:
+    // Put your code here:
+    Mux16(a[0..7]=false, a[8..15]=true, b[0..7]=true, b[8..15]=false, sel=sel, out=out);
+}

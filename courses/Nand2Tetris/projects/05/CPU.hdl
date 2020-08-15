@@ -1,0 +1,124 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/05/CPU.hdl
+
+/**
+ * The Hack CPU (Central Processing unit), consisting of an ALU,
+ * two registers named A and D, and a program counter named PC.
+ * The CPU is designed to fetch and execute instructions written in
+ * the Hack machine language. In particular, functions as follows:
+ * Executes the inputted instruction according to the Hack machine
+ * language specification. The D and A in the language specification
+ * refer to CPU-resident registers, while M refers to the external
+ * memory location addressed by A, i.e. to Memory[A]. The inM input
+ * holds the value of this location. If the current instruction needs
+ * to write a value to M, the value is placed in outM, the address
+ * of the target location is placed in the addressM output, and the
+ * writeM control bit is asserted. (When writeM==0, any value may
+ * appear in outM). The outM and writeM outputs are combinational:
+ * they are affected instantaneously by the execution of the current
+ * instruction. The addressM and pc outputs are clocked: although they
+ * are affected by the execution of the current instruction, they commit
+ * to their new values only in the next time step. If reset==1 then the
+ * CPU jumps to address 0 (i.e. pc is set to 0 in next time step) rather
+ * than to the address resulting from executing the current instruction.
+ */
+
+CHIP CPU {
+
+    IN  inM[16],         // M value input  (M = contents of RAM[A])
+        instruction[16], // Instruction for execution
+        reset;           // Signals whether to re-start the current
+                         // program (reset==1) or continue executing
+                         // the current program (reset==0).
+
+    OUT outM[16],        // M value output
+        writeM,          // Write to M?
+        addressM[15],    // Address in data memory (of M)
+        pc[15];          // address of next instruction
+
+    PARTS:
+    // instruction: i xx a cccccc ddd jjj
+    // i -> A or C
+    //     instruction[15]=0 -> A-instruction
+    //     instruction[15]=1 -> C-instruction
+    // For a C-instruction:
+    //     a -> M or A
+    //         instruction[12]=0 -> take input from A-register
+    //         instruction[12]=1 -> take input from Memory
+    //     ddd -> A, D, M (destination)
+    //         instruction[5]=1 -> ALU output writes to A register
+    //         instruction[4]=1 -> ALU output writes to D register
+    //         instruction[3]=1 -> ALU output writes to M register
+    //     cccccc -> zx, nx, zy, ny, f, no (inputs for the ALU)
+    //         these are instruction[6..11]
+    //     jjj -> along with zr and ng, they determine Program Counter logic
+
+    // Determine whether first Mux should select ALU output.
+    // This is the case if the first d-bit is 1 and it's a C-instruction.
+    And(a=instruction[15], b=instruction[5], out=ALUtoA); // dest=A and instr=C
+
+    // First Mux. Accepts instruction and ALU output as inputs.
+    // Outputs into the A-register. Selects based on ALUtoA above.
+    Mux16(a=instruction, b=ALUout, sel=ALUtoA, out=AregIn);
+
+    // Determine whether A-register should load its input into the register.
+    // This is the case if it's an A-instruction, or a C-instruction and first d-bit is 1.
+    Not(in=instruction[15], out=Ainstruction);
+    Or(a=Ainstruction, b=ALUtoA, out=loadA); // instr=A or (instr=C and dest=A)
+
+    // A-register. Outputs into the second Mux, Program Counter (PC) and addressM[15].
+    ARegister(in=AregIn, load=loadA, out=AregOut, out[0..14]=addressM);
+
+    // Second Mux. Accepts A-register's output (AregOut) and Memory (inM) as inputs.
+    // Outputs into ALU. Selects based on the a-bit of a C-instruction (instruction[12]).
+    Mux16(a=AregOut, b=inM, sel=instruction[12], out=AorMout);
+
+    // Determine whether D-register should load its input into the register.
+    // This is the case if it's a C-instruction and second d-bit is 1.
+    And(a=instruction[15], b=instruction[4], out=loadD); // instr=C and dest=D
+
+    // D-register. Accepts ALU's output as input. Outputs into ALU.
+    // Loads input into register based on instruction type and second d-bit (instruction[4]).
+    DRegister(in=ALUout, load=loadD, out=DregOut);
+
+    // Determine whether to write to Memory (writeM).
+    // This is the case if it's a C-instruction and the third d-bit is 1 (instruction[3]).
+    And(a=instruction[15], b=instruction[3], out=writeM);
+
+    // ALU. Accepts outputs of D-register (DregOut) and second Mux (AorMout) as inputs.
+    // Sends its output to 3 (potential) destinations:
+    // A-register (through first Mux), D-register and Memory (outM).
+    // Also outputs zr and ng, which are used for the Program Counter's Jump logic.
+    ALU(x=DregOut, y=AorMout, zx=instruction[11], nx=instruction[10],
+        zy=instruction[9], ny=instruction[8], f=instruction[7],
+        no=instruction[6], out=ALUout, zr=zr, ng=ng, out=outM);
+
+    // Program Counter logic
+    // The j-bits (instruction[0..2]) and ALU's zr and ng output determine loadPC:
+    //     000 -> null
+    //     001 -> JGT (not zr and not ng)
+    //     010 -> JEQ (zr)
+    //     011 -> JGE (not ng)
+    //     100 -> JLT (ng)
+    //     101 -> JNE (not zr)
+    //     110 -> JLE (ng or zr)
+    //     111 -> JMP
+    Or(a=zr, b=ng, out=zrOrNg);           // zr or ng
+    Not(in=zrOrNg, out=pos);              // pos (not zr and not ng)
+    And(a=pos, b=instruction[0], out=JGT);// pos AND jjj=001 (instruction[0]=1)
+    And(a=zr, b=instruction[1], out=JEQ); // zr AND jjj=010 (instruction[1]=1)
+    //Or(a=JGT, b=JEQ, out=JGE);            // GT or EQ -> GE (greater than or equal)
+    And(a=ng, b=instruction[2], out=JLT); // ng AND jjj=100 (instruction[2]=1)
+    //Not(in=JEQ, out=JNE);                 // not EQ -> NE (not equal)
+    Or(a=JEQ, b=JLT, out=JLE);            // EQ or LT -> LE (less than or equal)
+    Or(a=JLE, b=JGT, out=JMP);            // load PC if cond met and jump if cond
+
+    And(a=instruction[15], b=JMP, out=loadPC); // Jump only if it's a C-instruction
+
+    Not(in=loadPC, out=inc);                    // increment only if not load
+
+    // PC. Takes A-register's output, and pcLoad, pcInc, reset as inputs.
+    PC(in=AregOut, load=loadPC, inc=inc, reset=reset, out[0..14]=pc);
+}

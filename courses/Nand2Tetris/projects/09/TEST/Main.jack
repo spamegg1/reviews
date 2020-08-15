@@ -1,0 +1,27 @@
+class Main {
+    function void main() {
+        var String bora;
+        var Hand hand;
+        var Dictionary dict;
+        var Array keys;
+        var Array values;
+        var int i;
+
+        let bora = "RARECAREBEAR";
+        let hand = Hand.new(bora);
+        let dict = hand.hand_to_dict();
+
+        let keys = dict.getKeys();
+        let values = dict.getValues();
+
+        let i = 0;
+        while (i < dict.getLength()) {
+            do Output.printChar(keys[i]);
+            do Output.printInt(values[i]);
+            do Output.println();
+            let i = i + 1;
+        }
+
+        return;
+    }
+}

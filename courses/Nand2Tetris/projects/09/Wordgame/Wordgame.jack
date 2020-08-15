@@ -1,0 +1,332 @@
+class Wordgame{
+    static int screenlines;
+    field Dictionary scrabble_letter_values;
+    field Dictionary wordcounts;
+    field Array handlist;
+    field Array wordlist;
+    field int hand_size;
+
+    constructor Wordgame new(Dictionary scrabble, Dictionary counts, Array hands, Array words, int handsize) {
+        let scrabble_letter_values = scrabble;
+        let wordcounts = counts;
+        let handlist = hands;
+        let wordlist = words;
+        let hand_size = handsize;
+        return this;
+    }
+
+    // String comparison function, returns true if strings have same length and chars
+    function boolean stringEqual(String first, String second) {
+        var int i; // loop var
+        let i = 0;
+
+        // if strings have different length, return false
+        if (~(first.length() = second.length())) {
+            return false;
+        }
+        // if strings have equal length, compare characters
+        else {
+            while (i < first.length()) {
+                // if they differ by a char, return false
+                if (~(first.charAt(i) = second.charAt(i))) {
+                    return false;
+                }
+                let i = i + 1;
+            }
+            // otherwise, strings have equal length and same chars
+            return true;
+        }
+    }
+
+    /* Returns true if word is in hand and also in worldlist. */
+    method boolean is_valid_word(Hand hand, String word){
+        // assume wordlist is an array of arrays, like
+        // [ ["a", "about", ...], ["baby", ...], ["cake", ...], ...]
+        // assume wordcounts is a dictionary of letters and integers, like
+        // ["a", "b", "c", ...], [47, 73, 76, ...], 26
+        return word_in_hand(hand, word) & word_in_list(word);
+    }
+
+    /* Returns true if word is in wordlist (which is indexed according to wordcounts). */
+    method boolean word_in_list(String word) {
+        // get keys of dictionary: keys = ["a", "b", "c", ...]
+        var Array keys;
+        // get length of dict, needed for next loop (normally 26)
+        var int length;
+        var int i; // loop variable to go through alphabet
+        // get the array of words that begin with the ith letter
+        var Array segment;
+        // look up its size (needed for next loop)
+        var int segment_size;
+        var int j; // loop var to go through words that begin with ith letter
+
+        let keys = wordcounts.getKeys(); // 65,66,67...
+        let length = wordcounts.getLength(); // = 26
+        let i = 0;
+        while (i < length) {
+            // if word starts with ith letter in alphabet
+            if (word.charAt(0) = keys[i]) {
+                let segment = wordlist[i];
+                let segment_size = wordcounts.lookup(keys[i]);
+                let j = 0;
+                while (j < segment_size) {
+                    if (Wordgame.stringEqual(word, segment[j])) {
+                        return true; // word is found, finish
+                    }
+                    let j = j + 1; // continue otherwise
+                }
+                let i = length; // exit the loop
+            }
+            let i = i + 1; // continue otherwise
+        }
+        return false;
+    }
+
+    /* Returns true if word is in hand. */
+    method boolean word_in_hand(Hand hand, String word) {
+        // check that word is in hand by converting both to dictionaries
+        // and comparing letter counts. Hand's letter counts must be greater or equal
+        // but first create a temporary hand out of word, so hand_to_dict can be used
+        var Hand wordhand;
+        var Dictionary hand_dict;
+        var Dictionary word_dict;
+        // get array of letters in word
+        var Array letters;
+        // get size of word_dict (needed for the loop)
+        var int dict_size;
+        var int i; // loop var
+        var int j;
+
+        let wordhand = Hand.new(word);
+        let hand_dict = hand.hand_to_dict();
+        let word_dict = wordhand.hand_to_dict();
+        let letters = word_dict.getKeys();
+        let dict_size = word_dict.getLength();
+
+        let i = 0;
+        while (i < dict_size) {
+            // if ith letter in word appears more times in word than in hand
+            // or ith letter in word does not appear in hand at all (lookup=-1)
+            if (hand_dict.lookup(letters[i]) < word_dict.lookup(letters[i])) {
+                // then word is NOT in hand
+                return false;
+            }
+            let i = i + 1;
+        }
+        // otherwise word is in hand
+        return true;
+    }
+
+    /* Returns word score, given hand and scrabble_letter_values dictionary. */
+    method int get_word_score(String word) {
+        /**
+        * Returns the score for a word. Assumes the word is a valid word.
+        * The score for a word is the sum of the points for letters in the
+        * word, multiplied by the length of the word, PLUS 50 points if all hand_size
+        * letters are used on the first turn.
+        * Letters are scored as in Scrabble; A is worth 1, B is worth 3, C is
+        * worth 3, D is worth 2, E is worth 1, and so on (see SCRABBLE_LETTER_VALUES)
+        * word: string (lowercase letters)
+        * returns: int >= 0
+        */
+        var int score;
+        var int i; // loop variable
+        let score = 0;
+        let i = 0;
+        while (i < word.length()) {
+            let score = score + scrabble_letter_values.lookup(word.charAt(i));
+            let i = i + 1;
+        }
+        let score = score * word.length();
+        if (word.length() = 10) {
+            let score = score + 50;
+        }
+        return score;
+    }
+
+    /* Plays one hand. */
+    method void play_hand(Hand hand) {
+        /**
+        * Allows the user to play the given hand, as follows:
+        * The hand is displayed.
+        * The user may input a word or a single period (the string ".")
+        * to indicate they're done playing
+        * Invalid words are rejected, and a message is displayed asking
+        * the user to choose another word until they enter a valid word or "."
+        * When a valid word is entered, it uses up letters from the hand.
+        * After every valid word: the score for that word is displayed,
+        * the remaining letters in the hand are displayed, and the user
+        * is asked to input another word.
+        * The sum of the word scores is displayed when the hand finishes.
+        * The hand finishes when there are no more unused letters or the user
+        * inputs a "."
+        * hand: dictionary (string -> int)
+        * word_list: list of lowercase strings
+        * n: integer (hand_size; i.e., hand size required for additional points)
+        */
+
+        var int score; // Keep track of total hand score
+        var int word_score;
+        var String word; // var that holds user input
+        var String score_message;
+        var int i; // loop variable
+
+        let score = 0;
+        let i = hand.getLength();
+        // As long as there are still letters left in the hand
+        while (i > 0) {
+            // display the hand
+            do hand.display_hand();
+            let screenlines = screenlines + 1;
+            do refresh();
+
+            // ask user for input
+            let word = Keyboard.readLine("Enter word, or a . to indicate that you are finished: ");
+            let screenlines = screenlines + 1;
+            do refresh();
+
+            // if the input is "." then end the hand
+            if (word.charAt(0) = 46 & word.length() = 1) {
+                let i = 0; // exit the loop
+            }
+            // Otherwise (the input is not a single period):
+            else {
+                // If the word is not valid:
+                if (~is_valid_word(hand, word)) {
+                    do Output.printString("Invalid word, please try again.");
+                    do Output.println();
+                    let screenlines = screenlines + 1;
+                    do refresh();
+                }
+                // Otherwise (the word is valid):
+                else {
+                    // Tell the user how many points the word earned, and the
+                    // updated total score, in one line followed by a blank line
+                    let word_score = get_word_score(word);
+                    let score = score + word_score;
+
+                    do Output.printString(word);
+                    do Output.printString(" earned ");
+                    do Output.printInt(word_score);
+                    do Output.printString(" points. Total: ");
+                    do Output.printInt(score);
+                    do Output.printString(" points.");
+                    do Output.println();
+                    let screenlines = screenlines + 1;
+                    do refresh();
+
+                    // Update the hand
+                    do hand.update_hand(word);
+                    let i = hand.getLength();
+                }
+            }
+        }
+
+        // Hand is over (user entered a '.' or ran out of letters),
+        // so tell user the total score
+        if (hand.getLength() = 0) {
+            do Output.printString("Ran out of letters. Total score: ");
+            do Output.printInt(score);
+            do Output.printString(" points.");
+            do Output.println();
+            let screenlines = screenlines + 1;
+            do refresh();
+        }
+        else {
+            do Output.printString("Goodbye! Total score: ");
+            do Output.printInt(score);
+            do Output.printString(" points.");
+            do Output.println();
+            let screenlines = screenlines + 1;
+            do refresh();
+        }
+        return;
+    }
+
+    /* Clears screen when full. */
+    method void refresh() {
+        // if screen is full, clear it
+        if (screenlines = 23) {
+            do Screen.clearScreen();
+            let screenlines = 0; // reset line counter
+        }
+        return;
+    }
+
+    /* Runs the game. */
+    method void run() {
+        /**
+        * Allow the user to play an arbitrary number of hands.
+        * 1) Asks the user to input 'n' or 'r' or 'e'.
+        * If the user inputs 'n', let the user play a new (random) hand.
+        * If the user inputs 'r', let the user play the last hand again.
+        * If the user inputs 'e', exit the game.
+        * If the user inputs anything else, tell them their input was invalid.
+        * 2) When done playing the hand, repeat from step 1
+        */
+
+        // keep track of last hand played
+        var boolean last_hand_played;
+        var Hand last_hand;
+        var String command; // Ask user for input
+        var int nexthand; // index var for handlist array
+        var Hand new_hand; // create new hand
+
+        let screenlines = 0;
+        let nexthand = 0;
+        let last_hand_played = false;
+
+        // infinite loop that runs the game
+        while (true) {
+            do refresh();
+            let command = Keyboard.readLine("N to deal new hand, R to replay last hand, E to end game: ");
+            let screenlines = screenlines + 1;
+            do refresh();
+
+            // If no hand has been played, impossible to replay last hand
+            while (command.charAt(0) = 82 & (~last_hand_played) & command.length() = 1) {
+                do refresh();
+                do Output.printString("You have not played a hand yet. Please play a new hand first!");
+                do Output.println();
+                let screenlines = screenlines + 1;
+                do refresh();
+                let command = Keyboard.readLine("Enter N to deal a new hand, R to replay the last hand, or E to end game: ");
+                let screenlines = screenlines + 1;
+                do refresh();
+            }
+
+            // If user inputs 'N', play a new random hand
+            if (command.charAt(0) = 78 & command.length() = 1) {
+                let last_hand_played = true;
+                let new_hand = Hand.new(handlist[nexthand]);
+                // update last hand to new hand
+                let last_hand = Hand.new(handlist[nexthand]);
+                // increment hand
+                let nexthand = nexthand + 1;
+                // play the new hand
+                do play_hand(new_hand);
+            }
+
+            // If user inputs 'R', play last hand again
+            if (command.charAt(0) = 82 & command.length() = 1) {
+                do play_hand(last_hand);
+            }
+
+            // If user inputs 'E', exit the game
+            if (command.charAt(0) = 69 & command.length() = 1) {
+                return;
+            }
+        }
+        return;
+    }
+
+    /* Disposes this game. */
+    method void dispose() {
+        do scrabble_letter_values.dispose();
+        do wordcounts.dispose();
+        do handlist.dispose();
+        do wordlist.dispose();
+        do Memory.deAlloc(this);
+        return;
+    }
+}

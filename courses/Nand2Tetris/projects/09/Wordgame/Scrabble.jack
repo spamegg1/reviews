@@ -1,0 +1,51 @@
+// Creates a dictionary of scrabble scores for each letter in alphabet
+class Scrabble {
+    function Dictionary create() {
+        var Array letters;
+        var Array scores;
+        var Dictionary scrabble_scores;
+        var int i;
+        var int j;
+
+        let letters = Array.new(26);
+        let scores = Array.new(26);
+        let i = 0;
+        let j = 65;
+
+        while (i < 26) {
+            let letters[i] = j;
+            let i = i + 1;
+            let j = j + 1;
+        }
+
+        let scores[0] = 1;
+        let scores[1] = 3;
+        let scores[2] = 3;
+        let scores[3] = 2;
+        let scores[4] = 1;
+        let scores[5] = 4;
+        let scores[6] = 2;
+        let scores[7] = 4;
+        let scores[8] = 1;
+        let scores[9] = 8;
+        let scores[10] = 5;
+        let scores[11] = 1;
+        let scores[12] = 3;
+        let scores[13] = 1;
+        let scores[14] = 1;
+        let scores[15] = 3;
+        let scores[16] = 10;
+        let scores[17] = 1;
+        let scores[18] = 1;
+        let scores[19] = 1;
+        let scores[20] = 1;
+        let scores[21] = 4;
+        let scores[22] = 4;
+        let scores[23] = 8;
+        let scores[24] = 4;
+        let scores[25] = 10;
+
+        let scrabble_scores = Dictionary.new(letters, scores, 26);
+        return scrabble_scores;
+    }
+}

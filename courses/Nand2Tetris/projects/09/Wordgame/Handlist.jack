@@ -1,0 +1,61 @@
+// Creates a list of randomly generated hands.
+class Handlist {
+    function Array create(){
+        var Array handlist;
+        let handlist = Array.new(50);
+
+        // HAND_SIZE = 8
+        let handlist[0] = "EOFSNBFZ";
+        let handlist[1] = "OOWJFDJB";
+        let handlist[2] = "EAHHZFTN";
+        let handlist[3] = "IITBWNLC";
+        let handlist[4] = "IAZCPGQT";
+        let handlist[5] = "AEMFNLFC";
+        let handlist[6] = "IESRJZMG";
+        let handlist[7] = "UAJXXPZD";
+        let handlist[8] = "IEZYCSWV";
+        let handlist[9] = "EESVGBKR";
+        let handlist[10] = "AEBDMHGS";
+        let handlist[11] = "AEXVRXCN";
+        let handlist[12] = "UIPCHCMR";
+        let handlist[13] = "EUHWRVWD";
+        let handlist[14] = "AUXYSKZC";
+        let handlist[15] = "UOVVPDJL";
+        let handlist[16] = "UUHYDNFW";
+        let handlist[17] = "IOXJQDJR";
+        let handlist[18] = "OASDRDPC";
+        let handlist[19] = "EOZNYJXC";
+        let handlist[20] = "AUSTCSSD";
+        let handlist[21] = "AIGYKRBV";
+        let handlist[22] = "OEWPYNPR";
+        let handlist[23] = "UADYZBBQ";
+        let handlist[24] = "OATNVMDF";
+        let handlist[25] = "AIMBLMJG";
+        let handlist[26] = "OAWRHXGW";
+        let handlist[27] = "EUPHJVFJ";
+        let handlist[28] = "UECJQPRP";
+        let handlist[29] = "UEHWKJVX";
+        let handlist[30] = "OIVFXLZP";
+        let handlist[31] = "OENPVXRY";
+        let handlist[32] = "IAVPJTZM";
+        let handlist[33] = "UUTWLJSV";
+        let handlist[34] = "OOGZZBWD";
+        let handlist[35] = "OIPWWCYB";
+        let handlist[36] = "AERNMFRY";
+        let handlist[37] = "IAWPMXYG";
+        let handlist[38] = "IOBTGMJB";
+        let handlist[39] = "AOCQDWVH";
+        let handlist[40] = "IIDGBWDQ";
+        let handlist[41] = "EUPSRHVD";
+        let handlist[42] = "UOGZKVLQ";
+        let handlist[43] = "UEPJNTNR";
+        let handlist[44] = "AOFQQJLF";
+        let handlist[45] = "IIDMRBLW";
+        let handlist[46] = "UAFFCPMM";
+        let handlist[47] = "IIFLSKBJ";
+        let handlist[48] = "AEDMWQPT";
+        let handlist[49] = "EINRJWGP";
+
+        return handlist;
+    }
+}

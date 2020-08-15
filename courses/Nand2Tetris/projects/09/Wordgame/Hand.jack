@@ -1,0 +1,137 @@
+// The class that represents a hand of letters in a Wordgame.
+class Hand{
+    field String hand;
+    constructor Hand new(String my_hand) {
+        let hand = my_hand;
+        return this;
+    }
+
+    // getter method
+    method String getHand() {
+        return hand;
+    }
+
+    // setter method
+    method void setHand(String newhand) {
+        let hand = newhand;
+        return;
+    }
+
+    /* converts a hand (string) to a frequency dictionary */
+    /* example: "rarecarebear" -> ["r", "a", "e", "c", "b"], [4, 3, 3, 1, 1], 5 */
+    method Dictionary hand_to_dict() {
+        var int hand_length;
+        // create keys and values arrays for the dictionary
+        var Array keys;
+        var Array values;
+        // boolean to detect repeated letters in hand
+        var boolean already_seen;
+        // counts how many unique letters appear in hand
+        var int char_counter;
+        var int i; // loop var that goes through letters in hand
+        var int j; // loop var that goes through keys
+        // keys and values arrays may be too long if there are repetitions in hand
+        // create shorter arrays if necessary
+        var Array newkeys;
+        var Array newvalues;
+        var int k; // loop var to copy keys to newkeys
+        var int l; // loop var to copy values to newvalues
+        // create dictionary to be returned
+        var Dictionary dict;
+
+        let hand_length = hand.length();
+        let keys = Array.new(hand_length);
+        let values = Array.new(hand_length);
+        let already_seen = false;
+        let char_counter = 0;
+
+        let i = 0;
+        while (i < hand_length) {
+            let j = 0;
+            while (j < hand_length) {
+                // if letter was seen before and recorded to keys
+                if (keys[j] = hand.charAt(i)) {
+                    let values[j] = values[j] + 1;
+                    let already_seen = true;
+                    let j = hand_length; // break out of the loop
+                }
+                let j = j + 1;
+            }
+            // if letter was not seen before, must be added to keys
+            if (~already_seen) {
+                let keys[char_counter] = hand.charAt(i);
+                let values[char_counter] = 1;
+                let char_counter = char_counter + 1;
+            }
+            let i = i + 1; // move on to next letter in hand
+            let already_seen = false; // reset already_seen
+        }
+        // if there are repetitions in hand
+        if (char_counter < hand_length) {
+            let newkeys = Array.new(char_counter);
+            let newvalues = Array.new(char_counter);
+
+            let k = 0;
+            while (k < char_counter) {
+                let newkeys[k] = keys[k];
+                let k = k + 1;
+            }
+
+            let l = 0;
+            while (l < char_counter) {
+                let newvalues[l] = values[l];
+                let l = l + 1;
+            }
+
+            // dispose of keys and values
+            do keys.dispose();
+            do values.dispose();
+
+            let dict = Dictionary.new(newkeys, newvalues, char_counter);
+            return dict;
+        }
+        else {
+            let dict = Dictionary.new(keys, values, char_counter);
+            return dict;
+        }
+    }
+
+    /* Removes word from hand. Assumes all letters of word are in hand. */
+    method void update_hand(String word) {
+        var Dictionary dict; // hand will be converted to a dict
+        var int i; // loop var
+        var int value; // var to look up letters of word in dict
+
+        let dict = hand_to_dict();
+        let i = 0;
+        while (i < word.length()) {
+            let value = dict.lookup(word.charAt(i));
+            do dict.update(word.charAt(i), value - 1);
+            let i = i + 1;
+        }
+        // with letters of word removed from dict, convert it to string
+        do setHand(dict.toString());
+        return;
+    }
+
+    /* Displays hand on screen. */
+    method void display_hand() {
+        do Output.printString("Current hand: ");
+        do Output.printString(hand);
+        do Output.println();
+        return;
+    }
+
+    /* Returns number of letters in current hand. */
+    method int getLength() {
+        return hand.length();
+    }
+
+    /* Disposes hand. */
+    method void dispose(){
+        do hand.dispose();
+        do Memory.deAlloc(this);
+        return;
+    }
+
+}

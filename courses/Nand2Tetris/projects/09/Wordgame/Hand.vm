@@ -1,0 +1,315 @@
+function Hand.new 0
+push constant 1
+call Memory.alloc 1
+pop pointer 0
+push argument 0
+pop this 0
+push pointer 0
+return
+function Hand.getHand 0
+push argument 0
+pop pointer 0
+push this 0
+return
+function Hand.setHand 0
+push argument 0
+pop pointer 0
+push argument 1
+pop this 0
+push constant 0
+return
+function Hand.hand_to_dict 12
+push argument 0
+pop pointer 0
+push this 0
+call String.length 1
+pop local 0
+push local 0
+call Array.new 1
+pop local 1
+push local 0
+call Array.new 1
+pop local 2
+push constant 0
+pop local 3
+push constant 0
+pop local 4
+push constant 0
+pop local 5
+label WHILE_EXP0
+push local 5
+push local 0
+lt
+not
+if-goto WHILE_END0
+push constant 0
+pop local 6
+label WHILE_EXP1
+push local 6
+push local 0
+lt
+not
+if-goto WHILE_END1
+push local 6
+push local 1
+add
+pop pointer 1
+push that 0
+push this 0
+push local 5
+call String.charAt 2
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push local 6
+push local 2
+add
+push local 6
+push local 2
+add
+pop pointer 1
+push that 0
+push constant 1
+add
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+not
+pop local 3
+push local 0
+pop local 6
+label IF_FALSE0
+push local 6
+push constant 1
+add
+pop local 6
+goto WHILE_EXP1
+label WHILE_END1
+push local 3
+not
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push local 4
+push local 1
+add
+push this 0
+push local 5
+call String.charAt 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 4
+push local 2
+add
+push constant 1
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 4
+push constant 1
+add
+pop local 4
+label IF_FALSE1
+push local 5
+push constant 1
+add
+pop local 5
+push constant 0
+pop local 3
+goto WHILE_EXP0
+label WHILE_END0
+push local 4
+push local 0
+lt
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push local 4
+call Array.new 1
+pop local 7
+push local 4
+call Array.new 1
+pop local 8
+push constant 0
+pop local 9
+label WHILE_EXP2
+push local 9
+push local 4
+lt
+not
+if-goto WHILE_END2
+push local 9
+push local 7
+add
+push local 9
+push local 1
+add
+pop pointer 1
+push that 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 9
+push constant 1
+add
+pop local 9
+goto WHILE_EXP2
+label WHILE_END2
+push constant 0
+pop local 10
+label WHILE_EXP3
+push local 10
+push local 4
+lt
+not
+if-goto WHILE_END3
+push local 10
+push local 8
+add
+push local 10
+push local 2
+add
+pop pointer 1
+push that 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 10
+push constant 1
+add
+pop local 10
+goto WHILE_EXP3
+label WHILE_END3
+push local 1
+call Array.dispose 1
+pop temp 0
+push local 2
+call Array.dispose 1
+pop temp 0
+push local 7
+push local 8
+push local 4
+call Dictionary.new 3
+pop local 11
+push local 11
+return
+goto IF_END2
+label IF_FALSE2
+push local 1
+push local 2
+push local 4
+call Dictionary.new 3
+pop local 11
+push local 11
+return
+label IF_END2
+function Hand.update_hand 3
+push argument 0
+pop pointer 0
+push pointer 0
+call Hand.hand_to_dict 1
+pop local 0
+push constant 0
+pop local 1
+label WHILE_EXP0
+push local 1
+push argument 1
+call String.length 1
+lt
+not
+if-goto WHILE_END0
+push local 0
+push argument 1
+push local 1
+call String.charAt 2
+call Dictionary.lookup 2
+pop local 2
+push local 0
+push argument 1
+push local 1
+call String.charAt 2
+push local 2
+push constant 1
+sub
+call Dictionary.update 3
+pop temp 0
+push local 1
+push constant 1
+add
+pop local 1
+goto WHILE_EXP0
+label WHILE_END0
+push pointer 0
+push local 0
+call Dictionary.toString 1
+call Hand.setHand 2
+pop temp 0
+push constant 0
+return
+function Hand.display_hand 0
+push argument 0
+pop pointer 0
+push constant 14
+call String.new 1
+push constant 67
+call String.appendChar 2
+push constant 117
+call String.appendChar 2
+push constant 114
+call String.appendChar 2
+push constant 114
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 110
+call String.appendChar 2
+push constant 116
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 104
+call String.appendChar 2
+push constant 97
+call String.appendChar 2
+push constant 110
+call String.appendChar 2
+push constant 100
+call String.appendChar 2
+push constant 58
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push this 0
+call Output.printString 1
+pop temp 0
+call Output.println 0
+pop temp 0
+push constant 0
+return
+function Hand.getLength 0
+push argument 0
+pop pointer 0
+push this 0
+call String.length 1
+return
+function Hand.dispose 0
+push argument 0
+pop pointer 0
+push this 0
+call String.dispose 1
+pop temp 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return

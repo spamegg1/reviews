@@ -1,0 +1,106 @@
+/** Creates a dictionary of key:value pairs.
+*   Uses two arrays. The ith entry of the keys array
+*   corresponds to the ith entry of the values array.
+*   The two arrays must have the same length.
+*/
+
+class Dictionary {
+    field Array keys;
+    field Array values;
+    field int length;
+
+    /* assumes that my_keys and my_values have the same length my_length. */
+    constructor Dictionary new(Array my_keys, Array my_values, int my_length) {
+        let keys = my_keys;
+        let values = my_values;
+        let length = my_length;
+        return this;
+    }
+
+    /* This method looks up char:int pairs. */
+    method int lookup(char key) {
+        var int i;
+        let i = 0;
+
+        while (i < length) {
+            if (keys[i] = key) {
+                return values[i];
+            }
+            let i = i + 1;
+        }
+        // if key was not found in dictionary, return a default value
+        return -1;
+    }
+
+    /* This method updates the value of a key. */
+    method void update(char key, int value) {
+        var int i;
+        let i = 0;
+        while (i < length) {
+            if (keys[i] = key) {
+                let values[i] = value;
+                let i = length; // exit the loop
+            }
+            let i = i + 1;
+        }
+        return;
+    }
+
+    /* This method returns the sum of values array. */
+    method int size(){
+        var int i; // loop variable
+        var int sum; // variable to sum the values array
+
+        let i = 0;
+        let sum = 0;
+
+        while (i < length) {
+            let sum = sum + values[i];
+            let i = i + 1;
+        }
+
+        return sum;
+    }
+
+    /* This method converts dictionary to a string. */
+    /* example: ["a", "b", "c"], [1, 2, 3], 3 -> "abbccc" */
+    method String toString() {
+        var String result;
+        var int i;
+        var int j;
+
+        let result = String.new(size());
+        let i = 0;
+
+        while (i < length) {
+            let j = 0;
+            while (j < values[i]) {
+                let result = result.appendChar(keys[i]);
+                let j = j + 1;
+            }
+            let i = i + 1;
+        }
+        return result;
+    }
+
+    /* Dispose method */
+    method void dispose() {
+        do keys.dispose();
+        do values.dispose();
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    /* Getter methods */
+    method Array getKeys() {
+        return keys;
+    }
+
+    method Array getValues() {
+        return values;
+    }
+
+    method int getLength() {
+        return length;
+    }
+}

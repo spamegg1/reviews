@@ -1,0 +1,240 @@
+class Main {
+    static String alphabet;
+    static int screenlines;
+
+    function void main() {
+        var Array words; // list of secret words to be guessed
+        var int i; // loop var
+        var String secret_word; //
+        let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        let screenlines = 0;
+        let words = Main.create_words();
+
+        let i = 0;
+        while (i < 25) {
+            let secret_word = words[i];
+            do Main.hangman(secret_word);
+            let i = i + 1;
+        }
+
+        do words.dispose();
+        do Sys.halt();
+        return;
+    }
+
+    /* creates array of secret words. */
+    function Array create_words(){
+        var Array words;
+        let words = Array.new(50);
+        let words[0] = "ADEQUATE";
+        let words[1] = "DIPLOMAT";
+        let words[2] = "VIRGINAL";
+        let words[3] = "DISASTER";
+        let words[4] = "WATERWAY";
+        let words[5] = "MANIFOLD";
+        let words[6] = "CUSTARDS";
+        let words[7] = "OBVIATED";
+        let words[8] = "WELCOMED";
+        let words[9] = "PATHETIC";
+        let words[10] = "HEARTIES";
+        let words[11] = "DOUBLOON";
+        let words[12] = "SHREDDED";
+        let words[13] = "FARTHEST";
+        let words[14] = "RHAPSODY";
+        let words[15] = "BLOSSOMS";
+        let words[16] = "PITCHMEN";
+        let words[17] = "FIREWALL";
+        let words[18] = "SAFFRONS";
+        let words[19] = "GRANULAR";
+        let words[20] = "ASPHALTS";
+        let words[21] = "DEFROSTS";
+        let words[22] = "CRAFTIER";
+        let words[23] = "MACHINED";
+        let words[24] = "PRESTIGE";
+        let words[25] = "TEMPTERS";
+
+        return words;
+    }
+
+    /* returns true if all letters in secret_word are in letters_guessed. */
+    function boolean is_word_guessed(String secret_word, String letters_guessed) {
+        var int i; // loop var to go through secret_word
+        let i = 0;
+        while (i < secret_word.length()) {
+            // if a letter in secret_word is NOT in letters_guessed
+            if (~(Main.in_string(secret_word.charAt(i), letters_guessed))) {
+                return false;
+            }
+            let i = i + 1;
+        }
+        // otherwise all letters of secret_word must be in letters_guessed
+        return true;
+    }
+
+    /* returns true if char appears in string. */
+    function boolean in_string(char letter, String word) {
+        var int i; // loop var
+        let i = 0;
+        while (i < word.length()) {
+            if (letter = word.charAt(i)) {
+                return true;
+            }
+            let i = i + 1;
+        }
+        return false;
+    }
+
+    /* returns guessed word so far, with underscores on letters yet to be guessed. */
+    function String get_guessed_word(String secret_word, String letters_guessed) {
+        var String result;
+        var int i; // loop var
+        let i = 0;
+        let result = String.new(secret_word.length());
+        while (i < secret_word.length()) {
+            // if letter was guessed, place that letter
+            if (Main.in_string(secret_word.charAt(i), letters_guessed)) {
+                let result = result.appendChar(secret_word.charAt(i));
+            }
+            else {
+                // if letter was not guessed, place an underscore
+                let result = result.appendChar(95);
+            }
+            let i = i + 1;
+        }
+        return result;
+    }
+
+    /* returns string of what letters in alphabet have not yet been guessed. */
+    function String get_available_letters(String letters_guessed) {
+        var String result;
+        var int i; // loop var
+        let result = String.new(26);
+
+        while (i < 26) {
+            // if letter in alphabet is NOT in letters_guessed
+            if (~(Main.in_string(alphabet.charAt(i), letters_guessed))) {
+                let result = result.appendChar(alphabet.charAt(i));
+            }
+            let i = i + 1;
+        }
+        return result;
+    }
+
+    /* prints into to game. */
+    function void intro(String secret_word) {
+        do Output.printString("Welcome to the game, Hangman!");
+        do Output.println();
+        let screenlines = screenlines + 1;
+        do Main.refresh();
+        do Output.printString("I am thinking of a word that is ");
+        do Output.printInt(secret_word.length());
+        do Output.printString(" letters long.");
+        do Output.println();
+        let screenlines = screenlines + 1;
+        do Main.refresh();
+        return;
+    }
+
+    /* displays number of guesses left. */
+    function void display_guesses(int mistakes_made) {
+        do Output.printString("You have ");
+        do Output.printInt(8 - mistakes_made);
+        do Output.printString(" guesses left.");
+        do Output.println();
+        let screenlines = screenlines + 1;
+        do Main.refresh();
+        return;
+    }
+
+    /* clears screen when screen is filled. */
+    function void refresh() {
+        if (screenlines = 23) {
+            do Screen.clearScreen();
+            let screenlines = 0; // reset line counter
+        }
+        return;
+    }
+
+    /* runs the game. */
+    function void hangman(String secret_word) {
+        var int mistakes_made; // keep track of mistakes (=8 is game over)
+        var String letters_guessed;
+        var String available_letters; // letters that haven't been used
+        var String guess; // letter input from user
+        var String so_far; // word that is guessed so far
+
+        let mistakes_made = 0;
+        let letters_guessed = String.new(15);
+
+        do Main.intro(secret_word); // display intro text
+
+        // 8 mistakes means game over
+        while (mistakes_made < 8) {
+            // display number of guesses left
+            do Main.display_guesses(mistakes_made);
+
+            // get available letters
+            let available_letters = Main.get_available_letters(letters_guessed);
+
+            // get user input
+            let guess = Keyboard.readLine("Please guess a letter: ");
+            let screenlines = screenlines + 1;
+            do Main.refresh();
+
+            // get word guessed so far
+            let so_far = Main.get_guessed_word(secret_word, letters_guessed);
+
+            // if that letter was already guessed
+            if (Main.in_string(guess.charAt(0), letters_guessed)) {
+                do Output.printString("Oops! You've already guessed that letter: ");
+                do Output.printString(so_far);
+                do Output.println();
+                let screenlines = screenlines + 1;
+                do Main.refresh();
+            }
+            // otherwise we have a brand new letter guessed
+            else {
+                let letters_guessed = letters_guessed.appendChar(guess.charAt(0));
+
+                // if guess is correct
+                if (Main.in_string(guess.charAt(0), secret_word)) {
+                    let so_far = Main.get_guessed_word(secret_word, letters_guessed);
+                    do Output.printString("Good guess: ");
+                    do Output.printString(so_far);
+                    do Output.println();
+                    let screenlines = screenlines + 1;
+                    do Main.refresh();
+
+                    // if the whole secret word is guessed correctly
+                    if (Main.is_word_guessed(secret_word, letters_guessed)) {
+                        do Output.printString("Congratulations. You won!");
+                        do Output.println();
+                        let screenlines = screenlines + 1;
+                        do Main.refresh();
+
+                        // exit loop
+                        let mistakes_made = 8;
+                    }
+                }
+                // otherwise guess is incorrect
+                else {
+                    do Output.printString("Oops! That letter is not in my word: ");
+                    do Output.printString(so_far);
+                    do Output.println();
+                    let screenlines = screenlines + 1;
+                    do Main.refresh();
+
+                    let mistakes_made = mistakes_made + 1;
+                    if (mistakes_made = 8) {
+                        do Output.printString("Sorry, you ran out of guesses. The word was: ");
+                        do Output.printString(secret_word);
+                        do Output.println();
+                        let screenlines = screenlines + 1;
+                        do Main.refresh();
+                    }
+                }
+            }
+        }
+        return;
+    }
+}

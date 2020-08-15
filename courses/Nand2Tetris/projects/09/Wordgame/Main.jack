@@ -1,0 +1,35 @@
+// Wordgame main program,
+// by Bora Bosna, 1/19/2019.
+// File name: projects/09/Wordgame/Main.jack
+
+class Main {
+    function void main() {
+        // create list of arrays of 997 English words
+        var Array words;
+        // create dictionary that holds sizes of arrays by first letter
+        var Dictionary wordcounts;
+        // create list of 100 playable hands
+        var Array hands;
+        // create dictionary of scrabble values for scoring
+        var Dictionary scrabble_values;
+        // decide hand size
+        var int handsize;
+        // create new wordgame and run it
+        var Wordgame game;
+
+        // setup
+        let words = Wordlist.create();
+        let wordcounts = Wordlist.word_counts();
+        let hands = Handlist.create();
+        let scrabble_values = Scrabble.create();
+        let handsize = 8;
+        let game = Wordgame.new(scrabble_values, wordcounts, hands, words, handsize);
+
+        // run the game
+        do game.run();
+
+        // dispose of game
+        do game.dispose();
+        return;
+    }
+}

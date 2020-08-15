@@ -1,0 +1,173 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/12/Memory.jack
+
+/**
+ * Memory operations library.
+ */ 
+class Memory {
+    static Array memory;
+    static Array freeList;
+    static Array NO_BLOCK;
+    
+    // Free block structure:
+    // word 0: free block size including 2 header words
+    // word 1: Next free block ptr
+    static int FL_LENGTH; // freeList.length index
+    static int FL_NEXT;   // freeList.next index
+    
+    // Alloc block structure:
+    // word 0: alloc block size including 1 header word
+    // word 1..size: allocated block
+    static int ALLOC_SIZE;// alloc block size index relative to start of allocated block
+    
+    /** Initializes memory parameters. */
+    function void init() {
+        let memory = 0;
+        let freeList = 2048;
+        let NO_BLOCK = 16384;   // means no block found
+        let FL_LENGTH = 0;
+        let FL_NEXT = 1;
+        let ALLOC_SIZE = -1;
+        let freeList[FL_LENGTH] = 16384-2048;
+        let freeList[FL_NEXT] = null;
+        return;
+    }
+
+    /** Returns the value of the main memory at the given address. */
+    function int peek(int address) {
+        return memory[address];
+    }
+
+    /** Sets the value of the main memory at this address
+     *  to the given value. */
+    function void poke(int address, int value) {
+        let memory[address] = value;
+        return;
+    }
+
+    /** finds and allocates from the heap a memory block of the 
+     *  specified size and returns a reference to its base address. */
+    function Array alloc(int size) {
+        var Array prev_block;
+        var Array found_block;
+        
+        let prev_block = Memory.best_fit(size);             // prev_block is the block before the found block
+        if( prev_block = NO_BLOCK ) {
+            let found_block = null;    // none found
+        }
+        else {
+            if( prev_block = null ) {
+                let found_block = freeList;                 // New block is at the beginning of the freeList
+                let freeList = Memory.do_alloc(found_block, size); // Free list now starts a new first free block
+            }
+            else {
+                let found_block = prev_block[FL_NEXT];
+                let prev_block[FL_NEXT] = Memory.do_alloc(found_block, size);
+            }
+        }
+        return found_block+1;
+    }
+    
+    // Find the block with the best fit
+    function Array best_fit(int size) {
+        var Array best_block;
+        var Array prev_block;
+        var Array cur_block;
+        var int best_size;
+        var int cur_size;
+        
+        let best_block = NO_BLOCK;
+        let best_size = 16384 - 2048;
+        let cur_block = freeList;
+        let prev_block = null;
+        
+        while( ~(cur_block = null) ) {
+            let cur_size = cur_block[FL_LENGTH]-1;  // Number of usable words
+            if( ~(cur_size < size) & (cur_size < best_size) ) {
+                // Found new best block
+                let best_block = prev_block;    // Remember block before best block
+                let best_size = cur_size;
+            }
+            let prev_block = cur_block;
+            let cur_block = cur_block[FL_NEXT];
+        }
+        
+        return best_block;  // block just before best fit
+    }
+
+    // Allocate the found block and adjust free and alloc block headers
+    function Array do_alloc(Array found_block, int size) {
+        var Array next_block;
+        var int block_size;
+        
+        if( found_block[FL_LENGTH] > (size+1+2) ) { // block can hold free hdr + alloc hdr + alloc block + more
+            let next_block = found_block + size+1;  // Leave room for the alloc hdr
+            let next_block[FL_NEXT] = found_block[FL_NEXT];
+            let next_block[FL_LENGTH] = found_block[FL_LENGTH] - (next_block - found_block);
+            let found_block = found_block + 1;      // Point just after the alloc hdr
+            let found_block[ALLOC_SIZE] = size+1; // Size includes alloc hdr
+        }
+        else {      // Need to allocate the entire block
+            let next_block = found_block[FL_NEXT];
+            let block_size = found_block[FL_LENGTH];
+            let found_block = found_block + 1;      // Point just after the alloc hdr
+            let found_block[ALLOC_SIZE] = block_size;
+        }
+        
+        return next_block;
+    }
+    /** De-allocates the given object and frees its space. */
+    function void deAlloc(Array object) {
+        var int alloc_size;
+        var Array prev_block;
+        var Array next_block;
+        
+        let alloc_size = object[ALLOC_SIZE];
+        let object = object - 1;        // point to the beginning of the block
+        let prev_block = Memory.find_prev_free(object);
+        
+        if( prev_block = null ) {       // object becomes new start of freeList
+            let object[FL_LENGTH] = alloc_size;
+            let object[FL_NEXT] = freeList;
+            let freeList = object;
+            let prev_block = object;
+        }
+        else {
+            if( (prev_block + prev_block[FL_LENGTH]) = object ) {
+                // join prev free block with alloc block.
+                let prev_block[FL_LENGTH] = prev_block[FL_LENGTH] + alloc_size;
+            }
+            else {
+                // link prev free block to alloc block
+                let object[FL_LENGTH] = alloc_size;
+                let object[FL_NEXT] = prev_block[FL_NEXT];
+                let prev_block[FL_NEXT] = object;
+                let prev_block = object;
+            }
+        }
+        
+        if( (prev_block + prev_block[FL_LENGTH]) = prev_block[FL_NEXT] ) {
+            // join prev free with next free.
+            let next_block = prev_block[FL_NEXT];
+            let prev_block[FL_LENGTH] = prev_block[FL_LENGTH] + next_block[FL_LENGTH];
+            let prev_block[FL_NEXT] = next_block[FL_NEXT];
+        }
+        return;
+    }    
+    
+    function Array find_prev_free(Array object) {
+        var Array block;
+        
+        if( freeList > object ) {
+            return null;
+        }
+        
+        let block = freeList;
+        while( ~(block[FL_NEXT] = null) & (block[FL_NEXT] < object) ) {
+            let block = block[FL_NEXT];
+        }
+        return block;
+    }
+}

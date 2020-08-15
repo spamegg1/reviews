@@ -1,0 +1,26 @@
+function Main.main 6
+call Wordlist.create 0
+pop local 0
+call Wordlist.word_counts 0
+pop local 1
+call Handlist.create 0
+pop local 2
+call Scrabble.create 0
+pop local 3
+push constant 8
+pop local 4
+push local 3
+push local 1
+push local 2
+push local 0
+push local 4
+call Wordgame.new 5
+pop local 5
+push local 5
+call Wordgame.run 1
+pop temp 0
+push local 5
+call Wordgame.dispose 1
+pop temp 0
+push constant 0
+return
