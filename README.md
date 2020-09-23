@@ -1,7 +1,11 @@
 # Spam's CS Corner: Course Reviews
 DISCLAIMER: These are my subjective personal opinions! Make your own judgment. Also, I will talk a lot about my feelings! You are warned.
 
+I keep mentioning something called OSSU. [Here it is](https://github.com/ossu/computer-science/) in case you haven't heard of it.
+
 Originally written June 2020
+
+Updated September 2020 (Game Theory 1)
 
 - [Harvard's CS50 (first half)](#cs50)
 - [CS50, second half, Final Project](#cs50-2)
@@ -31,6 +35,7 @@ Originally written June 2020
 - [LAFF - On programming for Correctness](#laff)
 - [Intro to Parallel Programming](#cs344)
 - [Functional Programming in Scala (5 courses)](#scala)
+- [Game Theory 1](#game)
 
 ### <a name="cs50"></a> Harvard's CS50 (first half)
 https://cs50.harvard.edu/
@@ -505,3 +510,28 @@ This one has only text descriptions of what you are supposed to do. I found thes
 It's broken into 6 Milestones. The first 2 were the hardest, the last 2 went super quickly. I think Milestones 5 and 6 took me 5 minutes each! Insanely easy. The GUI is mostly coded for you, you have to only code small parts of it using Signals from Course 2. Signals are a functional, immutable way to deal with events and reactive programming needed for interactive applications. In case you forgot Course 2 by now, they provide a refresher.
 
 *Spam's recommendation:* If you are into FP, definitely take it! You know what, JUST TAKE IT. An entire specialization that you can audit FOR FREE and even submit your code for grading that you can finish in 1-2 months! Super super awesome. You might wanna wait until it is updated to Scala 3 (probably in 2021) but it works just fine today. You can take it after 1 year, probably even earlier (just after PLABC or the Haskell book).
+
+### <a name="game"></a> Game Theory 1
+https://www.coursera.org/learn/game-theory-1
+http://www.game-theory-class.org/
+
+This course is an advanced elective in OSSU. It's a math course, usually taught in Econ departments, and it's supposed to be related to AI, but I could hardly see any connections between this course and computer science. There is *Algorithmic Game Theory* but that is more academic and research focused. There is brief mention of algorithms in this course, but those algorithms are used *to solve the games presented in the course* (rather than *using* games to *do* something in CS).
+
+The course is aimed at pretty much anyone. You'll need to know how to solve some linear and a few quadratic equations in one variable. High school math should suffice. There are also a few infinite series involved in Infinitely Repeated Games, but it's only the geometric series (look up the formula on Wikipedia) and it's possible to solve the problems without infinite series knowledge. You also need some very basic discrete probability (if you understand coin tosses or dice rolls then you're good).
+
+It is taught by THREE professors! Holy cow! Two CS and one Econ profs. The lecture slide PDFs are a bit hidden, they are not present under "Week"s. You have to go to the main course menu and look under "Resources". The course also comes with interactive websites where you can play many of the games covered in the course against others or against AI enemies. Very cool!
+
+The overall mathematical rigor of the course is kept low, and I think that is the right decision here. The proofs of the theorems are skipped, as they would be way too advanced and complicated mathematically, and detract from learning the games themselves. Game Theory is one of those areas of math where you can make a few definitions and immediately reach research-level problems!
+
+The first 3 weeks are pretty easy and intuitive. Mostly about Nash equilibrium, dominant and dominated strategies (very obvious concepts), maxmin/minmax strategies, and mixed strategies (where you play each move with a probability). There are many examples that tie-in the content nicely to the real world. A study on pigs, and some data on soccer penalty kicks.
+
+Starting with Week 4 the course gets pretty challenging. The definitions get longer and more complicated, and it's harder to intuit. The definitions are for *n*-player games, but thankfully the course sticks to 2 or 3-player games so it's managable. Once you get to practical examples everything just clicks. 
+Week 4 probably has the most difficult concept: subgame perfect equilibria. I still struggled with it on the Final Exam. There is also Imperfect Information games. 
+
+Then on Week 5 there is Repeated Games, fairly easy to understand if you know your geometric series. On Week 6 you look at *Bayesian games* which is an incredibly interesting, mind-boggling concept: there are multiple different games with different payoffs, and you don't necessarily know which game you are playing at which stage. Amazing! It models certain things in real life really well (where each move/turn can change the game you are playing, and the payoffs). Week 7 is about Coalitional Games, another amazing concept. 
+
+There are practice quizzes (called *in video quizzes*) each week to prepare you for the real quiz (called *problem set*). A 70% score is needed to pass. You can attempt the real quiz 3 times every 8 hours. Other than that there is no limitation. The questions are about 2 or 3 player games (there are a few about 4-5 player games). You gotta read carefully, take your time, calculate, reason, draw diagrams and tables with pencil and paper... and you should be fine. They are very doable!
+
+There is also a [second course](http://www.game-theory-class.org/game-theory-II.html) on Coursera. Looked at its contents. Still don't see its relevance to CS.
+
+*Spam's recommendation: If you are into math, econ, games and cool fun stuff, definitely take it! It's a great course. It will make you look at everything in life differently. Otherwise you might want to take some other electives that are more relevant to CS.*

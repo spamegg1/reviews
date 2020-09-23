@@ -4,7 +4,6 @@ Created on Thu Sep  6 22:17:48 2018
 
 @author:
 """
-from math import ceil
 
 
 def creditBalance(balance, annualInterestRate, monthlyPayment):
@@ -50,6 +49,7 @@ while abs(creditBalance(balance, annualInterestRate, result)) >= epsilon:
     result = (left + right) / 2
 
 # This line of code rounds the result to a multiple of 10
-result = ceil(round(result) / 10) * 10
+result = (result + 9) // 10 * 10
+
 
 print("Lowest payment: " + str(result))
