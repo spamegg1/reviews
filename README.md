@@ -551,7 +551,7 @@ The instructor is one of the main 3-4 people in the world trying to advance this
 
 Lecture slide PDFs are incomplete. Week 2 does not have one, and the other weeks have sections not covered on the PDFs. You'll have to rewatch videos if you need recap during quizzes. Apparently there is some software ([Lattice Miner](https://sourceforge.net/p/lattice-miner/code/HEAD/tree/) and [Concept Explorer](https://sourceforge.net/projects/conexp/)) shown in some of the videos, but the course does not provide any access or links to them. The course has a survey half-way in Week 3, asking for feedback. So the course is still somewhat of a "work in progress" and not perfectly polished (but of overall high quality).
 
-There are no programming assignments, only quizzes.
+There are no programming assignments, only quizzes. The only things you'll see throughout the course look like [this](https://en.wikipedia.org/wiki/Formal_concept_analysis#Example). You don't work with any traditional datasets or files.
 
 Some of the algorithms covered in the course (with pseudo-code provided) are very complicated (exponential time), they would be either very hard or impossible to implement (without reading some hard research papers). Only a few problems have polynomial time algorithms. The quiz questions require you to go through these algorithms on some rather large contexts, and you have to do it all by hand, with pencil and paper. There is always a long video where the instructor goes through a similar lengthy example by hand. So you'll have to go along with that video, pause often, and imitate it when you are doing these quizzes. 
 
