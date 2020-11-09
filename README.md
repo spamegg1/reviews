@@ -6,6 +6,7 @@ I keep mentioning something called OSSU. [Here it is](https://github.com/ossu/co
 Originally written June 2020
 
 Updated September 2020 (Game Theory 1)
+Updated November 2020 (Formal Concept Analysis)
 
 - [Harvard's CS50 (first half)](#cs50)
 - [CS50, second half, Final Project](#cs50-2)
@@ -36,6 +37,7 @@ Updated September 2020 (Game Theory 1)
 - [Intro to Parallel Programming](#cs344)
 - [Functional Programming in Scala (5 courses)](#scala)
 - [Game Theory 1](#game)
+- [Formal Concept Analysis](#concept)
 
 ### <a name="cs50"></a> Harvard's CS50 (first half)
 https://cs50.harvard.edu/
@@ -535,3 +537,34 @@ There are practice quizzes (called *in video quizzes*) each week to prepare you 
 There is also a [second course](http://www.game-theory-class.org/game-theory-II.html) on Coursera. Looked at its contents. Still don't see its relevance to CS.
 
 *Spam's recommendation: If you are into math, econ, games and cool fun stuff, definitely take it! It's a great course. It will make you look at everything in life differently. Otherwise you might want to take some other electives that are more relevant to CS.*
+
+### <a name="concept"></a> Formal Concept Analysis
+https://www.coursera.org/learn/formal-concept-analysis
+
+Very tough and abstract course. It's a graduate level math class. It is primarily a specialized version of Lattice Theory (a branch of Set Theory, which is a branch of Mathematical Logic). Also uses ideas like models, theories and implications from Model Theory (another branch of Mathematical Logic). 
+
+What in the world is FCA? It's a mathematical way to derive an ontology from data in some knowledge domain, and represent them using lattices of binary relations between objects and attributes. It has some very vague connections to data analysis/mining and machine learning, and even automated theorem proving, but it uses none of the techniques from those domains. It's very hard to classify. In fact Coursera kept asking me over and over to identify the topics covered in this course, to help them better understand it. None of the options Coursera provided could describe the topics. Closest thing I can come up with would be "Lattice Theory" or "Set Theory".
+
+This is a brand new original approach spearheaded by a very small group of researchers, so it's mostly academic. It's not new in the chronological sense, it's been around for decades, but it's new in the sense that it does not have widespread usage or application yet. Apparently it has applications in biology, [medicine](https://www.cs.ubbcluj.ro/~fca/application-of-fca-in-medicine/), information retrieval and [knowledge processing](https://www.sciencedirect.com/science/article/abs/pii/S0957417413002959). These "applications" are mostly done by the researchers themselves trying to prove the usefulness of their theory (admirable, since academics usually don't do that).
+
+The instructor is one of the main 3-4 people in the world trying to advance this theory (he wrote and co-wrote the main textbooks on the subject, the course roughly follows one of his books) and get it off the ground. He is excellent in my opinion. You might struggle with his Russian accent. Thankfully Coursera has captions (which are sometimes wrong on the special terminology used).
+
+Lecture slide PDFs are incomplete. Week 2 does not have one, and the other weeks have sections not covered on the PDFs. You'll have to rewatch videos if you need recap during quizzes. Apparently there is some software ([Lattice Miner](https://sourceforge.net/p/lattice-miner/code/HEAD/tree/) and [Concept Explorer](https://sourceforge.net/projects/conexp/)) shown in some of the videos, but the course does not provide any access or links to them. The course has a survey half-way in Week 3, asking for feedback. So the course is still somewhat of a "work in progress" and not perfectly polished (but of overall high quality).
+
+Some of the algorithms covered in the course (with pseudo-code provided) are very complicated (exponential time), they would be either very hard or impossible to implement (without reading some hard research papers). Only a few problems have polynomial time algorithms. The quiz questions require you to go through these algorithms on some rather large contexts, and you have to do it all by hand, with pencil and paper. There is always a long video where the instructor goes through a similar lengthy example by hand. So you'll have to go along with that video, pause often, and imitate it when you are doing these quizzes. 
+
+It's very easy to make some small mistake somewhere. This is OK with the multiple tick-box type questions because of feedback you get from multiple attempts, but some of them ask for the exact total number of concepts, implications, objects etc. (not allowing you to verify each individual item you produce during the algorithm) and this is extremely hard to get right, or take advantage of the "3 attempts per 8 hours" system. I'll admit that I had to resort to 2-3 days of blind guessing on some of these.
+
+Week 1 is mostly introductory. Explains contexts, extents, intents and concepts. Good luck not mixing up these four words. It introduces closure operators. These fundamental concepts (oops!) are heavily used throughout the course. Some doable multiple tick-box quizzes on reading and understanding context diagrams with concrete data (classifying wines and Swiss knives!). There is a quiz-less section on many-valued contexts (as opposed to binary) but this is not covered much later.
+
+Week 2 is pure Lattice Theory. Fun! You need strong set theoretic skills to follow through the theorems proved here. Again doable quizzes with concrete examples (kinds of fruit and their impact on digestion). The fully worked-out example videos are a lifesaver here. One quiz is very abstract and requires understanding natural numbers, power sets, cardinality and infinity.
+
+On Week 3 the course gets super hard all of a sudden. It's about deriving the formal concepts by calculating closed sets. A linear ordering on subsets called *Lectic Order* and an algorithm called *Next Closure* are introduced and are heavily used in the rest of the course. You'll go through this algorithm many, many, many times in Weeks 4, 5, 6. Then the idea of Attribute Implications is introduced (some Model Theory goes a long way to understand this). This week is too long and full of hard fundamental ideas, so I think it should have been split into two.
+
+Week 4 continues implications. Various versions of sets are introduced: pseudo-closed, pre-closed, and closed. An algorithm to compute the canonical basis of implications is taught (which uses Next Closure inside it). Again, very hard. The quizzes here are insane and very long. I could not 100% one of them even with a lot of blind guessing.
+
+Week 5 goes in a completely different direction from what's been done up until now, but it's very interesting. It's about learning with queries: imagine you are exploring a fairly unknown domain, you have incomplete/missing data, but there are some domain experts who can act as "oracles" to verify your questions or give counterexamples, and you still want to compute the attribute implications. Then the algorithm for Attribute Exploration is shown: expanding your formal context with counterexamples from the oracle, while deriving the implications. There is a very nice example of classifying all possible combinations of two squares and how they relate to each other. In quizzes you'll have to replicate this first with classifying triangles, then with graph theory concepts: *strongly connected, weakly connected, rooted, acyclic, transitive, disconnected* etc. Hard quizzes.
+
+Week 6 is a bit self-defeating but it shows the self-awareness of the theory. The instructor admits that formal concepts are too strict and rigid, and having just one counterexample in your data can violate an implication that holds, say, 99% of the time. Moreover there is the issue of having a lattice that has way too many concepts that it becomes unreadable and impossible to understand. So, statistical and probabilistic methods are introduced to handle "noisy data" (support, confidence, frequency, stability, concept probability) and throw away less relevant data (iceberg lattices). Quizzes are easier but have some really nitty gritty number crunching with some of the probability calculations. I had to write 1-2 lines of Python code to do it right and fast.
+
+*Spam's recommendation:* I would say... don't take this course except for fun and (super hard!) challenge. You'll need a very strong set theory/logic background. I enjoyed it because I have that already. Despite that I had a really hard time. You can learn more mainstream data analysis/mining/classification techniques instead.
