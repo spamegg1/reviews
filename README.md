@@ -96,7 +96,7 @@ Second course teaches you generic recipes and formulas for building bigger, more
 
 First course ends with a Space Invaders type game (it's cool that Racket has a built-in way of doing events/mutation called "big bang"), while second course ends with a very difficult programming assignment of brute-force solving a scheduling problem for TAs and office hours. You will also write other fun and challenging stuff like a Sudoku solver, a fractal image generator, and so on. This is recursion on steroids basically. There are no auto-graders to which you submit your code. You'll be the judge of the correctness of your code. I'm told you can pay edX to have your final exam graded by the instructor, but don't do that.
 
-*Spam's recommendation:* I am personally biased to like these courses. Definitely take if you are interested in pursuing functional programming. You can also take them as your first programming course. If you already had an introductory course, you can skip these and go to Programming Languages A, B, C. PLA uses ML to teach very similar functional programming principles, and PLB already uses the same language, Racket.
+*Spam's recommendation:* I am personally biased to like these courses. Definitely take if you are interested in pursuing functional programming. I've seen some people struggle with Programming Languages A, B, C without these courses (PLA uses ML to teach very similar functional programming principles, and PLB uses the same language, Racket) so definitely take at least the first of these two courses before PLABC if you've never seen functional programming, recursion and the like.
 
 ### <a name="softcons"></a> Software Construction 1, 2
 https://www.edx.org/course/software-construction-data-abstraction
