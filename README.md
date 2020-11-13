@@ -135,7 +135,7 @@ Each week there are some community contributed resources with extra problems. Th
 
 The concepts I learned here carried me all the way through; in fact in my Scala Spec, the first two courses by Martin Odersky were pretty much a repetition of these three courses. I was able to do the PAs of my Scala Spec without even watching Odersky's lecture videos!
 
-*Spam's recommendation:* Drop what you are doing and take these now! They will serve you forever.
+*Spam's recommendation:* Drop what you are doing and take these now! They will serve you forever. Many people struggle hard with these courses if they skip How to Code classes. So take those first!
 
 ### <a name="lpn"></a> Learn Prolog Now!
 https://lpn.swi-prolog.org/lpnpage.php?pageid=top
