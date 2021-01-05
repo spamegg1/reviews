@@ -1,4 +1,5 @@
 (* COMMUNITY PROBLEMS FOR WEEK 2
+   solution credit goes to: spamegg
     this is community.sml
 *)
 

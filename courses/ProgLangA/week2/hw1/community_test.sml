@@ -1,4 +1,5 @@
-(* this is community_test.sml *)
+(* this is community_test.sml
+   solution credit goes to: spamegg *)
 use "community.sml";
 
 val test1a: bool = alternate [1] = 1
