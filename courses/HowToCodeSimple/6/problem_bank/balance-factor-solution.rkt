@@ -93,6 +93,12 @@
                                                     false))) -2)
 
 ;<template from BST>
+(define (height t)
+  (cond [(false? t) -1]
+        [else
+         (+ 1 (max
+              (height (node-l t))
+              (height (node-r t))))]))
 
 (define (balance-factor bst)
   (- (height (node-l bst))
