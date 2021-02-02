@@ -1,0 +1,53 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Sep  1 12:35:13 2018
+
+@author: spamegg
+
+Assume s is a string of lower case characters.
+
+Write a program that prints the longest substring of s in which the letters
+occur in alphabetical order. For example, if s = 'azcbobobegghakl', then your
+program should print
+
+Longest substring in alphabetical order is: beggh
+
+In the case of ties, print the first substring. For example, if s = 'abcbcd',
+then your program should print
+
+Longest substring in alphabetical order is: abc
+
+Note: This problem may be challenging. We encourage you to work smart.
+If you've spent more than a few hours on this problem,
+we suggest that you move on to a different part of the course.
+If you have time, come back to this problem after you've had a break and cleared
+your head.
+"""
+S = 'aaaaaaaaaaaabaaaaaaaaaazaaaaaaaaaafaaaaaaaaayaaaaaaaa'
+
+
+def longest_substring(s):
+    """Returns longest substring in string"""
+    if not s:
+        print("Longest substring in alphabetical order is: " + s)
+    else:
+        start = 0
+        end = 1
+        longest = 1
+        longest_string = s[0]
+        current = s[start:end]
+        while end < len(s):
+            if current[-1] <= s[end]:
+                current = current + s[end]
+                if len(current) > longest:
+                    longest = len(current)
+                    longest_string = current
+                end += 1
+            else:
+                start = end
+                end = start + 1
+                current = s[start:end]
+        print("Longest substring in alphabetical order is: " + longest_string)
+
+
+longest_substring(S)
