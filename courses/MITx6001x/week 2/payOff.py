@@ -2,7 +2,7 @@
 """
 Created on Thu Sep  6 22:17:48 2018
 
-@author:
+@author: spamegg
 """
 
 
@@ -31,25 +31,55 @@ def creditBalance(balance, annualInterestRate, monthlyPayment):
 
     return balance
 
+if __name__ == "__main__":                
+    # Test Case 1:
+    # balance = 3329
+    # annualInterestRate = 0.2
+    # Result Your Code Should Generate:
+    # -------------------
+    # Lowest Payment: 310
+                  
+    # Test Case 2:
+    # balance = 4773
+    # annualInterestRate = 0.2
+    # Result Your Code Should Generate:
+    # -------------------
+    # Lowest Payment: 440
 
-# Bisection search to find the minimum monthly payment that pays off balance
-left = 0
-right = balance
-result = (left + right) / 2
-epsilon = 10
+    # Test Case 3:
+    # balance = 3926
+    # annualInterestRate = 0.2
+    # Result Your Code Should Generate:
+    # -------------------
+    # Lowest Payment: 360
 
-while abs(creditBalance(balance, annualInterestRate, result)) >= epsilon:
-    attempt = creditBalance(balance, annualInterestRate, result)
-    if attempt == 0:
-        break
-    if attempt > 0:
-        left = result
-    else:
-        right = result
+    # Test Case 4:
+    balance = 794
+    annualInterestRate = 0.25
+    # Result Your Code Should Generate:
+    # -------------------
+    # Lowest Payment: 80
+
+    # Bisection search to find the minimum
+    # monthly payment that pays off balance
+    left = 0
+    right = balance
     result = (left + right) / 2
+    epsilon = 10
+    attempt = balance
 
-# This line of code rounds the result to a multiple of 10
-result = (result + 9) // 10 * 10
+    while abs(attempt) >= epsilon:
+        attempt = creditBalance(balance, annualInterestRate, result)
+        if attempt == 0:
+            break
+        if attempt > 0:
+            left = result
+        else:
+            right = result
+        result = (left + right) / 2
+
+    # This line of code rounds the result to a multiple of 10
+    #result = int((result + 9) // 10 * 10)
 
 
-print("Lowest payment: " + str(result))
+    print("Lowest payment: " + str(result))

@@ -2,7 +2,7 @@
 """
 Created on Wed Sep  5 21:27:54 2018
 
-@author:
+@author: spamegg
 """
 
 
@@ -10,15 +10,16 @@ def guessing_game(lower_bound, upper_bound):
     """Play a number guessing game with the computer."""
 
     low, high = lower_bound, upper_bound
-    print("Please think of a number between "
-          + str(low) + " and " + str(high) + "!")
+    print(f"Please think of a number between {low} and {high}!")
 
     guess = (low + high) // 2
 
-    print("Is your secret number " + str(guess) + "?")
-    user_input = input("Enter 'h' to indicate the guess is too high."
-                       + " Enter 'l' to indicate the guess is too low."
-                       + " Enter 'c' to indicate I guessed correctly.\n>>")
+    print(f"Is your secret number {guess}?")
+    user_input = input("""
+Enter 'h' to indicate the guess is too high.
+Enter 'l' to indicate the guess is too low.
+Enter 'c' to indicate I guessed correctly.
+>> """)
 
     while str(user_input) != 'c':
         if user_input not in ('h', 'l'):
@@ -31,10 +32,13 @@ def guessing_game(lower_bound, upper_bound):
             guess = (low + high) // 2
 
         print("Is your secret number " + str(guess) + "?\n")
-        user_input = input("Enter 'h' to indicate the guess is too high."
-                           + " Enter 'l' to indicate the guess is too low."
-                           + " Enter 'c' to indicate I guessed correctly.")
-    print("Game over. Your secret number was: " + str(guess))
+        user_input = input("""
+Enter 'h' to indicate the guess is too high.
+Enter 'l' to indicate the guess is too low.
+Enter 'c' to indicate I guessed correctly.
+>> """)
+    print(f"Game over. Your secret number was: {guess}")
 
 
-guessing_game(0, 100)
+if __name__ == "__main__":
+    guessing_game(0, 100)

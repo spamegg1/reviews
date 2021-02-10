@@ -6,9 +6,9 @@ Created on Fri Sep  7 13:00:43 2018
 """
 
 
-def credit_balance(balance, annual_interest_rate, monthly_payment):
+def credit_balance(bal, annual_interest_rate, monthly_payment):
     """
-    balance is: float
+    bal is: float
     annual_interest_rate is: float
     monthly_payment is: float
     returns: integer
@@ -17,20 +17,17 @@ def credit_balance(balance, annual_interest_rate, monthly_payment):
     monthly payment each month."""
 
     # this variable will iterate through 12 months of the year
-    month = 0
+    month = 1
+    result = bal
 
-    while month < 12:
-        unpaid_balance = balance - monthly_payment
+    while month <= 12:
+        unpaid_balance = result - monthly_payment
 
         # The bank charges interest each month on unpaid balance
-        balance = unpaid_balance + \
-            (annual_interest_rate / 12.0) * unpaid_balance
+        result = unpaid_balance + (annual_interest_rate / 12.0) * unpaid_balance
         month += 1
 
-    # Don't forget to round answer to two decimal places
-    balance = round(balance, 2)
-
-    return balance
+    return result
 
 
 def min_monthly_payoff(balance, annual_interest_rate):
@@ -49,8 +46,7 @@ def min_monthly_payoff(balance, annual_interest_rate):
     result = (left + right) / 2
     epsilon = 0.01
 
-    while abs(credit_balance(balance, annual_interest_rate, result)) \
-            >= epsilon:
+    while abs(credit_balance(balance, annual_interest_rate, result)) >= epsilon:
         attempt = credit_balance(balance, annual_interest_rate, result)
         if attempt > 0:
             left = result
@@ -58,14 +54,25 @@ def min_monthly_payoff(balance, annual_interest_rate):
             right = result
         result = (left + right) / 2
 
-    print("Lowest payment: " + str(round(result, 2)))
+    print("Lowest payment: " + str(result))
     return round(result, 2)
 
 
 def test_min_monthly_payoff():
     """Tests the min_monthly_payoff function."""
     assert min_monthly_payoff(320000, 0.2) == 29157.09
+    assert min_monthly_payoff(290021, 0.2) == 26425.53
+    assert min_monthly_payoff(333421, 0.2) == 30379.96
+    assert min_monthly_payoff(329256, 0.21) == 30130.98
+    assert min_monthly_payoff(103997, 0.21) == 9517.01
+    # assert min_monthly_payoff(298709, 0.22) == 27454.15
+    min_monthly_payoff(298709, 0.22)
+    assert min_monthly_payoff(334429, 0.22) == 30737.16
+    assert min_monthly_payoff(91446, 0.18) == 8259.87
+    #assert min_monthly_payoff(431144, 0.22) == 39626.17
+    min_monthly_payoff(431144, 0.22)
     assert min_monthly_payoff(999999, 0.18) == 90325.03
+    assert min_monthly_payoff(334839, 0.18) == 30244.37
     print("tests pass")
 
 

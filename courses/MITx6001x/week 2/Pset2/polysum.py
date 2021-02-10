@@ -2,7 +2,7 @@
 """
 Created on Thu Sep  6 18:47:02 2018
 
-@author:
+@author: spamegg
 """
 
 import math
