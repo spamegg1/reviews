@@ -51,7 +51,12 @@ val test6l = card_value (Spades, Queen) = 10
 val test6m = card_value (Clubs, King) = 10
 val test6n = card_value (Diamonds, Ace) = 11
 
-
+(* Assert that an exception is raised *)
+fun assert_raises (f, args, e) =
+    (f args; "No " ^ exnName (e) ^ " was raised")
+    handle e' => if exnName e = exnName e' then "Test Passed!"
+		 else "Wrong exception raised: " ^ exnName (e')
+val test7 = assert_raises(remove_card, ([], (Hearts, Ace), IllegalMove), IllegalMove) = "Test Passed!"
 val test7a = remove_card ([(Hearts, Ace)], (Hearts, Ace), IllegalMove) = []
 val test7b = remove_card ([(Diamonds, Jack),(Hearts, Ace)], (Hearts, Ace), IllegalMove) = [(Diamonds, Jack)]
 val test7c = remove_card ([(Hearts, Ace), (Diamonds, Jack)], (Hearts, Ace), IllegalMove) = [(Diamonds, Jack)]
@@ -75,7 +80,7 @@ val test9f = sum_cards [(Clubs, Num 5),(Hearts, King)] = 15
 val test9g = sum_cards [(Clubs, Num 5),(Clubs, Ace)] = 16
 val test9h = sum_cards [(Clubs, Ace),(Clubs, King), (Clubs, Jack)] = 31
 
-val test10a = score([],100) = 50								 
+val test10a = score([],100) = 50
 val test10b = score ([(Hearts, Num 2),(Clubs, Num 4)],10) = 4
 val test10c = score ([(Hearts, Num 2),(Clubs, Num 4)],5) = 3
 val test10d = score ([(Hearts, Num 2),(Diamonds, Num 4)],10) = 2
@@ -92,8 +97,8 @@ val test11g = officiate ([(Clubs,Ace),(Spades,Ace)],[Draw,Draw],42) = 10
 val test11h = officiate ([(Clubs,Ace),(Spades,Ace),(Clubs,Ace)],
                         [Draw,Draw,Draw],42) = 4
 val test11i = ((officiate([(Clubs,Jack),(Spades,Num(8))], [Draw,Discard(Hearts,Jack)],
-                         42); false)  handle IllegalMove => true)             
+                         42); false)  handle IllegalMove => true)
 val test11j = officiate([], [], 10) = 5
 val test11k = officiate([(Clubs,Ace)], [], 10) = 5
-val test11l = officiate([],[Draw], 10) = 5             
-val test11m = ((officiate([],[Discard(Diamonds,Num(9))], 10); false) handle IllegalMove => true)            
+val test11l = officiate([],[Draw], 10) = 5
+val test11m = ((officiate([],[Discard(Diamonds,Num(9))], 10); false) handle IllegalMove => true)
