@@ -51,12 +51,8 @@ val test6l = card_value (Spades, Queen) = 10
 val test6m = card_value (Clubs, King) = 10
 val test6n = card_value (Diamonds, Ace) = 11
 
-(* Assert that an exception is raised *)
-fun assert_raises (f, args, e) =
-    (f args; "No " ^ exnName (e) ^ " was raised")
-    handle e' => if exnName e = exnName e' then "Test Passed!"
-		 else "Wrong exception raised: " ^ exnName (e')
-val test7 = assert_raises(remove_card, ([], (Hearts, Ace), IllegalMove), IllegalMove) = "Test Passed!"
+
+val test7 = ((remove_card ([], (Hearts, Ace), IllegalMove); false) handle IllegalMove => true)
 val test7a = remove_card ([(Hearts, Ace)], (Hearts, Ace), IllegalMove) = []
 val test7b = remove_card ([(Diamonds, Jack),(Hearts, Ace)], (Hearts, Ace), IllegalMove) = [(Diamonds, Jack)]
 val test7c = remove_card ([(Hearts, Ace), (Diamonds, Jack)], (Hearts, Ace), IllegalMove) = [(Diamonds, Jack)]
