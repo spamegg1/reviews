@@ -373,6 +373,8 @@ I took this because the Stanford compilers course became unavailable. This cours
 
 *Spam's recommendation:* Don't take it. What are you, crazy? Crazy enough to write a compiler? Nobody is gonna write a compiler in their career. If you want to write an ad-hoc "fun compiler" take Nand2Tetris Part 2 instead. You'll probably have to write a simple lexer/parser at some point in your life though, so you should take the beginning part (regex, FSMs, parsing).
 
+***Update Feb 2021:*** Looks like I was wrong, you should probably take this course. I was working on updating a [complex web application](https://futurecoder.io) to a newer version of Python, and one of the [dependencies](https://github.com/gristlabs/asttokens/) was about abstract syntax trees. The dependent package was failing some tests, and it required AST knowledge and understanding on my part to fix the broken tests.
+
 ### <a name="debug"></a> Software Debugging
 https://www.udacity.com/course/software-debugging--cs259
 
