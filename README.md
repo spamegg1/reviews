@@ -96,6 +96,8 @@ Second course teaches you generic recipes and formulas for building bigger, more
 
 First course ends with a Space Invaders type game (it's cool that Racket has a built-in way of doing events/mutation called "big bang"), while second course ends with a very difficult programming assignment of brute-force solving a scheduling problem for TAs and office hours. You will also write other fun and challenging stuff like a Sudoku solver, a fractal image generator, and so on. This is recursion on steroids basically. There are no auto-graders to which you submit your code. You'll be the judge of the correctness of your code. I'm told you can pay edX to have your final exam graded by the instructor, but don't do that.
 
+***Update March 2021:***
+
 These courses teach very fundamental skills that I've seen so many learners lack, and struggle with as a result. There is usually a strong resistance to, and a strong rejection of, the contents of this course, and many common complaints:
 
 - This language is old and stupid!
