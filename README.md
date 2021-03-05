@@ -96,6 +96,24 @@ Second course teaches you generic recipes and formulas for building bigger, more
 
 First course ends with a Space Invaders type game (it's cool that Racket has a built-in way of doing events/mutation called "big bang"), while second course ends with a very difficult programming assignment of brute-force solving a scheduling problem for TAs and office hours. You will also write other fun and challenging stuff like a Sudoku solver, a fractal image generator, and so on. This is recursion on steroids basically. There are no auto-graders to which you submit your code. You'll be the judge of the correctness of your code. I'm told you can pay edX to have your final exam graded by the instructor, but don't do that.
 
+These courses teach very fundamental skills that I've seen so many learners lack, and struggle with as a result. There is usually a strong resistance to, and a strong rejection of, the contents of this course, and many common complaints:
+
+- This language is old and stupid!
+- I'll never use any of this in real life! It's a waste of time.
+- The templates cannot be used in other programming languages, what's the point of learning them?
+- No, I will NOT trust the natural recursion! It's wrong and evil.
+- GIVE ME EXPLICIT CONCRETE EXAMPLES FROM REAL LIFE PROJECTS WHERE THESE ARE DIRECTLY USED OTHERWISE I'M NOT DOING THESE COURSES AND YOU SUCK!!! 
+
+These courses teach general ways of thinking and form neural pathways in your brain that will serve you forever and you will use them in literally everything. The language, the templates, the formulas etc. are simply tools to "prime" your brain and give you maturity in your thinking. The systematic approach to program design and the fundamental skills learned here are very transferable to any area, type of problem, programming language, framework and so on. 
+
+It's like breathing, walking, talking, swimming, riding a bicycle... things you do without thinking, things that are "in the back of your mind", things to which you would not directly attribute your success in some area. FUNDAMENTAL things.
+
+The "fake" languages used here are perfect for such purpose: extremely simple syntax, and they get out of your way completely, letting you purely focus on the systematic design (at the cost of having [too many parentheses](https://xkcd.com/297/)). Later on in "real" languages you will miss these features, trust me. (One analogy can be the comparison between the artificial language [Lojban](https://en.wikipedia.org/wiki/Lojban) with its perfectly clear and logical design, and natural languages, with all the inconsistencies, idiosyncracies and ambiguities that natural languages usually come with.)
+
+Many learners first focus on some language, or some tool and then are forced to "learn" these fundamentals later, in a disordered haphazard way, with a lot of pain, when they are stuck in a problem. They usually end up doing something like "keep trying until it works!" I experienced this first-hand with learners that I tutor on a daily basis. They skipped over the fundamentals and jumped to "more advanced things", only to suffer a lot. So I highly recommend reading the [Preface](https://htdp.org/2020-8-1/Book/part_preface.html) of the How to Design Programs textbook which is freely available. Not to say that these courses are the only place where you can learn fundamental skills and systematic program design, but it's really good.
+
+If you are not convinced, I can give you a testimonial: I used the fundamental skills and patterns I learned here in my Functional Programming in Scala specialization and Final Project (scroll down).
+
 *Spam's recommendation:* I am personally biased to like these courses. Definitely take if you are interested in pursuing functional programming. I've seen some people struggle with Programming Languages A, B, C without these courses (PLA uses ML to teach very similar functional programming principles, and PLB uses the same language, Racket) so definitely take at least the first of these two courses before PLABC if you've never seen functional programming, recursion and the like.
 
 ### <a name="softcons"></a> Software Construction 1, 2
