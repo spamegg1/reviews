@@ -461,6 +461,8 @@ Correctness proofs are provided only for EXTREMELY SIMPLE algorithms that all fo
 
 *Spam's recommendation:* DO NOT take this course! Don't do it. Hey! I said don't. It's "optional" and of interest to researchers and specialists. No use to you.
 
+***Update March 2021:*** Recently found out that these concepts are available in Python! There has been a [PEP](https://www.python.org/dev/peps/pep-0316/) (Python Enhancement Proposal) to include [Eiffel's](https://www.eiffel.org/) "design by contract" features in Python (which hasn't been accepted yet and seems unlikely), and there are even [several](https://stackoverflow.com/questions/8563464/using-design-by-contract-in-python) [packages](https://pypi.org/project/PyContracts/) and [methods](https://krzysztofzuraw.com/blog/2016/design-by-contract-in-python-part-one) that let you define preconditions, postconditions and invariants, using decorators for example. Very cool! I think I'm gonna start using these.
+
 ### <a name="cs344"></a> Intro to Parallel Programming
 https://classroom.udacity.com/courses/cs344
 
