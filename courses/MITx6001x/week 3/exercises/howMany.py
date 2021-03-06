@@ -18,6 +18,7 @@ the number of values associated with a dictionary. For example:
 6
 """
 
+
 def how_many(aDict):
     '''
     aDict: A dictionary, where all the values are lists.
@@ -29,6 +30,7 @@ def how_many(aDict):
     for thing in aDict.values():
         result += len(thing)
     return result
+
 
 if __name__ == "__main__":
     func = 'how_many'
