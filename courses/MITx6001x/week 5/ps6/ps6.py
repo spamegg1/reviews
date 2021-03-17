@@ -218,7 +218,7 @@ class CiphertextMessage(Message):
         Message.__init__(self, text)
 
     def decrypt_message(self):
-        '''
+        """
         Decrypt self.message_text by trying every possible shift value
         and find the "best" one. We will define "best" as the shift that
         creates the maximum number of real words when we use apply_shift(shift)
@@ -232,7 +232,7 @@ class CiphertextMessage(Message):
 
         Returns: a tuple of the best shift value used to decrypt the message
         and the decrypted message text using that shift value
-        '''
+        """
         # Keep track of best decryption so far
         best_valid_word_count = 0
         best_shift = 0
@@ -254,7 +254,7 @@ class CiphertextMessage(Message):
                 best_shift = shift_value
                 decrypted_message = attempt
 
-        return (best_shift, decrypted_message)
+        return best_shift, decrypted_message
 
 
 # Example test case (PlaintextMessage)
