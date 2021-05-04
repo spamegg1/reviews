@@ -6,6 +6,7 @@ I keep mentioning something called OSSU. [Here it is](https://github.com/ossu/co
 Originally written June 2020
 
 Updated September 2020 (Game Theory 1)
+
 Updated November 2020 (Formal Concept Analysis)
 
 - [Harvard's CS50 (first half)](#cs50)
@@ -75,7 +76,7 @@ Looking for options on an interactive Python console that can be embedded in a w
 
 I had to figure out how to use LaTeX (mathematical typesetting) on a web page. The go-to "industry standard" is considered to be [MathJaX](https://www.mathjax.org/) but actually it performed so slowly that my CSS animations would trigger earlier than MathJaX could render math symbols, so they would not show up. Then I found a much better alternative called [KaTeX](https://katex.org/) which performs WAY faster and it worked.
 
-I spent about 5 weeks making my project after "finishing" CS50. I'm pretty sure I spent one entire week on trying to figure out something called Window.getComputedStyle() to do a certain animation/user-input update thing. Only to learn later that the W3 School made a custom CSS template that does it automatically... I still have a list of improvements I was going to do. Like learn how to use HTML5 local storage so the next time a user visits the page, it remembers where they left off. I realized that I could keep spending MONTHS on polishing this project. So I decided to move on.
+I spent about 5 weeks making my project after "finishing" CS50. I'm pretty sure I spent one entire week on trying to figure out something called `Window.getComputedStyle()` to do a certain animation/user-input update thing. Only to learn later that the W3 School made a custom CSS template that does it automatically... I still have a list of improvements I was going to do. Like learn how to use HTML5 local storage so the next time a user visits the page, it remembers where they left off. I realized that I could keep spending MONTHS on polishing this project. So I decided to move on.
 
 *Spam's recommendation:* Take it only if you like messy challenges. This is the world of web programming, where nothing makes sense, and code from multiple languages are meshed together in spaghetti and it's all raining on your head, meatballs and all. I liked it but it was super frustrating. For me it replaces the [Software Engineering Capstone Project](https://www.edx.org/course/software-development-capstone-project-ubcx-softengprjx) which I did not take due to paywall.
 
@@ -119,6 +120,7 @@ If you are not convinced, I can give you a testimonial: I used the fundamental s
 *Spam's recommendation:* I am personally biased to like these courses. Definitely take if you are interested in pursuing functional programming. I've seen some people struggle with Programming Languages A, B, C without these courses (PLA uses ML to teach very similar functional programming principles, and PLB uses the same language, Racket) so definitely take at least the first of these two courses before PLABC if you've never seen functional programming, recursion and the like.
 
 ### <a name="softcons"></a> Software Construction 1, 2
+
 https://www.edx.org/course/software-construction-data-abstraction
 https://www.edx.org/course/software-construction-object-oriented-design
 
@@ -135,6 +137,7 @@ The second course finishes with a project that is some sort of Twitter app. You 
 *Spam's recommendation:* I'd say skip them. They are OK courses I guess. You don't learn too much or do much coding at all. But they are a TOLERABLE way to get through Java concepts. Definitely preferable to Udacity's Software Architecture and Design, and Coursera's Software Architecture. These courses have actual code you can download and look at.
 
 ### <a name="plabc"></a> Programming Languages A, B, C
+
 https://www.coursera.org/learn/programming-languages
 https://www.coursera.org/learn/programming-languages-part-b
 https://www.coursera.org/learn/programming-languages-part-c
@@ -158,7 +161,8 @@ The concepts I learned here carried me all the way through; in fact in my Scala 
 *Spam's recommendation:* Drop what you are doing and take these now! They will serve you forever. Many people struggle hard with these courses if they skip How to Code classes. So take those first!
 
 ### <a name="lpn"></a> Learn Prolog Now!
-https://lpn.swi-prolog.org/lpnpage.php?pageid=top
+
+https://www.let.rug.nl/bos/lpn//lpnpage.php?pageid=online
 
 This is a text-only course, like a textbook. There is a book version of it too I believe. No videos. There are some interactive widgets that can run Prolog code but they did not work well on my browser. I resorted to [this IDE for Windows](https://arbeitsplattform.bildung.hessen.de/fach/informatik/swiprolog/indexe.html). For Mac and Linux there is an Eclipse plugin.
 
@@ -175,11 +179,12 @@ Originally Prolog was created by a linguist, so the main application is studying
 *Spam's recommendation:* Don't take it unless you have strong interest/background in Mathematical Logic/Proof Theory/Linguistics. If you like complex mathematical algorithmic thinking, the Logic Programming's way of thinking can be VERY USEFUL if you plan to go into an area of CS with hard problems. Study backtracking and search trees.
 
 ### <a name="cs212"></a> Design of Computer Programs
+
 https://www.udacity.com/course/design-of-computer-programs--cs212
 
 I took this course twice! Once a few years before I started OSSU. I had to quit because it was too hard and I was frustrated. It totally kicked my ass and wiped the floor with it. The second time around I finished it.
 
-The instructor Peter Norvig is a super smart guy leading Google AI Research (at the time, 2013?). His teaching style is very tough and definitely not for most people. He leaves A LOT up to you: he wants you to think through the problem, go to Python website and look up functions from the Python library to solve the problem, and not only that, but to solve it in a clever, short, elegant way. The first time I took it, a lot of students were really butthurt in the forums complaining about him. Later the TAs added some extra exercises and videos to explain some of those high-level, functional Python features unfamiliar to beginners, such as the itertools module. They also added "Office Hours" videos where Norvig and a TA answer questions submitted by students.
+The instructor Peter Norvig is a super smart guy leading Google AI Research (at the time, 2013?). His teaching style is very tough and definitely not for most people. He leaves A LOT up to you: he wants you to think through the problem, go to Python website and look up functions from the Python library to solve the problem, and not only that, but to solve it in a clever, short, elegant way. The first time I took it, a lot of students were really butthurt in the forums complaining about him. Later the TAs added some extra exercises and videos to explain some of those high-level, functional Python features unfamiliar to beginners, such as the `itertools` module. They also added "Office Hours" videos where Norvig and a TA answer questions submitted by students.
 
 But the course is incredibly valuable. It teaches you so many "high-level" programming ideas and tricks. I first learned the DRY Principle (Don't Repeat Yourself), the concepts of Refactoring, Dependency Injection and Memoization here. It's a purely problem-solving, puzzle-solving course, except for the language theory section in the middle. That part just didn't click even the second time around. 
 
@@ -190,6 +195,7 @@ The assignments are very hard. Definitely up there with Algorithms or even Advan
 *Spam's recommendation:* Take it only if you want a real challenge, you're OK with a very indirect instructor, and you are self-driven to do your own searches through documentation and figure things out.
 
 ### <a name="haskell"></a> Functional Programming in Haskell
+
 https://www.futurelearn.com/courses/functional-programming-haskell
 
 This was a 6-week "course" that cannot really be called a course. It was more like a few short tutorials put together. It was so insanely short I finished it in one day. I think the last "week" was just some interview videos with some academics. In week 6 they jump into Monads (which you won't understand), because for some reason FP people MUST mention Monads! What's cool is that it's from U of Glasgow, the creators of Haskell. You get to meet Simon Peyton Jones. They talk about the history of the ML-family of languages from the 70s and 80s. They talk about Alonzo Church, Stephen Kleene and lambda calculus too. History is cool.
@@ -197,6 +203,7 @@ This was a 6-week "course" that cannot really be called a course. It was more li
 *Spam's recommendation:* Well, I'm a sucker for computing history. I also like Scottish nerds. If you have a few hours of spare time and interested in Functional Programming, its people and its history, go for it.
 
 ### <a name="hpffp"></a> Haskell Programming from First Principles
+
 https://haskellbook.com/
 
 I didn't pay for this. $59? Are you kidding? My Specialization cost me $0, please. In my country I can eat for a month with $59 (local currency crap against the mighty dollar). It's a great book though. Although SUPER SUPER SUPER LONG! Like 1900 pages. I think I quit at page 1700 or so, after Applicative. I already knew about and used Monads.
@@ -212,6 +219,7 @@ Did I already tell you that this is hard? It's very hard. The book is full of co
 You might try (I haven't) [Learn You a Haskell for a Great Good!](http://www.learnyouahaskell.com/) if you MUST learn Haskell. 
 
 ### <a name="n2t"></a> Nand2Tetris 1,2
+
 https://www.nand2tetris.org/
 
 This was my favorite course ever (until I took Algorithms)! It's purely project focused. No lectures or academic topics, no quizzes or exams. It probably won't be directly useful in real life, but the ideas/systems will indirectly help you understand computers at every level: machine instructions/assembly/VM/compilers.
@@ -232,7 +240,7 @@ These courses gave me the best feeling! I felt euphoric, like I just flashed thr
 
 *EDIT:* After a bit of studying the science of learning, I have some idea as to why this course felt so amazing. It's true that the projects in this course will not be directly applicable or useful in real life. However, the ways of thinking acquired in this course are highly transferable chunks of understanding that will allow you to understand many other similar things in CS. It touches upon almost everything in CS. Moreover it covers so many different topics interleaved with one another. According to learning research this interleaving of similar yet different topics is extremely beneficial for long-term learning. It causes dopamine release and feeling of not only reward, but future rewards. 
 
-The same applies to Programming Languages A, B, C (all three cover programming languages, but different: functional, OOP etc.), Machine Learning (similar concepts, many different awesome applications) and Algorithms (they all cover algorithms but very different strategies: divide-and-conquer, greedy, dynamic, randomized etc.) All these three courses provide repetitive-enough, but also varied-enough practice. Also all three had great instructors. They give you the feeling of finally leaving the world of repetitive practice and stepping into creative, independent thinking. However just covering lots of different topics is not enough, if a course is a boring, unmotivating giant info dump without practice (like Intro to Networking below).
+The same applies to Programming Languages A, B, C (all three cover programming languages, but different: functional, OOP etc.), Machine Learning (similar concepts, many different awesome applications) and Algorithms (they all cover algorithms but very different strategies: divide-and-conquer, greedy, dynamic, randomized etc.) All these three courses provide repetitive-enough, but also varied-enough practice. Also all three had great instructors. They give you the feeling of finally leaving the world of repetitive practice and stepping into creative, independent thinking. However just covering lots of different topics is not enough, if a course is a boring, demotivating giant info dump without practice (like Intro to Networking below).
 
 ### <a name="intro-to-net"></a> Intro to Networking
 
@@ -247,6 +255,7 @@ Each topic had so many nitty gritty technical details, it's impossible to keep t
 *Spam's recommendation:* I can't recommend this in good conscience. A better alternative might be [this](https://www.coursera.org/learn/computer-networking) or [this](https://www.udacity.com/course/computer-networking--ud436). If you want to learn networking by programming instead, you can take a look [here](https://github.com/PrincetonUniversity/COS461-Public). This is probably the best way.
 
 ### <a name="ostep"></a> Operating Systems: Three Easy Pieces
+
 http://pages.cs.wisc.edu/~remzi/OSTEP/
 
 This is a textbook, not a course. But it became a course and replaced Hack the Kernel in OSSU. I read this whole book and did all of its exercises since HtK totally sucked and I could not understand anything.
@@ -260,6 +269,7 @@ Check the author's site as he is planning an update and some other excellent fre
 *Spam's recommendation:* Look no further. This is THE BOOK if you want to understand operating systems. It's OK if you don't.
 
 ### <a name="mit6001x"></a> Intro to CS and Programming with Python
+
 https://www.edx.org/course/introduction-computer-science-mitx-6-00-1x-10
 
 This is probably the best intro course ever. This is much gentler than CS50 as an intro class, obviously. I took it one year into my studies, because it got added to the OSSU curriculum one year after I started, and I wanted to do it for completeness. Obviously at that point I was not a beginner so this course was very easy and fun. I think it took me 6 days. It went so quickly because I was having so much fun.
@@ -268,9 +278,10 @@ Although it was easy for me, it's not so easy from a beginner's perspective. I f
 
 Assignments were: finding a longest substring, a Hangman game, a dictionary word-guessing game (with an AI opponent!), decoding secret encoded messages, and some others. There is a timed Midterm exam and a timed Final exam. I think I was given 8 hours to finish them. I finished in less than 1 hour.
 
-*Spam's recommendation:* TAKE THIS! BEST intro course ever. Ignore the other "intro/beginner" stuff like Py4e or Fundamentals of Computing (nothing against those courses).
+*Spam's recommendation:* TAKE THIS! BEST intro course ever. 
 
 ### <a name="coretheory"></a> Algorithms (Tim Roughgarden)
+
 https://www.coursera.org/learn/algorithms-divide-conquer
 https://www.coursera.org/learn/algorithms-graphs-data-structures
 https://www.coursera.org/learn/algorithms-greedy
@@ -293,11 +304,11 @@ Fourth course is the most theoretical. What to do when problems are just too har
 
 I implemented ALL algorithms, ALL data structures, and did ALL the exercises in the textbooks (which happen to include the quizzes/midterms/finals/PAs of the online version). The "Challenge Data Sets" on Tim's website are INSANE! Graphs with millions of nodes and billions of edges and such! There is actually a really cool story here that led me to switch from Windows to Linux... I'll tell it later. Suffice it to say that the Traveling Salesman challenge problem made me run out of my 32GB of RAM! There are midterm/final exams with multiple choice questions. You can attempt them multiple times, and they give you nice feedback even when you get things wrong.
 
-*Exact math requirements:* Course 1: You need the big-O notation, but this is one of the first chapters of the textbook. You must know the Principle of Mathematical Induction. Exercise writing some proofs by induction. Then OPTIONALLY, you need to do a [discrete probability analysis](https://en.wikibooks.org/wiki/High_School_Mathematics_Extensions/Discrete_Probability) using some random variables that are independent, exploiting the Linearity of Expectation. Both of these are covered in the Appendices of Roughgarden's textbook and you don't need to take a math course.
+*Exact math requirements:* Course 1: You need the big-O notation, but this is one of the first chapters of the textbook. You must know the Principle of Mathematical Induction. Exercise writing some proofs by induction. Then OPTIONALLY, you need to do a [discrete probability analysis](https://en.wikibooks.org/wiki/High_School_Mathematics_Extensions/Discrete_Probability) using some random variables that are independent, exploiting the Linearity of Expectation. Both of these are covered in the appendices of Roughgarden's textbook.
 
-Course 2: Same regarding induction. Graph theory is covered in the course/textbook. If this is your first time being exposed to graph theory it will be very difficult. I actually prefer Roughgarden's graph coverage to that other free [textbook](https://courses.csail.mit.edu/6.042/spring18/mcs.pdf) that Roughgarden links to on his webpage. Lots of graph theoretic proofs (no new math, just solid logic and reasoning skills). There is one probabilistic analysis in Karger's Min Cut algorithm (same requirement as Course 1).
+Course 2: Same regarding induction. Graph theory is covered from scratch in the course/textbook. If this is your first time being exposed to graph theory it will be very difficult. I actually prefer Roughgarden's graph coverage to that other free [textbook](https://courses.csail.mit.edu/6.042/spring18/mcs.pdf) that Roughgarden links to on his web page. Lots of graph theoretic proofs (requires solid logic and reasoning skills). There is one probabilistic analysis in Karger's Min Cut algorithm (same requirement as Course 1).
 
-Courses 3, 4: Nothing new math-wise. Lots of induction as usual. Logic and Reasoning are the most difficult parts really.
+Courses 3, 4: Nothing new math-wise. Lots of induction as usual. Logic and Reasoning are the most difficult parts really. Dynamic programming is basically Mathematical Induction turned into programs.
 
 *Spam's recommendation:* Stop reading right now and TAKE THEM! Also get Roughgarden's books. Worth every cent, will serve you FOR LIFE. They are EXCELLENT (and self-contained; they will take care of your math fears).
 
@@ -320,7 +331,7 @@ The instructor Ravi Ravamoorthi is a brilliant and leading man in his field. He 
 
 When he goes through some calculations, he is using a screen-marker pen that must be from the late 1990s, it has no smoothing whatsoever that everything he writes is completely angular/straight, it looks like it was written by a 3 year old. Impossible to read or follow, and very annoying. In later videos, he quickly cuts to the version of the formula that was typeset instead of handwritten.
 
-The OpenGL pipeline is pretty complicated. There are so many parts, and I had real trouble understanding how and in what order they are connected. The math is really involved. I found it possible, but really hard, to follow the derivations of the formulas for various calculations: shading, lighting, tracing, projection, rotation, transformation, dilation, translation, and so on... For the assignments I just ignored the derivations and extracted the final formulas from the PDF slides without really understanding them fully. You really need to be on point with your vector and matrix algebra (dot/cross products, normalization, matrix-vector and matrix-matrix multiplications), but you don't need to take an entire linear algebra or an entire multivariable calculus class.
+The OpenGL pipeline is pretty complicated. There are so many parts, and I had real trouble understanding how and in what order they are connected. The math is really involved. I found it possible, but really hard, to follow the derivations of the formulas for various calculations: shading, lighting, tracing, projection, rotation, transformation, dilation, translation, and so on... For the assignments I just ignored the derivations and extracted the final formulas from the PDF slides without really understanding them fully. You really need to be on point with your vector and matrix algebra (dot/cross products, normalization, matrix-vector and matrix-matrix multiplications, creating an orthonormal basis in 3D), but you don't need to take an entire linear algebra or an entire multivariable calculus class.
 
 The first assignment was very nice and doable. You write a bunch of matrices to do transformations. Then you test this on a provided OpenGL rendering of a 3D teapot. The testing tool provided is interactive, you can rotate, dilate, shift the teapot. If you did everything correctly, the testing script will output a bunch of snapshots of the teapot after a particular sequence of transformations, and you can compare them to the correct results. However sometimes your solution is wrong and it's extremely subtle. You can't tell what's wrong from the interactive tool.
 
@@ -330,11 +341,12 @@ They did something extremely useful: they provided guides from students who succ
 
 The third assignment was getting close to Hack the Kernel levels of difficulty. It says: "hey, go ahead and implement a Ray Tracer!" OK... No skeleton code is provided. There is a long, wordy specification and some links to sites with "ray tracer design ideas". OK... Also you can't use the OpenGL libraries from previous assignments, because the ray tracer is software rendering only, it doesn't use any hardware acceleration. OK... Also, rendering each of the test images with your ray tracer will take hours of CPU intensive computing. OK... 
 
-I took a look at some people's solutions and holy hell... it would have taken me at least 1-2 months to do that. Here the TAs joke that with each assignment the time required to finish goes up exponentially. They had a formula, something like (n+1)^n hours: Assignment 0 would take 1 hour, Assignment 1 would take 2, Assignment 2 would take 3^2 = 9 and Assignment 3 takes 4^3 = 64 hours. With the added time pressure from edX and no way to even test things I gave up (thanks to HtK I was beginning to master *The Art of Moving On*).
+I took a look at some people's solutions and holy hell... it would have taken me at least 1-2 months to do that. Here the TAs joke that with each assignment the time required to finish goes up exponentially. They had a formula, something like `(n+1)^n` hours: Assignment 0 would take 1 hour, Assignment 1 would take 2, Assignment 2 would take 3^2 = 9 and Assignment 3 takes 4^3 = 64 hours. With the added time pressure from edX and no way to even test things I gave up (thanks to HtK I was beginning to master *The Art of Moving On*).
 
 *Spam's recommendation:* Do the first two assignments, if you really want to learn computer graphics and OpenGL. Otherwise skip it. 
 
 ### <a name="ml"></a> Machine Learning
+
 https://www.coursera.org/learn/machine-learning
 
 Wow, this was one of the BEST courses I took ever. So good. The instructor Andrew Ng is, if I understand correctly, the founder of Coursera. His teaching style is great. The material, PDFs/notes, videos, assignments are all top-notch quality. They also introduced me to the awesome free MATLAB alternative, GNU Octave, which I ended up using later again for another course.
@@ -347,8 +359,8 @@ You also need to spend some time thinking about how to correctly "vectorize" the
 
 *Spam's recommendation:* What are you waiting for? TAKE IT RIGHT NOW!
 
-
 ### <a name="crypt"></a> Cryptography 1
+
 https://www.coursera.org/learn/crypto/
 
 Wow this course was HARD. The easiest part for me was close to the ending where it goes into number theory (Euler phi function and such). The last part of the course is just setting you up for Cryptography 2, the next course, which I'm told is even more math heavy. Yikes! 
@@ -366,6 +378,7 @@ What I said above sounds all very negative, but it's a really good course and th
 *Spam's recommendation:* Probably don't take it. This is a very hard MATH course, it doesn't really teach you about security (well it does, but in painful mathematical technical detail, not in simple practical terms). You should definitely learn the core security concepts though.
 
 ### <a name="softproc"></a> Software Processes
+
 https://www.coursera.org/learn/software-processes
 
 I decided to take this when I realized [Software Engineering: Introduction](https://www.edx.org/course/software-engineering-introduction-ubcx-softeng1x) is behind a paywall. That course was talking about Software Methodologies, so I took this.
@@ -393,7 +406,7 @@ I took this because the Stanford compilers course became unavailable. This cours
 
 *Spam's recommendation:* Don't take it. What are you, crazy? Crazy enough to write a compiler? Nobody is gonna write a compiler in their career. If you want to write an ad-hoc "fun compiler" take Nand2Tetris Part 2 instead. You'll probably have to write a simple lexer/parser at some point in your life though, so you should take the beginning part (regex, FSMs, parsing).
 
-***Update Feb 2021:*** Looks like I was wrong, you should probably take this course. I was working on updating a [complex web application](https://futurecoder.io) to a newer version of Python, and one of the [dependencies](https://github.com/gristlabs/asttokens/) was about abstract syntax trees. The dependent package was failing some tests, and it required AST knowledge and understanding on my part to fix the broken tests.
+***Update Feb 2021:*** Looks like I was wrong, you should probably take this course. I was working on updating a [complex web application](https://futurecoder.io) to a newer version of Python, and one of the [dependencies](https://github.com/gristlabs/asttokens/) was about abstract syntax trees. The dependent package was failing some tests, and it required AST (abstract syntax tree) knowledge and understanding on my part to fix the broken tests.
 
 ### <a name="debug"></a> Software Debugging
 https://www.udacity.com/course/software-debugging--cs259
@@ -404,7 +417,7 @@ Instead of using a debugger from an IDE or something like that, in this course y
 
 In the final exam you put everything together to create a fully automated bug finder and reasoner that explains the bug, tracking the chain of causation in the code. Really cool, advanced debugging ideas. Particularly interesting one is the idea of [Delta Debugging](https://en.wikipedia.org/wiki/Delta_debugging): taking a test input that breaks down code, systematically narrowing down code to its minimum portion that breaks. Unfortunately it never feels like you can use them in the real world beyond the scope of the simple functions that are tested in these assignments.
 
-It's an old course so it uses Python2. I usually translate them to Python3 and do them that way on my PC, but this time it was impossible, because Python's sys.settrace API (used throughout the whole course) changed significantly from 2 to 3. So the 2to3 conversion tool fails to produce a working version.
+It's an old course so it uses Python 2. I usually translate them to Python 3 and do them that way on my PC, but this time it was impossible, because Python's `sys.settrace` API (used throughout the whole course) changed significantly from 2 to 3. So the `2to3` conversion tool fails to produce a working version.
 
 Some of the programming assignments have issues and bugs. There are some notes below the PA videos, telling you "this code is wrong/has a typo, it should be like this", but those are also wrong. The grader seems to be broken on many occasions. I spent some time reading old forum posts to figure things out. Another issue is that most PAs use the same "buggy code example" from the beginning of the course, over and over again.
 
@@ -428,19 +441,21 @@ In the final exam you write a fuzzer/random tester for a text viewing applicatio
 *Spam's recommendation:* You can't really lose much by taking it. It's pretty short. Really cool ideas.
 
 ### <a name="softdesg"></a> Software Architecture & Design
+
 https://www.udacity.com/course/software-architecture-design--ud821
 
 This was quite atrocious. There are 30 Lessons, each with 25-50 videos. Some videos are so short (like 3 seconds) it gets incredibly annoying to go through the in-between-video transitions.
 
 You basically listen to a nice old man read tons and tons of definitions from some Software Architecture textbook. He constantly shifts his eyes between the camera and the teleprompter from which he is reading. It's one of THOSE courses where they try to sound super cool and talk about famous architects, buildings, designers etc.
 
-This is a purely verbal course. No programming assignments, no homeworks, just a few quizzes here and there that are very, very subjective. It's like a super long, boring audio-book to put you to sleep. Maybe you can figure out a way to listen to it when you are jogging or something. Personally I had the videos playing in the background while I was doing pushups and ab crunches in front of my PC.
+This is a purely verbal course. No programming assignments, no homeworks, just a few quizzes here and there that are very, very subjective. It's like a super long, boring audio-book to put you to sleep. Maybe you can figure out a way to listen to it when you are jogging or something. Personally I had the videos playing in the background while I was doing push ups and ab crunches in front of my PC. I feel like I'm a bad influence on you. Don't listen to me.
 
 There was only one useful Lesson. It's a scenario where two instructors are play-acting as software engineer and client. They go through the design decisions of a Library ID card/book checkout system. It actually made a lot of sense. This was extremely similar to what they did in the Software Construction 1,2 classes.
 
-*Spam's recommendation:* Do not take this. Total waste of time. You can listen to [The Joy of Painting with Bob Ross](https://www.youtube.com/user/BobRossInc) if you have trouble going to sleep.
+*Spam's recommendation:* Do not take this. Total waste of time. You can listen to [The Joy of Painting with Bob Ross](https://www.youtube.com/user/BobRossInc) if you have trouble going to sleep. Software architecture is obviously a serious topic, it's not a joke; but this is a terrible way to teach it. Check out these books instead: https://aosabook.org/en/index.html 
 
 ### <a name="laff"></a> LAFF - On programming for Correctness
+
 https://www.edx.org/course/laff-on-programming-for-correctness
 
 This course was very strange and uneven. It has 6 weeks. Week 1 is purely dedicated to Logic review, which I skipped. Week 2 starts with the core idea of the course: obtaining correctness proofs of algorithms along with deriving the algorithm itself, hand in hand. 
@@ -464,6 +479,7 @@ Correctness proofs are provided only for EXTREMELY SIMPLE algorithms that all fo
 ***Update March 2021:*** Recently found out that these concepts are available in Python! There has been a [PEP](https://www.python.org/dev/peps/pep-0316/) (Python Enhancement Proposal) to include [Eiffel's](https://www.eiffel.org/) "design by contract" features in Python (which hasn't been accepted yet and seems unlikely), and there are even [several](https://stackoverflow.com/questions/8563464/using-design-by-contract-in-python) [packages](https://pypi.org/project/PyContracts/) and [methods](https://krzysztofzuraw.com/blog/2016/design-by-contract-in-python-part-one) that let you define preconditions, postconditions and invariants, using decorators for example. Very cool! I think I'm gonna start using these.
 
 ### <a name="cs344"></a> Intro to Parallel Programming
+
 https://classroom.udacity.com/courses/cs344
 
 This was the hardest course after Hack the Kernel. But it's insanely cool! However, this course is deprecated/abandoned by Udacity (you can't find it in their course catalog, only accessible if you know a certain URL). So there is no support at all. The auto-graders do not work (the GPU time-sharing they rented from Amazon no longer exists, the back-end of the grader is GONE). The forums are dead (I searched through thousands of posts to find anything relevant at all). The other MANY ways I tried to run the code on my machine did not work either:
@@ -483,14 +499,14 @@ The course is about CUDA programming specifically on the GPU. Lots of GPU-only s
 
 You will go through the fundamentals of parallel programming and learn/implement all the fundamental parallel algorithms: scan, reduce, histogram, sort, and so on. The assignments are super cool and interesting (assuming you can DO THEM AT ALL!): image blurring, turning an image to B&W, red eye reduction, normalizing an image's shininess (so that super bright/super dark portions become more visible), Radix Sort, Jacobi filtering. I could not even do the final exam's PAs, I assume they were even harder.
 
-The instructors are great! I always thought Udacity is the only one that got online pedagogy right: short videos, tons of questions in between videos (fully utilizing the Socratic method) instead of long boring info dumps. However the TAs totally suck. The TAs are tasked with the "explain HW assignment" videos, and they do a terrible job. There is one main instructor and some guests from Nvidia. They got the main CUDA guy from Nvidia to give a guest lecture (without any assignments) on the CUDA programming model. Don't worry, it does NOT play like a commercial. The only issue is that the main instructor gets into super nitty gritty details of optimizing parallel code for the GPU... while it's cool to have industry people teaching you the tricks directly, these felt like totally out of reach unless you work in the industry yourself. There is a "Histogramming for Speed" programming assignment but the optimizations you can do there are very simple and limited.
+The instructors are great! I always thought Udacity is the only one that got online pedagogy right: short videos, tons of questions in between videos (fully utilizing the Socratic method) instead of long boring info dumps. However the TAs totally suck. The TAs are tasked with the "explain HW assignment" videos, and they do a terrible job. There is one main instructor and some guests from Nvidia. They got the main CUDA guy from Nvidia to give a guest lecture (without any assignments) on the CUDA programming model. Don't worry, it does NOT play like a commercial (well not much). The only issue is that the main instructor gets into super nitty gritty details of optimizing parallel code for the GPU... while it's cool to have industry people teaching you the tricks directly, these felt like totally out of reach unless you work in the industry yourself. There is a "Histogramming for Speed" programming assignment but the optimizations you can do there are very simple and limited.
 
-*Spam's recommendation:* DO NOT TAKE THIS! It's abandonware. Super hard, and you are all alone. You'll go through so much pain and frustration. It's too bad though, because it's actually an awesome course. Very sad, and shame on Udacity. Take [Parallel Programming](https://www.coursera.org/learn/parprog1).
+*Spam's recommendation:* DO NOT TAKE THIS! It's abandon ware. Super hard, and you are all alone. You'll go through so much pain and frustration. It's too bad though, because it's actually an awesome course. Very sad, and shame on Udacity. Take [Parallel Programming](https://www.coursera.org/learn/parprog1).
 
 ### <a name="scala"></a> Functional Programming in Scala (5 courses)
 https://www.coursera.org/specializations/scala
 
-OK, this was the big finish line. From the very first day I came across OSSU I've been eyeing this as my eventual goal. I set my browser homepage to the Scala wikipedia page for two years, so I would see it everyday and stay motivated. I had never seen a single line of Scala code up to this point. 
+OK, this was the big finish line. From the very first day I came across OSSU I've been eyeing this as my eventual goal. I set my browser homepage to the Scala Wikipedia page for two years, so I would see it everyday and stay motivated. I had never seen a single line of Scala code up to this point. 
 
 Unfortunately I came across too many outside issues during this. I was under quarantine, and starting to lose my mind from boredom and mild depression. Then to top it all off my PC broke (motherboard's CPU socket burned). I had to take a break in the middle of my Spec to go out looking for hardware in a pandemic taking some huge risk and being super bummed and depressed. Once I was able to continue I wasn't motivated or overjoyed as I have been dreaming for a year. Adjust your expectations people!
 
@@ -498,40 +514,40 @@ Initially I planned to pay for this, to make it more "official" and "serious", a
 
 To reduce time, I did some quick reading before starting. There is an excellent write-up of lecture notes and lecture code snippets of the first 3 courses [here](https://github.com/xiaoyunyang/coursera-scala-specialization). When I started typing the code in IntelliJ, I noticed that it was all outdated and incompatible!!! What the hell? Then I started to read some reviews on Coursera. While the overall rating is high, there were MANY negative reviews, complaining about compatibility issues and the code/PAs not working on their PC. There seems to be a lot of confusion especially from people thinking that this is a "beginner's FP course" or something like that (even though it says "one year programming experience required"). Some commenters said "I'm a programmer of 20 years and these courses were impossible! Makes no sense! Terrible!" I started to have some Hack the Kernel flashbacks.
 
-At this point I decided to test it by auditing the first course, skipping all the lectures and doing the PAs right away. Initially I had a ton of trouble getting things to work correctly in IntelliJ. There are some really finicky settings that have to be just right. Also the correct version of sbt (Scala build tool), correct version of Java (oh man this was hell, good luck reading Java's 100s of lines of stack trace error messages!) and correct version of the Scala compiler have to be present. Eventually things started working. Without watching any lecture videos I finished the first 4 weeks of PAs in 1 day. But the code was working fine. So I could keep going.
+At this point I decided to test it by auditing the first course, skipping all the lectures and doing the PAs right away. Initially I had a ton of trouble getting things to work correctly in IntelliJ. There are some really finicky settings that have to be just right. Also the correct version of `sbt` (Scala build tool), correct version of Java (oh man this was hell, good luck reading Java's 100s of lines of stack trace error messages!) and correct version of the Scala compiler have to be present. Eventually things started working. Without watching any lecture videos I finished the first 4 weeks of PAs in 1 day. But the code was working fine. So I could keep going.
 
-So why did the code I typed initially not work? Apparently all the versions of Scala and sbt are backwards-incompatible; the courses are 5 years old and many of the language features used in the courses are now deprecated! Apparently there is going to be some "big changes" in the Scala world soon, with [Scala Native](https://www.scala-native.org/) slowly being transitioned, ditching the JVM backend in favor of LLVM (that is awesome! but why didn't they do that from the beginning years ago?), and Scala 3 slowly being transitioned: just like Python 3 which made big, permanent, backwards incompatible changes, but from that point forward it's all compatible. The instructors changed part of the second course right when I was about to take it, and they claim they will "update the courses to Scala 3 at some point" [here](https://www.scala-lang.org/2020/03/10/functional-program-re-design.html).
+So why did the code I typed initially not work? Apparently all the versions of Scala and `sbt` are backwards-incompatible; the courses are 5 years old and many of the language features used in the courses are now deprecated! Apparently there is going to be some "big changes" in the Scala world soon, with [Scala Native](https://www.scala-native.org/) slowly being transitioned, ditching the JVM backend in favor of LLVM (that is awesome! but why didn't they do that from the beginning years ago?), and Scala 3 slowly being transitioned: just like Python 3 which made big, permanent, backwards incompatible changes, but from that point forward it's all compatible. The instructors changed part of the second course right when I was about to take it, and they claim they will "update the courses to Scala 3 at some point" [here](https://www.scala-lang.org/2020/03/10/functional-program-re-design.html).
 
 Then more sad news about the hype around Scala [dying](https://www.lihaoyi.com/post/TheDeathofHypeWhatsNextforScala.html), companies like Twitter starting to move away from Scala, then Scala getting eaten up by Kotlin's rise in popularity, and so on. Why are these things important, and what do they have to do with the courses I'm supposed to be reviewing? Well, if you are going to seriously get into a language and look for a job in that language, these things are important. At this point I was even reconsidering my Spec choice. Maybe I should do something else? I decided to stick with it but not pay.
 
-Overall the Specialization was very, very easy (at least 20x easier than Hack the Kernel). I don't know if that was because I'm so good, or because FP is right up my alley, or because of the power of FP itself. Most PAs took me 10-15 minutes to finish. Lots of clever functional one-liners! The wonderful thing is that, once you satisfy the type-checker, you almost always get the right solution. You MUST use a smart IDE such as IntelliJ that automatically type-checks BEFORE you compile, and visually shows the types AS YOU ARE TYPING and visually gives you type errors. This probably saved me 100 hours of "Type-Kata" (compiling, fighting with the type checker, going back, compiling again). Turns out Haskell's type checker is much stricter than Scala's.
+Overall the Specialization was very, very, VERY easy (at least 20 times easier than Hack the Kernel). I don't know if that was because I'm so good, or because FP is right up my alley, or because of the power of FP itself. THE FUNDAMENTALS COMPLETELY PAID OFF! Thanks to the How to Code courses, Prog Lang courses, and so on... it's like I cracked the meta-cognitive code of programming languages so I can learn anything. Most PAs took me 10-15 minutes to finish. Lots of clever functional one-liners! The wonderful thing is that, once you satisfy the type-checker, you almost always get the right solution. You MUST use a smart IDE such as IntelliJ that automatically type-checks BEFORE you compile, and visually shows the types AS YOU ARE TYPING and visually gives you type errors. This probably saved me 100 hours of "Type-Kata" (compiling, fighting with the type checker, going back, compiling again). Turns out Haskell's type checker is much stricter than Scala's.
 
-Functional Programming mostly boils down to... MAP. Yep that's it. For the most part, you will be writing ".map(...=>...)".
+Functional Programming mostly boils down to... `map`. Yep that's it. For the most part, you will be writing ``.map(...=>...)``.
 
 The first two courses were mostly a repetition of Programming Languages A, B, C. Walk in the park. Best parts were when Odersky is live-coding in the video instead of slides.
 
-Course 1: taught by Big Papa all-hail Lord Odersky himself (creator of Scala). He's not the best instructor, but he's pretty good. Sometimes he's too abstract and glosses over details too quickly. I had no trouble, but others would. First of all the title *Functional* Programming in Scala is a big fat lie. It's *Programming* in Scala. In fact Weeks 2-3-4 are entirely dedicated to Object Oriented Programming. At this point I was very upset. Scala seemed like a "kitchen sink" language (like C++). They threw everything in there; FP, OOP, mutation... Thankfully the later courses get more functional, less object-oriented. The PAs are: recursion, Functional Sets (lie!), Object oriented sets, Huffman Codes, Anagrams. Very easy.
+***Course 1:*** taught by Big Papa all-hail Lord Odersky himself (creator of Scala). He's not the best instructor, but he's pretty good. Sometimes he's too abstract and glosses over details too quickly. I had no trouble, but others would. First of all the title *Functional* Programming in Scala is a big fat lie. It's *Programming* in Scala. In fact Weeks 2-3-4 are entirely dedicated to Object Oriented Programming. At this point I was very upset. Scala seemed like a kitchen sink language (like C++). They threw everything in there; FP, OOP, mutation... Thankfully the later courses get more functional, less object-oriented. The PAs are: recursion, Functional Sets (lie!), Object oriented sets, Huffman Codes, Anagrams. Very easy.
 
-Course 2: also taught by Odersky. yet another big fat lie with the title *Functional* Design in Scala. NOPE! It's *Design* in Scala, once again most of the course dedicated to Object Oriented Programming. Screw you, old man! This course is an incohesive mess, with topics that don't really relate to each other. The part about the Pouring problem (from Die Hard 3) was nice. There was the mandatory MONADS section. MONAAAADS! Are you scared enough? Never used ever in the rest of the Spec. The PAs are: quickCheck (ripped off from Haskell, you cheap bastards!), a solver for a block-based game called [Bloxorz](https://www.miniclip.com/games/bloxorz/en/), Type directed programming quizzes (see below), and a web-app calculator program.
+***Course 2:*** also taught by Odersky. yet another big fat lie with the title *Functional* Design in Scala. NOPE! It's *Design* in Scala, once again most of the course dedicated to Object Oriented Programming. Screw you, old man! This course is an incohesive mess, with topics that don't really relate to each other. The part about the Pouring problem (from Die Hard 3) was nice. There was the mandatory MONADS section. MONAAAADS! Are you scared enough? Never used ever in the rest of the Spec. The PAs are: `quickCheck` (ripped off from Haskell, you cheap bastards!), a solver for a block-based game called [Bloxorz](https://www.miniclip.com/games/bloxorz/en/), Type directed programming quizzes (see below), and a web-app calculator program.
 
 Apparently there was a part about [Functional Reactive programming](https://www.edx.org/course/programming-reactive-systems) that was removed (why is this not in the Spec?), and replaced with a text-only treatise on Implicits: a super abstract, hard, difficult, vague, boring topic. I skipped the reading. They added some quizzes that require you to "Upgrade to Submit". This was the ONLY payment required in the entire Spec. I didn't, of course. Later I got an email from Coursera, asking me why I didn't finish this course. LOL! I can submit my final project for free, but I have to pay to submit some stupid text-quizzes? What is this? I never used implicits in the Capstone Project anyway! [The Zen of Python](https://en.wikipedia.org/wiki/Zen_of_Python#/media/File:Zen_Of_Python.png) dictates "Explicit is better than implicit." In this case, Scala is wrong! Python is right.
 
-(*Update April 2021:* Looks like I was right! In Scala 3 they are replacing implicits with something else, and also dropping most parentheses and all curly braces entirely, allowing Python style indentation! Odersky himself [admits](https://www.youtube.com/watch?v=Z0w_pITUTyU) it's much much better this way. Moreover Scala 3 is getting more "opinionated", nudging coders towards the "one best way" to do things (just like the Zen of Python says). Finally people are seeing Python was right all along.)
+(*Update April 2021:* Looks like I was right! In Scala 3 they are replacing implicits with something else, and also dropping most parentheses and all curly braces entirely, allowing Python style indentation! Odersky himself [admits](https://www.youtube.com/watch?v=Z0w_pITUTyU) it's much much better this way. Moreover Scala 3 is getting more "opinionated", nudging coders towards the "one best way" to do things, just like the Zen of Python says. Finally people are seeing Python was right all along and Scala is shedding its Java skin completely.)
 
-Course 3 can be summed up as: ".par". Yep, that's pretty much it! You take a normal Scala collection (List, Array, Iterable, Seq, Traversable, whatever) and append ".par" at the end, and it becomes... a PARALLEL collection! YAY! Unlike Intro to Parallel Programming you don't have to write the parallel code yourself. Scala compiler takes care of it. This course is super easy and super short. Even the last PA about Builders and Combiners took me 15 minutes or so. However there is once again some deprecation. The "parallel agnostic" data structures (like "GenSeq" and variants) that are taught in the last weeks are now deprecated in Scala; in fact the assignments even say "don't use them!" So there is some self-contradictory material going on.
+***Course 3*** can be summed up as: `.par`. Yep, that's pretty much it! You take a normal Scala collection (List, Array, Iterable, Seq, Traversable, whatever) and append `.par` at the end, and it becomes... a PARALLEL collection! YAY! Unlike Intro to Parallel Programming you don't have to write the parallel code yourself. Scala compiler takes care of it. No messing around with double pointers! This course is super easy and super short. Even the last PA about Builders and Combiners took me 15 minutes or so. However there is once again some deprecation. The "parallel agnostic" data structures (like `GenSeq` and variants) that are taught in the last weeks are now deprecated in Scala; in fact the assignments even say "don't use them!" So there is some self-contradictory material going on.
 
 A lot of repetition from Udacity's Intro to Parallel Programming: first PA was a blur filter (which I already did in IPP), second PA was about reduce, scan, prefixSum (which I already did in IPP), third PA was about K-Means clustering algorithm in parallel (which I knew from Roughgarden's Algorithms), and fourth PA was about celestial bodies simulation algorithm called Barnes-Hut (this was new).
 
 Short sweet accessible doable course with nice instructors! I like those Slavic accents, man. They provide full lecture code snippets on Github so it was super easy to go through even the longer videos. The assignments have interactive GUIs where you can play around with blurring images and so on. Super nice!
 
-Course 4: This is about Apache Spark, which is considered Scala's only "Killer App" and the main selling point for a lot of people who did this Spec. It delivers on its promise: it's super fast! And this is achieved by... LAZINESS! A concept from the academic world of functional programming making a huge impact in real life! You can process gigabytes-large data in seconds. You can abstract yourself away from threads, parallel computation, distributed networks, clusters, synchronization. 
+***Course 4:*** This is about Apache Spark, which is considered Scala's only "Killer App" and the main selling point for a lot of people who did this Spec. It delivers on its promise: it's super fast! And this is achieved by... LAZINESS! A concept from the academic world of functional programming making a huge impact in real life! You can process gigabytes-large data in seconds. You can abstract yourself away from threads, parallel computation, distributed networks, clusters, synchronization. 
 Although it's a bit disappointing that Scala's big killer app kinda gets reduced to code that looks like a bunch of... SQL queries (later it literally becomes SQL queries!). Boring! The main data structure is called RDD: Resilient Distributed Dataset. It's very similar to SQL tables. You can join them and stuff. RDDs are lazy by default so in order to "retrieve" results from them you have to call .collect() on them at the end.
 
-There are TRANSFORMATIONS (like map, filter etc.) that don't move data around, are LAZY and results are kept in memory as much as possible for max performance (avoiding disk I/O). There are ACTIONS (like groupBy) which are not lazy and shuffle data around, causing disk I/O or worse, network traffic. Third week (no PA) is about more nitty gritty details about performance of parallel code. You gotta watch out for non-lazy ACTIONS that SHUFFLE data across the distributed network (bottleneck due to latency/traffic). This is done by clever data partitioning. Alternative to RDDs there are Dataframes, which use some ninja optimizations from the world of SQL, but lack type safety, and Datasets (bit of both worlds: some optimization, some type safety).
+There are TRANSFORMATIONS (like `map`, `filter` etc.) that don't move data around, are LAZY and results are kept in memory as much as possible for max performance (avoiding disk I/O). There are ACTIONS (like `groupBy`) which are not lazy and shuffle data around, causing disk I/O or worse, network traffic. Third week (no PA) is about more nitty gritty details about performance of parallel code. You gotta watch out for non-lazy ACTIONS that SHUFFLE data across the distributed network (bottleneck due to latency/traffic). This is done by clever data partitioning. Alternative to RDDs there are Dataframes, which use some ninja optimizations from the world of SQL, but lack type safety, and Datasets (bit of both worlds: some optimization, some type safety).
 
 The assignments were easy, I finished them in 15-30 minutes. The lecture videos took WAY LONGER than the PAs. Some videos were over 40 minutes long! I was going insane from boredom under quarantine trying to get through these. One assignment is about programming language popularity ranking through Wikipedia articles. Second assignment is about ranking stuff from StackOverFlow. I don't understand why this was a "two-week long assignment." I finished it in half an hour. It feels like they ran out of stuff to give you. Fourth week (3rd assignment) is about some census data of Americans and their daily activities. This one was messy because it uses Dataframes and Datasets which mix 2 or 3 different APIs so the syntax becomes spaghetti like HTML+JavaScript+SQL. 
 
-Course 5 (Capstone Project): The goal is to create an [interactive web app](https://s3-eu-west-1.amazonaws.com/scala-capstone/index.html) displaying world-wide temperatures from 1975 to 2015. You have to process 1.3GB of CSV file data and convert them to colorful images for different zoom levels. Generating the images takes several days of CPU intensive computing, even with all the parallel tricks. 
+***Course 5 (Capstone Project):*** The goal is to create an [interactive web app](https://s3-eu-west-1.amazonaws.com/scala-capstone/index.html) displaying world-wide temperatures from 1975 to 2015. You have to process 1.3GB of CSV file data and convert them to colorful images for different zoom levels. Generating the images takes several days of CPU intensive computing, even with all the parallel tricks. 
 
 This one has only text descriptions of what you are supposed to do. I found these descriptions sometimes vague and lacking. They leave a lot up to you. I entirely sidestepped the whole "RDD vs Dataset vs Dataframe" debate and just went straight with RDDs. Give you links to some Wikipedia pages to implement many mathematical formulas needed. Lots of them: Inverse Distance Weighting, Great Circle Distance, Linear and Bilinear Interpolation, and so on. The auto-grader has very cryptic, unhelpful messages where I spent several days not knowing what I was doing wrong. I could debug only by random trial-error of changing stuff in my code. The "teaching staff" on Coursera are useless. They have no clue about this course, and don't respond for several days/weeks. DON'T PAY!
 
@@ -540,7 +556,9 @@ It's broken into 6 Milestones. The first 2 were the hardest, the last 2 went sup
 *Spam's recommendation:* If you are into FP, definitely take it! You know what, JUST TAKE IT. An entire specialization that you can audit FOR FREE and even submit your code for grading that you can finish in 1-2 months! Super super awesome. You might wanna wait until it is updated to Scala 3 (probably in 2021) but it works just fine today. You can take it after 1 year, probably even earlier (just after PLABC or the Haskell book).
 
 ### <a name="game"></a> Game Theory 1
+
 https://www.coursera.org/learn/game-theory-1
+
 http://www.game-theory-class.org/
 
 This course is an advanced elective in OSSU. It's a math course, usually taught in Econ departments, and it's supposed to be related to AI, but I could hardly see any connections between this course and computer science. There is *Algorithmic Game Theory* but that is more academic and research focused. There is brief mention of algorithms in this course, but those algorithms are used *to solve the games presented in the course* (rather than *using* games to *do* something in CS).
@@ -553,8 +571,8 @@ The overall mathematical rigor of the course is kept low, and I think that is th
 
 The first 3 weeks are pretty easy and intuitive. Mostly about Nash equilibrium, dominant and dominated strategies (very obvious concepts), maxmin/minmax strategies, and mixed strategies (where you play each move with a probability). There are many examples that tie-in the content nicely to the real world. A study on pigs, and some data on soccer penalty kicks.
 
-Starting with Week 4 the course gets pretty challenging. The definitions get longer and more complicated, and it's harder to intuit. The definitions are for *n*-player games, but thankfully the course sticks to 2 or 3-player games so it's managable. Once you get to practical examples everything just clicks. 
-Week 4 probably has the most difficult concept: subgame perfect equilibria. I still struggled with it on the Final Exam. There is also Imperfect Information games. 
+Starting with Week 4 the course gets pretty challenging. The definitions get longer and more complicated, and it's harder to intuit. The definitions are for *n*-player games, but thankfully the course sticks to 2 or 3-player games so it's manageable. Once you get to practical examples everything just clicks. 
+Week 4 probably has the most difficult concept: sub game perfect equilibria. I still struggled with it on the Final Exam. There is also Imperfect Information games. 
 
 Then on Week 5 there is Repeated Games, fairly easy to understand if you know your geometric series. On Week 6 you look at *Bayesian games* which is an incredibly interesting, mind-boggling concept: there are multiple different games with different payoffs, and you don't necessarily know which game you are playing at which stage. Amazing! It models certain things in real life really well (where each move/turn can change the game you are playing, and the payoffs). Week 7 is about Coalitional Games, another amazing concept. 
 
@@ -575,7 +593,7 @@ This is a brand new original approach spearheaded by a very small group of resea
 
 The instructor is one of the main 3-4 people in the world trying to advance this theory (he wrote and co-wrote the main textbooks on the subject, the course roughly follows one of his books) and get it off the ground. He is excellent in my opinion. You might struggle with his Russian accent. Thankfully Coursera has captions (which are sometimes wrong on the special terminology used).
 
-Lecture slide PDFs are incomplete. Week 2 does not have one, and the other weeks have sections not covered on the PDFs. You'll have to rewatch videos if you need recap during quizzes. Apparently there is some software ([Lattice Miner](https://sourceforge.net/p/lattice-miner/code/HEAD/tree/) and [Concept Explorer](https://sourceforge.net/projects/conexp/)) shown in some of the videos, but the course does not provide any access or links to them. The course has a survey half-way in Week 3, asking for feedback. So the course is still somewhat of a "work in progress" and not perfectly polished (but of overall high quality).
+Lecture slide PDFs are incomplete. Week 2 does not have one, and the other weeks have sections not covered on the PDFs. You'll have to re-watch videos if you need recap during quizzes. Apparently there is some software ([Lattice Miner](https://sourceforge.net/p/lattice-miner/code/HEAD/tree/) and [Concept Explorer](https://sourceforge.net/projects/conexp/)) shown in some of the videos, but the course does not provide any access or links to them. The course has a survey half-way in Week 3, asking for feedback. So the course is still somewhat of a "work in progress" and not perfectly polished (but of overall high quality).
 
 There are no programming assignments, only quizzes. The only things you'll see throughout the course look like [this](https://en.wikipedia.org/wiki/Formal_concept_analysis#Example). You don't work with any traditional datasets or files.
 
