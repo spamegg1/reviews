@@ -9,6 +9,8 @@ Updated September 2020 (Game Theory 1)
 
 Updated November 2020 (Formal Concept Analysis)
 
+Updated May 2021 (Fullstack Open) (in progress)
+
 - [Harvard's CS50 (first half)](#cs50)
 - [CS50, second half, Final Project](#cs50-2)
 - [How to Code 1 & 2](#how-to-code)
@@ -39,6 +41,7 @@ Updated November 2020 (Formal Concept Analysis)
 - [Functional Programming in Scala (5 courses)](#scala)
 - [Game Theory 1](#game)
 - [Formal Concept Analysis](#concept)
+- [Fullstack Open](#fsopen)
 
 ### <a name="cs50"></a> Harvard's CS50 (first half)
 https://cs50.harvard.edu/
@@ -616,3 +619,73 @@ Week 5 goes in a completely different direction from what's been done up until n
 Week 6 is a bit self-defeating but it shows the self-awareness of the theory. The instructor admits that formal concepts are too strict and rigid, and having just one counterexample in your data can violate an implication that holds, say, 99% of the time. Moreover there is the issue of having a lattice that has way too many concepts that it becomes unreadable and impossible to understand. So, statistical and probabilistic methods are introduced to handle "noisy data" (support, confidence, frequency, stability, concept probability) and throw away less relevant data (iceberg lattices). Quizzes are easier but have some really nitty gritty number crunching with some of the probability calculations. I had to write 1-2 lines of Python code to do it right and fast.
 
 *Spam's recommendation:* I would say... don't take this course except for fun and (super hard!) challenge. You'll need a very strong set theory/logic background. I enjoyed it because I have that already. Despite that I had a really hard time. You can learn more mainstream data analysis/mining/classification techniques instead.
+
+### <a name="fsopen"></a> Fullstack Open (still in progress!)
+
+https://fullstackopen.com/en/
+
+*Decided to start writing this while it's fresh in my mind! Consider this the equivalent of an Advanced Application/Final Project in OSSU.*
+
+There are many other popular and highly regarded sources to learn web programming such as [The Odin Project](https://www.theodinproject.com/), [freecodecamp](https://www.freecodecamp.org/) and others; this is not about a comparison between them. I don't have much other experience with web dev. If I had to say something, I'd say those sources are probably more practical and this one is a bit more academic/computer science-y (I'm probably wrong, it's just a guess). Nothing wrong with that.
+
+The course tagline is:
+
+*Learn React, Redux, Node.js, MongoDB, GraphQL and TypeScript in one go! This course will introduce you to modern JavaScript-based web development. The main focus is on building single page applications with ReactJS that use REST APIs built with Node.js.*
+
+This course from University of Helsinki (which gave us Torvalds and Linux) came very highly recommended. UoH is known for many other high quality [MOOCs](https://www.mooc.fi/en). I've always kept putting off learning web dev, but it's a topic I had to eventually face, and you know me, I don't back down from a challenge. There are so many web dev frameworks out there (Angular, Vue, Rails, Django, React, jQuery, PHP, Laravel, Spring, ASP.NET) constantly going in and out of fashion, and I wouldn't know the first thing about any one of them or how to compare them. This course apparently teaches something called the "MERN stack": (M)ongoDB and (E)xpressJS for the backend, (N)odeJS to manage the whole project/packages/dependencies, and (R)eact for the frontend. OK...
+
+The course has a lot of material written by industry sponsors. If you are Finnish you can get university credit from this course, even take an exam, and possibly get a job interview with one of the sponsors (all Finnish companies). Wild!
+
+If you've read my reviews above you know that I hate web programming, and especially JavaScript with a hot passion. I (used to) hate this language so much, I cannot find words to describe it. Then I learned I'm not alone! There seems to be a decades-long universal hatred for this language (and a million kinds of "X to JS" languages and projects). HAHA! YES! Awesome. One of those rare moments that make you feel like you BELONG in the world of programming. It's great when the whole Internet unites to hate something. Warms my cold black heart. I could search the web and simply indulge in my hatred and satisfy it to my heart's content. All good. (Watch out [Brendan Eich](https://en.wikipedia.org/wiki/Brendan_Eich), when I get my time machine...)
+
+Anyway, I started this course very begrudgingly in July 2020, but had to quit after Part 4 due to various things. In March 2021 I tried to resume, but I had become somewhat rusty so I started over. The course gets updated annually, and it got slightly changed in 2021, so now I have quite a bit of experience to comment on it and help you. The course materials are open source and welcoming suggestions and contributions. In fact I proposed some changes to Part 5 and the instructor Matti Luukkainen [merged it](https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/pull/1283) within two hours! Now a few sentences written by yours truly lives in that course, hopefully for a long time!
+
+*Prerequisites:* It [says](https://fullstackopen.com/en/part0/general_info#prerequisites) "Participants are expected to have good programming skills, basic knowledge of web programming and databases, and mastery of basic use of the Git version management system. You are also expected to have  perseverance and a capacity for solving problems and seeking information independently. Previous knowledge of JavaScript or other course topics is not required."
+
+This is mostly true, but I think it's a bit modest. (I think it's primarily written with U of Helsinki CS students in mind.)
+
+In order to adapt to modern JS, you need pretty solid understanding of different programming languages and paradigms, especially functional programming, higher order functions, mutation/immutability, and later thunking and laziness. This is especially important for the frontend modern React. Taking [PLABC](#plabc) is highly recommended, I'd say almost required. 
+
+In the backend, you will need good understanding of asynchronous/parallel execution, futures and promises, race conditions, solid understanding of network programming, how the client/server model works, how HTTP requests work, how data, headers etc. can be carried and so on. You don't need to take a full operating systems and a full networking course, but it wouldn't hurt. 
+
+Since I've already taken [all of](#ostep) [that](https://github.com/ossu/computer-science/issues/690), I'm not sure how well someone would do in this course if they haven't. Maybe there are shorter simpler sources to learn this stuff only to the extent required for web dev, although the overall state of web programmers out there seems to be "not quite understanding these topics, but muddling through somehow." Sad! I think Helsinki U students are probably familiar with all this.
+
+As for databases, Mongo is non-relational and object/document based, so all you need to know is how... this ISN'T relational. It leads to very different data design decisions than relational databases. Much simpler than complicated SQL queries, but also harder to manage and more radical.
+
+*Parts:*
+
+Part 0 is warm-up: teaches you the basics of the web, how browser interacts with a site/server. You'll draw some UML-like diagrams! Also fun historical info about the web, JS and their evolution.
+
+Part 1 is introduction to JS, well, actually, React-flavor of JS. If I understand correctly, "vanilla" JS is much worse to deal with: too many parentheses, curly brackets, semicolons, `function`s and so on. Modern React did away with all that garbage and created a much cleaner and much more pleasant version that translates to vanilla JS. I even started to like JS! Imagine that! It's so full of functional programming ideas and paradigms, it was actually fun! I still hate the stupid curly brackets though (good on Scala to get rid of them in Scala 3).
+
+Part 2 goes deeper into React and states. In order to communicate with the server in the backend we use a fake database with the [`json-server`](https://github.com/typicode/json-server) package, which allows a quick and dirty fake backend when you are focusing on frontend design and coding. There are a LOT of exercises here. You make 3 different apps. One of them uses [Weatherstack API](https://weatherstack.com/) to get real time weather updates, another uses [REST countries API](https://restcountries.eu/#api-endpoints-all) to search/display info on the world's countries. Excellent stuff! Very hard exercises.
+
+Part 3 is all about Express and the backend. This is where things start to get hairy. You have to learn about asynchronous concepts, Futures, Promises, [Callback Hell](http://callbackhell.com/) and Promise Chaining with `.then()`.
+
+Part 4 is about Users, Login, Authentication and backend testing. [Jest]() is used. We learn the ultimate form of promises: `async/await` syntax. The exercises are quite hard, following the lecture, tests keep breaking all the time and need fixing.
+
+Part 5 is about frontend and End-to-End testing. [Cypress](https://www.cypress.io/) is used (instead of something like the very popular but complicated [Selenium](https://www.selenium.dev/)).
+
+Parts 4 and 5 get very complicated and difficult. I had to do Part 4 twice! Because I could not find the asynchronous bugs in my code that was failing the tests, so I had to restart all over and go step by step, repeating the lectures on the exercise application.
+
+***Currently I'm on Part 5, and I've studied a good chunk of Part 7.***
+
+Part 6 is about Redux (what to do when state gets too complicated?). 
+
+Part 7 is about various polishing aspects: routing for the frontend interface (so that users can see URLs change despite the app being a "single page app"), custom React hooks, styling with CSS and webpack, eye candy and so on. At this point you can go off and start creating your own beautiful sites.
+
+Parts 8, 9, 10, 11 can be considered "various independent advanced optional topics."  You can go on your web development journey without them, but they might be "the future." They cover GraphQL (an alternative to REST by Facebook), Typescript (many agree this to be the one true finally stable JS flavor that will stay around for a long time), React Native (developing frontend for mobile apps, Discord is written in it) and Continuous Integration/Delivery (CI/CD) by using Github Actions. These are written by industry sponsors of the course. Great! I'm already familiar with CI/CD from working on [futurecoder](https://github.com/alexmojaki/futurecoder) and some other open source repos. (I haven't taken the rest yet!)
+
+*Assignments:* Exercises are scattered throughout the text. Almost always they are of the "repeat the lecture steps on a slightly different exercise app" kind. Then there are the harder, starred exercises that ask you to go beyond the lecture.
+
+One issue is that sometimes too many exercises are thrown at you all at once, and they are significantly more difficult than what is covered in lecture. I get that this is a teaching technique, but some of the starred (*) exercises are SERIOUSLY hard (especially the ones that involve going out into the wild to read some bad documentation for a package like [morgan](https://github.com/expressjs/morgan) and spend hours to figure out 1 line of code). I had submitted unfinished assignments in 2020 which gave me access to the solutions, which I had saved to my PC, so instead of wasting a lot of time I looked at the solutions.
+
+*Highlights:* One of the best things about the course is how readable it is, and how insanely chock-full of links, documentation and information it is. Basically someone else (the instructor) did the job of perusing the web and finding all the relevant libraries and their relevant documentation pages for you! There is no way in hell I could have found and learned all those libraries by myself in a year or two! I'm sure others would be much more opinionated than me, criticize the choice of certain tools/libraries over others, etc. Not knowing too much about the options out there, I found these choices to be excellent.
+
+Another highlight is the coverage of the history of the web, the evolution of JavaScript and web apps, the V8 Engine, Babel compiler/transpiler and so on. I LOVE HISTORY! I'm always watching some computing [documentary](https://www.imdb.com/title/tt0308808) or interview with [the greats](https://www.youtube.com/watch?v=de2Hsvxaf8M).
+
+*Downsides (these are just minor complaints):* Sometimes the text is too long and difficult to plow through. With the 2021 iteration of the course there are a few dead links and typos, some confusing/inconsistent instructions here and there, but these are very minor. Some details are not clear (like which file you are editing, in what order you are doing certain operations, which command you should run and when, etc.) and the course expects you to be on your toes all the time to keep up with it and figure it out! There are many suggestions in issues and some pull requests to make adjustments to the text. I'm sure it will improve and become less ambiguous.
+
+Another downside (this is slightly bigger than minor) is how we keep bulldozing over code we have previously written, constantly refactoring, breaking tests and functionality. I understand that the teaching technique used here is to do everything step by step before learning "the ultimate version" of how to do something the best/most concise/modern way, but sometimes I wished that we immediately learned the "better" version first instead of spending so much time on code we then later erase. I suppose this will pay off in the long term because of the understanding we gain, instead of "just learning how this one library works."
+
+*Spam's recommendation:* Take it, but it's long and hard! Should take up to 3-4 months of tough perseverance. As I said at the beginning, I can't compare it to others and say "this is the best web dev learning source" but it's pretty damn good. I'd say this is probably "learn web dev the hard way" or something like that. Very academic and quite advanced! You can stop after Part 6 or 7 if all you want is to learn how to make a site in the MERN stack, since the rest of the course devolves into "advanced optional topics."
