@@ -122,6 +122,8 @@ Many learners first focus on some language, or some tool and then are forced to 
 
 If you are not convinced, I can give you a testimonial: I used the fundamental skills and patterns I learned here in my Functional Programming in Scala specialization and Final Project (scroll down).
 
+One more thing to convince you: [Clojure](https://clojure.org/), a Lisp-like programming language that looks exactly like the languages in these courses, was listed as one of the highest paying software jobs of 2019 in a [StackOverFlow survey](https://insights.stackoverflow.com/survey/2019#top-paying-technologies). You hated recursion and immutability huh? Turns out that stuff is super valuable in parallel programming of big data analytics!
+
 ***More updates (May 2021):*** I've spoken to quite a few students who say "I finished these courses but I still don't feel like I understand recursion or I'm making any progress" or "I just want to skip these", and move on to PLAB (below) only to struggle with recursion in SML even more. The 4-course "recursion gauntlet" of the OSSU curriculum (these two courses + PLAB) become a long, unbearable, soul crushing period of feeling like not making any progress.
 
 This is mostly due to poor educational systems that teach little to no math in high school.
