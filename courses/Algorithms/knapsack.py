@@ -4,8 +4,6 @@ Created on Thu Oct 31 08:07:03 2019.
 
 @author: spamegg1
 """
-# import resource
-# import sys
 
 
 def knapsack(array, constraint):
@@ -127,10 +125,14 @@ if __name__ == '__main__':
     assert knapdict(ARRAY, CONSTRAINT, {}) == 2493893
 
     # Challenge data set, 2000 items, 2000000 constraint
-    # UNCOMMENT IMPORTS ABOVE AND THE BELOW ON LINUX ONLY!
+    # UNCOMMENT THE BELOW ON LINUX ONLY!
+    # Takes about 5-6 mins and around 1 GB RAM
+    # import resource
+    # import sys
     # resource.setrlimit(resource.RLIMIT_STACK,
     #                    (resource.RLIM_INFINITY, resource.RLIM_INFINITY))
     # sys.setrecursionlimit(2 ** 17)
     # ARRAY, CONSTRAINT = text_to_knapsack('problem16.7.txt')
     # print(knapdict(ARRAY, CONSTRAINT, {}))  # 4243395 CORRECT!
+    
     print("Tests pass.")
