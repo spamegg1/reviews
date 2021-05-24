@@ -122,7 +122,7 @@ Many learners first focus on some language, or some tool and then are forced to 
 
 If you are not convinced, I can give you a testimonial: I used the fundamental skills and patterns I learned here in my Functional Programming in Scala specialization and Final Project (scroll down).
 
-Also check out my [Fullstack Open review](#fsopen) below. Modern JavaScript is full of functional programming all over. Apparently JS was [inspired by Scheme!](https://www.youtube.com/watch?v=Rj49rmc01Hs) (which is Racket, which is the language used here.)
+Also check out my [Fullstack Open review](#fsopen) below. Modern JavaScript is full of functional programming all over. Especially in [state management](https://fullstackopen.com/en/part6/flux_architecture_and_redux#pure-functions-immutable) of complex web applications. Apparently JS was [inspired by Scheme!](https://www.youtube.com/watch?v=Rj49rmc01Hs) (which is Racket, which is the language used here.)
 
 One more thing to convince you: [Clojure](https://clojure.org/), a Lisp-like programming language that looks exactly like the languages in these courses, was listed as one of the highest paying software jobs of 2019 in a [StackOverFlow survey](https://insights.stackoverflow.com/survey/2019#top-paying-technologies). You hated recursion and immutability huh? Turns out that stuff is super valuable in parallel programming of big data analytics!
 
