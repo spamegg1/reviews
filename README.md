@@ -603,7 +603,7 @@ Then on Week 5 there is Repeated Games, fairly easy to understand if you know yo
 
 There are practice quizzes (called *in video quizzes*) each week to prepare you for the real quiz (called *problem set*). A 70% score is needed to pass. You can attempt the real quiz 3 times every 8 hours. Other than that there is no limitation. The questions are about 2 or 3 player games (there are a few about 4-5 player games). You gotta read carefully, take your time, calculate, reason, draw diagrams and tables with pencil and paper... and you should be fine. They are very doable!
 
-There is also a [second course](http://www.game-theory-class.org/game-theory-II.html) on Coursera. Looked at its contents. Still don't see its relevance to CS.
+There is also a [second course](http://www.game-theory-class.org/game-theory-II.html) on Coursera. Looked at its contents. Still don't see its relevance to CS. Apparently it's used in open world game design, and some crypto currency security.
 
 *Spam's recommendation: If you are into math, econ, games and cool fun stuff, definitely take it! It's a great course. It will make you look at everything in life differently. Otherwise you might want to take some other electives that are more relevant to CS.*
 
