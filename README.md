@@ -128,7 +128,7 @@ One more thing to convince you: [Clojure](https://clojure.org/), a Lisp-like pro
 
 ***More updates (May 2021):*** I've spoken to quite a few students who say "I finished these courses but I still don't feel like I understand recursion or I'm making any progress" or "I just want to skip these", and move on to PLAB (below) only to struggle with recursion in SML even more. The 4-course "recursion gauntlet" of the OSSU curriculum (these two courses + PLAB) become a long, unbearable, soul crushing period of feeling like not making any progress.
 
-This is mostly due to poor educational systems that teach little to no math in high school.
+This is mostly due to [poor educational systems](https://www.persuasion.community/p/why-america-is-flunking-math-education) that teach little to no math in high school, even in wealthy industrialized nations.
 
 I'm doing a deep dive into "the recursion problem", reading some educational research on the subject. It turns out to be a universal learning problem. My gut feeling says that students never learned mathematical induction. I've written hundreds of induction proofs in a crappy underfunded public high school that didn't even have heating in the winter or clean toilets. We were freezing and had shitty toilets, but we learned our induction super solid. I even learned the [full cubic formula!](https://www.youtube.com/watch?v=N-KXStupwsc) They certainly don't teach 'em like they used to anymore. Recursion is just induction in code form. 
 
