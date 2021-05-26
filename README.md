@@ -9,7 +9,7 @@ Updated September 2020 (Game Theory 1)
 
 Updated November 2020 (Formal Concept Analysis)
 
-Updated May 2021 (Fullstack Open) (in progress)
+Updated May 2021 (Fullstack Open)
 
 - [Harvard's CS50 (first half)](#cs50)
 - [CS50, second half, Final Project](#cs50-2)
