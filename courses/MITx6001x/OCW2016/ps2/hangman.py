@@ -194,8 +194,13 @@ def match_with_gaps(my_word, other_word):
     """
     # FILL IN YOUR CODE HERE AND DELETE "pass"
     my_word_no_spaces = ''.join(my_word.split(' '))
-    if len(my_word_no_spaces) != len(other_word):
+    length = len(my_word_no_spaces)
+    if length != len(other_word):
         return False
+    for i in range(length):
+        if my_word_no_spaces[i] == '_':
+            if other_word[i] in my_word:
+                return False
     return all(pair[0] == '_' or pair[0] == pair[1]
                for pair in zip(my_word_no_spaces, other_word))
 
