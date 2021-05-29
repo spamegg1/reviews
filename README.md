@@ -9,7 +9,7 @@ Updated September 2020 (Game Theory 1)
 
 Updated November 2020 (Formal Concept Analysis)
 
-Updated May 2021 (Fullstack Open)
+Updated May 2021 (Fullstack Open, Intro to Logic)
 
 - [Harvard's CS50 (first half)](#cs50)
 - [CS50, second half, Final Project](#cs50-2)
@@ -42,6 +42,7 @@ Updated May 2021 (Fullstack Open)
 - [Game Theory 1](#game)
 - [Formal Concept Analysis](#concept)
 - [Fullstack Open](#fsopen)
+- [Introduction to Logic](#logic)
 
 ### <a name="cs50"></a> Harvard's CS50 (first half)
 https://cs50.harvard.edu/
@@ -715,3 +716,27 @@ Another highlight is the coverage of the history of the web, the evolution of Ja
 Another downside is how we keep bulldozing over code we have previously written, constantly refactoring, breaking tests and functionality. I understand that the teaching technique used here is to do everything step by step before learning "the ultimate version" of how to do something the best/most concise/modern way, but sometimes I wished that we immediately learned the "better" version first instead of spending so much time on code we then later erase. I suppose this will pay off in the long term because of the understanding we gain, instead of "just learning how this one library works." Sometimes it's the other way around: we learn the better/modern/right way to do something, then learn the old/worse/complicated way to do it for backwards mental compatibility and maintaining older projects.
 
 *Spam's recommendation:* Take it, but it's long and hard! Should take up to 3-4 months of tough perseverance. As I said at the beginning, I can't compare it to others and say "this is the best web dev learning source" but it's pretty damn good. I'd say this is probably "learn web dev the hard way" or something like that. Very academic and quite advanced! You can stop after Part 7 if all you want is to learn how to make a site in the MERN stack, since the rest of the course devolves into "advanced optional topics."
+
+### <a name="logic"></a> Introduction to Logic
+
+https://www.coursera.org/learn/logic-introduction/
+
+Let me start by saying that I have a PhD in Mathematical Logic. So I can do this course in my sleep (and on many occasions I did). I took this course to help out some others who were having trouble. I finished in 3-4 days.
+
+The ["textbook"](http://intrologic.stanford.edu/intrologic/public/textbook.php) for this course is garbage (but it's free!). It pains me to say that to my fellow Logician colleagues. It's a bunch of "hypercards" (slides) put together. The book clocks under some 150 pages but it's like they took a 600 page book and threw away all the explanations, definitions, theorems, proofs, exercises and did a really crappy Cliff Notes version of it. BONE DRY. Not only that, but there is a feeling that they are being punished for every extra word, so the explanations are deliberately terse, vague and confusing. There is no way you can understand what's going on by reading the book in the later sections, unless you already know Logic. This is FORMAL SYMBOLIC MATHEMATICAL Logic, not "general" Logic.
+
+The course has a really weird system: from Coursera, you click on links to go to an "external tool" which is on Stanford's website (it doesn't work with HTTPS, this should already be a warning sign that this is an outdated, unmaintained course). You finish the assignment there, click on "Submit" then you have to refresh the Coursera page to see the check-mark. It does work, but weird. There are no videos (oh wait I think there was ONE video). Just slides, oh sorry, I meant HYPERCARDS, to read. I was hoping the "textbook" would be an expanded version of the hypercards with more detailed explanations. Nope, the hypercards and the textbook are exactly the same.
+
+It starts out innocently enough. First few weeks are simple, true/false, and/or, truth table, possible worlds, baby cute stuff. There are even some fun Minesweeper, Sudoku, and few other interactive logic games. Nice. Then some Propositional Logic and Resolution (without quantifiers). Eventually though it gets into some hardcore stuff like first-order, quantified versions of Herbrand Logic, Resolution, Unification, the axiomatization of Peano Arithmetic, even touching on Gödel Completeness etc. Most of this stuff is the basis of Prolog, so if you want to do that (or if you have already done that) then this will be very useful (or easy). These are certainly advanced topics and they require much more in-depth, detailed treatment. Logic is one of those strange subjects where it's difficult to separate undergraduate / graduate level, or introductory / advanced level material. They don't do a good job of separating that here. Honestly I don't believe this graduate level material can be learned purely online on your own. (How the hell are they teaching this stuff to high schoolers? Californians must be *on* something.)
+
+Many graded assignments are multiple-choice with infinitely many retries. They give you feedback, so by simply going through all the options you can get 100% without understanding why. The course assumes that you are an honorable fella and you will not submit a 100% without understanding why it's correct. Then there are proof assignments where you can't do that. They use Stanford's own Fitch proof system. It uses a natural deduction calculus. But it's very unintuitive and difficult to use, and you'll probably have to do some web searches to be able to use it (the provided instructions are useless).
+
+Some of the Fitch proof exercises were insanely hard even for me. I found this to be a fun challenge, spent a few hours, pulled out some pencil and paper and went to town on them. Yes, I can do them, but there is no way in hell that some random person on the Internet who is learning Logic for the first time could possibly do some of these exercises. The longest one takes 54 steps! There is another one near the end of the course (a double nested quantifier induction proof) that's shorter (around 36 steps) but far more difficult! Took me a few hours and several pages of paper.
+
+Last week has some (first-order, quantified) Resolution proof exercises, but the Resolution tool is BROKEN. It doesn't work. The buttons don't do anything and the instructions are useless. It's possible to cheat and simply enter the GOAL you are trying to prove as a PREMISE and the tool says you finished the proof! LOL. So you can get full credit, like that means anything. I was able to find a bug in the tool that allowed me to do legitimate proofs. (For those who are curious I took screenshots.) There are posts on Coursera discussion forums dating back 4 years (this was written May 2021) reporting these issues but nobody fixed them.
+
+It feels like some academics got a very small research grant to create an online course and did the bare minimum. I'm sure they did a good job teaching this *in person,* but this online course is like a bunch of leftovers from their course that they were forced to produce in a very short amount of time, dumped onto the Internet. It really saddens me because it will turn people off Logic and give Logic a bad name. They claim they wanted to make formal logic easy and gentle, accessible to a wider audience, but all they did is throw out necessary details to make it *seem* "lightweight". It goes to show you that even giants like Stanford can produce low quality. I don't understand the high rating on Coursera (must be a strong case of self-selection bias or maybe sunken cost fallacy if they paid for this). 
+
+They have a whole [Logic program](http://intrologic.stanford.edu/intrologic/homepage/index.html) going on in Stanford and they prepared the "textbook" for that, but the program is a bunch of Summer/Winter camps, on-site classes or adoptions by other schools where you would have profs and TAs and get help in person. It's admirable to see they are spreading Logic, emphasizing its importance and even trying to reach out to high school students, but some of this material is borderline graduate level and inappropriate. It would be much more appropriate to do some basic number theory proofs.
+
+*Spam's recommendation:* Don't take this. Or rather, just take the earlier sections (first 4-5 chapters maybe?). It's a free, "as-is" resource you can use, if you are very smart, willing to find a proper, actual textbook, do lots of Internet searches and learn on your own, somehow making up for the absence of a prof and TA. If you are super strong already and want to do Prolog, then take it. It overlaps with the Prolog course to a great extent (I actually thought they were written by the same people at first!) Definitely take *some* Logic (it's the best thing in life) but unfortunately I do not know of a good undergraduate, entry-level alternative. I only learned it at the graduate level.
