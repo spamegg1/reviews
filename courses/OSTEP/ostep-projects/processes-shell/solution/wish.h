@@ -1,23 +1,40 @@
-#ifndef WISH_H
-#define WISH_H
+// Thanks to @palladian on Discord
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <ctype.h>
-#include <unistd.h>
-#include <sys/wait.h>
-#include <sys/stat.h>
-#include <fcntl.h>
+// these two are for the C preprocessor: if WISH_H is not defined, define it.
+// the convention is to just use the name of your header file like that,
+// so it's convention to avoid defining any macros that end in _H to
+// avoid conflicts with any other header files.
+// for example, if you did #define STRING_H,
+// then you wouldn't be able to use any of the string functions
+#ifndef WISH_H  // "if not defined", should be closed with #endif at the end
+#define WISH_H  // defines WISH_H, without setting it to any value, removes it from other code
 
-#define MAXARGS 128
-#define MAXPATHS 128
-#define PATHLEN 128
+#include <stdlib.h>   // for memory allocation and EXIT_SUCCESS/FAILURE
+#include <stdio.h>    // for file handling and printf
+#include <string.h>   // for getline strsep strcpy strncpy strncat strcmp
+#include <ctype.h>    // for characters, isspace()
+#include <unistd.h>   // for system calls fork execv chdir close access write
+#include <sys/wait.h> // for system call wait()
+#include <sys/stat.h> // for system call open()
+#include <fcntl.h>    // for system call write(), open()
 
+#define MAXARGS 128   // maximum number of arguments for our wish shell
+#define MAXPATHS 128  // maximum number of paths for our wish shell
+#define PATHLEN 128   // maximum length for a path for our wish shell
+
+// enum is a type constructor, It creates a new type out of integer values,
+// that always start from 0 and keep increasing by 1.
+// Now we can simply use QUIT, CONTINUE in our code without having to remember
+// that QUIT is 0, CONTINUE is 1 etc.
+// Similar to macros like: #define QUIT 0 #define CONTINUE 1
+// typedef creates a "type alias", so the type
+// enum { QUIT, CONTINUE } gets abbreviated as cmdresult.
+// without the type alias, we could do: enum cmdresult {QUIT, CONTINUE};
+// but we'd have to use "enum cmdresult" as the type every time.
 typedef enum {
-	EXIT,
-	CONTINUE,
-} cmdresult;
+    QUIT,       // this is 0
+    CONTINUE,   // this is 1
+} cmdresult;    // new name of the type
 
 
 cmdresult parallel_cmds(char *buf, char ***path);
@@ -87,7 +104,11 @@ ssize_t wish_error(void);
 void strip(char **str);
 /* strip: removes all leading and trailing whitespace from the string pointed
  * to by str.
+ * https://stackoverflow.com/questions/122616/how-do-i-trim-leading-trailing-whitespace-in-a-standard-way#122721
  */
 
+void handle_exit(FILE *infile, char *line, char **path, int exit_code);
+/* exit/cleanup code that is repeated many times, refactored
+ */
 
 #endif

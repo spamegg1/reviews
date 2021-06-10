@@ -1,6 +1,6 @@
 'Tests for ps4a'
-from ps4a import get_word_score, get_freq_dict, update_hand, is_valid_word
-from ps4a import load_words
+from ps4a import getWordScore, getFreqDict, updateHand, isValidWord
+from ps4a import loadWords
 
 #
 # Test code
@@ -22,7 +22,7 @@ def test_get_word_score():
              ("fork", 4): 94}
     for key in words:
         (word, num) = key
-        score = get_word_score(word, num)
+        score = getWordScore(word, num)
         if score != words[(word, num)]:
             print("FAILURE: test_get_word_score()")
             print("\tExpected", words[(word, num)], "points but got '"
@@ -43,7 +43,7 @@ def test_update_hand():
     hand_copy = hand_orig.copy()
     word = "quail"
 
-    hand2 = update_hand(hand_copy, word)
+    hand2 = updateHand(hand_copy, word)
     expected_hand1 = {'l': 1, 'm': 1}
     expected_hand2 = {'a': 0, 'q': 0, 'l': 1, 'm': 1, 'u': 0, 'i': 0}
     if hand2 not in (expected_hand1, expected_hand2):
@@ -67,7 +67,7 @@ def test_update_hand():
     hand_copy = hand_orig.copy()
     word = "evil"
 
-    hand2 = update_hand(hand_copy, word)
+    hand2 = updateHand(hand_copy, word)
     expected_hand1 = {'v': 1, 'n': 1, 'l': 1}
     expected_hand2 = {'e': 0, 'v': 1, 'n': 1, 'i': 0, 'l': 1}
     if hand2 not in (expected_hand1, expected_hand2):
@@ -92,7 +92,7 @@ def test_update_hand():
     hand_copy = hand_orig.copy()
     word = "hello"
 
-    hand2 = update_hand(hand_copy, word)
+    hand2 = updateHand(hand_copy, word)
     expected_hand1 = {}
     expected_hand2 = {'h': 0, 'e': 0, 'l': 0, 'o': 0}
     if hand2 not in (expected_hand1, expected_hand2):
@@ -124,10 +124,10 @@ def test_is_valid_word(word_list):
     failure = False
     # test 1
     word = "hello"
-    hand_orig = get_freq_dict(word)
+    hand_orig = getFreqDict(word)
     hand_copy = hand_orig.copy()
 
-    if not is_valid_word(word, hand_copy, word_list):
+    if not isValidWord(word, hand_copy, word_list):
         print("FAILURE: test_is_valid_word()")
         print("\tExpected True, but got False for word: '" + word
               + "' and hand:", hand_orig)
@@ -135,7 +135,7 @@ def test_is_valid_word(word_list):
         failure = True
 
     # Test a second time to see if word_list or hand has been modified
-    if not is_valid_word(word, hand_copy, word_list):
+    if not isValidWord(word, hand_copy, word_list):
         print("FAILURE: test_is_valid_word()")
 
         if hand_copy != hand_orig:
@@ -160,7 +160,7 @@ def test_is_valid_word(word_list):
     hand = {'r': 1, 'a': 3, 'p': 2, 'e': 1, 't': 1, 'u': 1}
     word = "rapture"
 
-    if is_valid_word(word, hand, word_list):
+    if isValidWord(word, hand, word_list):
         print("FAILURE: test_is_valid_word()")
         print("\tExpected False, but got True for word: '"
               + word + "' and hand:", hand)
@@ -171,7 +171,7 @@ def test_is_valid_word(word_list):
     hand = {'n': 1, 'h': 1, 'o': 1, 'y': 1, 'd': 1, 'w': 1, 'e': 2}
     word = "honey"
 
-    if not is_valid_word(word, hand, word_list):
+    if not isValidWord(word, hand, word_list):
         print("FAILURE: test_is_valid_word()")
         print("\tExpected True, but got False for word: '"
               + word + "' and hand:", hand)
@@ -182,7 +182,7 @@ def test_is_valid_word(word_list):
     hand = {'r': 1, 'a': 3, 'p': 2, 't': 1, 'u': 2}
     word = "honey"
 
-    if is_valid_word(word, hand, word_list):
+    if isValidWord(word, hand, word_list):
         print("FAILURE: test_is_valid_word()")
         print("\tExpected False, but got True for word: '"
               + word + "' and hand:", hand)
@@ -193,7 +193,7 @@ def test_is_valid_word(word_list):
     hand = {'e': 1, 'v': 2, 'n': 1, 'i': 1, 'l': 2}
     word = "evil"
 
-    if not is_valid_word(word, hand, word_list):
+    if not isValidWord(word, hand, word_list):
         print("FAILURE: test_is_valid_word()")
         print("\tExpected True, but got False for word: '"
               + word + "' and hand:", hand)
@@ -203,7 +203,7 @@ def test_is_valid_word(word_list):
     # test 6
     word = "even"
 
-    if is_valid_word(word, hand, word_list):
+    if isValidWord(word, hand, word_list):
         print("FAILURE: test_is_valid_word()")
         print("\tExpected False, but got True for word: '"
               + word + "' and hand:", hand)
@@ -216,7 +216,7 @@ def test_is_valid_word(word_list):
         print("SUCCESS: test_is_valid_word()")
 
 
-WORD_LIST = load_words()
+WORD_LIST = loadWords()
 print("----------------------------------------------------------------------")
 print("Testing get_word_score...")
 test_get_word_score()
