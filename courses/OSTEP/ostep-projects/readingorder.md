@@ -1,3 +1,5 @@
+### all thanks to @palladian on Discord
+
 * Before starting the course: initial-utilities (aka, project 1a) and initial-reverse (not assigned in class)  
 * Chapter 5: processes-shell (project 2a) 
 * Chapter 6: initial-xv6 (project 1b, but only worry about test 1) 
