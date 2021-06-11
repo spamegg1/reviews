@@ -1,7 +1,5 @@
 ## Project 2A
-
 ### all thanks to @palladian on Discord
-
 - [x] Interactive mode
 - [x] Batch mode
 - [x] exit
@@ -36,7 +34,8 @@
 
 * When you use `strsep()`, make sure you keep a copy of the original pointer to the string around so that you can free it later, because `strsep()` will modify the pointer, so if you free that later on, you'll corrupt the page table.
 
-* After calling `strsep(&buf, delim)`, check whether `buf` is `NULL` before dereferencing it. 
-* General C coding practice: if you allocate memory for a data structure inside a function, you should free it in the same function. If you allocate memory in a dedicated `create_xxx` function, you should have a corresponding `destroy_xxx` function. That way, you always allocate and free memory at the same function depth, which makes it easier to avoid memory errors. 
-* After every call to `malloc`, `calloc`, or `realloc`, check whether the result is `NULL`. 
+* After calling `strsep(&buf, delim)`, check whether `buf` is `NULL` before dereferencing it.
+* General C coding practice: if you allocate memory for a data structure inside a function, you should free it in the same function. If you allocate memory in a dedicated `create_xxx` function, you should have a corresponding `destroy_xxx` function. That way, you always allocate and free memory at the same function depth, which makes it easier to avoid memory errors.
+* After every call to `malloc`, `calloc`, or `realloc`, check whether the result is `NULL`.
 * Use `calloc` instead of `malloc` if you're creating an array of pointers to avoid creating pointers to garbage values.
+* in `update_path` I had to fix that issue where most of the tests do `path /bin /usr/bin`, but one of them did `path tests`. So i just assumed that if your path starts with a slash, it's an absolute path and you should copy it in as is; if it doesn't, it's a relative path and you should add a ./ at the beginning.

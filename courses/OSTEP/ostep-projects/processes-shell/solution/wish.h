@@ -20,7 +20,7 @@
 
 #define MAXARGS 128   // maximum number of arguments for our wish shell
 #define MAXPATHS 128  // maximum number of paths for our wish shell
-#define PATHLEN 128   // maximum length for a path for our wish shell
+#define PATHLEN 128   // maximum length of a path for our wish shell
 
 // enum is a type constructor, It creates a new type out of integer values,
 // that always start from 0 and keep increasing by 1.

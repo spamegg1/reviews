@@ -1,8 +1,8 @@
-// Thanks to @palladian on Discord
+// Thanks to @palladian on Discord for solution, I added comments
 #include "wish.h"
 
 
-// main function that runs the shell.
+// main function that runs the wish shell.
 int main(int argc, char *argv[])
 {
     // If batch mode, set input file; otherwise read from stdin
@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
             }
         }
 
-        else if (feof(infile)) {  // Reached EOF
+        else if (feof(infile)) {                                  // Reached EOF
             handle_exit(infile, line, path, EXIT_SUCCESS);      // defined below
         }
 
@@ -79,7 +79,7 @@ cmdresult parallel_cmds(char *line, char ***path)         // cmdresult is 0 or 1
 {
     char *cmd = strsep(&line, "&");               // Check for parallel commands
     if (line == NULL) {                 // If none found, process single command
-        return get_cmd(cmd, path);
+        return get_cmd(cmd, path);                     // process single command
     }
 
     cmdresult res = CONTINUE;    // Otherwise, fork to execute the first command
@@ -105,86 +105,84 @@ cmdresult parallel_cmds(char *line, char ***path)         // cmdresult is 0 or 1
 
 
 cmdresult get_cmd(char *buf, char ***path) {
-    if (buf == NULL) {                                 // Check for empty buffer
-        return CONTINUE;
+    // buf can come from a strsep() in parallel_cmd so it could be NULL
+    // example: buf = '   ls     -a          -l   \n'
+    if (buf == NULL) {     // Check for empty buffer (strip will dereference it)
+        return CONTINUE;                              // move on to next command
     }
 
-    strip(&buf);
-    if (*buf == '\0')
-        return CONTINUE;
+    strip(&buf);           // remove leading and trailing whitespace and newline
+    if (*buf == '\0')                                // empty string, no command
+        return CONTINUE;                              // move on to next command
 
-    // Separate command from arguments and remove trailing newline
-    char *cmd = strsep(&buf, " \t\n\r");
-    if (buf != NULL && buf[strlen(buf) - 1] == '\n') {
-        buf[strlen(buf) - 1] = '\0';
+    char *cmd = strsep(&buf, " \t\n\r");      // Separate command from arguments
+    // example: now cmd = 'ls' and buf becomes = '     -a          -l'
+
+    // example: buf = "exit\n" (OK) or "exit       5\n" (should raise error)
+    if (strcmp(cmd, "exit") == 0) {                       // Handle exit command
+        if (buf != NULL) {     // exit should not be followed by another command
+            wish_error();
+        }
+        return QUIT;                                    // quit after exit error
     }
 
-    // Handle exit command
-    if (strcmp(cmd, "exit") == 0) {
-        if (buf != NULL && *buf != '\0') {
-            wish_error();
+    if (strcmp(cmd, "cd") == 0) {                           // Handle cd command
+        if (chdir(buf) != 0) {     // try to change directory to the path in buf
+            wish_error();       // chdir returns 0 on success, nonzero otherwise
         }
-        return QUIT;
+        return CONTINUE;                              // move on to next command
     }
-    // Handle cd command
-    if (strcmp(cmd, "cd") == 0) {
-        if (chdir(buf) != 0) {
-            wish_error();
+
+    if (strcmp(cmd, "path") == 0) {                       // Handle path command
+        *path = update_path(*path, buf);               // try to update the path
+        if (*path == NULL) {            // update_path uses realloc. if it fails
+            wish_error();                               // report error and quit
+            return QUIT;   // why not exit(1)? we can only free memory in main()
         }
-        return CONTINUE;
-    }
-    // Handle path command
-    if (strcmp(cmd, "path") == 0) {
-        *path = update_path(*path, buf);
-        if (*path == NULL) {
-            wish_error();
-            return QUIT;
-        }
-        return CONTINUE;
+        return CONTINUE;                    // otherwise move on to next command
     }
 
     // Check for a redirect; redir will be either the output filename or NULL;
-    // line will be everything before '>'
-    char *redir = process_redirect(&buf);
+    char *redir = process_redirect(&buf);  // line will be everything before '>'
 
-    char **argv = create_argv(cmd, buf, *path);     // Create the argument array
-    if (argv == NULL) {
-        wish_error();
-        return QUIT;
+    char **argv = create_argv(cmd, buf, *path);    // Create arg array for execv
+    if (argv == NULL) {                      // if argument array creation fails
+        wish_error();                                            // report error
+        return QUIT;                                                 // and quit
     }
 
-    run_cmd(argv, redir);                                     // Run the command
-    destroy_argv(argv);
-    return CONTINUE;
+    run_cmd(argv, redir);    // Run the command with the given arguments (below)
+    destroy_argv(argv);                                    // clean up arguments
+    return CONTINUE;                                  // move on to next command
 }
 
 
 void run_cmd(char **argv, char *redir)
 {
-    int rc = fork();
-    if (rc < 0) {
-        // Fork failed
-        destroy_argv(argv);
-        wish_error();
+    int rc = fork();           // create child process to run command with execv
+    if (rc < 0) {                               // Fork failed, no child created
+        destroy_argv(argv);                                // clean up arguments
+        wish_error();                                            // report error
+    }
 
-    } else if (rc == 0) {
-        // Child: check for redirection and set it up
+    else if (rc == 0) {            // Child: check for redirection and set it up
         if (redir != NULL) {
-            if (redir[0] == '\0') {
-                wish_error();
-                return;
+            if (redir[0] == '\0') {              // if redir is the empty string
+                wish_error();                                    // report error
+                return;                                                  // exit
             }
-            close(STDOUT_FILENO);
-            open(redir, O_CREAT|O_WRONLY|O_TRUNC, S_IRWXU);
+
+            close(STDOUT_FILENO);         // redirect output: close stdout first
+            open(redir, O_CREAT|O_WRONLY|O_TRUNC, S_IRWXU);        // open redir
         }
-        execv(argv[0], argv);
+        execv(argv[0], argv);            // execute command with given arguments
 
         // execv() doesn't return, so this executes only if execv fails
         wish_error();
-        exit(EXIT_SUCCESS);
+        exit(EXIT_SUCCESS);                               // satisfy the tests:)
+    }
 
-    } else {
-        // Parent: wait for the child process to terminate
+    else {                    // Parent: wait for the child process to terminate
         wait(NULL);
     }
 }
@@ -268,16 +266,17 @@ void destroy_path(char **path) {
 
 
 char **update_path(char **path, char *buf) {
-    // Replace path array with new one
-    destroy_path(path);
-    char **new_path = calloc(MAXPATHS, sizeof(char *));
+    destroy_path(path);                       // Replace path array with new one
+    char **new_path = calloc(MAXPATHS, sizeof(char *));               // new one
     if (new_path == NULL) {
         return NULL;
     }
-    // Add paths from shell arguments to path array
-    char *tmp;
-    for (size_t i = 0; i < MAXPATHS; i++) {
-        tmp = strsep(&buf, " \t\n\r");
+
+    char *tmp;                   // Add paths from shell arguments to path array
+    size_t i = 0;
+    while (tmp != NULL && i < MAXPATHS) {                   // go through tokens
+        tmp = strsep(&buf, " \t\n\r");             // get next token from buffer
+
         if (tmp != NULL) {
             // Allocate memory for entry and copy path into it
             new_path[i] = calloc(PATHLEN + 1, 1);
@@ -285,16 +284,19 @@ char **update_path(char **path, char *buf) {
                 destroy_path(new_path);
                 return NULL;
             }
-            if (tmp[0] != '/') {
-                // Relative path
+
+            if (tmp[0] != '/') {                                // Relative path
                 strcpy(new_path[i], "./");
                 strncat(new_path[i], tmp, PATHLEN - 3);
-            } else {
-                // Absolute path
+            }
+
+            else {                                              // Absolute path
                 strncpy(new_path[i], tmp, PATHLEN - 1);
             }
         }
+        i++;
     }
+
     return new_path;
 }
 
@@ -327,11 +329,9 @@ ssize_t wish_error(void) {
 
 
 void strip(char **str) {
-    // Remove trailing whitespace
-    char *end = *str + strlen(*str) - 1;
-    while (end > *str && isspace(*end)) end--;
+    char *end = *str + strlen(*str) - 1;           // Remove trailing whitespace
+    while (end > *str && isspace(*end)) end--;// isspace counts \n as whitespace
     end[1] = '\0';
 
-    // Remove leading whitespace
-    while (isspace(**str)) (*str)++;
+    while (isspace(**str)) (*str)++;                // Remove leading whitespace
 }
