@@ -1,5 +1,16 @@
-
 # Intro To xv6 Virtual Memory
+
+### WARNING:
+
+The project doesn't match the currently available xv6 source code, which already has this project implemented in it!
+
+@palladian on Discord tracked down a different xv6 source from the Github page of a U of Wisconsin student. We had to edit the `Makefile` to find the QEMU executable correctly. We added `null.c` to the `user` folder (also edited `makefile.mk` there), which demonstrates the lack of memory safety.
+
+Start with the code in `start.zip`. Extract it and run `make clean` and `make qemu-nox`. Then inside the xv6 system run `null` to see the lack of safety! If you want to compare the results of `null` with the actual machine code, you can run `objdump -d user/null.o`.
+
+You might have to manually run `make clean` and `make qemu-nox` every time you make a change to the code.
+
+## Now, the Project...
 
 In this project, you'll be changing xv6 to support a feature virtually
 every modern OS does: causing an exception to occur when your program
@@ -58,7 +69,7 @@ Calling `mprotect()` should change the protection bits of the page range
 starting at `addr` and of `len` pages to be read only. Thus, the program could
 still read the pages in this range after `mprotect()` finishes, but a write to
 this region should cause a trap (and thus kill the process). The `munprotect()`
-call does the opposite: sets the region back to both readable and writeable.
+call does the opposite: sets the region back to both readable and write-able.
 
 Also required: the page protections should be inherited on fork(). Thus, if
 a process has mprotected some of its pages, when the process calls fork, the
@@ -83,7 +94,6 @@ user code tries to (a) access a null pointer or (b) overwrite an mprotected
 region of memory. In both cases, xv6 should trap and kill the process (this
 will happen without too much trouble on your part, if you do the project in a
 sensible way).
-
 
 
 
