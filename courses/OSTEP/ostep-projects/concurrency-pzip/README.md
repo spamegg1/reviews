@@ -1,3 +1,8 @@
+### Notes:
+
+Thanks to Shubham Aggarwal https://github.com/Saggarwal9/Parallel-ZIP for the solution. I cleaned up the code a bit for readability.
+
+There were no tests provided for this project. So we are using the `wzip` tests for correctness. So you can use `./test-pzip.sh`. Currently I don't have tests for performance.
 
 # Parallel Zip
 
