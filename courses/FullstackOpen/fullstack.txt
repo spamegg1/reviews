@@ -1,0 +1,200 @@
+FULLSTACK:
+- npx:
+    npx create-react-app unicafe
+    cd unicafe
+    rm -rf .git
+    npx json-server --port 3001 --watch db.json
+    npx create-react-app countries
+    cd countries
+    npm i axios
+    npm start
+    npx static-server
+    npx rome init
+
+- nvm:
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+    command -v nvm
+    nvm install node
+    nvm install 6.14.4
+    etc.
+
+- npm:
+    npm init
+    npm i express --save
+    npm i --save-dev nodemon
+    npm i --save-dev morgan
+    npm i cors --save
+    npm i mongoose --save
+    npm i dotenv --save
+    npm i eslint --save-dev
+    npm i --save-dev jest
+    npm i --save-dev supertest
+    npm i --save mongoose-unique-validator
+    npm i cross-env
+    npm i express-async-errors --save
+    npm i bcrypt --save
+    npm i jsonwebtoken --save
+    npm i prop-types
+    npm i --save-dev eslint-plugin-jest
+    npm i --save-dev @testing-library/react @testing-library/jest-dom
+    npm run dev
+    npm run server
+    npm run build
+    npm run lint
+    npm run test
+    npm test -- tests/note_api.test.js
+    npm test -- -t 'a specific note is within the returned notes'
+    npm test -- -t 'notes'
+    npm i -g serve
+    serve -s build
+    node mongo.js password
+    CI=true npm test
+    CI=true npm test -- --coverage
+    npm i --save-dev cypress
+    npm i eslint-plugin-cypress --save-dev
+    npm run start:test
+    npm start
+    npm run cypress:open
+    npm i --save-dev deep-freeze
+    npm i redux
+    npm i react-redux
+    npm i --save-dev redux-devtools-extension
+    npm i react-router
+    npm i react-router-dom
+    npm i react-bootstrap
+    npm i @material-ui/core
+    npm i @material-ui/lab
+    npm i --save styled-components
+    npm i --save-dev webpack webpack-cli
+    npm i @babel/core babel-loader @babel/preset-react --save-dev
+    npm i @babel/polyfill
+    npm i @babel/preset-env --save-dev
+    npm i --save-dev css-loader style-loader
+    npm i --save-dev mini-css-extract-plugin
+    npm i --save-dev webpack-dev-server
+    npm i uglify-js
+    npm outdated --depth 0
+    npm audit
+    npm audit fix
+    npm audit fix --force
+    npm i helmet --save
+    npm i --save-dev eslint-plugin-security
+    npm i ramda
+    npm i date-fns --save
+    npm i formik
+    npm i recharts
+    npm i highcharts-react-official
+    npm i immutable
+    npm i immer
+    npm i redux-saga
+    npm i react-ga --save
+    npm i webpack
+    npm i -g parcel-bundler
+
+- Refactoring an app
+    npm init
+    npm i --save mongoose nodemon express cors dotenv
+    edit package.json file: under "scripts" add
+        "start": "node index.js",  <- this is run with "npm start"
+        "dev" : "nodemon index.js" <- this is run with "npm run dev"
+    Move the
+        mongoose.Schema def
+    and the
+        const Blog = mongoose.model('Blog', blogSchema)
+    to
+        /models/blog.js
+    Move GET and POST handlers to: /controllers/blogs.js
+        but create a Router at the top of /controllers/blogs.js
+        and add module.exports = blogsRouter at the end
+        and add app.use('/api/blogs', notesRouter) to index.js
+    Create app.js in the same directory as index.js
+        Move the mongoose.connect() stuff into app.js
+        Move const mongoose = require('mongoose') into app.js
+        Move const express = require('express') into app.js
+        Move const app = express() into app.js
+        Move
+            app.use(cors())
+            app.use(express.json())
+            app.use('/api/blogs', blogsRouter)
+        into app.js
+        Add module.exports = app at the end
+        Add const app = require('./app') to index.js
+    Create /utils/config.js
+        add require('dotenv').config() to it
+        add let PORT = process.env.PORT and MONGODB_URI stuff into it
+        module.exports = {PORT, MONGODB_URI}
+        add const config = require('./utils/config') to app.js
+        edit the mongoose.connect() stuff to use config.PORT etc.
+    create .env file
+        put PORT and MONGODB_URI which are referenced in config.js
+        at the top of index.js:
+            const http = require('http')
+        at the end of index.js:
+            const server = http.createServer(app)
+            change app.listen() to server.listen()
+            change PORT to config.PORT
+            change console.log() to logger.info()
+    create /utils/logger.js and /utils/middleware.js
+        at the top of index.js:
+            const config = require('./utils/config')
+            const logger = require('./utils/logger')
+        at the top of app.js:
+            const middleware = require('./utils/middleware')
+            const logger = require('./utils/logger')
+        inside app.js:
+            logger.info('connecting to', config.MONGODB_URI)
+        after mongoose.connect():
+            .then(() => {    logger.info('connected to MongoDB')  })
+            .catch((error) => {    logger.error('error connection to MongoDB:', error.message)  })
+        before app.use(blogsRouter):
+            app.use(middleware.requestLogger)
+        after it:
+            app.use(middleware.unknownEndpoint)
+            app.use(middleware.errorHandler)
+
+- Install Heroku CLI
+    curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
+    git init
+    git add .
+    heroku login
+    heroku create
+    git commit -m "initial commit"
+    git push heroku master
+    make frontend production build:
+        npm run build
+    copy/paste build folder into backend
+    tell backend to use frontend:
+        app.use(express.static('build'))
+    git add .
+    git commit -m "initial commit"
+    git push heroku master
+    add to package.json/scripts:
+        "build:ui": "rm -rf build && cd ../part2-notes/ && npm run build --prod && cp -r build ../notes-backend",
+        "deploy": "git push heroku main",
+        "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",
+        "logs:prod": "heroku logs --tail"
+    heroku ps:scale web=1
+    heroku open
+    heroku logs -t
+    heroku config:set MONGODB_URI='mongodb+srv://fullstack:{password}@cluster0.jmpc7.mongodb.net/note-app?retryWrites=true&w=majority'
+
+- MongoDB Atlas username, password, connection string
+    fullstack
+    password
+    mongodb+srv://fullstack:<password>@cluster0.jmpc7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+    Replace <password> with the password for the fullstack user.
+    Replace myFirstDatabase with the name of the database that connections will use by default.
+    Ensure any option params are URL encoded.
+    mongodb+srv://fullstack:{password}@cluster0.jmpc7.mongodb.net/note-app?retryWrites=true&w=majority
+    node mongo.js password
+    heroku config:set MONGODB_URI='mongodb+srv://fullstack:{password}@cluster0.jmpc7.mongodb.net/phonebook-backend?retryWrites=true&w=majority'
+
+- Install Postman
+    https://www.postman.com/downloads/
+    Extract archive
+
+- Install Watchman (file watching service)
+    sudo apt install watchman
+
+- Install MongoDB
+    sudo apt install mongodb

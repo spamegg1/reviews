@@ -1,0 +1,8 @@
+POST http://localhost:3001/api/notes/
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1sdXVra2FpIiwiaWQiOiI2MDBmZjc4YmQ4MTAzMjY4NTNiNjRmYmMiLCJpYXQiOjE2MTE2ODEyNTN9.z7VHwnA_Vz0Pinv-0S0uwX626Zq7OwrX3gEFhjWB6mA
+
+{
+    "content": "Token provided",
+    "important": true
+}
