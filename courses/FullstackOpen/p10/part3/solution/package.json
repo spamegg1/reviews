@@ -1,0 +1,34 @@
+{
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "eject": "expo eject",
+    "lint": "eslint ./src/**/*.{js,jsx} App.js --no-error-on-unmatched-pattern"
+  },
+  "dependencies": {
+    "@apollo/react-hooks": "^3.1.5",
+    "apollo-boost": "^0.4.7",
+    "dotenv": "^8.2.0",
+    "expo": "~37.0.3",
+    "formik": "^2.1.4",
+    "graphql": "^15.0.0",
+    "react": "~16.9.0",
+    "react-dom": "~16.9.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-37.0.1.tar.gz",
+    "react-native-web": "~0.11.7",
+    "react-router-native": "^5.1.2",
+    "yup": "^0.28.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.6",
+    "@expo/webpack-config": "^0.12.23",
+    "babel-eslint": "^10.1.0",
+    "babel-preset-expo": "~8.1.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-react": "^7.19.0"
+  },
+  "private": true
+}

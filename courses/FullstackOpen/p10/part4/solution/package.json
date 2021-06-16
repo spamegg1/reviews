@@ -1,0 +1,56 @@
+{
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "eject": "expo eject",
+    "lint": "eslint ./src/**/*.{js,jsx} App.js --no-error-on-unmatched-pattern",
+    "test": "jest"
+  },
+  "jest": {
+    "preset": "jest-expo",
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!(jest-)?react-native|react-clone-referenced-element|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|@sentry/.*|react-router-native)"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/setupTests.js"
+    ]
+  },
+  "dependencies": {
+    "@apollo/react-hooks": "^3.1.5",
+    "apollo-boost": "^0.4.7",
+    "date-fns": "^2.13.0",
+    "dotenv": "^8.2.0",
+    "expo": "~37.0.3",
+    "formik": "^2.1.4",
+    "graphql": "^15.0.0",
+    "react": "~16.9.0",
+    "react-dom": "~16.9.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-37.0.1.tar.gz",
+    "react-native-paper": "^3.10.1",
+    "react-native-picker-select": "^7.0.0",
+    "react-native-web": "~0.11.7",
+    "react-router-native": "^5.1.2",
+    "use-debounce": "^3.4.2",
+    "yup": "^0.28.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.6",
+    "@expo/webpack-config": "^0.12.23",
+    "@testing-library/jest-native": "^3.1.0",
+    "@testing-library/react-native": "^7.0.0",
+    "babel-eslint": "^10.1.0",
+    "babel-preset-expo": "~8.1.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-jest": "^23.8.2",
+    "eslint-plugin-react": "^7.19.0",
+    "jest": "^25.4.0",
+    "jest-expo": "^37.0.0"
+  },
+  "private": true
+}
