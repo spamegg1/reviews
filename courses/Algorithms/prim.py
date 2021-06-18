@@ -14,35 +14,36 @@ def prim(uwgraph):
 
     Return the edges of a minimum spanning tree (MST) for the graph.
     """
-    graphsize = len(uwgraph.nodes)
+    graph_size = len(uwgraph.nodes)
     node = random.choice(list(uwgraph.nodes.keys()))
     explored = {node}
     edges_seen = {}
-    frontier = deque(uwgraph.get_node(node))         # edges yet to be explored
-    winner, least = node, -1     # choose node and path that minimizes distance
+    frontier = deque(uwgraph.get_node(node))          # edges yet to be explored
+    winner, least = node, -1      # choose node and path that minimizes distance
+    new_node = None
 
     while frontier:
-        bestedge = None
-        for edge in frontier:   # consider each edge in frontier, find shortest
+        best_edge = None
+        for edge in frontier:    # consider each edge in frontier, find shortest
             node1, node2 = uwgraph.get_edge(edge)[0]
             if node1 in explored:
-                newnode = node2
+                new_node = node2
             elif node2 in explored:
-                newnode = node1
+                new_node = node1
             cost = uwgraph.get_edge(edge)[1]
 
             # if this is the first edge we look at, or gives us a shorter path
             if least < 0 or cost < least:
-                winner = newnode
+                winner = new_node
                 least = cost
-                bestedge = edge
+                best_edge = edge
 
         explored.add(winner)
-        edges_seen[bestedge] = least
-        if len(explored) == graphsize:
+        edges_seen[best_edge] = least
+        if len(explored) == graph_size:
             break
-        frontier.remove(bestedge)
-        least = -1                    # reset shortest path cost for next round
+        frontier.remove(best_edge)
+        least = -1                     # reset shortest path cost for next round
 
         # because explored increased, some frontier edges must be removed
         # iterate over list of frontier, so that we can safely mutate deque
