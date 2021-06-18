@@ -4,6 +4,7 @@ from ps3 import *
 # Test code
 #
 
+
 def test_get_word_score():
     """
     Unit test for get_word_score
@@ -99,6 +100,7 @@ def test_update_hand():
 
 # end of test_update_hand
 
+
 def test_is_valid_word(word_list):
     """
     Unit test for is_valid_word
@@ -191,7 +193,7 @@ def test_wildcard(word_list):
     """
     Unit test for is_valid_word
     """
-    failure=False
+    failure = False
 
     # test 1
     hand = {'a': 1, 'r': 1, 'e': 1, 'j': 2, 'm': 1, '*': 1}
@@ -224,7 +226,7 @@ def test_wildcard(word_list):
         failure = True
 
     # test 4
-    hand = {'c': 1, 'o': 1, '*': 1, 'w': 1, 's':1, 'z':1, 'y': 2}
+    hand = {'c': 1, 'o': 1, '*': 1, 'w': 1, 's': 1, 'z': 1, 'y': 2}
     word = "c*wz"
 
     if is_valid_word(word, hand, word_list):
@@ -239,7 +241,7 @@ def test_wildcard(word_list):
         score = get_word_score(word, n)
         if score != words[(word, n)]:
             print("FAILURE: test_get_word_score() with wildcards")
-            print("\tExpected", words[(word, n)], "points but got '" + \
+            print("\tExpected", words[(word, n)], "points but got '" +
                   str(score) + "' for word '" + word + "', n=" + str(n))
             failure = True
 
@@ -258,6 +260,6 @@ print("----------------------------------------------------------------------")
 print("Testing is_valid_word...")
 test_is_valid_word(word_list)
 print("----------------------------------------------------------------------")
-# print("Testing wildcards...")
-# test_wildcard(word_list)
+print("Testing wildcards...")
+test_wildcard(word_list)
 print("All done!")

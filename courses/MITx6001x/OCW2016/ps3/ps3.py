@@ -9,14 +9,15 @@
 
 import math
 import random
-import string
 
 VOWELS = 'aeiou'
 CONSONANTS = 'bcdfghjklmnpqrstvwxyz'
 HAND_SIZE = 7
 
 SCRABBLE_LETTER_VALUES = {
-    'a': 1, 'b': 3, 'c': 3, 'd': 2, 'e': 1, 'f': 4, 'g': 2, 'h': 4, 'i': 1, 'j': 8, 'k': 5, 'l': 1, 'm': 3, 'n': 1, 'o': 1, 'p': 3, 'q': 10, 'r': 1, 's': 1, 't': 1, 'u': 1, 'v': 4, 'w': 4, 'x': 8, 'y': 4, 'z': 10
+    'a': 1, 'b': 3, 'c': 3, 'd': 2, 'e': 1, 'f': 4, 'g': 2, 'h': 4, 'i': 1,
+    'j': 8, 'k': 5, 'l': 1, 'm': 3, 'n': 1, 'o': 1, 'p': 3, 'q': 10, 'r': 1,
+    's': 1, 't': 1, 'u': 1, 'v': 4, 'w': 4, 'x': 8, 'y': 4, 'z': 10, '*': 0
 }
 
 # -----------------------------------
@@ -70,8 +71,7 @@ def get_frequency_dict(sequence):
 #
 def get_word_score(word, n):
     """
-    Returns the score for a word. Assumes the word is a
-    valid word.
+    Returns the score for a word. Assumes the word is a valid word.
 
     You may assume that the input word is always either a string of letters,
     or the empty string "". You may not assume that the string will only contain
@@ -93,7 +93,6 @@ def get_word_score(word, n):
     n: int >= 0
     returns: int >= 0
     """
-
     first = sum(SCRABBLE_LETTER_VALUES[letter] for letter in word.lower())
     second = max(1, 7 * len(word) - 3 * (n - len(word)))
     return first * second
@@ -142,13 +141,15 @@ def deal_hand(n):
     hand = {}
     num_vowels = int(math.ceil(n / 3))
 
-    for i in range(num_vowels):
+    for i in range(num_vowels - 1):
         x = random.choice(VOWELS)
         hand[x] = hand.get(x, 0) + 1
 
     for i in range(num_vowels, n):
         x = random.choice(CONSONANTS)
         hand[x] = hand.get(x, 0) + 1
+
+    hand['*'] = 1
 
     return hand
 
@@ -197,10 +198,17 @@ def is_valid_word(word, hand, word_list):
     word_list: list of lowercase strings
     returns: boolean
     """
-
     word = word.lower()
-    letters_in_hand = [word.count(letter) <= hand.get(letter, 0) for letter in word]
-    return word in word_list and all(letters_in_hand)
+    letters_in_hand = [word.count(char) <= hand.get(char, 0) for char in word]
+    if not all(letters_in_hand):
+        return False
+
+    if '*' not in word:
+        return word in word_list
+
+    for vowel in VOWELS:
+        if word.replace('*', vowel) in word_list:
+            return True
 
 
 #
