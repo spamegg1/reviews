@@ -1,21 +1,36 @@
-For the Challenge Data set problem for Counting Inversions with the 100,000 integer array, the correct output is 2407905288.
+For the Challenge Data set problem for Counting Inversions with the 100,000
+    integer array, the correct output is 2407905288.
 
-For Quicksort with the 10,000 integer array, the output for first-element-pivot is 162085, last-element-pivot is 164123, median-of-3-pivot is 138382.
+For Quicksort with the 10,000 integer array, the output for first-element-pivot
+    is 162085, last-element-pivot is 164123, median-of-3-pivot is 138382.
 
-For Kosaraju SCC Challenge, the 5 largest SCC sizes are: 434821, 968, 459, 313, 211.
+For Kosaraju SCC Challenge, the 5 largest SCC sizes are:
+    434821, 968, 459, 313, 211.
 
-For Dijkstra Challenge, the shortest-path distances between vertex 1 and vertices 7,37,59,82,99,115,133,165,188,197 are (in order):  2599, 2610, 2947, 2052, 2367, 2399, 2029, 2442, 2505, 3068.
+For Dijkstra Challenge, the shortest-path distances between vertex 1 and
+    vertices 7,37,59,82,99,115,133,165,188,197 are (in order):
+    2599, 2610, 2947, 2052, 2367, 2399, 2029, 2442, 2505, 3068.
 
-For Median Maintenance Challenge Data Set with 10000 integers, the last 4 digits of the sum of the kth medians (with k going from 1 to 10000) is: 1213.
+For Median Maintenance Challenge Data Set with 10000 integers, the last 4 digits
+    of the sum of the kth medians (with k going from 1 to 10000) is: 1213.
 
-For the 2-SUM problem with 1 million integers, the number of targets t in range [-10000, 10000] such that there are distinct numbers x, y in the input file that satisfy x + y = t is: 427.
+For the 2-SUM problem with 1 million integers, the number of targets t in range
+    [-10000, 10000] such that there are distinct numbers x, y in the input file
+    that satisfy x + y = t is: 427.
 
-For the Greedy Scheduling Challenge Data Set with 10000 jobs, the weighted sum of completion times of GreedyDiff is 69119377652, of GreedyRatio is 67311454237.
+For the Greedy Scheduling Challenge Data Set with 10000 jobs, the weighted sum
+    of completion times of
+        GreedyDiff is 69119377652,
+        GreedyRatio is 67311454237.
 
-For the Huffman Code 1000 symbol alphabet Challenge Data Set, the minimum and maximum lengths of codes are 9 and 19 respectively.
+For the Huffman Code 1000 symbol alphabet Challenge Data Set, the minimum and
+    maximum lengths of codes are 9 and 19 respectively.
 
-For the Minimum Spanning Tree Challenge Data Set with 2184 edges, the cost of an MST is -3612829.
+For the Minimum Spanning Tree Challenge Data Set with 2184 edges, the cost of an
+    MST is -3612829.
 
-For the WIS Challenge Data set with the 1000-vertex path graph, max total weight is 2955353732.
+For the WIS Challenge Data set with the 1000-vertex path graph, max total weight
+    is 2955353732.
 
-For the Knapsack Challenge Data set with 2000 items and 2000000 capacity, optimal solution is 4243395.
+For the Knapsack Challenge Data set with 2000 items and 2000000 capacity,
+    optimal solution is 4243395.
