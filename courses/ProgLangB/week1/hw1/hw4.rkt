@@ -83,15 +83,14 @@
 ;; produces function of one argument that acts like Racket's assoc,
 ;; which has an n-element vector-cache. Assumes: n is positive
 (define (cached-assoc xs n)
-  (local [(define cache (make-vector n #f))
-          (define index 0)
-          (define (aux v)
-            (local [(define check-cache (vector-assoc v cache))]
-              (cond [check-cache check-cache]
-                    [else (local [(define ans (assoc v xs))]
-                            (begin (vector-set! cache index ans)
-                                   (set! index (if (= (+ index 1) n)
-                                                   0
-                                                   (+ index 1)))
-                                   ans))])))]
-    aux))
+  (letrec ([cache (make-vector n #f)]
+           [index 0])
+    (lambda (v)
+      (if (vector-assoc v cache)
+          (vector-assoc v cache)
+          (let ([cur-val (assoc v xs)])
+            (begin
+              (vector-set! cache index cur-val)
+              (set! index
+                    (remainder (+ index 1) n))
+              (vector-assoc v cache)))))))
