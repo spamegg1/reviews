@@ -70,7 +70,7 @@
 ;; produces first pair with a first field equal to given value, false otherwise
 ;; allows vector elements not to be pairs, in which case it skips them
 (define (vector-assoc v vec)
-  (if (empty? vec) #f
+  (if (= 0 (vector-length vec)) #f
   (local [(define vlen (vector-length vec))
           (define (aux i)
             (local [(define vi (vector-ref vec i))]
