@@ -82,15 +82,14 @@
 ;; List Integer -> Function
 ;; produces function of one argument that acts like Racket's assoc,
 ;; which has an n-element vector-cache. Assumes: n is positive
-(define (cached-assoc xs n)
-  (letrec ([cache (make-vector n #f)]
-           [index 0])
+(define (cached-assoc lst n)
+  (let ([cache (make-vector n #f)]
+        [next-to-replace 0])
     (lambda (v)
-      (if (vector-assoc v cache)
-          (vector-assoc v cache)
-          (let ([cur-val (assoc v xs)])
-            (begin
-              (vector-set! cache index cur-val)
-              (set! index
-                    (remainder (+ index 1) n))
-              (vector-assoc v cache)))))))
+      (or (vector-assoc v cache)
+          (let ([ans (assoc v lst)])
+            (and ans
+                 (begin (vector-set! cache next-to-replace ans)
+                        (set! next-to-replace
+                              (remainder (+ next-to-replace 1) n))
+                        ans)))))))
