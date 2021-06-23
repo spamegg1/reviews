@@ -3,6 +3,7 @@
 // Removing a blog does not update "blog count by user" stat without a reload
 // More styling!
 // Tests are probably broken! Also add tests for new features.
+// Some errors in console: unmounted component, GET req to socket-node etc.
 import React, { useEffect, useRef } from 'react'
 import Notification from './components/Notification'
 import LoginForm from './components/LoginForm'                   // Exercise 5.5
