@@ -1,0 +1,45 @@
+h1 {
+  color: green;
+  font-style: italic;
+}
+
+.link {                                                      /* Exercise 7.16 */
+  padding: 10px
+}
+
+.navBar {                                                    /* Exercise 7.19 */
+  margin: 10px;
+  padding: 10px;
+  background-color: darkslategray;
+}
+
+.blog {                                                      /* Exercise 7.20 */
+  color: grey;
+  padding-top: 3px;
+  font-size: 15px;
+  padding-top: 10px;
+  padding-left: 2px;
+  border: solid;
+  border-width: 1px;
+  margin-bottom: 5px
+}
+
+.error {
+  color: red;
+  background: lightgrey;
+  font-size: 20px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.success {
+  color: green;
+  background: lightgrey;
+  font-size: 20px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
