@@ -30,4 +30,3 @@ while abs(attempt) >= epsilon:
     monthlyPayment = (left + right) / 2
 
 print("Lowest payment: " + str(round(monthlyPayment, 2)))
-       
