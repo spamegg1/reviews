@@ -2,10 +2,10 @@
 semi_annual_raise = 0.07
 investment_rate = 0.04
 total_cost = 1000000
-portion_down_payment = total_cost * 0.25
+down_payment = total_cost * 0.25
 
 
-def thirtysix_month_savings(starting_salary, portion_saved):
+def savings(starting_salary, portion_saved):
     months = 0
     current_savings = 0
     salary = starting_salary
@@ -31,25 +31,23 @@ def optimal_saving_rate():
     portion_saved = 5000
     steps_in_search = 0
 
-
     starting_salary = float(input("Enter the starting salary: "))
 
-    if thirtysix_month_savings(starting_salary, 10000) < portion_down_payment:
+    if savings(starting_salary, 10000) < down_payment:
         print("It is not possible to pay the down payment in three years.")
     else:
-        current_savings = thirtysix_month_savings(starting_salary, portion_saved)
+        current_savings = savings(starting_salary, portion_saved)
         steps_in_search += 1
 
-        while abs(current_savings - portion_down_payment) >= 100.0:
-            if current_savings < portion_down_payment:
+        while abs(current_savings - down_payment) >= 100.0:
+            if current_savings < down_payment:
                 left = portion_saved
-                portion_saved = (portion_saved + right) // 2
             else:
-                next_portion_saved = portion_saved
-                portion_saved = (portion_saved + left) // 2
+                right = portion_saved
 
+            portion_saved = (left + right) // 2
             steps_in_search += 1
-            current_savings = thirtysix_month_savings(starting_salary, portion_saved)
+            current_savings = savings(starting_salary, portion_saved)
 
         print("Best savings rate:", portion_saved / 10000)
         print("Steps in bisection search:", steps_in_search)
