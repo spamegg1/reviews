@@ -25,9 +25,9 @@ val z = (x + y) + (y + 2);
 val q = z+1;
 (* static environment: q-->int, z-->int, y-->int, x-->int *)
 (* dynamic environment: q-->71, z-->70, y-->17, x-->34 *)
- 
+
 val abs_of_z = if z < 0 then 0 - z else  z;
 (* static environment: abs_of_z-->int, q-->int, z-->int, y-->int, x-->int *)
 (* dynamic environment: abs_of_z-->70, q-->71, z-->70, y-->17, x-->34 *)
- 
+
 val abs_of_z_simpler = abs z;

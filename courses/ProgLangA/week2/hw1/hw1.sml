@@ -103,7 +103,3 @@ fun oldest(datelist : (int*int*int) list) =
     then SOME (hd datelist)
     else tl_ans
     end
-
-
-
-
