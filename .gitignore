@@ -3,3 +3,7 @@
 sml.json
 *.pyc
 *.dat
+target/
+project/target/
+project/project/
+.bsp/

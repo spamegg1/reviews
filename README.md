@@ -11,6 +11,8 @@ Updated November 2020 (Formal Concept Analysis)
 
 Updated May 2021 (Fullstack Open, Intro to Logic)
 
+Updated July 2021 (Effective Programming in Scala)
+
 - [Harvard's CS50 (first half)](#cs50)
 - [CS50, second half, Final Project](#cs50-2)
 - [How to Code 1 & 2](#how-to-code)
@@ -43,8 +45,10 @@ Updated May 2021 (Fullstack Open, Intro to Logic)
 - [Formal Concept Analysis](#concept)
 - [Fullstack Open](#fsopen)
 - [Introduction to Logic](#logic)
+- [Effective Programming in Scala](#eff)
 
 ### <a name="cs50"></a> Harvard's CS50 (first half)
+
 https://cs50.harvard.edu/
 
 This was my first course. In 2018 this was the "intro/beginner" course on OSSU curriculum. For the sake of completeness I took the whole course at once, including the [second half](#cs50-2). It's pretty challenging for a beginner course, because that's how Harvard does it. In terms of college course numbering, they go with 050 but it feels more like a 200-level class.
@@ -744,3 +748,25 @@ It feels like some academics got a very small research grant to create an online
 They have a whole [Logic program](http://intrologic.stanford.edu/intrologic/homepage/index.html) going on in Stanford and they prepared the "textbook" for that, but the program is a bunch of Summer/Winter camps, on-site classes or adoptions by other schools where you would have profs and TAs and get help in person. It's admirable to see they are spreading Logic, emphasizing its importance and even trying to reach out to high school students, but some of this material is borderline graduate level and inappropriate. It would be much more appropriate to do some basic number theory proofs.
 
 *Spam's recommendation:* Don't take this. Or rather, just take the earlier sections (first 4-5 chapters maybe?). It's a free, "as-is" resource you can use, if you are very smart, willing to find a proper, actual textbook, do lots of Internet searches and learn on your own, somehow making up for the absence of a prof and TA. If you are super strong already and want to do Prolog, then take it. It overlaps with the Prolog course to a great extent (I actually thought they were written by the same people at first!) ***Definitely take some Logic (it's the best thing in life)*** but unfortunately I do not know of a good undergraduate, entry-level alternative. I only learned it at the graduate level.
+
+### <a name="eff"></a> Effective Programming in Scala
+
+[https://www.coursera.org/learn/effective-scala](https://www.coursera.org/learn/effective-scala)
+
+Finally a Scala 3 course! And it's much more beginner friendly than the Specialization courses!
+
+Week 1 deals with language basics: values, definitions, evaluation etc. Then it introduces the simplified Scala 3 syntax and shows how to model a domain using case classes, sealed traits and enumerations, in order to implement business logic. Extremely simplified, beautiful OOP. Even I, the OOP hater, can appreciate it. It finishes with a fairly easy programming assignment (PA) which is all about filling in the blanks of a code base with sealed traits and case classes. Just follow the types and the methods. You get to make a nice fireworks animation!
+
+Week 2 is about basic data structures built-in to Scala: Lists, Sequences, Maps, Tuples; and then Loops: for-expressions (like Python's list comprehension) which act as for-loops, recursion to iterate over collections, while loops, `var` (mutation), `do` keyword, and `fold`s. So you've got 4 ways to loop/iterate. It also covers Option types, and introduces basic higher-order functions like `map`, `filter`, `flatMap`, various `fold`s, `groupBy`, `sortBy` etc. so that we can construct, query and transform collections. Basic built-in methods on collections. Very straightforward. In the Loops section you learn tail recursion. Cool! You learn to pattern-match on some collections! Awesome. The PA is very easy and doable. You fill in the blanks of a democratic majority-based voting system. All about using built-in methods of collections. I was surprised by `groupMap`, which is a faster, more elegant version of the commonly used `groupBy` - `mapValues` chain. Clever functional one-liners! Finished in 15 minutes.
+
+Week 3 is about build tools and `sbt`. Wow! An academic course teaching something *practical and real world?* What heresy is this? Awesome. Then it covers code organization topics. Mostly OOP stuff.
+
+Week 4.
+
+Week 5.
+
+Week 6.
+
+Videos have good length (not too long, not too short), good pace and good explanations. Definitely better than previous Scala courses. Each section of each week is littered with practice quizzes: multiple choice with infinite attempts (even if you don't pay). They are fairly short, easy and very instructive. Definitely made with beginners in mind. Each week has downloadable project zip files of code from the videos, which you can open up in IntelliJ or in VS Code (with Metals plug-in). I would still recommend live coding along with the videos first. The discussion forums are active and the instructors/staff are responsive. Main instructor Julien replies to almost all posts.
+
+*Spam's recommendation:* This course is excellent, take it!
