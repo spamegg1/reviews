@@ -96,28 +96,48 @@ object PersistentModel extends Model:
    */
 
   def create(task: Task): Id =
-    ???
+    val id: Id = loadId() // NEW
+    saveId(id.next)
+    val idstore: List[(Id, Task)] = loadTasks().toList
+    val tasks: List[(Id, Task)] = idstore ++ List((id, task))
+    saveTasks(Tasks(tasks))
+    id
 
   def read(id: Id): Option[Task] =
-    ???
+    val idstore: Map[Id, Task] = loadTasks().toMap // NEW
+    idstore.get(id)
 
   def update(id: Id)(f: Task => Task): Option[Task] =
-    ???
+    val idstore: Map[Id, Task] = loadTasks().toMap // NEW
+    idstore.get(id) match
+      case None => None
+      case Some(_) =>
+        val tasks: Map[Id, Task] = idstore.updatedWith(id)(opt => opt.map(f))
+        saveTasks(Tasks(tasks))
+        tasks.get(id)
 
   def delete(id: Id): Boolean =
-    ???
+    val idstore: Map[Id, Task] = loadTasks().toMap // NEW
+    idstore.get(id) match
+      case None => false
+      case Some(_) =>
+        val tasks: Map[Id, Task] = idstore.filter((tid, task) => tid != id)
+        saveTasks(Tasks(tasks))
+        true
 
   def tasks: Tasks =
-    ???
+    loadTasks() // NEW
 
   def tasks(tag: Tag): Tasks =
-    ???
+    val idstore: Map[Id, Task] = loadTasks().toMap // NEW
+    Tasks(idstore.filter((id, task) => task.tags.contains(tag)))
 
   def complete(id: Id): Option[Task] =
-    ???
+    update(id)(task => task.complete) // NEW
 
   def tags: Tags =
-    ???
+    val idstore: Map[Id, Task] = loadTasks().toMap // NEW
+    Tags(idstore.values.flatMap(task => task.tags).toSet.toList)
 
   def clear(): Unit =
-    ???
+    saveTasks(Tasks.empty) // NEW
