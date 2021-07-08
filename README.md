@@ -585,6 +585,8 @@ It's broken into 6 Milestones. The first 2 were the hardest, the last 2 went sup
 
 *Spam's recommendation:* If you are into FP, definitely take it! You know what, JUST TAKE IT. An entire specialization that you can audit FOR FREE and even submit your code for grading that you can finish in 1-2 months! Super super awesome. You might wanna wait until it is updated to Scala 3 (probably in 2021) but it works just fine today. You can take it after 1 year, probably even earlier (just after PLABC or the Haskell book).
 
+**Update (July 2021)** On May 17, 2021 they [updated most of these courses to Scala 3](https://scala-lang.org/blog/2021/05/17/effective-programming-scala-course.html) as promised! Except courses 4-5 using Spark, which are still Scala 2 (because Spark is maintained by Apache I guess). I might re-take them just for fun.
+
 ### <a name="game"></a> Game Theory 1
 
 https://www.coursera.org/learn/game-theory-1
