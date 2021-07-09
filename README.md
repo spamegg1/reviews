@@ -781,7 +781,7 @@ Week 4 covers reasoning about your code (local vs global scope, pure vs side eff
 
 Week 5 is about type driven development, implicit types, type classes (new in Scala 3). Very dry boring subjects! The PA is once again `codecs` which I have also done before in the Specialization. Quite difficult but I did it without watching the lectures or reading the notes. Following the types and looking into the test file helps a lot! This time around the syntax is updated to Scala 3 and `implicit` and `implicitly` are replaced by `given` and `using`. I looked at my old solution after I was done, and there is definitely improvement from Scala 2 to 3. The syntax for implicits is much better now, but still not easier to understand than before.
 
-Week 6.
+Week 6 is about error handling, validating data, and concurrent/asynchronous programming with `Future`. The PA, which is about calculating "distance" between wiki articles, requires downloading a 1.4 GB database file! Feels like a Spark project from the Specialization for sure.
 
 Videos have good length (not too long, not too short), good pace and good explanations. Definitely better than previous Scala courses. Each section of each week is littered with practice quizzes: multiple choice with infinite attempts (even if you don't pay). They are fairly short, easy and very instructive. Definitely made with beginners in mind. Each week has downloadable project zip files of code from the videos, which you can open up in IntelliJ or in VS Code (with Metals plug-in). I would still recommend live coding along with the videos first. The discussion forums are active and the instructors/staff are responsive. Main instructor Julien replies to almost all posts.
 
