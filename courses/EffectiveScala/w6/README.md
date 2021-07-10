@@ -1,0 +1,1 @@
+Download the 1.4 GB database file from https://moocs.scala-lang.org/~dockermoocs/effective-scala/smallwiki.db
