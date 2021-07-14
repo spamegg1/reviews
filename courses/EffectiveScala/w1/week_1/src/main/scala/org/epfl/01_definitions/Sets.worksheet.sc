@@ -12,17 +12,13 @@ enum Shading:
 
 case class Card(shape: Shape, number: Num, color: Color, shading: Shading)
 
-def allSame(things: List[Any]): Boolean =
-  things.forall(thing => thing == things(0))
+def allSame[A](things: List[A]): Boolean =
+  things.distinct.size == 1
 
-def allDifferent(things: List[Any]): Boolean =
-  val boolArray = for
-    i <- 0 until things.size - 1
-    j <- i + 1 until things.size
-  yield things(i) == things(j)
-  !boolArray.exists(identity)
+def allDifferent[A](things: List[A]): Boolean =
+  things.distinct.size == things.size
 
-def check(things: List[Any]): Boolean =
+def check[A](things: List[A]): Boolean =
   allSame(things) || allDifferent(things)
 
 def isValidSet(cards: List[Card]): Boolean =
