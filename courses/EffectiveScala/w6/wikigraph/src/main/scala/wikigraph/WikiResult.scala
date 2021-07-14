@@ -1,6 +1,6 @@
 package wikigraph
 
-import scala.concurrent.{ ExecutionContext, Future }
+import scala.concurrent.{ExecutionContext, Future}
 import wikigraph.errors.WikiError
 import wikigraph.errors.WikiException
 
@@ -52,7 +52,7 @@ case class WikiResult[A](val value: Future[Either[Seq[WikiError], A]]):
     * Hint: Both Either and Future have a similar method
     */
   def map[B](f: A => B)(using ExecutionContext): WikiResult[B] =
-    ???
+    WikiResult(value.map(x => x.map(f)))
 
   /**
     * Use the result of this computation as an input for another asynchronous
@@ -65,7 +65,8 @@ case class WikiResult[A](val value: Future[Either[Seq[WikiError], A]]):
     */
   def flatMap[B](f: A => WikiResult[B])(using ExecutionContext): WikiResult[B] = 
     val futureB: Future[Either[Seq[WikiError], B]] = value.flatMap {
-      ???
+      case Left(seqA) => Future(Left(seqA))
+      case Right(a) => f(a).value
     }
     WikiResult(futureB)
 
@@ -80,7 +81,11 @@ case class WikiResult[A](val value: Future[Either[Seq[WikiError], A]]):
     */
   def zip[B](that: WikiResult[B])(using ExecutionContext): WikiResult[(A, B)] =
     def zipEithersAcc(a: Either[Seq[WikiError], A], b: Either[Seq[WikiError], B]): Either[Seq[WikiError], (A, B)] =
-      ???
+      (a, b) match
+        case (Left(seqA), Left(seqB)) => Left(seqA ++ seqB)
+        case (Left(seqA), Right(y)) => Left(seqA)
+        case (Right(x), Left(seqB)) => Left(seqB)
+        case (Right(x), Right(y)) => Right((x, y))
     WikiResult(this.value.flatMap { thisEither =>
       that.value.map { thatEither =>
         zipEithersAcc(thisEither, thatEither)
@@ -119,15 +124,27 @@ object WikiResult:
 
   /**
     * Asynchronously and non-blockingly transforms a `Seq[A]` into a WikiResult[Seq[B]]
-    * using the provided `A => WikiResult[B]`.
-    * 
-    * The results are collected in the Seq as the computation progresses without blocking. 
-    * 
-    * Note: the order is preserved
-    * 
-    * Hint: Use WikiResult.zip
+    * using the provided function `A => WikiResult[B]`.
+    *
+    * Applies the function `f` to every element of the sequence `as`, concurrently
+    * computing values of type `B`.
+    *
+    *   - If the function `f` always eventually returns successful values of type `B`,
+    *     returns a successful result containing the sequence of values (note: order
+    *     is preserved).
+    *   - If the function `f` eventually returns some domain errors, returns a failed
+    *     result containing all the domain errors.
+    *   - If the function `f` eventually returns some system failure, returns a failed
+    *     result containing one of the system failures.
+    *
+    * Hint: iterate over the input sequence with `foldLeft` or `foldRight`, combine
+    * all the `WikiResult` values with the operation `zip`. If the input sequence is
+    * empty, return a successful empty sequence.
     */
-  def traverse[A, B](ls: Seq[A])(f: A => WikiResult[B])(using ExecutionContext): WikiResult[Seq[B]] =
-    ???
+  def traverse[A, B](as: Seq[A])(f: A => WikiResult[B])(using ExecutionContext): WikiResult[Seq[B]] =
+    val initVal: WikiResult[Seq[B]] = WikiResult.successful(Seq.empty)
+    def iterFun(seqB: WikiResult[Seq[B]], a: A): WikiResult[Seq[B]] =
+      seqB.zip(f(a)).map((bs, b) => bs :+ b)
+    as.foldLeft(initVal)(iterFun)
 
 end WikiResult

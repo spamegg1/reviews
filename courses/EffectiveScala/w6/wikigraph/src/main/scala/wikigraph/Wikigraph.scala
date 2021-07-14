@@ -2,7 +2,6 @@ package wikigraph
 
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
-
 import Articles.ArticleId
 
 
@@ -21,7 +20,10 @@ final class Wikigraph(client: Wikipedia):
     * Hint: Use the methods that you implemented in WikiResult.
     */
   def namedLinks(of: ArticleId): WikiResult[Set[String]] =
-    ???
+    val links: WikiResult[Set[ArticleId]] = client.linksFrom(of)
+    def mapFun(set: Set[ArticleId]): Set[String] =
+      ???
+    links.map(mapFun)
 
   /**
     * Computes the distance between two articles using breadth first search.
@@ -57,7 +59,16 @@ final class Wikigraph(client: Wikipedia):
       * @param q the next nodes to visit and their distance from `start`
       */
     def iter(visited: Set[ArticleId], q: Queue[(Int, ArticleId)]): WikiResult[Option[Int]] =
-      ???
+      if q.isEmpty then
+        WikiResult.successful(None)
+      else
+        val (node, queue): ((Int, ArticleId), Queue[(Int, ArticleId)]) =
+          q.dequeue
+        if node._1 > maxDepth then
+          WikiResult.successful(None)
+        else
+          val neighbors: WikiResult[Set[ArticleId]] = client.linksFrom(node._2)
+          WikiResult.successful(None)
     if start == target then WikiResult.successful(Some(0))
     else iter(Set(start), Queue(1->start))
 

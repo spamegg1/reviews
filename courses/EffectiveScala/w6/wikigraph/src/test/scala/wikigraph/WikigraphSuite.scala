@@ -2,18 +2,20 @@ package wikigraph
 
 import org.scalacheck.*
 import Prop.{forAll, propBoolean}
-import wikigraph.WikiResult
+
+import wikigraph.*
 import wikigraph.WikiResult.*
 import wikigraph.Articles.*
 import wikigraph.implementations.InMemory
-import wikigraph.errors.WikiError
+import wikigraph.errors.*
 import wikigraph.errors.WikiError.*
-    
+
+import wikigraph.testing.*
+
 import scala.util.{Try, Success => TSucc, Failure => TFail}
 import scala.concurrent.{Await, Future, ExecutionContext}
 import scala.concurrent.duration.Duration
 import scala.concurrent.ExecutionContext.Implicits.given
-import errors.*
 
 class WikigraphSuite extends munit.FunSuite:
   given Gen[Int] = Arbitrary.arbitrary[Int]
@@ -47,17 +49,15 @@ class WikigraphSuite extends munit.FunSuite:
         else success
       }
 
-  val timeout = Duration(5, "s")
-
   property("zip without errors") {
     val genA = wikiResultGen[Int](false, false)
     val genB = wikiResultGen[String](false, false)
     val genAB = genA.flatMap(l => genB.map(r => l -> r))
     forAll(genAB) { (a: WikiResult[Int], b: WikiResult[String]) =>
-      val obtained = a.zip(b).value
-      val expected = a.value.flatMap(eiL => b.value.map(eiR => eiL.flatMap(l => eiR.map(r => l -> r)))) 
+      val obtained = a.zip(b)
+      val expected = WikiResult(a.value.flatMap(eiL => b.value.map(eiR => eiL.flatMap(l => eiR.map(r => l -> r)))))
 
-      Await.result(obtained, timeout) == Await.result(expected, timeout)
+      blockAndCompare(obtained, expected)
     }
   }
 
@@ -67,17 +67,14 @@ class WikigraphSuite extends munit.FunSuite:
     val genAB = genA.flatMap(l => genB.map(r => l -> r))
 
     forAll(genAB) { (a: WikiResult[Int], b: WikiResult[String]) =>
-      val obtained = Await.result(a.zip(b).value, timeout)
+      val obtained = a.zip(b)
 
-      val ar = Await.result(a.value, timeout)
-      val br = Await.result(b.value, timeout)
-
-      val errs: Seq[WikiError] = ar.swap.getOrElse(Seq.empty) ++ br.swap.getOrElse(Seq.empty)
+      val errs: Seq[WikiError] = a.errors ++ b.errors
 
       if errs.nonEmpty then
-        (errs == obtained.swap.getOrElse(Seq.empty)) :| "Errors are not accumulated correctly"
+        (errs == obtained.errors) :| "Errors are not accumulated correctly"
       else 
-        (ar.toOption.flatMap(l => br.toOption.map(r => l->r)) == obtained.toOption) :| "Result values are not zipped correctly"
+        ((a.extractUnsafe, b.extractUnsafe) == obtained.extractUnsafe) :| "Result values are not zipped correctly"
     }
   }
 
@@ -87,19 +84,16 @@ class WikigraphSuite extends munit.FunSuite:
     val genAB = genA.flatMap(l => genB.map(r => l -> r))
 
     forAll(genAB) { (a: WikiResult[Int], b: WikiResult[String]) =>
-      val obtained = Try(Await.result(a.zip(b).value, timeout))
+      val obtained = a.zip(b)
 
-      val ar = Try(Await.result(a.value, timeout))
-      val br = Try(Await.result(b.value, timeout))
-
-
-      if ar.isFailure || br.isFailure then
-        (List(ar, br).find(_.isFailure).get == obtained) :| "System failure is not reported correctly"
+      if a.failure.nonEmpty || b.failure.nonEmpty then
+        sameErrorMessage(List(a, b).find(_.failure.isDefined).get.failure, obtained.failure) :| "System failure is not reported correctly"
       else 
-        val errs: Seq[WikiError] = ar.get.swap.getOrElse(Seq.empty) ++ br.get.swap.getOrElse(Seq.empty)
+        val errs: Seq[WikiError] = a.errors ++ b.errors
         if errs.nonEmpty then 
-          (errs == obtained.get.swap.getOrElse(Seq.empty)) :| "Errors are not accumulated correctly"
-        else (ar.get.toOption.flatMap(l => br.get.toOption.map(r => l->r)) == obtained.get.toOption) :| "Results are not accumulated correctly"
+          (errs == obtained.errors) :| "Errors are not accumulated correctly"
+        else 
+          ((a.extractUnsafe, b.extractUnsafe) == obtained.extractUnsafe) :| "Results are not accumulated correctly"
     }
   }
 
@@ -108,72 +102,74 @@ class WikigraphSuite extends munit.FunSuite:
       val pure: (Int => String) = x => (x + 42).toString
       val toResult: (Int => WikiResult[String]) = x => WikiResult.successful(pure(x))
 
-      val obtained = Await.result(WikiResult.traverse(ls)(toResult).value, timeout)
-      val expected: Either[Seq[WikiError], List[String]] = Right(ls.map(pure))
+      val obtained: WikiResult[Seq[String]] = WikiResult.traverse(ls)(toResult)
+      val expected: WikiResult[Seq[String]] = WikiResult.successful(ls.map(pure))
 
-      expected == obtained
+      blockAndCompare(expected, obtained)
     }
   }
 
   property("traverse with domain errors") {
-    forAll(Gen.containerOf[List, WikiResult[Int]](wikiResultGen[Int](true, false))) { ls =>
+    forAll(Gen.containerOf[List, WikiResult[Int]](wikiResultGen[Int](true, false))) { listOfResults =>
       val pure: (Int => String) = x => (x + 42).toString
 
-      val obtained: Either[Seq[WikiError], Seq[String]] = 
-        val result: WikiResult[Seq[String]] = WikiResult.traverse(ls)(_.map(pure))
-        Await.result(result.value, timeout)
+      val obtained: WikiResult[Seq[String]] = WikiResult.traverse(listOfResults)(_.map(pure))
 
-      val eits = ls.map(w => Await.result(w.value, timeout).map(pure))
-      val expErrors: Seq[Seq[WikiError]] = eits.collect { case Left(domainError) => domainError }
-
-      if expErrors.nonEmpty then (expErrors.flatten == obtained.swap.getOrElse(Seq.empty)) :| "Errors are not reported correctly"
-      else (eits.collect { case Right(value) => value } == obtained.getOrElse(Seq.empty)) :| "Result sequence is incorrect"
+      if listOfResults.forall(_.errors.isEmpty) then
+        val expected: Seq[String] = listOfResults.map(_.extractUnsafe).map(pure)
+        blockAndCompare(WikiResult.successful(expected), obtained) :| "Result sequence is incorrect"
+      else
+        val expectedErrors = listOfResults.flatMap(_.errors)
+        val expectedResult = WikiResult(Future.successful(Left[Seq[WikiError], Seq[String]](expectedErrors))) 
+        blockAndCompare(expectedResult, obtained) :| "Errors are not reported correctly"
     }
   }
 
   property("traverse with domain errors and failures") {
-    forAll(Gen.containerOf[List, WikiResult[Int]](wikiResultGen[Int](true, true))) { ls =>
+    forAll(Gen.containerOf[List, WikiResult[Int]](wikiResultGen[Int](true, true))) { listOfResults =>
       val pure: (Int => String) = x => (x + 42).toString
 
-      val obtained: Try[Either[Seq[WikiError], Seq[String]]] = 
-        val result: WikiResult[Seq[String]] = WikiResult.traverse(ls)(_.map(pure))
-        Try(Await.result(result.value, timeout))
+      val obtained: WikiResult[Seq[String]] = WikiResult.traverse(listOfResults)(_.map(pure))
 
-      val eits: Seq[Try[Either[Seq[WikiError], String]]] =
-        ls.map(w => Try(Await.result(w.value, timeout).map(pure)))
-
-      eits.collectFirst { case TFail(ex) => ex } match
-        case Some(ex) => (TFail(ex) == obtained) :| "System failure is reported correctly"
-        case None =>
-          val expErrors: Seq[Seq[WikiError]] = eits.collect { case TSucc(Left(domainError)) => domainError }
-          if expErrors.nonEmpty then 
-            (expErrors.flatten == obtained.get.swap.getOrElse(Seq.empty)) :| "Errors are reported correctly"
-          else 
-            (eits.collect { case TSucc(Right(value)) => value } == obtained.get.getOrElse(Seq.empty)) :| "Result sequence is correct"
+      if listOfResults.exists(_.failure.nonEmpty) then
+        val failure = listOfResults.find(_.failure.nonEmpty).flatMap(_.failure).get
+        val expectedResult = WikiResult.systemFailure[Seq[String]](failure.asInstanceOf[WikiException])
+        blockAndCompare(expectedResult, obtained) :| "System failure is not reported correctly"
+      else if listOfResults.exists(_.errors.nonEmpty) then
+        val errors = listOfResults.flatMap(_.errors)
+        val expectedResult = WikiResult(Future.successful(Left[Seq[WikiError], Seq[String]](errors))) 
+        blockAndCompare(expectedResult, obtained) :| "Errors are not reported correctly"
+      else
+        val expectedResults = listOfResults.map(_.extractUnsafe).map(pure)
+        (obtained.extractUnsafe.toList == expectedResults) :| "Result sequence is incorrect"
     }
   }
 
   property("map") {
     forAll(wikiResultGen[Int](true, true)) { (w: WikiResult[Int]) =>
-      val obtained = Try(Await.result(w.map(_ + 1).map(_.toString).value, timeout))
+      val obtained = w.map(_ + 1).map(_.toString)
 
-      Try(Await.result(w.value, timeout)) match
-        case TSucc(Right(x)) => (TSucc(Right((x + 1).toString)) == obtained) :| "map on successfull WikiResult is correct"
-        case domainErr@TSucc(Left(_)) => (domainErr == obtained) :| "map on a WikiResult failed with a domain error is correct propagates the domain error"
-        case failure@TFail(_) => (failure == obtained) :| "map on a WikiResult failed with a system failure propagates the failure"
+      if w.failure.nonEmpty then
+        sameErrorMessage(w.failure, obtained.failure) :| "map on a WikiResult failed with a system failure propagates the failure"
+      else if w.errors.nonEmpty then
+        (w.errors == obtained.errors) :| "map on a WikiResult failed with a domain error is correct propagates the domain error"
+      else
+        ((w.extractUnsafe + 1).toString == obtained.extractUnsafe) :| "map on successfull WikiResult is correct"
     }
   }
 
   property("flatMap with a successful function") {
     forAll(wikiResultGen[Int](true, true)) { (w: WikiResult[Int]) =>
       def f(x: Int): WikiResult[String] = WikiResult(Future.successful(Right((x + 2).toString)))
-      val obtained = Try(Await.result(w.flatMap(f).value, timeout))
+      val obtained = w.flatMap(f)
 
-
-      Try(Await.result(w.value, timeout)) match
-        case TSucc(Right(x)) => (TSucc(Right((x+2).toString)) == obtained) :| "flatMap on successfull WikiResult with a successful function is correct"
-        case domainErr@TSucc(Left(_)) => (domainErr == obtained) :| "flatMap on a WikiResult failed with a domain error with a successful function propagates the error"
-        case err@TFail(_) => (err == obtained) :| "flatMap on a WikiResult failed with a system failure propagates the failure"
+      if w.failure.nonEmpty then
+        sameErrorMessage(w.failure, obtained.failure) :| "flatMap on a WikiResult failed with a system failure propagates the failure"
+      else if w.errors.nonEmpty then
+        (w.errors == obtained.errors) :| "flatMap on a WikiResult failed with a domain error with a successful function propagates the error"
+      else
+        val expected = WikiResult.successful((w.extractUnsafe + 2).toString)
+        blockAndCompare(expected, obtained) :| "flatMap on successfull WikiResult with a successful function is correct"
     }
   }
 
@@ -181,13 +177,14 @@ class WikigraphSuite extends munit.FunSuite:
     forAll(wikiResultGen[Int](true, true)) { (w: WikiResult[Int]) =>
       val err = ArticleNotFound(ArticleId(42))
       def f(x: Int): WikiResult[String] = WikiResult.domainError(err)
-      val origin = Try(Await.result(w.value, timeout))
-      val obtained = Try(Await.result(w.flatMap(f).value, timeout))
+      val obtained = w.flatMap(f)
 
-      origin match
-        case failure@TFail(_) => (failure == obtained) :| "flatMap on a WikiResult failed with a system failure is correct"
-        case TSucc(Right(_)) => (obtained == TSucc(Left(Seq(err)))) :| "flatMap on a successfull WikiResult with a failing function produces a failed WikiResult with the correct domain error"
-        case oldErr@TSucc(Left(_)) => (obtained == oldErr) :| "flatMap on a WikiResult with domain error using a failing function propagates the failure"
+      if w.failure.nonEmpty then
+        sameErrorMessage(w.failure, obtained.failure) :| "flatMap on a WikiResult failed with a system failure is correct"
+      else if w.errors.nonEmpty then
+        (w.errors == obtained.errors) :| "flatMap on a WikiResult with domain error using a failing function propagates the failure"
+      else
+        blockAndCompare(f(42), obtained) :| "flatMap on a successfull WikiResult with a failing function produces a failed WikiResult with the correct domain error"
     }
   }
 
@@ -196,13 +193,14 @@ class WikigraphSuite extends munit.FunSuite:
       val ex = wikigraph.errors.WikiException.Timeout
       def f(x: Int): WikiResult[String] = WikiResult.systemFailure(ex)
 
-      val origin = Try(Await.result(w.value, timeout))
-      val obtained = Try(Await.result(w.flatMap(f).value, timeout))
+      val obtained = w.flatMap(f)
 
-      origin match
-        case failure@TFail(_) => (failure == obtained) :| "flatMap on a WikiResult failed with a system failure is correct"
-        case TSucc(Right(_)) => (obtained == TFail(ex)) :| "flatMap on a successfull WikiResult with a failing function produces a failed WikiResult with the correct system failure"
-        case oldErr@TSucc(Left(_)) => (obtained == oldErr) :| "flatMap on a WikiResult with domain error using a failing function propagates the old error"
+      if w.failure.isDefined then
+        sameErrorMessage(w.failure, obtained.failure) :| "the old failure is not reported"
+      else if w.errors.nonEmpty then
+        (w.errors == obtained.errors) :| "the function is not invoked if the initial result contains errors"
+      else
+        sameErrorMessage(obtained.failure, Some(ex)) :| "the new failure is not reported"
     }
   }
 
@@ -213,9 +211,9 @@ class WikigraphSuite extends munit.FunSuite:
       ArticleId(3) -> Set(5).map(ArticleId(_)),
       ArticleId(5) -> Set(6).map(ArticleId(_))
     )
-    val res = Await.result(Wikigraph(InMemory(g)).breadthFirstSearch(ArticleId(1), ArticleId(6), 10).value, timeout)
+    val res = Wikigraph(InMemory(g)).breadthFirstSearch(ArticleId(1), ArticleId(6), 10)
 
-    assertEquals(res, Right(Some(3)), "correct distance")
+    assert(res.extractUnsafe == Option(3))
   }
 
   test("breadthFirstSearch finds shortest path path") {
@@ -227,9 +225,9 @@ class WikigraphSuite extends munit.FunSuite:
       ArticleId(6) -> Set(4).map(ArticleId(_))
     )
 
-    val res = Await.result(Wikigraph(InMemory(g)).breadthFirstSearch(ArticleId(1), ArticleId(4), 10).value, timeout)
+    val res = Wikigraph(InMemory(g)).breadthFirstSearch(ArticleId(1), ArticleId(4), 10)
 
-    assertEquals(res, Right(Some(2)), "correct distance")
+    assert(res.extractUnsafe == Option(2))
   }
 
   test("breadthFirstSearch exits when maxDepth is reached") {
@@ -239,15 +237,15 @@ class WikigraphSuite extends munit.FunSuite:
       ArticleId(3) -> Set(4).map(ArticleId(_)),
       ArticleId(4) -> Set(5).map(ArticleId(_)),
     )
-    val res = Await.result(Wikigraph(InMemory(g)).breadthFirstSearch(ArticleId(1), ArticleId(5), 2).value, timeout)
+    val res = Wikigraph(InMemory(g)).breadthFirstSearch(ArticleId(1), ArticleId(5), 2)
 
-    assertEquals(res, Right(None))
+    assert(blockAndCompare(res, WikiResult.successful[Option[Int]](None)))
   }
 
   test("breadthFirstSearch does not fail on errors") {
     val g = Map(ArticleId(0) -> Set.empty[ArticleId])
-    val res = Await.result(Wikigraph(InMemory(g)).breadthFirstSearch(ArticleId(1), ArticleId(1000), 4).value, timeout)
-    assertEquals(res, Right(None))
+    val res = Wikigraph(InMemory(g)).breadthFirstSearch(ArticleId(1), ArticleId(1000), 4)
+    assert(blockAndCompare(res, WikiResult.successful[Option[Int]](None)))
   }
 
   test("distanceMatrix") {
@@ -257,10 +255,82 @@ class WikigraphSuite extends munit.FunSuite:
       ArticleId(3) -> Set(1).map(ArticleId(_))
     )
 
-    val res: Either[Seq[WikiError], Seq[(String, String, Option[Int])]] = Await.result(Wikigraph(InMemory(g)).distanceMatrix(List("TestArticle-1", "TestArticle-3")).value, timeout)
-    val exp: Either[Seq[WikiError], Seq[(String, String, Option[Int])]] = Right(Seq(("TestArticle-1", "TestArticle-3", Some(2)), ("TestArticle-3", "TestArticle-1", Some(1))))
+    val res = Wikigraph(InMemory(g)).distanceMatrix(List("TestArticle-1", "TestArticle-3")) 
+    val exp = WikiResult.successful[Seq[(String, String, Option[Int])]](Seq(("TestArticle-1", "TestArticle-3", Option(2)), ("TestArticle-3", "TestArticle-1", Option(1))))
 
-    assertEquals(res, exp)
+    assert(blockAndCompare(res, exp))
+  }
+
+  property("namedLinks") {
+    val links = Set(2 ,3, 4, 5).map(ArticleId(_))
+    val graph: Map[ArticleId, Set[ArticleId]] = 
+      Map(ArticleId(1) -> links)
+
+    import scala.collection.convert.ImplicitConversionsToScala._
+
+    def setUp(withErrors: Boolean, withFailure: Boolean): Prop = {
+      // inject failures into the lnksFrom result
+      val failableLinks: Gen[WikiResult[Set[ArticleId]]] = 
+        val setOfGen = links.map(Gen.const).map(g => wikiResultGen(withErrors, withFailure)(using summon[Gen[WikiError]], g))
+        Gen.sequence(setOfGen).map(set => WikiResult.traverse(set.toSeq)(identity).map(_.toSet))
+  
+      // inject failrues into the nameOfArticle function
+      val nameSearcher: Gen[ArticleId => WikiResult[String]] =
+        val all: List[ArticleId] = links.toList
+        val gens: List[Gen[(ArticleId, WikiResult[String])]] = all.map { (node: ArticleId) => 
+          wikiResultGen(withErrors, withFailure)(using summon[Gen[WikiError]], Gen.const(s"TestArticle-${node.raw}")).map(r => node -> r)
+        }
+        Gen.sequence(gens).map { listOfTuples =>
+          (art: ArticleId) => 
+            List.from(listOfTuples).find(_._1 == art) match
+              case None => WikiResult.domainError(TitleNotFound(art))
+              case Some((_, res)) => res
+        }
+
+      // zip the two generators
+      val generator = 
+        for 
+          ls <- failableLinks
+          f <- nameSearcher
+        yield (ls -> f)
+  
+      forAll(generator) { (links, f) =>
+        // Create a dummy Wikipedia instance for testing
+        val client = new Wikipedia:
+          override def linksFrom(art: ArticleId)(using ExecutionContext) = links
+          override def nameOfArticle(art: ArticleId)(using ExecutionContext) = f(art)
+          override def searchId(title: String)(using ExecutionContext) = ???
+  
+        val wg = Wikigraph(client)
+
+        val result: WikiResult[Set[String]] = wg.namedLinks(graph.keys.head) 
+
+        if links.failure.nonEmpty || links.errors.nonEmpty then
+          // check when linksFrom fails or errors
+          (sameErrorMessage(result.failure, links.failure) ||
+            (result.errors == links.errors)) :| "did not report the error or failure issued by linksFrom"
+        else
+          // check nameOfArticle when linksFrom succeeds
+          val results = links.extractUnsafe.map(f)
+          // We need only the first failure because failures are fail-fast
+          val nameFail = results.collectFirst { case w if w.failure.nonEmpty => w.failure.get }
+          if nameFail.nonEmpty then
+            sameErrorMessage(nameFail, result.failure) :| "did not report the failure issued by nameOfArticle"
+          else 
+            // check errors, which are accumulated
+            val nameErrors = results.toSeq.flatMap(_.errors)
+            if nameErrors.nonEmpty then
+              (result.errors.toSet == nameErrors.toSet) :| "did not report the error(s) issued by nameOfArticle"
+            else
+              (result.extractUnsafe == results.map(_.extractUnsafe)) :| "did not construct the correct set of names"
+      }
+    }
+    val res: Prop = 
+      setUp(false, false) && 
+        setUp(true, false) &&
+        setUp(false, true) &&
+        setUp(true, true)
+    res
   }
 
   def property(name: String)(prop: => Prop)(using munit.Location) =
