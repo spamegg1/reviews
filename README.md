@@ -550,6 +550,8 @@ The instructors are great! I always thought Udacity is the only one that got onl
 ### <a name="scala"></a> Functional Programming in Scala (5 courses)
 https://www.coursera.org/specializations/scala
 
+**Update (July 2021):** The first 3 courses have been [updated to Scala 3](https://scala-lang.org/blog/2021/05/17/effective-programming-scala-course.html).
+
 OK, this was the big finish line. From the very first day I came across OSSU I've been eying this as my eventual goal. I set my browser homepage to the Scala Wikipedia page for two years, so I would see it everyday and stay motivated. I had never seen a single line of Scala code up to this point. 
 
 Unfortunately I came across too many outside issues during this. I was under quarantine, and starting to lose my mind from boredom and mild depression. Then to top it all off my PC broke (motherboard's CPU socket burned). I had to take a break in the middle of my Spec to go out looking for hardware in a pandemic taking some huge risk and being super bummed and depressed. Once I was able to continue I wasn't motivated or overjoyed as I have been dreaming for a year. Adjust your expectations people!
