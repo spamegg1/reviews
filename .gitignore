@@ -2,6 +2,7 @@
 .vscode/
 sml.json
 *.pyc
+.scalafix.conf
 *.dat
 target/
 project/target/
