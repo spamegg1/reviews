@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Functional Reactive Calculator</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+
+<h1>Functional Reactive Calculator</h1>
+
+
+<h2>Tweet measurer</h2>
+
+<form>
+  <div class="form-group">
+    <label for="tweettext">Enter the text of the tweet:</label>
+    <textarea class="form-control" id="tweettext" rows="3"></textarea>
+    <span class="help-block">Characters remaining: <span id="tweetremainingchars"></span></span>
+  </div>
+</form>
+
+
+<h2>2nd order polynomial solver</h2>
+
+<form class="form-inline">
+  <div class="form-group">
+    <input type="text" class="form-control" style="width: 7em" id="polyroota" value="1"> x²
+  </div>
+  +
+  <div class="form-group">
+    <input type="text" class="form-control" style="width: 7em" id="polyrootb" value="1"> x
+  </div>
+  +
+  <div class="form-group">
+    <input type="text" class="form-control" style="width: 7em" id="polyrootc" value="1">
+  </div>
+</form>
+
+<p>
+&Delta; = b² - 4ac = <span id="polyrootdelta">?</span><br/>
+Solution(s): <span id="polyrootsolutions">?</span>
+</p>
+
+
+<h2>Calculator</h2>
+
+<p>Once properly implemented, this calculator can compute values of variables
+depending on other variables.</p>
+
+<p>Only very simple expressions are valid, here. It can be one of:</p>
+
+<ul>
+  <li>A number</li>
+  <li>The name of a variable (from 'a' to 'j')</li>
+  <li>An expression of the form '&lt;expr&gt; &lt;op&gt; &lt;expr&gt;' where
+    &lt;expr&gt; is a number or a variable name, and &lt;op&gt; is one of + - * /<br />
+    Note that spaces are important, and that there cannot be more than one operation per cell.</li>
+</ul>
+
+<p>Any error, such as a malformed expression, or cyclic references between
+variables, will result in NaN (Not-a-Number).</p>
+
+<form class="form-horizontal">
+  <div class="form-group">
+    <label for="calculatorexpra" class="col-sm-1 control-label">a =</label>
+    <div class="col-sm-2">
+      <input type="text" class="form-control" id="calculatorexpra" value="0">
+    </div>
+    <div class="col-sm-2 help-block">
+      = <span id="calculatorvala">?</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="calculatorexprb" class="col-sm-1 control-label">b =</label>
+    <div class="col-sm-2">
+      <input type="text" class="form-control" id="calculatorexprb" value="0">
+    </div>
+    <div class="col-sm-2 help-block">
+      = <span id="calculatorvalb">?</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="calculatorexprc" class="col-sm-1 control-label">c =</label>
+    <div class="col-sm-2">
+      <input type="text" class="form-control" id="calculatorexprc" value="0">
+    </div>
+    <div class="col-sm-2 help-block">
+      = <span id="calculatorvalc">?</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="calculatorexprd" class="col-sm-1 control-label">d =</label>
+    <div class="col-sm-2">
+      <input type="text" class="form-control" id="calculatorexprd" value="0">
+    </div>
+    <div class="col-sm-2 help-block">
+      = <span id="calculatorvald">?</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="calculatorexpre" class="col-sm-1 control-label">e =</label>
+    <div class="col-sm-2">
+      <input type="text" class="form-control" id="calculatorexpre" value="0">
+    </div>
+    <div class="col-sm-2 help-block">
+      = <span id="calculatorvale">?</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="calculatorexprf" class="col-sm-1 control-label">f =</label>
+    <div class="col-sm-2">
+      <input type="text" class="form-control" id="calculatorexprf" value="0">
+    </div>
+    <div class="col-sm-2 help-block">
+      = <span id="calculatorvalf">?</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="calculatorexprg" class="col-sm-1 control-label">g =</label>
+    <div class="col-sm-2">
+      <input type="text" class="form-control" id="calculatorexprg" value="0">
+    </div>
+    <div class="col-sm-2 help-block">
+      = <span id="calculatorvalg">?</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="calculatorexprh" class="col-sm-1 control-label">h =</label>
+    <div class="col-sm-2">
+      <input type="text" class="form-control" id="calculatorexprh" value="0">
+    </div>
+    <div class="col-sm-2 help-block">
+      = <span id="calculatorvalh">?</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="calculatorexpri" class="col-sm-1 control-label">i =</label>
+    <div class="col-sm-2">
+      <input type="text" class="form-control" id="calculatorexpri" value="0">
+    </div>
+    <div class="col-sm-2 help-block">
+      = <span id="calculatorvali">?</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="calculatorexprj" class="col-sm-1 control-label">j =</label>
+    <div class="col-sm-2">
+      <input type="text" class="form-control" id="calculatorexprj" value="0">
+    </div>
+    <div class="col-sm-2 help-block">
+      = <span id="calculatorvalj">?</span>
+    </div>
+  </div>
+</form>
+
+    </div><!-- /.container -->
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">-->
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+    <!-- Scala.js-generated code -->
+    <script type="text/javascript" src="./target/scala-2.13/webui-fastopt.js"></script>
+
+  </body>
+</html>
