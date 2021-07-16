@@ -20,10 +20,12 @@ final class Wikigraph(client: Wikipedia):
     * Hint: Use the methods that you implemented in WikiResult.
     */
   def namedLinks(of: ArticleId): WikiResult[Set[String]] =
-    val links: WikiResult[Set[ArticleId]] = client.linksFrom(of)
-    def mapFun(set: Set[ArticleId]): Set[String] =
-      ???
-    links.map(mapFun)
+    val linkSet: WikiResult[Set[ArticleId]] = client.linksFrom(of)
+    val linkSeq: WikiResult[Seq[ArticleId]] = linkSet.map(_.toSeq)
+    val traversedSeq: WikiResult[Seq[String]] =
+      linkSeq.flatMap(list => WikiResult.traverse(list)(client.nameOfArticle))
+    traversedSeq.map(_.toSet)
+
 
   /**
     * Computes the distance between two articles using breadth first search.
@@ -66,8 +68,14 @@ final class Wikigraph(client: Wikipedia):
           q.dequeue
         if node._1 > maxDepth then
           WikiResult.successful(None)
+        else if visited.contains(node._2) then
+          iter(visited, queue)
         else
           val neighbors: WikiResult[Set[ArticleId]] = client.linksFrom(node._2)
+          val found: WikiResult[Boolean] =
+            neighbors.map(set => set.exists(id => id == target))
+          val nodes: WikiResult[Set[(Int, ArticleId)]] =
+            neighbors.map(set => set.map(aId => (node._1 + 1, aId)))
           WikiResult.successful(None)
     if start == target then WikiResult.successful(Some(0))
     else iter(Set(start), Queue(1->start))
@@ -86,5 +94,17 @@ final class Wikigraph(client: Wikipedia):
     *       breadthFirstSearch
     */
   def distanceMatrix(titles: List[String], maxDepth: Int = 50): WikiResult[Seq[(String, String, Option[Int])]] =
+  // traverse:
+  // as: Seq[A] = titles: List[String]
+  // so: A = String
+  // WikiResult[Seq[B]] = WikiResult[Seq[(String, String, Option[Int])]
+  // so: B = (String, String, Option[Int])
+  // we need: f: A => WikiResult[B]
+  // so: f: String => WikiResult[(String, String, Option[Int])]
+  // this can be done by zipping
+  //    WikiResult[String],
+  //    WikiResult[String],
+  //    WikiResult[Option[Int]] <- this is returned by breadthFirstSearch
+  //
     ???
 end Wikigraph
