@@ -1,0 +1,1 @@
+Lecture code snippets at: https://github.com/axel22/parprog-snippets
