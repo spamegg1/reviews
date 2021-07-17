@@ -40,7 +40,40 @@ class Img(val width: Int, val height: Int, private val data: Array[RGBA]):
 def boxBlurKernel(src: Img, x: Int, y: Int, radius: Int): RGBA =
 
   // TODO implement using while loops
-  ???
+  /* declare variables for the 4 averages and neighbor count */
+  var rnew, gnew, bnew, anew, nghCount = 0
+
+  /* define bounds for the while loops by clamping down on x -+ radius, y -+ radius */
+  val xmin: Int = clamp(x - radius, 0, src.width - 1)
+  val xmax: Int = clamp(x + radius, 0, src.width - 1)
+  val ymin: Int = clamp(y - radius, 0, src.height - 1)
+  val ymax: Int = clamp(y + radius, 0, src.height - 1)
+
+  /* define variables for the while loops */
+  var i: Int = xmin
+  var j: Int = ymin
+
+  /* get neighbors within clamped borders */
+  while
+    i <= xmax
+  do
+    while
+      j <= ymax
+    do
+      val neighbor: RGBA = src(i, j)
+      nghCount = nghCount + 1
+
+      /* add neighbor's RGBA values to accumulated 4 channels */
+      rnew = rnew + red(neighbor)
+      gnew = gnew + green(neighbor)
+      bnew = bnew + blue(neighbor)
+      anew = anew + alpha(neighbor)
+      j = j + 1
+    i = i + 1
+    j = ymin                                                 // back to leftmost
+
+  /* average the 4 channels and create a new RGBA value out of them */
+  rgba(rnew / nghCount, gnew / nghCount , bnew / nghCount, anew / nghCount)
 
 val forkJoinPool = ForkJoinPool()
 
