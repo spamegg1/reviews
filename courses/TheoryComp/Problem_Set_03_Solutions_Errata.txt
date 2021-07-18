@@ -1,0 +1,6 @@
+Errata for Problem Set 3 Solutions
+----------------------------------
+
+(3b)  This solution is not complete.  A better answer is S -> 0 | 1 | 00S | 01S | 10S | 11S.
+
+Thanks to Manny Gites.

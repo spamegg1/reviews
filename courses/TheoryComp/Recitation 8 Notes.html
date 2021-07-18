@@ -1,0 +1,229 @@
+<html class=" ixzxt idc0_331"><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"><style class="darkreader darkreader--fallback" media="screen"></style><style class="darkreader darkreader--text" media="screen"></style><style class="darkreader darkreader--invert" media="screen">.jfk-bubble.gtx-bubble, .captcheck_answer_label > input + img, span#closed_text > img[src^="https://www.gstatic.com/images/branding/googlelogo"], span[data-href^="https://www.hcaptcha.com/"] > #icon, #bit-notification-bar-iframe, ::-webkit-calendar-picker-indicator, embed[type="application/pdf"] {
+    filter: invert(100%) hue-rotate(180deg) contrast(90%) !important;
+}</style><style class="darkreader darkreader--inline" media="screen">[data-darkreader-inline-bgcolor] {
+  background-color: var(--darkreader-inline-bgcolor) !important;
+}
+[data-darkreader-inline-bgimage] {
+  background-image: var(--darkreader-inline-bgimage) !important;
+}
+[data-darkreader-inline-border] {
+  border-color: var(--darkreader-inline-border) !important;
+}
+[data-darkreader-inline-border-bottom] {
+  border-bottom-color: var(--darkreader-inline-border-bottom) !important;
+}
+[data-darkreader-inline-border-left] {
+  border-left-color: var(--darkreader-inline-border-left) !important;
+}
+[data-darkreader-inline-border-right] {
+  border-right-color: var(--darkreader-inline-border-right) !important;
+}
+[data-darkreader-inline-border-top] {
+  border-top-color: var(--darkreader-inline-border-top) !important;
+}
+[data-darkreader-inline-boxshadow] {
+  box-shadow: var(--darkreader-inline-boxshadow) !important;
+}
+[data-darkreader-inline-color] {
+  color: var(--darkreader-inline-color) !important;
+}
+[data-darkreader-inline-fill] {
+  fill: var(--darkreader-inline-fill) !important;
+}
+[data-darkreader-inline-stroke] {
+  stroke: var(--darkreader-inline-stroke) !important;
+}
+[data-darkreader-inline-outline] {
+  outline-color: var(--darkreader-inline-outline) !important;
+}
+[data-darkreader-inline-stopcolor] {
+  stop-color: var(--darkreader-inline-stopcolor) !important;
+}</style><style class="darkreader darkreader--variables" media="screen">:root {
+   --darkreader-neutral-background: #131516;
+   --darkreader-neutral-text: #d8d4cf;
+   --darkreader-selection-background: #004daa;
+   --darkreader-selection-text: #e8e6e3;
+}</style><style class="darkreader darkreader--root-vars" media="screen"></style><script class="darkreader darkreader--proxy">(function injectProxy() {
+        document.dispatchEvent(new CustomEvent('__darkreader__inlineScriptsAllowed'));
+        const addRuleDescriptor = Object.getOwnPropertyDescriptor(CSSStyleSheet.prototype, 'addRule');
+        const insertRuleDescriptor = Object.getOwnPropertyDescriptor(CSSStyleSheet.prototype, 'insertRule');
+        const deleteRuleDescriptor = Object.getOwnPropertyDescriptor(CSSStyleSheet.prototype, 'deleteRule');
+        const removeRuleDescriptor = Object.getOwnPropertyDescriptor(CSSStyleSheet.prototype, 'removeRule');
+        const shouldWrapDocStyleSheets = location.hostname.endsWith('pushbullet.com') ||
+            location.hostname.endsWith('ilsole24ore.com') ||
+            location.hostname.endsWith('allegro.pl');
+        const documentStyleSheetsDescriptor = shouldWrapDocStyleSheets ? Object.getOwnPropertyDescriptor(Document.prototype, 'styleSheets') : null;
+        const cleanUp = () => {
+            Object.defineProperty(CSSStyleSheet.prototype, 'addRule', addRuleDescriptor);
+            Object.defineProperty(CSSStyleSheet.prototype, 'insertRule', insertRuleDescriptor);
+            Object.defineProperty(CSSStyleSheet.prototype, 'deleteRule', deleteRuleDescriptor);
+            Object.defineProperty(CSSStyleSheet.prototype, 'removeRule', removeRuleDescriptor);
+            document.removeEventListener('__darkreader__cleanUp', cleanUp);
+            document.removeEventListener('__darkreader__addUndefinedResolver', addUndefinedResolver);
+            if (shouldWrapDocStyleSheets) {
+                Object.defineProperty(Document.prototype, 'styleSheets', documentStyleSheetsDescriptor);
+            }
+        };
+        const addUndefinedResolver = (e) => {
+            customElements.whenDefined(e.detail.tag).then(() => {
+                document.dispatchEvent(new CustomEvent('__darkreader__isDefined', { detail: { tag: e.detail.tag } }));
+            });
+        };
+        document.addEventListener('__darkreader__cleanUp', cleanUp);
+        document.addEventListener('__darkreader__addUndefinedResolver', addUndefinedResolver);
+        const updateSheetEvent = new Event('__darkreader__updateSheet');
+        function proxyAddRule(selector, style, index) {
+            addRuleDescriptor.value.call(this, selector, style, index);
+            if (this.ownerNode && !this.ownerNode.classList.contains('darkreader')) {
+                this.ownerNode.dispatchEvent(updateSheetEvent);
+            }
+            return -1;
+        }
+        function proxyInsertRule(rule, index) {
+            const returnValue = insertRuleDescriptor.value.call(this, rule, index);
+            if (this.ownerNode && !this.ownerNode.classList.contains('darkreader')) {
+                this.ownerNode.dispatchEvent(updateSheetEvent);
+            }
+            return returnValue;
+        }
+        function proxyDeleteRule(index) {
+            deleteRuleDescriptor.value.call(this, index);
+            if (this.ownerNode && !this.ownerNode.classList.contains('darkreader')) {
+                this.ownerNode.dispatchEvent(updateSheetEvent);
+            }
+        }
+        function proxyRemoveRule(index) {
+            removeRuleDescriptor.value.call(this, index);
+            if (this.ownerNode && !this.ownerNode.classList.contains('darkreader')) {
+                this.ownerNode.dispatchEvent(updateSheetEvent);
+            }
+        }
+        function proxyDocumentStyleSheets() {
+            const docSheets = documentStyleSheetsDescriptor.get.call(this);
+            const filtered = [...docSheets].filter((styleSheet) => {
+                return !styleSheet.ownerNode.classList.contains('darkreader');
+            });
+            return Object.setPrototypeOf(filtered, StyleSheetList.prototype);
+        }
+        Object.defineProperty(CSSStyleSheet.prototype, 'addRule', Object.assign({}, addRuleDescriptor, { value: proxyAddRule }));
+        Object.defineProperty(CSSStyleSheet.prototype, 'insertRule', Object.assign({}, insertRuleDescriptor, { value: proxyInsertRule }));
+        Object.defineProperty(CSSStyleSheet.prototype, 'deleteRule', Object.assign({}, deleteRuleDescriptor, { value: proxyDeleteRule }));
+        Object.defineProperty(CSSStyleSheet.prototype, 'removeRule', Object.assign({}, removeRuleDescriptor, { value: proxyRemoveRule }));
+        if (shouldWrapDocStyleSheets) {
+            Object.defineProperty(Document.prototype, 'styleSheets', Object.assign({}, documentStyleSheetsDescriptor, { get: proxyDocumentStyleSheets }));
+        }
+    })()</script><style class="darkreader darkreader--user-agent" media="screen">html {
+    background-color: #181a1b !important;
+}
+html, body, input, textarea, select, button {
+    background-color: #181a1b;
+}
+html, body, input, textarea, select, button {
+    border-color: #736b5e;
+    color: #e8e6e3;
+}
+a {
+    color: #3391ff;
+}
+table {
+    border-color: #545b5e;
+}
+::placeholder {
+    color: #b2aba1;
+}
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    background-color: #555b00 !important;
+    color: #e8e6e3 !important;
+}
+::-webkit-scrollbar {
+    background-color: #202324;
+    color: #aba499;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #454a4d;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: #575e62;
+}
+::-webkit-scrollbar-thumb:active {
+    background-color: #484e51;
+}
+::-webkit-scrollbar-corner {
+    background-color: #181a1b;
+}
+* {
+    scrollbar-color: #454a4d #202324;
+}
+::selection {
+    background-color: #004daa !important;
+    color: #e8e6e3 !important;
+}
+::-moz-selection {
+    background-color: #004daa !important;
+    color: #e8e6e3 !important;
+}</style>
+<title>
+Recitation 8 Notes
+</title>
+<meta name="darkreader" content="dcc887e3f96e456920dccf247b5aaa42"><style class="darkreader darkreader--override" media="screen">.vimvixen-hint {
+    background-color: #7b5300 !important;
+    border-color: #d8b013 !important;
+    color: #f3e8c8 !important;
+}
+::placeholder {
+    opacity: 0.5 !important;
+}
+a[href="https://coinmarketcap.com/"] > svg[width="94"][height="16"] > path {
+    fill: var(--darkreader-neutral-text) !important;
+}
+#edge-translate-panel-body {
+    color: var(--darkreader-neutral-text) !important;
+}</style></head>
+<body style="" data-darkreader-inline-bgcolor="" bgcolor="#ffffff">
+
+<center><h2> Ars Digita University <br> Theory of Computation <br>
+ Recitation 8, 05/14/01 </h2></center>
+
+<h2>Topics</h2>
+Today we'll mainly catch up on all the problems from previous handouts we haven't
+done yet.
+<ul>
+<li> Aisde: Languages as infinitely long streams of bits, complexity and compression
+</li><li>Leftmost and Rightmost derivations.
+</li><li>Parse Trees.
+</li><li>Chomsky Normal Form. What it is useful for.
+</li><li>Converting a grammar to Chomsky normal form.
+</li><li>Intro to the pumping lemma for context free languages.
+</li></ul>
+<h2> Languages and streams o' bits</h2>
+
+Here is a list (well, the beginning of a list) of all possible strings
+that can be made from the characters a and b. They are ordered so that
+all strings of length 1 come first, then strings of length 2 then strings
+of length 3, ... etc.
+
+<pre>e a  b  aa ab ba bb aaa aab aba abb baa bab bba bbb aaaa aaab aaba aabb abaa abab abba abbb baaa baab baba babb bbaa bbab bbba bbbb aaaaa aaaab aaaba aaabb aabaa aabab aabba aabbb abaaa abaab ababa ababb abbaa abbab abbba abbbb baaaa baaab baaba baabb babaa babab babba babbb bbaaa bbaab bbaba bbabb bbbaa bbbab bbbba bbbbb aaaaaa aaaaab aaaaba aaaabb aaabaa aaabab aaabba aaabbb aabaaa aabaab aababa aababb aabbaa aabbab aabbba aabbbb abaaaa abaaab abaaba abaabb ababaa ababab ababba ababbb abbaaa abbaab abbaba abbabb abbbaa abbbab abbbba abbbbb baaaaa baaaab baaaba baaabb baabaa baabab baabba baabbb babaaa babaab bababa bababb babbaa babbab babbba babbbb bbaaaa bbaaab bbaaba bbaabb bbabaa bbabab bbabba bbabbb bbbaaa bbbaab bbbaba bbbabb bbbbaa bbbbab bbbbba bbbbbb
+</pre>
+<p>
+A language is an infinite stream of bits.
+
+Example a(a+b)*
+</p><p>
+</p><pre>0 1  0   1  1  0  0   1   1   1   1   0   0   0   0    1    1    1    1    1    1    1    1    0    0    0    0    0    0    0    0     1     1     1     1     1     1     1     1     1     1     1     1     1     1     1     1     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0      1      1      1      1      1      1      1      1      1      1      1      1      1      1      1      1      1      1      1      1      1      1      1      1      1      1      1      1      1      1      1      1      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      
+</pre>
+
+
+Example (ab)*
+<p>
+</p><pre>1 0  0   0  1  0  0   0   0   0   0   0   0   0   0    0    0    0    0    0    1    0    0    0    0    0    0    0    0    0    0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      1      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      
+</pre>
+
+
+<h2> Problems to work on </h2>
+Work on the problems from previous handouts
+<hr>
+Dimitri Kountourogiannis, <a href="mailto://dimitrik@alum.mit.edu">dimitrik@alum.mit.edu</a>
+</body></html>
