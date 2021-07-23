@@ -205,13 +205,37 @@ class WikigraphSuite extends munit.FunSuite:
   }
 
   test("breadthFirstSearch finds unique path") {
+    // 1 -> 3 -> 5 -> 6
     val g: Map[ArticleId, Set[ArticleId]] = Map(
-      ArticleId(1) -> Set(2 ,3).map(ArticleId(_)),
+      ArticleId(1) -> Set(2, 3).map(ArticleId(_)),
       ArticleId(2) -> Set(4).map(ArticleId(_)),
       ArticleId(3) -> Set(5).map(ArticleId(_)),
       ArticleId(5) -> Set(6).map(ArticleId(_))
     )
-    val res = Wikigraph(InMemory(g)).breadthFirstSearch(ArticleId(1), ArticleId(6), 10)
+    val res = Wikigraph(InMemory(g)).breadthFirstSearch(ArticleId(1), ArticleId(6), 4)
+
+    assert(res.extractUnsafe == Option(3))
+  }
+
+  test("breadthFirstSearch avoids cycles and finds path") {
+    // lots of cycles:
+    // 1 -> 2 -> 1
+    // 1 -> 2 -> 4 -> 1
+    // 1 -> 3 -> 1
+    // 1 -> 3 -> 5 -> 1
+    val g: Map[ArticleId, Set[ArticleId]] = Map(
+      ArticleId(1) -> Set(2, 3).map(ArticleId(_)),
+      ArticleId(2) -> Set(1).map(ArticleId(_)),
+      ArticleId(2) -> Set(4).map(ArticleId(_)),
+      ArticleId(3) -> Set(1).map(ArticleId(_)),
+      ArticleId(3) -> Set(5).map(ArticleId(_)),
+      ArticleId(4) -> Set(1).map(ArticleId(_)),
+      ArticleId(5) -> Set(1).map(ArticleId(_)),
+      ArticleId(5) -> Set(6).map(ArticleId(_))
+    )
+
+    // path to find is 1 -> 3 -> 5 -> 6, requires at least depth 4
+    val res = Wikigraph(InMemory(g)).breadthFirstSearch(ArticleId(1), ArticleId(6), 4)
 
     assert(res.extractUnsafe == Option(3))
   }
