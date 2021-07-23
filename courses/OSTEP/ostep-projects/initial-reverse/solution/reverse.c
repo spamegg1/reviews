@@ -1,15 +1,28 @@
 #include <stdio.h>              // this has to be included in any file doing I/O
 #include <stdlib.h>                           // needed for exit() and constants
 #include <string.h>                              // needed for string comparison
+#include <sys/types.h>                                        // needed for stat
+#include <sys/stat.h>                                         // needed for stat
+#include <unistd.h>                                           // needed for stat
+
+// char *filename(char *path) {
+//     char *name = strchr(path, '/');
+//     if (name == NULL) {
+//         return path;
+//     }
+//     return name;
+// }
 
 // needed to detect same file under different directories
 // for example: ./reverse tests/5.in tests-out/5.in should be detected as same
-char *filename(char *path) {
-    char *name = strchr(path, '/');
-    if (name == NULL) {
-        return path;
+int samefile(char *file1, char *file2) {
+    struct stat statbuf1, statbuf2;
+    stat(file1, &statbuf1);
+    stat(file2, &statbuf2);
+    if (statbuf1.st_ino == statbuf2.st_ino) {
+        return 1;
     }
-    return name;
+    return 0;
 }
 
 // this code is repeated in all cases, so I factored it out to a function.
@@ -54,7 +67,7 @@ int main(int argc, char *argv[]) {
         char *outfile = argv[2];
 
         // input and output files are same
-        if (strcmp(filename(infile), filename(outfile)) == 0) {
+        if (samefile(infile, outfile)) {
             fprintf(stderr, "reverse: input and output file must differ\n");
             exit(EXIT_FAILURE);
         }
