@@ -1,57 +1,61 @@
 package wikigraph
 
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.{ ExecutionContext, Future }
 import wikigraph.errors.WikiError
 import wikigraph.errors.WikiException
 
 /**
   * The result of an asynchronous computation which may fail.
-  * This class is wrapper of Future[Either[Seq[WikiError], A]]
+  * This class is wrapper of `Future[Either[Seq[WikiError], A]]`.
   *
-  * @param A the type of the result of a successful computation
+  * @tparam A the type of the result of a successful computation
   * @param value the future to use to create this WikiResult. Checkout
   *        the companion object to find other ways to create a WikiResult
   * 
   * A WikiResult, after it completes, can be in one of the following states:
   * 
-  *  - [[Success(Right(result))]]
-  *  - [[Failure(exception)]]
-  *  - [[Success(Left(Seq(error)))]]
+  *  - success: `Success(Right(result))`
+  *  - system failure: `Failure(exception)`
+  *  - domain error: `Success(Left(Seq(error)))`
   */
-case class WikiResult[A](val value: Future[Either[Seq[WikiError], A]]):
+case class WikiResult[A](value: Future[Either[Seq[WikiError], A]]):
 
   /**
-    * If the computation fails, use the provided value as a result
-    * 
+    * Recovers from domain errors by returning the provided successful `solution` value instead.
+    * If this WikiResult is a system failure, that failure is not recovered.
+    *
     * @param solution the value to use in case of failure
     */
   def orElse(solution: A)(using ExecutionContext): WikiResult[A] =
     val f = value.map {
-      case Left(_) => Right(solution)
-      case nofail@Right(_)=> nofail
+      case Left(_)           => Right(solution)
+      case nofail @ Right(_) => nofail
     }
     WikiResult(f)
 
   /**
-    * If the computation fails, use the result of the provided computation
-    * 
+    * Tries to recover from domain errors by using `that` WikiResult instead.
+    * If both `this` and `that` are domain errors, only the errors of `that`
+    * are returned.
+    * If this WikiResult is a system failure, that failure is not recovered.
+    *
     * @param b the computation to use in case of failure
     */
   def fallbackTo(that: => WikiResult[A])(using ExecutionContext): WikiResult[A] =
-    val f = value.flatMap {
-      case Left(_) => that.value
-      case Right(_) => value
+    val f = this.value.flatMap {
+      case Left(_)  => that.value
+      case Right(_) => this.value
     }
     WikiResult(f)
 
   /**
-    * Transform the result of the computation
+    * Transform the successful result of this computation
     * 
     * @param f the function used to transform the result of the computation
     * 
     * Hint: Both Either and Future have a similar method
     */
-  def map[B](f: A => B)(using ExecutionContext): WikiResult[B] =
+  def map[B](f: A => B)(using ExecutionContext): WikiResult[B] = // TODO
     WikiResult(value.map(x => x.map(f)))
 
   /**
@@ -64,7 +68,7 @@ case class WikiResult[A](val value: Future[Either[Seq[WikiError], A]]):
     *       error should be propagated
     */
   def flatMap[B](f: A => WikiResult[B])(using ExecutionContext): WikiResult[B] = 
-    val futureB: Future[Either[Seq[WikiError], B]] = value.flatMap {
+    val futureB: Future[Either[Seq[WikiError], B]] = value.flatMap { // TODO
       case Left(seqA) => Future(Left(seqA))
       case Right(a) => f(a).value
     }
@@ -80,12 +84,12 @@ case class WikiResult[A](val value: Future[Either[Seq[WikiError], A]]):
     * Hint: The async part has been handled for you. You need to zip the two Either 
     */
   def zip[B](that: WikiResult[B])(using ExecutionContext): WikiResult[(A, B)] =
-    def zipEithersAcc(a: Either[Seq[WikiError], A], b: Either[Seq[WikiError], B]): Either[Seq[WikiError], (A, B)] =
-      (a, b) match
-        case (Left(seqA), Left(seqB)) => Left(seqA ++ seqB)
-        case (Left(seqA), Right(y)) => Left(seqA)
-        case (Right(x), Left(seqB)) => Left(seqB)
-        case (Right(x), Right(y)) => Right((x, y))
+    def zipEithersAcc(a: Either[Seq[WikiError], A], b: Either[Seq[WikiError], B])
+    : Either[Seq[WikiError], (A, B)] = (a, b) match // TODO
+      case (Left(seqA), Left(seqB)) => Left(seqA ++ seqB)
+      case (Left(seqA), Right(y)) => Left(seqA)
+      case (Right(x), Left(seqB)) => Left(seqB)
+      case (Right(x), Right(y)) => Right((x, y))
     WikiResult(this.value.flatMap { thisEither =>
       that.value.map { thatEither =>
         zipEithersAcc(thisEither, thatEither)
@@ -99,28 +103,32 @@ object WikiResult:
     * @param A the type of the result
     * @param a the value of the result
     */
-  def successful[A](a: A): WikiResult[A] = WikiResult(Future.successful(Right[Seq[WikiError], A](a)))
+  def successful[A](a: A): WikiResult[A] =
+    WikiResult(Future.successful(Right[Seq[WikiError], A](a)))
 
   /**
     * Creates a WikiResult which fails with the provided domain error
     * 
     * @param e the domain error which causes the failure of the computation
     */
-  def domainError[A](e: WikiError): WikiResult[A] = WikiResult(Future.successful(Left[Seq[WikiError], A](Seq(e))))
+  def domainError[A](e: WikiError): WikiResult[A] =
+    WikiResult(Future.successful(Left[Seq[WikiError], A](Seq(e))))
 
   /**
     * Creates a WikiResult which fails with the provided system exception
     * 
     * @param t the throwable exception causing the failure of the computation
     */
-  def systemFailure[A](t: WikiException): WikiResult[A] = WikiResult(Future.failed(t))
+  def systemFailure[A](t: WikiException): WikiResult[A] =
+    WikiResult(Future.failed(t))
 
   /**
     * Starts running the provided block asynchronously in the contextual execution context
     * 
     * @param block the computation to execute
     */
-  def start(block: => Unit)(using ExecutionContext): WikiResult[Unit] = WikiResult(Future(Right(block)))
+  def start(block: => Unit)(using ExecutionContext): WikiResult[Unit] =
+    WikiResult(Future(Right(block)))
 
   /**
     * Asynchronously and non-blockingly transforms a `Seq[A]` into a WikiResult[Seq[B]]
@@ -141,7 +149,8 @@ object WikiResult:
     * all the `WikiResult` values with the operation `zip`. If the input sequence is
     * empty, return a successful empty sequence.
     */
-  def traverse[A, B](as: Seq[A])(f: A => WikiResult[B])(using ExecutionContext): WikiResult[Seq[B]] =
+  def traverse[A, B](as: Seq[A])(f: A => WikiResult[B])(using ExecutionContext)
+  : WikiResult[Seq[B]] = // TODO
     val initVal: WikiResult[Seq[B]] = WikiResult.successful(Seq.empty)
     def iterFun(seqB: WikiResult[Seq[B]], a: A): WikiResult[Seq[B]] =
       seqB.zip(f(a)).map((bs, b) => bs :+ b)
