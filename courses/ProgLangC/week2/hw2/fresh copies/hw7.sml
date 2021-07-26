@@ -184,15 +184,15 @@ fun intersect (v1,v2) =
 
 fun eval_prog (e,env) =
     case e of
-    NoPoints => e (* first 5 cases are all values, so no computation *)
+        NoPoints => e (* first 5 cases are all values, so no computation *)
       | Point _  => e
       | Line _   => e
       | VerticalLine _ => e
       | LineSegment _  => e
       | Var s =>
     (case List.find (fn (s2,v) => s=s2) env of
-         NONE => raise BadProgram("var not found: " ^ s)
-       | SOME (_,v) => v)
+        NONE => raise BadProgram("var not found: " ^ s)
+      | SOME (_,v) => v)
       | Let(s,e1,e2) => eval_prog (e2, ((s, eval_prog(e1,env)) :: env))
       | Intersect(e1,e2) => intersect(eval_prog(e1,env), eval_prog(e2, env))
 (* CHANGE: Add a case for Shift expressions *)
