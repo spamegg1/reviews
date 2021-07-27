@@ -1,4 +1,4 @@
-# The course is at: https://www.coursera.org/learn/progfun2
+# The course is at: https://www.coursera.org/learn/scala-functional-program-design
 ---
 layout: page
 title: Cheat Sheet
