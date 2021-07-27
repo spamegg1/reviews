@@ -26,8 +26,10 @@ of the minimum and maximum of the numbers in the list.
 *)
 fun min_max_helper (numbers: int list, min_so_far: int, max_so_far: int): int * int =
     if null numbers then (min_so_far, max_so_far)
-    else if hd numbers < min_so_far then min_max_helper(tl numbers, hd numbers, max_so_far)
-    else if hd numbers > max_so_far then min_max_helper(tl numbers, min_so_far, hd numbers)
+    else if hd numbers < min_so_far
+    then min_max_helper(tl numbers, hd numbers, max_so_far)
+    else if hd numbers > max_so_far
+    then min_max_helper(tl numbers, min_so_far, hd numbers)
     else min_max_helper(tl numbers, min_so_far, max_so_far)
 
 fun min_max (numbers: int list): int * int =
@@ -64,7 +66,7 @@ Write a function
 that given a list of integers and another list of nonnegative integers,
 repeats the integers in the first list according to the numbers
 indicated by the second list. For example:
-    repeat ([1,2,3], [4,0,3]) = [1,1,1,1,3,3,3]
+    repeat ([1, 2, 3], [4, 0, 3]) = [1, 1, 1, 1, 3, 3, 3]
 *)
 fun repeat_helper (number: int, count: int): int list =
     if count = 0 then []
@@ -132,7 +134,7 @@ Write a function
     zip : int list * int list -> int * int
 that given two lists of integers creates consecutive pairs,
 and stops when one of the lists is empty. For example:
-    zip ([1,2,3], [4, 6]) = [(1,4), (2,6)].
+    zip ([1, 2, 3], [4, 6]) = [(1, 4), (2, 6)].
 *)
 fun zip (nums1: int list, nums2: int list): (int * int) list =
     if null nums1 orelse null nums2 then []
@@ -143,7 +145,8 @@ Challenge: Write a version
     zipRecycle
 where when one list is empty it starts recycling from its start
 until the other list completes. For example:
-    zipRecycle ([1,2,3], [1, 2, 3, 4, 5, 6, 7]) = [(1,1), (2,2), (3, 3), (1,4), (2,5), (3,6), (1,7)]
+    zipRecycle ([1, 2, 3], [1, 2, 3, 4, 5, 6, 7])
+    = [(1, 1), (2, 2), (3, 3), (1, 4), (2, 5), (3, 6), (1, 7)]
 *)
 (* This helper removes elements from the left of a list:
     head_remover ([1, 2, 3, 4, 5, 6, 7], 3) = [4, 5, 6, 7]
@@ -160,11 +163,7 @@ fun head_remover (numbers: int list, size: int): int list =
 fun zipRecycle_helper (nums1: int list, nums2: int list, order: bool): (int * int) list =
     if (null nums2) then []
     else
-    let val zipped =
-        if order
-        then zip(nums1, nums2)
-        else zip(nums2, nums1)
-    in
+    let val zipped = if order then zip(nums1, nums2) else zip(nums2, nums1) in
         zipped @ zipRecycle_helper(nums1, head_remover(nums2, (length nums1)), order)
     end
 
@@ -260,7 +259,7 @@ Write a function
     sortedMerge : int list * int list -> int list
 that takes two lists of integers that are each sorted from smallest to largest,
 and merges them into one sorted list. For example:
-    sortedMerge ([1,4,7], [5,8,9]) = [1,4,5,7,8,9]
+    sortedMerge ([1, 4, 7], [5, 8, 9]) = [1, 4, 5, 7, 8, 9]
 *)
 fun sortedMerge (nums1: int list, nums2: int list): int list =
     if null nums1 orelse null nums2 then nums1 @ nums2
@@ -281,9 +280,10 @@ are less than all the numbers in the other.)
 *)
 fun qsort (numbers: int list): int list =
     if null numbers then []
-    else let val lists = splitAt(tl numbers, hd numbers)
-    val bigger = #1 lists
-    val smaller = #2 lists
+    else
+    let val lists = splitAt(tl numbers, hd numbers)
+        val bigger = #1 lists
+        val smaller = #2 lists
     in
         qsort smaller @ [hd numbers] @ qsort bigger
         (*sortedMerge(qsort smaller, (hd numbers) :: qsort bigger)   <- this also works*)
@@ -295,12 +295,13 @@ Write a function
     divide : int list -> int list * int list
 that takes a list of integers and produces two lists by
 alternating elements between the two lists. For example:
-    divide ([1,2,3,4,5,6,7]) = ([1,3,5,7], [2,4,6])
+    divide ([1, 2, 3, 4, 5, 6, 7]) = ([1, 3, 5, 7], [2, 4, 6])
 *)
 fun divide (numbers: int list): int list * int list =
     if null numbers then ([], [])
     else if null (tl numbers) then (numbers, [])
-    else let
+    else
+    let
         val lists = divide(tl (tl numbers))
         val firsts = #1 lists
         val seconds = #2 lists
@@ -319,7 +320,8 @@ then merges them together with sortedMerge.
 fun not_so_quick_sort (numbers: int list): int list =
     if null numbers then []
     else if null (tl numbers) then numbers
-    else let
+    else
+    let
         val lists = divide(numbers)
         val firsts = #1 lists
         val seconds = #2 lists
@@ -336,11 +338,12 @@ and returns a pair (d, n2) where d is the number of times
 while n2 is the resulting n after all those divisions.
 Examples:
     fullDivide (2, 40) = (3, 5) because 2*2*2*5 = 40 and
-    fullDivide (3,10) = (0, 10) because 3 does not divide 10.
+    fullDivide (3, 10) = (0, 10) because 3 does not divide 10.
 *)
 fun fullDivide (pair: int * int): int * int =
     if (#2 pair) mod (#1 pair) <> 0 then (0, #2 pair)
-    else let
+    else
+    let
         val quotient = (#2 pair) div (#1 pair)
         val rest = fullDivide (#1 pair, quotient)
         val power = #1 rest
@@ -361,8 +364,8 @@ you should not need to test if the divisors are prime:
 If a number divides into n, it must be prime (if it had prime factors,
 they would have been earlier prime factors of n and thus reduced earlier).
 Examples:
-    factorize(20) = [(2,2), (5,1)]
-    factorize(36) = [(2,2), (3,2)]
+    factorize(20) = [(2, 2), (5, 1)]
+    factorize(36) = [(2, 2), (3, 2)]
     factorize(1) = []
 *)
 fun factorize_helper(current: int, divisor: int): (int * int) list =
@@ -373,7 +376,8 @@ fun factorize_helper(current: int, divisor: int): (int * int) list =
         (* if we found no divisors up to sqrt of current, then it's prime!
            This is computationally advantageous only for really large primes *)
         if real_div > Math.sqrt real_cur then [(current, 1)]
-        else let
+        else
+        let
             val factors = fullDivide (divisor, current)
             val quotient = #2 factors
             val power = #1 factors
@@ -411,7 +415,7 @@ possible products produced from using some or all of those prime factors
 no more than the number of times they are available.
 This should end up being a list of all the divisors of
 the number n that gave rise to the list. Example:
-    all_products([(2,2), (5,1)]) = [1,2,4,5,10,20]
+    all_products([(2, 2), (5, 1)]) = [1, 2, 4, 5, 10, 20]
 For extra challenge, your recursive process should return the numbers in this order,
 as opposed to sorting them afterwards.
 *)

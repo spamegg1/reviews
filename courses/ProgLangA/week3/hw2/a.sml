@@ -2,16 +2,21 @@ type student_id = int
 type grade = int (* must be in 0 to 100 range *)
 type final_grade = {id: student_id, grade: int option}
 datatype pass_fail = pass | fail
-type name_record = {student_id  : int option, name : string , middle : string option, surname : string}
+type name_record = {student_id  : int option,
+                    name : string ,
+                    middle : string option,
+                    surname : string}
 
-val myname = {student_id = SOME 4, name = "name", middle = SOME "middle", surname = "surname"}
+val myname = {student_id = SOME 4, name = "name",
+                middle = SOME "middle", surname = "surname"}
 
 fun pass_or_fail (x: final_grade) =
-    let val {grade=g, id=i} = x
+    let
+        val {grade=g, id=i} = x
     in
-    case g of
-        SOME y => if y >= 75 then pass else fail
-      | NONE => fail
+        case g of
+          SOME y => if y >= 75 then pass else fail
+        | NONE => fail
     end
 
 fun helper (xs: int list, pos: bool) =
