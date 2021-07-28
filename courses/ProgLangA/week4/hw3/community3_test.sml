@@ -4,12 +4,14 @@ use "community3.sml";
 
 val test1a: bool = compose_opt (fn x => NONE) (fn y => SOME y) 5 = NONE
 val test1b: bool = compose_opt (fn x => SOME x) (fn y => NONE) 5 = NONE
-val test1c: bool = compose_opt (fn x => SOME (x * x)) (fn y => SOME(y * 2)) 5 = SOME 100
+val test1c: bool = compose_opt (fn x => SOME (x * x)) (fn y => SOME(y * 2)) 5
+    = SOME 100
 
 val test2a: bool = do_until (fn x => x div 2) (fn x => x mod 2 <> 1) 1048576 = 1
 val test2b: bool = do_until (fn x => x div 2) (fn x => x mod 2 <> 1) 6 = 3
 val test2c: bool = do_until (fn x => x div 2) (fn x => x mod 2 <> 1) 10 = 5
-val test2d: bool = do_until (fn (x, acc) => (x - 1, x * acc)) (fn (x, acc) => x <> 0) (6, 1) = (0, 720)
+val test2d: bool = do_until (fn (x, acc) => (x - 1, x * acc))
+    (fn (x, acc) => x <> 0) (6, 1) = (0, 720)
 
 val test3a: bool = factorial1 1 = 1
 val test3b: bool = factorial1 2 = 2
@@ -21,8 +23,9 @@ val test4a: bool = fixed_point (fn x => if x > 1 then x div 2 else x) 1024 = 1
 val test4b: bool = fixed_point (fn x => if x < 1024 then x * 2 else x) 1 = 1024
 
 val test5a: bool = map2 (fn x => x * x) (1, 2) = (1, 4)
-val test5b: bool = map2 (fn x => [1, x, x*x]) (1, 2) = ([1, 1, 1], [1, 2, 4])
-val test5c: bool = map2 (fn x => if isSome x then valOf x else 0) (SOME 1, NONE) = (1, 0)
+val test5b: bool = map2 (fn x => [1, x, x * x]) (1, 2) = ([1, 1, 1], [1, 2, 4])
+val test5c: bool = map2 (fn x => if isSome x then valOf x else 0) (SOME 1, NONE)
+    = (1, 0)
 
 fun f n = [n, 2 * n, 3 * n]
 fun g n = [n * n, 2 * n * n]
@@ -35,10 +38,13 @@ val test7a: bool = true
 val test7b: bool = true
 val test7c: bool = true
 
-val test8a: bool = partition (fn n => n mod 2 = 0) [1, 2, 3, 4, 5, 6] = ([2, 4, 6], [1, 3, 5])
-val test8b: bool = partition (fn n => n mod 3 = 0) [1, 2, 3, 4, 5, 6] = ([3, 6], [1, 2, 4, 5])
+val test8a: bool = partition (fn n => n mod 2 = 0) [1, 2, 3, 4, 5, 6]
+    = ([2, 4, 6], [1, 3, 5])
+val test8b: bool = partition (fn n => n mod 3 = 0) [1, 2, 3, 4, 5, 6]
+    = ([3, 6], [1, 2, 4, 5])
 
-val test9a: bool = unfold (fn n => if n = 0 then NONE else SOME(n, n-1)) 5 = [5, 4, 3, 2, 1]
+val test9a: bool = unfold (fn n => if n = 0 then NONE else SOME(n, n-1)) 5
+    = [5, 4, 3, 2, 1]
 
 val test10a: bool = factorial2 1 = 1
 val test10b: bool = factorial2 2 = 2
@@ -74,10 +80,13 @@ fun treeadder (x, y, z) = x + y + z
 fun treemult (x, y, z) = x * y * z
 
 val test14a: bool = tree_map (fn x => x*x) bottomtree4 = bottomtree16
-val test14b: bool = tree_map (fn x => x*x) midtree2 = node {value=4, left=bottomtree16, right=bottomtree25}
-val test14c: bool = tree_map (fn x => x*x) toptree = node {value= 1, left=midtree4, right=midtree9}
+val test14b: bool = tree_map (fn x => x*x) midtree2
+    = node {value=4, left=bottomtree16, right=bottomtree25}
+val test14c: bool = tree_map (fn x => x*x) toptree
+    = node {value= 1, left=midtree4, right=midtree9}
 val test14d: bool = tree_filter (fn n => n mod 2 <> 0) bottomtree4 = leaf
 val test14e: bool = tree_filter (fn n => n mod 2 <> 0) midtree3 = midtree3filtered
-val test14f: bool = tree_filter (fn n => n mod 2 <> 0) toptree = node {value=1, left=leaf, right=midtree3filtered}
+val test14f: bool = tree_filter (fn n => n mod 2 <> 0) toptree
+    = node {value=1, left=leaf, right=midtree3filtered}
 val test14g: bool = tree_fold treeadder 0 toptree = 28
 val test14h: bool = tree_fold treemult 1 toptree = 5040

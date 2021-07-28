@@ -9,9 +9,7 @@ Write a function
 that composes two functions with "optional" values.
 If either function returns NONE, then the result is NONE. *)
 fun compose_opt (f: 'b -> 'c option) (g: 'a -> 'b option) (x: 'a) : 'c option =
-    case g x of
-        NONE => NONE
-        | SOME y => f y
+    case g x of NONE => NONE | SOME y => f y
 
 (* 2.
 Write a function
@@ -24,7 +22,8 @@ will evaluate to a function of type int->int that divides its argument by 2 unti
 In effect, it will remove all factors of 2 from its argument.
 *)
 fun do_until (f: 'a -> 'a) (pred: 'a -> bool) (x: 'a) : 'a =
-    if pred x then do_until f pred (f x)
+    if pred x
+    then do_until f pred (f x)
     else x
 
 (* 3.
@@ -44,7 +43,8 @@ Use do_until to write a function
 that given a function f and an initial value x applies f to x until f x = x.
 (Notice the use of '' to indicate equality types.)
 *)
-fun fixed_point (f: ''a -> ''a) (init: ''a) : ''a = do_until f (fn x => (f x) <> x) init
+fun fixed_point (f: ''a -> ''a) (init: ''a) : ''a =
+    do_until f (fn x => (f x) <> x) init
 
 (* 5.
 Write a function
@@ -64,11 +64,8 @@ For example, for fun f n = [n, 2 * n, 3 * n], we have
     app_all f f 1 = [1, 2, 3, 2, 4, 6, 3, 6, 9]
 *)
 fun app_all (f: 'b -> 'c list) (g: 'a -> 'b list)  (x: 'a) : 'c list =
-    let
-        fun helper func lst =
-            case lst of
-            [] => []
-            | l :: ls => (func l) @ helper func ls
+    let fun helper _ [] = []
+        |   helper func (l :: ls) = (func l) @ helper func ls
     in helper f (g x) end
 
 (* 7.

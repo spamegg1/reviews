@@ -37,11 +37,9 @@ fun get_substitutions1(lst, s) = case lst of
 fun get_substitutions2(lst, s) =
     let fun aux(lst, s, acc) = case lst of
         [] => acc
-        | x :: xs =>
-            let val first = all_except_option(s, x) in
-            case first of
+        | x :: xs => case all_except_option(s, x) of
               NONE => aux(xs, s, acc)
-            | SOME y => aux(xs, s, acc @ y) end
+            | SOME y => aux(xs, s, acc @ y)
     in aux(lst, s, []) end
 
 (*  string list list, {first:string, last:string, middle:string}
@@ -50,9 +48,8 @@ fun get_substitutions2(lst, s) =
 (* by substituting only the first name *)
 fun similar_names(lst, fullname) =
     let val {first=x, last=y, middle=z} = fullname
-        fun sub_fn(firstnames) = case firstnames of
-              [] => []
-            | head :: tail => {first=head, last=y, middle=z} :: sub_fn(tail)
+        fun sub_fn([]) = []
+        |   sub_fn(head :: tail) = {first=head, last=y, middle=z} :: sub_fn(tail)
     in fullname :: sub_fn(get_substitutions2(lst, x)) end
 
 (* you may assume that Num is always used with values 2, 3, ..., 10
@@ -71,17 +68,17 @@ exception IllegalMove
 (*  card -> color  *)
 (*  returns color of card  *)
 fun card_color(card) = case card of
-      (Clubs,_) => Black
-    | (Diamonds,_) => Red
-    | (Hearts,_) => Red
-    | (Spades,_) => Black
+      (Clubs, _) => Black
+    | (Diamonds, _) => Red
+    | (Hearts, _) => Red
+    | (Spades, _) => Black
 
 (*  card -> int  *)
 (*  returns value of card  *)
 fun card_value(card) = case card of
-      (_,Num i) => i
-    | (_,Ace) => 11
-    | (_,_) => 10
+      (_, Num i) => i
+    | (_, Ace) => 11
+    | (_, _) => 10
 
 (*  card list, card, exception ->  *)
 (*  remove card from list (only once), raise exception if card not in list  *)
@@ -91,18 +88,16 @@ fun remove_card(cs, c, e) = case cs of
 
 (*  card list -> bool  *)
 (*  returns true if all cards in list have same color  *)
-fun all_same_color(cardlist) = case cardlist of
-    [] => true
-    | c :: [] => true
-    | head :: (neck :: rest) =>
+fun all_same_color([]) = true
+|   all_same_color([_]) = true
+|   all_same_color(head :: (neck :: rest)) =
         card_color(head) = card_color(neck) andalso all_same_color(neck :: rest)
 
 (*  card list -> int  *)
 (*  returns sum of values of cards in list  *)
-fun sum_cards(cardlist) =
-    let fun aux(cardlist, sum) = case cardlist of
-        [] => sum
-        | c :: cs => aux(cs, sum + card_value(c))
+fun sum_cards(cardlist) = let
+    fun aux([], sum) = sum
+    |   aux(card :: cards, sum) = aux(cards, sum + card_value(card))
     in aux(cardlist, 0) end
 
 (*  card list, int -> int  *)
@@ -122,7 +117,7 @@ fun officiate(cardlist, movelist, goal) =
             state(remove_card(heldcards, c, IllegalMove), cardlist, ms)
         | (Draw) :: ms => case cardlist of
             [] => score(heldcards, goal)
-            | c::cs =>  if sum_cards(c::heldcards) > goal
-                        then score(c::heldcards, goal)
-                        else state(c::heldcards, cs, ms)
+            | c::cs =>  if sum_cards(c :: heldcards) > goal
+                        then score(c :: heldcards, goal)
+                        else state(c :: heldcards, cs, ms)
     in state([], cardlist, movelist) end

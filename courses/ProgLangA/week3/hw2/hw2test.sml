@@ -17,35 +17,35 @@ val test1g = all_except_option ("string",
     ["a", "string", "b", "c", "string", "d", "e", "f"])
     = SOME(["a", "b", "c", "d", "e", "f"])
 
-val test2a = get_substitutions1 ([["foo"],["there"]], "foo") = []
-val test2b = get_substitutions1 ([["foo"],["foo"]], "foo") = []
-val test2c = get_substitutions1 ([["there"],["foo", "here"]], "foo") = ["here"]
+val test2a = get_substitutions1 ([["foo"], ["there"]], "foo") = []
+val test2b = get_substitutions1 ([["foo"], ["foo"]], "foo") = []
+val test2c = get_substitutions1 ([["there"], ["foo", "here"]], "foo") = ["here"]
 val test2d = get_substitutions1 (
-    [["Fred", "Fredrick"],["Elizabeth", "Betty"],["Freddie", "Fred", "F"]], "Fred")
+    [["Fred", "Fredrick"], ["Elizabeth", "Betty"], ["Freddie", "Fred", "F"]], "Fred")
     = ["Fredrick", "Freddie", "F"]
 val test2e = get_substitutions1 (
-    [["Fred", "Fredrick"],["Jeff", "Jeffrey"],["Geoff","Jeff", "Jeffrey"]], "Jeff")
+    [["Fred", "Fredrick"], ["Jeff", "Jeffrey"], ["Geoff","Jeff", "Jeffrey"]], "Jeff")
     = ["Jeffrey", "Geoff", "Jeffrey"]
 
-val test3a = get_substitutions2 ([["foo"],["there"]], "foo") = []
-val test3b = get_substitutions2 ([["foo"],["foo"]], "foo") = []
-val test3c = get_substitutions2 ([["there"],["foo", "here"]], "foo") = ["here"]
+val test3a = get_substitutions2 ([["foo"], ["there"]], "foo") = []
+val test3b = get_substitutions2 ([["foo"], ["foo"]], "foo") = []
+val test3c = get_substitutions2 ([["there"], ["foo", "here"]], "foo") = ["here"]
 val test3d = get_substitutions2 (
-    [["Fred", "Fredrick"],["Elizabeth", "Betty"],["Freddie", "Fred", "F"]], "Fred")
+    [["Fred", "Fredrick"], ["Elizabeth", "Betty"], ["Freddie", "Fred", "F"]], "Fred")
     = ["Fredrick", "Freddie", "F"]
 val test3e = get_substitutions2 (
-    [["Fred", "Fredrick"],["Jeff", "Jeffrey"],["Geoff","Jeff", "Jeffrey"]], "Jeff")
+    [["Fred", "Fredrick"], ["Jeff", "Jeffrey"], ["Geoff", "Jeff", "Jeffrey"]], "Jeff")
     = ["Jeffrey", "Geoff", "Jeffrey"]
 
 val test4a = similar_names (
-    [["Fred","Fredrick"],["Elizabeth","Betty"],["Freddie","Fred","F"]],
+    [["Fred", "Fredrick"], ["Elizabeth", "Betty"], ["Freddie", "Fred", "F"]],
     {first="Fred", middle="W", last="Smith"}) =
     [{first="Fred", last="Smith", middle="W"},
     {first="Fredrick", last="Smith", middle="W"},
     {first="Freddie", last="Smith", middle="W"},
     {first="F", last="Smith", middle="W"}]
 val test4b = similar_names (
-    [["Fred", "Fredrick"],["Jeff", "Jeffrey"],["Geoff","Jeff", "Jeffrey"]],
+    [["Fred", "Fredrick"], ["Jeff", "Jeffrey"], ["Geoff", "Jeff", "Jeffrey"]],
     {first="Jeff", middle="Z", last="Jeffries"}) =
     [{first="Jeff", middle="Z", last="Jeffries"},
     {first="Jeffrey", middle="Z", last="Jeffries"},
@@ -103,28 +103,28 @@ val test9f = sum_cards [(Clubs, Num 5),(Hearts, King)] = 15
 val test9g = sum_cards [(Clubs, Num 5),(Clubs, Ace)] = 16
 val test9h = sum_cards [(Clubs, Ace),(Clubs, King), (Clubs, Jack)] = 31
 
-val test10a = score([],100) = 50
-val test10b = score ([(Hearts, Num 2),(Clubs, Num 4)],10) = 4
-val test10c = score ([(Hearts, Num 2),(Clubs, Num 4)],5) = 3
-val test10d = score ([(Hearts, Num 2),(Diamonds, Num 4)],10) = 2
-val test10e = score ([(Hearts, Num 10),(Diamonds, Num 4)],10) = 6
+val test10a = score([], 100) = 50
+val test10b = score ([(Hearts, Num 2), (Clubs, Num 4)], 10) = 4
+val test10c = score ([(Hearts, Num 2), (Clubs, Num 4)], 5) = 3
+val test10d = score ([(Hearts, Num 2), (Diamonds, Num 4)], 10) = 2
+val test10e = score ([(Hearts, Num 10), (Diamonds, Num 4)], 10) = 6
 
 val test11a = officiate ([(Hearts, Num 2),(Clubs, Num 4)],[Draw], 15) = 6
 val test11b = officiate ([(Hearts, Num 2),(Clubs, Num 4)],[Draw,Draw], 15) = 9
 val test11c = officiate ([(Hearts, Num 9),(Clubs, Num 8)],[Draw,Draw], 15) = 6
 val test11d = officiate (
-    [(Hearts, Num 2),(Clubs, Num 4)],[Draw,Draw,Discard(Clubs,Num 4)], 15) = 6
-val test11e = officiate ([(Clubs,Ace),(Spades,Ace),(Clubs,Ace),(Spades,Ace)],
-                        [Draw,Draw,Draw,Draw],42) = 3
-val test11f = officiate ([(Clubs,Ace)],[Draw],42)= 15
-val test11g = officiate ([(Clubs,Ace),(Spades,Ace)],[Draw,Draw],42) = 10
-val test11h = officiate ([(Clubs,Ace),(Spades,Ace),(Clubs,Ace)],
-                        [Draw,Draw,Draw],42) = 4
+    [(Hearts, Num 2), (Clubs, Num 4)], [Draw, Draw, Discard(Clubs, Num 4)], 15) = 6
+val test11e = officiate ([(Clubs, Ace), (Spades, Ace), (Clubs, Ace), (Spades, Ace)],
+                        [Draw, Draw, Draw, Draw], 42) = 3
+val test11f = officiate ([(Clubs, Ace)], [Draw], 42)= 15
+val test11g = officiate ([(Clubs, Ace), (Spades, Ace)], [Draw, Draw], 42) = 10
+val test11h = officiate ([(Clubs, Ace), (Spades, Ace), (Clubs, Ace)],
+                        [Draw, Draw, Draw], 42) = 4
 val test11i = ((officiate(
-    [(Clubs,Jack),(Spades,Num(8))], [Draw,Discard(Hearts,Jack)],
+    [(Clubs, Jack), (Spades, Num(8))], [Draw, Discard(Hearts, Jack)],
                          42); false)  handle IllegalMove => true)
 val test11j = officiate([], [], 10) = 5
-val test11k = officiate([(Clubs,Ace)], [], 10) = 5
-val test11l = officiate([],[Draw], 10) = 5
+val test11k = officiate([(Clubs, Ace)], [], 10) = 5
+val test11l = officiate([], [Draw], 10) = 5
 val test11m = ((officiate(
-    [],[Discard(Diamonds,Num(9))], 10); false) handle IllegalMove => true)
+    [], [Discard(Diamonds, Num(9))], 10); false) handle IllegalMove => true)

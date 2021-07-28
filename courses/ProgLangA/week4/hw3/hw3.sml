@@ -42,28 +42,32 @@ datatype typ = Anything
 val only_capitals = List.filter (fn s => Char.isUpper(String.sub(s, 0)))
 
 (*  string list -> string  *)
-(*  returns longest string in list, "" if list is empty, earliest in case of tie  *)
-val longest_string1 = List.foldl (fn (x,y) => if String.size(x) > String.size(y) then x else y) ""
+(*  returns longest string in list, "" if list is empty,  *)
+(*  earliest in case of tie  *)
+val longest_string1 = List.foldl
+    (fn (x, y) => if String.size(x) > String.size(y) then x else y) ""
 
 (*  string list -> string  *)
 (*  returns longest string in list, "" if list is empty, latest in case of tie  *)
-val longest_string2 = List.foldl (fn (x,y) => if String.size(x) >= String.size(y) then x else y) ""
+val longest_string2 = List.foldl
+    (fn (x, y) => if String.size(x) >= String.size(y) then x else y) ""
 
-(*  (int*int->bool) -> string list -> string  *)
-(*  if function passed in behaves like >, then this function acts like longest_string1  *)
+(*  (int * int -> bool) -> string list -> string  *)
+(*  if function passed in behaves like >, this acts like longest_string1  *)
 fun longest_string_helper f =
-    List.foldl (fn (x,y) => if f(String.size(x),String.size(y)) then x else y) ""
+    List.foldl (fn (x, y) => if f(String.size(x), String.size(y)) then x else y) ""
 
 (*  string list -> string  *)
 (*  returns longest string in list, "" if list is empty, earliest in case of tie  *)
-val longest_string3 = longest_string_helper (fn (x,y) => x > y)
+val longest_string3 = longest_string_helper (fn (x, y) => x > y)
 
 (*  string list -> string  *)
 (*  returns longest string in list, "" if list is empty, latest in case of tie  *)
-val longest_string4 = longest_string_helper (fn (x,y) => x >= y)
+val longest_string4 = longest_string_helper (fn (x, y) => x >= y)
 
 (*  string list -> string  *)
-(*  returns longest string in list that begins with uppercase, "" if there are no such strings  *)
+(*  returns longest string in list that begins with uppercase,  *)
+(*  "" if there are no such strings  *)
 (*  returns earliest longest string in case of tie  *)
 (*  assumes all strings in list have at least 1 character  *)
 val longest_capitalized = longest_string1 o only_capitals
@@ -73,22 +77,18 @@ val longest_capitalized = longest_string1 o only_capitals
 val rev_string = String.implode o List.rev o String.explode
 
 (*  ('a -> 'b option) -> 'a list -> 'b  *)
-fun first_answer f alist =
-    case alist of [] => raise NoAnswer
-       | a::rest => case f(a) of NONE => first_answer f rest
-                     | SOME v => v
+fun first_answer f [] = raise NoAnswer
+|   first_answer f (a :: rest) = case f(a) of
+      NONE => first_answer f rest
+    | SOME v => v
 
 (*  ('a -> 'b list option) -> 'a list -> 'b list option *)
-fun all_answers f alist =
-    case alist of
-    [] => SOME []
-    | a::alist' =>
-    case all_answers f alist' of
-                NONE => NONE
-        | SOME blist =>
-           case f(a) of
-           NONE => NONE
-          | SOME blist' => SOME(blist' @ blist)
+fun all_answers _ [] = SOME []
+|   all_answers f (a :: alist) = case all_answers f alist of
+      NONE => NONE
+    | SOME bs => case f(a) of
+          NONE => NONE
+        | SOME bs' => SOME(bs' @ bs)
 
 (*  pattern -> int  *)
 val count_wildcards = g (fn x => 1) (fn x => 0)
@@ -97,7 +97,7 @@ val count_wildcards = g (fn x => 1) (fn x => 0)
 val count_wild_and_variable_lengths = g (fn x => 1) String.size
 
 (*  string * pattern -> int  *)
-fun count_some_var (s,p) = g (fn x => 0) (fn x => if x=s then 1 else 0) p
+fun count_some_var (s,p) = g (fn x => 0) (fn x => if x = s then 1 else 0) p
 
 (*  pattern -> bool  *)
 (*  returns true if all variable names in pattern are same  *)
