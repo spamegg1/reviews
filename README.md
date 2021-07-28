@@ -147,7 +147,7 @@ They should simply assume their function returns the correct result with an inpu
 
 Moreover, "guess something, type on the keyboard, run the code, and hope it works, or get some quick feedback, or peek at solutions" trial-and-error style approach in coding (no such thing in proofs!), is completely different than doing it by hand, with pencil and paper (which forces you to think hard and form brain patterns). This trial-and-error makes it possible to somehow muddle through the courses and solve the problems without recursion ever fully clicking in your mind. This is exemplified by the students who finished HtC but still don't feel like they understood it, when they solve a hard recursion exercise in PLA. The students don't have the structural patterns in their minds that are required for induction/recursion.
 
-So... what's the point of this long educational, pedagogical tirade? I recommend you should learn mathematical induction FIRST! Write tons and tons of induction proofs. If you master induction, recursion is a piece of cake, and it will pay HUGE dividends in Algorithms later (it's all induction!) 
+So... what's the point of this long educational, pedagogical tirade? You have to acquire the rigor, discipline, and the logical reasoning skills necessary. I recommend you should learn mathematical induction FIRST! Write tons and tons of induction proofs. If you master induction, recursion is a piece of cake, and it will pay HUGE dividends in Algorithms later (it's all induction!) 
 
 ***Even more updates (July 2021):*** I told this story on Discord:
 
@@ -163,7 +163,7 @@ After solidifying the tests and the signature, I started thinking about the func
 Now, the really interesting part is: all the stuff I explained above, I was actually doing all of it subconsciously! Only after I was done, I realized "OMG, I've been totally using the How to Code discipline here!" I must have successfully internalized it even though on the surface of it it looks not applicable to a language like Python.
 ```
 
-*Spam's recommendation:* I am personally biased to like these courses. Definitely take if you are interested in pursuing functional programming. I've seen some people struggle with Programming Languages A, B, C without these courses (PLA uses ML to teach very similar functional programming principles, and PLB uses the same language, Racket) so definitely take at least the first of these two courses before PLABC if you've never seen functional programming, recursion and the like. Take *Unit 1: Proofs* of [Math for Computer Science](https://openlearninglibrary.mit.edu/courses/course-v1:OCW+6.042J+2T2019/about) first, and write tons and tons of induction proofs!
+*Spam's recommendation:* I am personally biased to like these courses. Definitely take if you are interested in pursuing functional programming. I've seen some people struggle with Programming Languages A, B, C without these courses (PLA uses ML to teach very similar functional programming principles, and PLB uses the same language, Racket) so definitely take at least the first of these two courses before PLABC if you've never seen functional programming, recursion and the like. You need strong reasoning skills. Learning induction can help.
 
 ### <a name="softcons"></a> Software Construction 1, 2
 
