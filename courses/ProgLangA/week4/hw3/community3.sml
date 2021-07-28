@@ -156,22 +156,20 @@ the entire subtree rooted at the node with data that produced false should be re
 datatype 'a tree = leaf | node of { value : 'a, left : 'a tree, right : 'a tree }
 
 (* Apply function f to the internal nodes only, and recurse *)
-fun tree_map (f: 'a -> 'a) (tree: 'a tree) : 'a tree =
-  case tree of
-    leaf => leaf
-  | node {value= v, left= l, right= r} =>
-    node {value=f v, left= tree_map f l, right= tree_map f r}
+fun tree_map (f: 'a -> 'a) (tree: 'a tree) : 'a tree = case tree of
+      leaf => leaf
+    | node {value= v, left= l, right= r} =>
+        node {value=f v, left= tree_map f l, right= tree_map f r}
 
-fun tree_filter (f: 'a -> bool) (tree: 'a tree) : 'a tree =
-  case tree of
-    leaf => leaf
-  | node {value= v, left= l, right= r} =>
-    if f v
-    then node {value= v, left= tree_filter f l, right= tree_filter f r}
-    else leaf
+fun tree_filter (f: 'a -> bool) (tree: 'a tree) : 'a tree = case tree of
+      leaf => leaf
+    | node {value= v, left= l, right= r} =>
+        if f v
+        then node {value= v, left= tree_filter f l, right= tree_filter f r}
+        else leaf
 
 fun tree_fold (f: 'a * 'a * 'a -> 'a) (acc: 'a) (tree: 'a tree) : 'a =
-  case tree of
-    leaf => acc
-  | node {value= v, left= l, right= r} =>
-    f (tree_fold f acc l, v, tree_fold f acc r)
+    case tree of
+      leaf => acc
+    | node {value= v, left= l, right= r} =>
+        f (tree_fold f acc l, v, tree_fold f acc r)

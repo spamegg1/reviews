@@ -97,44 +97,48 @@ val count_wildcards = g (fn x => 1) (fn x => 0)
 val count_wild_and_variable_lengths = g (fn x => 1) String.size
 
 (*  string * pattern -> int  *)
-fun count_some_var (s,p) = g (fn x => 0) (fn x => if x = s then 1 else 0) p
+fun count_some_var (s, p) = g (fn x => 0) (fn x => if x = s then 1 else 0) p
 
 (*  pattern -> bool  *)
 (*  returns true if all variable names in pattern are same  *)
 fun check_pat (p) =
-    (*pattern -> string list*)
-    (*returns list of strings occurring in variables in pattern*)
+    (* pattern -> string list *)
+    (* returns list of strings occurring in variables in pattern *)
     let fun get_var_strings (pattern) =
         case pattern of
-           Wildcard => []
-         | Variable str => [str]
-         | UnitP => []
-         | ConstP i => []
-         | TupleP plist => List.foldl (fn (p,vs) => get_var_strings(p) @ vs) [] plist
-         | ConstructorP (str, pat) => get_var_strings(pat)
-    (*string list -> bool*)
-        (*returns true if there are reps, false if no reps*)
+          Wildcard => []
+        | Variable str => [str]
+        | UnitP => []
+        | ConstP i => []
+        | TupleP plist => List.foldl (fn (p, vs) => get_var_strings(p) @ vs) [] plist
+        | ConstructorP (str, pat) => get_var_strings(pat)
+    (* string list -> bool *)
+        (* returns true if there are reps, false if no reps *)
         fun check_string_reps (strlist) =
-        case strlist of [] => false
-             | s::rest => List.exists (fn x => s=x) rest
+        case strlist of
+          [] => false
+        | s :: rest => List.exists (fn x => s = x) rest
     in not(check_string_reps(get_var_strings(p))) end
 
 (*  valu * pattern -> (string * valu) list option  *)
 fun match (value, pattern) =
     case (value, pattern) of
-       (_, Wildcard) => SOME []
-     | (_, Variable str) => SOME [(str, value)]
-     | (Unit, UnitP) => SOME []
-     | (Const i, ConstP j) => if i=j then SOME [] else NONE
-     | (Tuple vlist, TupleP plist) =>
+      (_, Wildcard) => SOME []
+    | (_, Variable str) => SOME [(str, value)]
+    | (Unit, UnitP) => SOME []
+    | (Const i, ConstP j) => if i = j then SOME [] else NONE
+    | (Tuple vlist, TupleP plist) =>
        if List.length vlist = List.length plist
        then all_answers match (ListPair.zip(vlist, plist))
        else NONE
-     | (Constructor(s1,v), ConstructorP(s2,p)) => if s1=s2 then match(v, p) else NONE
-         | (_,_) => NONE
+    | (Constructor(s1, v), ConstructorP(s2, p)) =>
+        if s1 = s2
+        then match(v, p)
+        else NONE
+    | (_, _) => NONE
 
 
 (*  valu * (pattern list) -> (string * valu) list option  *)
 fun first_match value plist =
-    SOME(first_answer (fn p => match(value,p)) plist)
+    SOME(first_answer (fn p => match(value, p)) plist)
     handle NoAnswer => NONE

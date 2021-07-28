@@ -144,7 +144,7 @@ val test11f = match (Const(1), pat2) = SOME [("pat2", Const(1))]
 val test11g = match (Const(1), pat5) = NONE
 val test11h = match (Tuple[Const(1)], pat5) = NONE
 val test11i = match (val5, pat5) = SOME [("pat2", Const(2))]
-val test11j = match (Tuple[Const 17, Unit, Const 4, Constructor ("egg",Const 4),
+val test11j = match (Tuple[Const 17, Unit, Const 4, Constructor ("egg", Const 4),
     Constructor("egg", Constructor ("egg", Const 4))], TupleP[Wildcard, Wildcard])
     = NONE
 
