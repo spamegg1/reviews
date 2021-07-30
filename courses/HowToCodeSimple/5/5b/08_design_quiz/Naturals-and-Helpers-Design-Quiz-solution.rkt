@@ -128,16 +128,30 @@
 (check-expect (sink empty) empty)
 (check-expect (sink (cons "bubble" empty)) (cons "bubble" empty))
 (check-expect (sink (cons "solid" empty)) (cons "solid" empty))
+(check-expect (sink (cons "bubble" (cons "bubble" empty)))
+              (cons "bubble" (cons "bubble" empty)))
+(check-expect (sink (cons "bubble" (cons "solid" empty)))
+              (cons "bubble" (cons "solid" empty)))
+(check-expect (sink (cons "solid" (cons "bubble" empty)))
+              (cons "bubble" (cons "solid" empty)))
+(check-expect (sink (cons "solid" (cons "solid" empty)))
+              (cons "solid" (cons "solid" empty)))
+(check-expect (sink (cons "bubble" (cons "bubble" (cons "bubble" empty))))
+              (cons "bubble" (cons "bubble" (cons "bubble" empty))))
+(check-expect (sink (cons "bubble" (cons "bubble" (cons "solid" empty))))
+              (cons "bubble" (cons "bubble" (cons "solid" empty))))
 (check-expect (sink (cons "bubble" (cons "solid" (cons "bubble" empty))))
               (cons "bubble" (cons "bubble" (cons "solid" empty))))
-(check-expect (sink (cons "solid" (cons "solid" (cons "bubble" empty))))
-              (cons "bubble" (cons "solid" (cons "solid" empty))))
 (check-expect (sink (cons "solid" (cons "bubble" (cons "bubble" empty))))
               (cons "bubble" (cons "solid" (cons "bubble" empty))))
-(check-expect (sink (cons "solid" (cons "bubble" (cons "solid" empty))))
-              (cons "bubble" (cons "solid" (cons "solid" empty))))
 (check-expect (sink (cons "bubble" (cons "solid" (cons "solid" empty))))
               (cons "bubble" (cons "solid" (cons "solid" empty))))
+(check-expect (sink (cons "solid" (cons "bubble" (cons "solid" empty))))
+              (cons "bubble" (cons "solid" (cons "solid" empty))))
+(check-expect (sink (cons "solid" (cons "solid" (cons "bubble" empty))))
+              (cons "bubble" (cons "solid" (cons "solid" empty))))
+(check-expect (sink (cons "solid" (cons "solid" (cons "solid" empty))))
+              (cons "solid" (cons "solid" (cons "solid" empty))))
 (check-expect (sink (cons "solid"
                           (cons "solid"
                                 (cons "bubble" (cons "bubble" empty)))))
@@ -147,7 +161,6 @@
 ;<template from ListOfBlob>
 (define (sink lob)
   (cond [(empty? lob) empty]
-        [(empty? (rest lob)) lob]
         [else (helper (first lob) (sink (rest lob)))]))
 
 
@@ -163,9 +176,6 @@
 ;(define (helper b lob) lob) ;stub
 ;<template from Blob, with added ListOfBlob parameter>
 (define (helper b lob)
-  (cond [(string=? b "bubble") (cons b lob)]
-        [(string=? b "solid")
-         (cond [(string=? (first lob) "solid")
-                (cons b lob)]
-               [(string=? (first lob) "bubble")
-                (cons (first lob) (cons b (rest lob)))])]))
+  (cond [(empty? lob) (cons b lob)]
+        [(string=? "solid" b) (cons (first lob) (cons b (rest lob)))]
+        [else (cons b lob)]))
