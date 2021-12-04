@@ -11,7 +11,8 @@ fun all_answers f xs =
                      | _ => SOME xs)
 *)
 
-fun all_answers f xs =
+(*  ('a -> 'b list option) -> 'a list -> 'b list option *)
+fun all_answers (f : 'a -> 'b list option) (xs : 'a list) : 'b list option =
     let fun helper (f, xs, acc) =
         case xs of
         [] => SOME acc
