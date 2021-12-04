@@ -21,11 +21,10 @@ final class Wikigraph(client: Wikipedia):
     * Hint: Use the methods that you implemented in WikiResult.
     */
   def namedLinks(of: ArticleId): WikiResult[Set[String]] = // TODO
-    val linkSet: WikiResult[Set[ArticleId]] = client.linksFrom(of)
-    val linkSeq: WikiResult[Seq[ArticleId]] = linkSet.map(_.toSeq)
-    val traversedSeq: WikiResult[Seq[String]] =
-      linkSeq.flatMap(list => WikiResult.traverse(list)(client.nameOfArticle))
-    traversedSeq.map(_.toSet)
+    for
+      linkSet <- client.linksFrom(of)
+      traversedSeq <- WikiResult.traverse(linkSet.toSeq)(client.nameOfArticle)
+    yield traversedSeq.toSet
 
   /**
     * Computes the distance between two articles using breadth first search.
