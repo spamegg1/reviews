@@ -19,7 +19,7 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mongoose": "^5.11.13"
+    "mongoose": "^5.13.13"
   },
   "devDependencies": {
     "eslint": "^7.18.0",
