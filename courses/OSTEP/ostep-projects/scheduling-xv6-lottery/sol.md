@@ -1,4 +1,4 @@
-## all thanks to @palladian on Discord
+## all thanks to @palladian
 
 ### General Tips
 
@@ -144,7 +144,7 @@
 
 - Only once we've executed all the `RUNNABLE` processes do we exit the inner for loop and release the lock.
 
-- Original source code is structured like this:
+- Original source code is structured like this (this is pseudocode):
 
   ```python
   while (1) {
@@ -154,7 +154,7 @@
       run it
   ```
 
-- New code is structured like this:
+- New code is structured like this (this is pseudocode):
 
   ```python
   while (1) {
