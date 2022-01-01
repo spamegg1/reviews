@@ -32,5 +32,10 @@ For the Minimum Spanning Tree Challenge Data Set with 2184 edges, the cost of an
 For the WIS Challenge Data set with the 1000-vertex path graph, max total weight
     is 2955353732.
 
-For the Knapsack Challenge Data set with 2000 items and 2000000 capacity,
+For the Knapsack Challenge Data Set with 2000 items and 2000000 capacity,
     optimal solution is 4243395.
+
+For the Hamming Distance Challenge Data Set with 200000 nodes, the largest value
+    of k such that there is a k-clustering with spacing at least 3 is 6118.
+    (That is, how many clusters are needed to ensure that no pair of nodes with
+    all but 2 bits in common get split into different clusters.)

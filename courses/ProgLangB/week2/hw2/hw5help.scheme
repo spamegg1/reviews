@@ -1,0 +1,71 @@
+;; call definition is:
+(struct call (funexp actual)       #:transparent) ;; function call
+
+;; Look at the call expression in the test file:
+(call (closure '() (fun #f "x" (add (var "x") (int 7)))) (int 1))
+
+;; Let's "match them up"
+call                      funexp                               actual
+call (closure '() (fun #f "x" (add (var "x") (int 7))))       (int 1)
+
+;; so "actual" is just a value like (int 1)
+;; and "funexp" is a closure expression.
+
+;; closure definition is:
+(struct closure (env fun) #:transparent)
+
+;; again let's match them up
+closure      env                       fun
+closure      '()       (fun #f "x" (add (var "x") (int 7)))
+
+;; so "env" is a list, and "fun" is a fun expression.
+
+;; fun definition is:
+(struct fun  (nameopt formal body) #:transparent) ;; a recursive(?) 1-argument function
+
+;; Again, let's match them up:
+fun  nameopt   formal              body
+fun     #f       "x"      (add (var "x") (int 7))
+
+;; Let's read the problem statement:
+;; ...A call evaluates its first and second subexpressions to values.
+
+;; So, do that! You can use `eval-under-env` for this.
+
+;; ...If the first is not a closure, it is an error.
+
+;; OK, we can ignore this for now. You can handle that later.
+;; Let's just assume it's a closure like in the test.
+
+;; ...Else, it evaluates the closure’s function’s body in the closure’s environment
+;; ...extended to map the function’s name to the closure (unless the name field is #f)
+
+;; Also, let's ignore this part too,
+;; because in the test the "nameopt" field is #f. We can deal with that later.
+
+;; ...and the function’s argument-name (i.e., the parameter name) to the result of the second subexpression.
+
+;; So all you need is: "extend the closure's environment,"
+;; "map the function's argument-name to the result of 'actual'".
+;; What is "the function's argument name"? It's "formal".
+
+;; How do we "extend the closure's environment?"
+;; It's a list, so we have to add something to it using `cons`.
+
+;; First get the closure's environment with:
+(closure-env cl)
+
+;; Then evaluate the "second subexpression" (in other words, "actual")
+arg = (eval-under-env (call-actual e) env)
+
+;; Then, "map" the function's argument-name to "the result of second subexpression"
+;; by adding it to "arg", then add that to the closure's environment
+newenv =  (cons
+            (cons (fun-formal myfun) arg)
+            (closure-env cl))
+
+;; Then handle the cases we skipped with some if/else.
+;; You'll have to add the "nameopt" to "newenv" in a similar way, if it's not #f.
+
+;; AFTER correctly extending the closure's environment with the function's argument
+;; THEN you can evaluate fun-body under this new, extended environment.

@@ -1,0 +1,63 @@
+SPOILERS BELOW!
+Here is some pseudocode for the Hamming distance clustering problem.
+
+You should have implemented the Union-Find Data Structure separately.
+This problem's performance will entirely depend on your UF implementation.
+Make sure it's correct and fast, use path compression, and for Python/similar:
+try not to use lists, prefer dictionaries/hashmaps as much as possible.
+
+First, read the text file.
+First line has the number 200000 on it.
+That will be the initial number of our clusters (each node in its own cluster).
+
+After that, lines have 0s and 1s with spaces in between, like "0 1 1 0 1..."
+So you can remove the spaces from them: "01101..."
+Or handle it however you like, as long as you can easily calculate distances,
+and easily generate other nodes that are of distance 1 or 2 from a node.
+(So you should write a hamming distance function, and a function that generates
+the distance 1 or 2 nodes from a given node.)
+
+Initially, there are 200000 clusters (each node is in its own cluster).
+
+clusters = 200000
+
+Initialize a Union-find data structure (UFDS) with the 200000 nodes you've read
+from the file.
+
+for node1 among the 200000 nodes of your UFDS:
+
+    calculate set of all 24 nodes that are exactly distance 1 from node1,
+    plus the set of all 276 nodes that are exactly distance 2 from node1.
+    (we are doing this so that we don't have to look at all 200000 x 200000
+    pairs, instead we look at 200000 x 300 pairs)
+
+    (these 300 nodes might not be among the 200000 starting nodes!)
+
+    for node2 in these 300 nodes:
+        if node2 is among the 200000 nodes:
+
+            find node1 and node2 in your union-find data structure.
+            Do this with the find function you implemented in your UFDS.
+
+            if node1 and node2 don't have the same leader:
+
+                they currently belong to separate clusters.
+                we want to union them if they are of distance 1 or 2.
+
+                if hamming distance between node1 and node2 is less than 3:
+
+                    use your union_by_rank function with node1 and node2.
+                    We unioned a node (in its own cluster) with another cluster,
+                    so now we should decrease the number of clusters by 1
+
+                    decrement clusters by 1
+
+The correct answer for clusters is: 6118
+
+After the loop is done, the final count of clusters gives us the maximum
+possible number of clusters where nodes that are distance 1 or 2 from each other
+always fall in the same cluster.
+
+Because of the above procedure, if this maximum number was any bigger, there
+would have been at least one pair of nodes with distance 1 or 2 that fell in
+separate clusters.
