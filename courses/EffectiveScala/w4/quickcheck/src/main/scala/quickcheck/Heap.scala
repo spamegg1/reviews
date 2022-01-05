@@ -1,7 +1,7 @@
 package quickcheck
 
 // This file contains the definition of the interface
-// for the `Heap` type, and several implementations.
+// for the heap data structure, and several implementations.
 // You should NOT modify this file.
 
 /**
