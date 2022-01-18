@@ -7,5 +7,6 @@ sml.json
 target/
 project/target/
 project/project/
+resources/
 .bsp/
 *.log
