@@ -37,25 +37,25 @@ abstract class TweetSet extends TweetSetInterface:
    * This method takes a predicate and returns a subset of all the elements
    * in the original set for which the predicate is true.
    *
-   * Question: Can we implment this method here, or should it remain abstract
+   * Question: Can we implement this method here, or should it remain abstract
    * and be implemented in the subclasses?
    */
-  def filter(p: Tweet => Boolean): TweetSet = // TODO
-    this.filterAcc(p, new Empty)  // should be implemented here! same everywhere
+  def filter(p: Tweet => Boolean): TweetSet =                            // TODO
+    filterAcc(p, new Empty)       // should be implemented here! same everywhere
 
   /**
-   * This is a helper method for `filter` that propagetes the accumulated tweets.
+   * This is a helper method for `filter` that propagates the accumulated tweets.
    */
   def filterAcc(p: Tweet => Boolean, acc: TweetSet): TweetSet
 
   /**
    * Returns a new `TweetSet` that is the union of `TweetSet`s `this` and `that`.
    *
-   * Question: Should we implment this method here, or should it remain abstract
+   * Question: Should we implement this method here, or should it remain abstract
    * and be implemented in the subclasses?
    */
-  def union(that: TweetSet): TweetSet //= ??? // TODO
-    // should NOT be implemented here.
+  def union(that: TweetSet): TweetSet                                    // TODO
+    // should not be implemented here. very different in subclasses.
 
   /**
    * Returns the tweet from this set which has the greatest retweet count.
@@ -63,11 +63,11 @@ abstract class TweetSet extends TweetSetInterface:
    * Calling `mostRetweeted` on an empty set should throw an exception of
    * type `java.util.NoSuchElementException`.
    *
-   * Question: Should we implment this method here, or should it remain abstract
+   * Question: Should we implement this method here, or should it remain abstract
    * and be implemented in the subclasses?
    */
-  def mostRetweeted: Tweet //= ??? // TODO
-    // should NOT be implemented here.
+  def mostRetweeted: Tweet                                               // TODO
+    // should not be implemented here. very different in subclasses.
 
   /**
    * Returns a list containing all tweets of this set, sorted by retweet count
@@ -78,8 +78,8 @@ abstract class TweetSet extends TweetSetInterface:
    * Question: Should we implement this method here, or should it remain abstract
    * and be implemented in the subclasses?
    */
-  def descendingByRetweet: TweetList //= ??? // TODO
-    // should NOT be implemented here.
+  def descendingByRetweet: TweetList                                     // TODO
+    // should not be implemented here. very different in subclasses.
 
   /**
    * The following methods are already implemented
@@ -108,22 +108,13 @@ abstract class TweetSet extends TweetSetInterface:
    */
   def foreach(f: Tweet => Unit): Unit
 
-  def isEmpty: Boolean
+  /**
+   * This is needed below (because we cannot pattern match on Empty/Nonempty)
+   */
+  def isEmpty: Boolean                                                   // TODO
 
 class Empty extends TweetSet:
-  /* Calling `mostRetweeted` on an empty set should throw an exception of
-  * type `java.util.NoSuchElementException`.
-  * This exception was causing the grader to fail me, so I added a nonsense Tweet. */
-  override def mostRetweeted: Tweet =
-    new Tweet("z", "z", 1)
-
-  override def union(that: TweetSet): TweetSet = that
-
-  override def descendingByRetweet: TweetList = Nil
-
-  def isEmpty: Boolean = true
-
-  def filterAcc(p: Tweet => Boolean, acc: TweetSet): TweetSet = acc // TODO
+  def filterAcc(p: Tweet => Boolean, acc: TweetSet): TweetSet = acc      // TODO
 
   /**
    * The following methods are already implemented
@@ -137,37 +128,22 @@ class Empty extends TweetSet:
 
   def foreach(f: Tweet => Unit): Unit = ()
 
+  /**
+   * The new methods: union, mostRetweeted, descendingByRetweet, isEmpty // TODO
+   */
+  override def union(that: TweetSet): TweetSet = that                    // TODO
+
+  override def mostRetweeted: Tweet = Tweet("z", "z", 0)                 // TODO
+
+  override def descendingByRetweet: TweetList = Nil                      // TODO
+
+  override def isEmpty: Boolean = true                                   // TODO
+
 class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet:
 
-  def isEmpty: Boolean = false
-
-  override def union(that: TweetSet): TweetSet =
-    (right union (left union that)) incl elem
-
-
-  override def descendingByRetweet: TweetList =
-    new Cons(mostRetweeted, remove(mostRetweeted).descendingByRetweet)
-
-  override def mostRetweeted: Tweet =
-    val leftM: Tweet = left.mostRetweeted
-    val rightM: Tweet = right.mostRetweeted
-    val leftR: Int = leftM.retweets
-    val rightR: Int = rightM.retweets
-    val elemR: Int = elem.retweets
-
-    (left.isEmpty, right.isEmpty) match
-      case (true, true) => elem
-      case (true, false) => if rightR > elemR then rightM else elem
-      case (false, true) => if leftR > elemR then leftM else elem
-      case (false, false) =>
-        val maxR: Int = List(elemR, leftR, rightR).max
-        if maxR == leftR then leftM
-        else if maxR == rightR then rightM
-        else elem
-
-  def filterAcc(p: Tweet => Boolean, acc: TweetSet): TweetSet = // TODO
+  def filterAcc(p: Tweet => Boolean, acc: TweetSet): TweetSet =          // TODO
     if p(elem) then
-      left.filterAcc(p, right.filterAcc(p, acc.incl(elem)))
+      left.filterAcc(p, right.filterAcc(p, acc incl elem))
     else
       left.filterAcc(p, right.filterAcc(p, acc))
 
@@ -203,6 +179,31 @@ class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet:
     left.foreach(f)
     right.foreach(f)
 
+  /**
+   * The new methods: union, mostRetweeted, descendingByRetweet, isEmpty // TODO
+   */
+  override def union(that: TweetSet): TweetSet =                         // TODO
+    (right union (left union that)) incl elem
+
+  override def mostRetweeted: Tweet =                                    // TODO
+    val (leftM, rightM) = (left.mostRetweeted, right.mostRetweeted)
+    val (leftR, rightR, elemR) = (leftM.retweets, rightM.retweets, elem.retweets)
+
+    (left.isEmpty, right.isEmpty) match
+      case (true, true) => elem
+      case (true, false) => if rightR > elemR then rightM else elem
+      case (false, true) => if leftR > elemR then leftM else elem
+      case (false, false) =>
+        val maxR: Int = List(elemR, leftR, rightR).max
+        if maxR == leftR then leftM
+        else if maxR == rightR then rightM
+        else elem
+
+  override def descendingByRetweet: TweetList =                          // TODO
+    Cons(mostRetweeted, remove(mostRetweeted).descendingByRetweet)
+
+  override def isEmpty: Boolean = false                                  // TODO
+
 trait TweetList:
   def head: Tweet
   def tail: TweetList
@@ -225,22 +226,20 @@ object GoogleVsApple:
   val google = List("android", "Android", "galaxy", "Galaxy", "nexus", "Nexus")
   val apple = List("ios", "iOS", "iphone", "iPhone", "ipad", "iPad")
 
-  lazy val googleTweets: TweetSet = // TODO
+  lazy val googleTweets: TweetSet =                                      // TODO
     TweetReader.allTweets.filter(tweet =>
-      google.exists(keyword => tweet.text.contains(keyword))
-    )
+      google.exists(keyword => tweet.text.contains(keyword)))
 
-  lazy val appleTweets: TweetSet = // TODO
+  lazy val appleTweets: TweetSet =                                       // TODO
     TweetReader.allTweets.filter(tweet =>
-      apple.exists(keyword => tweet.text.contains(keyword))
-    )
+      apple.exists(keyword => tweet.text.contains(keyword)))
 
   /**
    * A list of all tweets mentioning a keyword from either apple or google,
    * sorted by the number of retweets.
    */
-  lazy val trending: TweetList = // TODO
-    googleTweets.union(appleTweets).descendingByRetweet
+  lazy val trending: TweetList =                                         // TODO
+    (googleTweets union appleTweets).descendingByRetweet
 
 object Main extends App:
   // Print the trending tweets

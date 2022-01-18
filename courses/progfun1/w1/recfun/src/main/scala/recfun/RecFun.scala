@@ -38,8 +38,8 @@ object RecFun extends RecFunInterface:
         case (0, _) => acc
         case (_, Nil) => acc
         case (_, head :: tail) =>
-          if (money == head) acc + 1
-          else if (money < sortedCoins.min) acc
+          if money == head then acc + 1
+          else if money < sortedCoins.min then acc
           else helper(acc, money - head, sortedCoins) + helper(acc, money, tail)
 
     helper(0, money, coins.sorted)

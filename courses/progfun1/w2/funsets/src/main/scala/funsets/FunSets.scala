@@ -19,7 +19,7 @@ trait FunSets extends FunSetsInterface:
    * Returns the set of the one given element.
    */
   def singletonSet(elem: Int): FunSet = // TODO
-    x => x == elem
+    _ == elem
 
   /**
    * Returns the union of the two given sets,
@@ -47,7 +47,6 @@ trait FunSets extends FunSetsInterface:
    */
   def filter(s: FunSet, p: Int => Boolean): FunSet = // TODO
     x => s(x) && p(x)
-
 
   /**
    * The bounds for `forall` and `exists` are +/- 1000.
