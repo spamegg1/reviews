@@ -190,7 +190,7 @@ class CalculatorSuite extends munit.FunSuite:
       "when an expression changes")
   }
 
-  test("If b previously depended on a, but no longer does, then it should not be recomputed anymore when a changes") {
+  test("If b previously depended on a, but no longer does, then its value should not change anymore when a changes") {
     val aexpr = Var[Expr](Minus(Literal(4), Literal(3)))
     val bexpr = Var[Expr](Plus(Ref("a"), Literal(1)))
     val input = Map("a" -> aexpr, "b" -> bexpr)

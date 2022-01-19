@@ -11,28 +11,25 @@ enum Expr:
 object Calculator extends CalculatorInterface:
  import Expr.*
 
-  def computeValues( // TODO
-      namedExpressions: Map[String, Signal[Expr]]): Map[String, Signal[Double]] =
-    namedExpressions map((string, signal) =>
-        (string, Signal(eval(signal(), namedExpressions)))
-    )
+  def computeValues(namedExpressions: Map[String, Signal[Expr]])
+      : Map[String, Signal[Double]] =                                    // TODO
+    namedExpressions map ((string, signal) =>
+      (string, Signal(eval(signal(), namedExpressions))))
 
-  def eval(expr: Expr, references: Map[String, Signal[Expr]])(using Signal.Caller): Double =
-    expr match // TODO
+  def eval(expr: Expr, references: Map[String, Signal[Expr]])
+      (using Signal.Caller): Double =                                    // TODO
+    expr match
       case Literal(v) => v
-      case Ref(name) =>
-        val lookup: Option[Signal[Expr]] = references.get(name)
-        lookup match  // careful! avoid infinite loops by removing name from references
-          case Some(v) => eval(v(), references.filter{case (key, _) => key != name})
-          case None => Double.NaN
+      case Ref(name) => references.get(name) match
+        case Some(signal) =>
+          eval(signal(), references filter ((k, _) => k != name))
+        case None => Double.NaN
       case Plus(a, b) => eval(a, references) + eval(b, references)
       case Minus(a, b) => eval(a, references) - eval(b, references)
       case Times(a, b) => eval(a, references) * eval(b, references)
-      case Divide(a, b) =>
-        val denom: Double = eval(b, references)
-        if (denom == 0) Double.NaN
-        else eval(a, references) / denom
-
+      case Divide(a, b) => eval(b, references) match
+        case 0 => Double.NaN
+        case denom => eval(a, references) / denom
 
   /** Get the Expr for a referenced variables.
    *  If the variable is not known, returns a literal NaN.

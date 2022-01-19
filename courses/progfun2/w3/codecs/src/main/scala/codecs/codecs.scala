@@ -89,7 +89,7 @@ trait EncoderInstances:
     * Encodes a list of values of type `A` into a JSON array containing
     * the list elements encoded with the given `encoder`
     */
-  given [A] (using encoder: Encoder[A]): Encoder[List[A]] = 
+  given [A] (using encoder: Encoder[A]): Encoder[List[A]] =
     Encoder.fromFunction(as => Json.Arr(as.map(encoder.encode)))
 
 
@@ -148,8 +148,8 @@ trait Decoder[+A]:
     }
 
   /**
-    * Transforms this `Decoder[A]` into a `Decoder[B]`, given a transformation function
-    * from `A` to `B`.
+    * Transforms this `Decoder[A]` into a `Decoder[B]`, given a transformation
+    * function from `A` to `B`.
     *
     * This operation is also known as “map”.
     */
@@ -177,32 +177,25 @@ trait DecoderInstances:
   given Decoder[Unit] =
     Decoder.fromPartialFunction { case Json.Null => () }
 
-  /** A decoder for `Int` values. Hint: use the `isValidInt` method of `BigDecimal`. */
+  /** A decoder for `Int` values.
+   * Hint: use the `isValidInt` method of `BigDecimal`. */
   // TODO Define a given value of type `Decoder[Int]`
   given intDecoder: Decoder[Int] =
-    def func(json: Json): Option[Int] = json match
+    Decoder.fromFunction(json => json match
       case Json.Num(value) =>
-        if value.isValidInt then
-          Some(value.toInt)
-        else None
+        if value.isValidInt then Some(value.toInt) else None
       case _ => None
-    Decoder.fromFunction(func)
+    )
 
   /** A decoder for `String` values */
   // TODO Define a given value of type `Decoder[String]`
   given stringDecoder: Decoder[String] =
-    Decoder.fromFunction(json => json match
-      case Json.Str(value) => Some(value)
-      case _ => None
-    )
+    Decoder.fromPartialFunction { case Json.Str(value) => value }
 
   /** A decoder for `Boolean` values */
   // TODO Define a given value of type `Decoder[Boolean]`
   given booleanDecoder: Decoder[Boolean] =
-    Decoder.fromFunction(json => json match
-      case Json.Bool(value) => Some(value)
-      case _ => None
-    )
+    Decoder.fromPartialFunction { case Json.Bool(value) => value }
 
   /**
     * A decoder for JSON arrays. It decodes each item of the array
@@ -214,11 +207,10 @@ trait DecoderInstances:
     type OLA = Option[List[A]]
     val initVal: OLA = Some(List[A]())
 
-    def iterFun(nextElt: Json, decList: OLA): OLA = nextElt.decodeAs[A] match
-      case Some(value) => decList match
-        case Some(lst) => Some(value :: lst)
-        case None => None
-      case None => None
+    def iterFun(nextElt: Json, decList: OLA): OLA =
+      (nextElt.decodeAs[A], decList) match
+        case (Some(value), Some(lst)) => Some(value :: lst)
+        case _ => None
 
     def decFun(json: Json): OLA = json match
       case Json.Arr(items) => items.foldRight(initVal)(iterFun)
@@ -252,7 +244,7 @@ trait PersonCodecs:
       .transform[Person](user => (user.name, user.age))
 
   /** The corresponding decoder for `Person` */
-  given Decoder[Person] = Decoder // TODO
+  given Decoder[Person] = Decoder                                        // TODO
     .field[String]("name")
     .zip(Decoder.field[Int]("age"))
     .transform[Person](user => Person(user._1, user._2))
@@ -271,7 +263,7 @@ trait ContactsCodecs:
     .field[List[Person]]("people")
     .transform[Contacts](contacts => contacts.people)
 
-  // ... then implement the decoder
+  // ... then implement the decoder                                         TODO
   given Decoder[Contacts] = Decoder
     .field[List[Person]]("people")
     .transform[Contacts](people => Contacts(people))
@@ -290,9 +282,9 @@ object Main:
     val maybeJsonObj    = parseJson(""" { "name": "Alice", "age": 42 } """)
     val maybeJsonObj2   = parseJson(""" { "name": "Alice", "age": "42" } """)
     // Uncomment the following lines as you progress in the assignment
-    // println(maybeJsonString.flatMap(_.decodeAs[Int]))
-    // println(maybeJsonString.flatMap(_.decodeAs[String]))
-    // println(maybeJsonObj.flatMap(_.decodeAs[Person]))
-    // println(maybeJsonObj2.flatMap(_.decodeAs[Person]))
-    // println(renderJson(Person("Bob", 66)))
+    println(maybeJsonString.flatMap(_.decodeAs[Int]))                    // None
+    println(maybeJsonString.flatMap(_.decodeAs[String]))            // Some(foo)
+    println(maybeJsonObj.flatMap(_.decodeAs[Person]))  // Some(Person(Alice,42))
+    println(maybeJsonObj2.flatMap(_.decodeAs[Person]))                   // None
+    println(renderJson(Person("Bob", 66)))            // {"name":"Bob","age":66}
 

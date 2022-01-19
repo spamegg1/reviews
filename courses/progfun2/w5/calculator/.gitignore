@@ -6,6 +6,7 @@
 target/
 logs/
 .bloop
+.bsp
 .dotty-ide-artifact
 .dotty-ide.json
 .idea
