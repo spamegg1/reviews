@@ -65,7 +65,7 @@ class BloxorzSuite extends munit.FunSuite:
       assertEquals(solution.length, optsolution.length)
   }
 
-  test("neighborsWithHistory") {
+  test("neighborsWithHistory") {                                         // TODO
     new Level1:
       import Move.*
       assertEquals(
@@ -77,7 +77,7 @@ class BloxorzSuite extends munit.FunSuite:
       )
   }
 
-  test("newNeighborsOnly") {
+  test("newNeighborsOnly") {                                             // TODO
     new Level1:
       import Move.*
       assertEquals(

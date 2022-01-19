@@ -75,7 +75,7 @@ trait GameDef:
    * This function returns the block at the start position of
    * the game.
    */
-  def startBlock: Block = Block(startPos, startPos)                       // NEW
+  def startBlock: Block = Block(startPos, startPos)                      // TODO
 
 
   /**
@@ -104,45 +104,45 @@ trait GameDef:
     /** The block obtained by moving left */
     def left = if isStanding then             deltaCol(-2, -1)
                else if b1.row == b2.row then  deltaCol(-1, -2)
-               else                        deltaCol(-1, -1)
+               else                           deltaCol(-1, -1)
 
     /** The block obtained by moving right */
     def right = if isStanding then            deltaCol(1, 2)
                 else if b1.row == b2.row then deltaCol(2, 1)
-                else                       deltaCol(1, 1)
+                else                          deltaCol(1, 1)
 
     /** The block obtained by moving up */
     def up = if isStanding then               deltaRow(-2, -1)
              else if b1.row == b2.row then    deltaRow(-1, -1)
-             else                          deltaRow(-1, -2)
+             else                             deltaRow(-1, -2)
 
     /** The block obtained by moving down */
     def down = if isStanding then             deltaRow(1, 2)
                else if b1.row == b2.row then  deltaRow(1, 1)
-               else                        deltaRow(2, 1)
+               else                           deltaRow(2, 1)
 
 
     /**
      * Returns the list of blocks that can be obtained by moving
      * the current block, together with the corresponding move.
      */
-    def neighbors: List[(Block, Move)] = List(                            // NEW
-        (left, Move.Left), (right, Move.Right), (up, Move.Up), (down, Move.Down)
-      )
+    def neighbors: List[(Block, Move)] =                                 // TODO
+      List( (left, Move.Left), (right, Move.Right),
+            (up, Move.Up),     (down, Move.Down) )
 
     /**
      * Returns the list of positions reachable from the current block
      * which are inside the terrain.
      */
-    def legalNeighbors: List[(Block, Move)] =                             // NEW
-      neighbors.filter((block, _) => block.isLegal)
+    def legalNeighbors: List[(Block, Move)] =                            // TODO
+      neighbors filter ((block, _) => block.isLegal)
 
     /**
      * Returns `true` if the block is standing.
      */
-    def isStanding: Boolean = b1 == b2                                    // NEW
+    def isStanding: Boolean = b1 == b2                                   // TODO
 
     /**
      * Returns `true` if the block is entirely inside the terrain.
      */
-    def isLegal: Boolean = terrain(b1) && terrain(b2)                     // NEW
+    def isLegal: Boolean = terrain(b1) && terrain(b2)                    // TODO
