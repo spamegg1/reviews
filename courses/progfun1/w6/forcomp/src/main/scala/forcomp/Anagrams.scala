@@ -35,14 +35,15 @@ object Anagrams extends AnagramsInterface:
    *
    *  Note: you must use `groupBy` to implement this method!
    */
-  def wordOccurrences(w: Word): Occurrences = // TODO
-    w.toLowerCase()
+  def wordOccurrences(w: Word): Occurrences =                            // TODO
+    w
+      .toLowerCase()
       .groupBy(identity)
       .view.mapValues(_.size)
       .toList.sortBy(_._1)
 
   /** Converts a sentence into its character occurrence list. */
-  def sentenceOccurrences(s: Sentence): Occurrences = // TODO
+  def sentenceOccurrences(s: Sentence): Occurrences =                    // TODO
     wordOccurrences(s.foldLeft("")(_+_))
 
   /** The `dictionaryByOccurrences` is a `Map` from different occurrences to a sequence of all
@@ -60,14 +61,16 @@ object Anagrams extends AnagramsInterface:
    *    List(('a', 1), ('e', 1), ('t', 1)) -> Seq("ate", "eat", "tea")
    *
    */
-  lazy val dictionaryByOccurrences: Map[Occurrences, List[Word]] = // TODO
-    dictionary.map(word => wordOccurrences(word) -> word)
+  lazy val dictionaryByOccurrences: Map[Occurrences, List[Word]] =       // TODO
+    dictionary
+      .map(word => wordOccurrences(word) -> word)
       .groupBy(_._1)
-      .view.mapValues(list => list.map(_._2))
+      .view
+      .mapValues(list => list.map(_._2))
       .toMap
 
   /** Returns all the anagrams of a given word. */
-  def wordAnagrams(word: Word): List[Word] = // TODO
+  def wordAnagrams(word: Word): List[Word] =                             // TODO
     dictionaryByOccurrences(wordOccurrences(word))
 
   /** Returns the list of all subsets of the occurrence list.
@@ -92,15 +95,17 @@ object Anagrams extends AnagramsInterface:
    *  Note that the order of the occurrence list subsets does not matter -- the subsets
    *  in the example above could have been displayed in some other order.
    */
-  def combinations(occurrences: Occurrences): List[Occurrences] = // TODO
+  def combinations(occurrences: Occurrences): List[Occurrences] =        // TODO
     occurrences match
-      case Nil => List(List())
+      case Nil => List(Nil)
       case (char, int) :: tail =>
         val earlier = combinations(tail)
-        val next = for
-          combo <- earlier
-          count <- 1 to int
-        yield (char, count) :: combo
+        val next =
+          for
+            combo <- earlier
+            count <- 1 to int
+          yield
+            (char, count) :: combo
         earlier ++ next
 
   /** Subtracts occurrence list `y` from occurrence list `x`.
@@ -113,7 +118,7 @@ object Anagrams extends AnagramsInterface:
    *  Note: the resulting value is an occurrence - meaning it is sorted
    *  and has no zero-entries.
    */
-  def subtract(x: Occurrences, y: Occurrences): Occurrences = y match // TODO
+  def subtract(x: Occurrences, y: Occurrences): Occurrences = y match    // TODO
     case Nil => x
     case (chary, inty) :: taily => x match
       case Nil => x
@@ -166,8 +171,9 @@ object Anagrams extends AnagramsInterface:
    *
    *  Note: There is only one anagram of an empty sentence.
    */
-  def sentenceAnagrams(sentence: Sentence): List[Sentence] = // TODO
+  def sentenceAnagrams(sentence: Sentence): List[Sentence] =             // TODO
     val occurrences: Occurrences = sentenceOccurrences(sentence)
+
     def helper(occ: Occurrences): List[Sentence] = occ match
       case Nil => List(List())
       case _ =>
@@ -177,6 +183,7 @@ object Anagrams extends AnagramsInterface:
           rest <- helper(subtract(occ, combo))
         yield
           word :: rest
+
     helper(occurrences)
 
 object Dictionary:
