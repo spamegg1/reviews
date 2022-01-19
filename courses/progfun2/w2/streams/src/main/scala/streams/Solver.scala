@@ -72,7 +72,7 @@ trait Solver extends GameDef:
     if initial.isEmpty then
       LazyList()
     else
-      val (block, history) = initial.head                 // (Block, List[Move])
+      val (block, history) = initial.head
       val neighbors = neighborsWithHistory(block, history)
       val newNeighbors = newNeighborsOnly(neighbors, explored)
       val newExplored = explored ++ newNeighbors.toSet.map(_._1)
