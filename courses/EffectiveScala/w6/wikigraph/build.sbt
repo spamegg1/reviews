@@ -1,7 +1,7 @@
 course := "effective-scala"
 assignment := "wikigraph"
 
-scalaVersion := "3.0.0"
+scalaVersion := "3.1.0"
 
 Test / parallelExecution := false
 

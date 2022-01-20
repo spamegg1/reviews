@@ -1,1 +1,0 @@
-For off-line testing, you can download the 1.4 GB database file from https://moocs.scala-lang.org/~dockermoocs/effective-scala/smallwiki.db

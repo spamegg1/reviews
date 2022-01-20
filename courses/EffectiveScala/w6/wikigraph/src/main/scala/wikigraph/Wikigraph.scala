@@ -20,11 +20,14 @@ final class Wikigraph(client: Wikipedia):
     *
     * Hint: Use the methods that you implemented in WikiResult.
     */
-  def namedLinks(of: ArticleId): WikiResult[Set[String]] = // TODO
+  def namedLinks(of: ArticleId): WikiResult[Set[String]] =               // TODO
     for
-      linkSet <- client.linksFrom(of)
-      traversedSeq <- WikiResult.traverse(linkSet.toSeq)(client.nameOfArticle)
-    yield traversedSeq.toSet
+      linkSet <- client.linksFrom(of)                   // Set[ArticleId] <- ...
+      linkSeq = linkSet.toSeq                                  // Seq[ArticleId]
+      fun = client.nameOfArticle                      // ArticleId => WR[String]
+      traversedSeq <- WikiResult.traverse(linkSeq)(fun)    // Seq[String] <- ...
+    yield
+      traversedSeq.toSet                                          // Set[String]
 
   /**
     * Computes the distance between two articles using breadth first search.
@@ -33,8 +36,8 @@ final class Wikigraph(client: Wikipedia):
     * @param target compute the distance from `start` to this node
     * @param maxDepth stop if the depth exceeds this value
     *
-    * @return an asynchronous computation that might fail. If the maximal distance
-    *         is exceeded during the search, the result is None
+    * @return an asynchronous computation that might fail. If the maximal
+    *         distance is exceeded during the search, the result is None
     *
     * Note: if a domain error occurs when jumping from node to node,
     *       fallback by ignoring the problematic node. On the other hand,
@@ -45,57 +48,64 @@ final class Wikigraph(client: Wikipedia):
     *       Use the `enqueue` and `dequeue` methods of `Queue`.
     */
   def breadthFirstSearch(start: ArticleId, target: ArticleId, maxDepth: Int)
-  : WikiResult[Option[Int]] = // TODO
+                        : WikiResult[Option[Int]] =
     import scala.collection.immutable.Queue
     /**
       * This recursive method iterates on the graph.
       *
       * The algorithm is detailed in the assignment description.
-      * - When the queue is empty or the maxDepth is exceeded (in the next element of the queue),
+      * - When the queue is empty or the maxDepth is exceeded
+      *   (in the next element of the queue),
       *   the search fails with None
-      * - Otherwise a node is retrieved from the queue and its neighbors fetched from the dataset.
-      *   The search succeeds if `target` is in this set.
-      *   Otherwise we recursively search after modifying `unknowns` and adding the unknown
-      *   neighbors to the queue with the correct distance.
+      * - Otherwise a node is retrieved from the queue and its neighbors
+      *   fetched from the dataset.
+      *   The search succeeds if `target` is in this set of neighbors.
+      *   Otherwise we recursively search after modifying `visited` and adding
+      *   the unknown neighbors to the queue with the correct distance.
       *
-      * @param visited keep the nodes the are already visited, used no to iterate infinitely on
-      *        graph cycles
+      * @param visited keep the nodes that are already visited, used to
+      *        iterate infinitely on graph cycles
       * @param q the next nodes to visit and their distance from `start`
+      *
+      * HINT: Have a look at the implementation of [[wikigraph.WikiResult#zip]]
+      *       to see how to use [[wikigraph.WikiResult#flatMap]] to work with
+      *       the content of [[wikigraph.WikiResult]].
+      *       This is useful to chain successive calls to iter.
+      *
+      * HINT: Do not forget, if a domain error occurs during exploration of the
+      *       graph, to fallback by continuing iteration without modifying
+      *       visited or q.
+      *       Refer to the documentation of[[wikigraph.WikiResult#fallbackTo]].
       */
     def iter(visited: Set[ArticleId], q: Queue[(Int, ArticleId)])
-    : WikiResult[Option[Int]] = // TODO
-
+            : WikiResult[Option[Int]] =                                  // TODO
       if q.isEmpty then
         WikiResult.successful(None)
 
       else
-        val ((depth, aId), queue): ((Int, ArticleId), Queue[(Int, ArticleId)]) =
-          q.dequeue
-
+        val ((depth, aId), queue) = q.dequeue
         if depth >= maxDepth then
           WikiResult.successful(None)
 
         else
-          val neighbors: WikiResult[Set[ArticleId]] = client.linksFrom(aId)
+          val neighbors = client.linksFrom(aId)            // WR[Set[ArticleId]]
 
-          val fun: Set[ArticleId] => WikiResult[Option[Int]] = nodes =>
+          def fun(nodes: Set[ArticleId]): WikiResult[Option[Int]] =
             if nodes.contains(target) then
               WikiResult.successful(Some(depth))
             else
-              val newVisited: Set[ArticleId] = visited + aId
-              val updatedNodes: Set[(Int, ArticleId)] =
-                nodes.map(aid => (depth + 1, aid))
-              iter(newVisited, queue.enqueueAll(updatedNodes))
+              val updatedNodes = nodes map (aid => (depth + 1, aid))
+              iter(visited + aId, queue.enqueueAll(updatedNodes))
 
           neighbors
             .flatMap(fun)
-            .fallbackTo(iter(visited + aId, queue))
+            .fallbackTo(iter(visited, queue))
 
     if start == target then WikiResult.successful(Some(0))
     else iter(Set(start), Queue(1->start))
 
   /**
-    * Computes the distances between some pages provided the list of their titles.
+    * Computes distances between some pages provided the list of their titles.
     * Do not compute the distance from page and itself.
     *
     * @param titles names of the articles
@@ -104,29 +114,32 @@ final class Wikigraph(client: Wikipedia):
     * @return An asynchronous computation of the following form:
     *         Seq((distanceFromTitle, distanceToTitle, distance), ...)
     *
-    * Hint: You should use the methods that you implemented on WikiResult as well as
-    *       breadthFirstSearch
+    * Hint: You should use the methods that you implemented on WikiResult
+    *        as well as breadthFirstSearch
     */
   def distanceMatrix(titles: List[String], maxDepth: Int = 50)
-  : WikiResult[Seq[(String, String, Option[Int])]] = // TODO
+                    : WikiResult[Seq[(String, String, Option[Int])]] =   // TODO
+
     val titlePairs: Seq[(String, String)] =
       for
-        source <- titles
-        dest <- titles
+        source <- titles                               // String <- List[String]
+        dest <- titles                                 // String <- List[String]
         if source != dest
       yield
-        (source, dest)
+        (source, dest)                                       // (String, String)
 
-    def fun(titlePair: (String, String)): WikiResult[(String, String, Option[Int])] =
-      val (source, dest): (String, String) = titlePair
+    def fun(titlePair: (String, String))
+           : WikiResult[(String, String, Option[Int])] =
+
+      val (source, dest) = titlePair
+
       for
-        idPair <- client.searchId(source).zip(client.searchId(dest))
+        idPair <- client.searchId(source) zip client.searchId(dest)
         (sourceId, destId) = idPair
         distance <- breadthFirstSearch(sourceId, destId, maxDepth)
         result <- WikiResult.successful(source, dest, distance)
       yield result
 
     WikiResult.traverse(titlePairs)(fun)
-
 
 end Wikigraph
