@@ -17,7 +17,7 @@ libraryDependencies ++= Seq(
   "ch.qos.logback"  %  "logback-classic"     % LogbackVersion,
   "org.scalameta"   %% "munit"               % "0.7.26" % Test,
   "com.novocode"    %  "junit-interface"     % "0.11" % Test,
-  ("io.circe" %% "circe-parser" % CirceVersion).cross(CrossVersion.for3Use2_13) // NEW
+  ("io.circe" %% "circe-parser" % CirceVersion).cross(CrossVersion.for3Use2_13)
 )
 
 scalacOptions += "-language:implicitConversions"

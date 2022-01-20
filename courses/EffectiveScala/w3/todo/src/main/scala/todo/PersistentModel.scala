@@ -95,49 +95,51 @@ object PersistentModel extends Model:
    * (The InMemoryModel uses the same.)
    */
 
-  def create(task: Task): Id =
-    val id: Id = loadId() // NEW
+  def create(task: Task): Id =                                           // TODO
+    val id: Id = loadId()
     saveId(id.next)
-    val idstore: List[(Id, Task)] = loadTasks().toList
-    val tasks: List[(Id, Task)] = idstore ++ List((id, task))
+    val idStore = loadTasks().toList
+    val tasks = idStore ++ List((id, task))
     saveTasks(Tasks(tasks))
     id
 
-  def read(id: Id): Option[Task] =
-    val idstore: Map[Id, Task] = loadTasks().toMap // NEW
-    idstore.get(id)
+  def read(id: Id): Option[Task] =                                       // TODO
+    val idStore = loadTasks().toMap
+    idStore.get(id)
 
-  def update(id: Id)(f: Task => Task): Option[Task] =
-    val idstore: Map[Id, Task] = loadTasks().toMap // NEW
-    idstore.get(id) match
+  def update(id: Id)(f: Task => Task): Option[Task] =                    // TODO
+    val idStore = loadTasks().toMap
+    idStore.get(id) match
       case None => None
       case Some(_) =>
-        val tasks: Map[Id, Task] = idstore.updatedWith(id)(opt => opt.map(f))
+        val tasks = idStore.updatedWith(id)(_.map(f))
         saveTasks(Tasks(tasks))
         tasks.get(id)
 
-  def delete(id: Id): Boolean =
-    val idstore: Map[Id, Task] = loadTasks().toMap // NEW
-    idstore.get(id) match
+  def delete(id: Id): Boolean =                                          // TODO
+    val idStore = loadTasks().toMap
+    idStore.get(id) match
       case None => false
       case Some(_) =>
-        val tasks: Map[Id, Task] = idstore.filter((tid, task) => tid != id)
+        val tasks = idStore.filter((tid, _) => tid != id)
         saveTasks(Tasks(tasks))
         true
 
-  def tasks: Tasks =
-    loadTasks() // NEW
+  def tasks: Tasks = loadTasks()                                         // TODO
 
-  def tasks(tag: Tag): Tasks =
-    val idstore: Map[Id, Task] = loadTasks().toMap // NEW
-    Tasks(idstore.filter((id, task) => task.tags.contains(tag)))
+  def tasks(tag: Tag): Tasks =                                           // TODO
+    val idstore = loadTasks().toMap
+    Tasks(idstore.filter((_, task) => task.tags.contains(tag)))
 
-  def complete(id: Id): Option[Task] =
-    update(id)(task => task.complete) // NEW
+  def complete(id: Id): Option[Task] = update(id)(_.complete)            // TODO
 
-  def tags: Tags =
-    val idstore: Map[Id, Task] = loadTasks().toMap // NEW
-    Tags(idstore.values.flatMap(task => task.tags).toSet.toList)
+  def tags: Tags = Tags(                                                 // TODO
+    loadTasks()                                                         // Tasks
+      .toMap                                                    // Map[Id, Task]
+      .values                                                       // Seq[Task]
+      .flatMap(_.tags)                                               // Seq[Tag]
+      .toSet                                                         // Set[Tag]
+      .toList                                                       // List[Tag]
+  )
 
-  def clear(): Unit =
-    saveTasks(Tasks.empty) // NEW
+  def clear(): Unit = saveTasks(Tasks.empty)                             // TODO
