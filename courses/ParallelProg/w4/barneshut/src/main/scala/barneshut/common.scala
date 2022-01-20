@@ -43,48 +43,58 @@ sealed abstract class Quad extends QuadInterface:
 
   def insert(b: Body): Quad
 
-case class Empty(centerX: Float, centerY: Float, size: Float) extends Quad: // TODO
-  def massX: Float = centerX
-  def massY: Float = centerY
-  def mass: Float = 0
-  def total: Int = 0
-  def insert(b: Body): Quad = Leaf(centerX, centerY, size, Seq(b))
+case class Empty(centerX: Float, centerY: Float, size: Float) extends Quad:
+  def massX: Float = centerX                                             // TODO
+  def massY: Float = centerY                                             // TODO
+  def mass: Float = 0                                                    // TODO
+  def total: Int = 0                                                     // TODO
+  def insert(b: Body): Quad = Leaf(centerX, centerY, size, Seq(b))       // TODO
 
 case class Fork(
   nw: Quad, ne: Quad, sw: Quad, se: Quad
-) extends Quad: // TODO
-  val centerX: Float = nw.centerX + nw.size / 2
-  val centerY: Float = nw.centerY + nw.size / 2
-  val size: Float = nw.size * 2
-  val mass: Float = nw.mass + ne.mass + sw.mass + se.mass
-  val massX: Float = if mass == 0 then centerX else
-    (nw.mass * nw.massX + ne.mass * ne.massX + sw.mass * sw.massX + se.mass * se.massX) / mass
-  val massY: Float = if mass == 0 then centerY else
-    (nw.mass * nw.massY + ne.mass * ne.massY + sw.mass * sw.massY + se.mass * se.massY) / mass
-  val total: Int = nw.total + ne.total + sw.total + se.total
+) extends Quad:
+  val centerX: Float = nw.centerX + nw.size / 2                          // TODO
+  val centerY: Float = nw.centerY + nw.size / 2                          // TODO
+  val size: Float = nw.size * 2                                          // TODO
+  val mass: Float = nw.mass + ne.mass + sw.mass + se.mass                // TODO
+  val weightX = nw.mass * nw.massX + ne.mass * ne.massX +                // MINE
+                sw.mass * sw.massX + se.mass * se.massX
+  val weightY = nw.mass * nw.massY + ne.mass * ne.massY +                // MINE
+                sw.mass * sw.massY + se.mass * se.massY
+  val massX: Float = if mass == 0 then centerX else weightX / mass       // TODO
+  val massY: Float = if mass == 0 then centerY else weightY / mass       // TODO
+  val total: Int = nw.total + ne.total + sw.total + se.total             // TODO
 
-  def insert(b: Body): Fork = // TODO
-    if b.x <= centerX && b.y <= centerY then Fork(nw.insert(b), ne, sw, se)
-    else if b.x <= centerX && b.y >= centerY then Fork(nw, ne, sw.insert(b), se)
-    else if b.x >= centerX && b.y <= centerY then Fork(nw, ne.insert(b), sw, se)
+  def insert(b: Body): Fork =                                            // TODO
+    if b.x <= centerX && b.y <= centerY then
+      Fork(nw.insert(b), ne, sw, se)
+    else if b.x <= centerX && b.y >= centerY then
+      Fork(nw, ne, sw.insert(b), se)
+    else if b.x >= centerX && b.y <= centerY then
+      Fork(nw, ne.insert(b), sw, se)
     else Fork(nw.insert(b), ne, sw, se.insert(b))
 
 case class Leaf(centerX: Float, centerY: Float, size: Float, bodies: coll.Seq[Body])
-extends Quad: // TODO
-  val massCalc: Float = bodies.foldLeft(0f)((m, body) => m + body.mass)
-  val (mass, massX, massY) = (massCalc ,
-    bodies.foldLeft(0f)((m, body) => m + body.mass * body.x) / massCalc,
-    bodies.foldLeft(0f)((m, body) => m + body.mass * body.y) / massCalc
-  )
-  val total: Int = bodies.size
-  def insert(b: Body): Quad =
-    if (size > minimumSize) then
+extends Quad:
+  val massCalc: Float = bodies.foldLeft(0f)((m, body) => m + body.mass)  // MINE
+  val weightX = bodies.foldLeft(0f)((m, body) => m + body.mass * body.x) // MINE
+  val weightY = bodies.foldLeft(0f)((m, body) => m + body.mass * body.y) // MINE
+
+  val (mass, massX, massY) =                                             // TODO
+    (massCalc, weightX / massCalc, weightY / massCalc)
+
+  val total: Int = bodies.size                                           // TODO
+
+  def insert(b: Body): Quad =                                            // TODO
+    if size > minimumSize then
       val myfork: Fork = Fork(
-        Empty(centerX - size/4, centerY - size/4, size/2),
-        Empty(centerX + size/4, centerY - size/4, size/2),
-        Empty(centerX - size/4, centerY + size/4, size/2),
-        Empty(centerX + size/4, centerY + size/4, size/2))
+        Empty(centerX - size / 4, centerY - size / 4, size / 2),
+        Empty(centerX + size / 4, centerY - size / 4, size / 2),
+        Empty(centerX - size / 4, centerY + size / 4, size / 2),
+        Empty(centerX + size / 4, centerY + size / 4, size / 2))
+
       (bodies :+ b).foldLeft(myfork)((fork, body) => fork.insert(body))
+
     else Leaf(centerX, centerY, size, bodies :+ b)
 
 def minimumSize = 0.00001f
@@ -128,21 +138,18 @@ class Body(val mass: Float, val x: Float, val y: Float, val xspeed: Float, val y
         netforcex += dforcex
         netforcey += dforcey
 
-    def traverse(quad: Quad): Unit = (quad: Quad) match // TODO
+    def traverse(quad: Quad): Unit = (quad: Quad) match
       case Empty(_, _, _) =>
         // no force
       case Leaf(_, _, _, bodies) =>
-        // add force contribution of each body by calling addForce
-        for
-          body <- bodies
-        do
-          addForce(body.mass, body.x, body.y)
+        // add force contribution of each body by calling addForce          TODO
+        for body <- bodies do addForce(body.mass, body.x, body.y)
       case Fork(nw, ne, sw, se) =>
         // see if node is far enough from the body,
-        // or recursion is needed
+        // or recursion is needed                                           TODO
         if quad.size / distance(x, y, quad.massX, quad.massY) < theta then
           addForce(quad.mass, quad.massX, quad.massY)
-        else  // recurse on sub-quads
+        else                                             // recurse on sub-quads
           traverse(nw); traverse(ne); traverse(sw); traverse(se)
 
     traverse(quad)
@@ -162,32 +169,36 @@ class SectorMatrix(val boundaries: Boundaries, val sectorPrecision: Int) extends
   val matrix = new Array[ConcBuffer[Body]](sectorPrecision * sectorPrecision)
   for i <- 0 until matrix.length do matrix(i) = ConcBuffer()
 
-  def +=(b: Body): SectorMatrix = // TODO
+  def +=(b: Body): SectorMatrix =                                        // TODO
     val secX =
       if b.x <= boundaries.minX then
         boundaries.minX
       else if b.x >= boundaries.maxX then
         boundaries.maxX - 1
-      else
-        b.x
+      else b.x
+
     val secY =
       if b.y <= boundaries.minY then
         boundaries.minY
       else if b.y >= boundaries.maxY then
         boundaries.maxY - 1
-      else
-        b.y
-    val sectorX = (secX - boundaries.minX) / (boundaries.maxX - boundaries.minX) * sectorPrecision
-    val sectorY = (secY - boundaries.minY) / (boundaries.maxY - boundaries.minY) * sectorPrecision
-    matrix(sectorY.toInt * sectorPrecision + sectorX.toInt) += b // using ConcBuffer's += method
+      else b.y
+
+    val sectorX = (secX - boundaries.minX) / (boundaries.maxX - boundaries.minX)
+                                           * sectorPrecision
+
+    val sectorY = (secY - boundaries.minY) / (boundaries.maxY - boundaries.minY)
+                                           * sectorPrecision
+
+    // using ConcBuffer's += method
+    matrix(sectorY.toInt * sectorPrecision + sectorX.toInt) += b
+
     this
 
   def apply(x: Int, y: Int) = matrix(y * sectorPrecision + x)
 
-  def combine(that: SectorMatrix): SectorMatrix = // TODO
-    for
-      i <- matrix.indices
-    do
+  def combine(that: SectorMatrix): SectorMatrix =                        // TODO
+    for i <- matrix.indices do
       matrix(i) = matrix(i).combine(that.matrix(i))
     this
 
@@ -205,7 +216,8 @@ class SectorMatrix(val boundaries: Boundaries, val sectorPrecision: Int) extends
         val nspan = span / 2
         val nAchievedParallelism = achievedParallelism * 4
         val (nw, ne, sw, se) =
-          if parallelism > 1 && achievedParallelism < parallelism * BALANCING_FACTOR then parallel(
+          if parallelism > 1 && achievedParallelism < parallelism * BALANCING_FACTOR
+          then parallel(
             quad(x, y, nspan, nAchievedParallelism),
             quad(x + nspan, y, nspan, nAchievedParallelism),
             quad(x, y + nspan, nspan, nAchievedParallelism),

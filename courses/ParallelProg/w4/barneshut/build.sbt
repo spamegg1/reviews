@@ -8,5 +8,3 @@ libraryDependencies ++= Seq(
   "org.scala-lang.modules" %% "scala-parallel-collections" % "1.0.3",
   "org.scalameta" %% "munit" % "0.7.26" % Test
 )
-
-testFrameworks += new TestFramework("munit.Framework")

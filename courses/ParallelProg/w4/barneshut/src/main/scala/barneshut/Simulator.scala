@@ -16,14 +16,14 @@ class Simulator(val taskSupport: TaskSupport, val timeStats: TimeStatistics):
     val newMaxX: Float = math.max(body.x, boundaries.maxX)
     val newMinY: Float = math.min(body.y, boundaries.minY)
     val newMaxY: Float = math.max(body.y, boundaries.maxY)
-    val newBoundaries: Boundaries = new Boundaries
-    newBoundaries.minX = newMinX    // these 4 are vars in the Boundaries class!
-    newBoundaries.maxX = newMaxX
-    newBoundaries.minY = newMinY
-    newBoundaries.maxY = newMaxY
-    newBoundaries
+    val newBd: Boundaries = new Boundaries
+    newBd.minX = newMinX            // these 4 are vars in the Boundaries class!
+    newBd.maxX = newMaxX
+    newBd.minY = newMinY
+    newBd.maxY = newMaxY
+    newBd
 
-  def mergeBoundaries(a: Boundaries, b: Boundaries): Boundaries = // TODO
+  def mergeBoundaries(a: Boundaries, b: Boundaries): Boundaries =        // TODO
     val newBd: Boundaries = new Boundaries
     newBd.minX = math.min(a.minX, b.minX)     // these 4 are vars in Boundaries!
     newBd.maxX = math.max(a.maxX, b.maxX)
@@ -31,16 +31,18 @@ class Simulator(val taskSupport: TaskSupport, val timeStats: TimeStatistics):
     newBd.maxY = math.max(a.maxY, b.maxY)
     newBd
 
-  def computeBoundaries(bodies: coll.Seq[Body]): Boundaries = timeStats.timed("boundaries") {
-    val parBodies = bodies.par
-    parBodies.tasksupport = taskSupport
-    parBodies.aggregate(Boundaries())(updateBoundaries, mergeBoundaries)
-  }
+  def computeBoundaries(bodies: coll.Seq[Body]): Boundaries =
+    timeStats.timed("boundaries") {
+      val parBodies = bodies.par
+      parBodies.tasksupport = taskSupport
+      parBodies.aggregate(Boundaries())(updateBoundaries, mergeBoundaries)
+    }
 
-  def computeSectorMatrix(bodies: coll.Seq[Body], boundaries: Boundaries): SectorMatrix = timeStats.timed("matrix") {
+  def computeSectorMatrix(bodies: coll.Seq[Body], boundaries: Boundaries)
+                         : SectorMatrix = timeStats.timed("matrix") {
     val parBodies = bodies.par
     parBodies.tasksupport = taskSupport
-    parBodies.aggregate( // TODO
+    parBodies.aggregate(                                                 // TODO
       new SectorMatrix(boundaries, SECTOR_PRECISION))(
       (secMat, bod) => secMat += bod, (secM1, secM2) => secM1.combine(secM2)
     )
@@ -50,13 +52,15 @@ class Simulator(val taskSupport: TaskSupport, val timeStats: TimeStatistics):
     sectorMatrix.toQuad(taskSupport.parallelismLevel)
   }
 
-  def updateBodies(bodies: coll.Seq[Body], quad: Quad): coll.Seq[Body] = timeStats.timed("update") {
-    val parBodies = bodies.par
-    parBodies.tasksupport = taskSupport
-    parBodies.map(body => body.updated(quad)).seq // TODO
-  }
+  def updateBodies(bodies: coll.Seq[Body], quad: Quad): coll.Seq[Body] =
+    timeStats.timed("update") {
+      val parBodies = bodies.par
+      parBodies.tasksupport = taskSupport
+      parBodies.map(body => body.updated(quad)).seq                      // TODO
+    }
 
-  def eliminateOutliers(bodies: coll.Seq[Body], sectorMatrix: SectorMatrix, quad: Quad): coll.Seq[Body] = timeStats.timed("eliminate") {
+  def eliminateOutliers(bodies: coll.Seq[Body], sectorMatrix: SectorMatrix,
+                        quad: Quad): coll.Seq[Body] = timeStats.timed("eliminate") {
     def isOutlier(b: Body): Boolean =
       val dx = quad.massX - b.x
       val dy = quad.massY - b.y
