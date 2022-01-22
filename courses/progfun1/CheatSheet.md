@@ -1,10 +1,8 @@
----
-layout: page
-title: Cheat Sheet
----
-
-This cheat sheet originated from the forum, credits to Laurent Poulain.
+This cheat sheet originated from the forums, credits to Laurent Poulain.
 We copied it and changed or added a few things.
+
+It may look overwhelming, especially when you see that it precedes the  content of the course. Its purpose is to summarize concepts and syntax  that you might need to solve the assignments. Therefore, during the  assignments, make sure to have a look here if you do not know how to use some features.
+
 There are certainly a lot of things that can be improved! If you would like to contribute, you have two options:
 
 - Click the "Edit" button on this file on GitHub:
@@ -18,7 +16,6 @@ There are certainly a lot of things that can be improved! If you would like to c
 - Call by value: evaluates the function arguments before calling the function
 - Call by name: evaluates the function first, and then evaluates the arguments if need be
 
-<!-- code -->
 ```scala
     def example = 2      // evaluated when called
     val example = 2      // evaluated immediately
