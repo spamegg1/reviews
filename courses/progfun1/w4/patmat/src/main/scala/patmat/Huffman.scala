@@ -70,9 +70,7 @@ trait Huffman extends HuffmanInterface:
    */
   def times(chars: List[Char]): List[(Char, Int)] =                      // TODO
     chars
-      .groupBy(identity)
-      .view
-      .mapValues(_.size)
+      .groupMapReduce(identity)(_ => 1)(_+_)
       .toList
 
   /**
