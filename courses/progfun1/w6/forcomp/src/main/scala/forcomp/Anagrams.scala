@@ -10,45 +10,50 @@ object Anagrams extends AnagramsInterface:
   /** A sentence is a `List` of words. */
   type Sentence = List[Word]
 
-  /** `Occurrences` is a `List` of pairs of characters and positive integers saying
-   *  how often the character appears.
+  /** `Occurrences` is a `List` of pairs of characters and positive integers
+   *  saying how often the character appears.
    *  This list is sorted alphabetically w.r.t. to the character in each pair.
    *  All characters in the occurrence list are lowercase.
    *
-   *  Any list of pairs of lowercase characters and their frequency which is not sorted
-   *  is **not** an occurrence list.
+   *  Any list of pairs of lowercase characters and their frequency which is not
+   *  sorted is **not** an occurrence list.
    *
-   *  Note: If the frequency of some character is zero, then that character should not be
-   *  in the list.
+   *  Note: If the frequency of some character is zero, then that character
+   *  should not be in the list.
    */
   type Occurrences = List[(Char, Int)]
 
   /** The dictionary is simply a sequence of words.
-   *  It is predefined and obtained as a sequence using the utility method `loadDictionary`.
+   *  It is predefined and obtained as a sequence using the utility method
+   * `loadDictionary`.
    */
   val dictionary: List[Word] = Dictionary.loadDictionary
 
   /** Converts the word into its character occurrence list.
    *
-   *  Note: the uppercase and lowercase version of the character are treated as the
-   *  same character, and are represented as a lowercase character in the occurrence list.
+   *  Note: the uppercase and lowercase version of the character are treated as
+   *  the same character, and are represented as a lowercase character in the
+   *  occurrence list.
    *
    *  Note: you must use `groupBy` to implement this method!
    */
   def wordOccurrences(w: Word): Occurrences =                            // TODO
     w
-      .toLowerCase()
+      .toLowerCase
       .groupBy(identity)
-      .view.mapValues(_.size)
-      .toList.sortBy(_._1)
+      .view
+      .mapValues(_.size)
+      .toList
+      .sortBy(_._1)
 
   /** Converts a sentence into its character occurrence list. */
   def sentenceOccurrences(s: Sentence): Occurrences =                    // TODO
     wordOccurrences(s.foldLeft("")(_+_))
 
-  /** The `dictionaryByOccurrences` is a `Map` from different occurrences to a sequence of all
-   *  the words that have that occurrence count.
-   *  This map serves as an easy way to obtain all the anagrams of a word given its occurrence list.
+  /** The `dictionaryByOccurrences` is a `Map` from different occurrences to a
+   *  sequence of all the words that have that occurrence count.
+   *  This map serves as an easy way to obtain all the anagrams of a word given
+   *  its occurrence list.
    *
    *  For example, the word "eat" has the following character occurrence list:
    *
@@ -92,8 +97,8 @@ object Anagrams extends AnagramsInterface:
    *      List(('a', 2), ('b', 2))
    *    )
    *
-   *  Note that the order of the occurrence list subsets does not matter -- the subsets
-   *  in the example above could have been displayed in some other order.
+   *  Note that the order of the occurrence list subsets does not matter -- the
+   *  subsets in the example above could have been displayed in some other order
    */
   def combinations(occurrences: Occurrences): List[Occurrences] =        // TODO
     occurrences match
@@ -121,23 +126,29 @@ object Anagrams extends AnagramsInterface:
   def subtract(x: Occurrences, y: Occurrences): Occurrences =            // TODO
     val yMap = y.toMap
     x
-      .map((cx, ix) => (cx, ix - yMap.getOrElse(cx, 0)))
+      .map((char, int) => (char, int - yMap.getOrElse(char, 0)))
       .filter(_._2 > 0)
 
   /** Returns a list of all anagram sentences of the given sentence.
    *
-   *  An anagram of a sentence is formed by taking the occurrences of all the characters of
-   *  all the words in the sentence, and producing all possible combinations of words with those characters,
+   *  An anagram of a sentence is formed by taking the occurrences of all the
+   *  characters of all the words in the sentence, and producing all possible
+   *  combinations of words with those characters,
    *  such that the words have to be from the dictionary.
    *
-   *  The number of words in the sentence and its anagrams does not have to correspond.
-   *  For example, the sentence `List("I", "love", "you")` is an anagram of the sentence `List("You", "olive")`.
+   *  The number of words in the sentence and its anagrams does not have to
+   *  correspond.
+   *  For example, the sentence `List("I", "love", "you")` is an anagram of the
+   *  sentence `List("You", "olive")`.
    *
-   *  Also, two sentences with the same words but in a different order are considered two different anagrams.
-   *  For example, sentences `List("You", "olive")` and `List("olive", "you")` are different anagrams of
+   *  Also, two sentences with the same words but in a different order are
+   *  considered two different anagrams.
+   *  For example, sentences `List("You", "olive")` and `List("olive", "you")`
+   *  are different anagrams of
    *  `List("I", "love", "you")`.
    *
-   *  Here is a full example of a sentence `List("Yes", "man")` and its anagrams for our dictionary:
+   *  Here is a full example of a sentence `List("Yes", "man")` and its anagrams
+   *  for our dictionary:
    *
    *    List(
    *      List(en, as, my),
@@ -156,10 +167,13 @@ object Anagrams extends AnagramsInterface:
    *      List(yes, man)
    *    )
    *
-   *  The different sentences do not have to be output in the order shown above - any order is fine as long as
-   *  all the anagrams are there. Every returned word has to exist in the dictionary.
+   *  The different sentences do not have to be output in the order shown above
+   *  - any order is fine as long as
+   *  all the anagrams are there. Every returned word has to exist in the
+   *  dictionary.
    *
-   *  Note: in case that the words of the sentence are in the dictionary, then the sentence is the anagram of itself,
+   *  Note: in case that the words of the sentence are in the dictionary, then
+   *  the sentence is the anagram of itself,
    *  so it has to be returned in this list.
    *
    *  Note: There is only one anagram of an empty sentence.
@@ -182,7 +196,8 @@ object Anagrams extends AnagramsInterface:
 object Dictionary:
   def loadDictionary: List[String] =
     val wordstream = Option {
-      getClass.getResourceAsStream(List("forcomp", "linuxwords.txt").mkString("/", "/", ""))
+      getClass.getResourceAsStream(List("forcomp", "linuxwords.txt")
+              .mkString("/", "/", ""))
     } getOrElse {
       sys.error("Could not load word list, dictionary file not found")
     }
