@@ -146,16 +146,17 @@ trait Huffman extends HuffmanInterface:
    * the resulting list of characters.
    */
   def decode(tree: CodeTree, bits: List[Bit]): List[Char] =              // TODO
-    def helper(t: CodeTree, b: List[Bit]): List[Char] = t match
-      case Leaf(char, _) =>
-        if b.isEmpty then List(char)
-        else char :: helper(tree, b)                          // go back to root
+    def helper(t: CodeTree, b: List[Bit]): List[Char] =
+      t match
+        case Leaf(char, _) =>
+          if b.isEmpty then List(char)
+          else char :: helper(tree, b)                        // go back to root
 
-      case Fork(left, right, _, _) =>
-        if b.head == 0 then
-          helper(left, b.tail)
-        else
-          helper(right, b.tail)
+        case Fork(left, right, _, _) =>
+          if b.head == 0 then
+            helper(left, b.tail)
+          else
+            helper(right, b.tail)
 
     helper(tree, bits)
 

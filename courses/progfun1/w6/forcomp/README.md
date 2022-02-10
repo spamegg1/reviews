@@ -83,7 +83,7 @@ List("Every", "student", "likes", "Scala").groupBy((element: String) => element.
 produces:
 
 ```scala
-Map(  5 -> List("Every", "likes", "Scala"),  7 -> List("student") )
+Map(5 -> List("Every", "likes", "Scala"), 7 -> List("student"))
 ```
 
 Above, the key is the length of the string and the type of the key is Int. Every String with the same length is grouped under the same key -- its length.
@@ -97,7 +97,7 @@ List(0, 1, 2, 1, 0).groupBy((element: Int) => element)
 produces:
 
 ```scala
-Map(  0 -> List(0, 0),  1 -> List(1, 1),  2 -> List(2) )
+Map(0 -> List(0, 0), 1 -> List(1, 1), 2 -> List(2))
 ```
 
 Maps provide efficient lookup of all the values mapped to a certain key. Any collection of pairs can be transformed into a Map using the `toMap` method. Similarly, any Map can be transformed into a List of pairs using the `toList` method.
@@ -165,7 +165,8 @@ def subtract(x: Occurrences, y: Occurrences): Occurrences
 For example, given two occurrence lists for words lard and r:
 
 ```scala
-val x = List(('a', 1), ('d', 1), ('l', 1), ('r', 1)) val y = List(('r', 1))
+val x = List(('a', 1), ('d', 1), ('l', 1), ('r', 1)) 
+val y = List(('r', 1))
 ```
 
 the `subtract(x, y)` is `List(('a', 1), ('d', 1), ('l', 1))`.

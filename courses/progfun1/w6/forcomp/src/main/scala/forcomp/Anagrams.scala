@@ -118,18 +118,11 @@ object Anagrams extends AnagramsInterface:
    *  Note: the resulting value is an occurrence - meaning it is sorted
    *  and has no zero-entries.
    */
-  def subtract(x: Occurrences, y: Occurrences): Occurrences = y match    // TODO
-    case Nil => x
-    case (chary, inty) :: taily => x match
-      case Nil => x
-      case (charx, intx) :: tailx =>
-        if charx == chary then
-          if inty < intx then
-            (charx, intx - inty) :: subtract(tailx, taily)
-          else
-            subtract(tailx, taily)
-        else
-          (charx, intx) :: subtract(tailx, y)
+  def subtract(x: Occurrences, y: Occurrences): Occurrences =            // TODO
+    val yMap = y.toMap
+    x
+      .map((cx, ix) => (cx, ix - yMap.getOrElse(cx, 0)))
+      .filter(_._2 > 0)
 
   /** Returns a list of all anagram sentences of the given sentence.
    *
