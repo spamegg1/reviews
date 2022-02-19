@@ -10,16 +10,12 @@ def guessing_game(lower_bound, upper_bound):
     """Play a number guessing game with the computer."""
 
     low, high = lower_bound, upper_bound
-    print(f"Please think of a number between {low} and {high}!")
+    print("Please think of a number between", low, "and", str(high) + "!")
 
     guess = (low + high) // 2
 
-    print(f"Is your secret number {guess}?")
-    user_input = input("""
-Enter 'h' to indicate the guess is too high.
-Enter 'l' to indicate the guess is too low.
-Enter 'c' to indicate I guessed correctly.
->> """)
+    print("Is your secret number", str(guess) + "?")
+    user_input = input("Enter 'h' to indicate the guess is too high. Enter 'l' to indicate the guess is too low. Enter 'c' to indicate I guessed correctly.")
 
     while str(user_input) != 'c':
         if user_input not in ('h', 'l'):
@@ -31,13 +27,9 @@ Enter 'c' to indicate I guessed correctly.
             low = guess
             guess = (low + high) // 2
 
-        print("Is your secret number " + str(guess) + "?\n")
-        user_input = input("""
-Enter 'h' to indicate the guess is too high.
-Enter 'l' to indicate the guess is too low.
-Enter 'c' to indicate I guessed correctly.
->> """)
-    print(f"Game over. Your secret number was: {guess}")
+        print("Is your secret number", str(guess) + "?")
+        user_input = input("Enter 'h' to indicate the guess is too high. Enter 'l' to indicate the guess is too low. Enter 'c' to indicate I guessed correctly.")
+    print("Game over. Your secret number was:", guess)
 
 
 if __name__ == "__main__":

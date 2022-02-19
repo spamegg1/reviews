@@ -130,16 +130,9 @@ class Message(object):
         Returns: the message text (string) in which every character is shifted
              down the alphabet by the input shift
         """
-        newtext = ''
         shift_dict = self.build_shift_dict(shift)
-
-        for letter in self.message_text:
-            if letter.isalpha():
-                newtext += shift_dict[letter]
-            else:
-                newtext += letter
-
-        return newtext
+        return ''.join(shift_dict[letter] if letter.isalpha() else letter
+                       for letter in self.message_text)
 
 
 class PlaintextMessage(Message):
