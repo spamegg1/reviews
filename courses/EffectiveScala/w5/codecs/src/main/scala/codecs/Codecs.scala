@@ -83,19 +83,19 @@ trait EncoderInstances:
   /** An encoder for `String` values */
   given stringEncoder: Encoder[String] =
     // TODO Implement the `Encoder[String]` given instance
-    Encoder.fromFunction(s => Json.Str(String(s)))
+    Encoder fromFunction (s => Json.Str(String(s)))
 
   /** An encoder for `Boolean` values */
   // TODO Define a given instance of type `Encoder[Boolean]`
   given booleanEncoder: Encoder[Boolean] =
-    Encoder.fromFunction(b => Json.Bool(b))
+    Encoder fromFunction (b => Json.Bool(b))
 
   /**
     * Encodes a list of values of type `A` into a JSON array containing
     * the list elements encoded with the given `encoder`
     */
   given listEncoder[A](using encoder: Encoder[A]): Encoder[List[A]] =
-    Encoder.fromFunction(as => Json.Arr(as.map(encoder.encode)))
+    Encoder fromFunction (as => Json.Arr(as map encoder.encode))
 
 //  type MSJ = Map[String, Json]
 //  given objectEncoder[A](using encoder: Encoder[A]): Encoder[MSJ] =
@@ -195,28 +195,18 @@ trait DecoderInstances:
 
   /** A decoder for `Int` values. Hint: use the `isValidInt` method of `BigDecimal`. */
   // TODO Define a given instance of type `Decoder[Int]`
-  given intDecoder: Decoder[Int] =
-    def func(json: Json): Option[Int] = json match
-      case Json.Num(value) =>
-        if value.isValidInt then Some(value.toInt) else None
-      case _ => None
-    Decoder.fromFunction(func)
+  given intDecoder: Decoder[Int] = Decoder.fromPartialFunction {
+      case Json.Num(value) if value.isValidInt => value.toInt }
 
   /** A decoder for `String` values */
   // TODO Define a given instance of type `Decoder[String]`
   given stringDecoder: Decoder[String] =
-    Decoder.fromFunction(json => json match
-      case Json.Str(value) => Some(value)
-      case _ => None
-    )
+    Decoder.fromPartialFunction { case Json.Str(value) => value }
 
   /** A decoder for `Boolean` values */
   // TODO Define a given instance of type `Decoder[Boolean]`
   given booleanDecoder: Decoder[Boolean] =
-    Decoder.fromFunction(json => json match
-      case Json.Bool(value) => Some(value)
-      case _ => None
-    )
+    Decoder.fromPartialFunction { case Json.Bool(value) => value }
 
   /**
     * A decoder for JSON arrays. It decodes each item of the array
@@ -238,7 +228,8 @@ trait DecoderInstances:
     type OLA = Option[List[A]]
     val initVal: OLA = Some(List[A]())
 
-    def iterFun(nextElt: Json, decList: OLA): OLA = nextElt.decodeAs[A] match
+    def iterFun(nextElt: Json, decList: OLA): OLA =
+      nextElt.decodeAs[A] match
         case Some(value) => decList match
           case Some(lst) => Some(value :: lst)
           case None => None
@@ -255,11 +246,9 @@ trait DecoderInstances:
     * the supplied `name` using the given `decoder`.
     */
   def field[A](name: String)(using decoder: Decoder[A]): Decoder[A] =
-    def func(json: Json): Option[A] = json match
+    Decoder.fromFunction(json => json match
       case Json.Obj(fields) => decoder.decode(fields(name))
-      case _ => None
-
-    Decoder.fromFunction(func)
+      case _ => None)
 
 end DecoderInstances
 
