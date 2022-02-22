@@ -1,9 +1,9 @@
 package democracy
 
 /**
- * A grade to assign to a candidate. There are seven possible grades (from
- * the worst to the best): `Bad`, `Mediocre`, `Inadequate`, `Passable`, `Good`,
- * `VeryGood`, and `Excellent`.
+ * A grade to assign to a candidate. There are seven possible grades 
+ * (from the worst to the best): `Bad`, `Mediocre`, `Inadequate`, 
+ * `Passable`, `Good`, `VeryGood`, and `Excellent`.
  *
  * Grades can be compared by using their `ordinal` method:
  *
@@ -67,7 +67,7 @@ case class Election(description: String, candidates: Set[Candidate]):
    */
   def elect(ballots: Seq[Ballot]): Candidate =
     assert(ballots.nonEmpty)
-    assert(ballots.forall(_.grades.keySet == candidates))
+    assert(ballots forall (_.grades.keySet == candidates))
 
     // Re-structure the data to get all the grades assigned to
     // each candidate by all the voters
@@ -96,9 +96,9 @@ case class Election(description: String, candidates: Set[Candidate]):
    */
   def findWinner(gradesPerCandidate: Map[Candidate, Seq[Grade]]): Candidate =
     // In case all the candidates have an empty collection of grades (this
-    // can happen because of the tie-breaking algorithm, see below), the winner
-    // is chosen by lottery from among the candidates.
-    if gradesPerCandidate.forall((candidate, grades) => grades.isEmpty) then
+    // can happen because of the tie-breaking algorithm, see below), 
+    // the winner is chosen by lottery from among the candidates.
+    if gradesPerCandidate forall ((_, grades) => grades.isEmpty) then
       val candidatesSeq = gradesPerCandidate.keys.toSeq
       val randomIndex   = util.Random.between(0, candidatesSeq.size)
       candidatesSeq(randomIndex)
@@ -107,8 +107,8 @@ case class Election(description: String, candidates: Set[Candidate]):
       // Use the operation `values` to select the collections of grades,
       // then use the operation `filter` to keep only the non empty grades,
       // then use the operation `map` to compute the median value of each
-      // collection of grades, and finally use the operation `maxBy` to find the
-      // highest median grade.
+      // collection of grades, and finally use the operation `maxBy` 
+      // to find the highest median grade.
       val bestMedianGrade: Grade =                                       // TODO
         gradesPerCandidate                         // Map[Candidate, Seq[Grade]]
           .values                                                  // Seq[Grade]
@@ -116,8 +116,8 @@ case class Election(description: String, candidates: Set[Candidate]):
           .map(Grade.median)                                       // Seq[Grade]
           .maxBy(_.ordinal)                                             // Grade
 
-      // Use the operation `filter` to select all the candidates that got the
-      // same best median grade (as the case may be)
+      // Use the operation `filter` to select all the candidates 
+      // that got the same best median grade (as the case may be)
       val bestCandidates: Map[Candidate, Seq[Grade]] =                   // TODO
         gradesPerCandidate filter
           ((_, grades) => Grade.median(grades) == bestMedianGrade)
@@ -133,8 +133,8 @@ case class Election(description: String, candidates: Set[Candidate]):
         // “If more than one candidate has the same highest median-grade, the
         // winner is discovered by removing (one-by-one) any grades equal in
         // value to the shared median grade from each tied candidate's total.
-        // This is repeated until only one of the previously tied candidates is
-        // currently found to have the highest median-grade.”
+        // This is repeated until only one of the previously tied candidates
+        // is currently found to have the highest median-grade.”
         // (source: https://en.wikipedia.org/wiki/Majority_judgment)
 
         // Use the operation `map` to transform each element of the

@@ -34,9 +34,9 @@ object Firework:
    * “literal patterns” to match on case objects.
    */
   def next(firework: Firework): Firework = firework match                // TODO
-    case Done => Done
-    case w: Waiting => w.next
-    case l: Launched => l.next
+    case Done         => Done
+    case w: Waiting   => w.next
+    case l: Launched  => l.next
     case e: Exploding => e.next
 
 end Firework
@@ -67,8 +67,7 @@ case class Waiting(countDown: Int,
    * firework to the [[Launched]] state.
    */
   def next: Firework =                                                   // TODO
-    if countDown > 0 then
-      copy(countDown = countDown - 1)
+    if countDown > 0 then copy(countDown = countDown - 1)
     else Launched.init(startPosition, numberOfParticles, particlesColor)
 
 end Waiting
@@ -82,13 +81,16 @@ object Waiting:
     // Take one color, randomly, among `Settings.colors`
     val color = Settings.colors(Random.nextInt(Settings.colors.length))
     val numberOfParticles = 40
+
     // Random initial position in the image boundary
     val position = Point(
       (Random.nextInt(Settings.width / 2) - Settings.width / 4).toDouble,
       (-Settings.height / 2).toDouble
     )
+
     // Random count-down between 0 and 60
     val countDown = Random.nextInt(60)
+
     Waiting(countDown, position, numberOfParticles, color)
 
 end Waiting
@@ -127,10 +129,18 @@ case class Launched(countDown: Int,
    */
   def next: Firework =                                                   // TODO
     if countDown > 0 then
-      val newPosition = Motion.movePoint(position, direction, Settings.propulsionSpeed)
-      Launched(countDown - 1, newPosition, direction, numberOfParticles, particlesColor)
-    else
-      Exploding.init(numberOfParticles, direction, position, particlesColor)
+      val newPosition =
+        Motion.movePoint(position, direction,
+                         Settings.propulsionSpeed)
+      Launched(countDown - 1,
+               newPosition,
+               direction,
+               numberOfParticles,
+               particlesColor)
+    else Exploding.init(numberOfParticles,
+                        direction,
+                        position,
+                        particlesColor)
 
 end Launched
 
@@ -145,7 +155,11 @@ object Launched:
   def init(position: Point, numberOfParticles: Int, particlesColor: Color): Launched =
     // A random vertical direction
     val direction = Angle(math.Pi / 2 + (Random.nextDouble() - 0.5) / 5)
-    Launched(countDown = 30, position, direction, numberOfParticles, particlesColor)
+    Launched(countDown = 30,
+             position,
+             direction,
+             numberOfParticles,
+             particlesColor)
 
 end Launched
 
@@ -183,9 +197,13 @@ object Exploding:
    * @param position          position of the explosion
    * @param color             color of the firework
    */
-  def init(numberOfParticles: Int, direction: Angle, position: Point, color: Color): Exploding =
+  def init(numberOfParticles: Int,
+           direction: Angle,
+           position: Point,
+           color: Color): Exploding =
     // Create a group of `numberOfParticles` random particles
-    val particles = List.fill(numberOfParticles)(Particle.init(direction, position, color))
+    val particles = List.fill(numberOfParticles)
+                             (Particle.init(direction, position, color))
     Exploding(countDown = 30, Particles(particles))
 
 end Exploding
@@ -203,7 +221,9 @@ case object Done extends Firework
  * @param color           color of the particle
  */
 case class Particle(horizontalSpeed: Double,
-                    verticalSpeed: Double, position: Point, color: Color):
+                    verticalSpeed: Double,
+                    position: Point,
+                    color: Color):
 
   /**
    * @return The next state of this particle
@@ -229,6 +249,7 @@ case class Particle(horizontalSpeed: Double,
     // Particle position is updated according to its new speed
     val updatedPosition = Point(position.x + updatedHorizontalSpeed,
                                 position.y + updatedVerticalSpeed)
+
     // Construct a new particle with the updated position and speed
     Particle(updatedHorizontalSpeed,                                     // TODO
              updatedVerticalSpeed,
@@ -248,7 +269,7 @@ case class Particles(value: List[Particle]):
   /**
    * @return The next state of this group of particles
    */
-  def next: Particles = Particles(value.map(particle => particle.next))
+  def next: Particles = Particles(value map (_.next))
 
 end Particles
 
@@ -256,13 +277,18 @@ object Particle:
 
   /**
    * @return The initial state of a particle
-   * @param initialDirection direction of the firework during its [[Launched]] phase
+   * @param initialDirection direction of the firework during 
+                             its [[Launched]] phase
    * @param position         position of the particle
    * @param color            color of the particle
    */
-  def init(initialDirection: Angle, position: Point, color: Color): Particle =
-    val angle = initialDirection + Angle(Random.nextDouble() * (math.Pi / 4) - math.Pi / 8)
+  def init(initialDirection: Angle,
+           position: Point, color: Color): Particle =
+
+    val r = Angle(Random.nextDouble() * math.Pi / 4 - math.Pi / 8)
+    val angle = initialDirection + r
     val velocity = Random.nextDouble() * 10 + 20
+
     Particle(angle.cos * velocity, angle.sin * velocity, position, color)
 
 end Particle
@@ -289,8 +315,7 @@ object Motion:
       math.max(speed - Settings.friction, 0)
     else if speed < -Settings.friction then
       math.min(speed + Settings.friction, 0)
-    else
-      0
+    else 0
 
 end Motion
 
@@ -301,7 +326,8 @@ object Settings:
   val colors: Array[Color] =
     Array(Color.red, Color.yellow, Color.white, Color.blue, Color.violet)
 
-  // These values have no standard units. They just work well for the animation.
+  // These values have no standard units. 
+  // They just work well for the animation.
   val friction = 0.2
   val gravity = 1.5
   val propulsionSpeed = 8.0

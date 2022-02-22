@@ -12,15 +12,16 @@ import org.http4s.server.middleware.CORS
 /**
  * This object setups and runs the webserver.
  *
- * You should changing InMemoryModel in this file to PersistentModel when you
- * have successfully implemented PersistentModel. Otherwise you should NOT
- * modify this file.
+ * You should change InMemoryModel in this file to PersistentModel 
+ * when you have successfully implemented PersistentModel. 
+ * Otherwise you should NOT modify this file.
  */
 object Main extends IOApp:
   private def app(blocker: Blocker): HttpApp[IO] =
-    Router.define(
-      "/api" -> CORS(TodoService(InMemoryModel).service)
-    )(AssetService.service(blocker)).orNotFound
+    Router
+      .define("/api" -> CORS(TodoService(InMemoryModel).service))
+             (AssetService.service(blocker))
+      .orNotFound
 
   private def server(blocker: Blocker): Resource[IO, Server] =
     EmberServerBuilder
@@ -31,12 +32,15 @@ object Main extends IOApp:
       .build
 
   private val program: Stream[IO, Unit] =
-    for {
+    for
       blocker <- Stream.resource(Blocker[IO])
       server <- Stream.resource(server(blocker))
       _ <- Stream.eval(IO(println(s"Started server on: ${server.address}")))
       _ <- Stream.never[IO].covaryOutput[Unit]
-    } yield ()
+    yield ()
 
   override def run(args: List[String]): IO[ExitCode] =
-    program.compile.drain.as(ExitCode.Success)
+    program
+      .compile
+      .drain
+      .as(ExitCode.Success)
