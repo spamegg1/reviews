@@ -153,8 +153,11 @@ object StudentTasks extends AutoPlugin {
     val assignmentKey = assignmentDetails.key
     val courseName =
       course.value match {
-        case "capstone" => "scala-capstone"
+        case "progfun1" => "scala-functional-programming"
+        case "progfun2" => "scala-functional-program-design"
+        case "parprog1" => "scala-parallel-programming"
         case "bigdata"  => "scala-spark-big-data"
+        case "capstone" => "scala-capstone"
         case "reactive" => "scala-akka-reactive"
         case other      => other
       }
