@@ -15,11 +15,12 @@ trait Wikipedia:
     * Retrieves the ids of the pages linked on a page.
     * 
     * If the provided id does not identify an article in the data,
-    * the computation fails with a [[wikigraph.errors.WikiError.ArticleNotFound]]
+    * the computation fails with [[wikigraph.errors.WikiError.ArticleNotFound]]
     * 
     * @param the id of the page from which we want to retrieve the links
     */
-  def linksFrom(art: ArticleId)(using ExecutionContext): WikiResult[Set[ArticleId]]
+  def linksFrom(art: ArticleId)
+               (using ExecutionContext): WikiResult[Set[ArticleId]]
 
   /**
     * Retrieves the title of the page corresponding to the provided id.

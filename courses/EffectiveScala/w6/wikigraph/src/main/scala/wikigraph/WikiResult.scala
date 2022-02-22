@@ -28,10 +28,9 @@ case class WikiResult[A](value: Future[Either[Seq[WikiError], A]]):
     * @param solution the value to use in case of failure
     */
   def orElse(solution: A)(using ExecutionContext): WikiResult[A] =
-    val f = value.map {
+    val f = value map {
       case Left(_)           => Right(solution)
-      case nofail @ Right(_) => nofail
-    }
+      case nofail @ Right(_) => nofail }
     WikiResult(f)
 
   /**
@@ -42,11 +41,11 @@ case class WikiResult[A](value: Future[Either[Seq[WikiError], A]]):
     *
     * @param b the computation to use in case of failure
     */
-  def fallbackTo(that: => WikiResult[A])(using ExecutionContext): WikiResult[A] =
-    val f = this.value.flatMap {
+  def fallbackTo(that: => WikiResult[A])
+                (using ExecutionContext): WikiResult[A] =
+    val f = this.value flatMap {
       case Left(_)  => that.value
-      case Right(_) => this.value
-    }
+      case Right(_) => this.value }
     WikiResult(f)
 
   /**
@@ -57,7 +56,7 @@ case class WikiResult[A](value: Future[Either[Seq[WikiError], A]]):
     * Hint: Both Either and Future have a similar method
     */
   def map[B](f: A => B)(using ExecutionContext): WikiResult[B] =         // TODO
-    WikiResult(value map (_.map(f)))
+    WikiResult(value map (_ map f))
 
   /**
     * Use the result of this computation as an input for another asynchronous
@@ -69,20 +68,19 @@ case class WikiResult[A](value: Future[Either[Seq[WikiError], A]]):
     *       error should be propagated
     */
   def flatMap[B](f: A => WikiResult[B])(using ExecutionContext): WikiResult[B] =
-    val futureB: Future[Either[Seq[WikiError], B]] = value.flatMap {
+    val futureB: Future[Either[Seq[WikiError], B]] = value flatMap {
       case Left(seqA) => Future(Left(seqA))                              // TODO
-      case Right(a) => f(a).value
-    }
+      case Right(a) => f(a).value }
     WikiResult(futureB)
 
   /**
-    * Retrieve the results of two computations and produce a result containing the
-    * two results in a pair. If one of the computations fails, its errors are propagated.
-    * If both fail, the errors of the two are propagated
+    * Retrieve the results of two computations and produce a result containing 
+    * the two results in a pair. If one of the computations fails, its errors 
+    * are propagated. If both fail, the errors of the two are propagated
     *
     * @param that the second computation
-    *
-    * Hint: The async part has been handled for you. You need to zip the two Either
+    * Hint:
+    * The async part has been handled for you. You need to zip the two Either
     */
   def zip[B](that: WikiResult[B])(using ExecutionContext): WikiResult[(A, B)] =
     def zipEithersAcc(a: Either[Seq[WikiError], A],
@@ -90,15 +88,17 @@ case class WikiResult[A](value: Future[Either[Seq[WikiError], A]]):
                        : Either[Seq[WikiError], (A, B)] =                // TODO
       (a, b) match
         case (Left(seqA), Left(seqB)) => Left(seqA ++ seqB)
-        case (Left(seqA), Right(_)) => Left(seqA)
-        case (Right(_), Left(seqB)) => Left(seqB)
-        case (Right(x), Right(y)) => Right((x, y))
+        case (Left(seqA), Right(_)  ) => Left(seqA)
+        case (Right(_)  , Left(seqB)) => Left(seqB)
+        case (Right(x)  , Right(y)  ) => Right((x, y))
 
-    WikiResult(this.value.flatMap { thisEither =>
-      that.value.map { thatEither =>
-        zipEithersAcc(thisEither, thatEither)
-      }
-    })
+    WikiResult(
+      for
+        thisEither <- this.value
+        thatEither <- that.value
+      yield
+        zipEithersAcc(thisEither, thatEither))
+
 
 object WikiResult:
   /**

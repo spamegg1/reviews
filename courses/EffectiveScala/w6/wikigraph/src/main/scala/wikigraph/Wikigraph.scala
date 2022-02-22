@@ -2,7 +2,6 @@ package wikigraph
 
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
-
 import Articles.ArticleId
 
 
@@ -79,30 +78,27 @@ final class Wikigraph(client: Wikipedia):
       */
     def iter(visited: Set[ArticleId], q: Queue[(Int, ArticleId)])
             : WikiResult[Option[Int]] =                                  // TODO
-      if q.isEmpty then
-        WikiResult.successful(None)
-
+      if   q.isEmpty
+      then WikiResult.successful(None)
       else
         val ((depth, aId), queue) = q.dequeue
-        if depth >= maxDepth then
-          WikiResult.successful(None)
-
+        if   depth >= maxDepth
+        then WikiResult.successful(None)
         else
           val neighbors = client.linksFrom(aId)            // WR[Set[ArticleId]]
-
           def fun(nodes: Set[ArticleId]): WikiResult[Option[Int]] =
-            if nodes.contains(target) then
-              WikiResult.successful(Some(depth))
+            if   nodes contains target
+            then WikiResult.successful(Some(depth))
             else
-              val updatedNodes = nodes map (aid => (depth + 1, aid))
-              iter(visited + aId, queue.enqueueAll(updatedNodes))
+              val updatedNodes = nodes map ((depth + 1, _))
+              iter(visited + aId, queue enqueueAll updatedNodes)
 
           neighbors
             .flatMap(fun)
             .fallbackTo(iter(visited, queue))
 
     if start == target then WikiResult.successful(Some(0))
-    else iter(Set(start), Queue(1->start))
+    else iter(Set(start), Queue(1 -> start))
 
   /**
     * Computes distances between some pages provided the list of their titles.
@@ -130,9 +126,7 @@ final class Wikigraph(client: Wikipedia):
 
     def fun(titlePair: (String, String))
            : WikiResult[(String, String, Option[Int])] =
-
       val (source, dest) = titlePair
-
       for
         idPair <- client.searchId(source) zip client.searchId(dest)
         (sourceId, destId) = idPair
