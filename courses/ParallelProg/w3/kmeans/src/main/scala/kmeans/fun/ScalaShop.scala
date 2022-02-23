@@ -17,7 +17,8 @@ object ScalaShop:
     setLayout(BorderLayout())
 
     val rightpanel = JPanel()
-    rightpanel.setBorder(BorderFactory.createEtchedBorder(border.EtchedBorder.LOWERED))
+    rightpanel.setBorder(
+      BorderFactory.createEtchedBorder(border.EtchedBorder.LOWERED))
     rightpanel.setLayout(BorderLayout())
     add(rightpanel, BorderLayout.EAST)
 
@@ -62,7 +63,8 @@ object ScalaShop:
 
     // Initial means selection
     val convergenceControls = JPanel()
-    convergenceControls.setLayout(BoxLayout(convergenceControls, BoxLayout.Y_AXIS))
+    convergenceControls.setLayout(
+      BoxLayout(convergenceControls, BoxLayout.Y_AXIS))
     allControls.add(convergenceControls)
 
     val convergenceGroup = ButtonGroup()
@@ -84,7 +86,8 @@ object ScalaShop:
     etaConvergenceButton.setSelected(true);
     criteriaControls.add(etaConvergenceButton)
 
-    val etaCountSpinner = JSpinner(SpinnerNumberModel(0.001, 0.00001, 0.01, 0.00001))
+    val etaCountSpinner =
+      JSpinner(SpinnerNumberModel(0.001, 0.00001, 0.01, 0.00001))
     criteriaControls.add(etaCountSpinner)
 
     val snrConvergenceButton = JRadioButton("Sound-to-noise")
@@ -107,7 +110,8 @@ object ScalaShop:
       def actionPerformed(e: ActionEvent): Unit = {
         var status = ""
         val time = measure {
-          status = canvas.applyIndexedColors(getColorCount, getInitialSelectionStrategy, getConvergenceStragegy)
+          status = canvas.applyIndexedColors(
+            getColorCount, getInitialSelectionStrategy, getConvergenceStragegy)
         }
         updateInformationBox(status, time.value)
       }
@@ -133,7 +137,8 @@ object ScalaShop:
     openMenuItem.addActionListener(new ActionListener {
       def actionPerformed(e: ActionEvent): Unit = {
         val fc = JFileChooser()
-        if fc.showOpenDialog(ScalaShopFrame.this) == JFileChooser.APPROVE_OPTION then {
+        if fc.showOpenDialog(ScalaShopFrame.this) == JFileChooser.APPROVE_OPTION
+        then {
           canvas.loadFile(fc.getSelectedFile.getPath)
         }
       }
@@ -143,7 +148,8 @@ object ScalaShop:
     saveMenuItem.addActionListener(new ActionListener {
       def actionPerformed(e: ActionEvent): Unit = {
         val fc = JFileChooser("epfl-view.png")
-        if fc.showSaveDialog(ScalaShopFrame.this) == JFileChooser.APPROVE_OPTION then {
+        if fc.showSaveDialog(ScalaShopFrame.this) == JFileChooser.APPROVE_OPTION
+        then {
           canvas.saveFile(fc.getSelectedFile.getPath)
         }
       }
@@ -163,7 +169,9 @@ object ScalaShop:
     val aboutMenuItem = JMenuItem("About")
     aboutMenuItem.addActionListener(new ActionListener {
       def actionPerformed(e: ActionEvent): Unit = {
-        JOptionPane.showMessageDialog(null, "ScalaShop, the ultimate image manipulation tool\nBrought to you by EPFL, 2015")
+        JOptionPane.showMessageDialog(null,
+          "ScalaShop, the ultimate image manipulation tool\n" +
+          "Brought to you by EPFL, 2015")
       }
     })
     helpMenu.add(aboutMenuItem)
@@ -204,7 +212,8 @@ object ScalaShop:
   try
     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
   catch
-    case _: Exception => println("Cannot set look and feel, using the default one.")
+    case _: Exception =>
+      println("Cannot set look and feel, using the default one.")
 
   val frame = ScalaShopFrame()
 

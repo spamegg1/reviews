@@ -60,12 +60,21 @@ class PhotoCanvas extends JComponent:
   def saveFile(path: String): Unit =
     reload()
     val stream = FileOutputStream(path)
-    val bufferedImage = BufferedImage(image.width, image.height, BufferedImage.TYPE_INT_ARGB)
-    for x <- 0 until image.width; y <- 0 until image.height do bufferedImage.setRGB(x, y, image(x, y))
+    val bufferedImage = BufferedImage(
+      image.width, image.height, BufferedImage.TYPE_INT_ARGB)
+    for
+      x <- 0 until image.width;
+      y <- 0 until image.height
+    do
+      bufferedImage.setRGB(x, y, image(x, y))
+
     ImageIO.write(bufferedImage, "png", stream)
 
-  def applyIndexedColors(colorCount: Int, initStrategy: InitialSelectionStrategy, convStrategy: ConvergenceStrategy): String =
-    val filter = IndexedColorFilter(image, colorCount, initStrategy, convStrategy)
+  def applyIndexedColors(colorCount: Int,
+                         initStrategy: InitialSelectionStrategy,
+                         convStrategy: ConvergenceStrategy): String =
+    val filter =
+      IndexedColorFilter(image, colorCount, initStrategy, convStrategy)
     image = filter.getResult()
     repaint()
     filter.getStatus()
@@ -75,8 +84,13 @@ class PhotoCanvas extends JComponent:
 
     val width = image.width
     val height = image.height
-    val bufferedImage = BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
-    for x <- 0 until width; y <- 0 until height do bufferedImage.setRGB(x, y, image(x, y))
+    val bufferedImage = BufferedImage(
+      width, height, BufferedImage.TYPE_INT_ARGB)
+    for
+      x <- 0 until width;
+      y <- 0 until height
+    do
+      bufferedImage.setRGB(x, y, image(x, y))
 
     gcan.drawImage(bufferedImage, 0, 0, null)
 

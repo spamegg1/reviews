@@ -51,7 +51,8 @@ class IndexedColorFilter(initialImage: Img,
 
     dst
 
-  private def initializeIndex(numColors: Int, points: ParSeq[Point]): Seq[Point] =
+  private def initializeIndex(numColors: Int,
+                              points: ParSeq[Point]): Seq[Point] =
     val initialPoints: Seq[Point] =
       initStrategy match
         case RandomSampling =>
@@ -59,7 +60,11 @@ class IndexedColorFilter(initialImage: Img,
           (0 until numColors) map (idx => points(d * idx))
         case UniformSampling =>
           val sep: Int = 32
-          (for r <- 0 until 255 by sep; g <- 0 until 255 by sep; b <- 0 until 255 by sep yield {
+          (for
+             r <- 0 until 255 by sep;
+             g <- 0 until 255 by sep;
+             b <- 0 until 255 by sep
+           yield {
             def inside(p: Point): Boolean =
               (p.x >= (r.toDouble / 255)) &&
               (p.x <= ((r.toDouble + sep) / 255)) &&
@@ -77,8 +82,14 @@ class IndexedColorFilter(initialImage: Img,
               Seq()
           }).flatten
         case UniformChoice =>
-          val d: Int = math.max(1, (256 / math.cbrt(numColors.toDouble).ceil).toInt)
-          for r <- 0 until 256 by d; g <- 0 until 256 by d; b <- 0 until 256 by d yield
+          val d: Int = math.max(
+            1, (256 / math.cbrt(numColors.toDouble).ceil).toInt)
+
+          for
+            r <- 0 until 256 by d;
+            g <- 0 until 256 by d;
+            b <- 0 until 256 by d
+          yield
             Point(r.toDouble / 256,g.toDouble / 256, b.toDouble / 256)
 
     val d2 = initialPoints.size.toDouble / numColors
@@ -92,10 +103,12 @@ class IndexedColorFilter(initialImage: Img,
       import math.{pow, sqrt}
       val closest = findClosest(point, means)
       sound += sqrt(pow(point.x, 2) + pow(point.y, 2) + pow(point.z, 2))
-      noise += sqrt(pow(point.x - closest.x, 2) + pow(point.y - closest.y, 2) + pow(point.z - closest.z, 2))
-    sound/noise
+      noise += sqrt(pow(point.x - closest.x, 2) + pow(point.y - closest.y, 2)
+                  + pow(point.z - closest.z, 2))
+    sound / noise
 
-  override def converged(eta: Double, oldMeans: ParSeq[Point], newMeans: ParSeq[Point]): Boolean =
+  override def converged(eta: Double, oldMeans: ParSeq[Point],
+                         newMeans: ParSeq[Point]): Boolean =
     steps += 1
     convStrategy match
       case ConvergedAfterNSteps(n) =>
