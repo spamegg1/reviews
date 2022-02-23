@@ -16,7 +16,8 @@ object ScalaShop:
     setLayout(BorderLayout())
 
     val rightpanel = JPanel()
-    rightpanel.setBorder(BorderFactory.createEtchedBorder(border.EtchedBorder.LOWERED))
+    rightpanel.setBorder(
+      BorderFactory.createEtchedBorder(border.EtchedBorder.LOWERED))
     rightpanel.setLayout(BorderLayout())
     add(rightpanel, BorderLayout.EAST)
 
@@ -72,40 +73,36 @@ object ScalaShop:
 
     val fileMenu = JMenu("File")
     val openMenuItem = JMenuItem("Open...")
-    openMenuItem.addActionListener(new ActionListener {
-      def actionPerformed(e: ActionEvent): Unit = {
+    openMenuItem.addActionListener(new ActionListener:
+      def actionPerformed(e: ActionEvent): Unit =
         val fc = JFileChooser()
-        if fc.showOpenDialog(ScalaShopFrame.this) == JFileChooser.APPROVE_OPTION then {
-          canvas.loadFile(fc.getSelectedFile.getPath)
-        }
-      }
-    })
-    fileMenu.add(openMenuItem)
-    val exitMenuItem = JMenuItem("Exit")
-    exitMenuItem.addActionListener(new ActionListener {
-      def actionPerformed(e: ActionEvent): Unit = {
-        sys.exit(0)
-      }
-    })
-    fileMenu.add(exitMenuItem)
+        if fc.showOpenDialog(ScalaShopFrame.this) == JFileChooser.APPROVE_OPTION
+        then { canvas.loadFile(fc.getSelectedFile.getPath) })
 
+    fileMenu.add(openMenuItem)
+
+    val exitMenuItem = JMenuItem("Exit")
+    exitMenuItem.addActionListener(new ActionListener:
+      def actionPerformed(e: ActionEvent): Unit =
+        sys.exit(0))
+
+    fileMenu.add(exitMenuItem)
     mainMenuBar.add(fileMenu)
 
     val helpMenu = JMenu("Help")
     val aboutMenuItem = JMenuItem("About")
-    aboutMenuItem.addActionListener(new ActionListener {
-      def actionPerformed(e: ActionEvent): Unit = {
-        JOptionPane.showMessageDialog(null, "ScalaShop, the ultimate image manipulation tool\nBrought to you by EPFL, 2015")
-      }
-    })
+
+    aboutMenuItem.addActionListener(new ActionListener:
+      def actionPerformed(e: ActionEvent): Unit =
+        JOptionPane.showMessageDialog(null,
+          "ScalaShop, the ultimate image manipulation tool\n" +
+          "Brought to you by EPFL, 2015"))
+
     helpMenu.add(aboutMenuItem)
-
     mainMenuBar.add(helpMenu)
-
     setJMenuBar(mainMenuBar)
 
     val canvas = PhotoCanvas()
-
     val scrollPane = JScrollPane(canvas)
 
     add(scrollPane, BorderLayout.CENTER)
@@ -125,10 +122,10 @@ object ScalaShop:
   try
     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
   catch
-    case _: Exception => println("Cannot set look and feel, using the default one.")
+    case _: Exception =>
+      println("Cannot set look and feel, using the default one.")
 
   val frame = ScalaShopFrame()
 
-  def main(args: Array[String]): Unit =
-    frame.repaint()
+  def main(args: Array[String]): Unit = frame.repaint()
 

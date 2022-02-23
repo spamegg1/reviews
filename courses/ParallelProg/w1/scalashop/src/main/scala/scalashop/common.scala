@@ -43,7 +43,8 @@ def boxBlurKernel(src: Img, x: Int, y: Int, radius: Int): RGBA =
   /* declare variables for the 4 averages and neighbor count */
   var rnew, gnew, bnew, anew, nghCount = 0
 
-  /* define bounds for the while loops by clamping down on x -+ radius, y -+ radius */
+  /* define bounds for the while loops by clamping down on 
+   * x -+ radius, y -+ radius */
   val xmin: Int = clamp(x - radius, 0, src.width - 1)
   val xmax: Int = clamp(x + radius, 0, src.width - 1)
   val ymin: Int = clamp(y - radius, 0, src.height - 1)
@@ -69,6 +70,7 @@ def boxBlurKernel(src: Img, x: Int, y: Int, radius: Int): RGBA =
       bnew = bnew + blue(neighbor)
       anew = anew + alpha(neighbor)
       j = j + 1
+
     i = i + 1
     j = ymin                                                 // back to leftmost
 
@@ -80,22 +82,19 @@ val forkJoinPool = ForkJoinPool()
 abstract class TaskScheduler:
   def schedule[T](body: => T): ForkJoinTask[T]
   def parallel[A, B](taskA: => A, taskB: => B): (A, B) =
-    val right = task {
-      taskB
-    }
+    val right = task { taskB }
     val left = taskA
     (left, right.join())
 
 class DefaultTaskScheduler extends TaskScheduler:
   def schedule[T](body: => T): ForkJoinTask[T] =
-    val t = new RecursiveTask[T] {
+    val t = new RecursiveTask[T]:
       def compute = body
-    }
+
     Thread.currentThread match
-      case wt: ForkJoinWorkerThread =>
-        t.fork()
-      case _ =>
-        forkJoinPool.execute(t)
+      case wt: ForkJoinWorkerThread => t.fork()
+      case _ => forkJoinPool.execute(t)
+
     t
 
 val scheduler =
@@ -107,7 +106,8 @@ def task[T](body: => T): ForkJoinTask[T] =
 def parallel[A, B](taskA: => A, taskB: => B): (A, B) =
   scheduler.value.parallel(taskA, taskB)
 
-def parallel[A, B, C, D](taskA: => A, taskB: => B, taskC: => C, taskD: => D): (A, B, C, D) =
+def parallel[A, B, C, D](taskA: => A, taskB: => B,
+                         taskC: => C, taskD: => D): (A, B, C, D) =
   val ta = task { taskA }
   val tb = task { taskB }
   val tc = task { taskC }

@@ -36,7 +36,12 @@ class PhotoCanvas extends JComponent:
     val width = bufferedImage.getWidth
     val height = bufferedImage.getHeight
     val img = Img(width, height)
-    for x <- 0 until width; y <- 0 until height do img(x, y) = bufferedImage.getRGB(x, y)
+    for
+      x <- 0 until width
+      y <- 0 until height
+    do
+      img(x, y) = bufferedImage.getRGB(x, y)
+
     img
 
   def reload(): Unit =
@@ -65,8 +70,13 @@ class PhotoCanvas extends JComponent:
 
     val width = image.width
     val height = image.height
-    val bufferedImage = BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
-    for x <- 0 until width; y <- 0 until height do bufferedImage.setRGB(x, y, image(x, y))
+    val bufferedImage =
+      BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
+    for
+      x <- 0 until width
+      y <- 0 until height
+    do
+      bufferedImage.setRGB(x, y, image(x, y))
 
     gcan.drawImage(bufferedImage, 0, 0, null)
 

@@ -21,26 +21,35 @@ object ParallelCountChangeRunner:
     val seqtime = standardConfig measure {
       seqResult = ParallelCountChange.countChange(amount, coins)
     }
+
     println(s"sequential result = $seqResult")
     println(s"sequential count time: $seqtime")
 
-    def measureParallelCountChange(threshold: => ParallelCountChange.Threshold): Unit = try
+    def measureParallelCountChange(threshold: => ParallelCountChange.Threshold)
+      : Unit = try
       val fjtime = standardConfig measure {
         parResult = ParallelCountChange.parCountChange(amount, coins, threshold)
       }
+
       println(s"parallel result = $parResult")
       println(s"parallel count time: $fjtime")
       println(s"speedup: ${seqtime.value / fjtime.value}")
+
     catch
       case e: NotImplementedError =>
         println("Not implemented.")
 
     println("\n# Using moneyThreshold\n")
-    measureParallelCountChange(ParallelCountChange.moneyThreshold(amount))
+    measureParallelCountChange(
+      ParallelCountChange.moneyThreshold(amount))
+
     println("\n# Using totalCoinsThreshold\n")
-    measureParallelCountChange(ParallelCountChange.totalCoinsThreshold(coins.length))
+    measureParallelCountChange(
+      ParallelCountChange.totalCoinsThreshold(coins.length))
+
     println("\n# Using combinedThreshold\n")
-    measureParallelCountChange(ParallelCountChange.combinedThreshold(amount, coins))
+    measureParallelCountChange(
+      ParallelCountChange.combinedThreshold(amount, coins))
 
 object ParallelCountChange extends ParallelCountChangeInterface:
 
@@ -61,8 +70,8 @@ object ParallelCountChange extends ParallelCountChangeInterface:
    *  specified list of coins for the specified amount of money.
    */
   def parCountChange(money: Int, coins: List[Int], threshold: Threshold): Int =
-    if threshold(money, coins) then                                      // TODO
-      countChange(money, coins)
+    if   threshold(money, coins)                                         // TODO
+    then countChange(money, coins)
     else money match
       case m if m < 0 => 0
       case 0 => 1
@@ -71,8 +80,7 @@ object ParallelCountChange extends ParallelCountChangeInterface:
         case head :: tail =>
           val (left, right) = parallel(
             parCountChange(money - head, coins, threshold),
-            parCountChange(money, tail, threshold)
-          )
+            parCountChange(money, tail, threshold))
           left + right
 
   /** Threshold heuristic based on the starting money. */
@@ -83,7 +91,10 @@ object ParallelCountChange extends ParallelCountChangeInterface:
   def totalCoinsThreshold(totalCoins: Int): Threshold =                  // TODO
     (_, coins) => coins.length <= (totalCoins * 2) / 3         // 5.40x speed-up
 
-  /** Threshold heuristic based on the starting money and the initial list of coins. */
-  def combinedThreshold(startingMoney: Int, allCoins: List[Int]): Threshold = // TODO
-    (money, coins) => money * coins.length <= (startingMoney * allCoins.length) / 2
-    // 5.48x speed-up
+  /** Threshold heuristic based on the starting money 
+    * and the initial list of coins. */
+  def combinedThreshold(startingMoney: Int,
+                        allCoins: List[Int]): Threshold =                // TODO
+    (money, coins) =>                                          // 5.48x speed-up
+      money * coins.length <= (startingMoney * allCoins.length) / 2
+
