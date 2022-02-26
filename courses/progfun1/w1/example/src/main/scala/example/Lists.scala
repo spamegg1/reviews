@@ -1,5 +1,7 @@
 package example
 
+import scala.annotation.tailrec
+
 object Lists:
 
   /**
@@ -16,16 +18,18 @@ object Lists:
    *  - `xs.tail: List[Int]` returns the tail of the list `xs`, i.e. the the
    *    list `xs` without its `head` element
    *
-   *  ''Hint:'' instead of writing a `for` or `while` loop, think of a recursive
-   *  solution.
+   *  ''Hint:'' instead of writing a `for` or `while` loop,
+   *  think of a recursive solution.
    *
    * @param xs A list of natural numbers
    * @return The sum of all elements in `xs`
    */
-  def sum(xs: List[Int]): Int = // TODO
-    def helper(xs: List[Int], acc: Int): Int =
-      if xs.isEmpty then acc
-      else helper(xs.tail, acc + xs.head)
+  def sum(xs: List[Int]): Int =                                          // TODO
+    @tailrec
+    def helper(ys: List[Int], total: Int): Int =
+      if   ys.isEmpty
+      then total
+      else helper(ys.tail, total + ys.head)
     helper(xs, 0)
 
   /**
@@ -41,11 +45,14 @@ object Lists:
    * @return The largest element in `xs`
    * @throws java.util.NoSuchElementException if `xs` is an empty list
    */
-  def max(xs: List[Int]): Int = // TODO
-    def helper(xs: List[Int], acc: Int): Int =
-      if xs.isEmpty then acc
-      else helper(xs.tail, if xs.head > acc then xs.head else acc)
-    if xs.isEmpty then
-      throw new NoSuchElementException
-    else
-      helper(xs.tail, xs.head)
+  def max(xs: List[Int]): Int =                                          // TODO
+    @tailrec
+    def helper(ys: List[Int], maxSoFar: Int): Int =
+      if      ys.isEmpty
+      then    maxSoFar
+      else if ys.head <= maxSoFar
+      then    helper(ys.tail, maxSoFar)
+      else    helper(ys.tail, ys.head)
+    if   xs.isEmpty
+    then throw new NoSuchElementException
+    else helper(xs.tail, xs.head)

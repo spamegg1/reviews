@@ -10,7 +10,9 @@ class RecFunSuite extends munit.FunSuite:
   }
 
   test("balance: 'I told him ...' is balanced") {
-    assert(balance("I told him (that it's not (yet) done).\n(But he wasn't listening)".toList))
+    assert(balance(
+      "I told him (that it's not (yet) done).\n(But he wasn't listening)"
+      .toList))
   }
 
   test("balance: ':-)' is unbalanced") {
@@ -51,6 +53,28 @@ class RecFunSuite extends munit.FunSuite:
 
   test("pascal: col=1,row=3") {
     assertEquals(pascal(1, 3), 3)
+  }
+
+  import scala.collection.mutable.Map                                    // TODO
+  var factMemo: Map[Int, Int] = Map(0 -> 1)
+
+  def fact(n: Int): Int =
+    require(n >= 0)
+    factMemo.get(n) match
+      case Some(x) => x
+      case None =>
+        val x = n * fact(n - 1)
+        factMemo += n -> x
+        x
+
+  def choose(c: Int, r: Int) =
+    require(c <= r)
+    fact(r) / (fact(c) * fact(r - c))
+
+  test(s"pascal: col=0 to 10 row=0 to 10") {
+    for r <- 0 to 10 do
+      for c <- 0 to r do
+        assertEquals(pascal(c, r), choose(c, r))
   }
 
   import scala.concurrent.duration.*
