@@ -1,8 +1,8 @@
 package funsets
 
 /**
- * The interface used by the grading infrastructure. You should not edit any
- * code here, or your submission may fail with a NoSuchMethodError.
+ * The interface used by the grading infrastructure. You should not edit
+ * any code here, or your submission may fail with a NoSuchMethodError.
  */
 trait FunSetsInterface:
   type FunSet = Int => Boolean
