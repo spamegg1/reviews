@@ -14,8 +14,8 @@ trait Wikipedia:
   /**
     * Retrieves the ids of the pages linked on a page.
     * 
-    * If the provided id does not identify an article in the data,
-    * the computation fails with [[wikigraph.errors.WikiError.ArticleNotFound]]
+    * If the provided id does not identify an article in the data, the
+    * computation fails with a [[wikigraph.errors.WikiError.ArticleNotFound]]
     * 
     * @param the id of the page from which we want to retrieve the links
     */
