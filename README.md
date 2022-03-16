@@ -795,7 +795,9 @@ They have a whole [Logic program](http://intrologic.stanford.edu/intrologic/home
 
 So they changed the weird grading functionality (and hopefully got rid of that HTTP only website), but did not really fix the Resolution tool's bug or adjust any of the content.
 
-*Spam's recommendation:* Don't take this. Or rather, just take the earlier sections (first 4-5 chapters maybe?). It's a free, "as-is" resource you can use, if you are very smart, willing to find a proper, actual textbook, do lots of Internet searches and learn on your own, somehow making up for the absence of a prof and TA. If you are super strong already and want to do Prolog, then take it. It overlaps with the Prolog course to a great extent (I actually thought they were written by the same people at first!) ***Definitely take some Logic (it's the best thing in life)*** but unfortunately I do not know of a good undergraduate, entry-level alternative. I only learned it at the graduate level.
+***Update March 2022:*** Most of the course material is no longer working. The links to the “External Tools” from Coursera to Stanford website simply lead to blank pages. I left a scathing comment on Coursera discussion forums.
+
+*Spam's recommendation:* **Don’t take this.** ~~Don't take this. Or rather, just take the earlier sections (first 4-5 chapters maybe?). It's a free, "as-is" resource you can use, if you are very smart, willing to find a proper, actual textbook, do lots of Internet searches and learn on your own, somehow making up for the absence of a prof and TA. If you are super strong already and want to do Prolog, then take it. It overlaps with the Prolog course to a great extent (I actually thought they were written by the same people at first!)~~ ***Definitely take some Logic (it's the best thing in life)*** but unfortunately I do not know of a good undergraduate, entry-level alternative. I only learned it at the graduate level.
 
 ### <a name="eff"></a> Effective Programming in Scala
 
