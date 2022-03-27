@@ -103,16 +103,15 @@ class PhraseTrigger(Trigger):
         self.phrase = phrase.lower()
 
     def is_phrase_in(self, text):
-        clean = [' ' if letter in string.punctuation else letter.lower() for letter in text]
+        clean = [' ' if letter in string.punctuation
+                 else letter.lower() for letter in text]
         clean = ''.join(clean).split()
         phrase = self.phrase.split()
 
-        try:
-            start = clean.index(phrase[0])
-            return phrase == clean[start: start + len(phrase)]
-        except ValueError:
-            return False
-
+        for index, word in enumerate(clean):
+            if word == phrase[0] and phrase == clean[index: index + len(phrase)]:
+                return True
+        return False
 
 # Problem 3
 # TODO: TitleTrigger
@@ -250,7 +249,7 @@ def read_trigger_config(filename):
                 trig_list.append(trig_dict[trig[x]])
     return trig_list
 
-    # print(lines)  # for now, print it so you see what it contains!
+    # print(lines)  # for now, print it, so you see what it contains!
 
 
 SLEEPTIME = 120  # seconds -- how often we poll

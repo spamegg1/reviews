@@ -83,7 +83,7 @@ object Anagrams extends AnagramsInterface:
    *  is a subset of `List(('k', 1), ('o', 1))`.
    *  It also include the empty subset `List()`.
    *
-   *  Example: the subsets of the occurrence list `List(('a', 2), ('b', 2))` are:
+   *  Example: the subsets of the occurrence list `List(('a', 2), ('b', 2))`:
    *
    *    List(
    *      List(),

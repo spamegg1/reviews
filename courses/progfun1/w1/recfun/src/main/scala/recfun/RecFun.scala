@@ -14,8 +14,8 @@ object RecFun extends RecFunInterface:
    */
   def pascal(c: Int, r: Int): Int =                                      // TODO
     (c, r) match
-      case (_, 0) => 1
-      case (0, _) => 1
+      case (_, 0)      => 1
+      case (0, _)      => 1
       case _ if c == r => 1
       case _ => pascal(c - 1, r - 1) + pascal(c, r - 1)
 
@@ -24,7 +24,8 @@ object RecFun extends RecFunInterface:
    */
   def balance(chars: List[Char]): Boolean =                              // TODO
     def helper(chars: List[Char], count: Int): Boolean =
-      if chars.isEmpty then count == 0
+      if   chars.isEmpty
+      then count == 0
       else chars.head match
         case '(' => helper(chars.tail, count + 1)
         case ')' => count > 0 && helper(chars.tail, count - 1)
@@ -37,7 +38,7 @@ object RecFun extends RecFunInterface:
   def countChange(money: Int, coins: List[Int]): Int =                   // TODO
     def helper(money: Int, coins: List[Int], acc: Int): Int =
       (money, coins) match
-        case (0, _) => acc
+        case (0, _)   => acc
         case (_, Nil) => acc
         case (_, head :: tail) =>
           if      money == head

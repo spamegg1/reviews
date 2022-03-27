@@ -41,10 +41,12 @@ class ProblemSet5NewsStory(unittest.TestCase):
 class ProblemSet5(unittest.TestCase):
     def setUp(self):
         class TrueTrigger:
-            def evaluate(self, story): return True
+            def evaluate(self, story):
+                return True
 
         class FalseTrigger:
-            def evaluate(self, story): return False
+            def evaluate(self, story):
+                return False
 
         self.tt = TrueTrigger()
         self.tt2 = TrueTrigger()
@@ -65,6 +67,8 @@ class ProblemSet5(unittest.TestCase):
         badorder = NewsStory('', 'Cow!!! Purple!!!', '', '', datetime.now())
         nospaces = NewsStory('', 'purplecowpurplecowpurplecow', '', '', datetime.now())
         nothing = NewsStory('', 'I like poison dart frogs.', '', '', datetime.now())
+        multiple1 = NewsStory('', 'purple dog, purple bat, purple cow', '', '', datetime.now())
+        multiple2 = NewsStory('', 'purple dog, purple bat, purple', '', '', datetime.now())
 
         s1 = TitleTrigger('PURPLE COW')
         s2 = TitleTrigger('purple cow')
@@ -75,6 +79,7 @@ class ProblemSet5(unittest.TestCase):
             self.assertTrue(trig.evaluate(spaces), "TitleTrigger failed to fire when the words were separated by multiple spaces.")
             self.assertTrue(trig.evaluate(caps), "TitleTrigger failed to fire when the phrase appeared with both uppercase and lowercase letters.")
             self.assertTrue(trig.evaluate(exact), "TitleTrigger failed to fire when the words in the phrase were the only words in the title.")
+            self.assertTrue(trig.evaluate(multiple1), "TitleTrigger failed to fire when the first word of the phrase appeared multiple times, with the complete phrase appearing later in the title..")
 
             self.assertFalse(trig.evaluate(plural), "TitleTrigger fired when the words in the phrase were contained within other words.")
             self.assertFalse(trig.evaluate(separate), "TitleTrigger fired when the words in the phrase were separated by other words.")
@@ -82,6 +87,7 @@ class ProblemSet5(unittest.TestCase):
             self.assertFalse(trig.evaluate(badorder), "TitleTrigger fired when the words in the phrase appeared out of order.")
             self.assertFalse(trig.evaluate(nospaces), "TitleTrigger fired when words were not separated by spaces or punctuation.")
             self.assertFalse(trig.evaluate(nothing), "TitleTrigger fired when none of the words in the phrase appeared.")
+            self.assertFalse(trig.evaluate(multiple2), "TitleTrigger fired when the first word of the phrase appeared multiple times, but the complete phrase never appeared.")
 
     def test2DescriptionTrigger(self):
         cuddly = NewsStory('', '', 'The purple cow is soft and cuddly.', '', datetime.now())

@@ -3,15 +3,19 @@ package patmat
 /**
  * A huffman code is represented by a binary tree.
  *
- * Every `Leaf` node of the tree represents one character of the alphabet that the tree can encode.
+ * Every `Leaf` node of the tree represents one character 
+ * of the alphabet that the tree can encode.
  * The weight of a `Leaf` is the frequency of appearance of the character.
  *
- * The branches of the huffman tree, the `Fork` nodes, represent a set containing all the characters
- * present in the leaves below it. The weight of a `Fork` node is the sum of the weights of these
- * leaves.
+ * The branches of the huffman tree, the `Fork` nodes,
+ * represent a set containing all the characters present in the leaves below it. 
+ * The weight of a `Fork` node is the sum of the weights of these leaves.
  */
 abstract class CodeTree
-case class Fork(left: CodeTree, right: CodeTree, chars: List[Char], weight: Int) extends CodeTree
+case class Fork(left: CodeTree,
+                right: CodeTree,
+                chars: List[Char],
+                weight: Int) extends CodeTree
 case class Leaf(char: Char, weight: Int) extends CodeTree
 
 /**
@@ -30,32 +34,36 @@ trait Huffman extends HuffmanInterface:
     case Leaf(char, _) => List(char)
 
   def makeCodeTree(left: CodeTree, right: CodeTree) =
-    Fork(left, right, chars(left) ::: chars(right), weight(left) + weight(right))
+    Fork(left, right, chars(left):::chars(right), weight(left) + weight(right))
 
   // Part 2: Generating Huffman trees
 
   /**
-   * In this assignment, we are working with lists of characters. This function allows
-   * you to easily create a character list from a given string.
+   * In this assignment, we are working with lists of characters. 
+   * This function allows you to easily create a character list 
+   * from a given string.
    */
   def string2Chars(str: String): List[Char] = str.toList
 
   /**
-   * This function computes for each unique character in the list `chars` the number of
-   * times it occurs. For example, the invocation
+   * This function computes for each unique character in the list `chars` the 
+   * number of times it occurs. For example, the invocation
    *
    *   times(List('a', 'b', 'a'))
    *
-   * should return the following (the order of the resulting list is not important):
+   * should return the following 
+   * (the order of the resulting list is not important):
    *
    *   List(('a', 2), ('b', 1))
    *
-   * The type `List[(Char, Int)]` denotes a list of pairs, where each pair consists of a
-   * character and an integer. Pairs can be constructed easily using parentheses:
+   * The type `List[(Char, Int)]` denotes a list of pairs, where each pair 
+   * consists of a character and an integer. 
+   * Pairs can be constructed easily using parentheses:
    *
    *   val pair: (Char, Int) = ('c', 1)
    *
-   * In order to access the two elements of a pair, you can use the accessors `_1` and `_2`:
+   * In order to access the two elements of a pair, 
+   * you can use the accessors `_1` and `_2`:
    *
    *   val theChar = pair._1
    *   val theInt  = pair._2
@@ -96,14 +104,15 @@ trait Huffman extends HuffmanInterface:
    *
    * This function takes the first two elements of the list `trees` and combines
    * them into a single `Fork` node. This node is then added back into the
-   * remaining elements of `trees` at a position such that the ordering by weights
-   * is preserved.
+   * remaining elements of `trees` at a position such that the ordering by
+   * weights is preserved.
    *
-   * If `trees` is a list of less than two elements, that list should be returned
-   * unchanged.
+   * If `trees` is a list of less than two elements, that list should be 
+   * returned unchanged.
    */
   def combine(trees: List[CodeTree]): List[CodeTree] =                   // TODO
-    if trees.size < 2 then trees
+    if   trees.size < 2
+    then trees
     else
       val (first, second, rest) = (trees.head, trees.tail.head, trees.tail.tail)
       val fork: CodeTree = makeCodeTree(first, second)
@@ -114,23 +123,27 @@ trait Huffman extends HuffmanInterface:
    *
    *   until(singleton, combine)(trees)
    *
-   * where `trees` is of type `List[CodeTree]`, `singleton` and `combine` refer to
-   * the two functions defined above.
+   * where `trees` is of type `List[CodeTree]`, `singleton` and `combine`
+   * refer to the two functions defined above.
    *
-   * In such an invocation, `until` should call the two functions until the list of
-   * code trees contains only one single tree, and then return that singleton list.
+   * In such an invocation, `until` should call the two functions until 
+   * the list of code trees contains only one single tree, 
+   * and then return that singleton list.
    */
   def until(done: List[CodeTree] => Boolean,
             merge: List[CodeTree] => List[CodeTree])
-            (trees: List[CodeTree]): List[CodeTree] =                    // TODO
-    if done(trees) then trees
+           (trees: List[CodeTree]): List[CodeTree] =                     // TODO
+    if   done(trees)
+    then trees
     else until(done, merge)(merge(trees))
 
   /**
-   * This function creates a code tree which is optimal to encode the text `chars`.
+   * This function creates a code tree which is optimal 
+   * to encode the text `chars`.
    *
-   * The parameter `chars` is an arbitrary text. This function extracts the character
-   * frequencies from that text and creates a code tree based on them.
+   * The parameter `chars` is an arbitrary text. 
+   * This function extracts the character frequencies from that text 
+   * and creates a code tree based on them.
    */
   def createCodeTree(chars: List[Char]): CodeTree =                      // TODO
     val freqs = times(chars)
@@ -142,21 +155,21 @@ trait Huffman extends HuffmanInterface:
   type Bit = Int
 
   /**
-   * This function decodes the bit sequence `bits` using the code tree `tree` and returns
-   * the resulting list of characters.
+   * This function decodes the bit sequence `bits` using the code tree `tree`
+   * and returns the resulting list of characters.
    */
   def decode(tree: CodeTree, bits: List[Bit]): List[Char] =              // TODO
     def helper(t: CodeTree, b: List[Bit]): List[Char] =
       t match
         case Leaf(char, _) =>
-          if b.isEmpty then List(char)
+          if   b.isEmpty
+          then List(char)
           else char :: helper(tree, b)                        // go back to root
 
         case Fork(left, right, _, _) =>
-          if b.head == 0 then
-            helper(left, b.tail)
-          else
-            helper(right, b.tail)
+          if   b.head == 0
+          then helper(left, b.tail)
+          else helper(right, b.tail)
 
     helper(tree, bits)
 
@@ -191,28 +204,24 @@ trait Huffman extends HuffmanInterface:
       case Fork(left, right, _, _) =>
         (left, right) match
           case (Leaf(c, _), Leaf(_, _)) =>
-            if c == char then
-              0 :: lookup(left)(char)
-            else
-              1 :: lookup(right)(char)
+            if   c == char
+            then 0 :: lookup(left)(char)
+            else 1 :: lookup(right)(char)
 
           case (Fork(l, r, chars, _), Leaf(c, _)) =>
-            if chars.contains(char) then
-              0 :: lookup(left)(char)
-            else
-              1 :: lookup(right)(char)
+            if   chars.contains(char)
+            then 0 :: lookup(left)(char)
+            else 1 :: lookup(right)(char)
 
           case (Leaf(c, _), Fork(l, r, chars, _)) =>
-            if chars.contains(char) then
-              1 :: lookup(right)(char)
-            else
-              0 :: lookup(left)(char)
+            if   chars.contains(char)
+            then 1 :: lookup(right)(char)
+            else 0 :: lookup(left)(char)
 
           case (Fork(l, r, chars, _), Fork(_, _, _, _)) =>
-            if chars.contains(char) then
-              0 :: lookup(left)(char)
-            else
-              1 :: lookup(right)(char)
+            if   chars.contains(char)
+            then 0 :: lookup(left)(char)
+            else 1 :: lookup(right)(char)
 
     text flatMap lookup(tree)
 
@@ -221,8 +230,8 @@ trait Huffman extends HuffmanInterface:
   type CodeTable = List[(Char, List[Bit])]
 
   /**
-   * This function returns the bit sequence that represents the character `char` in
-   * the code table `table`.
+   * This function returns the bit sequence that represents 
+   * the character `char` in the code table `table`.
    */
   def codeBits(table: CodeTable)(char: Char): List[Bit] =                // TODO
     table
@@ -231,21 +240,22 @@ trait Huffman extends HuffmanInterface:
       ._2
 
   /**
-   * Given a code tree, create a code table which contains, for every character in the
-   * code tree, the sequence of bits representing that character.
+   * Given a code tree, create a code table which contains, for every character 
+   * in the code tree, the sequence of bits representing that character.
    *
-   * Hint: think of a recursive solution: every sub-tree of the code tree `tree` is itself
-   * a valid code tree that can be represented as a code table. Using the code tables of the
-   * sub-trees, think of how to build the code table for the entire tree.
+   * Hint: think of a recursive solution: every sub-tree of the code tree `tree` 
+   * is itself a valid code tree that can be represented as a code table. 
+   * Using the code tables of the sub-trees, 
+   * think of how to build the code table for the entire tree.
    */
   def convert(tree: CodeTree): CodeTable = tree match                    // TODO
-    case Leaf(char, _) => List((char, List()))
+    case Leaf(char, _)    => List((char, List()))
     case Fork(l, r, _, _) => mergeCodeTables(convert(l), convert(r))
 
   /**
-   * This function takes two code tables and merges them into one. Depending on how you
-   * use it in the `convert` method above, this merge method might also do some transformations
-   * on the two parameter code tables.
+   * This function takes two code tables and merges them into one. 
+   * Depending on how you use it in the `convert` method above, this merge 
+   * method might also do some transformations on the two parameter code tables.
    */
   def mergeCodeTables(a: CodeTable, b: CodeTable): CodeTable =           // TODO
     val first : CodeTable = a.map(code => (code._1, 0 :: code._2))
@@ -255,8 +265,8 @@ trait Huffman extends HuffmanInterface:
   /**
    * This function encodes `text` according to the code tree `tree`.
    *
-   * To speed up the encoding process, it first converts the code tree to a code table
-   * and then uses it to perform the actual encoding.
+   * To speed up the encoding process, it first converts the code tree
+   * to a code table and then uses it to perform the actual encoding.
    */
   def quickEncode(tree: CodeTree)(text: List[Char]): List[Bit] =         // TODO
     text flatMap codeBits(convert(tree))
