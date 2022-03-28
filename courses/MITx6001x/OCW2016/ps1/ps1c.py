@@ -1,8 +1,8 @@
 # Constants given to us by the problem
-SEMI_ANNUAL_RAISE = 0.07
+SEMI_RAISE = 0.07
 INV_RATE = 0.04
 TOTAL_COST = 1000000
-DOWN_PAYMENT = TOTAL_COST * 0.25
+DOWNPAY = TOTAL_COST * 0.25
 
 
 def savings(start, portion, inv_rate, semi_raise):
@@ -20,39 +20,42 @@ def savings(start, portion, inv_rate, semi_raise):
     return saving
 
 
-def bisection_search(salary, inv_rate, semi_raise, down_payment):
-    # Variables for bisection search
-    left, right = 0, 10000
-    portion_saved = 5000
-    steps_in_search = 0
+def bisearch(salary, inv_rate, semi_raise, down_pay):
+    left, portion, right = 0, 5000, 10000
+    steps = 1
+    saving = savings(salary, portion, inv_rate, semi_raise)
 
-    # do-while
-    saving = savings(salary, portion_saved, inv_rate, semi_raise)
-    steps_in_search += 1
-
-    while abs(saving - down_payment) >= 100.0:
-        if saving < down_payment:
-            left = portion_saved
+    while abs(saving - down_pay) >= 100.0:
+        if saving < down_pay:
+            left = portion
         else:
-            right = portion_saved
+            right = portion
 
-        portion_saved = (left + right) // 2
-        steps_in_search += 1
-        saving = savings(salary, portion_saved, inv_rate, semi_raise)
+        portion = (left + right) // 2
+        steps += 1
+        saving = savings(salary, portion, inv_rate, semi_raise)
 
-    print("Best savings rate:", portion_saved / 10000)
-    print("Steps in bisection search:", steps_in_search)
+    return portion, steps
 
 
-def optimal_saving_rate(salary, inv_rate, semi_raise, down_payment):
+def optimal_saving_rate(salary, inv_rate, semi_raise, down_pay):
     max_saving = savings(salary, 10000, inv_rate, semi_raise)
 
-    if max_saving < down_payment:
+    if max_saving < down_pay:
         print("It is not possible to pay the down payment in three years.")
     else:
-        bisection_search(salary, inv_rate, semi_raise, down_payment)
+        portion, steps = bisearch(salary, inv_rate, semi_raise, down_pay)
+        print("Best savings rate:", portion / 10000)
+        print("Steps in bisection search:", steps)
+
+
+def tests():
+    assert (4411, 12) == bisearch(150000, INV_RATE, SEMI_RAISE, DOWNPAY)
+    assert (2206,  9) == bisearch(300000, INV_RATE, SEMI_RAISE, DOWNPAY)
 
 
 if __name__ == "__main__":
+    tests()
     SALARY = float(input("Enter the starting salary: "))
-    optimal_saving_rate(SALARY, INV_RATE, SEMI_ANNUAL_RAISE, DOWN_PAYMENT)
+    optimal_saving_rate(SALARY, INV_RATE, SEMI_RAISE, DOWNPAY)
+    
