@@ -1,0 +1,164 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>AX:(e(X) => AY:(h(Y) => w(X,Y)))</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>EX:(h(X) & AY:(d(Y) => w(X,Y)))</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>AX:AY:AZ:(w(X,Y) & w(Y,Z) => w(X,Z))</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>e([a])</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>h([b]) & AY:(d(Y) => w([b],Y))</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>6</number>
+    <sentence>h([b])</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>5</antecedent>
+  </step>
+  <step>
+    <number>7</number>
+    <sentence>AY:(d(Y) => w([b],Y))</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>5</antecedent>
+  </step>
+  <step>
+    <number>8</number>
+    <sentence>e([a]) => AY:(h(Y) => w([a],Y))</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>1</antecedent>
+  </step>
+  <step>
+    <number>9</number>
+    <sentence>AY:(h(Y) => w([a],Y))</sentence>
+    <justification>Modus Ponens</justification>
+    <antecedent>8</antecedent>
+    <antecedent>4</antecedent>
+  </step>
+  <step>
+    <number>10</number>
+    <sentence>d([c])</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>11</number>
+    <sentence>d([c]) => w([b],[c])</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>7</antecedent>
+  </step>
+  <step>
+    <number>12</number>
+    <sentence>w([b],[c])</sentence>
+    <justification>Modus Ponens</justification>
+    <antecedent>11</antecedent>
+    <antecedent>10</antecedent>
+  </step>
+  <step>
+    <number>13</number>
+    <sentence>h([b]) => w([a],[b])</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>9</antecedent>
+  </step>
+  <step>
+    <number>14</number>
+    <sentence>w([a],[b])</sentence>
+    <justification>Modus Ponens</justification>
+    <antecedent>13</antecedent>
+    <antecedent>6</antecedent>
+  </step>
+  <step>
+    <number>15</number>
+    <sentence>w([a],[b]) & w([b],[c])</sentence>
+    <justification>And Introduction</justification>
+    <antecedent>14</antecedent>
+    <antecedent>12</antecedent>
+  </step>
+  <step>
+    <number>16</number>
+    <sentence>AY:AZ:(w([a],Y) & w(Y,Z) => w([a],Z))</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>3</antecedent>
+  </step>
+  <step>
+    <number>17</number>
+    <sentence>AZ:(w([a],[b]) & w([b],Z) => w([a],Z))</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>16</antecedent>
+  </step>
+  <step>
+    <number>18</number>
+    <sentence>w([a],[b]) & w([b],[c]) => w([a],[c])</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>17</antecedent>
+  </step>
+  <step>
+    <number>19</number>
+    <sentence>w([a],[c])</sentence>
+    <justification>Modus Ponens</justification>
+    <antecedent>18</antecedent>
+    <antecedent>15</antecedent>
+  </step>
+  <step>
+    <number>20</number>
+    <sentence>d([c]) => w([a],[c])</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>10</antecedent>
+    <antecedent>19</antecedent>
+  </step>
+  <step>
+    <number>21</number>
+    <sentence>h([b]) & AY:(d(Y) => w([b],Y)) => (d([c]) => w([a],[c]))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>5</antecedent>
+    <antecedent>20</antecedent>
+  </step>
+  <step>
+    <number>22</number>
+    <sentence>AX:(h(X) & AY:(d(Y) => w(X,Y)) => (d([c]) => w([a],[c])))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>21</antecedent>
+  </step>
+  <step>
+    <number>23</number>
+    <sentence>d([c]) => w([a],[c])</sentence>
+    <justification>Existential Elimination</justification>
+    <antecedent>2</antecedent>
+    <antecedent>22</antecedent>
+  </step>
+  <step>
+    <number>24</number>
+    <sentence>AY:(d(Y) => w([a],Y))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>23</antecedent>
+  </step>
+  <step>
+    <number>25</number>
+    <sentence>e([a]) => AY:(d(Y) => w([a],Y))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>4</antecedent>
+    <antecedent>24</antecedent>
+  </step>
+  <step>
+    <number>26</number>
+    <sentence>AX:(e(X) => AY:(d(Y) => w(X,Y)))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>25</antecedent>
+  </step>
+</proof>
+<goal>
+  AX:(e(X) => AY:(d(Y) => w(X,Y)))
+</goal>

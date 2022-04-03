@@ -1,0 +1,97 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>~EX:(w(X) & f(X))</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>EX:(f(X) & w(X))</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>~EX:(w(X) & f(X))</sentence>
+    <justification>Reiteration</justification>
+    <antecedent>1</antecedent>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>EX:(f(X) & w(X)) => ~EX:(w(X) & f(X))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>2</antecedent>
+    <antecedent>3</antecedent>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>EX:(f(X) & w(X))</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>6</number>
+    <sentence>f([c]) & w([c])</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>7</number>
+    <sentence>f([c])</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>6</antecedent>
+  </step>
+  <step>
+    <number>8</number>
+    <sentence>w([c])</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>6</antecedent>
+  </step>
+  <step>
+    <number>9</number>
+    <sentence>w([c]) & f([c])</sentence>
+    <justification>And Introduction</justification>
+    <antecedent>8</antecedent>
+    <antecedent>7</antecedent>
+  </step>
+  <step>
+    <number>10</number>
+    <sentence>EX:(w(X) & f(X))</sentence>
+    <justification>Existential Introduction</justification>
+    <antecedent>9</antecedent>
+  </step>
+  <step>
+    <number>11</number>
+    <sentence>f([c]) & w([c]) => EX:(w(X) & f(X))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>6</antecedent>
+    <antecedent>10</antecedent>
+  </step>
+  <step>
+    <number>12</number>
+    <sentence>AX:(f(X) & w(X) => EX:(w(X) & f(X)))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>11</antecedent>
+  </step>
+  <step>
+    <number>13</number>
+    <sentence>EX:(w(X) & f(X))</sentence>
+    <justification>Existential Elimination</justification>
+    <antecedent>5</antecedent>
+    <antecedent>12</antecedent>
+  </step>
+  <step>
+    <number>14</number>
+    <sentence>EX:(f(X) & w(X)) => EX:(w(X) & f(X))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>5</antecedent>
+    <antecedent>13</antecedent>
+  </step>
+  <step>
+    <number>15</number>
+    <sentence>~EX:(f(X) & w(X))</sentence>
+    <justification>Reductio Ad Absurdum</justification>
+    <antecedent>14</antecedent>
+    <antecedent>4</antecedent>
+  </step>
+</proof>
+<goal>
+  ~EX:(f(X) & w(X))
+</goal>

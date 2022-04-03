@@ -1,0 +1,90 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>t(m,n)</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>EX:t(X,m)</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>AX:AY:AZ:(t(X,Y) & t(Y,Z) => t(X,Z))</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>t([a],m)</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>t([a],m) & t(m,n)</sentence>
+    <justification>And Introduction</justification>
+    <antecedent>4</antecedent>
+    <antecedent>1</antecedent>
+  </step>
+  <step>
+    <number>6</number>
+    <sentence>AY:AZ:(t([a],Y) & t(Y,Z) => t([a],Z))</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>3</antecedent>
+  </step>
+  <step>
+    <number>7</number>
+    <sentence>AZ:(t([a],m) & t(m,Z) => t([a],Z))</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>6</antecedent>
+  </step>
+  <step>
+    <number>8</number>
+    <sentence>t([a],m) & t(m,n) => t([a],n)</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>7</antecedent>
+  </step>
+  <step>
+    <number>9</number>
+    <sentence>t([a],n)</sentence>
+    <justification>Modus Ponens</justification>
+    <antecedent>8</antecedent>
+    <antecedent>5</antecedent>
+  </step>
+  <step>
+    <number>10</number>
+    <sentence>t([a],m) & t([a],n)</sentence>
+    <justification>And Introduction</justification>
+    <antecedent>4</antecedent>
+    <antecedent>9</antecedent>
+  </step>
+  <step>
+    <number>11</number>
+    <sentence>EX:(t(X,m) & t(X,n))</sentence>
+    <justification>Existential Introduction</justification>
+    <antecedent>10</antecedent>
+  </step>
+  <step>
+    <number>12</number>
+    <sentence>t([a],m) => EX:(t(X,m) & t(X,n))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>4</antecedent>
+    <antecedent>11</antecedent>
+  </step>
+  <step>
+    <number>13</number>
+    <sentence>AX:(t(X,m) => EX:(t(X,m) & t(X,n)))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>12</antecedent>
+  </step>
+  <step>
+    <number>14</number>
+    <sentence>EX:(t(X,m) & t(X,n))</sentence>
+    <justification>Existential Elimination</justification>
+    <antecedent>2</antecedent>
+    <antecedent>13</antecedent>
+  </step>
+</proof>
+<goal>
+  EX:(t(X,m) & t(X,n))
+</goal>

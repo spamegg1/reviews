@@ -1,0 +1,34 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>AX:AY:p(X,Y)</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>AY:p([c],Y)</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>1</antecedent>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>p([c],[d])</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>2</antecedent>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>AY:p(Y,[d])</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>3</antecedent>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>AX:AY:p(Y,X)</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>4</antecedent>
+  </step>
+</proof>
+<goal>
+  AX:AY:p(Y,X)
+</goal>

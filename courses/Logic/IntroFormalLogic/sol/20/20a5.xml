@@ -1,0 +1,59 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>~((p | r) & ~~(~s & q))</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>~~(~s & q)</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>p | r</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>(p | r) & ~~(~s & q)</sentence>
+    <justification>And Introduction</justification>
+    <antecedent>3</antecedent>
+    <antecedent>2</antecedent>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>p | r => (p | r) & ~~(~s & q)</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>3</antecedent>
+    <antecedent>4</antecedent>
+  </step>
+  <step>
+    <number>6</number>
+    <sentence>p | r</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>7</number>
+    <sentence>~((p | r) & ~~(~s & q))</sentence>
+    <justification>Reiteration</justification>
+    <antecedent>1</antecedent>
+  </step>
+  <step>
+    <number>8</number>
+    <sentence>p | r => ~((p | r) & ~~(~s & q))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>6</antecedent>
+    <antecedent>7</antecedent>
+  </step>
+  <step>
+    <number>9</number>
+    <sentence>~(p | r)</sentence>
+    <justification>Reductio Ad Absurdum</justification>
+    <antecedent>5</antecedent>
+    <antecedent>8</antecedent>
+  </step>
+</proof>
+<goal>
+  ~(p | r)
+</goal>

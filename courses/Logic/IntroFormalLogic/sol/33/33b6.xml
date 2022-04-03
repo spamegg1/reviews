@@ -1,0 +1,127 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>AX:AY:(a(X,g) & a(g,Y) => a(X,Y))</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>AX:(p(X) => a(g,X))</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>EX:(p(X) & a(X,g))</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>p([x]) & a([x],g)</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>p([x])</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>4</antecedent>
+  </step>
+  <step>
+    <number>6</number>
+    <sentence>a([x],g)</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>4</antecedent>
+  </step>
+  <step>
+    <number>7</number>
+    <sentence>p([y])</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>8</number>
+    <sentence>p([y]) => a(g,[y])</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>2</antecedent>
+  </step>
+  <step>
+    <number>9</number>
+    <sentence>a(g,[y])</sentence>
+    <justification>Modus Ponens</justification>
+    <antecedent>8</antecedent>
+    <antecedent>7</antecedent>
+  </step>
+  <step>
+    <number>10</number>
+    <sentence>AY:(a([x],g) & a(g,Y) => a([x],Y))</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>1</antecedent>
+  </step>
+  <step>
+    <number>11</number>
+    <sentence>a([x],g) & a(g,[y]) => a([x],[y])</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>10</antecedent>
+  </step>
+  <step>
+    <number>12</number>
+    <sentence>a([x],g) & a(g,[y])</sentence>
+    <justification>And Introduction</justification>
+    <antecedent>6</antecedent>
+    <antecedent>9</antecedent>
+  </step>
+  <step>
+    <number>13</number>
+    <sentence>a([x],[y])</sentence>
+    <justification>Modus Ponens</justification>
+    <antecedent>11</antecedent>
+    <antecedent>12</antecedent>
+  </step>
+  <step>
+    <number>14</number>
+    <sentence>p([y]) => a([x],[y])</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>7</antecedent>
+    <antecedent>13</antecedent>
+  </step>
+  <step>
+    <number>15</number>
+    <sentence>AY:(p(Y) => a([x],Y))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>14</antecedent>
+  </step>
+  <step>
+    <number>16</number>
+    <sentence>p([x]) & AY:(p(Y) => a([x],Y))</sentence>
+    <justification>And Introduction</justification>
+    <antecedent>5</antecedent>
+    <antecedent>15</antecedent>
+  </step>
+  <step>
+    <number>17</number>
+    <sentence>EX:(p(X) & AY:(p(Y) => a(X,Y)))</sentence>
+    <justification>Existential Introduction</justification>
+    <antecedent>16</antecedent>
+  </step>
+  <step>
+    <number>18</number>
+    <sentence>p([x]) & a([x],g) => EX:(p(X) & AY:(p(Y) => a(X,Y)))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>4</antecedent>
+    <antecedent>17</antecedent>
+  </step>
+  <step>
+    <number>19</number>
+    <sentence>AX:(p(X) & a(X,g) => EX:(p(X) & AY:(p(Y) => a(X,Y))))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>18</antecedent>
+  </step>
+  <step>
+    <number>20</number>
+    <sentence>EX:(p(X) & AY:(p(Y) => a(X,Y)))</sentence>
+    <justification>Existential Elimination</justification>
+    <antecedent>3</antecedent>
+    <antecedent>19</antecedent>
+  </step>
+</proof>
+<goal>
+   EX:(p(X) & AY:(p(Y) => a(X,Y)))
+</goal>

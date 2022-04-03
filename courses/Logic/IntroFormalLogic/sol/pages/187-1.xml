@@ -1,0 +1,50 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>~p</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>p & ~q</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>p</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>2</antecedent>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>p & ~q => p</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>2</antecedent>
+    <antecedent>3</antecedent>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>p & ~q</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>6</number>
+    <sentence>~p</sentence>
+    <justification>Reiteration</justification>
+    <antecedent>1</antecedent>
+  </step>
+  <step>
+    <number>7</number>
+    <sentence>p & ~q => ~p</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>5</antecedent>
+    <antecedent>6</antecedent>
+  </step>
+  <step>
+    <number>8</number>
+    <sentence>~(p & ~q)</sentence>
+    <justification>Negation Introduction</justification>
+    <antecedent>4</antecedent>
+    <antecedent>7</antecedent>
+  </step>
+</proof>

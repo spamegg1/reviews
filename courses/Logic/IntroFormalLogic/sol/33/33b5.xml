@@ -1,0 +1,127 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>AX:(l(X) => r(X) & g(X))</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>AX:(EY:(m(Y) & t(X,Y)) => ~g(X))</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>l([x]) => r([x]) & g([x])</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>1</antecedent>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>EY:(m(Y) & t([x],Y)) => ~g([x])</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>2</antecedent>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>l([x])</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>6</number>
+    <sentence>m([y])</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>7</number>
+    <sentence>t([x],[y])</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>8</number>
+    <sentence>r([x]) & g([x])</sentence>
+    <justification>Modus Ponens</justification>
+    <antecedent>3</antecedent>
+    <antecedent>5</antecedent>
+  </step>
+  <step>
+    <number>9</number>
+    <sentence>g([x])</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>8</antecedent>
+  </step>
+  <step>
+    <number>10</number>
+    <sentence>t([x],[y]) => g([x])</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>7</antecedent>
+    <antecedent>9</antecedent>
+  </step>
+  <step>
+    <number>11</number>
+    <sentence>t([x],[y])</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>12</number>
+    <sentence>m([y]) & t([x],[y])</sentence>
+    <justification>And Introduction</justification>
+    <antecedent>6</antecedent>
+    <antecedent>11</antecedent>
+  </step>
+  <step>
+    <number>13</number>
+    <sentence>EY:(m(Y) & t([x],Y))</sentence>
+    <justification>Existential Introduction</justification>
+    <antecedent>12</antecedent>
+  </step>
+  <step>
+    <number>14</number>
+    <sentence>~g([x])</sentence>
+    <justification>Modus Ponens</justification>
+    <antecedent>4</antecedent>
+    <antecedent>13</antecedent>
+  </step>
+  <step>
+    <number>15</number>
+    <sentence>t([x],[y]) => ~g([x])</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>11</antecedent>
+    <antecedent>14</antecedent>
+  </step>
+  <step>
+    <number>16</number>
+    <sentence>~t([x],[y])</sentence>
+    <justification>Reductio Ad Absurdum</justification>
+    <antecedent>10</antecedent>
+    <antecedent>15</antecedent>
+  </step>
+  <step>
+    <number>17</number>
+    <sentence>m([y]) => ~t([x],[y])</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>6</antecedent>
+    <antecedent>16</antecedent>
+  </step>
+  <step>
+    <number>18</number>
+    <sentence>AY:(m(Y) => ~t([x],Y))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>17</antecedent>
+  </step>
+  <step>
+    <number>19</number>
+    <sentence>l([x]) => AY:(m(Y) => ~t([x],Y))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>5</antecedent>
+    <antecedent>18</antecedent>
+  </step>
+  <step>
+    <number>20</number>
+    <sentence>AX:(l(X) => AY:(m(Y) => ~t(X,Y)))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>19</antecedent>
+  </step>
+</proof>
+<goal>
+  AX:(l(X) => AY:(m(Y) => ~t(X,Y)))
+</goal>

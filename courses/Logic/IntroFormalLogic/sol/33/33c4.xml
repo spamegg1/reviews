@@ -1,0 +1,176 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>AX:f(X) => EY:g(Y)</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>~EX:EY:(f(X) => g(Y))</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>~f([x])</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>~f([x]) | g(b)</sentence>
+    <justification>Or Introduction</justification>
+    <antecedent>3</antecedent>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>f([x]) => g(b)</sentence>
+    <justification>PL conditional equivalence</justification>
+    <antecedent>4</antecedent>
+  </step>
+  <step>
+    <number>6</number>
+    <sentence>EY:(f([x]) => g(Y))</sentence>
+    <justification>Existential Introduction</justification>
+    <antecedent>5</antecedent>
+  </step>
+  <step>
+    <number>7</number>
+    <sentence>EX:EY:(f(X) => g(Y))</sentence>
+    <justification>Existential Introduction</justification>
+    <antecedent>6</antecedent>
+  </step>
+  <step>
+    <number>8</number>
+    <sentence>~f([x]) => EX:EY:(f(X) => g(Y))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>3</antecedent>
+    <antecedent>7</antecedent>
+  </step>
+  <step>
+    <number>9</number>
+    <sentence>~f([x])</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>10</number>
+    <sentence>~EX:EY:(f(X) => g(Y))</sentence>
+    <justification>Reiteration</justification>
+    <antecedent>2</antecedent>
+  </step>
+  <step>
+    <number>11</number>
+    <sentence>~f([x]) => ~EX:EY:(f(X) => g(Y))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>9</antecedent>
+    <antecedent>10</antecedent>
+  </step>
+  <step>
+    <number>12</number>
+    <sentence>~~f([x])</sentence>
+    <justification>Reductio Ad Absurdum</justification>
+    <antecedent>8</antecedent>
+    <antecedent>11</antecedent>
+  </step>
+  <step>
+    <number>13</number>
+    <sentence>f([x])</sentence>
+    <justification>Negation Elimination</justification>
+    <antecedent>12</antecedent>
+  </step>
+  <step>
+    <number>14</number>
+    <sentence>AX:f(X)</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>13</antecedent>
+  </step>
+  <step>
+    <number>15</number>
+    <sentence>EY:g(Y)</sentence>
+    <justification>Modus Ponens</justification>
+    <antecedent>1</antecedent>
+    <antecedent>14</antecedent>
+  </step>
+  <step>
+    <number>16</number>
+    <sentence>g([y])</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>17</number>
+    <sentence>~f([x]) | g([y])</sentence>
+    <justification>Or Introduction</justification>
+    <antecedent>16</antecedent>
+  </step>
+  <step>
+    <number>18</number>
+    <sentence>f([x]) => g([y])</sentence>
+    <justification>PL conditional equivalence</justification>
+    <antecedent>17</antecedent>
+  </step>
+  <step>
+    <number>19</number>
+    <sentence>EY:(f([x]) => g(Y))</sentence>
+    <justification>Existential Introduction</justification>
+    <antecedent>18</antecedent>
+  </step>
+  <step>
+    <number>20</number>
+    <sentence>EX:EY:(f(X) => g(Y))</sentence>
+    <justification>Existential Introduction</justification>
+    <antecedent>19</antecedent>
+  </step>
+  <step>
+    <number>21</number>
+    <sentence>g([y]) => EX:EY:(f(X) => g(Y))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>16</antecedent>
+    <antecedent>20</antecedent>
+  </step>
+  <step>
+    <number>22</number>
+    <sentence>AY:(g(Y) => EX:EY:(f(X) => g(Y)))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>21</antecedent>
+  </step>
+  <step>
+    <number>23</number>
+    <sentence>EX:EY:(f(X) => g(Y))</sentence>
+    <justification>Existential Elimination</justification>
+    <antecedent>15</antecedent>
+    <antecedent>22</antecedent>
+  </step>
+  <step>
+    <number>24</number>
+    <sentence>~EX:EY:(f(X) => g(Y)) => EX:EY:(f(X) => g(Y))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>2</antecedent>
+    <antecedent>23</antecedent>
+  </step>
+  <step>
+    <number>25</number>
+    <sentence>~EX:EY:(f(X) => g(Y))</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>26</number>
+    <sentence>~EX:EY:(f(X) => g(Y)) => ~EX:EY:(f(X) => g(Y))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>25</antecedent>
+    <antecedent>25</antecedent>
+  </step>
+  <step>
+    <number>27</number>
+    <sentence>~~EX:EY:(f(X) => g(Y))</sentence>
+    <justification>Reductio Ad Absurdum</justification>
+    <antecedent>24</antecedent>
+    <antecedent>26</antecedent>
+  </step>
+  <step>
+    <number>28</number>
+    <sentence>EX:EY:(f(X) => g(Y))</sentence>
+    <justification>Negation Elimination</justification>
+    <antecedent>27</antecedent>
+  </step>
+</proof>
+<goal>
+   EX:EY:(f(X) => g(Y))
+</goal>

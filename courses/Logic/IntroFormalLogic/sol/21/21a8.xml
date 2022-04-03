@@ -1,0 +1,234 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>p & (q | r)</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>~((p & q) & s)</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>~(p & s) | ~r</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>p</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>1</antecedent>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>q | r</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>1</antecedent>
+  </step>
+  <step>
+    <number>6</number>
+    <sentence>q</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>7</number>
+    <sentence>p & q</sentence>
+    <justification>And Introduction</justification>
+    <antecedent>4</antecedent>
+    <antecedent>6</antecedent>
+  </step>
+  <step>
+    <number>8</number>
+    <sentence>s</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>9</number>
+    <sentence>(p & q) & s</sentence>
+    <justification>And Introduction</justification>
+    <antecedent>7</antecedent>
+    <antecedent>8</antecedent>
+  </step>
+  <step>
+    <number>10</number>
+    <sentence>s => (p & q) & s</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>8</antecedent>
+    <antecedent>9</antecedent>
+  </step>
+  <step>
+    <number>11</number>
+    <sentence>s</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>12</number>
+    <sentence>~((p & q) & s)</sentence>
+    <justification>Reiteration</justification>
+    <antecedent>2</antecedent>
+  </step>
+  <step>
+    <number>13</number>
+    <sentence>s => ~((p & q) & s)</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>11</antecedent>
+    <antecedent>12</antecedent>
+  </step>
+  <step>
+    <number>14</number>
+    <sentence>~s</sentence>
+    <justification>Reductio Ad Absurdum</justification>
+    <antecedent>10</antecedent>
+    <antecedent>13</antecedent>
+  </step>
+  <step>
+    <number>15</number>
+    <sentence>q => ~s</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>6</antecedent>
+    <antecedent>14</antecedent>
+  </step>
+  <step>
+    <number>16</number>
+    <sentence>r</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>17</number>
+    <sentence>~r</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>18</number>
+    <sentence>s</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>19</number>
+    <sentence>~r</sentence>
+    <justification>Reiteration</justification>
+    <antecedent>17</antecedent>
+  </step>
+  <step>
+    <number>20</number>
+    <sentence>s => ~r</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>18</antecedent>
+    <antecedent>19</antecedent>
+  </step>
+  <step>
+    <number>21</number>
+    <sentence>s</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>22</number>
+    <sentence>r</sentence>
+    <justification>Reiteration</justification>
+    <antecedent>16</antecedent>
+  </step>
+  <step>
+    <number>23</number>
+    <sentence>s => r</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>21</antecedent>
+    <antecedent>22</antecedent>
+  </step>
+  <step>
+    <number>24</number>
+    <sentence>~s</sentence>
+    <justification>Reductio Ad Absurdum</justification>
+    <antecedent>23</antecedent>
+    <antecedent>20</antecedent>
+  </step>
+  <step>
+    <number>25</number>
+    <sentence>~r => ~s</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>17</antecedent>
+    <antecedent>24</antecedent>
+  </step>
+  <step>
+    <number>26</number>
+    <sentence>~(p & s)</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>27</number>
+    <sentence>s</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>28</number>
+    <sentence>p & s</sentence>
+    <justification>And Introduction</justification>
+    <antecedent>4</antecedent>
+    <antecedent>27</antecedent>
+  </step>
+  <step>
+    <number>29</number>
+    <sentence>s => p & s</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>27</antecedent>
+    <antecedent>28</antecedent>
+  </step>
+  <step>
+    <number>30</number>
+    <sentence>s</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>31</number>
+    <sentence>~(p & s)</sentence>
+    <justification>Reiteration</justification>
+    <antecedent>26</antecedent>
+  </step>
+  <step>
+    <number>32</number>
+    <sentence>s => ~(p & s)</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>30</antecedent>
+    <antecedent>31</antecedent>
+  </step>
+  <step>
+    <number>33</number>
+    <sentence>~s</sentence>
+    <justification>Reductio Ad Absurdum</justification>
+    <antecedent>29</antecedent>
+    <antecedent>32</antecedent>
+  </step>
+  <step>
+    <number>34</number>
+    <sentence>~(p & s) => ~s</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>26</antecedent>
+    <antecedent>33</antecedent>
+  </step>
+  <step>
+    <number>35</number>
+    <sentence>~s</sentence>
+    <justification>Or Elimination</justification>
+    <antecedent>3</antecedent>
+    <antecedent>34</antecedent>
+    <antecedent>25</antecedent>
+  </step>
+  <step>
+    <number>36</number>
+    <sentence>r => ~s</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>16</antecedent>
+    <antecedent>35</antecedent>
+  </step>
+  <step>
+    <number>37</number>
+    <sentence>~s</sentence>
+    <justification>Or Elimination</justification>
+    <antecedent>5</antecedent>
+    <antecedent>15</antecedent>
+    <antecedent>36</antecedent>
+  </step>
+</proof>
+<goal>
+  ~s
+</goal>

@@ -1,0 +1,102 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>~(p & ~(s & q))</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>~r & ~~p</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>~r</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>2</antecedent>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>~~p</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>2</antecedent>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>p</sentence>
+    <justification>Negation Elimination</justification>
+    <antecedent>4</antecedent>
+  </step>
+  <step>
+    <number>6</number>
+    <sentence>~(s & q)</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>7</number>
+    <sentence>~(p & ~(s & q))</sentence>
+    <justification>Reiteration</justification>
+    <antecedent>1</antecedent>
+  </step>
+  <step>
+    <number>8</number>
+    <sentence>~(s & q) => ~(p & ~(s & q))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>6</antecedent>
+    <antecedent>7</antecedent>
+  </step>
+  <step>
+    <number>9</number>
+    <sentence>~(s & q)</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>10</number>
+    <sentence>p & ~(s & q)</sentence>
+    <justification>And Introduction</justification>
+    <antecedent>5</antecedent>
+    <antecedent>9</antecedent>
+  </step>
+  <step>
+    <number>11</number>
+    <sentence>~(s & q) => p & ~(s & q)</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>9</antecedent>
+    <antecedent>10</antecedent>
+  </step>
+  <step>
+    <number>12</number>
+    <sentence>~~(s & q)</sentence>
+    <justification>Reductio Ad Absurdum</justification>
+    <antecedent>11</antecedent>
+    <antecedent>8</antecedent>
+  </step>
+  <step>
+    <number>13</number>
+    <sentence>s & q</sentence>
+    <justification>Negation Elimination</justification>
+    <antecedent>12</antecedent>
+  </step>
+  <step>
+    <number>14</number>
+    <sentence>s</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>13</antecedent>
+  </step>
+  <step>
+    <number>15</number>
+    <sentence>q</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>13</antecedent>
+  </step>
+  <step>
+    <number>16</number>
+    <sentence>q & ~r</sentence>
+    <justification>And Introduction</justification>
+    <antecedent>15</antecedent>
+    <antecedent>3</antecedent>
+  </step>
+</proof>
+<goal>
+   q & ~r
+</goal>

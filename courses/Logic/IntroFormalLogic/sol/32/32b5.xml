@@ -1,0 +1,96 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>EX:(p(X) & l(X))</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>AX:(l(X) => r(X))</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>AX:(r(X) => ~f(X))</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>p([c]) & l([c])</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>p([c])</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>4</antecedent>
+  </step>
+  <step>
+    <number>6</number>
+    <sentence>l([c])</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>4</antecedent>
+  </step>
+  <step>
+    <number>7</number>
+    <sentence>l([c]) => r([c])</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>2</antecedent>
+  </step>
+  <step>
+    <number>8</number>
+    <sentence>r([c])</sentence>
+    <justification>Modus Ponens</justification>
+    <antecedent>7</antecedent>
+    <antecedent>6</antecedent>
+  </step>
+  <step>
+    <number>9</number>
+    <sentence>r([c]) => ~f([c])</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>3</antecedent>
+  </step>
+  <step>
+    <number>10</number>
+    <sentence>~f([c])</sentence>
+    <justification>Modus Ponens</justification>
+    <antecedent>9</antecedent>
+    <antecedent>8</antecedent>
+  </step>
+  <step>
+    <number>11</number>
+    <sentence>p([c]) & ~f([c])</sentence>
+    <justification>And Introduction</justification>
+    <antecedent>5</antecedent>
+    <antecedent>10</antecedent>
+  </step>
+  <step>
+    <number>12</number>
+    <sentence>EX:(p(X) & ~f(X))</sentence>
+    <justification>Existential Introduction</justification>
+    <antecedent>11</antecedent>
+  </step>
+  <step>
+    <number>13</number>
+    <sentence>p([c]) & l([c]) => EX:(p(X) & ~f(X))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>4</antecedent>
+    <antecedent>12</antecedent>
+  </step>
+  <step>
+    <number>14</number>
+    <sentence>AX:(p(X) & l(X) => EX:(p(X) & ~f(X)))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>13</antecedent>
+  </step>
+  <step>
+    <number>15</number>
+    <sentence>EX:(p(X) & ~f(X))</sentence>
+    <justification>Existential Elimination</justification>
+    <antecedent>1</antecedent>
+    <antecedent>14</antecedent>
+  </step>
+</proof>
+<goal>
+  EX:(p(X) & ~f(X))
+</goal>

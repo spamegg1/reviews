@@ -199,10 +199,10 @@ assembly_code += '@SP\n'
 assembly_code += 'M=M-1\n'  # decrement SP
 # gt
 assembly_code = '// ' + command + '\n'
-assembly_code += '@SP\n'  # point at SP = 0
+assembly_code += '@SP\n'    # point at SP = 0
 assembly_code += 'A=M-1\n'  # now A = RAM[0]-1, points at stacktop-1
 assembly_code += 'A=A-1\n'  # now A = RAM[0]-2, points at stacktop-2
-assembly_code += 'D=M\n'  # copy value at RAM[stacktop-2] to D register
+assembly_code += 'D=M\n'    # copy value at RAM[stacktop-2] to D register
 assembly_code += 'A=A+1\n'  # go to stacktop-1
 assembly_code += 'D=D-M\n'  # subtract RAM[stacktop-2]-RAM[stacktop-1]
 assembly_code += '@GT\n'
@@ -213,38 +213,51 @@ assembly_code += '(GT)\n'
 assembly_code += '@SP\n'
 assembly_code += 'A=M-1\n'  # go back to stacktop-1
 assembly_code += 'A=A-1\n'  # go back to stacktop-2
-assembly_code += 'M=-1\n'  # put 'true' in there
+assembly_code += 'M=-1\n'   # put 'true' in there
 assembly_code += '@SP\n'
 assembly_code += 'M=M-1\n'  # decrement SP
 assembly_code += '(GT_ELSE)\n'
 assembly_code += '@SP\n'
 assembly_code += 'A=M-1\n'  # go back to stacktop-1
 assembly_code += 'A=A-1\n'  # go back to stacktop-2
-assembly_code += 'M=0\n'  # put 'false' in there
+assembly_code += 'M=0\n'    # put 'false' in there
 assembly_code += '@SP\n'
 assembly_code += 'M=M-1\n'  # decrement SP
 # and
 assembly_code = '// ' + command + '\n'
-assembly_code += '@SP\n'  # point at SP = 0
+assembly_code += '@SP\n'    # point at SP = 0
 assembly_code += 'A=M-1\n'  # now A = RAM[0]-1, points at stacktop-1
 assembly_code += 'A=A-1\n'  # now A = RAM[0]-2, points at stacktop-2
-assembly_code += 'D=M\n'  # copy value at RAM[stacktop-2] to D register
+assembly_code += 'D=M\n'    # copy value at RAM[stacktop-2] to D register
 assembly_code += 'A=A+1\n'  # go to stacktop-1
 assembly_code += 'D=D&M\n'  # calculate RAM[stacktop-2] AND RAM[stacktop-1]
 assembly_code += 'A=A-1\n'  # go back to stacktop-2
-assembly_code += 'M=D\n'  # put RAM[stacktop-2] AND RAM[stacktop-1] in there
+assembly_code += 'M=D\n'    # put RAM[stacktop-2] AND RAM[stacktop-1] in there
 assembly_code += '@SP\n'
 assembly_code += 'M=M-1\n'  # decrement SP
+# and version 2
+# x           stacktop-2
+# y           stacktop-1
+# (nothing)   stacktop
+assembly_code = '// ' + command + '\n'
+assembly_code += '@SP\n'    # point at SP = 0
+assembly_code += 'A=M-1\n'  # now A points at stacktop-1
+assembly_code += 'D=M\n'    # copy value y at stacktop-1 to D register
+assembly_code += 'A=A-1\n'  # now A points at stacktop-2
+assembly_code += 'D=D&M\n'  # calculate y&x
+assembly_code += 'M=D\n'    # put x&y at position stacktop-2
+assembly_code += '@SP\n'    # point at SP
+assembly_code += 'M=M-1\n'  # decrement SP so now it's stacktop-1 (where y was)
 # or
 assembly_code = '// ' + command + '\n'
-assembly_code += '@SP\n'  # point at SP = 0
+assembly_code += '@SP\n'    # point at SP = 0
 assembly_code += 'A=M-1\n'  # now A = RAM[0]-1, points at stacktop-1
 assembly_code += 'A=A-1\n'  # now A = RAM[0]-2, points at stacktop-2
-assembly_code += 'D=M\n'  # copy value at RAM[stacktop-2] to D register
+assembly_code += 'D=M\n'    # copy value at RAM[stacktop-2] to D register
 assembly_code += 'A=A+1\n'  # go to stacktop-1
 assembly_code += 'D=D|M\n'  # calculate RAM[stacktop-2] OR RAM[stacktop-1]
 assembly_code += 'A=A-1\n'  # go back to stacktop-2
-assembly_code += 'M=D\n'  # put RAM[stacktop-2] OR RAM[stacktop-1] in there
+assembly_code += 'M=D\n'    # put RAM[stacktop-2] OR RAM[stacktop-1] in there
 assembly_code += '@SP\n'
 assembly_code += 'M=M-1\n'  # decrement SP
 # not

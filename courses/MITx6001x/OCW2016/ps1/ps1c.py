@@ -1,10 +1,3 @@
-# Constants given to us by the problem
-SEMI_RAISE = 0.07
-INV_RATE = 0.04
-TOTAL_COST = 1000000
-DOWNPAY = TOTAL_COST * 0.25
-
-
 def savings(start, portion, inv_rate, semi_raise):
     saving = 0
     salary = start
@@ -49,13 +42,20 @@ def optimal_saving_rate(salary, inv_rate, semi_raise, down_pay):
         print("Steps in bisection search:", steps)
 
 
-def tests():
-    assert (4411, 12) == bisearch(150000, INV_RATE, SEMI_RAISE, DOWNPAY)
-    assert (2206,  9) == bisearch(300000, INV_RATE, SEMI_RAISE, DOWNPAY)
+def tests(inv_rate, semi_raise, down_pay):
+    assert (4411, 12) == bisearch(150000, inv_rate, semi_raise, down_pay)
+    assert (2206,  9) == bisearch(300000, inv_rate, semi_raise, down_pay)
 
 
 if __name__ == "__main__":
-    tests()
+    # Constants given to us by the problem
+    SEMI_RAISE = 0.07
+    INV_RATE = 0.04
+    TOTAL_COST = 1000000
+    DOWNPAY = TOTAL_COST * 0.25
+
+    tests(INV_RATE, SEMI_RAISE, DOWNPAY)    
+
     SALARY = float(input("Enter the starting salary: "))
     optimal_saving_rate(SALARY, INV_RATE, SEMI_RAISE, DOWNPAY)
     

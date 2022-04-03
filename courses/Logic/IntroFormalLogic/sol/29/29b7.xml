@@ -1,0 +1,228 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>AX:f(X) => AY:g(Y)</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>~AX:f(X) | AY:g(Y)</sentence>
+    <justification>p=>q is ~p|q</justification>
+    <antecedent>1</antecedent>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>EX:~f(X) | AY:g(Y)</sentence>
+    <justification>not-forall is exists-not</justification>
+    <antecedent>2</antecedent>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>EX:~f(X)</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>~f([a])</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>6</number>
+    <sentence>~f([a]) | AY:g(Y)</sentence>
+    <justification>Or Introduction</justification>
+    <antecedent>5</antecedent>
+  </step>
+  <step>
+    <number>7</number>
+    <sentence>EX:(~f(X) | AY:g(Y))</sentence>
+    <justification>Existential Introduction</justification>
+    <antecedent>6</antecedent>
+  </step>
+  <step>
+    <number>8</number>
+    <sentence>~f([a]) => EX:(~f(X) | AY:g(Y))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>5</antecedent>
+    <antecedent>7</antecedent>
+  </step>
+  <step>
+    <number>9</number>
+    <sentence>AX:(~f(X) => EX:(~f(X) | AY:g(Y)))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>8</antecedent>
+  </step>
+  <step>
+    <number>10</number>
+    <sentence>EX:(~f(X) | AY:g(Y))</sentence>
+    <justification>Existential Elimination</justification>
+    <antecedent>4</antecedent>
+    <antecedent>9</antecedent>
+  </step>
+  <step>
+    <number>11</number>
+    <sentence>EX:~f(X) => EX:(~f(X) | AY:g(Y))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>4</antecedent>
+    <antecedent>10</antecedent>
+  </step>
+  <step>
+    <number>12</number>
+    <sentence>AY:g(Y)</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>13</number>
+    <sentence>~f(a) | AY:g(Y)</sentence>
+    <justification>Or Introduction</justification>
+    <antecedent>12</antecedent>
+  </step>
+  <step>
+    <number>14</number>
+    <sentence>EX:(~f(X) | AY:g(Y))</sentence>
+    <justification>Existential Introduction</justification>
+    <antecedent>13</antecedent>
+  </step>
+  <step>
+    <number>15</number>
+    <sentence>AY:g(Y) => EX:(~f(X) | AY:g(Y))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>12</antecedent>
+    <antecedent>14</antecedent>
+  </step>
+  <step>
+    <number>16</number>
+    <sentence>EX:(~f(X) | AY:g(Y))</sentence>
+    <justification>Or Elimination</justification>
+    <antecedent>3</antecedent>
+    <antecedent>11</antecedent>
+    <antecedent>15</antecedent>
+  </step>
+  <step>
+    <number>17</number>
+    <sentence>EX:(f(X) => AY:g(Y))</sentence>
+    <justification>~p|q is p=>q</justification>
+    <antecedent>16</antecedent>
+  </step>
+  <step>
+    <number>18</number>
+    <sentence>(AX:f(X) => AY:g(Y)) => EX:(f(X) => AY:g(Y))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>1</antecedent>
+    <antecedent>17</antecedent>
+  </step>
+  <step>
+    <number>19</number>
+    <sentence>EX:(f(X) => AY:g(Y))</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>20</number>
+    <sentence>EX:(~f(X) | AY:g(Y))</sentence>
+    <justification>p=>q is ~p|q</justification>
+    <antecedent>19</antecedent>
+  </step>
+  <step>
+    <number>21</number>
+    <sentence>~f([a]) | AY:g(Y)</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>22</number>
+    <sentence>~f([a])</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>23</number>
+    <sentence>EX:~f(X)</sentence>
+    <justification>Existential Introduction</justification>
+    <antecedent>22</antecedent>
+  </step>
+  <step>
+    <number>24</number>
+    <sentence>EX:~f(X) | AY:g(Y)</sentence>
+    <justification>Or Introduction</justification>
+    <antecedent>23</antecedent>
+  </step>
+  <step>
+    <number>25</number>
+    <sentence>~f([a]) => EX:~f(X) | AY:g(Y)</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>22</antecedent>
+    <antecedent>24</antecedent>
+  </step>
+  <step>
+    <number>26</number>
+    <sentence>AY:g(Y)</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>27</number>
+    <sentence>EX:~f(X) | AY:g(Y)</sentence>
+    <justification>Or Introduction</justification>
+    <antecedent>26</antecedent>
+  </step>
+  <step>
+    <number>28</number>
+    <sentence>AY:g(Y) => EX:~f(X) | AY:g(Y)</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>26</antecedent>
+    <antecedent>27</antecedent>
+  </step>
+  <step>
+    <number>29</number>
+    <sentence>EX:~f(X) | AY:g(Y)</sentence>
+    <justification>Or Elimination</justification>
+    <antecedent>21</antecedent>
+    <antecedent>25</antecedent>
+    <antecedent>28</antecedent>
+  </step>
+  <step>
+    <number>30</number>
+    <sentence>~f([a]) | AY:g(Y) => EX:~f(X) | AY:g(Y)</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>21</antecedent>
+    <antecedent>29</antecedent>
+  </step>
+  <step>
+    <number>31</number>
+    <sentence>AX:(~f(X) | AY:g(Y) => EX:~f(X) | AY:g(Y))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>30</antecedent>
+  </step>
+  <step>
+    <number>32</number>
+    <sentence>EX:~f(X) | AY:g(Y)</sentence>
+    <justification>Existential Elimination</justification>
+    <antecedent>20</antecedent>
+    <antecedent>31</antecedent>
+  </step>
+  <step>
+    <number>33</number>
+    <sentence>~AX:f(X) | AY:g(Y)</sentence>
+    <justification>exists-not is not-forall</justification>
+    <antecedent>32</antecedent>
+  </step>
+  <step>
+    <number>34</number>
+    <sentence>AX:f(X) => AY:g(Y)</sentence>
+    <justification>~p|q is p=>q</justification>
+    <antecedent>33</antecedent>
+  </step>
+  <step>
+    <number>35</number>
+    <sentence>EX:(f(X) => AY:g(Y)) => (AX:f(X) => AY:g(Y))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>19</antecedent>
+    <antecedent>34</antecedent>
+  </step>
+  <step>
+    <number>36</number>
+    <sentence>AX:f(X) => AY:g(Y) <=> EX:(f(X) => AY:g(Y))</sentence>
+    <justification>Biconditional Introduction</justification>
+    <antecedent>18</antecedent>
+    <antecedent>35</antecedent>
+  </step>
+</proof>
+<goal>
+  AX:f(X) => AY:g(Y) <=> EX:(f(X) => AY:g(Y))
+</goal>

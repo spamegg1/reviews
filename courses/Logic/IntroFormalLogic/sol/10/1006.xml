@@ -1,0 +1,53 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>EY:AX:p(X,Y)</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>AX:p(X,[d])</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>p([c],[d])</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>2</antecedent>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>EY:p([c],Y)</sentence>
+    <justification>Existential Introduction</justification>
+    <antecedent>3</antecedent>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>AX:p(X,[d]) => EY:p([c],Y)</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>2</antecedent>
+    <antecedent>4</antecedent>
+  </step>
+  <step>
+    <number>6</number>
+    <sentence>AY:(AX:p(X,Y) => EY:p([c],Y))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>5</antecedent>
+  </step>
+  <step>
+    <number>7</number>
+    <sentence>EY:p([c],Y)</sentence>
+    <justification>Existential Elimination</justification>
+    <antecedent>1</antecedent>
+    <antecedent>6</antecedent>
+  </step>
+  <step>
+    <number>8</number>
+    <sentence>AX:EY:p(X,Y)</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>7</antecedent>
+  </step>
+</proof>
+<goal>
+  AX:EY:p(X,Y)
+</goal>

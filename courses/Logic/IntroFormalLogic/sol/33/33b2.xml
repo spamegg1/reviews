@@ -1,0 +1,60 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>EX:(f(X) => d)</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>AX:f(X)</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>f([x])</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>2</antecedent>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>f([x]) => d</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>d</sentence>
+    <justification>Modus Ponens</justification>
+    <antecedent>4</antecedent>
+    <antecedent>3</antecedent>
+  </step>
+  <step>
+    <number>6</number>
+    <sentence>(f([x]) => d) => d</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>4</antecedent>
+    <antecedent>5</antecedent>
+  </step>
+  <step>
+    <number>7</number>
+    <sentence>AX:((f(X) => d) => d)</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>6</antecedent>
+  </step>
+  <step>
+    <number>8</number>
+    <sentence>d</sentence>
+    <justification>Existential Elimination</justification>
+    <antecedent>1</antecedent>
+    <antecedent>7</antecedent>
+  </step>
+  <step>
+    <number>9</number>
+    <sentence>AX:f(X) => d</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>2</antecedent>
+    <antecedent>8</antecedent>
+  </step>
+</proof>
+<goal>
+  AX:f(X) => d
+</goal>

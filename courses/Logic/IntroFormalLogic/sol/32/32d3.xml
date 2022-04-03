@@ -1,0 +1,29 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>AX:(f(X) => p)</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>EX:f(X)</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>p</sentence>
+    <justification>Existential Elimination</justification>
+    <antecedent>2</antecedent>
+    <antecedent>1</antecedent>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>EX:f(X) => p</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>2</antecedent>
+    <antecedent>3</antecedent>
+  </step>
+</proof>
+<goal>
+  EX:f(X) => p
+</goal>

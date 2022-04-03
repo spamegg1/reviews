@@ -1,0 +1,47 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>AX:(p(X) & q(X))</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>p([c]) & q([c])</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>1</antecedent>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>p([c])</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>2</antecedent>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>q([c])</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>2</antecedent>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>AX:p(X)</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>3</antecedent>
+  </step>
+  <step>
+    <number>6</number>
+    <sentence>AX:q(X)</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>4</antecedent>
+  </step>
+  <step>
+    <number>7</number>
+    <sentence>AX:p(X) & AX:q(X)</sentence>
+    <justification>And Introduction</justification>
+    <antecedent>5</antecedent>
+    <antecedent>6</antecedent>
+  </step>
+</proof>
+<goal>
+  AX:p(X) & AX:q(X)
+</goal>

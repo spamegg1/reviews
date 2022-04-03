@@ -1,0 +1,25 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>p | q</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>p => r</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>q => r</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>r</sentence>
+    <justification>Or Elimination</justification>
+    <antecedent>1</antecedent>
+    <antecedent>2</antecedent>
+    <antecedent>3</antecedent>
+  </step>
+</proof>

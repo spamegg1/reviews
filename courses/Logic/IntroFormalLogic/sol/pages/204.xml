@@ -1,0 +1,37 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>p => q</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>~q</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>p</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>~q</sentence>
+    <justification>Reiteration</justification>
+    <antecedent>2</antecedent>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>p => ~q</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>3</antecedent>
+    <antecedent>4</antecedent>
+  </step>
+  <step>
+    <number>6</number>
+    <sentence>~p</sentence>
+    <justification>Reductio Ad Absurdum</justification>
+    <antecedent>1</antecedent>
+    <antecedent>5</antecedent>
+  </step>
+</proof>

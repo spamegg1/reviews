@@ -1,0 +1,84 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>p => AX:(c(X) => d(X))</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>c(m) & ~d(m)</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>c(m)</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>2</antecedent>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>~d(m)</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>2</antecedent>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>p</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>6</number>
+    <sentence>AX:(c(X) => d(X))</sentence>
+    <justification>Modus Ponens</justification>
+    <antecedent>1</antecedent>
+    <antecedent>5</antecedent>
+  </step>
+  <step>
+    <number>7</number>
+    <sentence>c(m) => d(m)</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>6</antecedent>
+  </step>
+  <step>
+    <number>8</number>
+    <sentence>d(m)</sentence>
+    <justification>Modus Ponens</justification>
+    <antecedent>7</antecedent>
+    <antecedent>3</antecedent>
+  </step>
+  <step>
+    <number>9</number>
+    <sentence>p => d(m)</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>5</antecedent>
+    <antecedent>8</antecedent>
+  </step>
+  <step>
+    <number>10</number>
+    <sentence>p</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>11</number>
+    <sentence>~d(m)</sentence>
+    <justification>Reiteration</justification>
+    <antecedent>4</antecedent>
+  </step>
+  <step>
+    <number>12</number>
+    <sentence>p => ~d(m)</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>10</antecedent>
+    <antecedent>11</antecedent>
+  </step>
+  <step>
+    <number>13</number>
+    <sentence>~p</sentence>
+    <justification>Reductio Ad Absurdum</justification>
+    <antecedent>9</antecedent>
+    <antecedent>12</antecedent>
+  </step>
+</proof>
+<goal>
+  ~p
+</goal>

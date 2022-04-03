@@ -1,0 +1,121 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>~(q & p)</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>r & q | p & q</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>r & q</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>r</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>3</antecedent>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>r & q => r</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>3</antecedent>
+    <antecedent>4</antecedent>
+  </step>
+  <step>
+    <number>6</number>
+    <sentence>p & q</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>7</number>
+    <sentence>p</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>6</antecedent>
+  </step>
+  <step>
+    <number>8</number>
+    <sentence>q</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>6</antecedent>
+  </step>
+  <step>
+    <number>9</number>
+    <sentence>q & p</sentence>
+    <justification>And Introduction</justification>
+    <antecedent>8</antecedent>
+    <antecedent>7</antecedent>
+  </step>
+  <step>
+    <number>10</number>
+    <sentence>~r</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>11</number>
+    <sentence>q & p</sentence>
+    <justification>Reiteration</justification>
+    <antecedent>9</antecedent>
+  </step>
+  <step>
+    <number>12</number>
+    <sentence>~r => q & p</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>10</antecedent>
+    <antecedent>11</antecedent>
+  </step>
+  <step>
+    <number>13</number>
+    <sentence>~r</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>14</number>
+    <sentence>~(q & p)</sentence>
+    <justification>Reiteration</justification>
+    <antecedent>1</antecedent>
+  </step>
+  <step>
+    <number>15</number>
+    <sentence>~r => ~(q & p)</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>13</antecedent>
+    <antecedent>14</antecedent>
+  </step>
+  <step>
+    <number>16</number>
+    <sentence>~~r</sentence>
+    <justification>Reductio Ad Absurdum</justification>
+    <antecedent>12</antecedent>
+    <antecedent>15</antecedent>
+  </step>
+  <step>
+    <number>17</number>
+    <sentence>r</sentence>
+    <justification>Negation Elimination</justification>
+    <antecedent>16</antecedent>
+  </step>
+  <step>
+    <number>18</number>
+    <sentence>p & q => r</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>6</antecedent>
+    <antecedent>17</antecedent>
+  </step>
+  <step>
+    <number>19</number>
+    <sentence>r</sentence>
+    <justification>Or Elimination</justification>
+    <antecedent>2</antecedent>
+    <antecedent>5</antecedent>
+    <antecedent>18</antecedent>
+  </step>
+</proof>
+<goal>
+  r
+</goal>

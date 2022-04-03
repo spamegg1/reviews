@@ -1,0 +1,78 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>EX:~p(X)</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>~p([c])</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>AX:p(X)</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>p([c])</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>3</antecedent>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>AX:p(X) => p([c])</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>3</antecedent>
+    <antecedent>4</antecedent>
+  </step>
+  <step>
+    <number>6</number>
+    <sentence>AX:p(X)</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>7</number>
+    <sentence>~p([c])</sentence>
+    <justification>Reiteration</justification>
+    <antecedent>2</antecedent>
+  </step>
+  <step>
+    <number>8</number>
+    <sentence>AX:p(X) => ~p([c])</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>6</antecedent>
+    <antecedent>7</antecedent>
+  </step>
+  <step>
+    <number>9</number>
+    <sentence>~AX:p(X)</sentence>
+    <justification>Reductio Ad Absurdum</justification>
+    <antecedent>5</antecedent>
+    <antecedent>8</antecedent>
+  </step>
+  <step>
+    <number>10</number>
+    <sentence>~p([c]) => ~AX:p(X)</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>2</antecedent>
+    <antecedent>9</antecedent>
+  </step>
+  <step>
+    <number>11</number>
+    <sentence>AX:(~p(X) => ~AX:p(X))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>10</antecedent>
+  </step>
+  <step>
+    <number>12</number>
+    <sentence>~AX:p(X)</sentence>
+    <justification>Existential Elimination</justification>
+    <antecedent>1</antecedent>
+    <antecedent>11</antecedent>
+  </step>
+</proof>
+<goal>
+  ~AX:p(X)
+</goal>

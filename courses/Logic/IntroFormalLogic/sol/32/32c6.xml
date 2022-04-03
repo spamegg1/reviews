@@ -1,0 +1,97 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>~(l([c]) | ~l([c]))</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>~(l([c]) | ~l([c])) => ~(l([c]) | ~l([c]))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>1</antecedent>
+    <antecedent>1</antecedent>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>~(l([c]) | ~l([c]))</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>l([c])</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>~(l([c]) | ~l([c]))</sentence>
+    <justification>Reiteration</justification>
+    <antecedent>3</antecedent>
+  </step>
+  <step>
+    <number>6</number>
+    <sentence>l([c]) => ~(l([c]) | ~l([c]))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>4</antecedent>
+    <antecedent>5</antecedent>
+  </step>
+  <step>
+    <number>7</number>
+    <sentence>l([c])</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>8</number>
+    <sentence>l([c]) | ~l([c])</sentence>
+    <justification>Or Introduction</justification>
+    <antecedent>7</antecedent>
+  </step>
+  <step>
+    <number>9</number>
+    <sentence>l([c]) => l([c]) | ~l([c])</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>7</antecedent>
+    <antecedent>8</antecedent>
+  </step>
+  <step>
+    <number>10</number>
+    <sentence>~l([c])</sentence>
+    <justification>Reductio Ad Absurdum</justification>
+    <antecedent>9</antecedent>
+    <antecedent>6</antecedent>
+  </step>
+  <step>
+    <number>11</number>
+    <sentence>l([c]) | ~l([c])</sentence>
+    <justification>Or Introduction</justification>
+    <antecedent>10</antecedent>
+  </step>
+  <step>
+    <number>12</number>
+    <sentence>~(l([c]) | ~l([c])) => l([c]) | ~l([c])</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>3</antecedent>
+    <antecedent>11</antecedent>
+  </step>
+  <step>
+    <number>13</number>
+    <sentence>~~(l([c]) | ~l([c]))</sentence>
+    <justification>Reductio Ad Absurdum</justification>
+    <antecedent>12</antecedent>
+    <antecedent>2</antecedent>
+  </step>
+  <step>
+    <number>14</number>
+    <sentence>l([c]) | ~l([c])</sentence>
+    <justification>Negation Elimination</justification>
+    <antecedent>13</antecedent>
+  </step>
+  <step>
+    <number>15</number>
+    <sentence>AX:(l(X) | ~l(X))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>14</antecedent>
+  </step>
+</proof>
+<goal>
+  AX:(l(X) | ~l(X))
+</goal>

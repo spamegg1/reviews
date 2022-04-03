@@ -1,0 +1,53 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>EX:s(X,X,X)</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>s([a],[a],[a])</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>EZ:s([a],[a],Z)</sentence>
+    <justification>Existential Introduction</justification>
+    <antecedent>2</antecedent>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>EY:EZ:s([a],Y,Z)</sentence>
+    <justification>Existential Introduction</justification>
+    <antecedent>3</antecedent>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>EX:EY:EZ:s(X,Y,Z)</sentence>
+    <justification>Existential Introduction</justification>
+    <antecedent>4</antecedent>
+  </step>
+  <step>
+    <number>6</number>
+    <sentence>s([a],[a],[a]) => EX:EY:EZ:s(X,Y,Z)</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>2</antecedent>
+    <antecedent>5</antecedent>
+  </step>
+  <step>
+    <number>7</number>
+    <sentence>AX:(s(X,X,X) => EX:EY:EZ:s(X,Y,Z))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>6</antecedent>
+  </step>
+  <step>
+    <number>8</number>
+    <sentence>EX:EY:EZ:s(X,Y,Z)</sentence>
+    <justification>Existential Elimination</justification>
+    <antecedent>1</antecedent>
+    <antecedent>7</antecedent>
+  </step>
+</proof>
+<goal>
+  EX:EY:EZ:s(X,Y,Z)
+</goal>

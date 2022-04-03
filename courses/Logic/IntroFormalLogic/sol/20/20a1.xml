@@ -1,0 +1,41 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>p</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>q</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>r</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>q & q</sentence>
+    <justification>And Introduction</justification>
+    <antecedent>2</antecedent>
+    <antecedent>2</antecedent>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>p & (q & q)</sentence>
+    <justification>And Introduction</justification>
+    <antecedent>1</antecedent>
+    <antecedent>4</antecedent>
+  </step>
+  <step>
+    <number>6</number>
+    <sentence>p & (p & (q & q))</sentence>
+    <justification>And Introduction</justification>
+    <antecedent>1</antecedent>
+    <antecedent>5</antecedent>
+  </step>
+</proof>
+<goal>
+  p & (p & (q & q))
+</goal>

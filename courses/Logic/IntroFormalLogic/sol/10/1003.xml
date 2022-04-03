@@ -1,0 +1,59 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>AX:(p(X) => q(X))</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>AX:(q(X) => r(X))</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>p([c])</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>p([c]) => q([c])</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>1</antecedent>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>q([c])</sentence>
+    <justification>Modus Ponens</justification>
+    <antecedent>4</antecedent>
+    <antecedent>3</antecedent>
+  </step>
+  <step>
+    <number>6</number>
+    <sentence>q([c]) => r([c])</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>2</antecedent>
+  </step>
+  <step>
+    <number>7</number>
+    <sentence>r([c])</sentence>
+    <justification>Modus Ponens</justification>
+    <antecedent>6</antecedent>
+    <antecedent>5</antecedent>
+  </step>
+  <step>
+    <number>8</number>
+    <sentence>p([c]) => r([c])</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>3</antecedent>
+    <antecedent>7</antecedent>
+  </step>
+  <step>
+    <number>9</number>
+    <sentence>AX:(p(X) => r(X))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>8</antecedent>
+  </step>
+</proof>
+<goal>
+  AX:(p(X) => r(X))
+</goal>

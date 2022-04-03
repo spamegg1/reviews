@@ -1,0 +1,65 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>AX:(l(X) => a(X,g))</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>AX:(EY:a(X,Y) => ~w(X))</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>l([c])</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>l([c]) => a([c],g)</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>1</antecedent>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>a([c],g)</sentence>
+    <justification>Modus Ponens</justification>
+    <antecedent>4</antecedent>
+    <antecedent>3</antecedent>
+  </step>
+  <step>
+    <number>6</number>
+    <sentence>EY:a([c],Y) => ~w([c])</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>2</antecedent>
+  </step>
+  <step>
+    <number>7</number>
+    <sentence>EY:a([c],Y)</sentence>
+    <justification>Existential Introduction</justification>
+    <antecedent>5</antecedent>
+  </step>
+  <step>
+    <number>8</number>
+    <sentence>~w([c])</sentence>
+    <justification>Modus Ponens</justification>
+    <antecedent>6</antecedent>
+    <antecedent>7</antecedent>
+  </step>
+  <step>
+    <number>9</number>
+    <sentence>l([c]) => ~w([c])</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>3</antecedent>
+    <antecedent>8</antecedent>
+  </step>
+  <step>
+    <number>10</number>
+    <sentence>AX:(l(X) => ~w(X))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>9</antecedent>
+  </step>
+</proof>
+<goal>
+  AX:(l(X) => ~w(X))
+</goal>

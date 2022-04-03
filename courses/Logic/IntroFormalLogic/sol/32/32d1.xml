@@ -1,0 +1,41 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>p & AX:f(X)</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>p</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>1</antecedent>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>AX:f(X)</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>1</antecedent>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>f([c])</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>3</antecedent>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>p & f([c])</sentence>
+    <justification>And Introduction</justification>
+    <antecedent>2</antecedent>
+    <antecedent>4</antecedent>
+  </step>
+  <step>
+    <number>6</number>
+    <sentence>AX:(p & f(X))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>5</antecedent>
+  </step>
+</proof>
+<goal>
+  AX:(p & f(X))
+</goal>

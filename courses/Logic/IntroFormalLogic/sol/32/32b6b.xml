@@ -1,0 +1,52 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>AX:(l(X) | t(X) => d(X))</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>AX:(d(X) => a(X))</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>l(m)</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>l(m) | t(m) => d(m)</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>1</antecedent>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>l(m) | t(m)</sentence>
+    <justification>Or Introduction</justification>
+    <antecedent>3</antecedent>
+  </step>
+  <step>
+    <number>6</number>
+    <sentence>d(m)</sentence>
+    <justification>Modus Ponens</justification>
+    <antecedent>4</antecedent>
+    <antecedent>5</antecedent>
+  </step>
+  <step>
+    <number>7</number>
+    <sentence>d(m) => a(m)</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>2</antecedent>
+  </step>
+  <step>
+    <number>8</number>
+    <sentence>a(m)</sentence>
+    <justification>Modus Ponens</justification>
+    <antecedent>7</antecedent>
+    <antecedent>6</antecedent>
+  </step>
+</proof>
+<goal>
+  a(m)
+</goal>

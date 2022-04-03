@@ -1,0 +1,91 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>~(r | ~r)</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>~(r | ~r) => ~(r | ~r)</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>1</antecedent>
+    <antecedent>1</antecedent>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>~(r | ~r)</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>r</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>r | ~r</sentence>
+    <justification>Or Introduction</justification>
+    <antecedent>4</antecedent>
+  </step>
+  <step>
+    <number>6</number>
+    <sentence>r => r | ~r</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>4</antecedent>
+    <antecedent>5</antecedent>
+  </step>
+  <step>
+    <number>7</number>
+    <sentence>r</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>8</number>
+    <sentence>~(r | ~r)</sentence>
+    <justification>Reiteration</justification>
+    <antecedent>3</antecedent>
+  </step>
+  <step>
+    <number>9</number>
+    <sentence>r => ~(r | ~r)</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>7</antecedent>
+    <antecedent>8</antecedent>
+  </step>
+  <step>
+    <number>10</number>
+    <sentence>~r</sentence>
+    <justification>Reductio Ad Absurdum</justification>
+    <antecedent>6</antecedent>
+    <antecedent>9</antecedent>
+  </step>
+  <step>
+    <number>11</number>
+    <sentence>r | ~r</sentence>
+    <justification>Or Introduction</justification>
+    <antecedent>10</antecedent>
+  </step>
+  <step>
+    <number>12</number>
+    <sentence>~(r | ~r) => r | ~r</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>3</antecedent>
+    <antecedent>11</antecedent>
+  </step>
+  <step>
+    <number>13</number>
+    <sentence>~~(r | ~r)</sentence>
+    <justification>Reductio Ad Absurdum</justification>
+    <antecedent>12</antecedent>
+    <antecedent>2</antecedent>
+  </step>
+  <step>
+    <number>14</number>
+    <sentence>r | ~r</sentence>
+    <justification>Negation Elimination</justification>
+    <antecedent>13</antecedent>
+  </step>
+</proof>
+<goal>
+  r | ~r
+</goal>

@@ -1,0 +1,100 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>EY:(f([c]) & g(Y))</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>f([c]) & g([d])</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>f([c])</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>23</antecedent>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>g([d])</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>23</antecedent>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>EX:f(X)</sentence>
+    <justification>Existential Introduction</justification>
+    <antecedent>24</antecedent>
+  </step>
+  <step>
+    <number>6</number>
+    <sentence>EX:g(X)</sentence>
+    <justification>Existential Introduction</justification>
+    <antecedent>25</antecedent>
+  </step>
+  <step>
+    <number>7</number>
+    <sentence>EX:f(X) & EX:g(X)</sentence>
+    <justification>And Introduction</justification>
+    <antecedent>26</antecedent>
+    <antecedent>27</antecedent>
+  </step>
+  <step>
+    <number>8</number>
+    <sentence>f([c]) & g([d]) => EX:f(X) & EX:g(X)</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>23</antecedent>
+    <antecedent>28</antecedent>
+  </step>
+  <step>
+    <number>9</number>
+    <sentence>AY:(f([c]) & g(Y) => EX:f(X) & EX:g(X))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>29</antecedent>
+  </step>
+  <step>
+    <number>10</number>
+    <sentence>EX:f(X) & EX:g(X)</sentence>
+    <justification>Existential Elimination</justification>
+    <antecedent>22</antecedent>
+    <antecedent>30</antecedent>
+  </step>
+  <step>
+    <number>11</number>
+    <sentence>EY:(f([c]) & g(Y)) => EX:f(X) & EX:g(X)</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>22</antecedent>
+    <antecedent>31</antecedent>
+  </step>
+  <step>
+    <number>12</number>
+    <sentence>AX:(EY:(f(X) & g(Y)) => EX:f(X) & EX:g(X))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>32</antecedent>
+  </step>
+  <step>
+    <number>13</number>
+    <sentence>EX:f(X) & EX:g(X)</sentence>
+    <justification>Existential Elimination</justification>
+    <antecedent>21</antecedent>
+    <antecedent>33</antecedent>
+  </step>
+  <step>
+    <number>14</number>
+    <sentence>EX:EY:(f(X) & g(Y)) => EX:f(X) & EX:g(X)</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>21</antecedent>
+    <antecedent>34</antecedent>
+  </step>
+  <step>
+    <number>15</number>
+    <sentence>EX:f(X) & EX:g(X) <=> EX:EY:(f(X) & g(Y))</sentence>
+    <justification>Biconditional Introduction</justification>
+    <antecedent>20</antecedent>
+    <antecedent>35</antecedent>
+  </step>
+</proof>
+<goal>
+   EX:f(X) & EX:g(X) <=> EX:EY:(f(X) & g(Y))
+</goal>

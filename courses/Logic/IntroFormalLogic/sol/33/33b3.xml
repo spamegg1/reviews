@@ -1,0 +1,96 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>EX:(g(X) & a(X,f))</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>AX:(w(X) => AY:(g(Y) => a(X,Y)))</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>w(f)</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>w(f) => AY:(g(Y) => a(f,Y))</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>2</antecedent>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>AY:(g(Y) => a(f,Y))</sentence>
+    <justification>Modus Ponens</justification>
+    <antecedent>4</antecedent>
+    <antecedent>3</antecedent>
+  </step>
+  <step>
+    <number>6</number>
+    <sentence>g([x]) & a([x],f)</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>7</number>
+    <sentence>g([x])</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>6</antecedent>
+  </step>
+  <step>
+    <number>8</number>
+    <sentence>a([x],f)</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>6</antecedent>
+  </step>
+  <step>
+    <number>9</number>
+    <sentence>g([x]) => a(f,[x])</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>5</antecedent>
+  </step>
+  <step>
+    <number>10</number>
+    <sentence>a(f,[x])</sentence>
+    <justification>Modus Ponens</justification>
+    <antecedent>9</antecedent>
+    <antecedent>7</antecedent>
+  </step>
+  <step>
+    <number>11</number>
+    <sentence>a([x],f) & a(f,[x])</sentence>
+    <justification>And Introduction</justification>
+    <antecedent>8</antecedent>
+    <antecedent>10</antecedent>
+  </step>
+  <step>
+    <number>12</number>
+    <sentence>EX:(a(X,f) & a(f,X))</sentence>
+    <justification>Existential Introduction</justification>
+    <antecedent>11</antecedent>
+  </step>
+  <step>
+    <number>13</number>
+    <sentence>g([x]) & a([x],f) => EX:(a(X,f) & a(f,X))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>6</antecedent>
+    <antecedent>12</antecedent>
+  </step>
+  <step>
+    <number>14</number>
+    <sentence>AX:(g(X) & a(X,f) => EX:(a(X,f) & a(f,X)))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>13</antecedent>
+  </step>
+  <step>
+    <number>15</number>
+    <sentence>EX:(a(X,f) & a(f,X))</sentence>
+    <justification>Existential Elimination</justification>
+    <antecedent>1</antecedent>
+    <antecedent>14</antecedent>
+  </step>
+</proof>
+<goal>
+  EX:(a(X,f) & a(f,X))
+</goal>

@@ -1,0 +1,183 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>~EX:AY:(~f(Y) | f(X))</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>AX:~AY:(~f(Y) | f(X))</sentence>
+    <justification>not-exists is forall-not</justification>
+    <antecedent>1</antecedent>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>AX:EY:~(~f(Y) | f(X))</sentence>
+    <justification>not-forall is exists-not</justification>
+    <antecedent>2</antecedent>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>AX:EY:(f(Y) & ~f(X))</sentence>
+    <justification>De Morgan</justification>
+    <antecedent>3</antecedent>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>EY:(f(Y) & ~f([a]))</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>4</antecedent>
+  </step>
+  <step>
+    <number>6</number>
+    <sentence>f([b]) & ~f([a])</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>7</number>
+    <sentence>f([b])</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>6</antecedent>
+  </step>
+  <step>
+    <number>8</number>
+    <sentence>EY:(f(Y) & ~f([b]))</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>4</antecedent>
+  </step>
+  <step>
+    <number>9</number>
+    <sentence>f([c]) & ~f([b])</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>10</number>
+    <sentence>~f([b])</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>9</antecedent>
+  </step>
+  <step>
+    <number>11</number>
+    <sentence>~EX:AY:(~f(Y) | f(X))</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>12</number>
+    <sentence>~f([b])</sentence>
+    <justification>Reiteration</justification>
+    <antecedent>10</antecedent>
+  </step>
+  <step>
+    <number>13</number>
+    <sentence>~EX:AY:(~f(Y) | f(X)) => ~f([b])</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>11</antecedent>
+    <antecedent>12</antecedent>
+  </step>
+  <step>
+    <number>14</number>
+    <sentence>~EX:AY:(~f(Y) | f(X))</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>15</number>
+    <sentence>f([b])</sentence>
+    <justification>Reiteration</justification>
+    <antecedent>7</antecedent>
+  </step>
+  <step>
+    <number>16</number>
+    <sentence>~EX:AY:(~f(Y) | f(X)) => f([b])</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>14</antecedent>
+    <antecedent>15</antecedent>
+  </step>
+  <step>
+    <number>17</number>
+    <sentence>~~EX:AY:(~f(Y) | f(X))</sentence>
+    <justification>Reductio Ad Absurdum</justification>
+    <antecedent>16</antecedent>
+    <antecedent>13</antecedent>
+  </step>
+  <step>
+    <number>18</number>
+    <sentence>EX:AY:(~f(Y) | f(X))</sentence>
+    <justification>Negation Elimination</justification>
+    <antecedent>17</antecedent>
+  </step>
+  <step>
+    <number>19</number>
+    <sentence>f([c]) & ~f([b]) => EX:AY:(~f(Y) | f(X))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>9</antecedent>
+    <antecedent>18</antecedent>
+  </step>
+  <step>
+    <number>20</number>
+    <sentence>AY:(f(Y) & ~f([b]) => EX:AY:(~f(Y) | f(X)))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>19</antecedent>
+  </step>
+  <step>
+    <number>21</number>
+    <sentence>EX:AY:(~f(Y) | f(X))</sentence>
+    <justification>Existential Elimination</justification>
+    <antecedent>8</antecedent>
+    <antecedent>20</antecedent>
+  </step>
+  <step>
+    <number>22</number>
+    <sentence>f([b]) & ~f([a]) => EX:AY:(~f(Y) | f(X))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>6</antecedent>
+    <antecedent>21</antecedent>
+  </step>
+  <step>
+    <number>23</number>
+    <sentence>AY:(f(Y) & ~f([a]) => EX:AY:(~f(Y) | f(X)))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>22</antecedent>
+  </step>
+  <step>
+    <number>24</number>
+    <sentence>EX:AY:(~f(Y) | f(X))</sentence>
+    <justification>Existential Elimination</justification>
+    <antecedent>5</antecedent>
+    <antecedent>23</antecedent>
+  </step>
+  <step>
+    <number>25</number>
+    <sentence>~EX:AY:(~f(Y) | f(X)) => EX:AY:(~f(Y) | f(X))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>1</antecedent>
+    <antecedent>24</antecedent>
+  </step>
+  <step>
+    <number>26</number>
+    <sentence>~EX:AY:(~f(Y) | f(X))</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>27</number>
+    <sentence>~EX:AY:(~f(Y) | f(X)) => ~EX:AY:(~f(Y) | f(X))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>26</antecedent>
+    <antecedent>26</antecedent>
+  </step>
+  <step>
+    <number>28</number>
+    <sentence>~~EX:AY:(~f(Y) | f(X))</sentence>
+    <justification>Reductio Ad Absurdum</justification>
+    <antecedent>25</antecedent>
+    <antecedent>27</antecedent>
+  </step>
+  <step>
+    <number>29</number>
+    <sentence>EX:AY:(~f(Y) | f(X))</sentence>
+    <justification>Negation Elimination</justification>
+    <antecedent>28</antecedent>
+  </step>
+</proof>
+<goal>
+  EX:AY:(~f(Y) | f(X))
+</goal>

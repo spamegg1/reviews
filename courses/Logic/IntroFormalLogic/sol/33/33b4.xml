@@ -1,0 +1,96 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>AX:(EY:(l(Y,X) | l(X,Y)) => l(X,X))</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>EX:EY:l(Y,X)</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>EY:(l(Y,[a]) | l([a],Y)) => l([a],[a])</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>1</antecedent>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>EY:l(Y,[a])</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>l([b],[a])</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>6</number>
+    <sentence>l([b],[a]) | l([a],[b])</sentence>
+    <justification>Or Introduction</justification>
+    <antecedent>5</antecedent>
+  </step>
+  <step>
+    <number>7</number>
+    <sentence>EY:(l(Y,[a]) | l([a],Y))</sentence>
+    <justification>Existential Introduction</justification>
+    <antecedent>6</antecedent>
+  </step>
+  <step>
+    <number>8</number>
+    <sentence>l([a],[a])</sentence>
+    <justification>Modus Ponens</justification>
+    <antecedent>3</antecedent>
+    <antecedent>7</antecedent>
+  </step>
+  <step>
+    <number>9</number>
+    <sentence>l([b],[a]) => l([a],[a])</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>5</antecedent>
+    <antecedent>8</antecedent>
+  </step>
+  <step>
+    <number>10</number>
+    <sentence>AY:(l(Y,[a]) => l([a],[a]))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>9</antecedent>
+  </step>
+  <step>
+    <number>11</number>
+    <sentence>l([a],[a])</sentence>
+    <justification>Existential Elimination</justification>
+    <antecedent>4</antecedent>
+    <antecedent>10</antecedent>
+  </step>
+  <step>
+    <number>12</number>
+    <sentence>EX:l(X,X)</sentence>
+    <justification>Existential Introduction</justification>
+    <antecedent>11</antecedent>
+  </step>
+  <step>
+    <number>13</number>
+    <sentence>EY:l(Y,[a]) => EX:l(X,X)</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>4</antecedent>
+    <antecedent>12</antecedent>
+  </step>
+  <step>
+    <number>14</number>
+    <sentence>AX:(EY:l(Y,X) => EX:l(X,X))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>13</antecedent>
+  </step>
+  <step>
+    <number>15</number>
+    <sentence>EX:l(X,X)</sentence>
+    <justification>Existential Elimination</justification>
+    <antecedent>2</antecedent>
+    <antecedent>14</antecedent>
+  </step>
+</proof>
+<goal>
+   EX:l(X,X)
+</goal>

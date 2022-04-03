@@ -1,0 +1,115 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>~(p & ~q)</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>~(q & ~~r)</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>p & ~~r</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>p</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>3</antecedent>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>~~r</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>3</antecedent>
+  </step>
+  <step>
+    <number>6</number>
+    <sentence>q</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>7</number>
+    <sentence>~(q & ~~r)</sentence>
+    <justification>Reiteration</justification>
+    <antecedent>2</antecedent>
+  </step>
+  <step>
+    <number>8</number>
+    <sentence>q => ~(q & ~~r)</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>6</antecedent>
+    <antecedent>7</antecedent>
+  </step>
+  <step>
+    <number>9</number>
+    <sentence>q</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>10</number>
+    <sentence>q & ~~r</sentence>
+    <justification>And Introduction</justification>
+    <antecedent>9</antecedent>
+    <antecedent>5</antecedent>
+  </step>
+  <step>
+    <number>11</number>
+    <sentence>q => q & ~~r</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>9</antecedent>
+    <antecedent>10</antecedent>
+  </step>
+  <step>
+    <number>12</number>
+    <sentence>~q</sentence>
+    <justification>Reductio Ad Absurdum</justification>
+    <antecedent>11</antecedent>
+    <antecedent>8</antecedent>
+  </step>
+  <step>
+    <number>13</number>
+    <sentence>p & ~q</sentence>
+    <justification>And Introduction</justification>
+    <antecedent>4</antecedent>
+    <antecedent>12</antecedent>
+  </step>
+  <step>
+    <number>14</number>
+    <sentence>p & ~~r => p & ~q</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>3</antecedent>
+    <antecedent>13</antecedent>
+  </step>
+  <step>
+    <number>15</number>
+    <sentence>p & ~~r</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>16</number>
+    <sentence>~(p & ~q)</sentence>
+    <justification>Reiteration</justification>
+    <antecedent>1</antecedent>
+  </step>
+  <step>
+    <number>17</number>
+    <sentence>p & ~~r => ~(p & ~q)</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>15</antecedent>
+    <antecedent>16</antecedent>
+  </step>
+  <step>
+    <number>18</number>
+    <sentence>~(p & ~~r)</sentence>
+    <justification>Reductio Ad Absurdum</justification>
+    <antecedent>14</antecedent>
+    <antecedent>17</antecedent>
+  </step>
+</proof>
+<goal>
+  ~(p & ~~r)
+</goal>

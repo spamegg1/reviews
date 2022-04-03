@@ -1,0 +1,268 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>EZ:f(Z) => EZ:g(Z)</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>~EY:(f([a]) => g(Y))</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>AY:~(f([a]) => g(Y))</sentence>
+    <justification>not-exists is forall-not</justification>
+    <antecedent>2</antecedent>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>EZ:f(Z)</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>EZ:g(Z)</sentence>
+    <justification>Modus Ponens</justification>
+    <antecedent>1</antecedent>
+    <antecedent>4</antecedent>
+  </step>
+  <step>
+    <number>6</number>
+    <sentence>g([b])</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>7</number>
+    <sentence>~(f([a]) => g([b]))</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>3</antecedent>
+  </step>
+  <step>
+    <number>8</number>
+    <sentence>~(~f([a]) | g([b]))</sentence>
+    <justification>p=>q is ~p|q</justification>
+    <antecedent>7</antecedent>
+  </step>
+  <step>
+    <number>9</number>
+    <sentence>f([a]) & ~g([b])</sentence>
+    <justification>De Morgan</justification>
+    <antecedent>8</antecedent>
+  </step>
+  <step>
+    <number>10</number>
+    <sentence>~g([b])</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>9</antecedent>
+  </step>
+  <step>
+    <number>11</number>
+    <sentence>EZ:f(Z)</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>12</number>
+    <sentence>g([b])</sentence>
+    <justification>Reiteration</justification>
+    <antecedent>6</antecedent>
+  </step>
+  <step>
+    <number>13</number>
+    <sentence>EZ:f(Z) => g([b])</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>11</antecedent>
+    <antecedent>12</antecedent>
+  </step>
+  <step>
+    <number>14</number>
+    <sentence>EZ:f(Z)</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>15</number>
+    <sentence>~g([b])</sentence>
+    <justification>Reiteration</justification>
+    <antecedent>10</antecedent>
+  </step>
+  <step>
+    <number>16</number>
+    <sentence>EZ:f(Z) => ~g([b])</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>14</antecedent>
+    <antecedent>15</antecedent>
+  </step>
+  <step>
+    <number>17</number>
+    <sentence>~EZ:f(Z)</sentence>
+    <justification>Reductio Ad Absurdum</justification>
+    <antecedent>13</antecedent>
+    <antecedent>16</antecedent>
+  </step>
+  <step>
+    <number>18</number>
+    <sentence>g([b]) => ~EZ:f(Z)</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>6</antecedent>
+    <antecedent>17</antecedent>
+  </step>
+  <step>
+    <number>19</number>
+    <sentence>AZ:(g(Z) => ~EZ:f(Z))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>18</antecedent>
+  </step>
+  <step>
+    <number>20</number>
+    <sentence>~EZ:f(Z)</sentence>
+    <justification>Existential Elimination</justification>
+    <antecedent>5</antecedent>
+    <antecedent>19</antecedent>
+  </step>
+  <step>
+    <number>21</number>
+    <sentence>EZ:f(Z) => ~EZ:f(Z)</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>4</antecedent>
+    <antecedent>20</antecedent>
+  </step>
+  <step>
+    <number>22</number>
+    <sentence>EZ:f(Z)</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>23</number>
+    <sentence>EZ:f(Z) => EZ:f(Z)</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>22</antecedent>
+    <antecedent>22</antecedent>
+  </step>
+  <step>
+    <number>24</number>
+    <sentence>~EZ:f(Z)</sentence>
+    <justification>Reductio Ad Absurdum</justification>
+    <antecedent>23</antecedent>
+    <antecedent>21</antecedent>
+  </step>
+  <step>
+    <number>25</number>
+    <sentence>~(f([a]) => g([a]))</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>3</antecedent>
+  </step>
+  <step>
+    <number>26</number>
+    <sentence>~(~f([a]) | g([b]))</sentence>
+    <justification>p=>q is ~p|q</justification>
+    <antecedent>25</antecedent>
+  </step>
+  <step>
+    <number>27</number>
+    <sentence>f([a]) & ~g([b])</sentence>
+    <justification>De Morgan</justification>
+    <antecedent>26</antecedent>
+  </step>
+  <step>
+    <number>28</number>
+    <sentence>f([a])</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>27</antecedent>
+  </step>
+  <step>
+    <number>29</number>
+    <sentence>EZ:f(Z)</sentence>
+    <justification>Existential Introduction</justification>
+    <antecedent>28</antecedent>
+  </step>
+  <step>
+    <number>30</number>
+    <sentence>~EY:(f([a]) => g(Y))</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>31</number>
+    <sentence>EZ:f(Z)</sentence>
+    <justification>Reiteration</justification>
+    <antecedent>29</antecedent>
+  </step>
+  <step>
+    <number>32</number>
+    <sentence>~EY:(f([a]) => g(Y)) => EZ:f(Z)</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>30</antecedent>
+    <antecedent>31</antecedent>
+  </step>
+  <step>
+    <number>33</number>
+    <sentence>~EY:(f([a]) => g(Y))</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>34</number>
+    <sentence>~EZ:f(Z)</sentence>
+    <justification>Reiteration</justification>
+    <antecedent>24</antecedent>
+  </step>
+  <step>
+    <number>35</number>
+    <sentence>~EY:(f([a]) => g(Y)) => ~EZ:f(Z)</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>33</antecedent>
+    <antecedent>34</antecedent>
+  </step>
+  <step>
+    <number>36</number>
+    <sentence>~~EY:(f([a]) => g(Y))</sentence>
+    <justification>Reductio Ad Absurdum</justification>
+    <antecedent>32</antecedent>
+    <antecedent>35</antecedent>
+  </step>
+  <step>
+    <number>37</number>
+    <sentence>EY:(f([a]) => g(Y))</sentence>
+    <justification>Negation Elimination</justification>
+    <antecedent>36</antecedent>
+  </step>
+  <step>
+    <number>38</number>
+    <sentence>~EY:(f([a]) => g(Y)) => EY:(f([a]) => g(Y))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>2</antecedent>
+    <antecedent>37</antecedent>
+  </step>
+  <step>
+    <number>39</number>
+    <sentence>~EY:(f([a]) => g(Y))</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>40</number>
+    <sentence>~EY:(f([a]) => g(Y)) => ~EY:(f([a]) => g(Y))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>39</antecedent>
+    <antecedent>39</antecedent>
+  </step>
+  <step>
+    <number>41</number>
+    <sentence>~~EY:(f([a]) => g(Y))</sentence>
+    <justification>Reductio Ad Absurdum</justification>
+    <antecedent>38</antecedent>
+    <antecedent>40</antecedent>
+  </step>
+  <step>
+    <number>42</number>
+    <sentence>EY:(f([a]) => g(Y))</sentence>
+    <justification>Negation Elimination</justification>
+    <antecedent>41</antecedent>
+  </step>
+  <step>
+    <number>43</number>
+    <sentence>AX:EY:(f(X) => g(Y))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>42</antecedent>
+  </step>
+</proof>
+<goal>
+   AX:EY:(f(X) => g(Y))
+</goal>

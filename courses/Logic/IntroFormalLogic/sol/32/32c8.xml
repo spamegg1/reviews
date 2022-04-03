@@ -1,0 +1,182 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>~EY:(l([a],Y) & l(Y,Y) | (~~l(Y,Y) => ~l([a],Y)))</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>l([a],[a]) & l([a],[a]) | (~~l([a],[a]) => ~l([a],[a]))</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>EY:(l([a],Y) & l(Y,Y) | (~~l(Y,Y) => ~l([a],Y)))</sentence>
+    <justification>Existential Introduction</justification>
+    <antecedent>2</antecedent>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>l([a],[a]) & l([a],[a]) | (~~l([a],[a]) => ~l([a],[a])) => EY:(l([a],Y) & l(Y,Y) | (~~l(Y,Y) => ~l([a],Y)))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>2</antecedent>
+    <antecedent>3</antecedent>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>l([a],[a]) & l([a],[a]) | (~~l([a],[a]) => ~l([a],[a]))</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>6</number>
+    <sentence>~EY:(l([a],Y) & l(Y,Y) | (~~l(Y,Y) => ~l([a],Y)))</sentence>
+    <justification>Reiteration</justification>
+    <antecedent>1</antecedent>
+  </step>
+  <step>
+    <number>7</number>
+    <sentence>l([a],[a]) & l([a],[a]) | (~~l([a],[a]) => ~l([a],[a])) => ~EY:(l([a],Y) & l(Y,Y) | (~~l(Y,Y) => ~l([a],Y)))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>5</antecedent>
+    <antecedent>6</antecedent>
+  </step>
+  <step>
+    <number>8</number>
+    <sentence>~(l([a],[a]) & l([a],[a]) | (~~l([a],[a]) => ~l([a],[a])))</sentence>
+    <justification>Reductio Ad Absurdum</justification>
+    <antecedent>4</antecedent>
+    <antecedent>7</antecedent>
+  </step>
+  <step>
+    <number>9</number>
+    <sentence>~(l([a],[a]) | (~~l([a],[a]) => ~l([a],[a])))</sentence>
+    <justification>p&p is p</justification>
+    <antecedent>8</antecedent>
+  </step>
+  <step>
+    <number>10</number>
+    <sentence>~(l([a],[a]) | (l([a],[a]) => ~l([a],[a])))</sentence>
+    <justification>~~p is p</justification>
+    <antecedent>9</antecedent>
+  </step>
+  <step>
+    <number>11</number>
+    <sentence>~(l([a],[a]) | (~l([a],[a]) | ~l([a],[a])))</sentence>
+    <justification>p=>q is ~p|q</justification>
+    <antecedent>10</antecedent>
+  </step>
+  <step>
+    <number>12</number>
+    <sentence>~(l([a],[a]) | ~l([a],[a]))</sentence>
+    <justification>p|p is p</justification>
+    <antecedent>11</antecedent>
+  </step>
+  <step>
+    <number>13</number>
+    <sentence>~l([a],[a]) & l([a],[a])</sentence>
+    <justification>De Morgan</justification>
+    <antecedent>12</antecedent>
+  </step>
+  <step>
+    <number>14</number>
+    <sentence>~l([a],[a])</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>13</antecedent>
+  </step>
+  <step>
+    <number>15</number>
+    <sentence>l([a],[a])</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>13</antecedent>
+  </step>
+  <step>
+    <number>16</number>
+    <sentence>~EY:(l([a],Y) & l(Y,Y) | (~~l(Y,Y) => ~l([a],Y)))</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>17</number>
+    <sentence>l([a],[a])</sentence>
+    <justification>Reiteration</justification>
+    <antecedent>15</antecedent>
+  </step>
+  <step>
+    <number>18</number>
+    <sentence>~EY:(l([a],Y) & l(Y,Y) | (~~l(Y,Y) => ~l([a],Y))) => l([a],[a])</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>16</antecedent>
+    <antecedent>17</antecedent>
+  </step>
+  <step>
+    <number>19</number>
+    <sentence>~EY:(l([a],Y) & l(Y,Y) | (~~l(Y,Y) => ~l([a],Y)))</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>20</number>
+    <sentence>~l([a],[a])</sentence>
+    <justification>Reiteration</justification>
+    <antecedent>14</antecedent>
+  </step>
+  <step>
+    <number>21</number>
+    <sentence>~EY:(l([a],Y) & l(Y,Y) | (~~l(Y,Y) => ~l([a],Y))) => ~l([a],[a])</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>19</antecedent>
+    <antecedent>20</antecedent>
+  </step>
+  <step>
+    <number>22</number>
+    <sentence>~~EY:(l([a],Y) & l(Y,Y) | (~~l(Y,Y) => ~l([a],Y)))</sentence>
+    <justification>Reductio Ad Absurdum</justification>
+    <antecedent>18</antecedent>
+    <antecedent>21</antecedent>
+  </step>
+  <step>
+    <number>23</number>
+    <sentence>EY:(l([a],Y) & l(Y,Y) | (~~l(Y,Y) => ~l([a],Y)))</sentence>
+    <justification>Negation Elimination</justification>
+    <antecedent>22</antecedent>
+  </step>
+  <step>
+    <number>24</number>
+    <sentence>~EY:(l([a],Y) & l(Y,Y) | (~~l(Y,Y) => ~l([a],Y))) => EY:(l([a],Y) & l(Y,Y) | (~~l(Y,Y) => ~l([a],Y)))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>1</antecedent>
+    <antecedent>23</antecedent>
+  </step>
+  <step>
+    <number>25</number>
+    <sentence>~EY:(l([a],Y) & l(Y,Y) | (~~l(Y,Y) => ~l([a],Y)))</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>26</number>
+    <sentence>~EY:(l([a],Y) & l(Y,Y) | (~~l(Y,Y) => ~l([a],Y))) => ~EY:(l([a],Y) & l(Y,Y) | (~~l(Y,Y) => ~l([a],Y)))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>25</antecedent>
+    <antecedent>25</antecedent>
+  </step>
+  <step>
+    <number>27</number>
+    <sentence>~~EY:(l([a],Y) & l(Y,Y) | (~~l(Y,Y) => ~l([a],Y)))</sentence>
+    <justification>Reductio Ad Absurdum</justification>
+    <antecedent>24</antecedent>
+    <antecedent>26</antecedent>
+  </step>
+  <step>
+    <number>28</number>
+    <sentence>EY:(l([a],Y) & l(Y,Y) | (~~l(Y,Y) => ~l([a],Y)))</sentence>
+    <justification>Negation Elimination</justification>
+    <antecedent>27</antecedent>
+  </step>
+  <step>
+    <number>29</number>
+    <sentence>AX:EY:(l(X,Y) & l(Y,Y) | (~~l(Y,Y) => ~l(X,Y)))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>28</antecedent>
+  </step>
+</proof>
+<goal>
+  AX:EY:(l(X,Y) & l(Y,Y) | (~~l(Y,Y) => ~l(X,Y)))
+</goal>
