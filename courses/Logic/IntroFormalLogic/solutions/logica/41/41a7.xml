@@ -1,0 +1,141 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>EX:(j(X) & AY:(j(Y) => eq(Y,X)))</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>EX:(l(X) & j(X))</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>j([a]) & AY:(j(Y) => eq(Y,[a]))</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>AY:(j(Y) => eq(Y,[a]))</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>3</antecedent>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>l([b]) & j([b])</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>6</number>
+    <sentence>l([b])</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>5</antecedent>
+  </step>
+  <step>
+    <number>7</number>
+    <sentence>j([b])</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>5</antecedent>
+  </step>
+  <step>
+    <number>8</number>
+    <sentence>j([b]) => eq([b],[a])</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>4</antecedent>
+  </step>
+  <step>
+    <number>9</number>
+    <sentence>eq([b],[a])</sentence>
+    <justification>Modus Ponens</justification>
+    <antecedent>8</antecedent>
+    <antecedent>7</antecedent>
+  </step>
+  <step>
+    <number>10</number>
+    <sentence>j([c])</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>11</number>
+    <sentence>j([c]) => eq([c],[a])</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>4</antecedent>
+  </step>
+  <step>
+    <number>12</number>
+    <sentence>eq([c],[a])</sentence>
+    <justification>Modus Ponens</justification>
+    <antecedent>11</antecedent>
+    <antecedent>10</antecedent>
+  </step>
+  <step>
+    <number>13</number>
+    <sentence>eq([b],[c])</sentence>
+    <justification>Eq Elimination</justification>
+    <antecedent>9</antecedent>
+    <antecedent>12</antecedent>
+  </step>
+  <step>
+    <number>14</number>
+    <sentence>l([c])</sentence>
+    <justification>Eq Elimination</justification>
+    <antecedent>6</antecedent>
+    <antecedent>13</antecedent>
+  </step>
+  <step>
+    <number>15</number>
+    <sentence>j([c]) => l([c])</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>10</antecedent>
+    <antecedent>14</antecedent>
+  </step>
+  <step>
+    <number>16</number>
+    <sentence>AX:(j(X) => l(X))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>15</antecedent>
+  </step>
+  <step>
+    <number>17</number>
+    <sentence>l([b]) & j([b]) => AX:(j(X) => l(X))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>5</antecedent>
+    <antecedent>16</antecedent>
+  </step>
+  <step>
+    <number>18</number>
+    <sentence>AX:(l(X) & j(X) => AX:(j(X) => l(X)))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>17</antecedent>
+  </step>
+  <step>
+    <number>19</number>
+    <sentence>AX:(j(X) => l(X))</sentence>
+    <justification>Existential Elimination</justification>
+    <antecedent>2</antecedent>
+    <antecedent>18</antecedent>
+  </step>
+  <step>
+    <number>20</number>
+    <sentence>j([a]) & AY:(j(Y) => eq(Y,[a])) => AX:(j(X) => l(X))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>3</antecedent>
+    <antecedent>19</antecedent>
+  </step>
+  <step>
+    <number>21</number>
+    <sentence>AX:(j(X) & AY:(j(Y) => eq(Y,X)) => AX:(j(X) => l(X)))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>20</antecedent>
+  </step>
+  <step>
+    <number>22</number>
+    <sentence>AX:(j(X) => l(X))</sentence>
+    <justification>Existential Elimination</justification>
+    <antecedent>1</antecedent>
+    <antecedent>21</antecedent>
+  </step>
+</proof>
+<goal>
+  AX:(j(X) => l(X))
+</goal>

@@ -1,0 +1,53 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>~eq(j,k)</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>eq(k,j)</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>~eq(j,j)</sentence>
+    <justification>Eq Elimination</justification>
+    <antecedent>1</antecedent>
+    <antecedent>2</antecedent>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>eq(k,j) => ~eq(j,j)</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>2</antecedent>
+    <antecedent>3</antecedent>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>eq(k,j)</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>6</number>
+    <sentence>eq(j,j)</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>7</number>
+    <sentence>eq(k,j) => eq(j,j)</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>5</antecedent>
+    <antecedent>6</antecedent>
+  </step>
+  <step>
+    <number>8</number>
+    <sentence>~eq(k,j)</sentence>
+    <justification>Reductio Ad Absurdum</justification>
+    <antecedent>7</antecedent>
+    <antecedent>4</antecedent>
+  </step>
+</proof>
+<goal>
+  ~eq(k,j)
+</goal>

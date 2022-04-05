@@ -1,0 +1,240 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>EX:AY:((f(Y) <=> eq(Y,X)) & g(X))</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>EX:AY:((f(Y) <=> eq(X,Y)) & g(X))</sentence>
+    <justification>eq is symmetric</justification>
+    <antecedent>1</antecedent>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>AY:((f(Y) <=> eq([a],Y)) & g([a]))</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>(f([a]) <=> eq([a],[a])) & g([a])</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>3</antecedent>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>f([a]) <=> eq([a],[a])</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>4</antecedent>
+  </step>
+  <step>
+    <number>6</number>
+    <sentence>eq([a],[a]) => f([a])</sentence>
+    <justification>Biconditional Elimination</justification>
+    <antecedent>5</antecedent>
+  </step>
+  <step>
+    <number>7</number>
+    <sentence>eq([a],[a])</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>8</number>
+    <sentence>f([a])</sentence>
+    <justification>Modus Ponens</justification>
+    <antecedent>6</antecedent>
+    <antecedent>7</antecedent>
+  </step>
+  <step>
+    <number>9</number>
+    <sentence>EX:f(X)</sentence>
+    <justification>Existential Introduction</justification>
+    <antecedent>8</antecedent>
+  </step>
+  <step>
+    <number>10</number>
+    <sentence>f([b]) & f([c])</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>11</number>
+    <sentence>f([b])</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>10</antecedent>
+  </step>
+  <step>
+    <number>12</number>
+    <sentence>f([c])</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>10</antecedent>
+  </step>
+  <step>
+    <number>13</number>
+    <sentence>(f([b]) <=> eq([a],[b])) & g([a])</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>3</antecedent>
+  </step>
+  <step>
+    <number>14</number>
+    <sentence>f([b]) <=> eq([a],[b])</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>13</antecedent>
+  </step>
+  <step>
+    <number>15</number>
+    <sentence>f([b]) => eq([a],[b])</sentence>
+    <justification>Biconditional Elimination</justification>
+    <antecedent>14</antecedent>
+  </step>
+  <step>
+    <number>16</number>
+    <sentence>eq([a],[b])</sentence>
+    <justification>Modus Ponens</justification>
+    <antecedent>15</antecedent>
+    <antecedent>11</antecedent>
+  </step>
+  <step>
+    <number>17</number>
+    <sentence>(f([c]) <=> eq([a],[c])) & g([a])</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>3</antecedent>
+  </step>
+  <step>
+    <number>18</number>
+    <sentence>f([c]) <=> eq([a],[c])</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>17</antecedent>
+  </step>
+  <step>
+    <number>19</number>
+    <sentence>f([c]) => eq([a],[c])</sentence>
+    <justification>Biconditional Elimination</justification>
+    <antecedent>18</antecedent>
+  </step>
+  <step>
+    <number>20</number>
+    <sentence>eq([a],[c])</sentence>
+    <justification>Modus Ponens</justification>
+    <antecedent>19</antecedent>
+    <antecedent>12</antecedent>
+  </step>
+  <step>
+    <number>21</number>
+    <sentence>eq([b],[c])</sentence>
+    <justification>Eq Elimination</justification>
+    <antecedent>16</antecedent>
+    <antecedent>20</antecedent>
+  </step>
+  <step>
+    <number>22</number>
+    <sentence>f([b]) & f([c]) => eq([b],[c])</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>10</antecedent>
+    <antecedent>21</antecedent>
+  </step>
+  <step>
+    <number>23</number>
+    <sentence>AY:(f([b]) & f(Y) => eq([b],Y))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>22</antecedent>
+  </step>
+  <step>
+    <number>24</number>
+    <sentence>AX:AY:(f(X) & f(Y) => eq(X,Y))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>23</antecedent>
+  </step>
+  <step>
+    <number>25</number>
+    <sentence>f([d])</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>26</number>
+    <sentence>(f([d]) <=> eq([a],[d])) & g([a])</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>3</antecedent>
+  </step>
+  <step>
+    <number>27</number>
+    <sentence>f([d]) <=> eq([a],[d])</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>26</antecedent>
+  </step>
+  <step>
+    <number>28</number>
+    <sentence>g([a])</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>26</antecedent>
+  </step>
+  <step>
+    <number>29</number>
+    <sentence>f([d]) => eq([a],[d])</sentence>
+    <justification>Biconditional Elimination</justification>
+    <antecedent>27</antecedent>
+  </step>
+  <step>
+    <number>30</number>
+    <sentence>eq([a],[d])</sentence>
+    <justification>Modus Ponens</justification>
+    <antecedent>29</antecedent>
+    <antecedent>25</antecedent>
+  </step>
+  <step>
+    <number>31</number>
+    <sentence>g([d])</sentence>
+    <justification>Eq Elimination</justification>
+    <antecedent>28</antecedent>
+    <antecedent>30</antecedent>
+  </step>
+  <step>
+    <number>32</number>
+    <sentence>f([d]) => g([d])</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>25</antecedent>
+    <antecedent>31</antecedent>
+  </step>
+  <step>
+    <number>33</number>
+    <sentence>AX:(f(X) => g(X))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>32</antecedent>
+  </step>
+  <step>
+    <number>34</number>
+    <sentence>EX:f(X) & AX:AY:(f(X) & f(Y) => eq(X,Y))</sentence>
+    <justification>And Introduction</justification>
+    <antecedent>9</antecedent>
+    <antecedent>24</antecedent>
+  </step>
+  <step>
+    <number>35</number>
+    <sentence>(EX:f(X) & AX:AY:(f(X) & f(Y) => eq(X,Y))) & AX:(f(X) => g(X))</sentence>
+    <justification>And Introduction</justification>
+    <antecedent>34</antecedent>
+    <antecedent>33</antecedent>
+  </step>
+  <step>
+    <number>36</number>
+    <sentence>AY:((f(Y) <=> eq([a],Y)) & g([a])) => (EX:f(X) & AX:AY:(f(X) & f(Y) => eq(X,Y))) & AX:(f(X) => g(X))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>3</antecedent>
+    <antecedent>35</antecedent>
+  </step>
+  <step>
+    <number>37</number>
+    <sentence>AX:(AY:((f(Y) <=> eq(X,Y)) & g(X)) => (EX:f(X) & AX:AY:(f(X) & f(Y) => eq(X,Y))) & AX:(f(X) => g(X)))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>36</antecedent>
+  </step>
+  <step>
+    <number>38</number>
+    <sentence>(EX:f(X) & AX:AY:(f(X) & f(Y) => eq(X,Y))) & AX:(f(X) => g(X))</sentence>
+    <justification>Existential Elimination</justification>
+    <antecedent>2</antecedent>
+    <antecedent>37</antecedent>
+  </step>
+</proof>
+<goal>
+  (EX:f(X) & AX:AY:(f(X) & f(Y) => eq(X,Y))) & AX:(f(X) => g(X))
+</goal>

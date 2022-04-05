@@ -1,0 +1,84 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>AX:(p(X) => m(X))</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>EX:(s(X) & ~m(X))</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>AX:(~m(X) => ~p(X))</sentence>
+    <justification>Modus Tollens</justification>
+    <antecedent>1</antecedent>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>s([a]) & ~m([a])</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>s([a])</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>4</antecedent>
+  </step>
+  <step>
+    <number>6</number>
+    <sentence>~m([a])</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>4</antecedent>
+  </step>
+  <step>
+    <number>7</number>
+    <sentence>~m([a]) => ~p([a])</sentence>
+    <justification>Universal Elimination</justification>
+    <antecedent>3</antecedent>
+  </step>
+  <step>
+    <number>8</number>
+    <sentence>~p([a])</sentence>
+    <justification>Modus Ponens</justification>
+    <antecedent>7</antecedent>
+    <antecedent>6</antecedent>
+  </step>
+  <step>
+    <number>9</number>
+    <sentence>s([a]) & ~p([a])</sentence>
+    <justification>And Introduction</justification>
+    <antecedent>5</antecedent>
+    <antecedent>8</antecedent>
+  </step>
+  <step>
+    <number>10</number>
+    <sentence>EX:(s(X) & ~p(X))</sentence>
+    <justification>Existential Introduction</justification>
+    <antecedent>9</antecedent>
+  </step>
+  <step>
+    <number>11</number>
+    <sentence>s([a]) & ~m([a]) => EX:(s(X) & ~p(X))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>4</antecedent>
+    <antecedent>10</antecedent>
+  </step>
+  <step>
+    <number>12</number>
+    <sentence>AX:(s(X) & ~m(X) => EX:(s(X) & ~p(X)))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>11</antecedent>
+  </step>
+  <step>
+    <number>13</number>
+    <sentence>EX:(s(X) & ~p(X))</sentence>
+    <justification>Existential Elimination</justification>
+    <antecedent>2</antecedent>
+    <antecedent>12</antecedent>
+  </step>
+</proof>
+<goal>
+  EX:(s(X) & ~p(X))
+</goal>

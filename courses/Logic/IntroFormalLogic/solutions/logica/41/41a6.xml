@@ -1,0 +1,153 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>EX:(p(X) & w(X))</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>EX:(p(X) & ~w(X))</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>p([a]) & w([a])</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>p([b]) & ~w([b])</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>eq([a],[b])</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>6</number>
+    <sentence>w([a])</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>3</antecedent>
+  </step>
+  <step>
+    <number>7</number>
+    <sentence>w([b])</sentence>
+    <justification>Eq Elimination</justification>
+    <antecedent>5</antecedent>
+    <antecedent>6</antecedent>
+  </step>
+  <step>
+    <number>8</number>
+    <sentence>eq([a],[b]) => w([b])</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>5</antecedent>
+    <antecedent>7</antecedent>
+  </step>
+  <step>
+    <number>9</number>
+    <sentence>eq([a],[b])</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>10</number>
+    <sentence>~w([b])</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>4</antecedent>
+  </step>
+  <step>
+    <number>11</number>
+    <sentence>eq([a],[b]) => ~w([b])</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>9</antecedent>
+    <antecedent>10</antecedent>
+  </step>
+  <step>
+    <number>12</number>
+    <sentence>~eq([a],[b])</sentence>
+    <justification>Reductio Ad Absurdum</justification>
+    <antecedent>8</antecedent>
+    <antecedent>11</antecedent>
+  </step>
+  <step>
+    <number>13</number>
+    <sentence>p([a])</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>3</antecedent>
+  </step>
+  <step>
+    <number>14</number>
+    <sentence>p([b])</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>4</antecedent>
+  </step>
+  <step>
+    <number>15</number>
+    <sentence>p([a]) & p([b])</sentence>
+    <justification>And Introduction</justification>
+    <antecedent>13</antecedent>
+    <antecedent>14</antecedent>
+  </step>
+  <step>
+    <number>16</number>
+    <sentence>(p([a]) & p([b])) & ~eq([a],[b])</sentence>
+    <justification>And Introduction</justification>
+    <antecedent>15</antecedent>
+    <antecedent>12</antecedent>
+  </step>
+  <step>
+    <number>17</number>
+    <sentence>EY:((p([a]) & p(Y)) & ~eq([a],Y))</sentence>
+    <justification>Existential Introduction</justification>
+    <antecedent>16</antecedent>
+  </step>
+  <step>
+    <number>18</number>
+    <sentence>EX:EY:((p(X) & p(Y)) & ~eq(X,Y))</sentence>
+    <justification>Existential Introduction</justification>
+    <antecedent>17</antecedent>
+  </step>
+  <step>
+    <number>19</number>
+    <sentence>p([b]) & ~w([b]) => EX:EY:((p(X) & p(Y)) & ~eq(X,Y))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>4</antecedent>
+    <antecedent>18</antecedent>
+  </step>
+  <step>
+    <number>20</number>
+    <sentence>AX:(p(X) & ~w(X) => EX:EY:((p(X) & p(Y)) & ~eq(X,Y)))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>19</antecedent>
+  </step>
+  <step>
+    <number>21</number>
+    <sentence>EX:EY:((p(X) & p(Y)) & ~eq(X,Y))</sentence>
+    <justification>Existential Elimination</justification>
+    <antecedent>2</antecedent>
+    <antecedent>20</antecedent>
+  </step>
+  <step>
+    <number>22</number>
+    <sentence>p([a]) & w([a]) => EX:EY:((p(X) & p(Y)) & ~eq(X,Y))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>3</antecedent>
+    <antecedent>21</antecedent>
+  </step>
+  <step>
+    <number>23</number>
+    <sentence>AX:(p(X) & w(X) => EX:EY:((p(X) & p(Y)) & ~eq(X,Y)))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>22</antecedent>
+  </step>
+  <step>
+    <number>24</number>
+    <sentence>EX:EY:((p(X) & p(Y)) & ~eq(X,Y))</sentence>
+    <justification>Existential Elimination</justification>
+    <antecedent>1</antecedent>
+    <antecedent>23</antecedent>
+  </step>
+</proof>
+<goal>
+  EX:EY:((p(X) & p(Y)) & ~eq(X,Y))
+</goal>
