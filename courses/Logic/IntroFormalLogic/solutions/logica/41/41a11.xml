@@ -1,0 +1,171 @@
+<proof>
+  <step>
+    <number>1</number>
+    <sentence>EX:l(X)</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>2</number>
+    <sentence>~EX:(l(X) & AY:(l(Y) => eq(Y,X)))</sentence>
+    <justification>Premise</justification>
+  </step>
+  <step>
+    <number>3</number>
+    <sentence>l([a])</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>4</number>
+    <sentence>AY:(l(Y) => eq(Y,[a]))</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>5</number>
+    <sentence>l([a]) & AY:(l(Y) => eq(Y,[a]))</sentence>
+    <justification>And Introduction</justification>
+    <antecedent>3</antecedent>
+    <antecedent>4</antecedent>
+  </step>
+  <step>
+    <number>6</number>
+    <sentence>EX:(l(X) & AY:(l(Y) => eq(Y,X)))</sentence>
+    <justification>Existential Introduction</justification>
+    <antecedent>5</antecedent>
+  </step>
+  <step>
+    <number>7</number>
+    <sentence>AY:(l(Y) => eq(Y,[a])) => EX:(l(X) & AY:(l(Y) => eq(Y,X)))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>4</antecedent>
+    <antecedent>6</antecedent>
+  </step>
+  <step>
+    <number>8</number>
+    <sentence>AY:(l(Y) => eq(Y,[a]))</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>9</number>
+    <sentence>~EX:(l(X) & AY:(l(Y) => eq(Y,X)))</sentence>
+    <justification>Reiteration</justification>
+    <antecedent>2</antecedent>
+  </step>
+  <step>
+    <number>10</number>
+    <sentence>AY:(l(Y) => eq(Y,[a])) => ~EX:(l(X) & AY:(l(Y) => eq(Y,X)))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>8</antecedent>
+    <antecedent>9</antecedent>
+  </step>
+  <step>
+    <number>11</number>
+    <sentence>~AY:(l(Y) => eq(Y,[a]))</sentence>
+    <justification>Reductio Ad Absurdum</justification>
+    <antecedent>7</antecedent>
+    <antecedent>10</antecedent>
+  </step>
+  <step>
+    <number>12</number>
+    <sentence>EY:~(l(Y) => eq(Y,[a]))</sentence>
+    <justification>not-forall is exists-not</justification>
+    <antecedent>11</antecedent>
+  </step>
+  <step>
+    <number>13</number>
+    <sentence>~(l([b]) => eq([b],[a]))</sentence>
+    <justification>Assumption</justification>
+  </step>
+  <step>
+    <number>14</number>
+    <sentence>~(~l([b]) | eq([b],[a]))</sentence>
+    <justification>p=>q is ~p|q</justification>
+    <antecedent>13</antecedent>
+  </step>
+  <step>
+    <number>15</number>
+    <sentence>l([b]) & ~eq([b],[a])</sentence>
+    <justification>De Morgan</justification>
+    <antecedent>14</antecedent>
+  </step>
+  <step>
+    <number>16</number>
+    <sentence>l([b])</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>15</antecedent>
+  </step>
+  <step>
+    <number>17</number>
+    <sentence>~eq([b],[a])</sentence>
+    <justification>And Elimination</justification>
+    <antecedent>15</antecedent>
+  </step>
+  <step>
+    <number>18</number>
+    <sentence>l([b]) & l([a])</sentence>
+    <justification>And Introduction</justification>
+    <antecedent>16</antecedent>
+    <antecedent>3</antecedent>
+  </step>
+  <step>
+    <number>19</number>
+    <sentence>(l([b]) & l([a])) & ~eq([b],[a])</sentence>
+    <justification>And Introduction</justification>
+    <antecedent>18</antecedent>
+    <antecedent>17</antecedent>
+  </step>
+  <step>
+    <number>20</number>
+    <sentence>EY:((l([b]) & l(Y)) & ~eq([b],Y))</sentence>
+    <justification>Existential Introduction</justification>
+    <antecedent>19</antecedent>
+  </step>
+  <step>
+    <number>21</number>
+    <sentence>EX:EY:((l(X) & l(Y)) & ~eq(X,Y))</sentence>
+    <justification>Existential Introduction</justification>
+    <antecedent>20</antecedent>
+  </step>
+  <step>
+    <number>22</number>
+    <sentence>~(l([b]) => eq([b],[a])) => EX:EY:((l(X) & l(Y)) & ~eq(X,Y))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>13</antecedent>
+    <antecedent>21</antecedent>
+  </step>
+  <step>
+    <number>23</number>
+    <sentence>AY:(~(l(Y) => eq(Y,[a])) => EX:EY:((l(X) & l(Y)) & ~eq(X,Y)))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>22</antecedent>
+  </step>
+  <step>
+    <number>24</number>
+    <sentence>EX:EY:((l(X) & l(Y)) & ~eq(X,Y))</sentence>
+    <justification>Existential Elimination</justification>
+    <antecedent>12</antecedent>
+    <antecedent>23</antecedent>
+  </step>
+  <step>
+    <number>25</number>
+    <sentence>l([a]) => EX:EY:((l(X) & l(Y)) & ~eq(X,Y))</sentence>
+    <justification>Implication Introduction</justification>
+    <antecedent>3</antecedent>
+    <antecedent>24</antecedent>
+  </step>
+  <step>
+    <number>26</number>
+    <sentence>AX:(l(X) => EX:EY:((l(X) & l(Y)) & ~eq(X,Y)))</sentence>
+    <justification>Universal Introduction</justification>
+    <antecedent>25</antecedent>
+  </step>
+  <step>
+    <number>27</number>
+    <sentence>EX:EY:((l(X) & l(Y)) & ~eq(X,Y))</sentence>
+    <justification>Existential Elimination</justification>
+    <antecedent>1</antecedent>
+    <antecedent>26</antecedent>
+  </step>
+</proof>
+<goal>
+  EX:EY:((l(X) & l(Y)) & ~eq(X,Y))
+</goal>
