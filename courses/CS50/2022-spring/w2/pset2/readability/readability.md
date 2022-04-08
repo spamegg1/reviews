@@ -244,9 +244,7 @@ If the resulting index number is 16 or higher (equivalent to or  greater than a 
 
 ## [Walkthrough](https://cs50.harvard.edu/college/2022/spring/psets/2/readability/#walkthrough)
 
-<iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" class="border" data-video="" src="https://www.youtube.com/embed/AOVyZEh9zgE?modestbranding=0&amp;rel=0&amp;showinfo=0" scrolling="no" id="iFrameResizer0" style="overflow: hidden;"></iframe>
-
-
+[walkthrough](https://www.youtube.com/embed/AOVyZEh9zgE?modestbranding=0&amp;rel=0&amp;showinfo=0)
 
 ## [How to Test Your Code](https://cs50.harvard.edu/college/2022/spring/psets/2/readability/#how-to-test-your-code)
 

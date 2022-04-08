@@ -323,6 +323,10 @@ Then modify main in such a way that it prints "ciphertext: " and then iterates o
 
 </details>
 
+## Walkthrough
+
+[walkthrough](https://youtu.be/V2uusmv2wxI)
+
 ## [How to Test Your Code](https://cs50.harvard.edu/college/2022/spring/psets/2/caesar/#how-to-test-your-code)
 
 Execute the below to evaluate the correctness of your code using `check50`. But be sure to compile and test it yourself as well!
