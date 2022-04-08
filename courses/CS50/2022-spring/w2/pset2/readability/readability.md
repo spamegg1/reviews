@@ -109,7 +109,9 @@ Grade 12
 ```
 
 <details> <summary>Try It</summary>
+
 To try out the staff’s implementation of this problem, execute  `./readability`  within [this sandbox](http://bit.ly/2ulEXkw).
+
 </details>
 
 
@@ -161,9 +163,10 @@ Text: Alice was beginning to get very tired of sitting by her sister on the bank
 ```
 
 <details><summary>Hint</summary>
-Declared in ctype.h is a function that you might find helpful, per [manual.cs50.io](https://manual.cs50.io). If you use it, be sure to include that header file atop your own code!
-</details>
 
+Declared in `ctype.h` is a function that you might find helpful, per [manual.cs50.io](https://manual.cs50.io). If you use it, be sure to include that header file atop your own code!
+
+</details>
 
 
 ### [Words](https://cs50.harvard.edu/college/2022/spring/psets/2/readability/#words)
@@ -227,11 +230,13 @@ Modify `main` in `readability.c` so that instead of outputting the number of let
 
 <details>
     <summary>Hints</summary>
-    
+
 - Recall that round is declared in `math.h`, per [manual.cs50.io](https://manual.cs50.io)! 
 - Recall that, when dividing values of type int in C, the result will also be an int, with any remainder (i.e., digits after the decimal point) discarded. Put another way, the result will be “truncated.” You might want to cast your one or more values to float before performing division when calculating L and S!
-    
+  
+
 </details>
+
 
 If the resulting index number is 16 or higher (equivalent to or  greater than a senior undergraduate reading level), your program should  output `"Grade 16+"` instead of outputting an exact index number. If the index number is less than 1, your program should output `"Before Grade 1"`.
 
