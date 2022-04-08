@@ -225,9 +225,12 @@ where `L` is the average number of letters per 100 words in the text, and `S` is
 
 Modify `main` in `readability.c` so that instead of outputting the number of letters, words, and  sentences, it instead outputs (only) the grade level as defined by the  Coleman-Liau index (e.g. `"Grade 2"` or `"Grade 8" or the like`). Be sure to round the resulting index number to the nearest `int`!
 
-<details><summary>Hints</summary>
+<details>
+    <summary>Hints</summary>
+    
 - Recall that round is declared in `math.h`, per [manual.cs50.io](https://manual.cs50.io)! 
 - Recall that, when dividing values of type int in C, the result will also be an int, with any remainder (i.e., digits after the decimal point) discarded. Put another way, the result will be “truncated.” You might want to cast your one or more values to float before performing division when calculating L and S!
+    
 </details>
 
 If the resulting index number is 16 or higher (equivalent to or  greater than a senior undergraduate reading level), your program should  output `"Grade 16+"` instead of outputting an exact index number. If the index number is less than 1, your program should output `"Before Grade 1"`.
