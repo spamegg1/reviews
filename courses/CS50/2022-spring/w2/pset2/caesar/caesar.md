@@ -276,8 +276,8 @@ Then modify main in such a way that it prints "ciphertext: " and then iterates o
 
 <details><summary>Hints</summary>
 
-- Recall that printf can print a char using %c.
-- If you’re not seeing any output at all when you call printf, odds are it’s because you’re printing characters outside of the valid ASCII range from 0 to 127. Try printing characters temporarily as numbers (using %i instead of %c) to see what values you’re printing!
+- Recall that `printf` can print a char using `%c`.
+- If you’re not seeing any output at all when you call `printf`, odds are it’s because you’re printing characters outside of the valid ASCII range from 0 to 127. Try printing characters temporarily as numbers (using `%i` instead of `%c`) to see what values you’re printing!
 
 </details>
 
