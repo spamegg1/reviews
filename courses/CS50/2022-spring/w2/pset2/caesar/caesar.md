@@ -113,7 +113,13 @@ plaintext:  be sure to drink your Ovaltine
 ciphertext: or fher gb qevax lbhe Binygvar
 ```
 
-<details open=""><summary>Why?</summary><div class="ratio ratio-16x9" data-video=""><iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" class="border" data-video="" src="https://www.youtube.com/embed/9K4FsAHB-C8?modestbranding=0&amp;rel=0&amp;showinfo=0" scrolling="no" id="iFrameResizer0" style="overflow: hidden;"></iframe></div></details>
+
+
+<details><summary>Why?</summary>
+
+<iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" class="border" data-video="" src="https://www.youtube.com/embed/9K4FsAHB-C8?modestbranding=0&amp;rel=0&amp;showinfo=0" scrolling="no" id="iFrameResizer0" style="overflow: hidden;"></iframe>
+
+</details>
 
 Notice that the case of the original message has been preserved.  Lowercase letters remain lowercase, and uppercase letters remain  uppercase.
 
@@ -289,21 +295,21 @@ Then, implement a function called, e.g., `rotate`, that takes a `char` as input 
 <details><summary>Hints</summary>
 
     Odds are you’ll want a prototype like:
-
+    
     char rotate(char c, int n);
-
+    
     A function call like
-
+    
     rotate('A', 1)
-
+    
     or even
-
+    
     rotate('A', 27)
-
+    
     should thus return 'B'. And a function call like
-
+    
     rotate('!', 13)
-
+    
     should return '!'.
     Recall that you can explicitly “cast” a char to an int with (char), and an int to a char with (int). Or you can do so implicitly by simply treating one as the other.
     Odds are you’ll want to subtract the ASCII value of 'A' from any uppercase letters, so as to treat 'A' as 0, 'B' as 1, and so forth, while performing arithmetic. And then add it back when done with the same.
