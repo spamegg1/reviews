@@ -216,9 +216,8 @@ Usage: ./caesar key
 $ ./caesar 1
 ```
 
-<details><summary>Hints<summary>
+<details><summary>Hints</summary>
 
-Some hints:
 - Recall that you can print with `printf`.
 - Recall that a function can return a value with `return`.
 - Recall that `argc` contains the number of command-line arguments passed to a program, plus the program’s own name.
