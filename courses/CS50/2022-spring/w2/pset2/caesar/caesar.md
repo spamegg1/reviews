@@ -117,7 +117,7 @@ ciphertext: or fher gb qevax lbhe Binygvar
 
 <details><summary>Why?</summary>
 
-<iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" class="border" data-video="" src="https://www.youtube.com/embed/9K4FsAHB-C8?modestbranding=0&amp;rel=0&amp;showinfo=0" scrolling="no" id="iFrameResizer0" style="overflow: hidden;"></iframe>
+[watch here](https://www.youtube.com/embed/9K4FsAHB-C8?modestbranding=0&amp;rel=0&amp;showinfo=0)
 
 </details>
 
@@ -145,7 +145,9 @@ Usage: ./caesar key
 ```
 
 <details><summary>Try It</summary>
+
 To try out the staff’s implementation of this problem, execute `./caesar key` within [this sandbox](http://bit.ly/2Vwi8n0), substituting a valid integer in place of `key`.
+
 </details> 
 
 
@@ -219,7 +221,10 @@ How to begin? Let’s approach this problem one step at a time.
 First write, try to write a `main` function in `caesar.c` that implements the program using just pseudocode, even if not (yet!) sure how to write it in actual code.
 
 <details><summary>Hint</summary>
+
 There’s more than one way to do this, so here’s just one!
+
+```c
 int main(void)
 {
     // Make sure program was run with just one command-line argument
@@ -234,10 +239,10 @@ int main(void)
     
         // Rotate the character if it's a letter
 }
+```
 It’s okay to edit your own pseudocode after seeing ours here, but don’t simply copy/paste ours into your own!
+
 </details>
-
-
 
 ### [Counting Command-Line Arguments](https://cs50.harvard.edu/college/2022/spring/psets/2/caesar/#counting-command-line-arguments)
 
@@ -255,7 +260,9 @@ $ ./caesar 1
 
 <details><summary>Hints<summary>
 
-Recall that you can print with `printf`.  Recall that a function can return a value with `return`.  Recall that `argc` contains the number of command-line arguments passed to a program, plus the program’s own name.
+- Recall that you can print with `printf`.
+- Recall that a function can return a value with `return`.
+- Recall that `argc` contains the number of command-line arguments passed to a program, plus the program’s own name.
 
 </details>
 
@@ -275,7 +282,7 @@ bool only_digits(string s);
 - Recall that a string is just an array of chars.
 - Recall that strlen, declared in string.h, calculates the length of a string.
 - You might find isdigit, declared in ctype.h, to be helpful, per manual.cs50.io. But note that it only checks one char at a time!
-- 
+
 </details>
 
 Then modify `main` in such a way that it calls `only_digits` on `argv[1]`. If that function returns `false`, then `main` should print `"Usage: ./caesar key\n"` and return `1`. Else `main` should simply return `0`. The program should thus behave per the below:
@@ -294,36 +301,25 @@ Then, implement a function called, e.g., `rotate`, that takes a `char` as input 
 
 <details><summary>Hints</summary>
 
-    Odds are you’ll want a prototype like:
-    
-    char rotate(char c, int n);
-    
-    A function call like
-    
-    rotate('A', 1)
-    
-    or even
-    
-    rotate('A', 27)
-    
-    should thus return 'B'. And a function call like
-    
-    rotate('!', 13)
-    
-    should return '!'.
-    Recall that you can explicitly “cast” a char to an int with (char), and an int to a char with (int). Or you can do so implicitly by simply treating one as the other.
-    Odds are you’ll want to subtract the ASCII value of 'A' from any uppercase letters, so as to treat 'A' as 0, 'B' as 1, and so forth, while performing arithmetic. And then add it back when done with the same.
-    Odds are you’ll want to subtract the ASCII value of 'a' from any lowercase letters, so as to treat 'a' as 0, 'b' as 1, and so forth, while performing arithmetic. And then add it back when done with the same.
-    You might find some other functions declared in ctype.h to be helpful, per manual.cs50.io.
-    Odds are you’ll find % helpful when “wrapping around” arithmetically from a value like 25 to 0.
+- Odds are you’ll want a prototype like:
+```c    
+char rotate(char c, int n);
+```
+A function call like `rotate('A', 1)`  or even `rotate('A', 27)`  should thus return `'B'`. And a function call like  `rotate('!', 13)`     should return '!'.
+- Recall that you can explicitly “cast” a char to an int with (char), and an int to a char with (int). Or you can do so implicitly by simply treating one as the other.
+- Odds are you’ll want to subtract the ASCII value of 'A' from any uppercase letters, so as to treat 'A' as 0, 'B' as 1, and so forth, while performing arithmetic. And then add it back when done with the same.
+- Odds are you’ll want to subtract the ASCII value of 'a' from any lowercase letters, so as to treat 'a' as 0, 'b' as 1, and so forth, while performing arithmetic. And then add it back when done with the same.
+- You might find some other functions declared in ctype.h to be helpful, per manual.cs50.io.
+- Odds are you’ll find % helpful when “wrapping around” arithmetically from a value like 25 to 0.
+
 </details>
 
 Then modify main in such a way that it prints "ciphertext: " and then iterates over every char in the user’s plaintext, calling rotate on each, and printing the return value thereof.
 
 <details><summary>Hints</summary>
 
-    Recall that printf can print a char using %c.
-    If you’re not seeing any output at all when you call printf, odds are it’s because you’re printing characters outside of the valid ASCII range from 0 to 127. Try printing characters temporarily as numbers (using %i instead of %c) to see what values you’re printing!
+- Recall that printf can print a char using %c.
+- If you’re not seeing any output at all when you call printf, odds are it’s because you’re printing characters outside of the valid ASCII range from 0 to 127. Try printing characters temporarily as numbers (using %i instead of %c) to see what values you’re printing!
 
 </details>
 
