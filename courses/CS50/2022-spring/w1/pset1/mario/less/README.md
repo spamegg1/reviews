@@ -54,8 +54,6 @@ ls
 
 and see a file named `mario.c`. Executing `code mario.c` should open the file where you will type your code for this problem  set. If not, retrace your steps and see if you can determine where you  went wrong!
 
-
-
 ## [World 1-1](https://cs50.harvard.edu/college/2022/spring/psets/1/mario/less/#world-1-1)
 
 Toward the end of World 1-1 in Nintendo’s Super Mario Brothers, Mario must ascend right-aligned pyramid of blocks, a la the below.
@@ -137,13 +135,9 @@ Height: 4
 
 How to begin? Let’s approach this problem one step at a time.
 
-
-
 ## [Walkthrough](https://cs50.harvard.edu/college/2022/spring/psets/1/mario/less/#walkthrough)
 
-<iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" class="border" data-video="" src="https://www.youtube.com/embed/NAs4FIWkJ4s?modestbranding=0&amp;rel=0&amp;showinfo=0" scrolling="no" id="iFrameResizer0" style="overflow: hidden;"></iframe>
-
-
+[walkthrough](https://www.youtube.com/embed/NAs4FIWkJ4s?modestbranding=0&amp;rel=0&amp;showinfo=0)
 
 ## [Pseudocode](https://cs50.harvard.edu/college/2022/spring/psets/1/mario/less/#pseudocode)
 
@@ -175,6 +169,14 @@ Write in `pseudocode.txt` some pseudocode that implements this program, even if 
 
 <details><summary>Spoiler</summary>
 
+There’s more than one way to do this, so here’s just one!
+
+- Prompt user for height
+- If height is less than 1 or greater than 8 (or not an integer at all), go back one step
+- Iterate from 1 through height:
+  - On iteration i, print i hashes and then a newline
+
+It’s okay to edit your own after seeing this pseudocode here, but don’t simply copy/paste ours into your own!
 
 </details>
 
@@ -196,9 +198,15 @@ Height: 4
 Stored: 4
 ```
 
-<details><summary>Hints</summary></details>
+<details><summary>Hints</summary>
 
+- Recall that you can compile your program with make.
+- Recall that you can print an int with printf using %i.
+- Recall that you can get an integer from the user with get_int.
+- Recall that get_int is declared in cs50.h.
+- Recall that we prompted the user for a positive integer in lecture using a do while loop in `mario.c`.
 
+</details>
 
 ## [Building the Opposite](https://cs50.harvard.edu/college/2022/spring/psets/1/mario/less/#building-the-opposite)
 
@@ -221,9 +229,24 @@ So let’s build a left-aligned pyramid first and then, once that’s working, r
 
 Modify `mario.c` at right such that it no longer simply prints the user’s input but instead prints a left-aligned pyramid of that height.
 
-<details><summary>Hints</summary></details>
+<details><summary>Hints</summary>
 
+- Keep in mind that a hash is just a character like any other, so you can print it with `printf`.
+- Just as Scratch has a repeat block, so does C have a for loop, via which you can iterate some number times. Perhaps on each iteration, i, you could print that many hashes?
+- You can actually “nest” loops, iterating with one variable (e.g., i) in the “outer” loop and another (e.g., j) in the “inner” loop. For instance, here’s how you might print a square of height and width n, below. Of course, it’s not a square that you want to print!
 
+```c
+  for (int i = 0; i < n; i++)
+  {
+      for (int j = 0; j < n; j++)
+      {
+          printf("#");
+      }
+      printf("\n");
+  }
+```
+
+</details>
 
 ## [Right-Aligning with Dots](https://cs50.harvard.edu/college/2022/spring/psets/1/mario/less/#right-aligning-with-dots)
 
@@ -242,9 +265,11 @@ Let’s now right-align that pyramid by pushing its hashes to the right by prefi
 
 Modify `mario.c` in such a way that it does exactly that!
 
-<details><summary>Hint</summary></details>
+<details><summary>Hint</summary>
 
+Notice how the number of dots needed on each line is the “opposite” of the number of that line’s hashes. For a pyramid of height 8, like the above, the first line has but 1 hash and thus 7 dots. The bottom line, meanwhile, has 8 hashes and thus 0 dots. Via what formula (or arithmetic, really) could you print that many dots?
 
+</details>
 
 ### [How to Test Your Code](https://cs50.harvard.edu/college/2022/spring/psets/1/mario/less/#how-to-test-your-code)
 
@@ -257,13 +282,9 @@ Does your code work as prescribed when you input
 - letters or words?
 - no input at all, when you only hit Enter?
 
-
-
 ## [Removing the Dots](https://cs50.harvard.edu/college/2022/spring/psets/1/mario/less/#removing-the-dots)
 
 All that remains now is a finishing flourish! Modify `mario.c` in such a way that it prints spaces instead of those dots!
-
-
 
 ### [How to Test Your Code](https://cs50.harvard.edu/college/2022/spring/psets/1/mario/less/#how-to-test-your-code-1)
 
@@ -279,9 +300,11 @@ Execute the below to evaluate the style of your code using `style50`.
 style50 mario.c
 ```
 
-<details><summary>Hint</summary></details>
+<details><summary>Hint</summary>
 
+A space is just a press of your space bar, just as a period is just a press of its key! Just remember that printf requires that you surround both with double quotes!
 
+</details>
 
 ## [How to Submit](https://cs50.harvard.edu/college/2022/spring/psets/1/mario/less/#how-to-submit)
 

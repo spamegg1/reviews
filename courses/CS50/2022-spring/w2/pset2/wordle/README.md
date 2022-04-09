@@ -132,13 +132,8 @@ Notice that we didn’t even count any of those invalid attempts as  guesses. Bu
 
 Design and implement a program, `wordle`, that completes the implementation of our Wordle50 clone of the game.  You’ll notice that some large pieces of this program have already been  written for you–you are not allowed to modify any of those parts of the  program. Instead, your work should be constrained to the seven `TODO`s we’ve left behind for you to fill in. Each one of those parts solves a  specific problem, and we recommend you tackle them in order from 1 to 7. Each numbered `TODO` corresponds to the same item in the below list.
 
-1. In the first `TODO`, you should ensure the program accepts a single command-line argument. Let’s call it 
-
- for the sake of discussion. If the program was not run with a single  command-line argument, you should print the error message as we  demonstrate above and return `1`, ending the program.
-
-In the second `TODO`, you should make sure that 
-
- is one of the acceptable values (5, 6, 7, or 8), and store that value in `wordsize`; we’ll need to make use of that later. If the value of `k` is not one of those four values exactly, you should print the error message as we demonstrate above and return `1`, ending the program.
+1. In the first `TODO`, you should ensure the program accepts a single command-line argument. Let’s call it `k` for the sake of discussion. If the program was not run with a single  command-line argument, you should print the error message as we  demonstrate above and return `1`, ending the program.
+1. In the second `TODO`, you should make sure that `k` is one of the acceptable values (5, 6, 7, or 8), and store that value in `wordsize`; we’ll need to make use of that later. If the value of `k` is not one of those four values exactly, you should print the error message as we demonstrate above and return `1`, ending the program.
 
 After that, the staff has already written some code that will go  through and open the word list for the length of word the user wants to  guess and randomly selects one from the 1000 options available. Don’t  worry about necessarily understanding all of this code, it’s not  important for purposes of this assignment. We’ll see something similar  though in a later assignment, and it will make a lot more sense then!  This is a good place to stop and test, before proceeding to the next `TODO`, that your code behaves as expected. It’s always easier to debug programs if you do so methodically!
 

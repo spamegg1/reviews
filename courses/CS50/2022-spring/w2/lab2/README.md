@@ -111,10 +111,7 @@ Complete the implementation of `scrabble.c`, such that it determines the winner 
 ### [Walkthrough](https://cs50.harvard.edu/college/2022/spring/labs/2/#walkthrough)
 
 This video was recorded when the course was still using CS50 IDE for writing code. Though the interface may look different from your codespace, the  behavior of the two environments should be largely similar!
-
-<iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" class="border" data-video="" src="https://video.cs50.io/RtjxxxlN1gc" scrolling="no" id="iFrameResizer0" style="overflow: hidden; height: 479px;"></iframe>
-
-
+[walkthrough](https://video.cs50.io/RtjxxxlN1gc)
 
 ### [Hints](https://cs50.harvard.edu/college/2022/spring/labs/2/#hints)
 
@@ -124,12 +121,11 @@ This video was recorded when the course was still using CS50 IDE for writing cod
 
 - Recall that computers represent characters using [ASCII](http://asciitable.com/), a standard that represents each character as a number.
 
-<details>
-<summary>Not sure how to solve?</summary>
-<iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" class="border" data-video="" src="https://video.cs50.io/USiLkXuXJEg" scrolling="no" id="iFrameResizer0" style="overflow: hidden; height: 479px;"></iframe>
+<details><summary>Not sure how to solve?</summary>
+
+[help](https://video.cs50.io/USiLkXuXJEg)
+
 </details>
-
-
 
 ### [How to Test Your Code](https://cs50.harvard.edu/college/2022/spring/labs/2/#how-to-test-your-code)
 

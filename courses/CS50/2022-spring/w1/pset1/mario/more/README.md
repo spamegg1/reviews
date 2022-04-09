@@ -54,8 +54,6 @@ ls
 
 and see a file named `mario.c`. Executing `code mario.c` should open the file where you will type your code for this problem  set. If not, retrace your steps and see if you can determine where you  went wrong!
 
-
-
 ## [World 1-1](https://cs50.harvard.edu/college/2022/spring/psets/1/mario/more/#world-1-1)
 
 Toward the beginning of World 1-1 in Nintendo’s Super Mario Brothers, Mario must hop over adjacent pyramids of blocks, per the below.
@@ -135,13 +133,9 @@ Notice that width of the “gap” between adjacent pyramids is equal to  the wi
 
 Open your `mario.c` file to implement this problem as described!
 
-
-
 ### [Walkthrough](https://cs50.harvard.edu/college/2022/spring/psets/1/mario/more/#walkthrough)
 
-<iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" class="border" data-video="" src="https://www.youtube.com/embed/FzN9RAjYG_Q?modestbranding=0&amp;rel=0&amp;showinfo=0" scrolling="no" id="iFrameResizer0" style="overflow: hidden;"></iframe>
-
-
+[walkthrough](https://www.youtube.com/embed/FzN9RAjYG_Q?modestbranding=0&amp;rel=0&amp;showinfo=0)
 
 ### [How to Test Your Code](https://cs50.harvard.edu/college/2022/spring/psets/1/mario/more/#how-to-test-your-code)
 
@@ -165,8 +159,6 @@ Execute the below to evaluate the style of your code using `style50`.
 ```bash
 style50 mario.c
 ```
-
-
 
 ## [How to Submit](https://cs50.harvard.edu/college/2022/spring/psets/1/mario/more/#how-to-submit)
 

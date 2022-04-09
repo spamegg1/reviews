@@ -62,8 +62,6 @@ A credit (or debit) card, of course, is a plastic card with which you can pay fo
 
 Actually, that’s a bit of an exaggeration, because credit card  numbers actually have some structure to them. All American Express  numbers start with 34 or 37; most MasterCard numbers start with 51, 52,  53, 54, or 55 (they also have some other potential starting numbers  which we won’t concern ourselves with for this problem); and all Visa  numbers start with 4. But credit card numbers also have a “checksum”  built into them, a mathematical relationship between at least one number and others. That checksum enables computers (or humans who like math)  to detect typos (e.g., transpositions), if not fraudulent numbers,  without having to query a database, which can be slow. Of course, a  dishonest mathematician could certainly craft a fake number that  nonetheless respects the mathematical constraint, so a database lookup  is still necessary for more rigorous checks.
 
-
-
 ## [Luhn’s Algorithm](https://cs50.harvard.edu/college/2022/spring/psets/1/credit/#luhns-algorithm)
 
 So what’s the secret formula?  Well, most cards use an algorithm  invented by Hans Peter Luhn of IBM. According to Luhn’s algorithm, you  can determine if a credit card number is (syntactically) valid as  follows:
@@ -97,8 +95,6 @@ That’s kind of confusing, so let’s try an example with David’s Visa: 40036
 3. Yup, the last digit in that sum (20) is a 0, so David’s card is legit!
 
 So, validating credit card numbers isn’t hard, but it does get a bit tedious by hand. Let’s write a program.
-
-
 
 ## [Implementation Details](https://cs50.harvard.edu/college/2022/spring/psets/1/credit/#implementation-details)
 
@@ -138,9 +134,7 @@ If your program behaves incorrectly on some inputs (or doesn’t compile at all)
 
 ### [Walkthrough](https://cs50.harvard.edu/college/2022/spring/psets/1/credit/#walkthrough)
 
-<iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" class="border" data-video="" src="https://www.youtube.com/embed/dF7wNjsRBjI?modestbranding=0&amp;rel=0&amp;showinfo=0" scrolling="no" id="iFrameResizer0" style="overflow: hidden;"></iframe>
-
-
+[walkthrough](https://www.youtube.com/embed/dF7wNjsRBjI?modestbranding=0&amp;rel=0&amp;showinfo=0)
 
 ### [How to Test Your Code](https://cs50.harvard.edu/college/2022/spring/psets/1/credit/#how-to-test-your-code)
 
