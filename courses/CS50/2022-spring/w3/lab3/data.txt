@@ -1,0 +1,119 @@
+===================== SORT1
+time ./sort1 random5000.txt
+    real    0m0.075s
+    user    0m0.056s
+    sys     0m0.017s
+time ./sort1 random10000.txt
+    real    0m0.304s
+    user    0m0.241s
+    sys     0m0.036s
+time ./sort1 random50000.txt
+    real    0m8.358s
+    user    0m6.892s
+    sys     0m0.219s
+
+time ./sort1 reversed5000.txt
+    real    0m0.070s
+    user    0m0.048s
+    sys     0m0.021s
+time ./sort1 reversed10000.txt
+    real    0m0.254s
+    user    0m0.189s
+    sys     0m0.042s
+time ./sort1 reversed50000.txt
+    real    0m6.081s
+    user    0m4.965s
+    sys     0m0.191s
+
+time ./sort1 sorted5000.txt
+    real    0m0.049s
+    user    0m0.007s
+    sys     0m0.014s
+time ./sort1 sorted10000.txt
+    real    0m0.081s
+    user    0m0.007s
+    sys     0m0.028s
+time ./sort1 sorted50000.txt
+    real    0m1.206s
+    user    0m0.029s
+    sys     0m0.168s
+
+================ SORT2
+time ./sort2 random5000.txt
+    real    0m0.044s
+    user    0m0.003s
+    sys     0m0.020s
+time ./sort2 random10000.txt
+    real    0m0.100s
+    user    0m0.004s
+    sys     0m0.041s
+time ./sort2 random50000.txt
+    real    0m1.257s
+    user    0m0.040s
+    sys     0m0.169s
+
+time ./sort2 reversed5000.txt
+    real    0m0.043s
+    user    0m0.012s
+    sys     0m0.012s
+time ./sort2 reversed10000.txt
+    real    0m0.209s
+    user    0m0.011s
+    sys     0m0.037s
+time ./sort2 reversed50000.txt
+    real    0m1.063s
+    user    0m0.042s
+    sys     0m0.177s
+
+time ./sort2 sorted5000.txt
+    real    0m0.045s
+    user    0m0.001s
+    sys     0m0.023s
+time ./sort2 sorted10000.txt
+    real    0m0.087s
+    user    0m0.000s
+    sys     0m0.044s
+time ./sort2 sorted50000.txt
+    real    0m1.239s
+    user    0m0.027s
+    sys     0m0.166s
+
+================ SORT3
+time ./sort3 random5000.txt
+    real    0m0.069s
+    user    0m0.021s
+    sys     0m0.027s
+time ./sort3 random10000.txt
+    real    0m0.176s
+    user    0m0.113s
+    sys     0m0.029s
+time ./sort3 random50000.txt
+    real    0m4.012s
+    user    0m2.667s
+    sys     0m0.227s
+
+time ./sort3 reversed5000.txt
+    real    0m0.133s
+    user    0m0.039s
+    sys     0m0.019s
+time ./sort3 reversed10000.txt
+    real    0m0.202s
+    user    0m0.123s
+    sys     0m0.036s
+time ./sort3 reversed50000.txt
+    real    0m3.858s
+    user    0m2.654s
+    sys     0m0.164s
+
+time ./sort3 sorted5000.txt
+    real    0m0.048s
+    user    0m0.030s
+    sys     0m0.017s
+time ./sort3 sorted10000.txt
+    real    0m0.258s
+    user    0m0.142s
+    sys     0m0.031s
+time ./sort3 sorted50000.txt
+    real    0m4.056s
+    user    0m2.798s
+    sys     0m0.197s
