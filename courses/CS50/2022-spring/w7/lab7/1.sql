@@ -1,0 +1,2 @@
+SELECT name
+FROM songs;
