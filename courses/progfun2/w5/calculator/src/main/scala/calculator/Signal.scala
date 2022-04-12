@@ -33,7 +33,10 @@ object Signal:
       protected val eval = expr(using _)
       computeValue()
 
-  @annotation.implicitNotFound("You can only observe a Signal value within a Signal definition like in `Signal{ ... }`. If you want to just read the current value, use the method `currentValue`.")
+  @annotation.implicitNotFound(
+    "You can only observe a Signal value within a Signal definition like in " + 
+    "`Signal{ ... }`. If you want to just read the current value, " +
+    "use the method `currentValue`.")
   opaque type Caller = AbstractSignal[?]
 
   class Var[T](expr: Signal.Caller ?=> T) extends Signal.AbstractSignal[T]:

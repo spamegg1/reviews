@@ -24,8 +24,8 @@ class CalculatorSuite extends munit.FunSuite:
 
   test("tweetRemainingCharsCount with a supplementary char") {
     val result = tweetRemainingCharsCount(Var("foo blabla \uD83D\uDCA9 bar"))
-    assert(result.currentValue == MaxTweetLength - tweetLength("foo blabla \uD83D\uDCA9 bar"))
-  }
+    assert(result.currentValue ==
+           MaxTweetLength - tweetLength("foo blabla \uD83D\uDCA9 bar")) }
 
   test("tweetRemainingCharsCount's result signal should follow the input signal") {
     val input = Var("hello world")
@@ -60,7 +60,7 @@ class CalculatorSuite extends munit.FunSuite:
    ** POLYNOMIAL **
    ****************/
 
-   import Polynomial.*
+  import Polynomial.*
   import Ordering.Double.TotalOrdering
 
   def kindaEqual(a: Double, b: Double): Boolean =
@@ -109,12 +109,12 @@ class CalculatorSuite extends munit.FunSuite:
       "d" -> Signal[Expr](Minus(Literal(5), Literal(3))))
     val output = computeValues(input)
     val check = output("a").currentValue.isNaN
-    assert(check, " - Your implementation should return NaN when the expression for a variable " +
-      "references the variable itself")
+    assert(check, " - Your implementation should return NaN when the " +
+      "expression for a variable references the variable itself")
 
     val checkRes = (output("d").currentValue == 2)
-    assert(checkRes, " - Your implementation should return a valid result for variables " +
-      "that do not refer to themselves")
+    assert(checkRes, " - Your implementation should return a valid result " +
+      "for variables that do not refer to themselves")
   }
 
   test("Cyclic dependencies should result in NaN") {
@@ -123,12 +123,16 @@ class CalculatorSuite extends munit.FunSuite:
       "c" -> Signal[Expr](Times(Literal(5), Ref("a"))),
       "d" -> Signal[Expr](Minus(Literal(5), Literal(3))))
     val output = computeValues(input)
-    val checkNaNs = output("a").currentValue.isNaN && output("b").currentValue.isNaN && output("c").currentValue.isNaN
-    assert(checkNaNs, " - Your implementation should return NaN for variables that have cyclic dependencies")
+    val checkNaNs =
+      output("a").currentValue.isNaN &&
+      output("b").currentValue.isNaN &&
+      output("c").currentValue.isNaN
+    assert(checkNaNs, " - Your implementation should return NaN for " +
+                      "variables that have cyclic dependencies")
 
     val checkRes = (output("d").currentValue == 2)
-    assert(checkRes, " - Your implementation should return a valid result for variables " +
-      "that do not have any cyclic dependency")
+    assert(checkRes, " - Your implementation should return a valid result " +
+      "for variables that do not have any cyclic dependency")
   }
 
   test("Referencing an unknown variable should result in NaN") {
@@ -136,15 +140,16 @@ class CalculatorSuite extends munit.FunSuite:
       "d" -> Signal[Expr](Minus(Literal(5), Literal(3))))
     val output = computeValues(input)
     val check = output("a").currentValue.isNaN
-    assert(check, " - Your implementation should return NaN on evaluating an expression that " +
-      "references an unknown variable")
+    assert(check, " - Your implementation should return NaN on evaluating " +
+      "an expression that references an unknown variable")
 
     val checkRes = (output("d").currentValue == 2)
-    assert(checkRes, " - Your implementation should return a valid result for variables " +
-      "that do not reference unknown variables")
+    assert(checkRes, " - Your implementation should return a valid result " +
+      "for variables that do not reference unknown variables")
   }
 
-  test("Expressions corresponding to every variable should be correctly evaluated") {
+  test("Expressions corresponding to every variable should be correctly " +
+       "evaluated") {
     val aexpr = Var[Expr](Plus(Ref("b"), Literal(1)))
     val bexpr = Var[Expr](Times(Ref("c"), Ref("d")))
     val cexpr = Var[Expr](Plus(Literal(5), Ref("d")))
@@ -172,7 +177,8 @@ class CalculatorSuite extends munit.FunSuite:
     assert(dres, " - Value of `d` is incorrect after updating expression `d`!")
   }
 
-  test("When an expression changes, other variables that depend on it should be recomputed") {
+  test("When an expression changes, other variables that depend on " +
+       "it should be recomputed") {
     val aexpr = Var[Expr](Plus(Ref("b"), Literal(1)))
     val bexpr = Var[Expr](Times(Ref("c"), Ref("d")))
     val cexpr = Var[Expr](Plus(Literal(5), Ref("d")))
@@ -180,17 +186,19 @@ class CalculatorSuite extends munit.FunSuite:
     val input = Map("a" -> aexpr, "b" -> bexpr, "c" -> cexpr, "d" -> dexpr)
     val output = computeValues(input)
 
-    val oldvals = output.map {
-      case (k, v) => (k -> v.currentValue)
-    }
+    val oldvals = output.map { case (k, v) => (k -> v.currentValue) }
     cexpr() = Plus(Literal(4), Literal(3))
-    val checkRes = (output("a").currentValue != oldvals("a")) && (output("b").currentValue != oldvals("b")) &&
-      (output("c").currentValue != oldvals("c")) && (output("d").currentValue == oldvals("d"))
-    assert(checkRes, " - Your implementation should update the dependent values " +
-      "when an expression changes")
+    val checkRes =
+      (output("a").currentValue != oldvals("a")) &&
+      (output("b").currentValue != oldvals("b")) &&
+      (output("c").currentValue != oldvals("c")) &&
+      (output("d").currentValue == oldvals("d"))
+    assert(checkRes, " - Your implementation should update the dependent " +
+      "values when an expression changes")
   }
 
-  test("If b previously depended on a, but no longer does, then its value should not change anymore when a changes") {
+  test("If b previously depended on a, but no longer does, " +
+       "then its value should not change anymore when a changes") {
     val aexpr = Var[Expr](Minus(Literal(4), Literal(3)))
     val bexpr = Var[Expr](Plus(Ref("a"), Literal(1)))
     val input = Map("a" -> aexpr, "b" -> bexpr)
@@ -212,7 +220,8 @@ class CalculatorSuite extends munit.FunSuite:
     assert(bchanged == 0, " - Signal `b` should not be recomputed")
   }
 
-  test("When an expression changes, *only* the variables that depend on it should be recomputed") {
+  test("When an expression changes, *only* the variables that depend on it " +
+       "should be recomputed") {
     val aexpr = Var[Expr](Plus(Ref("b"), Literal(1)))
     val bexpr = Var[Expr](Times(Literal(5), Ref("d")))
     val cexpr = Var[Expr](Plus(Literal(5), Ref("d")))
@@ -233,9 +242,12 @@ class CalculatorSuite extends munit.FunSuite:
       })
     }
     cexpr() = Plus(Literal(4), Literal(3))
-    val checkRes = accessMap.filterNot(x => x._1 == "c").forall(x => x._2 == 0)
-    assert(checkRes, " - Your implementation should update only the dependent values " +
-      "when an expression changes")
+    val checkRes =
+      accessMap
+        .filterNot(x => x._1 == "c")
+        .forall(x => x._2 == 0)
+    assert(checkRes, " - Your implementation should update only the " +
+      "dependent values when an expression changes")
   }
 /*++++++*/
 

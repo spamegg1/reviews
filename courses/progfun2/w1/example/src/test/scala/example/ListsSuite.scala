@@ -30,7 +30,9 @@ class ListsSuite extends munit.FunSuite:
    * the reason for the failure. The output looks like this:
    *
    * {{{
-   * ==> X example.ListSuite.one plus one is three (0pts)?  0.007s munit.FailException: /tmp/example/src/test/scala/example/ListSuite.scala:26 assertion failed
+   * ==> X example.ListSuite.one plus one is three (0pts)?  0.007s 
+   * munit.FailException: /tmp/example/src/test/scala/example/ListSuite.scala:26 
+   * assertion failed
    * 25:  test("one plus one is two (0pts)") {
    * 26:      assert(1 + 1 == 3)
    * 27:  }
@@ -41,7 +43,9 @@ class ListsSuite extends munit.FunSuite:
    * run the next test, munit will show the following output:
    *
    * {{{
-   * ==> X example.ListSuite.details why one plus one is not three (0pts)  0.006s munit.FailException: /tmp/example/src/test/scala/example/ListSuite.scala:72
+   * ==> X example.ListSuite.details why one plus one is not three (0pts)  
+   * 0.006s munit.FailException: /tmp/example/src/test/scala/example/
+   *                              ListSuite.scala:72
    * 71:  test("details why one plus one is not three (0pts)") {
    * 72:      assertEquals(1 + 1, 3) // Fix me, please!
    * 73:  }
@@ -76,7 +80,8 @@ class ListsSuite extends munit.FunSuite:
    }
 
    def intNotZero(x: Int): Int =
-     if x == 0 then throw IllegalArgumentException("zero is not allowed")
+     if   x == 0
+     then throw IllegalArgumentException("zero is not allowed")
      else x
 
   /**
@@ -99,7 +104,7 @@ class ListsSuite extends munit.FunSuite:
    * every tested aspect of a method.
    */
   test("sum of a few numbers (10pts)") {
-    assert(sum(List(1,2,0)) == 3)
+    assert(sum(List(1, 2, 0)) == 3)
   }
 
   test("max of a few numbers (10pts)") {

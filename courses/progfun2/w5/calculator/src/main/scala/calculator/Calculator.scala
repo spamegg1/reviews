@@ -24,20 +24,19 @@ object Calculator extends CalculatorInterface:
         case Some(signal) =>
           eval(signal(), references filter ((k, _) => k != name))
         case None => Double.NaN
-      case Plus(a, b) => eval(a, references) + eval(b, references)
-      case Minus(a, b) => eval(a, references) - eval(b, references)
-      case Times(a, b) => eval(a, references) * eval(b, references)
+      case Plus(a, b)   => eval(a, references) + eval(b, references)
+      case Minus(a, b)  => eval(a, references) - eval(b, references)
+      case Times(a, b)  => eval(a, references) * eval(b, references)
       case Divide(a, b) => eval(b, references) match
-        case 0 => Double.NaN
+        case 0     => Double.NaN
         case denom => eval(a, references) / denom
 
   /** Get the Expr for a referenced variables.
    *  If the variable is not known, returns a literal NaN.
    */
   private def getReferenceExpr(name: String,
-      references: Map[String, Signal[Expr]])(using Signal.Caller): Expr =
-    references.get(name).fold[Expr] {
-      Literal(Double.NaN)
-    } { exprSignal =>
-      exprSignal()
-    }
+                               references: Map[String, Signal[Expr]])
+                              (using Signal.Caller): Expr =
+    references
+      .get(name)
+      .fold[Expr](Literal(Double.NaN))(exprSignal => exprSignal())

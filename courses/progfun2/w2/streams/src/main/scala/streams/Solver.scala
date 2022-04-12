@@ -8,7 +8,8 @@ trait Solver extends GameDef:
   /**
    * Returns `true` if the block `b` is at the final position
    */
-  def done(b: Block): Boolean = b.b1 == goal && b.b2 == goal             // TODO
+  def done(b: Block): Boolean =                                          // TODO
+    b.b1 == goal && b.b2 == goal && b.isStanding
 
   /**
    * This function takes two arguments: the current block `b` and
@@ -40,7 +41,7 @@ trait Solver extends GameDef:
    */
   def newNeighborsOnly(neighbors: LazyList[(Block, List[Move])],         // TODO
                        explored: Set[Block])
-                       : LazyList[(Block, List[Move])] =
+                                : LazyList[(Block, List[Move])] =
     neighbors filter ((block, _) => !explored.contains(block))
 
   /**
@@ -69,14 +70,14 @@ trait Solver extends GameDef:
   def from(initial: LazyList[(Block, List[Move])],
            explored: Set[Block])
            : LazyList[(Block, List[Move])] =
-    if initial.isEmpty then
-      LazyList()
+    if   initial.isEmpty
+    then LazyList()
     else
       val (block, history) = initial.head
-      val neighbors = neighborsWithHistory(block, history)
-      val newNeighbors = newNeighborsOnly(neighbors, explored)
-      val newExplored = explored ++ newNeighbors.toSet.map(_._1)
-      val newInitial = initial.tail ++ newNeighbors
+      val neighbors        = neighborsWithHistory(block, history)
+      val newNeighbors     = newNeighborsOnly(neighbors, explored)
+      val newExplored      = explored ++ newNeighbors.toSet.map(_._1)
+      val newInitial       = initial.tail ++ newNeighbors
 
       initial ++ from(newInitial, newExplored)
 
@@ -102,8 +103,8 @@ trait Solver extends GameDef:
    * position.
    */
   lazy val solution: List[Move] =                                        // TODO
-    if pathsToGoal.isEmpty then
-      List[Move]()
+    if   pathsToGoal.isEmpty
+    then List[Move]()
     else
       pathsToGoal
         .minBy(_._2.length)

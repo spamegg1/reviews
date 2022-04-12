@@ -18,17 +18,22 @@ class CodecsSuite
       else throw AssertionError(labels.mkString(". "))
     result.status match
       case scalacheck.Test.Passed | _: scalacheck.Test.Proved => ()
-      case scalacheck.Test.Failed(_, labels)                  => fail(labels, "A property failed.")
-      case scalacheck.Test.PropException(_, e, labels)        => fail(labels, s"An exception was thrown during property evaluation: $e.")
-      case scalacheck.Test.Exhausted                          => fail(Set.empty, "Unable to generate data.")
+      case scalacheck.Test.Failed(_, labels) =>
+        fail(labels, "A property failed.")
+      case scalacheck.Test.PropException(_, e, labels) =>
+        fail(labels, s"An exception was thrown during property evaluation: $e.")
+      case scalacheck.Test.Exhausted =>
+        fail(Set.empty, "Unable to generate data.")
 
   /**
-    * Check that a value of an arbitrary type `A` can be encoded and then successfully
-    * decoded with the given pair of encoder and decoder.
+    * Check that a value of an arbitrary type `A` can be encoded and then
+    * successfully decoded with the given pair of encoder and decoder.
     */
-  def encodeAndThenDecodeProp[A](a: A)(using encA: Encoder[A], decA: Decoder[A]): Prop =
+  def encodeAndThenDecodeProp[A](a: A)
+      (using encA: Encoder[A], decA: Decoder[A]): Prop =
     val maybeDecoded = decA.decode(encA.encode(a))
-    maybeDecoded.contains(a) :| s"Encoded value '$a' was not successfully decoded. Got '$maybeDecoded'."
+    maybeDecoded.contains(a) :|
+      s"Encoded value '$a' was not successfully decoded. Got '$maybeDecoded'."
 
   test("it is possible to encode and decode the 'Unit' value (0pts)") {
     checkProperty(Prop.forAll((unit: Unit) => encodeAndThenDecodeProp(unit)))
@@ -53,7 +58,7 @@ class CodecsSuite
 
   test("a 'Boolean' value should be encoded as a JSON boolean (1pt)") {
     val encoder = implicitly[Encoder[Boolean]]
-    assert(encoder.encode(true) == Json.Bool(true))
+    assert(encoder.encode(true)  == Json.Bool(true))
     assert(encoder.encode(false) == Json.Bool(false))
   }
 
@@ -79,21 +84,25 @@ class CodecsSuite
   }
 
   test("it is possible to encode and decode people (4pts)") {
-    checkProperty(Prop.forAll((s: String, x: Int) => encodeAndThenDecodeProp(Person(s, x))))
+    checkProperty(Prop.forAll((s: String, x: Int) =>
+      encodeAndThenDecodeProp(Person(s, x))))
   }
 
   test("a 'Contacts' value should be encoded as a JSON object (1pt)") {
     val contacts = Contacts(List(Person("Alice", 42)))
-    val json = Json.Obj(Map("people" ->
-      Json.Arr(List(Json.Obj(Map("name" -> Json.Str("Alice"), "age" -> Json.Num(42)))))
-    ))
+    val json =
+      Json.Obj(Map("people" ->
+        Json.Arr(List(
+          Json.Obj(Map("name" -> Json.Str("Alice"), "age" -> Json.Num(42)))))))
     val encoder = implicitly[Encoder[Contacts]]
     assert(encoder.encode(contacts) == json)
   }
 
   test("it is possible to encode and decode contacts (4pts)") {
-    val peopleGenerator = Gen.listOf(Gen.resultOf((s: String, x: Int) => Person(s, x)))
-    checkProperty(Prop.forAll(peopleGenerator)(people => encodeAndThenDecodeProp(Contacts(people))))
+    val peopleGenerator =
+      Gen.listOf(Gen.resultOf((s: String, x: Int) => Person(s, x)))
+    checkProperty(Prop.forAll(peopleGenerator)
+                 (people => encodeAndThenDecodeProp(Contacts(people))))
   }
 
 

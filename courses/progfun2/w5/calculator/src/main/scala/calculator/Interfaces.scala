@@ -6,7 +6,8 @@ package calculator
 trait TweetLengthInterface:
   def MaxTweetLength: Int
   def tweetRemainingCharsCount(tweetText: Signal[String]): Signal[Int]
-  def colorForRemainingCharsCount(remainingCharsCount: Signal[Int]): Signal[String]
+  def colorForRemainingCharsCount(remainingCharsCount: Signal[Int])
+                                                     : Signal[String]
 
 trait PolynomialInterface:
   def computeDelta(a: Signal[Double], b: Signal[Double],
@@ -16,8 +17,9 @@ trait PolynomialInterface:
       c: Signal[Double], delta: Signal[Double]): Signal[Set[Double]]
 
 trait CalculatorInterface:
-  def computeValues(
-        namedExpressions: Map[String, Signal[Expr]]): Map[String, Signal[Double]]
+  def computeValues(namedExpressions: Map[String, Signal[Expr]])
+                                    : Map[String, Signal[Double]]
 
-  def eval(expr: Expr, references: Map[String, Signal[Expr]])(using Signal.Caller): Double
+  def eval(expr: Expr, references: Map[String, Signal[Expr]])
+          (using Signal.Caller): Double
 

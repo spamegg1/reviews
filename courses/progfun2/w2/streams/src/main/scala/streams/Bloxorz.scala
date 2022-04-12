@@ -11,7 +11,7 @@ object Bloxorz extends App:
    */
   object InfiniteLevel extends Solver with InfiniteTerrain:
     val startPos = Pos(1,3)
-    val goal = Pos(5,8)
+    val goal     = Pos(5,8)
 
   println(InfiniteLevel.solution)
 

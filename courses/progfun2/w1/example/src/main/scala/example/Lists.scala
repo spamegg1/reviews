@@ -26,7 +26,8 @@ object Lists:
    */
   def sum(xs: List[Int]): Int =
     def helper(xs: List[Int], acc: Int): Int =
-      if xs.isEmpty then acc
+      if   xs.isEmpty
+      then acc
       else helper(xs.tail, acc + xs.head)
     helper(xs, 0)
 
@@ -49,12 +50,16 @@ object Lists:
    */
   def max(xs: List[Int]): Int =
     def helper(xs: List[Int], soFar: Int): Int =
-      if xs.isEmpty then soFar
+      if   xs.isEmpty
+      then soFar
       else
-        val bigger: Int = if xs.head > soFar then xs.head else soFar
+        val bigger: Int = if   xs.head > soFar
+                          then xs.head
+                          else soFar
         helper(xs.tail, bigger)
-    if xs.isEmpty then
-      throw new NoSuchElementException
+
+    if   xs.isEmpty
+    then throw new NoSuchElementException
     else helper(xs.tail, xs.head)
 
 // Non-tail-recursive version:

@@ -86,7 +86,8 @@ trait GameDef:
   case class Block(b1: Pos, b2: Pos):
 
     // checks the requirement mentioned above
-    require(b1.row <= b2.row && b1.col <= b2.col, "Invalid block position: b1=" + b1 + ", b2=" + b2)
+    require(b1.row <= b2.row && b1.col <= b2.col,
+            "Invalid block position: b1=" + b1 + ", b2=" + b2)
 
     /**
      * Returns a block where the `row` coordinates of `b1` and `b2` are
@@ -102,22 +103,22 @@ trait GameDef:
 
 
     /** The block obtained by moving left */
-    def left = if isStanding then             deltaCol(-2, -1)
+    def left = if      isStanding       then  deltaCol(-2, -1)
                else if b1.row == b2.row then  deltaCol(-1, -2)
                else                           deltaCol(-1, -1)
 
     /** The block obtained by moving right */
-    def right = if isStanding then            deltaCol(1, 2)
+    def right = if      isStanding       then deltaCol(1, 2)
                 else if b1.row == b2.row then deltaCol(2, 1)
                 else                          deltaCol(1, 1)
 
     /** The block obtained by moving up */
-    def up = if isStanding then               deltaRow(-2, -1)
+    def up = if      isStanding       then    deltaRow(-2, -1)
              else if b1.row == b2.row then    deltaRow(-1, -1)
              else                             deltaRow(-1, -2)
 
     /** The block obtained by moving down */
-    def down = if isStanding then             deltaRow(1, 2)
+    def down = if      isStanding       then  deltaRow(1, 2)
                else if b1.row == b2.row then  deltaRow(1, 1)
                else                           deltaRow(2, 1)
 
@@ -127,8 +128,8 @@ trait GameDef:
      * the current block, together with the corresponding move.
      */
     def neighbors: List[(Block, Move)] =                                 // TODO
-      List( (left, Move.Left), (right, Move.Right),
-            (up, Move.Up),     (down, Move.Down) )
+      List((left, Move.Left), (right, Move.Right),
+           (up  , Move.Up  ), (down , Move.Down ))
 
     /**
      * Returns the list of positions reachable from the current block
