@@ -25,15 +25,17 @@ def after_request(response):
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
-
         # TODO: Add the user's entry into the database
-
+        name = request.form.get("name")
+        month = request.form.get("month")
+        day = request.form.get("day")
+        db.execute("INSERT INTO birthdays (name, month, day) VALUES (:name, :month, :day)",
+                   name=name, month=month, day=day)
         return redirect("/")
 
     else:
-
         # TODO: Display the entries in the database on index.html
-
-        return render_template("index.html")
+        birthdays = db.execute("SELECT * FROM birthdays;")  # list of dicts
+        return render_template("index.html", birthdays=birthdays)
 
 
