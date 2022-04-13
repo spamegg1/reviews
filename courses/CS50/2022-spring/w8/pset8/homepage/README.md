@@ -2,6 +2,8 @@
 
 Build a simple homepage using HTML, CSS, and JavaScript.
 
+## I DID NOT DO THIS ASSIGNMENT! I DON’T CARE. IT’S BORING!
+
 ## [Background](https://cs50.harvard.edu/college/2022/spring/psets/8/homepage/#background)
 
 The internet has enabled incredible things: we can use a search  engine to research anything imaginable, communicate with friends and  family members around the globe, play games, take courses, and so much  more. But it turns out that nearly all pages we may visit are built on  three core languages, each of which serves a slightly different purpose:

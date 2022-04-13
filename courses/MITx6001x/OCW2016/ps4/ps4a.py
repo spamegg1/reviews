@@ -25,17 +25,14 @@ def get_permutations(sequence):
 
     if len(sequence) == 1:
         return [sequence]
-
     else:
         first = sequence[0]
         perms = get_permutations(sequence[1:])
         result = []
-
         for perm in perms:
             for index in range(len(perm) + 1):
                 left, right = perm[:index], perm[index:]
                 result.append(left + first + right)
-
         return result
 
 
