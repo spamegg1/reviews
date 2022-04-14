@@ -131,8 +131,7 @@ class Message(object):
              down the alphabet by the input shift
         """
         shift_dict = self.build_shift_dict(shift)
-        return ''.join(shift_dict[letter] if letter.isalpha() else letter
-                       for letter in self.message_text)
+        return ''.join(shift_dict.get(l, l) for l in self.message_text)
 
 
 class PlaintextMessage(Message):
