@@ -155,7 +155,7 @@ Not very surprising, since our picture is `blank`. So let us change this line to
 ourPicture = solidCircle 1
 ```
 
-We now see a solid black circle of radius 1:
+We now see a solid black circle of radius 1: [see at CodeWorld](https://code.world/run.html?mode=haskell&hash=PGPxJJHfirP0_D8y8lOrQLw) 
 
 ![img](canvas.png)
 
@@ -275,6 +275,8 @@ ourPicture :: Picture
 ourPicture = trafficLight
 ```
 
+[see on CodeWorld](https://code.world/run.html?mode=haskell&hash=PghsHgwl_rJUmdcCvOPAR-w)
+
 ![img](canvas2.png)
 
 ## Defining functions
@@ -331,10 +333,9 @@ From looking at the code ([open on CodeWorld](https://code.world/haskell#Ph3vrux
 - We again define a function by multiple cases, but this time using a *guard* to select the case. When called, the conditions of the guards are tried in that order until one evaluates to `True`. Then this code is taken.
 - `otherwise` happens to be a defined to be `True`. It just reads better than writing `True` here.
 - There is a function called `round` and `mod`. `round` is used in the normal, infix way, but we turned `mod` into an operator by putting backticks around it (``mod``). You can do that two any function called with two arguments.
-- We are now working with numbers here, so let us take a quick detour into Haskell’s numeric types.
+- We are now working with numbers here, so let us take a quick detour into Haskell’s numeric types. [see on CodeWorld](https://code.world/run.html?mode=haskell&hash=Ph3vruxsOVmcnYG0D2NGG0Q)
 
-<iframe src="https://code.world/run.html?mode=haskell&amp;hash=Ph3vruxsOVmcnYG0D2NGG0Q" width="400" height="400">
-</iframe>
+![img](canvas3.png)
 
 ## Numerical Types
 
@@ -342,20 +343,16 @@ There are three number-related types we should know about for now: `Int`, `Integ
 
 - `Int` are machine-sized integers.
 
-  ```
+  ```haskell
   i :: Int
   i = -42
   ```
 
-  `Int`s are guaranteed by the Haskell language standard to accommodate values at least up to ±229
-
-, but the exact size depends on your architecture. For example, on my 64-bit machine the range is ±263
-
-- .
+  `Int`s are guaranteed by the Haskell language standard to accommodate values at least up to ±229, but the exact size depends on your architecture. For example, on my 64-bit machine the range is ±263.
 
 - The `Integer` type, on the other hand, is limited only by the amount of memory on your machine.
 
-  ```
+  ```haskell
   n :: Integer
   n = 1234567890987654321987340982334987349872349874534
   
@@ -370,7 +367,7 @@ There are three number-related types we should know about for now: `Int`, `Integ
 
 - For (double-precision) floating-point numbers, there is `Double`:
 
-  ```
+  ```haskell
   d1, d2 :: Double
   d1 = 4.5387
   d2 = 6.2831e-4
@@ -409,7 +406,7 @@ Recursion is, like abstraction, a very powerful method in functional  programmin
 
 So lets say we want to put multiple traffic lights next to each other. We could do it this way ([open on CodeWorld](https://code.world/haskell#PNApyEJW7C_zshSxdde3eIw)):
 
-```
+```haskell
 lights :: Integer -> Picture
 lights 0 = blank
 lights n = trafficLight True & translated 3 0 (lights (n-1))
@@ -419,8 +416,12 @@ ourPicture = lights 3
 main = drawingOf ourPicture
 ```
 
-<iframe src="https://code.world/run.html?mode=haskell&amp;hash=PNApyEJW7C_zshSxdde3eIw" width="400" height="400">
-</iframe>
+[see on CodeWorld](https://code.world/run.html?mode=haskell&hash=PNApyEJW7C_zshSxdde3eIw)
+
+![img](canvas4.png)
+
+
+
 
 The function `lights` is again defined over multiple  cases, by pattern-matching on the number of lights to draw. If we should draw no light, we do not draw anything. Otherwise, we draw one light,  and the remaining lights shifted to the right.
 
@@ -430,7 +431,7 @@ What happens if I try to draw `lights (-1)`? What if I swap the arguments to `(&
 
 Of course, there is a lot of logic involved in `lights`  that that is not specific to traffic lights, so this does call out for  some abstraction. We will abstract out both the picture to draw, and how far we shift to the right in every step ([open on CodeWorld](https://code.world/haskell#Pb3XJ3yim9fyIbLeIoaLMDw)):
 
-```
+```haskell
 spread :: Picture -> Double -> Integer -> Picture
 spread pic dx 0 = blank
 spread pic dx n = pic & translated dx 0 (spread pic dx (n-1))
@@ -442,7 +443,7 @@ Side remark: With this code, the compiler warns about unused variables `pic` and
 
 A recursive function may call itself more than once, and this allows for nice drawings [open on CodeWorld](https://code.world/haskell#Pt35LixP8QB5edtSH06YjAA):
 
-```
+```haskell
 tree :: Integer -> Picture
 tree 0 = blank
 tree n = path [(0,0),(0,1)] & translated 0 1 (
@@ -451,10 +452,9 @@ tree n = path [(0,0),(0,1)] & translated 0 1 (
 main = drawingOf (tree 8)
 ```
 
-We will get to the meaning of the lists with brackets and the pairs  with parentheses next lession, for now just consider this a way of  drawing a line from one point to another.
+We will get to the meaning of the lists with brackets and the pairs with parentheses next lesson, for now just consider this a way of  drawing a line from one point to another.
 
-<iframe src="https://code.world/run.html?mode=haskell&amp;hash=Pt35LixP8QB5edtSH06YjAA" width="400" height="400">
-</iframe>
+[see on CodeWorld](https://code.world/run.html?mode=haskell&amp;hash=Pt35LixP8QB5edtSH06YjAA)
 
 (Do you want to see the tree folding and unfolding? Requires only minor changes to the code… check out [this animation](https://code.world/haskell#PrrDoZkX8T-a3E9x0rXVydQ).)
 
