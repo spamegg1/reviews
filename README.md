@@ -61,6 +61,8 @@ The instructor David Malan is very energetic and fun, but I really disliked the 
 
 I think it's a challenging beginner course. These days Python is the preferred language for beginner courses (which is covered in the second half), but if you want to baptize yourself in fire, you can jump into this course.
 
+**Update (April 2022)** I re-took this course (Spring 2022 version), four years after the first time. Pretty much the same (except more face masks in videos). I was able to re-submit most of my existing solutions and they passed the grader. There are quite a few, new assignments too, but smaller and easier. The total number of assignments is quite high now (nearing 30). They haven’t changed Web programming (still using Flask, Jinja, Bootstrap, SQLite), which is interesting. CS50’s ecosystem and infrastructure came a long way. They have very mature libraries for both C and Python now. They are phasing out CS50 Online IDE, instead using Github Codespaces in conjunction with Visual Studio Code, it works great, but definitely sad to see CS50 IDE go.
+
 *Spam's Recommendation:* Take it. It's good!
 
 ### <a name="cs50-2"></a> CS50, second half, Final Project
