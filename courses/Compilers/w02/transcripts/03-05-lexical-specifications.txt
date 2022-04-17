@@ -1,0 +1,190 @@
+Welcome back. In this video, I'm going to show how to use regular expressions to
+specify different aspects of programming languages. Let's begin with the keywords
+and this one is a relatively simple case and I'll just do it for three keywords.
+I'll write a regular expression for if, else, or then and it will be obvious how
+to do it for more. So let's write a regular expression for if and that would
+be under regular expression for i. And followed by the regular expression for f
+and we're taking the concatenation of these two. And then we're going to union
+that with the regular expression for else and what is that? Well, else consists of
+four individual characters so we have to write out a concatenation of those four
+characters. And, as you can see this is a little bit verbose with all of these
+quotes and kind of messy to read. So in fact, there's a short hand that's normally
+used and let me switch over to that right now. So if I want to write the regular
+expression for a sequence of single character expressions, I could just
+put quotes around the outermost characters in the sequence. So for example
+most of the tools will let you write this, I put a quote at the beginning right IF
+and then I close quote and this means exactly the same thing as this. This is
+the concatenation of two single character regular expressions and similarly for else,
+and similarly for then. And if I have more keywords I'll just write them out and
+union them altogether. Now, let's consider a slightly more complicated example. Let's
+think about how to specify the integers who want to be the non-empty strings of
+digits. So the first problem here is to write out what a digit is and that's
+pretty straight forward. A digit is just any of the individual characters zero
+through nine and we already know how to write out single character regular
+expressions. And it's just a union of ten of those to specify this and it'll take me
+just a moment to finish. Here we go. So that's a regular expression for the set of
+strings corresponding to all the single digits. And because we'll want to refer to
+this from time to time - and also because that is a very common thing to want to do - most
+tools have a facility for naming regular expressions. So for example I can name
+this one to be digit so a single digital is anything that is generated or is in the
+set denoted by this regular expression. And now what we want to do is to have
+multiple digits. Well, we know a way to do that. We can just iterate a single digit
+as many times as we like. And so here we get all strings, all possible strings of
+digits and this is very, very close to what we wanted except that the string that
+we want has to be non-empty. We don't want to count the empty string as an integer.
+And there's an easy way to do that. We just say that the whole sequence has to
+begin with a single digit and then it's followed by zero or more additional digits.
+So, just to reiterate that, we say there has to be at least one digit and that it's
+followed by zero or more additional digits. And this pattern actually for a given
+language is extremely common. So if I wanted to say that I have at least one a I
+write that as a, a star, because this has zero or more a, the second part says zero or more
+a's and the first part says there has to be at least one a. And because this is so
+common, there's a short hand for it that I think is supported by every regular
+expression processor and that is to write a plus. An a + means, it's just, it's just a
+short hand for a star. And so we can actually simplify this regular expression
+a bit and write simply digit plus. Now, let's look at yet another example even
+more sophisticated than the, the previous two. Let's think about how to define the
+identifiers which are strings of letters or digits that begin with a letter. And so
+we already know how to do digits so let's focus on the letters for a moment. So how
+do we write out a regular expression for the letters? Well we're gonna want to name it. So
+we'll say that the letters or actually a single letter. And now we have to write a
+regular expression for all the individual letters and that's, you know
+straightforward but tedious. We have to say little a, lower case b, lower case c,
+lower case d. And well, as you can see, this is gonna be rather a large regular
+expression. We're going to have 26 lower case letters and 26 upper case letters and
+the whole thing is going to be rather tedious to write down so let's actually
+not do that. Instead, let me mention a shorthand, A tool support to make it
+easier to write out exactly this kind of regular expression which is called a
+character range. So inside of square brackets I can write a range of
+characters. So how do I do that? Well, I have the starting character and an ending
+character and I separate them by a hyphen. And what this means is the union of all
+the single character regular expressions beginning with the first character and
+ending with the second character, so everything in between. So this is exactly
+the regular expression for all the lower case letters and then I can have another
+character range and so at the same square brackets for all the upper case letters.
+So A through Z, okay? And this regular expression here on the right defines
+exactly the big union that I didn't wanna write out, okay? And that gives us the
+definition of a single letter and now we're in great shape. We are, we already
+have a definition for a digit, we already now we have definition for letter and so
+then we can write out the rest of this definition. So we want the whole Regular
+expression to always begin with a letter. Okay, so identifier always begins with a
+letter and after that it's allowed to be a string of letters or digits, okay? So the
+or suggests that there's going to be a union. So after the first letter we can
+have either a letter or a digit and then we can have an arbitrary string of those
+things. So we put a star on the whole thing and that is the definition of
+identifier. Begins with a single letter and it's followed by zero or more letters
+and digits. Now, because we're doing a complete lexical specification, we also
+have to deal with even the parts of the string that we're not really interested
+in. We have to have at least a specification of them so then we can recognize and throw
+them away. In particular we have to be able to recognize the white space and
+we're just gonna take white space to be a non-empty sequence of blanks, new lines
+and tabs even though there are other kinds of white space characters. Things like
+maybe like rubout. Depending on your keyboard, there might be others but these
+three will suffice to illustrate all the important points. So, you know, a blank is
+relatively easy to write down. That's just a single quote around the blank space but
+there's a problem with new line and tab. Because a new line - a carriage return - in
+the file has special meaning typically. You know, you end the line, you end
+whatever command you're working on in this regular expression tools, lexical tools.
+And, you know, tab also is not an easy thing to write down and it doesn't look
+much different from a blank in a lot of cases. So, what tools do is they provide
+a separate name for these and it's, and typically it's done by having some kind of
+escape character, and a backslash is the most common one that's used, and then
+followed by a name for the character. So backslash n is typically used for new
+line and back slash t is typically used for tab. And I just want to stress I mean
+the reason for doing this example is to illustrate this, that we have to have a
+way of naming some characters that don't really have a very nice print
+representation. There are other characters that, that don't even have really any kind
+of print representation and we still need a way to talk about them in our regular
+expressions because them might be embedded in a file that we have to lexically
+analyze at some point. And so anyway, the way this is done is by providing a
+separate naming scheme for such unprincipled characters and typically that's
+Done with the escape sequence. So, something beginning with special character like
+backslash followed by the name of the character. So, n for new line in this
+case, and t for tab. And so to finish off our definition, this gives us, you know, one
+character, white space and then we want a non empty sequence of such things so we
+wrap the whole union there in parenthesis and put a plus on it and that
+gets us what we want. Let's pause for a moment in discussing programming languages
+and look at another example of using regular expressions from a different
+domain. Here I have an e-mail address and as it turns out, e-mail addresses form a
+regular language and every e-mail processing device in the world. So your
+mailer and the mail servers that you use, all do regular expression processing to
+understand what the e-mail address is telling them and the e-mail messages that
+go by. And. And so we can think of an e-mail address as being, as consisting of
+four different strings separated by punctuation. There's a username and then
+three parts to the domain. Okay. Let's just assume for simplicity that the
+strings only consist of letters - in practice they can consist of other kinds
+of characters too but let's just keep things simple and we can write out the
+more complicated things using the regular expressions but the structure would be the
+same as if we just consider them to be made of letters. And then these four
+strings are separated by punctuations so there's the @ sign and two decimal points
+that form the separators of the strings so this is a relatively straightforward
+thing to write a regular expression for given what we know so far so the user name
+would be the non-empty sequence of letters and then that would be followed by an @
+sign. And then the first part of the domain will also be a non-empty sequence of
+letters followed by a dot and then the rest is just the same. Okay, so here we,
+quite concisely, we have specified a large family of e-mail addresses. As I said in
+reality the e-mail addresses are slightly more complicated but they can be written
+out with just a slightly more complicated regular expression. Finally for our last
+example, let's look at a fragment of the lexical specification of a real
+programming language. In this case that language is Pascal which is in the
+Algol family of languages, Pascal is an early example of a type language and
+it's in the same general family as Fortran and C. And this particular fragment of
+pascal deals with the definition of numbers and so let's take a look here.
+I'll start at the bottom and look at what the overall definition of a number is. So
+a number consist of three things, some digits, and I'll just read out this
+abbreviation: an optional fraction and an optional exponent. So we're dealing here
+with floating point numbers and so a floating point number can have a bunch of
+digits and then it can be followed possibly by a fraction or not and that
+could be followed possibly by an exponent or not and, and the idea, although we
+can't see it just from this particular definition is that either the fraction or the
+exponent can be present independent of the other. So, now let's work briefly from the
+bottom up, let's just check the digits are what we expect. So a single digit is in
+fact the union of all the common digits just as we would hope. And then a
+non-empty sequence of digit is a digit plus so this is what we've already seen.
+And now the interesting bit is to look at how the optional fraction and the optional
+exponent are defined and the optional fraction looks a little less scary so
+let's do that one first. So what's going on inside the fraction? Well if we have a
+decimal fraction, there is gonna be a decimal point and that's gonna be followed
+by strong of digits so this is just the fractional parts of the floating point
+number. It's the stuff that comes after the decimal point. And what's this plus
+epsilon doing out here? Well remember, the plus is union and epsilon stands for the
+empty string. So what this is saying is that either the fractional portion of the
+number is present or it's completely absent. So this is how you say something
+is optional. You write out the regular expression for the thing and then you do
+plus epsilon at the end and that means well, either everything I said before it
+can be there or nothing is there. Okay? And the optional exponent is structured
+similarly but somewhat more complex. So, you can see the whole exponent is optional
+because there's some regular expression here that's unioned with epsilon, And so
+either something is there - and this is the optional exponent part - or it's not
+present at all. And now let's look inside how the exponent's defined if it's there.
+So, an exponent always begins with e. So this is exponent, you know, standard
+exponent notation and it always has a non-empty string of digits. So there's e
+followed by some digits and in between, there's an optional sign. We know the sign
+is optional because epsilon is one of the possibilities. The whole, the whole sign
+might be absent. And then what are the possibilities for the sign? Well, it could
+be negative or it could be positive. So, either there's a positive or negative sign
+or no sign. In which case, presumably, it's interpreted to be positive. Now this
+idiom where we have + epsilon indicate that something is optional is also
+extremely common and so there's another short hand that many tools provide so
+another way of writing this, that's common is to say that's my fractional
+component and then it might be absent. So the question mark after a regular
+expression just means exactly this construction, that we take that regular
+expression and we or it with epsilon. And so this one, this regular expression is a, is
+a little more complicated. There's two optional components so let's just write
+out what that would look like so we would have the exponent begins with e and then
+we have a sign. Which is either + or - and that's optional so we put a question mark
+after it followed by a non-empty string or digits and then this whole thing is
+optional. The whole exponent is optional. So this is an alternative and more
+compact way to write this expression. To wrap up, I, I hope I convinced you in this
+video that regular expressions can describe many useful languages. We've seen
+some fragments from programming languages but also we saw that e-mail addresses
+could be specified this way. Other things that are regular languages are things like
+phone numbers and file names are also regular. And there are many, many examples
+in everyday life where regular languages are used to describe some simple set of
+strings. And I also want to emphasize that so far, we've used regular languages as a
+language specification. We use it to define the set of strings we're interested
+in. But, we haven't said anything about how to actually implement lexical
+analysis. We still need an implementation. And that's what we'll talk about in future
+videos. In particular, in particular, we're going to look at the problem of
+given a string as an irregular expression R, how do we know whether that string is
+in the language of the regular expression R?

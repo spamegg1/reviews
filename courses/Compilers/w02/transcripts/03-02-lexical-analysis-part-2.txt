@@ -1,0 +1,7 @@
+To summarize, lexical analysis implementation has to do two things. The first
+job is to recognize the substrings in the input that correspond to tokens. And
+here's a little bit of compiler lingo these substrings are called the lexemes. So
+the words of the program are called the lexemes. And then the second job is at for
+each lexeme we have to identify its token class. And then the output of the lexical
+analyzer is a series of pairs which are the token class. And lexing, Okay, And this
+whole thing, one of these pairsis called A token.

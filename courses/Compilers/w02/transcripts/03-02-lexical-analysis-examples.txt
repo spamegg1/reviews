@@ -1,0 +1,146 @@
+Welcome back, In this video, we're going to continue our lecture on lexical
+analysis with some examples from past programming languages where interesting
+lexical problems arose. So we've already talked a little bit about Fortran and what
+are the interesting lexical rules in Fortran is the white space is
+insignificant so white space doesn't matter and something like VAR1 to which
+could be a variable name VAR1 is exactly the same as VA R1 so these two program
+fragments have to mean exactly the same thing sand the idea in Fortran is that you
+can take your program and you could delete all the blanks from it and that shouldn't
+change what the program means at all. Let's take a look at an example of how
+Fortran's white space rule affects lexical analysis. Here are a couple of Fortran
+code fragments and I should say that this example is taken from the dragon book and
+actually couple of the later examples were also taken from an older edition of the
+dragon book. But anyway what we have here, this is actually the header of a Fortran
+loop. And you know it's a loop because it has the key word do, which is like four in
+modern C or C++ so I'd say loop key word And then we have out iteration variable I
+and we have a range that I will vary between. So, in this case I will go from
+one up to 25. And then this number five here, this is a little bit odd, something
+you don't see in modern languages. In the old days in Fortran you would have your do
+statement at the top of the loop and then the size of the loop or all the statements
+included in the loop Were named by a label, they came right after the do
+statement. So, the loop will extend from the, the header, the do statement down to
+the label five. So whatever statement was able with five, all of the statements in
+between would be part of the loop. And so, the loop would execute those statements
+then we'll go back around to the header and then we keep executing those until it
+had done so for every one of the values of the iteration variable, in this case, one
+to 25. Now, here's a nother code fragment and as you can see this one is almost
+exactly the same as the one above. The only difference is, let me just switch
+colors, is here that this particular fragment has a comma in that position and
+this fragment has a period. And it turns out that this difference makes all the
+difference that these two fragment of code mean completely different things. So, this
+fragment, the first one, is in fact a do loop as I said before so it has the
+keyword do, the label five, the variable I and the range one to 25. Now this fragment
+down here, this is actually a variable name, do 5I, So far as writing without the
+blanks. Remember the blanks don't matter, This would be do 5I and this is an
+assignment equals the number 1.25. Okay, And so you can see here these symbols, the
+sequence, the first sequence of symbols is interpreted completely differently
+depending on whether there's a period or a comma further on. And so let's just be a
+little more precise about that. How do we know what do is? So let's just focus on
+the keyword here do and when we're at this point, when our focus is here right after
+the zero. And keep in mind that, that the way this is going to be implemented is by
+a left to right scan so we're going to be walking in this direction over the, over
+the input looking at each character successfully and when our focus reaches
+this point, we can make a decision. Is this a, is this a keyword 'cause we've
+seen the entire keyword too. And the problem is that we don't have information
+to make that decision. We don't know whether this is do or whether it's going
+to be eventually be part of a variable name like do 5I. And the only way to know
+is to look ahead in the input to this position to see whether there's a comma or
+a period there. So this is an example of lexical analysis that requires look ahead.
+In order to understand the role of due, as we're going left to right. We have to pick
+ahead of the input to see some symbols that come later on. And we can't possibly
+disambiguate role of do until that poin t because up to this point, the sequence and
+the symbols are exactly the same and so the only thing that distinguishes them is
+something that's much, much further on. And as you can imagine, having lots of
+look ahead complicates the implementation of lexical analysis and so one of the
+goals in the design of lexical systems is to minimize the amount of the look ahead
+or bound the amount of look ahead that is required. So you might wonder why Fortran
+has this funny rule about white space. It turns out that on punch card machines it
+was easy to add extra blanks by accidents and as a result they added this rule to
+the language so the punch card operator wouldn't have to redo their work all the
+time. Fortunately today we don't enter our programs anymore on punch cards. But this
+example does help us understand better what we're trying to do in lexical
+analysis so as I said the goal is to partition the string. We're trying to buy
+the string up into the logically units of the language. And this is implemented by
+reading left to right. So we're doing a left to right scan over the input,
+recognizing one token at a time. And because of that, look ahead may be
+required to decide where one token ends and the next token begins. And again, I
+want to stress that look ahead is always needed but we would like to minimize the
+amount of look ahead. And in fact, we like to bound it to some constant to this,
+because it will simplify the implementation of lexical analyzer quite a
+bit. Now just to illustrate to look ahead is something that we always have to worry
+about. Let's consider this example which we've looked at before and just notice
+that when we're reading left to right, let's look at this keyword else here, when
+we read the E. We have to decide is that a variable name or some symbol but itself or
+do we want to consider it together with the symbols that follow them. And so
+there's a look ahead issue here. After we scanned E, we have to decide does that sit
+by itself or is it part of a larger lexical unit? And, you know there a re
+single character variable names in this example like I, J, and Z and so it's not
+unreasonable that E could also be one and another example is this double-equals.
+When we read a single equal sign, how do we decide whether that's a single equals
+like these other assignments or that it's really a double-equals. Well, in order to
+do that, if our focus point is right here, we have to look ahead and see. There's
+another = coming up and that's how we know or how we will know. That we wanted to
+combine it into a single symbol instead of considering this equals by itself. Another
+example from a, a language from long ago PL [inaudible] is a interesting language.
+It was designed by IBM and it stands for Programming Language One. Alright, It was
+designed to be the programming language. At least with an IBM that would be used by
+everybody and is supposed to encompass all the features that every programmer would
+ever need. And as such, it was supposed to be very, very general and have very few
+restrictions. And so, one of the features of PL [inaudible] is that Keywords are not
+reserved. So, in PL [inaudible] you can use a keyword both as a keyword and also
+as a variable. So you can use keywords and other roles other than keywords and that
+means you can write interesting, interesting sentences or interesting
+programs like this. And let me just read this out loud because it sounds
+interesting, if else then, then = else, else = then. And the correct organization
+here of course is that this is a keyword, this is a keyword and this is a keyword.
+And the other things, switch colors here, are all variables. These are all variable
+names. And as you can imagine this mix a lexical analysis somewhat difficult
+because when we're just scanning left to right like when we're coming through here
+when we say we're at to this point, you know how do we decide whether these things
+are going to be variable names or keywords without seeing what's going on in the rest
+of the expression so lexical analysis in PL [inaudible] was quite challenging. So
+here's another example from PL [inaudible]. Here we have a program
+fragment, we have the word declare and then an open paren and a close paren
+encompassing a bunch of arguments so we'll point out the balance parens here and then
+just a list of n things inside the parens. And it turns out that the pending on the
+larger context in which this whole expressions sits, this could be either a
+keyword. Or it could be in array reference that mean when, yeah, that mean declare
+here could either be a keyword or it could be a name of an array and this could be
+the end [inaudible] to the array. And as it happens, there is no way looking at
+just this much that we can decide. This fragment is valid, is a valid declaration
+and it's also a valid array reference. So, it would depend on what came next. It
+might depend on for example whether there was an equal sign here in which cases
+would be interpreted as an assignment and, and declare would be the name of an array.
+And, the interesting thing about this example is that because the number of
+arguments in here is unbounded. There could be n of them for any n. This
+requires unbounded look ahead. Okay, So to implement this properly as you're scanning
+left to right to decide whether declare again is a keyword or re-reference, we
+would have to scan beyond this entire argument list to see what came next.
+Fortren and PL [inaudible] were designed in the 1950s and 1960s respectively and
+those experiences taught us a lot about what not to do in the lexical design of
+programming languages. So things are a lot better today but the problems have not
+gone away completely and I'll use an example from C++ that illustrate this. So
+here's an example of C++ template syntax which you may be familiar with or you may
+have seen the similar syntax in Java. And C++ has another operator called Stream
+Input. So this operator here reads from an input stream and stores the results in a
+variable. And the problem is, here that there's a conflict with nested templates,
+So for example, if I have a template o peration that looks like this. Okay.
+Notice what happens here. So my intention here is to have a nested application of
+templates but I wind up with two great than signs together at the end and this
+looks just like the stream operator and the question is what should the lexical
+analyzer do? Should it interpret this as two close brackets for template or should
+it interpret it as a two greater than signs stuck together as a stream operator.
+And it turns out that for a very long time, I think most C++ compilers have now
+fixed this. The C++ compiler in this situation would regard this as a stream
+operator and you would get a syntax there. And what do you think the solution was, it
+turns out that the only fix that you could really do to make this lexically analyzed
+the correct way was to insert a blank so you would have to write this and you would
+have to remember to put the blank in there so that the two greater than signs were
+not together. And you know that's kind of ugly that we have to put in white space to
+fix the lexical analysis of the program. So to summarize the goal of lexical
+analysis is to partition the input streams into lexemes, okay. So we have drop down
+dividing lines in the string to decide where the lexemes lie and we want to
+identify the token of each lexeme, And because, exactly because we're doing a
+left to right scan, sometimes we have to have look ahead. Sometimes we have to peek
+ahead in the input string to figure out what the current string we're looking at,
+what the current substring we're looking at, what role it plays in the language?

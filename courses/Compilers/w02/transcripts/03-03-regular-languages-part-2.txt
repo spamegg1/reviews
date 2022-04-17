@@ -1,0 +1,9 @@
+Well, we've come to the end of this video. And to summarize, we looked at regular
+expressions, which are used to define regular languages. And the regular
+expressions are syntax (that's the expression that we write down), and it
+denotes a set of strings which is the regular language and that's the meaning of
+the regular expression. And there are five kinds of regular expressions in the
+standard definition. There's an expression for the empty string and that's denoted by
+epsilon and then we have all the one character strings and then there are three
+compound expressions - ways of building new regular expressions from other regular
+expressions - and these are union, concatenation, and iteration.

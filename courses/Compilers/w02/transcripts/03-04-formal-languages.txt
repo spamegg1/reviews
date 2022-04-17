@@ -1,0 +1,152 @@
+Welcome back. In this video, we're going to take a little digression and talk about
+formal languages. A formal language has played a big role in theoretical computer
+science but they're also very important in compilers because inside of the compiler,
+we typically have several different formal languages that we're manipulating. A
+regular expressions are one example of a formal language but it's actually helpful
+I think in understanding regular languages and all the formal languages we'll see
+later on in later videos to talk about what the formal languages in general, So,
+let's begin with the definition. A formal language has an alphabet, So, some set of
+letter sigma. And then a language over that alphabet is just a set of strings of
+the characters drawn from the alphabet. So in the case or regular languages, we had
+certain ways of building up sets of strings of characters but other kinds of
+languages would have different sets of strings. And in general, a formal language
+is just any set of strings over some alphabet. An example of a language that
+you're familiar with is a form from the alphabet of English characters and it is
+just the set of English sentences. Now, This is not quite a formal language and
+that we might disagree in which string of English characters are in fact valid
+English sentences but one could imagine that we could define some rules that we
+would say the certain strings are English sentences and others aren't. And if we
+could come to this on agreement this would be a fully formal language. Now a much
+more rigorous formal language would be something like the following; we could
+pick our alphabet to be the asking character set and the language to be the
+set of all Valid C program. So this is definitely a very well defined language.
+This is exactly the set of inputs that C compilers will accept. And the, the
+important contrast I want to draw here is that the alphabet is actually interesting.
+So, different formal languages, you know? Have a very, very different alphabets and
+we can't really talk a bout what the formal language is or what sort of strings
+we're interested in unless to find that alphabet. Another important concept for
+many formal languages is a meaning function. Typically we have one of the
+strings in our language and let's call that some expression e and the expression
+e by itself is just a piece of syntax. It's a program in some sense or it
+represents something else that we're, Which is the thing we're actually
+interested in. And so we have a Function L that maps the strings in the language to
+their meanings. And so for example in the case of the regular expressions, this
+would be a regular expression. And that would be map to a set of strings. The
+regular language that, that regular expression to notes and we saw an example
+where we wrote out the meeting function for regular expression last time so let's
+use regular expressions as an example and I'm gonna first write down the meaning of
+the regular expressions. The way I wrote it down in the last video so if you recall
+we had a regular expression epsilon and that denoted a set, Which contain just one
+string, namely the empty string. And then we had a regular expression C for every
+character in the alphabet which also do need a socketing just one string namely
+the single character C. And then, we had a bunch of compound expressions. So for
+example, A + B. That was equal to the union of the sets A and B and we had the
+concatenation so I could, I could [inaudible] A and B and that was equal to
+a cross product where I selected a string from each set in order and concatenated
+them together. And finally there was iteration so I could write a star and that
+was the union over I. Greater than zero of all the sets A to the I, I ends. An
+interesting thing about this definition is you can see that they were mapping, over
+we have expressions and let me switch colors here, over here we have expressions
+and over here we have the sets. But there's something kind of odd about the
+way this is written and not quite right cuz you can see here we clearly, we have
+an expression. We have a piece of syntax A + B and then somehow on the other side
+this, this A, this A and this B have magically turned into sets that we're
+taking the union of and similarly down here we're choosing an element from this
+set but this set is also an expression and what does that mean? Somehow we're
+conflating the sets in the expressions and this is what. The meaning function is
+intended to fix and this what they, or, or, or intended to make clear. So we, what
+we really wanted to say is that there's some mapping, That the language L epsilon
+is the set so the, so L maps from expressions into sets of strings. Okay,
+It's a function that maps one to the other and it you haven't seen this notation
+before, this is a standard notation for describing functions. It does says that L
+is a function from things in the domain, in this domain to this range, okay. And
+similarly the language of this expression is the set and it becomes really useful
+for the compound expressions cuz here we say the language of this expression. Is
+equal to the language of a union with the language of B and now you can see the
+recursion. First we interpret A and B using L and we take the union of the
+result. Okay, so now it's clear what's asset and what's an expression and
+similarly here the language of a concatenated with B, we are going to
+select elements from the language of these two expressions and then we're going to
+form another set from those two sets. And finally for iteration, The language of a
+star is equal to the union over the meaning of a bunch of expressions, A to
+the I is an expression. This is a, a piece of syntax and we have to convert it to A
+set N order to take the union. And so about this, is. The proper definition of
+the meaning of regular expressions where we've made the meaning function L explicit
+and we've shown exactly how recursively we apply L to decompose the compound
+expressions into several expressions that we compute the meaning of and then
+computed the sets from those from those separate smaller s ets. So, there's other
+reasons for using a meeting function. We just saw one of them which is to make
+clear. What is syntax and what is semantics in our definitions. Some parts
+of the definition are expression and some parts are the, the meanings or the sets
+and the using L makes it clear that the arguments to L are the, the programs or
+the expressions and the results Are the, the sets. The outputs are the sets, But
+there are a couple of other reasons for separating syntax and semantics. One, is
+that it allows us to consider notation as a separate issue. That is if we have
+syntax and semantics being different, then we can vary the syntax while we keep the
+semantics the same and we might discover. That there, that some kinds of syntax are
+better than others for the problems that we're interested in, for the languages
+that we're interested in. And another reason for separating the two is because
+of expressions and meanings because syntax and semantics are not in one to one
+correspondents. And I actually illustrated this with regular expressions in the
+previous video but I want to iterate here that, that there are generally many more
+expressions than there are meanings so that means there maybe multiple way. To
+write an expression that means the same thing. I'd like to take a moment to
+illustrate why separating syntax from semantics is beneficial for a notation.
+So, everybody's familiar with the, the r number system so I can write numbers like
+zero, one. 42 and 107 and there are very nice algorithms for describing how you add
+and subtract and multiply such numbers but there are older systems of notation for
+numbers. Things like the Roman numerals. I could have the number one. I could have
+the number four, the number ten and say the number 40 I think is written like that
+and. And an issue with this number system, first of all, let me stress that these two
+have the same meaning. So the, the meanings of expressions in this language
+are. Are the integers and it's exactly the same in this language. So the idea, the
+mean ing of these two systems are just the numbers but the notation is extremely
+different. The number written in Roman numerals was completely different from a
+number written in Arabic numerals. And the fact is that the Roman numerals are really
+painfully to do addition and subtraction and multiplication and in fact. Back in
+ancient times when this was a common system was not very well known how to do
+it and very few people were actually good at doing arithmetic with, with the system
+because of, because the algorithms were kind of complicated. And, when we moved to
+the, the Arabic system, later, That it was a big improvement because people, it was
+easier for people to learn how to do basic arithmetic with these kinds of numbers.
+And the only thing that changed between one system and the other was the system of
+notation. And so, notation is extremely important because it governs how you think
+and it governs the kinds of things you can say and the sort of procedures that you
+will use. So don't underestimate the importance of notation and this is one
+reason for separating syntax from semantics because we can leave the idea of
+what we're trying to do than numbers alone. And play with, with different ways
+of representing them and we might discover that some ways are better than others. The
+third reason I gave for separating syntax and semantics is that in many interesting
+languages, multiple expressions, multiple pieces of syntax will have the same
+semantics. Now going back again to regular expressions, let's consider the regular
+expression zero<i>. Now there are many ways to write the same language which is the</i>
+language of all strings of zeroes so string of zeroes of any length. So for
+example I could also write that as zero + zero<i>. Another way to write it is as</i>
+epsilon + zero, zero and here you can see that, that this expression is all the
+strings of 0s of at least link one and then we get the empty string for epsilon
+so that is = zero and then just, you know? Any combination of these things
+would also amount to an eq uivalent language for example that one and so on.
+So there's actually an unbounded, unlimited number of way I could write this
+language but all of these mean exactly the same thing and if you think about it. What
+this means is that in general, if I draw the two domains differently, I think about
+different expressions over here and different distinct meanings over here and
+the function L that maps between them. The function L is many to one. So there are.
+Yeah. There are points in the space that where many different expressions or pieces
+of syntax map to the same meaning. And this is just a general characteristic of
+Interesting formal languages and this is actually extremely important in compilers
+because this is the basis of optimization. The fact that there are many different
+programs that are actually functionally equivalent, that's what allows us to
+substitute one program that runs faster than another, that's what allows us to
+replace one program with another if it runs faster and does exactly the same
+thing. So we couldn't do optimization and, you know the reason we can do optimization
+as precisely because the meaning function is many to one. So meaning is many to one
+and keep in mind, important point here it's never one to many. We don't want the
+opposite situation. If we have the opposite situation, Where L could map a
+single point to two different meanings. Well first of all, this would no longer be
+a function but, but also it would mean that the meaning of certain expressions
+say in our programming language was not well defined. That's that when you wrote a
+program was actually ambiguous whether it meant this or it meant that and that's a
+situation we don't like. So, we expect meaning functions to be many to one for
+nontrivial languages and we don't want them ever to be one too many. And that
+concludes today's video. Next time, Going to go back and continue with our
+discussion of lexical analysis.

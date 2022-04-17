@@ -1,0 +1,143 @@
+Welcome back. In this video, we're going to talk about converting nondeterministic
+finite automata into deterministic finite automata. Here again is our little diagram
+of the pipeline of a lexical analyzer, how one is constructed. So beginning with the
+lexical specification, we write our regular expressions. Last time we talked
+about the step, the conversion of regular expressions and the non-deterministic
+finite automata and this time we're going to talk about this step. And as you might
+guess in the final video in the series we'll talk about the final step which is
+the implementation of DFA's. So here's the Nondeterministic Finite Automata and we
+finished up with last time. And, the first thing we're gonna discuss today is an
+important idea called the Epsilon Closure of a state. And the basic idea of the
+epsilon culture is that I pick the states. And it could a set of states but we'll
+just do it for a single state. And then I look at all the states that I can reach by
+following only epsilon moves. And so b is the state that we're starting with so b
+would be included in the set and then there's an epsilon move to c. So c would
+be included in the set and there's another epsilon move to d so d would be included
+in the set. So we would say, the epsilon closure of b is = the set b c d. And let's
+do one more as an example. Want to take the epsilon closure of g. And when we
+switch colors up to this one, I'll erase that and to this one in pink, Our
+purple-ish pink. So the epsilon closure of g, we always have to follow all the
+epsilon transitions out of g. So, h would be in the epsilon closure of g but it's
+not just single epsilon move. This is recursive. So any number of epsilon moves
+that I can take, all of those states are included in the epsilon closure of g. So,
+in fact, i would also be included. A would be included and b and c and d will also be
+included And now, if I look at all of these states that have been colored in the
+light purple color. I can see that I can't reach any new states from those states
+using only epsilon moves and so the epsilon closure of g would be equal to and
+[inaudible] out here it's a, b, c, d. Ghi. Okay. So that is the epsilon closure of a
+state. Recall from the last video that an NFA maybe in many states any given point
+in time that is because of the choices it can make for a given input and NFA may
+reach multiple different states. And the question we want to address now is how
+many different states can it be in? Well if a non-deterministic automaton has n
+states. And it winds up in some subset of those states as how big can that subset b
+will clearly the cardinality of that said has to be less than or equal to n. So the
+NFA can get into a most and different states. Now instead, I want to know the
+number of different subsets, well how many different subsets are there of any things.
+Well that means there are two to the n - one possible subsets of n states. And
+there's something very interesting about this number. First of all it's a very big
+number so clearly the NFA can get into lots of different configurations
+particularly one it has a lot of different states but the important thing is that
+this is a finite set of possible configurations. And this is going to give
+us the seed of the idea. For converting an NFA into a DFA or Deterministic Automata
+because all we have to be able to do to convert a Nondeterministic Automata into
+Deterministic Automata is come up with a way for the Deterministic Automata to
+simulate for the [inaudible] of the Nondeterministic Automata and the fact
+that the Nondeterministic Automata can only get into a finite set of
+configurations even that configurations is very large, is exactly what we will
+exploit in the construction. Now we're ready to give the construction showing how
+to map an arbitrary nondeterministic finite automaton to an equivalent
+deterministic finite automaton. So let's begin by saying what's in our NFA. So,
+we'll have a set of states, Which we'll call s and these are the states of the
+Nondeterministic machine. There's a star t state, a little s which is one of the
+states and there is a set of final states F. And then we also have to give the
+transition function and I want to write out the state transition function. I want
+to use the state transition function to define a, a operator that we're going to
+find handy for defining our DFA. So I'd say that a applied to a set of states so x
+here is a set of states and a is a character in the input language. So, a and
+x is = those states y such that there is some x little x here, single state in the
+set of states such that there's a transition from x to y on input a. Okay.
+So this is just a way of saying I've given the transition function at this set level.
+It says for a given set of state x, show me all the states that you can reach on
+input a. Alright. So now we're ready to define our DFA. So what will the DFA be?
+Well, it's gonna have to have all of these things. It's gonna have to have, perhaps
+where the states are? What are the start state is? What's the final states are and
+what's the transition function is? So let's begin with the set of states. The
+states will be the subsets Of s. So the states of the DFA will be all possible
+subsets of the states of the NFA so there will be one state of DFA for each subset
+of possible, each possible subset of states of the NFA. And of course this is
+potentially a very big number but it's still finite and so we can use that set
+of, of subsets of states as the states based of the Deterministic machine So, now
+what's the start state of the DFA. Well that's going
+to
+be the  epsilon closure. Now one of the set of final states, Well,
+so the final states will be consist of those state x and every member of the
+states of the DFA are sets of states of the NFA. So that x is a set and is can be
+every x such that x intersected with the set of final states of the NFA is not
+empty. And finally we need to define the transition function. And do we do that?
+Well, we, we need to say that for a given state x and another state y, when is there
+a transition between them on some input a. Well that, there will be such a transition
+under that conditions and well let's write them out. So, remember we're in state x.
+And what do we need to know? Well we need to know, the set of states that we can
+reach on input A, and we'll be justifying that that's A of X, and then once we've
+gotten to where these, once we've seen where we can go from the set of states X
+of input A. There's also a possibility of making [inaudible] after that so
+furthermore we have to take the [inaudible] closer of that set of states,
+okay? And So we'll say that there's a transition from x to y if y is equal to
+this set of states. Alright, And notice that there's only one such set of states
+for any x and that guarantees of this is a deterministic machine. Each machine, each
+state will only have one possible move on each input so. We can just, now it goes to
+our check list and see if we have a deterministic machine. We have a finite
+set of states. We have a start state and we have a set of final states and we have
+a transition function with only one more per input and no epsilon moves. And so
+that is in fact a deterministic machine and the property that it maintain is that
+each step of computation. The state of the DFA records the set of possible states
+that the NFA could have gotten into the same input So let's work to an example of
+constructing a Deterministic machine from a Nondeterministic machine. Here's the
+Nondeterministic Finite Automata that we built in the last video and again this is
+the one that I used at the beginning of the video to define epsilon enclosure. So
+we're gonna do the example slightly differently than the construction I gave
+on the previous slide. If we actually have to write out all the subsets of this many
+states, it will take us a very, very long time. And it turns out that not all of the
+subsets were actually used by the DFA. So we're just going to enumerate the states
+that we actually need and we'll do that by beginning with the start sta te of DFA and
+then working out which additional states are required. So how do we do that? Well,
+we begin with the start state of the NFA which is just this state a. And then
+recall at the start of the DFA is the epsilon closure of that state so that
+corresponds to this purple set here. Alright. So the first state of the DFA,
+the start state is the subset of states a, b, c, d, h, i. And now we have to work out
+from this particular state from the start state what happens on each of the
+impossible input values. So, the alphabet of this machine is one and zero so you
+would have to have two transitions out of the state, one for an input of one and one
+for an input of zero. So let's do input zero first. And, we can see looking at the
+purple set that there's only one possible transition and that's from the state D to
+the state F. So certainly the state s is included in the set of states if the NFA
+can reach but then once we get the state f there's a lot of epsilon moves that we can
+take and so in fact the second state of the DFA corresponds to a much larger set.
+It's all the, it's the epsilon closure of f and that is, this set of states f, g, h,
+i, a, b, c, and d, okay. So these are the set of possible states that the NFA could
+be in after reading a single zero. Next, let's consider what happens from the start
+state on an input of one. Which possible states can the NFA reach? And, if we look
+at the transition function, we see there are two possible moves that the NFA could
+take. It could be in state c. In which case it would move to state e or it could
+have been state i, that's also part of the purple set in which case it would move to
+state j. So, there are two possible states that the NFA can get into as a result of
+reading a one and then after that, there's a bunch of epsilon moves that can take
+place and in fact, it turns out that after reading a one, the machine could be in any
+state except for state f. And that's this set of states and you'll notice that this
+particular set of states, the read set includes the final state of the NFA so
+this is also a final state indicating that after reading one, the NFA could be in an
+accepting state. So this would be an accepting state of the DFA Well, we still
+have to fill in for both of the two states that we've added here. The two states on
+the right of the machine what they do on input zero, what they do on input one. So
+let's figure that out. So beginning with the red state on input zero, what can
+happen? Well, look the red state includes state d and it can move to state f but
+we've already computed what happens on the epsilon, what the epsilon closure that is
+just the green state. And so if I'm in the red state and I read zero, I move to the
+green state. If I'm in the red state and I read a one, you'll see that both states,
+NFA states c and i are in the red set. And so, it just takes us back to the red set.
+And similarly for the green state, if I read a one, I move to the red state. And
+if I read a zero, I stay in the green state. And so, this then is our
+deterministic machine down here. This is the deterministic machine and again, it
+simulates the NFA. So every move at the deterministic machine, it records the set
+of possible states that the NFA could be in and it will accept a string infinitely
+if the NFA could accept the string.

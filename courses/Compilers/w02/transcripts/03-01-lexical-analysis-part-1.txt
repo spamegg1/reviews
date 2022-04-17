@@ -1,0 +1,107 @@
+Welcome back. This is the first video in our long series of the
+implementation of compilers, The call from last time that a compiler has five phases.
+We're gonna begin by talking about lexical analysis and this will probably take us
+three to four videos to get through at least and then we'll, we will be moving on
+in order to the other phases. Let's start by looking at a small code fragment. The
+goal of lexical analysis is to divide this piece of code up. Into lexical units so
+things like the keyword if the variable names i, n, j and the relational operator
+double-equals and so on. Now as a human being this is. As we discussed last time
+this is a very easy thing to do because there are all kinds of visual clues about
+where the units lie Where the boundaries between the different units lie but a
+program like lexical analyzer. It doesn't have that kind of luxury. In fact what
+the, what the likes of analyzer will see is something that looks more like this. So
+here I overwritten, the code out just as a string, with all the white space symbols
+included and is from, from this representation, this is a linear string,
+you can think of this as bytes in the file that the lexical analyzer has to work and
+it's going to mark through, placing dividers between the different units. So,
+it will recognize that there's a division there, between the white space and the
+keyword. Then a division after the keyword and there's more a wide space, the open
+paren, the i, another wide space, double equals and so on and it goes through
+drawing these lines diving up. The, the string into its lexical unit, So I won't
+finish the whole thing but you should get the idea. Now, it doesn't just place these
+dividers in the string however. It doesn't just recognize the substrings. It also
+needs to classify the different elements of the string according to their role. We
+call these token classes. Or sometimes, I'll just call it the class of the token.
+And in English, these roles are things like noun, verb, adjective. Okay and there
+is, ther e are many more or at least or some more. And in the programming
+language, the classes, the token classes would be things like identifiers,
+Keywords. I, and then individual pieces of syntax like an open paren or a close
+paren, those are the classes by themselves. A, numbers. And again, there
+are more classes but there's a thick set of classes and each one of these
+corresponds to some set of strings that could appear in a program. So token
+classes correspond to sets of strings, And [inaudible] strings can be described
+relatively straightforwardly so for example. The token class of identifiers in
+most programming languages might be something like strings of letters or
+digits, starting with a letter. So for example, a variable name or identifier
+could be something like a1 or it could be f00 or it could be, b17, all of those
+would be, be valid identifiers and often, often they'll be additional characters
+that allowed identifiers but that's the basic idea, Very, very often The main
+restriction identifiers that they have to start, with a letter, An integer and
+typical definition of an integer is a non-empty string of digits. So, something
+like zero or twelve. Okay. One followed by two I should say is actually a string of
+number in this case. And, and yeah, it is actually whether admit some numbers you
+might not think of. Things like 001 would be a valid representation of a number or
+even 00 could be a valid integer according to this definition. Keywords are typically
+just a fix set of reserved words and so here I've listed a few, else, if, begin,
+and so on. And then white space as itself a token class so we actually have to say
+in that string which is the representation of the program what every character in
+that string, what token or what token class it's a part of. What every substring
+is a part of and that includes the white space. So, for example if we have a series
+of three blanks, if I say if and then an open paren and I have three blanks in
+here, these three blank s would be grouped together as white space. So the goal of
+lexical analysis is to classify substrings of the program according to their role.
+This is the, the token class, okay? Is it a keyword, a variable identifier, And then
+to communicate these tokens, to the parser. So, drawing a picture here, let's
+switch colors. The lexical analyzer communicates with the parser. Okay and the
+functionality here is that, the lexical analyzer takes in a string. Typically
+stored up, also just a sequence of bytes and then when [inaudible] to the parser is
+sequence or pairs which are the token class. And substring which I would say
+string here, that, that, of which is the sets of string which is a part of the
+input along with the class the role that it plays in the in the language, and this
+pair together is called a token. So for example, if my string is that f00 = 42,
+all right, then that will go to the lexical analyzer and that will come, I'll
+write down here, three tokens. And these would be identifier. Who? Operator say
+equals. And. Integer, excuse me 42. And here I just left these things as strings
+to, to emphasize that these are strings. So this is not the number 42 at this point
+in time, it's, it's the string 42 which is a plays an integer role in the programming
+language. And then these, and when the price that takes this input is this
+sequence of pairs. So the lexical analyzer essentially runs over the input string and
+chunks it up into the sequence of pairs where each pair is a token class and a
+substring of the original input. As we turn to the example from the beginning of
+the video, here it is written out as a string. And our goal now is to lexically
+analyze this fragment of code. We want to go through and identify the substrings
+that are tokens and also their token classes. So, to do this, we're gonna need
+some token classes. So let's give ourselves some of those to work with.
+We'll need white space. And, and so this is sequences of blanks, new lines tab,
+things like that with the keywords. And we'll need variables which we'll call
+identifiers. And we'll need integers and now I'll call those numbers. Here and then
+we're going to have some other operations some other classes things like open paren
+close paren, and semi colon and these are interesting. These three ae interesting
+because they're single character token classes that is, is a set of strings but
+is only, is only one string in the set so the open paren corresponds to exact
+[inaudible] strings that contain only open paren. So often the punctuation marks of
+the language are in token classes all by themselves. Another piece of punctuation
+that we'll add here is, is assignments. That will be a token class by itself
+because it's such an important operation. But, the double equals will class as a
+relational operator with this class as an operator put it up here. Alright, So now
+what we're going to do is we're gonna go through and tokenized this string and I'm
+going to write down for each substring. What class it is. You know, I'm just gonna
+use the first letter here of the class. It's indicated just to save time so I
+don't have to write everything up. Hence, we change colors so we can do this in a
+different color. So, the first token here is white space token and then that
+followed by the F keyword. So, okay, And then we have a blank here which is another
+white space and then the open paren which is its own token class so I'll just leave
+it to identify itself there and then we have an identifier. Okay, White space and
+then an operator, the double-equals. Another blank so that's white space
+followed by another identifier followed by close parens, Again, a punctuation mark in
+a token class by itself. And then we have three white space characters so those are
+group together as a white space token, Followed by another identifier and more
+white space and then another single character token, the assignment operator,
+white space and a number, And then sem i colon again and punctuation mark and a
+token class by itself. Two white space characters can group together. What
+follows in is a keyword, so it gets classified as in the keyword token class.
+Another run of white space characters and then another identifier. There's actually
+a blank there where we almost covered it up without marks. The assignment operator
+by itself in a token class, white space, a number, and finally the semi colon by
+itself. And there is our tokenization. We've identified the substrings and we've
+also labeled each one with its token class.

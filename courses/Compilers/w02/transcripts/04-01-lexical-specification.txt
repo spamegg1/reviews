@@ -1,0 +1,155 @@
+Welcome back. In this video, we're going to talk about how regular
+expressions are used to construct a full lexical specification of the programming
+language. Before we get started, I want to quickly summarize the notation for regular
+expressions. One of the shorthands we talked about last time is a+ which means a
+sequence of at least 1a or the language aa*. Sometimes you'll see a vertical bar
+used instead of unions or a + b. Can also be written a vertical bar b and optional a
+is abbreviation for the regular expression a + epsilon. And then we have character
+ranges which allows us to do a big union, a bunch of characters in order. And then
+one more that's used, that's, that's actually fairly important but we didn't
+discussed last time is the compliment of the character range. So this expression
+here means any character except the characters a through z. So the last
+lecture, we talked about a specification for the following predicate. Given a
+string s, is it in the language as the function L of a regular expression. As we,
+we define the language of regular expressions and talked about their
+semantics in terms of sets of strings. And so for any given regular expression, we
+could reason out by hand whether a given string was in that language or not, and
+this turns out not to be enough for what we wanted to do. So just to review, what
+is it we wanted to do when we're given an input, which is a bunch of characters, so
+here's a string of characters And it can be much longer than just setting
+characters and. But we actually wanted to do is to partition the string. We want to
+drop lines in the strings, divide up into the words of language. Now of course each
+one of these words are to be The language at some regular expression. But just
+having a, a, a definition or a yes no answers, not quite the same thing as
+having a method for partitioning a string into its constituting parts. And so we're
+gonna have to adapt regular expressions, to this problem and, and this requires
+some small extensions and that's what this video is all about. So let's talk about
+how to do this. The first thing we're going to do, when we want to design the
+lexical specification of the language is we have to write the regular expression,
+for the lexing to be to the [inaudible] classes and we, we talked about how to do
+this last time. So, for the numbers we might use digit plus desire as our regular
+expression and we might have a category of keywords which is just the list of all
+the, keywords in the language. We would have some category perhaps of identifiers.
+There is the, definitely we talked about it last time. Sequences of letters or
+digits that begin with, with the letter and then we're having a bunch of. Bunch of
+punctuations, things like open parens, close parens, etc. So we write down a
+whole set of regular expressions. One for each syntactic category in the language
+and that's the starting point for our lexical specification. The second step,
+what we're going to do is we're going to construct a gigantic regular expression
+which just matches all the lexings for all the tokens and this is just the union, of
+all the regular expressions, that we wrote out on the previous slides. So we'll just
+take the union of all those regular expressions and that forms, the lexical
+specification of the language. And, we'll just write this out, we don't really care
+what these regular expressions are but they're just some, set r1, r2 and so on
+and the whole thing we're going to call r. And now, here's the heart of how we
+actually use this bicycle's specification to perform lexical analysis. So, let's
+consider an input. We input the string x1 up to xn. And now for every prefix of that
+input, okay. We're going to check whether it's in the language of the regular
+expression. So we're gonna look at some prefix trying with the first character and
+we're gonna ask ourselves is it in the language of that big regular expression.
+And if it is, if it is in the language, well then we know in particular that, that
+prefix is in the language of one in the constituen t regular expressions cuz
+remember that r =. The sum of all the different talking classes of our language,
+okay. So we know that this prefix x1 through xi is in the language of sum rj.
+Okay And so that we know that, that's a word. In our language is one of. Is in one
+of the talking classes that we're interested in, And so what we do is we
+simply delete that prefix from the input and then we go back to three and we
+repeat. And in this way we keep biting off prefixes of the input and we'll do this
+until the string is empty and then we have [inaudible] analyzed the entire program.
+Now this algorithm has a couple of ambiguities or a couple of things that are
+under specified and those are actually interesting. So let's take a moment and
+talk about those. The first question is how much input is actually used? So, let's
+consider the following situation. Let's say that, we have, the x1 to xi, is in the
+language of our lexical specification. And let's say there's a different prefix,
+that's also in the language of our lexical specification and of course your I is, is
+not equal to J. What does that look like? Well, it would look like the following
+kind of situation; we would have our input string. And we have two different prefixes
+of the input that are both valid talking classes and the question is which one of
+these do we want? And, you know just be kind of [inaudible] here to have a
+concrete example, let's consider. What happens when a =,,,, = is at the, is at
+the beginning of the input. After we chopped off a bunch of other input and
+perhaps we have this sub-string or this prefix of the input that we're looking at
+and the question is, you know should this be regarded as a single = which would be
+an assignment operator in most languages or would it be regards to =,,,, = which in
+some language is a comparison operator? And, and this is an example we've looked
+at before and discussed, and there's actually a well defined answer to this
+question. And, it is, that we should always take the longer one and this has a
+name that's c alled the maximal munch. So the rule is that when faced with a choice
+of two different prefixes of the input, either which would be a valid token, we
+should always choose the longer one. And, the reason for this is that's just the way
+humans themselves read things so when we see =,,,, = we don't see two different
+equal operators, we see =,,,, = and if I. Look at, you know that the sentence that I
+wrote up here, you know when we look at HOW, we don't see three letters. We gather
+that altogether in one long token. We go as far as we can until we see a separator
+and so because this is the way humans work; we make the tools work the same way
+and this normally or almost always does the right thing. Second question is which
+token should be used if more than one token matches? So what do I mean by that?
+Well, again we have our prefix of the input and it's in the language of our
+lexical specification and just remember that the lexical specification itself
+again is made up as the union, a bunch of regular expressions for token classes.
+Now, since that, since this prefix, is in the language of the lexical, lexical
+specification, that means that it again, it must be in the language of some
+particular token class, rj. But nothing says that it isn't also in the language of
+a completely different token class. Meaning, at the same string could be
+interpreted as a, as one of two different tokens and the question is if this
+happens, which one should we pick? So, for example just to make this concrete, Recall
+that we could have a lexical specification for key words which would be things like
+if and else, and so on, and also for identifiers. And then the identifier was
+the letter Followed by a letter or a digit. Repeat it, okay. And if you look at
+these two specifications, you'll see that the string if, IF is both of them. So IF
+is in the language of keywords, And it's also in the language of the identifiers.
+And so should we treat it as a keyword or an identifier. Now the normal rule in most
+languages is that if it's a keyword then i t's always a keyword and you know the
+identifier is actually don't include the keywords. And but actually it's a real
+pain to write out the identifiers in such a way that you explicitly exclude the key
+words. This is a much more natural definition I've written here for the
+identifiers. And so the way this gets resolved is by a priority ordering and
+typically the rule is to choose the one Listed first. Okay. So when there is a
+choice, when there is more than one token class which the string might be long, the
+one that is listed first is given higher priority. So in our file defining our
+lexical specification we would put the key words before the identifiers just as we
+have done here. The final question is what to do if no rule matches. What if I have
+the prefix of the input? That is not in the language Of my lexical specification.
+Now this can actually arise. Certainly there are lots and lots of strings that
+are not gonna be in the language of the lexical specification of most languages.
+And the question is how to handle that situation? So it's very important for
+compilers to do good error handling. They can't simply crash. They need to be able
+to give the user, the programmer a feedback about where the error is and what
+kind of error it is so we do need to handle this gracefully. And the best
+solution for lexical analysis is to not do this so don't let this ever happen. And so
+what we wanted to do instead is to write a category of error strings, So, all of the
+strings. Not in the lexical specification of the language. So we write out a regular
+expression. Again this is another regular expression here. For all the possible
+error strings, all the possible erroneous strings that could occur as you know
+invalid lexical input and then we put it last. Put it last in priority. So that it
+will match after everything else matches and, and the reason for putting it last.
+Is that, this actually allows us to be a little bit sloppy in, in how we define the
+error strings. It can actually overlap, with earlier regular expressi ons. We can
+include things in the error strings that are in fact not errors. But, if we put it
+last in priority, then it will only match if no earlier regular expression match and
+so in fact, they will only catch the error strings. Then the action that we'll take
+when we match the error string will be the prints in the error message and give
+device a feedback like where it is in the file and such. To wrap up this video,
+regular expressions are very nice and concise notation for string patterns but
+to use them in lexical analysis requires a couple of small extensions. Some
+particulars, a couple of ambiguities we have to resolve, we want our matches to be
+as long as possible. So we take. As much input at a time as we can and we also want
+to choose the highest Priority match. So, the regular expressions are given a
+priority. The different token classes have priorities and, when there's tie, when the
+same, prefix of the input could match more than one, we pick the one that has the
+highest priority. Typically this has done just by listing them in order in a file
+and the ones listed first have higher priority over the ones listed later. I
+just wanna warn you that when you go to right lexical specifications, when you go
+to actually implement, lexor for a language, the interaction of these two
+rules that we take longest possible matches and we break ties and favor of the
+highest priority rules. That this lead to some tricky situations and it's not always
+obvious that you're getting exactly what you want, You have to think carefully
+about the Ordering of the rules and it's actually how you write the rules so that
+you get the behavior that you desire. And finally to handle errors, we typically
+write out. Catch all regular expression that soaks up all the possible erroneous
+strings and give it the lowest priority so that it only triggers if no valid token
+class matches some piece of the input. If I leave, we haven't discussed these yet
+but they are very good algorithm to know for implementing all of these and in fact
+we'll be able to do it in only single pass over the input and with very few
+operations per character. Just a few, Just a simple table look up and this would be
+the subject of our future videos.

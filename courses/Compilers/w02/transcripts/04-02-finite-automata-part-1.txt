@@ -1,0 +1,137 @@
+Welcome back. In this video we're going to talk about finite automata
+which we'll see in future videos are a good implementation model for regular
+expressions. So in the last few videos, we've been talking about regular
+expressions which we use as the specification language for lexical
+analysis. And, in this video we're gonna start something new. We're gonna talking
+about Finite Automata which are the For a convenience as an implementation mechanism
+for regular expressions. And so regular expressions and finite automaton are very
+close related. It turns out that they can specify exactly the same languages called
+the regular languages. We won't prove that in this course but we'll certainly make
+use of that fact. So, moving right along, What is a finite automaton? Well, here is
+a typical definition as you might see in a automaton theory textbook. Finite
+automaton consists of an input alphabet. So, it's a set of characters that it can
+read. It has this finite set of states. We should probably emphasize that. This is
+what makes it a finite automaton is that it has some set of states that it can be
+in. One of those states is special and it's designated as the start state. Some
+subset of the states are accepting states so these are the states that. But, well,
+we'll just find that more in a minute but intuitively, if the automaton terminates,
+after reading some input on one of these takes that it accepts the input.
+Otherwise, it rejects the input and finally the automaton has some set of
+state transitions that is in one state, they can read some input and go to another
+state. So let's look at that little more detail so a transition in a finite
+automaton. If I'm in, in this case I've written out one particular transition
+here. We're in state one and we read the input A then, the automaton can move to
+state two, okay. And there could be lots of different transitions for the automaton
+from different states and different inputs and its read the following way. If we're
+in state one on input A , we would go to state two. And, if the automaton ends in
+an accepting state when it gets to the end of the input that is going to do what's
+called accepting the string Meaning that it will say yes, That string was in the
+language of this machine. So intuitively the automaton starts in the start state and
+it repeatedly reads inputs one input character at a time makes a transition. So
+it'll see what kind of transition it can make out of its current state based on
+that input to another state and if that's done ringing the input it's in one of the
+final states that it will accept. Otherwise is going to reject the input.
+Now, one of the situations in which it rejects, well, if it terminates In a state
+S, that's no one of the final or accepting states, okay? So that ends in any other
+state besides one of the accepting states and it's going to reject. If the machine
+gets stuck, Meaning it finds itself in a state and there's no transition of that
+state on the input. So in particular, let's say that in some state as a news and
+the input is A, and there's no transition. There's no transition specified per state
+as an input A so the machine can't move anywhere and it get stuck and that's also
+a rejecting state. And so in these two situations, if, if you either get to the
+end of the input and it's not in a final state or. If it never reaches the end of
+the input because it can stuck and both of those cases it rejects the string. That
+string is not in the language of the finite automaton. Now there's an
+alternative notation for Finite Automata that I think is more intuitive for
+examples and so we're going to emphasize that way of writing the mount. In this
+notation a state is represented as a known graph which just draws a big circle. The
+start state is represented as a node that has an edge or an arrow into it with no
+source. So, this is a transition into the node but no source node that it comes from
+and that indicates the unique start state. An accepting state is drawn as a node wit
+h just double circles like this. And finally a transition is drawn as an edge
+between two nodes of the graph. So with this as the time in this state that I'm
+circling in blue and I read the input a well then I can move to this state at, at
+the tail of the arrow. So now, let's do a simple example. Let's try to write up the
+automaton that accepts only the single digit one. So all we need is start state.
+And will probably want an accepting state as well and now the questions is what do
+we put in between the two? Well, there would be some kind of transition here and
+it's a good guess that we should take that transition if the machine reads the one.
+Now let me take a moment here to talk about how the machine executes so let's
+label these states. Let's call this state a and let's call this state b, okay. So
+the machine will have some input. Okay, and we can write that input out will be
+here. So let's just say, we have the single character one and it begins in some
+state namely the start state. And so, one configuration of the machine is the state
+that it is in And the input. And typically we would indicate where it is in the input
+by just a pointers saying what position it is in the input. And, the important thing
+to know about input in [inaudible] the input pointer always advances. So, when
+we, or it only advances so when we read a character input, the input pointer moves
+to the right and it never moves back. Alright, So from state a, we have a rule.
+We can see that we're in state a. The next input character is a one and that allows
+us to take a transition to state b and so now where b in state b and where as our
+input point well it's beyond the end of the input indicating we are at the end of
+the input. And so now this is. We are in an accepting state and we pass the end of
+the input and so we accept. Okay? So let's, do another execution. So we start
+in state a and let's take as our input the string zero. Okay. And I'd like to draw
+the pointer. Actually I should have drawn it before the input so we'll al ways put
+the pointer between two input elements. In this case it's a merely to the left of the
+one we're about to read. So in this case we're about read zero so in state a. Our
+input is zero. We look at our machine. We see that there is no transition on zero.
+All right? And so the machine stays stuck. It doesn't make any move at all and this
+is our final configuration. And we could see that we're not at the end of the input
+and so this is a reject. Okay, so in this case the machine rejects that string as
+not being in the language of the machine. Let's do one more example. Let's say that
+we're in state, well we're always beginning in state a and the start state,
+and let's say our input this time is the string ten, okay? And our input pointer is
+there. All right? So again we're in state a. The input is a one and so we'll move to
+state b. And now the input doesn't change. Just the input point changes but I'll just
+copy the input over to show the difference. Now the input pointer has
+advanced cuz we've read one character of input and now we're in another state. And
+now we can see that we're in state b. Our next input is zero and there is no
+transition on zero from state b and so even though we're in an accepting state, b
+as a final state, it's one of the accept state and we haven't consumed the entire
+input. And so this, The machine also rejects this string so this is also a
+reject. And in general we can talk about the language. Of a finite automata that is
+equal to the set of...accepted strings. Okay? So the language of a finite
+automaton, when I'm talking about the language of a finite automaton, I mean the
+set of strings that the automaton accepts. So now let's do a more complex example.
+Let's try to write out an automaton that accepts any number of one followed by a
+single zero. So once again well need a start state and we'll also need a final
+state and now let's start by thinking about what's the shortest string is that's
+in the language of this machine. So in this case, we know it has to end in a
+singl e zero. So a zero definitely has to be, a zero transition has to be the last
+move and before that zero can come any number of what? In a particular there
+could be no 1's. So one transition in this machine is that from start state on input
+zero we can definitely go to the final state because the single string consisting
+of a single zero isn't the language of this machine. And now the only question is
+how do we encode the fact that any number of 1's can proceed to zero? Well, there is
+an easy way to do that. We can just add a [inaudible] by the start state. And take
+that transition if we read at one. And what does this mean? This means that we'll
+stay in the state, state as longer are we're reading 1's and as soon as we read
+zero, we'll move to the final state because that has to be the end of the
+string if the machine is going to accept it. So let's do a couple of examples to
+convince ourselves that this works. Let me label this state?s again. So this is state
+a, and that's stat b. So Let's write out here states and input. So we'll begin in
+state a and let's take as input 110, okay. So let's do an accepting case first. All
+right, So our input pointer begins to the left of the first character. So, we're in
+state a in start state. We're reading a one and that says we should take a
+transition that puts us back in state a. And so, we advance the input pointer. And
+now we consume the first one and, and again we're in state a and the next input
+is a one so we'll make another transition to state a. And the input cleaner will
+advance. So now we're in state a and the next input is a zero and so we'll take the
+transition to b and now in this configuration, so the input pointer has
+reached the end of the input we're in an accepting state and so the machine
+accepts. 110 is in the language of this machine. So now let's do an example where
+we will reject the input. And what configuration do we begin in and again a
+configuration for a finite automaton that just means you know a point in the
+execution it alwa ys consist of a state and a position of the, the input pointer.
+So our initial state is a and now let's just choose the string. I don't know,
+let's take 100 and let's confirm that this is not in the language of the machine. All
+right, So we begin in state a and our input pointer is there. Now we read a one
+and that means, well, you know. So it's from state a transition of one. We stay in
+state a and the input pointer advances. And now we see a zero. So from state a and
+input zero, we make a transition to state b. And now the input point is here so now,
+we're in state b and we have an input of zero but there is no transition the b and
+zero, there are no transitions out of b at all and so the machine gets stuck, it
+can't get to the en of the input and again, even though we're in an accepting
+state we haven't read the entire input yet and so that means the machine will reject.
+And so, 100 is not in the language of this machine.

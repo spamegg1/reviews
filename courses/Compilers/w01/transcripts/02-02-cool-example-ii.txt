@@ -1,0 +1,166 @@
+Welcome back, In this video we're going to look at another example of cool
+programing. This time let's move beyond the simple hello world kind of examples
+and on to something more exciting, say, the ever popular factorial function. So,
+in order to write factorial, we'll need to open a file, which we can write some code.
+Let me start that. And recall from last time that every cool program has to have a
+main class and the main class is required to have a main method. And we don't care
+what the main method return, so we'll just have it return something a type object,
+and then we'll just fill in a skeleton here on the file. And, so now we're ready
+to write some codes. So what are we going to have the main method do? Well, before
+we can actually write factorially, before we can get to the guts of this program,
+which is actually not very difficult. We need to talk about IO some more. Because
+we're going to need to be able to, read and write, numbers. We need to be able to
+read numbers from, the, the user who's running the program, and print them back
+out. So let's just review little bit about IO, also. In order to invoke the IO
+functions, we need an IO object. And one of the IO functions is something that
+prints out a string. So let's just, write a program that we already know how to do,
+just to confirm that we remember that. And, we can compile this program. And it
+should just print one. And, let's see. Indeed it does. Okay? So it prints out the
+number one. And so now, let's come back here and let's talk about how to do input.
+So, instead of just printing out the number one, let's print out a strain that
+the user types in. So, ins-, in here, we're going to read a strain. And in order
+to do that, we need an IO object because there is another function, another method,
+called in-strain. Okay. And so this will renew this string. And return to string.
+And to make sure that we get the nice output let's concatenate on to that string
+a new line. So, this is just to. When it prints this string back out it will be
+printed on i ts own line. So, let's try compiling this, And steak. It compiles,
+And now we can run spin. Remember the bang command in UNIX runs the previous command
+that began with the same letters. And now the program runs and it waits. Cause it's
+waiting for me to type something. And if I type it type in one it prints back one and
+if I type in 42 it gives me back 42. And so now The next thing we need to talk
+about is how to convert strings into integers, because if we're going to do a
+factorial, we want to work on integers and not strings. And at the moment we're just
+reading and writing strings. So, there is a library written in cool that does
+conversion between integers and strings. And we're going to give the main class
+here the functionality of that class. Which is called A2I for ASCII to integer.
+And that defines a bunch of methods, that can convert between strings and integers.
+So let's add those, commands in here. So here, here's our string. That we've read
+in. And what we want to do now is to, convert this into an integer. So let me
+just add a couple of parens here. So there's our string, okay? And now we're
+going to invoke. On that the method I'm sorry we're going to call on that the
+function the method, A to I. Okay? And let's just double check here that we've
+got friends in the right place. So that's the argument to A2I. Now, we recall that
+when we have a dispatch to a method and it's just sitting by itself with not
+object, it's dispatched to the self object. And the self object is the object
+of the current class that we're in. In this case the main object, which has
+inherited the A2I methods, And so the A2I functions should be defined in there. Now
+we have an integer. And we can do something with that integer if we like.
+So, let's add some more [inaudible] here and let's just say we add just one to the
+integer. Okay. And then once we're done with our integer. Whatever operation it is
+that we want to do with the integer we need to convert it back to a string so
+that we can print it out. An there's an inverse function I2A that will do. So, I
+don't know if we have all the parens in the right places at this point. So,
+let's just check. Yes. That looks like that should work. So this will, read in a
+string, convert, convert it to an integer, add one to it convert it back to a string,
+concatenate on a new line, and print it out. Now let's see if all that actually
+works, so let's run the compiler and we have a problem here. It says that we have
+an undefined class A to I. And the reason is, we didn't supply the code for A2I. So
+if we look in our directory here, we'll see I've already copied in the class file
+for A2I. And I encourage you to go and look at that code. It's actually
+interesting code to see how the conversions are written in COOL.
+But now we need to talk about how to compile a program that uses a library, And
+the way you do it is very simple. You just list all the class files on the command
+line when you call up the compiler. And it will read them all in and treat them as a
+single program. So in this case we compile, compile fact together with A2I.
+And that complies. And then we can run it. [sound]. And now, if I type in three, it
+prints four. And if I type in one, it prints two. And so the program seems to be
+working. And now we're almost ready to write our factorial function. So what do
+we want to do in factorial? Well, we want to do something other than just adding
+one. Instead, we want to call, our special function factorial. So let's insert a call
+to factorial in here. Okay, and let's get rid of the plus one. And then let's check
+that we have all the parens that we need. So we need to close off the, the A2I call,
+the factorial call, The I2A call. And then that last one should be the out string
+call, And it is, Okay. So now we can add a method fact to this class, And fact is
+gonna take an integer argument. So we need a parameter here, And it's type is in
+force. And the whole thing is gonna return an integer. And then we have body of our
+function, And probably a good idea here, just to make sure that we got this much
+right, to do something simple. So let's just try to make a function that returns
+one more than it's argument. So this will do exactly the same thing that we had
+before and let's just confirm that, that is working. So EW compile with the A2I
+library and now we have a syntax error. And we see that I forgot the closing
+semicolon here for the method. Remember the, the, class body is a list of methods,
+and each method is terminated by a semicolon, Must try compiling that again.
+Now it compiles. Let's run it. We type in four gives a spec five. Alright, So looks
+right we're ready now to actually right the code for factorial. And this is gonna
+be anti climactic because it's actually a very simple code if we write it
+recursively. So let's do that. So how's that going to work? Well, everybody knows
+the definition by Hardy Hope. If I is equal to zero then the factorial of zero
+is one. And we have a keyword there then one, otherwise the factorial is going to
+be I times, the factorial of I minus one. Right, and then if statements in
+[inaudible] always end in the keyword [inaudible] so it's an if then else
+[inaudible] construct. And that is actually the entire definition. So now we
+should have a program that actually computes factorial, it compiles, so now
+let's run it. So factorial of three is six. And factorial of six, is 720 and that
+looks right. And if we try it one more time with a bigger number, we get a, we
+get a large number, we think that's probably correct. And so, anyway our
+factorial function, is working. So, now let's come back here, and just as an
+exercise, let's rewrite this code iteratively. So instead of using a
+recursive function, let's write it using a loop. And in order to that [inaudible]
+gonna get rid of that code. What are we going to need? Well, we're going to need
+an accumulator here. We're going to need a, a local variable that we can use to
+accumulate the results of the factorial computation. And the way you declare local
+variables in [inaudible] is with [inaudible] Statements, or naudibl
+expressions. So we're gonna have, let's call this, variable fact, for the, result
+of factorial. And notice here that I can have a variable that has the same name as
+the function. And the programming language, [inaudible] will not get
+confused about that, Because variables and functions, play different roles. So we'll
+have the factorial fact, excuse me, it's of type Int, and we do initialize it to
+one. Alright, so that multiplication will work. I think that the default for
+integers is to be initialized to zero and that would not be good if we're going to
+be multiplying up fact with other with other numbers. Alright, so then the, a let
+has two parts. It has the variable or variables that you are declaring. This
+could actually be a list of variables. We'll only have one this time. And then it
+has a body. The, the expression or the computation in which the fact variable is
+available. And what do we want to do? So, I think we're gonna need to have this be a
+statement block 'cause we're gonna need to have more than one statement in the
+sequence. And we'll see why in just a minute. But then we wanna have a loop. And
+so what is our loop going to do? Well, we're gonna say while I is not equal to
+zero. What do we, and what do we need to do the opening for the loop body the
+opening keyword is called loop. [sound]. And now, I think we're going to need
+another statement block here. So let's open up a block. We're gonna probably need
+to do more than one thing. The first thing we want to do is we want to have fact. Be
+fact times I, so we know that I is not zero so we need to multiply the current
+value of I into fact to accumulate the result and then we want to subtract one
+from I and notice that the assignment statement in cool is this backwards arrow.
+That's how you do assignment. It's also how you do initialization. So,
+initialization and assignment look the same. Then we can close off our statement
+block. Okay, so the body of a while loop is always a single expression. In this
+case, that expression is a block that consists of two statements. [sound] And
+then we can close the loop. And the closing for a loop is the pool key word.
+And then now we're in a statement block, so this has to end with a semicolon.
+Notice the statement block up there from the let, And now we want the result of the
+let block, or the let expression, to be factorial. So whatever the, whatever we
+got out of the while loop, whatever we computed in the while loop, we want that
+to be the result of the entire let expression. [sound] so that's the last
+statement of our blog. Remember the last statement of a statement blog, is the
+value of the blog. The body of the led is the, the result of the led, so fact will
+also be result of the whole led statements, it's just the result of the
+statement blog. And since the body of the, factorial method itself is just the led
+expression, fact will be the result of the whole thing. And so this, if we've
+written, haven't made any mistakes, should be an iterative version of factorial. So,
+let's compile this. And amazingly it complies on the first try. And now let's
+run it. [sound] And whoa! It actually works. So we got six. And let's just do
+one more test, to see that, to convince ourselves that, things are working
+reasonably well, and they are. Now, let me just point out, one, common, mistake, that
+you can easily make, and, that I make when I haven't written cool programs for a
+little while. If you're a C or programmer or a Java programmer, you might, think
+about, writing assignments, like this. So I just use the equal sign to write
+assignment. That looks completely fine if you're, if you're familiar with those
+languages, or used to programming in those languages. And now, let's see what happens
+when we try to compile this. Oh, it compiles just fine. And then what happens
+when we try to run it. Well it runs [inaudible] input so let's give it input
+and. Then we see that we've run out of heat. And that looks like an infinite
+loop. So we're going around and around the loop And consuming memory for some reason.
+And we'll, we '[laugh] get to that much later in the class. Why, why this loop
+actually ends up consuming memory. But, clearly, we don't have enough memory, in
+the loop, and, and eventually we run out. And so, so that's a sure sign Of an
+infinite look. So what is going on here? Well the thing is that equals. Equals
+operator in cool is the comparison operators. [inaudible] Well we compared I
+with O and that returns a boullion. So these are perfectly valid cool
+expressions. They just happen to be boullions. So, you don't ever actually I
+or factorial in this program. Your just comparing fact with factoid body and I
+with I minus one and the program is perfectly happy to do that. It just
+doesn't compute the factorial function. And it never terminates, because I never
+reaches zero. So that concludes our factorial example. And we'll do one more
+example next time of a more complicated, of a, of a cool program with some
+non-trivial data structures.

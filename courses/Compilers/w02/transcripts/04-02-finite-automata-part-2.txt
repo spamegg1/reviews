@@ -1,0 +1,113 @@
+Up to this point a finite automaton consumes a character of input
+every time it makes a move. So if you can't make any move at all, the input
+pointer advances. Now we're talking about a new kind of move, the epsilon move and
+the idea behind the epsilon move is that the machine can make a state transition
+without consuming input, So for example if I have my states and I'm in state A and my
+input. And let's just say that we have x1, x2, x3 and for some reason we're about to
+read x2. When we make an Epsilon move the machine changes state but the input
+pointer stays in exactly the same place. So the new configuration of the machine
+that we are in state b, but our input pointer is still waiting to meet x2. So, you can
+think of an epsilon move is a kind of free move from the machine it can, it can move
+to a different state without consuming any input. And just to be clear here the
+machine does not have to make the epsilon move. It's a choice so they can decide
+whether to make the epsilon move or not. Now epsilon move, the first time we have
+mentioned the possibility that a finite automata might have a choice and what
+moves it makes. There's actually an important distinction between automata
+that have choices and those have don't. So deterministic finite automata have two
+properties, first of all, they have no epsilon moves so they must always consumed
+input. And second, they only have one transition per input per state. What do I
+mean by that? That means that if I look at any state in the deterministic automaton,
+they can never have something like this where they have two possible moves for the
+same input. All the outgoing edges in the deterministic automaton must have
+different input labels. And then Nondeterministic Finite Automata are just
+those not deterministic. So in particular a Nondeterministic Automata can have
+epsilon moves so it can choose to move to another state without consuming input and
+it could also have multiple transitions for one input in a given state so
+something like this, is okay for a Nondeterministic Automata. Yeah. Let me
+just point out really epsilon moves are enough to create a non-deterministic
+automata and then at the second case where you have multiple transitions on the same
+input can be simulated just by a slightly more complicated machine with epsilon move
+so for example I can draw this machine in the following way. I can have or I can
+simulate the machine that circled there in the following way. I can have a state with
+two epsilon moves and then. Each of those states has a move on A so I were to label
+the states one, two, and three. Then this would be the state that corresponds to
+one. And this would be the state that corresponds to two and this state be, be
+the state that corresponds to three. So anytime that we have multiple moves out of
+the state on a single input we could always replace that by a few more states
+with epsilon moves and have every state in the machine only have a single transition
+for every possible input. So really the only fundamental difference between the
+deterministic automata and non-deterministic automata is w hether
+they have epsilon moves or not. A key property of a Deterministic Automata is
+that it can only take one path through the state graph per input. So this is per
+input. What do I mean by that? Well, the automaton always begins at the start state
+and let's take a very simple input string like ABC and if we can look at the
+sequence of states that the Deterministic Automaton will take, For that input, this
+path through the state graph is completely determined by the input because again it
+has no choice. In a given state, this can be one transition label day and this
+continue to a state that it only has one transition labeled b and that goes to
+another state that only has one transition labeled c. And so, every input determines
+the path through the state graph of the automata will take. And, this is not true
+for Nondeterministic Automata. So, it might be for example. That beginning in
+the start state and on input a that there is some state I can go to on that input a
+but there maybe another transition labeled a that would take me to a different state
+so the automaton might be able to go to one of two different states and again
+there might be also epsilon transitions. And so what happens with Nondeterministic
+Automata is that in general as they proceed to the state graph is they execute
+on the input, they could wind up in any number of different states. Okay. And the
+rule with the non-deterministic automaton about when it accepts is that it accepts
+if any path accepts. So if NFA Accepts, If some Choices Lead to an accepting state at
+the end of the input. Now there's a [inaudible] automaton, I can choose what
+move to make and as long as there are some choice it can make, then we'll get it to
+an accepting state. So let's say switching colors here that you know this was an
+accepting state down here and they took this path. Then it would accept and maybe
+all of these other pass are rejecting pass, that doesn't matter. As long as
+there is one path, a one set of choices the NFA could make to get it to an
+accepting state at the end of the input, then we say that, that string is in the
+language of the NFA. The fact that NFAs could get into multiple different states
+depending on the choices they make during a run is important and will actually play
+central role in the future video, so we're gonna do a quick example here to just make
+sure that this is clear. So here's a little automaton and note that it is
+Nondeterministic Automata from the start state there are two possible moves input
+zero. And what we're going to do is just walk through in execution of this machine
+on a sample input and see what different states it can get into. So we begin at the
+start state and we should probably label our states actually so that we can refer
+to them. Let's call them A, B, and C. And let's say at the first input is one and so
+what does that mean? That means we'll take this transition. We'll just go from the
+start state and come back to the start state and so the set of states that the
+machine could be in after the first transition is just the set A. So it's
+guaranteed to still be in the start state. So there's no, no choices with the first
+move. Now let's say at the second input character is a zero and now we do have a
+choice. We could either go to state B or we could go to state A. And, we could
+think of this then as a set of possibilities that after we execute this
+move, this transition, the machine could be in anyone of the set of states and
+actually this completely characterizes the possibilities for the machine. We've only
+read the second input character and now we could be in a set of states, okay? And we
+could be either in state a or in state b. And so now let's say we read another zero.
+And where could we go then, well if we're in state B we could make the transition to
+state C but if we're in state A then we'll make the transition either to state B or
+again to state A. So in fact we could be in anyone of the three states if we read
+another zero. Okay? And now you, I think you can see w hat the rule is. So in every
+step a Nondeterministic Automata is in a set of states of the machine and when it
+reason, the input we consider all the possible moves it can make to compute the
+complete set of states that could be in at the next step of the machine. Okay? And
+then the, the, finally has to decide whether the machine accepts while we look
+at the final state after the last bid of input is red and if there's any I'm sorry,
+we look at the last set of states after the last input character is red and if
+there's any final state in that set, then the machine accepts and in this case,
+after we read zero, we see that in accepting state c is in the set of
+possible states. So what that means is, if there was some sort of choices that the
+machine could make, that we'll get it into the final state at the end of the input
+and so with the machine. Accepts this input, okay? So if there's a final state
+in the final set of possible states, then the Nondeterministic machine accepts. It
+turns out that NFA's and DFA's are recognized exactly the same languages and
+particularly the regular languages. So NFA's, DFA's and regular expressions all
+have equivalent power. They can only specify regular languages. Dfa's are
+definitely faster to execute primarily or entirely because there are no choices to
+consider so a DFA and just follow a single path through the state graph where with
+NFA we have to keep track potentially of the set of choices in the NFA and we might
+be in set of states. However there are some advantages to NFA so they are in
+general much smaller. And DFA's, In fact, they can be exponentially smaller so the
+smallest. Nfa, Maybe much, much smaller than the smallest equivalent DFA for the
+same language, And, there's, so essentially there's a space time tradeoff
+between NFAs and DFAs. Nfas might be more compact but DFAs will be faster to
+execute.
