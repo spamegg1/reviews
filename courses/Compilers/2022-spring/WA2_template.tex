@@ -1,0 +1,240 @@
+\documentclass[11pt]{article}
+\usepackage[pdftex]{graphicx, color}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{forest}
+
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+\usepackage{array}
+\newcommand{\PreserveBackslash}[1]{\let\temp=\\#1\let\\=\temp}
+\newcolumntype{C}[1]{>{\PreserveBackslash\centering}p{#1}}
+\newcolumntype{R}[1]{>{\PreserveBackslash\raggedleft}p{#1}}
+\newcolumntype{L}[1]{>{\PreserveBackslash\raggedright}p{#1}}
+
+\usepackage{tikz}
+\usetikzlibrary{automata,positioning}
+
+\let\epsilon\varepsilon
+\tikzset{shorten >=1pt, node distance=2cm, on grid, baseline={([yshift=-8pt] current bounding box.north)}}
+
+\headheight 8pt \headsep 20pt \footskip 30pt
+\textheight 9in \textwidth 6.5in
+\oddsidemargin 0in \evensidemargin 0in
+\topmargin -.35in
+
+
+\lstset{basicstyle=\small\ttfamily,breaklines=true}
+
+\begin{document}
+\begin{center}
+% Change this:
+\LARGE YOURNAME -- SUNETID \\
+\LARGE CS143 Spring 2022 -- Written Assignment 2 \\
+\end{center}
+
+This assignment covers context free grammars and parsing. You may discuss this assignment with other students and work on the problems together. However, your write-up should be your own individual work, and you should indicate in your submission who you worked with, if applicable. Assignments can be submitted electronically through Gradescope as a \textsc{pdf} by 11:59 \textsc{pm pdt}. Please review the the course policies for more information: \url{https://web.stanford.edu/class/cs143/policies/}. A \LaTeX{} template for writing your solutions is available on the course website.
+If you need to draw parse trees in \LaTeX{}, you may use the {\tt forest} package: \url{https://ctan.org/pkg/forest}.
+
+\bigskip
+
+\begin{enumerate}
+% Problem 1
+\item  Give a context-free grammar (CFG) for each of the following languages. Any grammar is acceptable---including ambiguous grammars---as long as it has the correct language. The start symbol should be $S$.
+  \begin{enumerate}
+  \item The set of all strings over the alphabet $\{1,2,*\}$ representing valid products of integers where the expression evaluates to some even value.
+
+    Example Strings in the Language:
+    \begin{center}
+      112 \tab \tab 2*121 \tab \tab 221*1*1122
+    \end{center}
+    Strings not in the Language:
+    \begin{center}
+      $\epsilon$ \tab \tab 11*121  \tab \tab 12**22*112
+    \end{center}
+    
+    \textbf{Solution}:
+    
+  \item The set of all strings over the alphabet $\{x,(,),;\}$ representing nested tuples of $x$'s where each tuple has an even length.
+
+    Example Strings in the Language:
+    \begin{center}
+      $()$ \tab \tab $(x;())$ \tab \tab $((); x; ((); x); x)$
+    \end{center}
+    Strings not in the Language:
+    \begin{center}
+      $\epsilon$ \tab \tab $x$ \tab \tab $((); x; x)$  \tab \tab $(x; (); (x; (); x); x)$
+    \end{center}
+    
+    \textbf{Solution}:
+    
+  \item  The set of all strings over the alphabet $\{0, 1\}$ where the number of $1$'s is exactly one more than the number of $0$'s.
+
+    Example Strings in the Language:
+    \begin{center}
+      1 \tab \tab 101  \tab \tab 001110101
+    \end{center}
+    Strings not in the Language: 
+    \begin{center}
+      $\epsilon$ \tab \tab 001 \tab \tab 01100101
+    \end{center}
+    
+    \textbf{Solution}:
+    
+  \item  The set of all strings over the alphabet $\{0,1\}$ in the language $L:\{0^i 1^j 0^k \mid j \neq i+k\}$.
+
+    Example Strings in the Language: 
+    \begin{center}
+      00 \tab \tab 110000  \tab \tab 000111110
+    \end{center}
+    Strings not in the Language: 
+    \begin{center}
+      $\epsilon$ \tab \tab 0011 \tab\tab 01111000
+    \end{center}
+
+    \textbf{Solution}:
+  \end{enumerate}
+
+  \newpage
+
+% Problem 2
+\item Consider the following grammar for if-then-else expressions that involve a variable $x$:
+  \begin{align*}
+    E &\to \text{if} \ x \ \text{then} \ E \mid \mathit{M} \\
+    \mathit{M} &\to \text{if} \ x \ \text{then} \ \mathit{M} \ \text{else} \ E \mid x
+  \end{align*}
+  Is this grammar ambiguous or not?
+  If yes, give an example of an expression with two different parse trees and draw the two parse trees.
+  If not, explain why that is the case.
+
+  \textbf{Solution}:
+
+  \newpage
+
+% Problem 3
+\item
+  \begin{enumerate}
+  \item Eliminate left recursion from the following grammar:
+    \begin{equation*}
+      \begin{split}
+        S &\to S(T) \mid Sa \mid [ T ] \mid Tb \\
+        T &\to T(S) \mid Tc \mid d
+      \end{split}
+    \end{equation*}
+
+    \textbf{Solution}:
+    
+  \item Left factor the following grammar:
+    \begin{equation*}
+      \begin{split}
+        S &\to (T+T) \mid (T) \\
+        T &\to U*T \mid U*? \mid [ U ] \\
+        U &\to U0 \mid U1 \mid \epsilon 
+      \end{split}
+    \end{equation*}
+    
+    \textbf{Solution}:
+  \end{enumerate}
+
+  \newpage
+  
+% Problem 4
+\item Consider the following CFG, where the set of terminals is $\{a, b, c, d, \# , ?\}$:
+  \begin{equation*}
+    \begin{split}
+      S &\to \# U T \mid T ? \\
+      T &\to aS \mid bUc \mid \epsilon \\
+      U &\to aSc \mid bTd \\
+    \end{split}
+  \end{equation*}
+
+  \begin{enumerate}
+  \item Construct the FIRST sets for each of the nonterminals.
+    
+    \textbf{Solution}:
+    \begin{itemize}
+    \item $S: $
+    \item $T: $
+    \item $U: $
+    \end{itemize}
+    
+  \item Construct the FOLLOW sets for each of the nonterminals.
+
+    \textbf{Solution}:
+    \begin{itemize}
+    \item $S: $
+    \item $T: $
+    \item $U: $
+    \end{itemize}
+
+  \item Construct the LL(1) parsing table for the grammar.
+
+    \textbf{Solution}:
+    \begin{center}
+      \begin{tabular}{c|C{3em}|C{3em}|C{3em}|C{3em}|C{3em}|C{3em}|C{3em}}
+        Nonterminal & $a$ & $b$ & $c$ & $d$ & $\#$ & $?$ & $\$$ \\
+        \hline
+        $S$ & & & & & & & \\
+        \hline
+        $T$ & & & & & & & \\
+        \hline
+        $U$ & & & & & & & \\
+      \end{tabular}
+    \end{center}
+    
+  \item Show the sequence of stack, input and action configurations that occur during an LL(1) parse of the string ``$\# a?ca?$''. At the beginning of the parse, the stack should contain a single $S$.
+
+    \textbf{Solution}:
+    \begin{center}
+      \begin{tabular}{R{10em}|R{10em}|L{10em}}
+        Stack & Input & Action \\
+        \hline
+        & & \\
+        & & \\
+        & & \\
+        & & \\
+        & & \\
+        & & \\
+        & & \\
+        & & \\
+        & & \\
+        & & \\
+        & & \\
+        & & \\
+        & & \\
+        & & \\
+        & & \\
+        & & \\
+        & & \\
+      \end{tabular}
+    \end{center}
+  \end{enumerate}
+
+  \newpage
+
+% Problem 5 
+\item Consider the following grammar $G$ over the alphabet $\{a,b,c\}$:
+  \begin{equation*}
+    \begin{split}
+      S' &\to S \\
+      S &\to Aa \\
+      S &\to Bb \\
+      A &\to Ac \\
+      A &\to \epsilon\\
+      B &\to Bc \\
+      B &\to \epsilon \\
+    \end{split}
+  \end{equation*}
+  You want to implement $G$ using an SLR(1) parser. Note that we have already added the $S' \to S$ production for you.
+  \begin{enumerate}
+  \item Construct the first state of the LR(0) machine, compute the FOLLOW sets of A and B, and point out the conflicts that prevent the grammar from being SLR(1).
+
+    \textbf{Solution}:
+
+  \item Show modifications to production 4 ($A \to Ac$) and production 6 ($B \to Bc$) to make the grammar SLR(1) while having the same language as the original grammar $G$. Explain the intuition behind this result.
+
+    \textbf{Solution}:
+  \end{enumerate} 
+
+\end{enumerate}
+\end{document}

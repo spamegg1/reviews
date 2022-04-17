@@ -1,0 +1,221 @@
+\documentclass[11pt]{article}
+\usepackage[pdftex]{graphicx, color}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage[pdfusetitle]{hyperref}
+
+\usepackage{tikz}
+\usetikzlibrary{automata,positioning}
+
+\renewcommand{\epsilon}{\varepsilon}
+\newcommand{\tikzname}{Ti\emph{k}Z}
+\tikzset{shorten >=1pt, node distance=2cm, on grid, baseline={([yshift=-8pt] current bounding box.north)}}
+
+\headheight 8pt \headsep 20pt \footskip 30pt
+\textheight 9in \textwidth 6.5in
+\oddsidemargin 0in \evensidemargin 0in
+\topmargin -.35in
+
+
+\lstset{basicstyle=\small\ttfamily,breaklines=true}
+
+\title{CS143 Spring 2022 -- Written Assignment 1}
+
+\begin{document}
+\begin{center}
+% Change this:
+\LARGE YOURNAME -- SUNETID \\
+\LARGE CS143 Spring 2022 -- Written Assignment 1
+\end{center}
+
+This assignment covers regular languages, finite automata, and lexical analysis. You may discuss this assignment with other students and work on the problems together. However, your write-up should be your own individual work, and you should indicate in your submission who you worked with, if applicable. Assignments can be submitted electronically through Gradescope as a \textsc{pdf} by 11:59 \textsc{pm pdt}. Please review the course policies for more information: \url{https://web.stanford.edu/class/cs143/policies/}. A \LaTeX{} template for writing your solutions is available on the course website. To create finite automata diagrams, you can either use the \tikzname{} package directly by following the examples in the template, or a tool like \url{https://madebyevan.com/fsm/}.
+
+\begin{enumerate}
+% problem 1
+\item Write regular expressions for the following languages over the alphabet $\Sigma = \{0, 1\}$.  Hint: some of these languages may include $\epsilon$.
+\begin{enumerate}
+    \item The set of all strings whose $1$\textsuperscript{st}, $3$\textsuperscript{rd}, $5$\textsuperscript{th}, \textellipsis, characters are the same.
+
+    \textbf{Solution}:
+    \[
+        % Answer Here
+    \]
+
+    \item The set of all strings that represent the concatenation of one odd number, one even number, and another odd number expressed in binary. (E.g., $\underline{01}\,\underline{10}\,\underline{01}$, but not $0110$.)
+
+    \textbf{Solution}:
+    \[
+        % Answer Here
+    \]
+
+    \item The set of all strings, except the string $0000$.
+
+    \textbf{Solution}:
+    \[
+        % Answer Here
+    \]
+\end{enumerate}
+
+\newpage
+
+% problem 2
+\item Draw DFAs for each of the languages from question~1. Note that a DFA must have a transition defined for every state and symbol pair. You must take this fact into account for your transformations. Your DFAs should not have more than 10 states.
+
+Notice that a short regular expression does not automatically imply a DFA with few states, nor vice versa.
+
+\begin{enumerate}
+    \item The set of all strings whose $1$\textsuperscript{st}, $3$\textsuperscript{rd}, $5$\textsuperscript{th}, \textellipsis, characters are the same.
+
+        \textbf{Solution}:
+        % Answer Here
+        % See beginning of handout for tips on drawing finite automata in LaTeX,
+        % or follow from the examples below
+
+    \item The set of all strings that represent the concatenation of one odd number, one even number, and another odd number expressed in binary. (E.g., $\underline{01}\,\underline{10}\,\underline{01}$, but not $0110$.)
+
+        \textbf{Solution}:
+        % Answer Here
+
+    \item The set of all strings, except the string $0000$.
+
+        \textbf{Solution}:
+        % Answer Here
+\end{enumerate}
+
+\newpage
+
+ % Problem 3
+\item Using the techniques covered in class, transform the following NFAs over the alphabet $\{a, b, c\}$ into DFAs. Your DFAs should not have more than 10 states.  Note that a DFA must have a transition defined for every state and symbol pair, whereas a NFA need not. You must take this fact into account for your transformations. Hint: Is there a subset of states the NFA transitions to when fed a symbol for which the set of current states has no explicit transition?
+
+Also include a mapping from each state of your DFA to the corresponding states of the original NFA.  Specifically, a state $s$ of your DFA maps to the set of states $Q$ of the NFA such that an input string stops at $s$ in the DFA if and only if it stops at one of the states in $Q$ in the NFA.
+
+Tip: for readability, states in the DFA may be labeled according to the set of states they represent in the NFA.  For example, state $q_{012}$ in the DFA would correspond to the set of states $\{q_0, q_1, q_2\}$ in the NFA, whereas state $q_{13}$ would correspond to set of states $\{q_1, q_3\}$ in the NFA.
+
+\begin{enumerate}
+    \item Original NFA:\\
+    \begin{tikzpicture}[auto]
+        \node[state,initial]   (q_0)                      {$q_0$};
+        \node[state]           (q_1) [above right of=q_0] {$q_1$};
+        \node[state,accepting] (q_2) [below right of=q_1] {$q_2$};
+        \path[->]
+            (q_0) edge[loop below] node {$b,c$} (q_0)
+                  edge             node {$b$}   (q_1)
+            (q_1) edge             node {$c$}   (q_2)
+            (q_1) edge[loop above] node {$c$}   (q_1)
+            (q_2) edge             node {$a$}   (q_0)
+            (q_2) edge[loop right] node {$a$}   (q_2);
+    \end{tikzpicture}
+
+    \textbf{Solution}: DFA: \\
+    % Answer Here
+
+    Correspondences (DFA to NFA):
+    \begin{itemize}
+        \item % Answer Here
+    \end{itemize}
+
+    \item Original NFA: \\
+    \begin{tikzpicture}[auto]
+        \node[state,initial]   (q_0)                      {$q_0$};
+        \node[state]           (q_1) [above right of=q_0] {$q_1$};
+        \node[state,accepting] (q_2) [below right of=q_1] {$q_2$};
+        \path[->]
+            (q_0) edge[loop below] node {$b,c$} (q_0)
+            (q_0) edge             node {$b$}   (q_1)
+            (q_0) edge             node {$\epsilon$} (q_2)
+            (q_1) edge             node {$c$}   (q_2)
+            (q_1) edge[loop above] node {$c$}   (q_1)
+            (q_2) edge[loop right] node {$a$}   (q_2);
+    \end{tikzpicture}
+
+    \textbf{Solution}: DFA: \\
+    % Answer Here
+
+    Correspondences (DFA to NFA):
+    \begin{itemize}
+        \item % Answer Here
+    \end{itemize}
+
+    \item Original NFA:\\
+    \begin{tikzpicture}[auto]
+        \node[state,initial]   (q_0)                {$q_0$};
+        \node[state]           (q_1) [right of=q_0] {$q_1$};
+        \node[state]           (q_2) [right of=q_1] {$q_2$};
+        \node[state,accepting] (q_3) [right of=q_2] {$q_3$};
+
+        \path[->]
+            (q_0) edge                node       {$a,b,c$} (q_1)
+            (q_1) edge                node       {$a,b,c$} (q_2)
+            (q_2) edge                node       {$a,b,c$} (q_3)
+            (q_0) edge[loop above]    node       {$a$}     (q_0)
+            (q_1) edge[loop above]    node       {$b$}     (q_1)
+            (q_1) edge[bend left=40]  node       {$c$}     (q_3)
+            (q_0) edge[bend right=40] node[swap] {$a,\epsilon$} (q_2)
+            (q_2) edge[loop below]    node       {$b$}     (q_2)
+            (q_3) edge[loop below]    node       {$c$}     (q_3);
+    \end{tikzpicture}
+
+    \textbf{Solution}: DFA: \\
+    % Answer Here
+
+    Correspondences (DFA to NFA):
+    \begin{itemize}
+        \item % Answer Here
+    \end{itemize}
+\end{enumerate}
+
+\newpage
+
+% Problem 4
+\item Let $L$ be a language over $\Sigma = \{a, b, c\}$, such that string $w$ is in $L$ if and only if $w$ is not $\epsilon$ and the last character of $w$ appears at most twice in $w$.
+
+Examples of strings in $L$: $\underline{aa}$, $\underline{a}b\underline{a}$, $bababab\underline{c}$.
+
+Examples of strings \textbf{not} in $L$: $\epsilon$, $\underline{bbb}$, $c\underline{a}b\underline{a}\underline{a}$
+
+Draw an NFA for $L$.  Your solution should have no more than 15 states.
+
+\textbf{Solution}:
+% Answer Here
+
+\newpage
+
+% Problem 5
+\item Consider the following tokens and their associated regular expressions, given as a \textbf{flex} scanner specification:
+\begin{quote}
+\begin{lstlisting}
+%%
+01?1                      printf("apple");
+0(10)+10                  printf("banana");
+(1011*0|0100*1)           printf("coconut");
+\end{lstlisting}
+\end{quote}
+Give an input to this scanner such that the output string is $(\mathtt{apple})^3 ((\mathtt{banana})^2 \ \mathtt{coconut})^2$, where $\mathtt{A}^i$ denotes $\mathtt{A}$ repeated $i$ times.   (And, of course, the parentheses are not part of the output.)  You may use similar shorthand notation in your answer.
+
+\textbf{Solution}:
+\[
+    % Answer Here
+\]
+
+
+\newpage
+
+% Problem 6
+\item Recall from the lecture that, when using regular expressions to scan an input, we resolve conflicts by taking the largest possible match at any point. That is, if we have the following \textbf{flex} scanner specification:
+\begin{quote}
+\begin{lstlisting}
+%%
+do                      { return T_Do; }
+[A-Za-z_][A-Za-z0-9_]*  { return T_Identifier; }
+\end{lstlisting}
+\end{quote}
+and we see the input string ``\texttt{dot}'', we will match the second rule and emit T\_Identifier for the whole string, not T\_Do.
+
+However, it is possible to have a set of regular expressions for which we can tokenize a particular string, but for which taking the largest possible match will fail to break the input into tokens. Give an example of no more than two regular expressions and an input string such that: a) the string can be broken into substrings, where each substring matches one of the regular expressions, b) our usual lexer algorithm, taking the largest match at every step, will fail to break the string in a way in which each piece matches one of the regular expressions. Explain how the string can be tokenized and why taking the largest match won't work in this case.
+
+As a challenge (not necessary for credit), try to find a solution that only uses one regular expression.
+
+\textbf{Solution}: % Answer Here
+
+\end{enumerate}
+\end{document}

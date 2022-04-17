@@ -1,3 +1,7 @@
+## Websites
+
+https://web.stanford.edu/class/cs143/
+
 ## Syllabus
 
 ***FALL 2020 UPDATE***
