@@ -2,7 +2,7 @@
 (*
  * methodless-primes.cl
  *
- * Designed by Jesse H. Willett, jhw@cory, 11103234, with 
+ * Designed by Jesse H. Willett, jhw@cory, 11103234, with
  *             Istvan Siposs, isiposs@cory, 12342921.
  *
  * This program generates primes in order without using any methods.
@@ -12,8 +12,8 @@
  * could regard the attribute 'out's sequential values as our output, and
  * the string "halt" as our terminate signal.
  *
- * Naturally, using Cool this way is a real waste, basically reducing it 
- * to assembly without the benefit of compilation.  
+ * Naturally, using Cool this way is a real waste, basically reducing it
+ * to assembly without the benefit of compilation.
  *
  * There could even be a subroutine-like construction, in that different
  * code could be in the assign fields of attributes of other classes,
@@ -26,58 +26,58 @@
 
 class Main inherits IO {
 
-  main() : Int {	-- main() is an atrophied method so we can parse. 
-    0 
+  main() : Int {  -- main() is an atrophied method so we can parse.
+    0
   };
 
-  out : Int <-		-- out is our 'output'.  Its values are the primes.
+  out : Int <-    -- out is our 'output'.  Its values are the primes.
     {
       out_string("2 is trivially prime.\n");
       2;
     };
 
-  testee : Int <- out;	-- testee is a number to be tested for primeness.   
+  testee : Int <- out;  -- testee is a number to be tested for primeness.
 
-  divisor : Int;	-- divisor is a number which may factor testee.
+  divisor : Int;  -- divisor is a number which may factor testee.
 
-  stop : Int <- 500;	-- stop is an arbitrary value limiting testee. 	
+  stop : Int <- 500;  -- stop is an arbitrary value limiting testee.
 
-  m : Object <-		-- m supplants the main method.
-    while true loop 
+  m : Object <-    -- m supplants the main method.
+    while true loop
       {
 
         testee <- testee + 1;
         divisor <- 2;
 
-        while 
-          if testee < divisor * divisor 
-            then false 		-- can stop if divisor > sqrt(testee).
-	  else if testee - divisor*(testee/divisor) = 0 
-            then false 		-- can stop if divisor divides testee. 
+        while
+          if testee < divisor * divisor
+            then false     -- can stop if divisor > sqrt(testee).
+          else if testee - divisor*(testee/divisor) = 0
+            then false     -- can stop if divisor divides testee.
             else true
-          fi fi     
-        loop 
+          fi fi
+        loop
           divisor <- divisor + 1
-        pool;        
+        pool;
 
-        if testee < divisor * divisor	-- which reason did we stop for?
-        then 	-- testee has no factors less than sqrt(testee).
+        if testee < divisor * divisor  -- which reason did we stop for?
+        then   -- testee has no factors less than sqrt(testee).
           {
-            out <- testee;	-- we could think of out itself as the output.
-            out_int(out); 
+            out <- testee;  -- we could think of out itself as the output.
+            out_int(out);
             out_string(" is prime.\n");
           }
-        else	-- the loop halted on testee/divisor = 0, testee isn't prime.
-          0	-- testee isn't prime, do nothing.
-	fi;   	
+        else  -- the loop halted on testee/divisor = 0, testee isn't prime.
+          0  -- testee isn't prime, do nothing.
+  fi;
 
-        if stop <= testee then 
-          "halt".abort()	-- we could think of "halt" as SIGTERM.
-        else 
+        if stop <= testee then
+          "halt".abort()  -- we could think of "halt" as SIGTERM.
+        else
           "continue"
-        fi;       
+        fi;
 
-      } 
+      }
     pool;
 
 }; (* end of Main *)
