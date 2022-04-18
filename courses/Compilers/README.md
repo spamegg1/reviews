@@ -2,6 +2,8 @@
 
 https://web.stanford.edu/class/cs143/
 
+http://openclassroom.stanford.edu/MainFolder/CoursePage.php?course=Compilers
+
 ## Syllabus
 
 ***FALL 2020 UPDATE***

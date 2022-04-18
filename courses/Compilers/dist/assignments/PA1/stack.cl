@@ -7,10 +7,21 @@
  *  Skeleton file
  *)
 
+class StackCommand {
+
+};
+
+class PushInt inherits StackCommand {
+
+};
+
 class Main inherits IO {
 
-   main() : Object {
-      out_string("Nothing implemented\n")
-   };
-
+    main() : Object {
+        let
+            prompt: IO <- out_string(">"),
+            input: String <- in_string()
+        in
+            out_string(input.concat("\n"))
+    };
 };
