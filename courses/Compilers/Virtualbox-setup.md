@@ -70,7 +70,9 @@ sudo usermod -a -G vboxsf compilers
 
 - Now any files written to your shared folder will appear in both your virtual machine and your host machine. For ease of access, you can  create a symbolic link from your shared folder into ~/cool with the  following:
 
-$ ln -s /media/sf_<FolderName> /home/compilers/cool/<Foldername>
+```bash
+ln -s /media/sf_<FolderName> /home/compilers/cool/<Foldername>
+```
 
 - To use the grading scripts, download the script for to your host  machine's shared folder and run the following command, where <num> is the number of the programming assignment you want to download.
 

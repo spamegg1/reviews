@@ -20,15 +20,46 @@ stack.test -> [cool root]/assignments/PA1/stack.test
 
 ## Instructions
 
-To compile and run your program, type: (you might have to replace `gmake` with `make` on your system)
+To compile and run your program, type:
 ```bash
-gmake test
+make test
 ```
-Try it now -- it should work, and print `Nothing implemented` (among a few other things).
+Try it now -- it should work, and print `Nothing implemented` (among a few other things). After completing the assignment, `make test` should print:
+```bash
+ ➜ make test
+stack.test
+../../bin/spim -file stack.s < stack.test
+SPIM Version 6.5 of January 4, 2003
+Copyright 1990-2003 by James R. Larus (larus@cs.wisc.edu).
+All Rights Reserved.
+See the file README for a full copyright notice.
+Loaded: ../lib/trap.handler
+>>>>>>>s
+2
++
+1
+>>>3
+>>>>>>>s
+s
+s
+1
++
+3
+>>>>>>>4
+>COOL program successfully executed
+```
+Here the multiple `>` signs on the same line are due to the fact that `spim` is reading the inputs from the file `stack.test` instead of being inputted by hand one at a time. So the inputs themselves are not displayed, only the prompts `>` and the results of `d` commands are displayed.
+
+This makes sense, since the PA1 handout says:
+```
+Your stack machine should not produce any output aside from whitespace (which our testing harness will ignore), ‘>’ prompts, and the output of a ‘d’ command.
+```
+
+The output of `d` also starts without a new line (like `>>>3`) for the same reason (normally when we input by hand and hit Enter, there would be a new line there). See the `proof.png` and `proof2.png` images for what the interactive session looks like.
 
 To simply compile your program, type
 ```bash
-gmake compile
+make compile
 ```
 Instructions for turning in the assignment will be posted on the course web page.
 

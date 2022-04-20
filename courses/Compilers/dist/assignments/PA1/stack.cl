@@ -8,7 +8,6 @@ class List {
     size   : Int;
     car    : String;
     cdr    : List;
-    isNil(): Bool   { size = 0 }; -- not needed since we assume correct input
     head() : String { car };
     tail() : List   { cdr };
     len()  : Int    { size };
@@ -72,18 +71,18 @@ class Stack {
 
     add(): Stack {
         let
-            atoi : A2I <- new A2I,
-            plus : String <- pop(),
-            num1 : Int <- atoi.a2i(pop()),
-            num2 : Int <- atoi.a2i(pop())
+            atoi: A2I    <- new A2I,
+            plus: String <- pop(),
+            num1: Int    <- atoi.a2i(pop()),
+            num2: Int    <- atoi.a2i(pop())
         in  push(atoi.i2a(num1 + num2))
     };
 
     swap(): Stack {
         let
-            s   : String <- pop(),
-            top : String <- pop(),
-            bot : String <- pop()
+            s  : String <- pop(),
+            top: String <- pop(),
+            bot: String <- pop()
         in  push(top).push(bot)
     };
 

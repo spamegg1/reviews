@@ -1,0 +1,131 @@
+In this video, we're gonna begin our discussion of parsing technology with
+context-free grammars. Now as we know, not all strings of tokens are actually valid
+programs and the parser has to tell the difference. It has to know which strings
+of tokens are valid and which ones are invalid and give error messages for the
+invalid ones. So, we need some way of describing the valid strings of tokens and
+then some kind of algorithm for distinguishing the valid and invalid
+strings of tokens from each other. Now we've also discussed that programming
+languages have a natural recursive structure, So for example in Cool, an
+expression That can be anyone of a very large number of things. So two of the
+things that can be are an if expression and a while expression but these
+expressions are themselves recursively composed of other expressions. So for
+example, the predicate of an if is a, a [inaudible] expression as is the then
+branch and the else branch and in a while loop the termination test is an expression
+and so is the loop body. And context-free grammars are in natural notation for
+describing such recursive structures. So within a context-free grammar so formally
+it consist a set of terminals t, a set of nonterminals n, a start symbol s and s is
+one of the nonterminals and a set of productions and what's a production? A
+production is a symbol followed by an arrow followed by a list of symbols. And
+these symbols, there are certain rules about them so the x thing on the left hand
+side of the arrow has to be a nonterminal. That's what it means to be on the left
+hand side so the set of things on the left hand side of productions are exactly the
+nonterminals. And then the right hand side every yi on the right hand side can be
+either a nonterminal or it can be a terminal or it can be the special symbol
+epsilon. So let's do a simple example of a Context-free Grammar. Strings of balanced
+parenthesis which we discussed in an earlier video can be expressed as follows.
+So, we have our start symbol and. One possibility for a string o f balanced
+parentheses is that it consists of an open paren on another string of balanced
+parentheses and a close paren. And, the other possibility for a string of balanced
+parentheses that is empty because the empty string is also a string of balanced
+parentheses. So, there are two productions for this grammar and just to go over the
+to, to relate this example to the formal definition we gave on the previous slide,
+what is our set of nine terminals, it's just. The singles nonterminal s, what our
+terminal symbols in this context-free grammar is just open and close paren. No
+other symbols. What's the start symbol? Well, it's s. It's the only nonterminal so
+it has to be the start symbol but generally we will, when we give grammars
+the first production will name a start symbol so rather than name and explicitly
+whichever production occurs first the symbol on the left hand side will be the
+nonterminal for that particular context-free grammar. And then finally,
+what are the productions with the, we said there could be a set of productions and
+here are the two productions for this particular Context-Free Grammar. Now,
+productions can be read as rules. So, let's write down one of our productions
+from the from the example grammar and what does this mean? This means wherever we see
+an s, we can replace it by the string of symbols on the right hand side. So,
+Wherever I see an s I can substitute and I can take the s out. If that important, I
+remove the s that appears on the left side and I replace it by the string of symbols
+on the right hand side so productions can be read as replacement rule so right hand
+side replaces the left hand side. So here's a little more formal description of
+that process. We begin with the string that has only the start symbol s, so we
+always start with just the start symbol. And now, we look at our string initially
+it's just a start symbol but it changes overtime, and we can replace any
+non-terminal in the string by the right hand side, side of some production for
+that non-terminal. So for exam ple, I can replace a non-terminal x by the right hand
+side of some production for x. X in this case, x goes to y1 through yn. And then we
+just repeat step two over and over again until there are no non-terminals left
+until the string consist of only terminals. And at that point, we're done.
+So, to write this out slightly more formally, a single step here consist of a
+state which is a, which is a string of symbols, so this can be terminals and
+non-terminals. And, somewhere in the string is a non-terminal x and there is a
+production for x, in our grammar. So this is part of the grammar, okay? This is a
+production And we can use now production to take a step from, to a new state Where
+we have replaced X by the right hand side of the production, Okay? So this is one
+step of a context-free derivation. So now if you wanted to do multiple steps, we
+could have a bunch of steps, alpha zero goes to alpha one goes to alpha two and
+these are strings now. Alpha i's are all strings and as we go along we eventually
+get to some strong alpha n, alright. And then we say that alpha zero rewrites in
+zero or more steps to alpha n so this means n zero, greater than or equal to
+zero steps. Okay. So this is just a short hand for saying there is some sequence of
+individual productions. Individual rules being applied to a string that gets us
+from the string alpha string zero to the string alpha n and remember that in
+general we start with just the start symbol and so we have a whole bunch of
+sequence of steps like this that get us from start symbol to some other string. So
+finally, we can define the language of a Context-Free Grammar. So, [inaudible]
+context-free grammar has a start symbol s, so then the language of the context-free
+grammar is gonna be the string of symbols alpha one through alpha n such that for
+all i. Alpha i is an element of the terminals of g, okay. So t here is the set
+of terminals of g and s goes, the start symbol s goes in zero or more steps to
+alpha one, I'm sorry a1 to an, okay. And so we're just saying, this is just saying
+that all the strings of terminals that I can derive beginning with just the start
+symbol, those are the strings in the language. So the name terminal comes from
+the fact that once terminals are included in the string, there is no rule of
+replacing them. That is once the terminal is generated, it's a permanent feature of
+the string and in applications to programming languages and context-free
+grammars, the terminals are to be the tokens of the language that we are
+modeling with our context-free grammar. With that in mind, let's try the
+context-free grammar for a fragment of [inaudible]. So, [inaudible] expressions,
+we talked about these earlier, but one possibility for a [inaudible] expression
+is that it's an if statement or an if expression. And, we call that [inaudible]
+if statements have three parts. And they end with the keyword [inaudible] which is
+a little bit unusual. And so looking at this looking at this particular rule, we
+can see some conventions that way, that are pretty standard and that we'll use so
+that non-terminals are in all caps. Okay, so in this case was just [inaudible] we'll
+try that in caps and then the terminal symbols are in, in lower case, all right?
+And another possibility Is that it could be a while expression. And finally the
+last possibility Is that it could be identifier id and there actually many,
+many more possibilities and lots of other cases for expressions and let me just show
+you one bit of notation to make things look a little bit nicer. So we have many
+we have many productions for the same non-terminal. We usually group those
+together in the grammar and we only write a non-terminal on the right hand side once
+and then we write explicit alternative. So this is actually. Completely the same as
+writing out expert arrow two more times but we here we just is, this is just a way
+of grouping these three productions together and saying that expr- is the
+non-terminal for all three right hand sides. Let's take a look at some of the
+strings on the language of this Context- Free Grammar. So, a valid Kuhl expression
+is just a single identifier and that's easy to see because EXPR is our start
+symbol, I'll call it EXPR. And, so the production it does says it goes to id. So
+I can take the start symbol directly to a string of terminals, a single variable
+name is a valid Kuhl expression. Another example is an e-th expression where e-th
+of the subexpressions is just a variable name. So this is perfectly fine structure
+for a Kuhl expression. Similarly I can do the same thing with the while expression.
+I can take the structure of a while and then replace each of the subexpressions
+just with a single variable name and that would be a syntactically valid cool while
+loop. There are more complicated expressions so for example, here we have a
+why loop as the predicate of an if expression. That's something you might
+normally think or writing but perfectly well form and tactically. Similarly, I
+could have an if statement or an if expression as the predicate of and if it's
+inside of an if expression. So, so nested if expressions like this one are also
+syntactically valid. Let's do another grammar, this time for simple arithmetic
+expressions. So, we'll have our start symbol and only non-terminal for this
+grammar be called e and one of the possibilities while e could be the sum of
+expressions. Or and remember this is an alternative notation for e arrow. It's
+just a way of saying I'm going to use the nonterminal for another production. We can
+have a sum of two expressions or we could have the Multiplication of two
+expressions. And then we could have expressions that appear inside the
+parentheses, so parenthesized expressions. And just to keep things simple, we could
+just have as our base, only base case simple identifier so variable names. And
+here's a small grammar over plus and times to see and in parentheses and variable
+names. [inaudible] a few elements of this language. So for example, a single
+variable name is a perfectly good element of the language id + id is also in this
+language. Which s is id + id id and we could also use parens to group things so
+we could say id + id id that's also something you can generate using these
+rules and so on and so forth. There are many, many more strings in this language.

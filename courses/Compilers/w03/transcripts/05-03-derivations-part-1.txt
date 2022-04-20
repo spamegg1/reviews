@@ -1,0 +1,78 @@
+In this video, we're gonna continue our discussion of parsing with the idea of a
+derivation. So a derivation is a sequence of productions so beginning with the start
+symbol, we can apply productions one at a time. In sequence and that produces a
+derivation. And a derivation can be drawn in a different way instead of as a linear
+sequence of replacements, we can draw it as a tree. So for example, if I have a
+nonterminal x it appears in a derivation, then when I replace x, I can represent
+that by making the children Of x, the left hand side of the rule that I used to
+replace x. So I applied production x goes to y1 to yn, I add the y1 to yn is
+children of x in the tree that I'm building up. Let's do an example. Here is
+our simple grammar of arithmetic expressions and let's consider this
+particular string id id + id. So what we're going to do now is we're going to
+parse this string and we're going to show how to produce a derivation for the string
+and also at the same time build the tree. And here it is, Over here, there is
+derivation beginning in e and ending in the string that we're interested in with
+one production applied each step along the way and here is the corresponding tree and
+this is called a parse tree. This is a parse tree of this expression or this
+input string. So let's walk through this derivation in detail. The right side in
+red, we're going to have the tree that we're building up. And on the left side in
+blue, we're going to have the steps in the derivation that we've taken so far. So
+initially, our derivation consists of just the start symbol e and our tree consists
+of just the root which is also the start symbol. So the first step is that we have
+a production e goes to e + e and what that means is over on the tree, we take the
+root of the tree and we make, we give it three children e + and e. So now, we replace
+the first e by e * e. We use the production e goes to e * e and that means
+we take the first e in the tree and we give it to three children, e * e.
+Continuing along we take the first e here that remains in this
+expression and we replace it by id which means we make id a child of the left most
+e in the tree that we're building. And then we replace the second e by id using
+the production e goes to id and finally, we use the same thing with the third e and
+now, we have completed our Parse Tree. So here again, from the start symbol to the
+string, we were interested in parsing and in the process we built up this Parse Tree
+of the expression. Now there are lots of interesting things to say about parse
+trees. So first of all, parse trees have terminals at the leaves and nonterminals
+at the interior nodes and furthermore, in-order traversal of the leaves is the
+original input. So let's back up and look at our example and confirm all this. If we
+look at the leaves, we can see that they are all terminals, Okay? And the interior
+nodes are all nonterminals. In this case, it's only one nonterminal in our language,
+all the interior nodes are e and the leaves are the terminals of the string.
+And then we can see if we do an inward reversal of the leaves, we get exactly
+this input string that we started with. Furthermore, the Parse Tree shows the
+association of the operations and the input string does not. So you may notice
+here that the way that this Parse Tree is constructed, the times binds more tightly
+than the plus because the times is a sub-tree. Of the tree containing plus. And
+so this means that we would do the e e first before we would add e and some, some
+of you may have wondered well, how did I know. To pick this Parse Tree because
+actually if you think about it, there's another derivation. Actually there are
+several derivations that will give me a different Parse Tree where the plus, where
+the times is towards the root and the plus is nested inside the times. So let's not
+worry about that for right now, and let's just say that somehow we knew that this
+was the Parse Tree we wanted and I gave you a derivation that produces that Parse
+Tree. Continuing on, the previous derivation I showed you is actually a very
+special derivation. It's what's called a leftmost derivation where each step will
+replace the leftmost nonterminal in our string of terminals and nonterminals. And
+there's a natural and equivalent notion of a rightmost derivation and here it is.
+Here is a rightmost derivation for the same string. Again, beginning with the
+start symbol ending with a string we're interested in. And notice that at each
+step, we're replacing the rightmost non-terminal. So here, we replace the only
+non-terminal e and we get e + c. And then in the second step, we replace the second
+non-terminal e with id and so on for the rest of the string. So let's just
+illustrate this entirely with our little picture here of the tree and the
+derivation simultaneously so once again over here is our tree and this is the
+root, the start symbol e and, and in blue is our derivation so we begin by replacing
+e by e + e. That's the only nonterminal so it's the rightmost one and then working
+from the right side of the tree, we replace the right e by id and then the
+left id gets replaced by e z. And now the right most e that remains is replaced
+by id and finally the only e that remains is also replaced by id. Now I want to
+point out that the rightmost and leftmost derivations I showed you have exactly the
+same Parse Tree. And, this was not an accident. Every Parse Tree has a rightmost
+and a leftmost derivation. It's just about the order in which the branches are added.
+So for example, if I have the first production e goes to e + e, now I have a
+choice on how to build my tree. I can either work on. This sub-tree or I can
+work on that sub-tree. And if I build this one first, that will be a rightmost
+derivation. If I continue to always work on the rightmost non-terminal of course,
+And if I work on this one first, I can use that to do a leftmost derivation. Now it's
+important also to realize that there are many derivations besides rightmost and
+leftmost. I could, I could choose non-terminals in some random order to do
+my replacements. But th e rightmost and leftmost ones are the ones that we're most
+concerned with.

@@ -1,0 +1,61 @@
+In this video, we're going to transition from lexical analysis to parsing and talk
+a little bit about the relationship between those two compiler phases. We've
+already talked about regular languages and it's worth mentioning that these are the
+weakest formal languages that are widely used. But they have, of course, many
+applications, some of which we saw in previous videos. The difficulty with
+regular languages is that a lot of languages are simply not regular. And
+there's some pretty important languages that can't be expressed using regular
+expressions or finite automata. So let's consider this language which is the set of
+all balanced parentheses. So some elements of this language would be at the string
+one open-paren, one close-paren, two open-parens, two close-parens, three
+open-parens, three close-parens and so on. And, you can imagine that this is actually
+something that's fairly representative of lots of programming language construct. So
+for example, any kind of nested arithmetic expression would fit into this class but
+also things like nested if and else's will have this category, this characteristic.
+And here with the nested [inaudible] it's just the f statement, the functions like
+an open-paren. Not every languages like cool which has the explicit closing fee as
+well but they're implicit in many languages and so there are lots of nesting
+structure in programming languages constructs and those cannot be handled by
+regular expressions. So this raises the question of what the regular languages can
+express. And, why they aren't sufficient for recognizing arbitrary nesting
+structure. So we can illustrate the limitations of regular languages and
+Finite Automaton by looking a simple two state machine. So let's consider this
+machine. We have one we have start state and then the other state is the accepting
+state. And, we'll have this machine. Just be a machine that we've already seen
+actually and it'll recognize strings with odd numbers of 1's. So if we see a one and
+we're in the start state, we move. We now see an odd number of 1's. We move to the
+accepting state and we stay there until we see another one. In which case, we've seen
+even number of 1's and then we're in the start state. So whenever we see an odd
+number of 1's, we're in the final state. Whenever we see an even number of 1's,
+we're in the start state. And if we feed this a fairly long string of 1's, let's,
+let's select only seven 1's in it. Then what's it going to do is going to go back
+and forth and back and forth between these states. It's gonna wind up in the final
+state when it gets to the last one so it'll accept but notice that it doesn't
+know how many times it's been to that final state. It doesn't remember the
+length of the string; it doesn't have any way of counting how many characters the
+string had in it. And in fact, all I can count here is the parity. So in general
+Finite Automata can really only express things where you can count modulus on k.
+So they can count mod k for some k where k is the number of states in the machine.
+And so, you know if I have pre-test the machine, I can keep track of whether the
+string length is divisible by three or some other similar property but I can't do
+things like count to an arbitrary i so if I need to recognize a language that
+requires counting arbitrarily high like recognizing all strings of balance
+parentheses, we can't do that with the finite set of states. So what does a
+parser do, it takes the sequence of tokens as input from the lexer and it produces a
+parse tree of the program. And for example in cool, here's an input expression that
+is input to the lexical analyzer. The lexical analyzer produces this sequence of
+tokens as its output. That's the input to the parser. Then the parser produces this
+parse tree where the nesting structure has been made explicit. So, we have the, if
+and else and then the three components: the predicate, the then branch and the
+else branch of the, if To summarize, the lexer takes a string of character as input
+and produces a string of tokens as output. That string of tok ens is the input to the
+parser which takes a string of tokens and produces a Parse Tree of the program. And
+it's worth mentioning a couple of thing here. First of all, sometimes the Parse
+Tree is only implicit. So the, a compiler may never actually build the full Parse
+Tree. We'll talk more about that later. Many compilers do build an explicit parse
+tree but many do not. The other thing that's worth mentioning is that there are
+compilers that do combine these two phases into one where everything is done by the
+parser. So, the parsing technology is generally powerful enough to express
+lexical analysis in addition to parsing. But most compilers still divide up the
+work this way because regular expressions are such a good match for lexical analysis
+and then the parsing is handled separately.

@@ -1,0 +1,6 @@
+So to summarize, we're not just interested in whether a string is in
+the language of a particular context-free grammar, we need to have a Parse Tree for
+that string. And, a derivation defines a Parse Tree but it turns out that one Parse
+Tree in general has many derivations and in particular, we're interested in the
+leftmost and rightmost derivations. These are the two kinds of derivations that are
+important in parser implementations.
