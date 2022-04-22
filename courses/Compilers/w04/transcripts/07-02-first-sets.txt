@@ -1,0 +1,160 @@
+In the next few videos, we're gonna talk about how to construct LL1 parsing tables.
+And in this particular video, we're gonna begin by looking at how be build something
+called first sets. Before we get into the main topic of this video, which is
+something called First Sets, we need to say a little bit about how we're going to
+construct parsing tables, or what the conditions are for constructing LL1
+parsing tables. And so what we're interested in knowing, we're building a,
+we're building a parsing table. And we want to know, for a given non terminal A.
+Kay, this is the leftmost non terminal. And a given input symbol, the next input
+symbol T, [cough]. We want to know what con-, under what conditions we will make
+the move A goes to alpha. We'll replace A, the non terminal by the right hand side,
+alpha. Alright and that means that the entry, in th, the AT entry in the table
+would be Alpha and there are two situations in which we would like to do
+this. Alright? So the first one is if alpha can derive T in the first position,
+That means that beginning with alpha, there is some derivation, some sequence of
+moves, could be zero or more moves, that will result in a T appearing in the first
+position of the string that's derived. And if there is such a derivation, then using
+the move, A goes to alpha, at this point, when T is the next input symbol, would be
+a good idea. Because then we would be able to match the T. Eventually, alpha could
+generate the T, and then we'd be able to match the T, and then continue with our
+parsing of the rest of the input. Alright, so in this situation, when alpha can
+generate a T in the first position, we say that T is an element of the first of
+alpha. T is one of the things, there may be more things. But T is at least one of
+the things that alpha can produce, in the very first position. One of the terminals,
+I should say, that alpha can produce in the very first position. Now, there's
+another situation, a slightly, more complicated situation, in which we might
+want to make the move, or we wou ld want to make the move, That if we see A as the
+leftmost non terminal, and T as the next input that we'd like to replace A by, A
+goes to alpha. Alright? And the situation here that we're going to consider is what
+if, alpha, cannot derive T? So alpha cannot, in any sequence of moves, derive
+T. So, in fact, what does that mean? That means T is not. Gonna be in the first of
+alpha, okay? So, and our next input symbol is T. We're still looking at the situation
+where we have A as the leftmost non terminal, and T as the next input symbol.
+Now, This doesn't sound very promising. Because we have an input symbol T that we
+want to match And the leftmost non terminal that we've got, up next, that we
+have to do a derivation for, can't generate the T. And so, but it turns out
+that, this, that it's not hopeless. That we actually may still be able to parse the
+string, even in that situation, provided that alpha can go to epsilon. So if alpha
+can derive epsilon, if alpha can go away completely, and we can basically erase the
+alpha, then it could be that some other part of the grammar can come in and match
+the T. Alright and so, in what situation would that be? Well, here are the
+conditions. So, if A goes to Alpha as a production and alpha can go to epsilon via
+zero or more moves. Alright, so alpha can eventually be completely wiped out.
+Alright, and. If T can come immediately after A in the grammar, so there has to be
+a derivation for this to make sense, there should be a derivation where we are using
+the A, okay? With the A as an important piece of the derivation you know, from the
+start symbol. And what comes immediately after the A is the next input symbol that
+we are expecting. So in this situation, if we could get rid of the A, Then by having
+a go at the epsilon then we'll still be on track cuz potentially some other piece of
+grammar could come in and match the T. Alright. So in that case, we would say
+what, what do we have to test for? What, under what conditions can we do it? Well
+we want to be able to do this if T can come after A in the grammar and we say
+that T is in the follow of A. T is one of the things that can come after A in the
+grammar. Now this is an important point, and a place where people sometimes get
+confused and so I want to, to emphasize this, notice that. We are not talking
+about A deriving T. A does not produce T. T appears in a derivation After A, okay?
+So the A and the T here it, it doesn't have anything to do with what A produces.
+This has to do with where A can appear in derivations, alright? So if the T can come
+after the A in a derivation, then we say the T is in the follow of A. Right. So in
+this video we're gonna focus on, only this first part, the first sets. In the next
+video, we'll look at the follow sets, and then the video after that, we'll talk
+about how to put it all together to build this parcing table. [sound] All right,
+let's focus now on our main topic for this video, the computation of first sets. So
+here, first of all, we have to have a definition of what a first set is. And so
+we're going to say, for an arbitrary, string. This is actually, x here is a
+string. Could be a ter-, could be a single terminal, it could be a single
+non-terminal, or it could be a string of grammar symbol. All right, and if that If
+that X, can derive T in the first position through some sequence of moves, then we
+say that T, T is a terminal here, is in the first of X, okay? So all the possible
+terminals that can be derived in the first position will be in the first, of X Now
+For technical reasons that will become clear in a minute we also need to keep
+track of whether x can produce epsilon. Now so even though epsilon is not a
+terminal symbol, if x can go to epsilon be a zero or more steps then we'll say that
+epsilon is in the first of x and this turns out to be needed. We need to keep
+track of whether x whether things can produce epsilon in order to compute all
+the terminals that are in the first set of a given grammar symbol. Alright so now
+here's a sketch of the algorithm. So first of all for any terminal symb ol the only
+thing the terminals can produce are themselves. So every terminal symbol in
+here I should just say T is the terminal. So for every terminal symbol, it is in,
+it's first set just consists of a the site containing only that terminal. All right,
+so now let's consider a non terminal X, okay so here X is a non terminal, and what
+it would be in the conditions when epsilon is in the first of X, well, if there's a
+epsilon production, if X goes immediately to epsilon, then, obviously, X can produce
+epsilon, epsilon should be in the first of X But also, if X can produce any other
+right hand side Alright, Where everything on the right hand side can go to epsilon.
+Well, then the whole right hand side can go to epsilon. So, in that case also
+epsilon is in the first of X. I noticed that this will only happen if this, it can
+only, it can only potentially happen if all the EIS here are non-terminal symbols
+themselves. Obviously if there's any terminal symbols on the right hand side
+then that production can never go completely to the empty string. Okay. It
+will always produce at least that, that terminal But if every non-terminal. On the
+right-hand side can produce epsilon. Meaning epsilon's in the first of all
+those non-terminals. And there are no terminals on the right hand side. Then,
+Then, epsilon will be in the first of X. Alright there's one other situation and
+here's where we make use of the fact that we are keeping track of where epsilon can
+be produced alright. So let's say that we have a production like this okay and let's
+say the first N symbols A1 through AN here can all go to epsilon. So this can all
+disappear and can be replaced by the empty string. What does that mean, so if we have
+derivation like this? Okay were, to some number of moves it goes to Alpha, well
+that means that X can through a bunch of moves here to derive Alpha itself, okay.
+So, X will go to Alpha by wiping out all of the AIs, and I forgot to put the alpha
+here on the end, there should be an Alpha after As have been there. Okay? And wh at
+does this mean? Well this means that anything that is in the first of alpha is
+going to also be in the first of X. All right? So, if any prefix of the right-hand
+side can disappear then the remaining suffix, the alpha, it doesn't matter what
+the alpha is, is left. Then the first of alpha will be a subset of the non-terminal
+on the right, left hand side of X in this case. All right? Okay? Alright. So that is
+a definition of a first sets and how you compute them. Okay. And we have to, we
+have to compute them for the terminals and for the non-terminals, alright? That's
+what these; these second two rolls here cover the non-terminals. I just noticed,
+as I mentioned here at the beginning that this is well defined for any other
+Grammar, sequence as well. I mean, excuse me, any other string in the grammar as
+well. It doesn't, if I, if I know how to compute it for terminals, I know how to
+compute it for non terminals. Then I can compute it for arbitrary strings in the
+grammar, as well. Let's analyze, do an example. Let's take a look at this grammar
+and let's see if we can compute the first sets. Let's start with the easy stuff.
+Let's do the terminal symbols. Alright So, for the terminals, it's really, you know,
+extremely straightforward. The first of plus is plus. The first of times Is just
+times every terminal is in a, has its first set, the first set of every terminal
+is just the second term in that terminal and so on for the others, and this is not
+worth writing out. So it'll be the first of open paren will just be open paren, the
+first of close paren will be just close paren and I think that is all. Now we have
+to do ants as well, okay? Alright, so these are the first sets for the terminal
+symbols. And now let's look at something more interesting; let's talk about the
+first of the non terminal symbols. So What about the first of E? Well, if we look at
+the production for E, let's remember our rules. So we know that anything that's in
+the first of T will also be in the first of E. So the first of T Is a subset of th
+e first of E. Okay so in order to know what the first of E is we have to know
+what the first of T is. At least to know part of the first of E we have to know the
+first of T. So let's move on then to first computing. The first of T Let's, let's try
+to get that set. Now the first of T is actually pretty easy because if we look at
+the productions for T we can see that they produce terminals in the first position.
+All right? So the only possibility in the, the only possibilities in the first of T
+are open per en and int. And since there are only two productions for T and both of
+them have a terminal in the very first position, there's no other terminal
+symbols that could be produced in the first position by T. So we can just read
+off the first of T directly from the grammar. And it's the open paren in int.
+Okay? Now, let's return to thinking about the first of E. So remember there was
+another case that we need to keep track of. Or, sorry, that we have to consider.
+So, it could be, or, clearly everything in the first of T is in the first of E and
+we've already noted that down. But if T can go to epsilon then things that are in
+the first of X Could also be in the first of E. And now we've computed the first of
+T and we see that epsilon is not in there. The first of T always generates at least
+one terminal symbol, and so there'll never be a situation in which X can contribute
+to the first of E because T is always guaranteed to generate at least one
+terminal. So in fact this subset that we wrote up here is not a subset at all, it's
+an inequality. The first of T and the first of E are equal. So the first of E is
+also open per rand and Nth. All right? So now let's take a look at the first of X.
+Okay? So, the first effects well clearly pluses in the first of X because one
+production per X plus immediately in the first positions, so we must add plus to
+the first of X. And then X has an epsilon production so it can also go to epsilon so
+that means epsilon is also in the first of X And what about the first of Y. Well, the
+fir st of Y, it's a similar structure to the productions request, we see we have
+one production here in the [inaudible] of the terminal in the first position, and
+that's times. So the first of y has times in it. And then, y also has an epsilon
+production. Y can go directly to epsilon, so epsilon is also in the first of y.
+Alright? And that's actually it for this grammar. These are the complete first sets
+for all of the symbols of the grammar. The terminals just have themselves in their
+first sets and then the non-terminals we computed have these sets. So that
+concludes our discussion of first sets and in the next video, we're going to take a
+look at computing follow sets.

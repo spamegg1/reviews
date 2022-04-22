@@ -1,3 +1,5 @@
+## No programming assignment this week!
+
 ### Compiling and running COOL programs
 
 Extract the `dist.tar.gz` file, then add the `bin` directory to your `PATH`. For example, if you extracted it to `~/dist` then add the following to either your `~/.bashrc` or your `~/.profile` file:

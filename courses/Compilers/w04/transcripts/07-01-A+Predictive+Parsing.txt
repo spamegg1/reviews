@@ -1,0 +1,82 @@
+In this video, we're going to continue our discussion of top-down parsing algorithms
+with another strategy called predictive parsing. So, predictive parsing is a lot
+like recursive descent. It's still a top-down parser. But the parser is able to
+predict which production to use. And it's never wrong. [inaudible] parser is always
+able to guess correctly which production will yield to, will lead to a successful
+parse, if any production. Well, it lead to a successful parse. And it does have some
+two ways; first of all it looks at the next few tokens, so it uses look-ahead to
+try to figure out which production should be used. So, based on what's coming up in
+the input string, but also it restricts the grammars. So this, this is only works
+for a restricted form of grammars. And there's, the advantage is that there's no
+back tracking involved and so the parser is completely deterministic if you were to
+try alternatives. The predictive parsers accept what are called the LLK grammars.
+And this is a really cryptic name, and so let me explain it. The first L stands for
+left-to-right scan. So that means we're starting at the left end of the input and
+reading left to right. And in fact that's what we always do, so all the techniques
+that we looked at, look at will have an L in the first position. The second L stands
+for a leftmost derivation. So we are constructing a leftmost derivation. That
+means we're always working on the leftmost non-terminal in the parse tree. And K
+here, stands for K tokens of look ahead. And in practice, while the theory is
+developed for arbitrary 'k', in practice, 'k' is always equal to one. And so in
+fact, we'll only discuss the 'k's, 'k' equals to one, in these videos. To review,
+in recursive descent parsing in each step, there may be many choices of production to
+use, and so we need to use backtracking to undo bad choices. In an LL-1 parser, in
+every step, there's only going to be one choice of productions, of possible
+production to use. And, and what does that mean? Well, it means that if I have an
+input string if I have a configuration of the parser where I have some terminal
+symbols omega and a non terminal a you know, possibly now followed by some other
+stuff there could be terminals and nonterminals, but again a here is the
+leftmost nonterminal. And, the next input. Is a token T Well then there is exactly
+one production A goes to alpha on input T. Okay, there's only one possible production
+that we can use. And any other production is guaranteed to be incorrect. Now it can
+be that, that even A goes to Alpha won't succeed. It could be that we will be in a
+situation where there's no production we could use. But in [inaudible] parser,
+there will always be at most one that we could use. So in this case we would chose
+to rewrite the string to Omega Alpha Beta. Let's take a look at our favorite grammar,
+the one we've been using for the last couple of videos. We can see an issue here
+with using this grammar for a predictive parser. Take a look at the first two
+productions for T. They both begin with N's. And so if I tell you that the next
+terminal in the input stream as we're parsing along is an integer that doesn't
+really help you in trying to distinguish between these two productions in deciding,
+deciding which one to use. So in fact with only one token of look ahead, I can't
+choose between these two productions. And that is not the only problem actually, so
+we have a problem with T but the same problem exist with E. We can see that here
+both production for E begin with the non-terminal T, and it is really clear
+what we're to make of that because a T against a non-terminal terminal, so how we
+even do the prediction but the fact that they begin with the same thing suggest
+that it's not going to be easy for us to predict which production to use based of
+only a single token of look ahead. So what we need to do here is we need to change
+the grammar. This grammar is actually unacceptable for predictive parsing, or at
+least for LL1 parsing. And we need to do something that's called left factoring the
+grammar. So the idea behind left factoring is to eliminate the common prefixes of
+multiple productions for one non terminal. So that's a mouthful. Let's do an example.
+Let's begin with the productions for E. And we can see, again, that E, that both
+productions for E begin with the same, the same prefix. What we're going to do is
+just factor out that common prefix into a single production. So we're going to have
+one production where E goes to T. And then we're going to have multiple suffixes. So
+let's introduce a new non terminal X that will handle the rest. So here, we have E
+goes to TX. So it says that everything that E produces begins with T, and that's
+consistent with these two productions. And now we have to write another production
+for X that handles the rest. And what would that be? Well, one possibility is if
+we're in this production, we need to have a Plus E and then in this production
+there's nothing. So that's easy to handle, right. One possibility for X as it goes to
+Plus E and the other possibility as it goes to Epsilon. And now you can see the
+general idea. We factor other common prefix, we have one production that deals
+with the prefix and then we write, and then we introduce a non terminal or the
+different suffixes. And then we just have, multiple productions, one for each
+possible suffix. And you can see what this is going to do. This is effectively going
+to delay the decision about which production we're using. So instead of
+having to decide immediately which production we're going to use for E. Here,
+in this grammar, we wait until we've already seen the T, whatever is derived
+from the T. And then we have to decide whether the rest of the production is a
+plus, E or the empty string. Let's do the other, set of productions. So we have tea
+goes to, and now the common prefix is int that we want to eliminate So we're going
+to have just one production that begins with int and then we'll have a new, a
+non-terminal to stand for the various possible suffixes. And now we also have
+another production that doesn't h ave anything to do with int, and so we'll just
+leave that one alone, that production just stays here. Because it already begins with
+something different we won't have any trouble predicting between these two
+possible productions, these two possible productions. And now we have to write. The
+productions for Y And again, we just take, the suffixes of the productions that we,
+left factored and write them down as alternatives. So one is empty and the
+other one is times T. So we wind up with times T or epsilon.

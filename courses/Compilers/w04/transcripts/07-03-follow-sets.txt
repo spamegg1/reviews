@@ -1,0 +1,190 @@
+In this video, we're going to continue our discussion of the construction of
+LL1 parsing tables by taking a look at how we build the follow sets. So here's
+the definition of follow of x, and recall that the follow set for a given symbol in
+the grammar isn't really about what that symbol can generate, really, doesn't
+depend necessarily at all on what the symbol can generate. It depends on where
+that symbol can appear, where that symbol is used in the grammar. And we say that t
+is in the follow of x if there is some place in the grammar, some derivation,
+where that terminal t can appear immediately after the symbol x. Okay, so
+for all such. E. They make up the follow set of x. And here's some intuition about
+how we would compute follow sets. Let's say we have a situation where X goes to
+two symbols A, B, right? And then anything that B can produce in the first position
+will clearly be in the follow of A. So if we have X goes to AB. And then through
+some more, steps, we can get something like, this A goes, B goes to T beta, then
+we have a situation where the T comes immediately after the A, and so clearly,
+something that was in the first of B, is in the follow of A. So, so the basic rule
+is that you have two symbols that are adjunct somewhere, the first of the second
+one is in the follow of the first one. Hm, now Another interesting effect here is
+that, if we have, a symbol at the end of a production. Let's take a look at the B
+here for a moment, okay? And a claim here that anything that's in the follow of the
+left hand side is gonna be in the follow of B. In this case, that the follow of X
+is a subset of the follow of B. And let's take a look at that. Let's say that we
+have, a situation where we have a derivation from the start symbol, okay? We
+wind up with X followed by T. Okay? And there can be other stuff around the X and T but
+let's ignore that for the moment, let's just focus on the XT. Then we can use this
+production X goes to AB and in one step we can get to ABT. And then we see T was in
+the follow of X a nd also, T is in the follow of B as a result, Okay. So,
+anything in the follow of X would also be in the follow of B. And we can generalize
+this observation about what occurs at the end of a production. So anything that
+occurs at the end of the production, it, its follow set will include the follow set
+of the symbol on the left hand side of the production. Well, what is the end of the
+production? If, if B can go to epsilon, if B can disappear, then A will appear at the
+end of the production. Okay, so if B can go to epsilon, then it will also happen
+that the follow of X, would be in the follow of A. And following up here in our
+example, so we. Or up here we start with the start symbol. We got to XT. In one
+step we got to ABT and so T was in the follow of B. But now, B can go into
+epsilon and so we can also get to AT and therefore T is also in the follow of A.
+And finally there's one special case. Remember that we have our special symbol
+marking the end of the input, and what can that follow? Well the end of the input is
+in the follow of the start symbol, alright? And this is just a way again of
+keeping track of what we're going to do when we run out of input. And we'll see
+how that's used when we built the parsing tables but we always add as an initial
+condition, that dollar sign is in the follow of the start symbol. So now, let's
+take a look at and sketch of the algorithm for computing follows. So that's, as we
+just said, the dollar sign is in the follow of the start symbol. And now we
+take a look at each production. Okay, A goes to alpha X beta, we're, we're
+focusing here on the X. Okay, if we look at every production and we look at every
+symbol on the right hand side of that production. And the first of beta, okay,
+the thing that can follow x in this in this production, the first of that will be
+in the follow of x, and also we just subtract out epsilon if it was in the
+first sub-beta. We're not interested anymore in the epsilons for the purposes
+of follow sites, epsilon never appears in follow sites, so follow sites are always
+just sets of terminals. And now the second part of the algorithm is it if we have
+some suffix of a production beta that can go to Epsilon, so Epsilon is in the first
+beta. Alright, this suffix of the production can completely disappear, then
+as we saw on the previous slide the follow of left hand side symbol will be in the
+follow of X. And that's it in terms of the rules for computing follow sets. So now
+let's work through an example. So here's our grammar again. And we're going to
+compute, the follow sets for each of the symbols of the grammar. So let's begin,
+with the, with the start symbol. We'll start with the follow of E. And by
+definition, we know that dollar is in the follow of E. So we get that one easily.
+And now the question is what else could be in the follow of E, Alright? So in order
+to figure that out we have to look at where E is used in the grammar, Alright?
+So remember always at follow sets are about where the symbol is used. Not what
+it produces. Alright? So here. Is a place where E is used, and we can see that it is
+merely followed by a terminal symbol, so certainly close paren is in the follow of
+E, right? And there's one other place where E is used, and that's over here. And
+it appears that the right end of the production, and so then we know that
+anything that's in the follow of X is also gonna be in the follow of E. And that's a
+constraint, and so we'll right that down over here 'coz this is just a property of
+the relationship. That the follow sets, will have when we're done computing them.
+This doesn't immediately tell us anything new that's in the follow of E. But we know
+that as we go along, and we learn about things that are in the follow of X, we'll
+have to add them to the follow of E. And let me just divide up. The slide here so
+we will put our properties that we know about relationships between fallocates
+over on the left hand side and we'll put the actual fallocates over here on the
+right side. So, now to make, that's the only two places, those are the only two pl
+aces where E is used in the grammar and to make further progress we need to know
+something about the follow of X. Okay, if we want to make further progress on the
+follow of E then we need to figure out what's in the follow of X. So, let's focus
+on that for a minute. So, where's X used in the grammar, well it's used in only one
+place and that's here, Okay? Where it appears at the right end of a production.
+And what, and so therefore, the symbol on the left hand side will be a subset of the
+follow set of X. So we're gonna know that the follow of E is a subset of the follow
+of X. Alright? And what does that mean? Well, so follow of X is a subset of follow
+of E. And follow of E is a subset of the follow of X. So that really means that
+these two sets are equal. The follow of X and the follow of E, whatever they wind up
+being, are gonna have to be the same set. And now we've looked at all the places
+where E is used in the grammar. We've looked at all the places where X is used
+in the grammar. We can't learn anything more about what is in the sets, the follow
+sets of E and X. We're not forced to add anything else, to either set, and so we're
+done. And so we can close off this set. And we know the follow of E consists of
+dollar sign and closed paren. And we also know that X. Has the same set, the same
+follow set. Alright, so now let's move on to the follow of T, All right. So what's
+going to be in the follow of T? Well we, again we have to look at where T is used
+in the grammar. So T is used in two places. The first one is here in the first
+production. And so what's going to be in the follow of T? Well it could be anything
+that is in the first of X. Okay? Cuz X comes immediately after T. And if you
+recall from the previous video, there were only two things in the first of X. One was
+plus. So this plus is definitely in the follow of T and let's just review. [cough]
+Excuse me. How that can happen, so we can go from E. To TX, okay? I'm using the
+first production. And now we see the X comes after the T. And then in one more
+step, we can go to T plus E. And now we have a derivation where plus follows T.
+And that's how we, that's, that's Y pluses in the follow of T. Alright? So the other
+thing that was in the first of X was epsilon, because there's an epsilon
+production for X over here. But remember that we're not interested in, we don't
+include epsilon in follow sets. And so X doesn't contribute anything else, to the,
+to the follow of T. But since X can go to epsilon, remember what that means. That
+means that over here, looking back at this first use of T again in the grammar, this
+X can disappear. Right and that means that anything it is in the follow of E is also
+in the follow of T. Now we already know the follow of E. So we can just add those
+things in. Okay? And let me write that down over here, just so that we don't
+forget it. So, to follow. Of, of E is a subset of the follow of T. We won't really
+need this fact again but, useful to write it down, perhaps. Alright and now we are
+done with this use of x. We've included everything implied by this production that
+we can in the follow of T and so now have to look at the other place where T is used
+and that's over here. Okay, and so here we're going to see that T is in the right
+end of a production, so anything that is in the follow Y can also be in the follow
+of T, alright? So the follow of Y. Is going to be a subset of the follow of T,
+alright. So now we can go off and work on the follow of Y. We have to in order to
+figure out what the follow of T is going to be, we're gonna have to know the follow
+of Y. So where is Y used in the grammar? Well there is only one place and that's
+over here. And also Y appears in the right hand of production which means that the
+left hand side symbol it's follow set will be included in the follow of Y. >> And so
+the follow of t will be a subset of the follow of y. All right? And now again, we
+have two follow sets that are subsets of each other. Follow of y is a subset of
+follow of t, and follow of t is a subset of follow of y. And so these two sets, we
+know are going to have to be equal. Okay? So we can write down here. At the follow
+of Y, includes plus, dollar, enclose parette. Just like the follow of T. And
+now we're done. We've, we've, follow of T, and follow of Y. We've followed all the
+implications of, how the follow of T gets things into, what can be included in the
+follow of T. We've worked out all the places where Y is used in the grammar, and
+added all the things that we can, based on, it's context. And there's nothing more
+that we're forced to add either said. So we can go ahead and close these sets off.
+They're finished, Alright. So now We've done the follow of E, X, T, and Y. So
+we've taken care of all the terminal symbols. But, I'm sorry, All the
+non-terminal symbols. But we still need to compute the follow sets for the terminal
+symbols. And unlike the case with first sets, the follow sets for terminal symbols
+can actually be interesting. So let's take a look, at the follow of open paren. Okay,
+what can follow an open paren in a derivation? Well open paren is only used
+in one places. It's here. Okay. And so, what can follow in open parens is whatever
+is in the first of E. And remember that the first of E, was the same as the first
+of T, because T always produces something in the first position. And the first of T
+was what? It was open paren. An int, 'kay? And if you think about this for a minute,
+this makes complete sense. What can come after an at any valid, at any valid string
+in this grammar, while it's going to be another nested parenthize expression, or
+is it going to be an integer. In particular, you couldn't have a times or a
+plus immediately after an and you couldn't absolutely have the end of the input, you
+couldn't have the input stop after an and have a valid string. So now let's take a
+look at the follow of. Okay? So what's in that set? Again, we look at where the
+symbol is used. It's only used here, in this one production. So and, because it
+appears at the right end of the production, we know that whatever is in
+the follow of T is going to be in the follow of ), all right. And so what was in
+the follow of T, [cough], that was +$), Okay. So, now let's move on and take a
+look at the operators. Let's look at the follow of plus. So where's plus used?
+Well, it's only used here. So whatever's in the first of E is going to be in the
+follow of plus. And we already know what the first of E was. That was an open
+[inaudible], An int, Okay. And remember also that E cannot go to Epsilon. So, E
+cannot ever disappear completely because T always produces at least one terminal.
+Therefore, only the things that are in the first of year in the follow of plus.
+Because E can't go to Epsilon, we only have to include the things that are in the
+first of E, in the follow of plus. Again, if you think about it for a minute this
+makes complete sense. What could come after a plus? Well, it could be an
+integer, the second argument to an addition, or it could be the beginning of
+another nested expression. And it couldn't be a times. It certainly couldn't be the
+end of the input cuz you always have to have an argument after the plus. And, >>
+And I think that's it. I think that's all the other possibilities. >> Okay, Alright.
+Now let's take a look at the follow of times. What can come after a times. Where
+is times used, it's used here. So things that are in the first of t. Are gonna be
+in the follow of times again, alright? [inaudible] we already know what that is.
+That's the same as the first of E. That's open paren and ints. And again, this makes
+complete sense. What can come after a times? It's either the beginning of
+another [inaudible] expression or an integer. It's certainly not a plus or the
+end of the input, okay? And again, T cannot go to epsilon, and so that's the
+only thing. Those are the only things that can be in the follow of times. And now we
+just have one more symbol to go. We have to look at the follow of an integer, of an
+int. Okay, where is that used in the grammar? Well, it's right here, Alright.
+So the, what's gonna be in the follow [inaudible], what 's going to include
+everything in the first of Y. Okay. What's in the first of Y, well times was in the
+first of Y, and epsilon was in the first of Y but remember, we don't include
+epsilons in follow sets. So, Y contributes times to the follow of int. But now,
+because Y could go to the epsilon and epsilon could [inaudible], that means that
+this int could wind up being at the right end of this production. Okay, it could,
+the Y could disappear and then whatever could follow the T could also follow the
+int. Right, so we have to include the things in the follow of T. In the follow
+of it, and what was in the follow of T where that was a plus. It was a dollar.
+And it was a close paren, okay? And what does that tell us? Well it tells us, okay
+for most anything to follow an int but as an open paren cannot follow an int. So you
+can't have another nesit expression with a, begin right after an int without an
+intervening operator, Alright? And that completes the computation of the follow
+sets for this example.

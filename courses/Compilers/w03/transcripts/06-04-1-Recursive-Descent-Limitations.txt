@@ -1,0 +1,102 @@
+In this video, I'm going to cover a limitation of the Recursive Descent
+Algorithm that I presented last time. Here's the grammar from our last
+presentation, and here's its implementation again, as a set of
+mutually recursive function that together, implement this simple recursive
+descent strategy. And now, let's think about what happens.
+When we go to parse the input int, simplest possible input strength.
+Well, let's work through it. So remember, we start with the function
+that implements all the productions for the non-terminal e.
+And so what we're going to do here, we're going to call e.
+And that will try calling E1. All right?
+And what is E1 going to do? E1 is going to call T.
+Because, of course, the first production is E goes to T.
+So let's take a look at what T does. T is going to try out the production of
+T1, all right? And what does T1 do?
+Well, T1 recognizes an int. Okay, so that's good.
+And it will match it and return, okay, and then E will return and we will
+succeed in parsing. And I forgot to mention it, also the
+process, the input point will be moved across the int, and so when we're done
+you will return, and we will have succeeded in parsing the string int
+because E return true the production for E return true, and we consumed all of the
+input. All right?
+So now, let's consider a slightly more complicated example, okay?
+So let's try the input string Int times int.
+All right? So again, we start with the production E.
+Okay? And the first thing we'll do, is we'll
+try the production E1. Same thing we did last time.
+E1 is going to call the function T. And T is going to try the first
+production for T. Which, again, is the production int.
+Okay? And the input pointer, of course, is
+here, and then it will try to match that against an int.
+Okay? If I match the first token in the input
+stream against the, the terminal int. And it will succeed.
+Okay? So the input pointer will be moved over.
+So T1 will return true. All right?
+And as a result. This right hand side here of the function
+T will also succeed, because T1 returns true, so T will return true.
+Okay? Therefore, E1 will return true and E, E1
+returning true will cause E to return true.
+And in fact that will be the end of the execution of the program will terminate.
+E will return true and the input player will only have advanced as far as int,
+and so we will reject the parse. This is actually, ends up getting
+rejected. And the question of course is what
+happened? All right.
+Why didn't we succeed in parsing this input?
+Which is clearly in the language of this grammar.
+Well, the story here is actually a little bit interesting.
+What happened is down here when we discovered that Int matched the first
+production for T, we said that T was done.
+Okay, T had succeeded, had matched it's input.
+And then, when E ultimately returns and the whole parse fails, because we haven't
+consumed the input, we don't have a way to back track and try another alternative
+for T. If we were going to succeed we would have
+to say, oh, well even though, we found a production for T that matched part of the
+input. Since the overall parts fail, that must
+not have been the right production to choose for T.
+Maybe we should try some other productions for T.
+And in fact if we'd tried the second production for T, T2.
+We would have matched Int times T, and then we probably would of succeeded.
+We would have been able to manage int times int.
+Okay? And so, the problem here is that even
+though there is backtracking within a production; while we're trying to find a
+production that works for a given non-terminals.
+So, while there is backtracking For a non-terminal during the time that we're
+trying to find a production that works for that non-terminal, but there is no
+backtracking once we have found a production that succeeds for
+non-terminals. So once a non-terminal commits and
+returns and says, I have found a way to parse part of the input using one of my
+productions. There's no way, in this particular
+structure, this particular algorithm, to go back and revisit that decision and try
+a different production. All right?
+So the problem is that if a production for non-terminal x succeeds, there's no
+way to backtrack to try a different production for x later.
+So once x, once the function for x has returned.
+And we're really committed to that production.
+Now that means that the particularly Recursive Descent Algorithm that I showed
+in the last video, is not completely general, and Recursive Descent is a
+general technique. There are algorithms for Resursive
+Descent parsing that can parse any grammar.
+That can implement the full language of any grammar.
+And they have more sophisticated backtracking, than what I showed in the
+algorithm that I presented last time. Now the reason for showing this
+particular algorithm is that it's easy to implement by hand.
+So this is actually an algorithm, or approach to Recursive Descent that while
+it has this limitation, as you can see, it's very mechanical and very
+straightforward to design a parser for a given for a given grammar.
+And it will work for a rather large class, class of grammar.
+So in particular, it'll work for any grammar where for any non-terminal at
+most one production can succeed. So if you know from the way that you've
+built your grammar, that in any situation, that the grammar can get into
+or the Recursive Descent Algorithm can get into during parsing, that at most one
+production can succeed. Then it this, this parsing is gradually
+will be sufficient, because there will never be, once you find a production that
+succeeds, there will never be a need to go back and revisit that decision,
+because it must be the case that none of the other productions could have
+succeeded. And it turns out that the example grammar
+that we're working with in the last couple of videos could actually be
+written to work with this algorithm. All right.
+And we would have to left factor the grammar.
+Well, actually there's more than one way to rewrite the grammar to work with this
+Recursive Decent Algorithm but one way to do it Is to left factor it.
+I'm not going to say any more about left factoring in this video, because that's
+going to be a topic of a video that's coming up shortly.

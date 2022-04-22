@@ -1,0 +1,114 @@
+Now there are several ways to eliminate ambiguity from a grammar and the most direct
+method which we'll talk about first is just to rewrite the grammar so it's an
+ambiguous. That is to write a new grammar that generates the same language as the old
+grammar but it only has a single Parse tree for each string. So here's a, a rewrite
+of the grammar we've been looking at and let's write down our favorite input
+string one more time, id id + id. And let's look at how that string will be parsed
+according to this new grammar so it begin with the start symbol e and now notice
+that e can no longer generate a plus or a times. In fact we separated the
+grammar now into two sets of productions, two nonterminals and e controls the generation
+of plus and e prime controls the generation of multiplications, okay. And
+so in originally of + we have to use the production e prime + e. There is no other
+way to do it. And now if we look at e prime, what can e prime do? Well, e prime
+can generate an identifier times something and if you look at the grammar that
+is the only production that can generate identifier times something else.
+The only other possibility involving times is to generate apprenticed expression which
+clearly won't match the string that we're trying to pars E. So we have to use
+this production Id e prime. Well now in order to match the string, we can see that
+this e prime, the second, the one remaining e prime here has to go to id because
+sandwiched in between the times and the plus is a single id, there's only
+one production that will do that so that's completely unique and determined. And finally,
+we have the last e over here which we want to use to produce an id. Well
+how can we do that? Well, the e can go to e prime. In fact it has to and then
+the e prime can go to id by itself, and there. We've manage to parse the string. So
+in general what does this grammar doing, well we do say we stratify the grammar.
+We've divided the productions into two classes. One that handles times and
+one that handles times and there's one nonterminal for each, each operator so. The
+e productions control the generation of plus and let's just look at what happens
+with that. So if I, e can go to e prime + e and just sticking with the e productions,
+what can happen to this e here? Well, we could do it again, E prime
++ e prime + e. And if we do it one more time, we'll have e prime + e prime + e prime
++ e. And in general, I think you see the pattern, we can generate any number of
+e primes summed together. And finally, that trailing e, there's always one e left
+at the end. Eventually that e, when we want to stop generating pluses, has to be
+rewritten to e prime. So in the end, we'll get a sequence of pluses of, of e primes separated
+by pluses, okay? That's what e prime can do. I'm sorry, that's what e can
+do. Now let's look at what e prime can do. So, e prime. And let's just focus on the first
+two productions. As we can see at the first two productions are handling identifiers
+times something and then the last two productions are handling parenthesized
+expression but you know I hope you the symmetry that it's, it's really
+the same idea for identifiers and parenthesized expressions. So we'll just do
+identifiers just to keep the slide from getting too crowded. So e prime can go to
+id e p rime. Well, we can repeat that, we can go to id. id e prime and we can repeat
+that again and I hope you're beginning to see the same pattern. This is
+the same idea as with plus. And when we wind up with n is a bunch of identifiers multiplied
+together, alright. Because that trailing e prime in this case, in the end,
+can be rewritten to id. Now, in the case of e prime there are actually two alternatives.
+We could either be generating id's or we could be generating
+parenthesized expression. So really, for each of these id's it could have been a parenthesized
+expression. So let me just write some parenthesized e's down here just
+to remind us that we have an alternative and in the end, we wind up with,
+you know? A string of identifiers or parenthesized expressions separated by times,
+Okay? Alright right, so I hope you see how this works. There's the, the way that
+the grammar set up because we have these two separate groups of productions.
+All the pluses must be generated Before any of the times. The times are gonna be nested
+more deeply inside the Parse tree than the pluses. The pluses are generated
+at the outer most level and then the e primes will generate the times inside the
+pluses. And so the grammar enforces that times is gonna buy more tightly than plus.
+The last detail that's worth pointing out here is I've noticed inside of the parenthesized
+expression, we have an e, not an e prime. And why is that? Well once
+we're inside of a parenthesized expression, the whole purpose of parentheses
+is to show the explicit association and so that we can have pluses
+inside of times by using parentheses. And that's all that, that, that's the significance
+of using e in this part of the grammar rather than e prime. To review,
+We started out with a grammar and A string we wanted to parse, id id + id, but
+that grammar gave us two distinct Parse trees for the string and here are the
+two Parse trees again. And by rewriting the grammar, we were able to eliminate
+this Parse tree on the right. So, this Parse tree is no longer p ossible.
+The Parse tree on the left is modified, there's more symbols in it now.
+I mean for example, this became an e prime and there was a chain here of non-terminals,
+this e went to e prime and went to id and there was some other minor
+changes in here so the Parse tree is not exactly the same as before but. We were able
+to get a parse where the times binds more tightly than the plus. So, now let's
+consider another interesting example. If, then, else expressions were the else is optional
+and here's one way to write that grammar. Here we have a if, then, else And
+the usual way. But then we also have a production where there is no else. So that's
+the case where the else is optional and then maybe there are some other kinds
+of expressions that we don't need to concern ourselves with those. We'll just focus
+on the if and else piece. The problem is, at this particular if, then, else
+expression has two possible Parse tree. On the one hand, the else might belong
+to the outer if, That is, this particular. Inner if might have no else and.
+The else would be associated with the outer if. The other possibility is that the
+else belongs to the inner if that we have this structure if then else is nested
+inside of an if then that has no else statement. And in, what we want in on the
+programming language I know of is the second form. We want else's to associate to
+the closest matching if then and not one that's further away. We can write a grammar
+to express the desired association. The property we want is that
+every else should match the closest unmatched then. So whenever we see an else,
+we want it to be associated with the closest then that doesn't already have a closer
+matching else. So that means that the if statements are going to be divided
+into two categories. We'll have the matched if's, those that have all of the then
+statements nested within them matched with an else. And the unmatched if's where
+some then's then expression inside of the unmatched if that has no matching else. So,
+when matched ifs look like, well tha t's pretty straight forward, I, and if, then,
+else is a matched if most have, must have both of them and an else and any nested
+if statements on both branches must, must also have matching else's. And,
+if you have any other kind of a constructs that's not an if and else, that's also considered
+a matched if. What about the unmatched if's? One possibility is that they,
+it's simply an unmatched if, that there is no else. So we have if and then and
+no matching else out here. And now the crucial case, what if we have an if and else?
+So that the top level if then has a matching else but then the unmatched if is
+somewhere inside. Well, then we claim that the unmatched if has to be in the else branch,
+it cannot be in the then branch. The then branch must be a matched if. And
+why is that? Well, think about it. If this was an unmatched if, if this was an unmatched
+if, that means that there will be some then in here. That had no matching
+else. And then this else here would be closer to that then, than it is to this end
+then. And so, we would have to match that one according to our definition. Okay.
+So, that situation is not possible. So, the only possibility for an unmatched
+if is that, that it's itself and if and else is that, that the any if, then, else's
+under their branch have to be matched and the unmatched if and else has
+to be in the else branch. So reconsidering the expression we had before, we can see that
+this else is supposed to match this then. And so the association should be like
+this, and, and therefore, this Parse tree on the right is not the one that we want
+and the grammar we gave on the previous slide will parse the expression according
+to this Parse tree on the left.

@@ -1,0 +1,38 @@
+Now you might think that the unambiguous if, then, else grammar is complicated and hard
+to understand and frankly I would have to agree with you. Unfortunately, it's
+impossible to automatically convert an unambiguous grammar to an ambiguous one,
+so we have to do these conversions by hand. If we're going to have unambiguous
+grammars, we have t o figure out how to write them by hand and that does result
+insignificantly more complex grammars and grammars that are hard to read and
+maintain than if we use the, well more straightforward ambiguous grammars. A
+possibility is to we'll try to somehow live with ambiguity cuz that will allow us
+more depth natural definitions. And, but then we would need some disambiguation
+mechanism. We need some way to tell which Parse tree we want when more than one
+Parse tree is possible. In fact, most practical parsing tools adopt the second
+approach. So, instead of rewriting the grammar, we used the more natural
+ambiguous grammar and the tool provide some kind of disambiguating declarations.
+The most popular form of disambiguating declarations are precedence and
+associativity declarations. So, here is a natural grammar for plus over the integers
+and this is ambiguous even just with a single infix operation, we can get
+ambiguity because this grammar doesn't tell us whether plus is left associative
+or right associative. And. So, simple solution here is to have associativity
+declarations. So here, we declare plus to be left associative and this is the
+notation used in Bison. So, Bison is a particular tool and a present left plus
+declares that plus is a left-associative operation and so that would rule out this
+particular Parse tree over here. Here [inaudible] more complex grammar
+essentially the grammar we began with the, at the start of this video. Here we have
+plus and times over the integers and again this grammar is ambiguous because it
+doesn't say what the precedence of times is with respect to plus. And the solution
+for this is to have multiple associativity declarations. We declare plus to be left
+associative and we declare times to be left associative and then the precedence
+between plus and times is given by the order. So the fact here that times appears
+after. Plus means that times has a higher precedence than plus. Just one word of
+caution, These declarations are called associativity and precedence declarations
+but that's not what's quite what's going on inside the parser. The parser doesn't
+really understand about associativity and precedence. Instead, these declarations
+tell it to make certain kinds of moves in certain situations. We won't really be
+able to explain this until we get much further into parsing technology, but just
+be aware that we have to be a little bit cautious in using these declarations.
+Usually they behave like associativity and precedence in the way you expect but there
+are some situations in which they will cause Rising behavior And is important
+that you check the behavior of your grammar after you add these declarations.

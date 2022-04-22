@@ -8,7 +8,7 @@
 
 # FAQ
 
-​        [General Questions](http://openclassroom.stanford.edu/MainFolder/DocumentPage.php?course=Compilers&doc=docs/faq.html#general)
+​    [General Questions](http://openclassroom.stanford.edu/MainFolder/DocumentPage.php?course=Compilers&doc=docs/faq.html#general)
 ​    [Video Lecture Questions](http://openclassroom.stanford.edu/MainFolder/DocumentPage.php?course=Compilers&doc=docs/faq.html#video)
 ​    [Programming Assignment 1 Questions](http://openclassroom.stanford.edu/MainFolder/DocumentPage.php?course=Compilers&doc=docs/faq.html#pa1)
 ​    [Programming Assignment 2 Questions](http://openclassroom.stanford.edu/MainFolder/DocumentPage.php?course=Compilers&doc=docs/faq.html#pa2)

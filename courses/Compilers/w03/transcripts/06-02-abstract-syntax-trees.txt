@@ -1,0 +1,46 @@
+In this video, we're gonna talk about the core data structure used in compilers, the
+abstract syntax tree. To briefly review, a parser traces the derivation of a sequence
+of tokens but this by itself Is not all that useful to the compiler because the
+rest of the compiler needs some representation of the program. It needs an
+actual data structure that tells it what the operations are in the program and how
+they're put together. Well, we know one such data structure is called a Parse Tree
+but it turns out that a Parse Tree really isn't what we wanted to work on. Instead,
+we wanted to work on something called an Abstract Syntax Tree. And the Abstract
+Syntax Tree is really just the Parse Tree but with some details ignored. We have
+abstracted a way From some of the details of the Parse Tree. And here's an
+abbreviation that you'll see, ASTs stand for Abstract Syntax Tree. So, let's look
+at the grammar. Here's the grammar for plus expressions over the integers and we
+also parenthesize expressions. And here's a string and after lexical analysis, what
+do we have? Well, we've got a sequence of tokens again with their associated lexemes
+telling us what the actual strings were. And that gets past into the parser and
+then we build a parse tree. And here's a parse tree for that expression. Now, if
+it's expressed that this representation, the parse tree is actually perfectly
+adequate for compilation. We could do our compiler using the parse tree. This is a
+faithful representation of the program. The problem is that it would be quite
+inconvenient to do that and to see this, it only point out some features of the
+parse tree. First of all you can see if the parse tree is quite robust so for
+example we have here a node e and it has only one child. So when there's only one
+successor of the, of the node, what is that really doing for us? Well, we don't
+really need the e at all, we could just put the, The five right here and, and make
+the tree smaller and similarly for the other single successor nodes. Furthermore
+these parentheses h ere, well these are very important in parsing because they
+show the association of, of this, of the arguments with respect to these two plus
+operations. It shows that this plus is nested; this plus down here is nested
+inside. Of this plus up here But once we've done the parsing, the tree structure
+shows us the same thing. We don't need to know that these were inside a parenthesis,
+that the fact that these two expressions or the argument of this plus already tells
+us all we need to know. And so, you know? All of these nodes in here are also in a
+sense redundant. We don't really need that information anymore. And so we prefer to
+do is to use something called an Abstract Syntax Tree that just compresses out all
+the junk in the Parse Tree. So here is a. Abstract syntax tree or a hypothetical
+abstract syntax tree that would represent the same thing as the parse tree on the
+previous slide and you can see here we've really just cut it down to the essential
+items. We have the two+ nodes. We have the three. Arguments and the association is
+just shown by which plus node is nested inside the other. We don't have any of the
+extraneous nonterminals. We don't have the parenthesis. Everything is much simpler
+and you can imagine that it'll be easier to write algorithms that walk over a
+structure like this rather than the, the rather, elaborate structure we had on the
+previous slide. Of course again is called an abstract syntax tree because it
+abstracts away from the concrete syntax. We suppress details of the concrete syntax
+and just keep enough information to be able to faithfully represent the program
+and compile it.
