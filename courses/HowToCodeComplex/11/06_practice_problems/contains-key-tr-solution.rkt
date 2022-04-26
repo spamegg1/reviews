@@ -122,3 +122,20 @@
                    (contains/one? (first todo) (rest todo))]))]
 
     (contains/one? bt empty)))
+
+; Interesting solution: using binary tree as accumulator
+(define (contains? k n)
+  ;; todo is Node (binary tree); worklist accumulator
+  (local [(define (contains? n todo)
+            (cond [(false? n) (if (false? todo)
+                                  false
+                                  (contains? todo false))]
+                  [(= k (node-k n)) true]
+                  [else
+                   (if (false? (node-l n))
+                       (contains? (node-r n) todo)
+                       (contains? (node-l n)
+                                  (if (false? (node-r n))
+                                      todo
+                                      (make-node 0 "" (node-r n) todo))))]))]
+    (contains? n false)))
