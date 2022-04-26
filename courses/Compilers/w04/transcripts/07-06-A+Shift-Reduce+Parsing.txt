@@ -1,0 +1,66 @@
+In this video, we're gonna continue our discussion of bottom-up parsing with the
+main strategy used by all bottom-up parsers, so-called shift-reduce parsing.
+Here is a quick review of the most important thing that we learned last time,
+that a bottom up parser traces a right most innervations in reverse. Now this
+particular fact has an important consequence. So let's think about a state
+of a shift reduced parse where we have string alpha, beta and omega, and let's
+assume the next reduction is going to be the replaced beta by X. Okay, so remember
+we're running productions backwards. Then I claim that Omega has to be a string of
+terminals. And why is that? Well if you think about it, if this is a rightmost
+innervations in reverse, then when X is replaced when we take this if we look at
+the forward step is the, the backward step. So remember the parser is running
+this way replacing data by X. But if we think about the rightmost innervations in
+the other direction then X has to be the rightmost non-terminal, which means there
+are no non-terminals to the right of X and so all the Character, all the tokens,
+whatever it is in this string have to be terminal symbols. Now it turns out that
+those terminal symbols to the right of the right most non-terminal are exactly the
+unexamined input in bottom of parsley implementations. That is if I have alpha
+X, omega and I'm, and X is my right most to non-terminal then this is the input
+that we haven't read yet. This is unexamined Input And it's gonna be useful
+to mark, where we are, in the parse, where our, where our input focus is. And we're
+gonna do that by using a vertical bar. So we're gonna just place, drop a vertical
+bar. Between the place where we read everything to the left, and we've actually
+been working on this. So this stuff to the left here can be terminals and
+non-terminals and we, the parts that we've seen all of that stuff. And the stuff to
+the right is after the parts hasn't seen. Now we don't know what's out there,
+although we do know its all terminal symbols. An d the vertical bar is just
+gonna mark the dividing line between the two sub-strings. To implement bottom up
+parsing, it turns out we only needs two kinds of actions. Shift moves and reduce
+moves. And we've already talked somewhat about reduce moves, and so we have to
+introduce shift moves. So let's do that now. So a shift move, reads one token of
+input. And we can explain that or represent that by moving the vertical bar
+one token to the right. So if our input focus is here, and we want to read one
+more token of input, then we just move the vertical bar over. And this signifies that
+now the parser knows about that next, terminal symbol. And now we can start
+working on it. It can do things. We can match against it for the purposes of
+performing reductions. Again the stuff out here to the right of the vertical bar the
+parser hasn't seen yet. And then a reduce move is to apply an inverse production at
+the right end of the left string. So if in production a goes to xy and we have x and
+y here immediately to the left of the vertical bar. So this is our focus point,
+okay, and x and y the right hand side of the reduction is right there. Then we can
+do a reduction, we can replace that right hand side by the left hand side, and this
+is a reduce move. Here is the example from the last video, and this is exactly the
+example just showing the reduced moves, now with the vertical bar also shown. So
+this shows where the input focus was, at the point where each of the reductions was
+performed. And what's missing, of course, now we know, is the sequence of shift
+moves. So here is the sequence of shift moves and reduce moves that, take the
+initial input string, to the start symbol. So let's walk through this in more detail.
+So we're going to go step by step. And we're going to show each shift and each
+reduce move. And now in addition to our input string down here we also have a
+pointer showing where the where in the input we are. So initially we haven't seen
+any of the input, and our input pointer is to the left of the entire str ing. So the
+first move is to do a shift. And then we do another shift, and then we do another
+shift. And now just look at the example from before if you look back at that, at
+that example, you know, the next thing we need to do is to reduce. So remember we're
+only allowed to reduce to the left of the arrows. So, we can only reduce over on
+this side of the arrow. So, we always have to read enough of the input before we can
+perform a reduced move. And then we perform another reduce move, okay? And
+then it turns out the next thing to do is two shift moves and we haven't explained
+yet how we know whether to shift or reduce we're going to get there. I'm just showing
+that there exists a sequence of shift and reduce moves that succeed in parsing this
+example. Now we've shifted the entire input onto this sorry we've, we've. We
+shifted over the entire input, so there's no more input to read. And now all we can
+do is reduce moves. But fortunately, there is a sequence of reduce moves from this
+point, that we can we can perform. So, here we reduce int, and then we reduce T
+plus T. Oh, forgot, we first reduce T to E, and then we reduce T plus E back to the
+start symbol.

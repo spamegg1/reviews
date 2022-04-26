@@ -157,6 +157,8 @@ Moreover, "guess something, type on the keyboard, run the code, and hope it work
 
 So... what's the point of this long educational, pedagogical tirade? ***You have to acquire the rigor, discipline, and the logical reasoning skills necessary.*** I recommend you should learn mathematical induction FIRST! Write tons and tons of induction proofs. If you master induction, recursion is a piece of cake, and it will pay HUGE dividends in Algorithms later (it's all induction!)
 
+Here’s one learner’s perspective: *It took me three tries to finally be ready for this course. I made it to the half way mark to understand why this course is really important. I just wish I knew this in the beginning of last year when I first started.*
+
 ***Even more updates (July 2021):*** I told this story on Discord:
 
 ```

@@ -198,16 +198,16 @@ def is_valid_word(word, hand, word_list):
     word_list: list of lowercase strings
     returns: boolean
     """
-    word = word.lower()
-    letters_in_hand = [word.count(char) <= hand.get(char, 0) for char in word]
+    lower = word.lower()
+    letters_in_hand = [lower.count(char) <= hand.get(char, 0) for char in lower]
     if not all(letters_in_hand):
         return False
 
-    if '*' not in word:
-        return word in word_list
+    if '*' not in lower:
+        return lower in word_list
 
     for vowel in VOWELS:
-        if word.replace('*', vowel) in word_list:
+        if lower.replace('*', vowel) in word_list:
             return True
 
 

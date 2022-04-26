@@ -1,0 +1,4 @@
+So, to summarize, a bottom up parser traces out a
+rightmost derivation in reverse. And it builds a parse tree by combining small parse
+trees into larger ones. It precedes bottom up. Instead of expanding out from the
+start symbol top down, it builds from the leaves of the tree up towards the root.

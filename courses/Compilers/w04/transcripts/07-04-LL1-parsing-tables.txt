@@ -1,0 +1,167 @@
+In this video, we're gonna put together what we've learned about first and follow
+sets to construct LL1 parsing tables. Our goal is to construct a parsing table T for
+a context free grammar G. And this is done by production. So we're gonna do this one
+production at, at time. And we're going to in turn, consider each production, A goes
+to alpha in the grammar G. And so the first case Is if we are trying to figure
+out whether we can use A goes to alpha and T happens to be in the first of alpha.
+Alright, so if we know that some terminal T is in the first of the right hand side,
+then. If we were in a situation where A was the leftmost non terminal, and T was
+the next token of input, then, then expanding by A goes to alpha would be a
+good move because the alpha could potentially, through more, productions,
+match the T. And so we'll add to the parsing table at the A, T entry, The right
+hand side alpha. Alright, the other situation that we're interested in is,
+what if we need to get rid of, the A, okay? So if the A cannot possibly match
+the T, alright? So let's say the T is not in the first of alpha, or we have some
+other situation where we want to erase the A. Well, then it would be okay, to use
+production A goes to alpha, provided that. Alpha can actually go to Epsilon, so alpha
+can go away completely, Alright? So we can eliminate all trace of the A. And T
+follows A in the grammar. So T is able to come after, excuse me, T is able to come
+after A in some derivation. So if T is in the follow of A, and the right hand side
+of the [inaudible] code epsilon, then we add the move that when A is the leftmost
+non terminal, and T is the next input, we can expand A by A goes to alpha. And
+finally, a special case for dollar, because dollar's technically not a
+terminal symbol. If we're at the end of the input, okay, so we have some stuff
+left on the stack, particularly we have if nonterminal a is still our leftmost
+nonterminal, but we've run out of input, well then our only hope is to get rid of
+the a completely. And so we want to pick a production for a that can go to epsilon,
+so we look for a production a goes to alpha, where epsilon is in the first of
+alpha, and dollar can follow a in a derivation. So that is the procedure, or
+those are the rules, for constructing a parsing table. And now let's work through
+an example. So here's our favorite grammar that we've been looking at for the last
+few videos. And now let's take a look at what the parsing table will look like,
+alright? And the parsing table will consist of, columns that are labeled by
+the terminal symbols of the grammar. All right, so here we'll have open paren,
+closed paren, plus times and inch. And then the rose will be labeled by the
+terminal symbol, so we'll have E, T, X, and Y. All right, and now we're just going
+to take each production, and apply our rules, and see what entries in the table
+we create. All right, so when would we use E goes to TX? Alright, well, so the first
+thing to observe about this production is that it cannot produce epsilon on the
+right hand side. So TX always produces at least one terminal. And so, the second
+case, where we're interested in whether the production can go to zero, as it could
+go to epsilon, excuse me, is not going to apply. All right, So we just have to
+consider what it can generate in the first position. So the only things that this
+[inaudible] can generate in the first position are things that are in the first
+of T, which are open paren and int. So there are two situations in which we will
+use the production E goes to TX, that is if E is the leftmost nonterminal, and the
+next input is an open paren. Okay? And the other one is that, if the next input is a
+[inaudible], alright? Okay, so now let's take a look at this production. Right. So
+when are we going to use T goes to open paren E closed paren. Well if T is the
+leftmost non-terminal, alright? That's this one on the left hand side and an open
+paren, is the next symbol in the input, kay. That's the only thing in the first of
+this right hand side. Then it would be a good move to expa nd by open paren E
+closed paren. So there's only one situation. Where we use that production.
+Alright? And for the other production, the other T production, we're going to use
+that when T is the leftmost nonterminal, and there's an INT in the input. So over
+here, we'll have [inaudible]. And I forgot one column over here for dollar. So we'll
+stick dollar in there at the very end. Okay? So now, we've covered these first
+three productions. Let's take a look at this production. So when would we use X
+goes to plus E. Well clearly the only thing on the first of the right hand side
+is plus, and the terminal, symbol on the right hand side is X, so the X plus entry
+we would want to expand by X goes to plus E. And similarly for Y, the production,
+the first production involving Y, when Y is the terminal, non terminal we're trying
+to expand and there's a times in the input, we would use the production Y goes
+to times T. Okay? And now we just have the two epsilon productions left. And these
+are the only productions, actually, that can go to epsilon. And so when would we
+use, when would we use X goes to epsilon or Y goes to epsilon. Alright, so recall
+that we need to know. What is in the follow of X in order to know when to use X
+goes to epsilon. And we computed that in the last lecture. But let's just write it
+down again here. Okay. And so what was in the follow of x, well we had to look at
+where x was used in the grammar, x was used there. I, it appears at the right
+hand side of the production. So it would be things that were in the follow of e.
+What was in the follow of e, well, e is the start symbol, so [inaudible] is in the
+follow of e, close paren is in the follow of e. Alright? And then what was in the
+follow of y. That's the other one where we'll need to know the follow set. Again
+we have to look at where Y is used so Y is used there. That means everything that's
+in the follow of T is in the follow of Y. The follow of y will therefore include the
+first of x because x can come after t. So plus will be in the follow of y. Alright
+but then x can go to epsilon and so everything is in the follow of E will be
+in the follow of t and therefore also in the follow of y. So the other two things
+in the follow of y were the dollar sign and close paren. Alright and so this is
+saying okay, is that if we are in a situation. Where we have, an X. Okay?
+Let's just focus on the X goes to epsilon production for a moment. Let's say that we
+have X on the stack, okay, on top of the stack, and $ is our next input. Well, what
+can we do? At the end of the input we have to get rid of the X so obviously we want
+to use the X goes to epsilon move, okay, so that makes sense. And the other
+situation that follows it tell us to use X goes to epsilon, as if there is a) on the
+stack, because the X cannot generate a) by itself. But hopefully some other symbol
+that's on the stack will be able to generate once we get rid of the x okay so
+we also use x goes to epsilon In this situation. And then [inaudible] for follow
+of Y, or for Y goes to epsilon, that production. There are three things in the
+follow, three terminals in the follow of Y. And we should use Y goes to epsilon if
+they are the next thing in the input. So, so, if we see a plus and we're trying to
+expand a Y we'll use Y goes to epsilon. If we see a closed paren and we see, and
+we're trying to expand a Y we'll use Y goes to epsilon. And finally if we're
+completely out of input and we still have a Y left over, we'll use Y goes to
+epsilon. And that is the complete parsing table, all right? And now you can see. How
+this will work in every situation, Okay. For our leftmost on terminal, and for
+every possible input or lack of input, we have a production that we can use. And now
+there are a lot of blank entries in this table. And what do those correspond to?
+Let's say that we, we're trying to expand x. And the next input symbol was a open
+paren. Well, there's no entry here. Okay, so that's an error. That's a parsing
+error. So whenever you encounter a blank entry in a table, you try to view the
+blank entry when you're parsing, that's when you [inaudible] a parsing error,
+because what this tells us, the fact that there's a blank entry, it tells us that
+there is no valid move. There is no way that we could parse that string. And we
+discovered that at the point where we tried to access an error or blank entry in
+the table. So now, let's consider what happens when we try to build an LL1
+parsing table for a grammar that is not LL1. And let's take a look at the simple
+left recursive grammar that we have looked at before. So S goes to SA is one
+production, and S goes to B is the other production. And to build a parsing table
+for this, we'll need to know the first and follow sets. So let's take a look at the
+first of S. Alright. So what can S produce in the first position? Well, it can
+clearly produce a B. And, there's no epsilon. There's no possibility of
+generating epsilon from S. As a matter of fact that's the only thing that's going to
+be in the first of S. And what about the follow of S, well, what can follow an S?
+Well that's the start symbol, so clearly dollar isn't the follow of S. And then the
+sub-terminal, the terminal A appears right after S in the first production, so A, is
+also in the follow of S. And now we're ready to build our table. And it's going
+to be a very small table, because we only have one non-terminal. And then we have
+two terminals, A and B. And we have the end of input symbol. So it's just three
+entries potentially, in this table, Alright? And so now, let's take each
+production, and see where we should put it. So let's just take a look at the
+second production first. Cuz that's [inaudible] for no particular reason. So
+if S goes to B, when should we use that? Well, clearly, if we see a B in the input,
+this would be a good one to use. Cuz 'cause, the because that, the first of the
+right hand side includes B, alright? So, so S goes to B. Would be used if we see a
+B in the input. And now what about S goes to SA? Well here, again this can't
+generate epsilons so we're only interested in what it can produc e in the first
+position. And once again, the first of S is just B. And so we also have the move,
+in the SB entry, we would have the move as goes to SA. And now we see the problem,
+right? Here we have an entry that has multiple moves. This is a multiply defined
+entry. Okay, and what does that mean? Well that means if we see an s in if we have an
+s and we want to expand, okay we're trying to, if s is our leftmost non terminal so
+it's at the top of the stack, and b is our next input symbol, alright, this table
+doesn't tell us exactly what move to make. It's not deterministic. It says there's
+two possible moves. That we can make. And so, this is how you know a grammar is not
+[laugh](1) because if it winds up that you build the [laugh](1) parsing table and you
+have more than one entry. More than one possible move in some, position in the
+table, some entry, excuse me. I used the word entry incorrectly. So if you wind up,
+let me say that again. If you wind, if you build the table and some entry in the
+table has more than one move in it, then, there's not an unique move For every
+situation for the parser. And that grammar is not [laugh](1) So, we just said if any
+entry is multiply defined in the parsing table, then the grammar is not LO1. And in
+fact, this is the definition of an LO1 grammar, so the only way to be sure that
+the grammar is LO1 or the mechanical way to check that the grammar is LO1, is to
+build the LO1 parsing table and see if all the entries in the table is unique. Now,
+that, we do know, however, that there are certain classes of grammars that are
+guaranteed not to be L1, not to be L1. And what are some of those? Well, any grammar
+that is not left factored. Will not be lo1, okay. Any grammar that is left
+recursive will not be lo1. Okay any grammar that is ambiguous, Is also
+guaranteed to not be L1. But this is not an exhaustive list. Other grammars are not
+L1 too. So in particular If the grammar required more than one token of look
+ahead, it would not be all one. But even that isn't a complete list. So e ven
+grammar is beyond that, that are not going to be all one. So what this amounts to,
+these three things here, amount to quick checks that you can do. To test whether a
+grammar is guaranteed not to be L1. But, if, just because a grammar is left
+factored, and it is not left recursive, and is ambig-, unambiguous, that doesn't
+guarantee that it's L1. And the only way to know for sure is to construct the
+parsing table, and see if all of the entries in it are unique. And
+unfortunately it turns out. That most programming languages, they're context
+free grammar. So the grammars that describe most programming languages are
+not LL1. And, the L1 grammars are too weak to actually capture all of the interesting
+and important constructs in commonly using programming languages. And there are more
+powerful. Formalism for describing grammars and or practical grammars, and
+we're going to be looking at those in future videos. It turns out that they
+build on everything that we've learned here over the last few videos for Elmer
+grammar so none of that will be wasted, but they assembled those ideas in a more
+sophisticated way to build more powerful parts.

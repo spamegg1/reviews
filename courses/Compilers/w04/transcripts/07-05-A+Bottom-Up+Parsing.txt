@@ -1,0 +1,81 @@
+This is the first of what will be a considerable sequence of videos on bottom
+up parsing. The first thing to know is that bottom up parsing is more general
+than deterministic top down parsing. So recall we talked about recursive descent,
+which is a completely general parsing algorithm, but requires backtracking. And
+now we're focused on deterministic techniques and we talked about L-L one or
+predictive parsing last time. And now we're gonna switch, shift gears and talk
+about bottom up parsing. And it turns out though even the bottom up parsing is more
+general, it's just as efficient, and it uses all of the ideas that we learned in
+top down parsing. And in fact, bottom up. Parsing is the preferred method that's
+using most of the parser generator tools. So, one good thing about bottom up
+parcers, is they don't need left factored grammars, so we can revert to the natural
+grammar for our example and natural here is in quotes, because we still have to
+encode the precedence of plus and times, so bottom up parcers aren't going to deal
+with ambiguous grammars. And let's just as an example, consider how a bottom up
+parcer would work on the following, typical input string. So the first thing
+to know about bottom up parsing is that it reduces, what we call reduces a string
+into the start symbol by inverting productions, by running productions
+backwards. So here's an example. On the left hand side is the sequence of states
+of the string. On the right hand side are the productions that were used And the
+thing to observe, let's just look at the very first step. Is that we began with the
+entire string. We began with the, the, the string of terminals. And we picked some of
+those terminals. In this case, just one, this particular Int right here. And we ran
+a production backwards. We replaced the Int here by the left side of the
+production. We began with, we matched the right side of the production Int and we
+replaced it by the left side. So Int went backwards here to T. And then in the next
+step, we took Int times T, this substr ing of The, string that we're working on And
+we replace it by the left-hand side of this production. N times T was replaced by
+T, and so on. At each step here, we're matching some portion of the string. And
+I'm underlining the portion that's being replaced at each step. And we're running,
+and that matches the right hand side of sum production. And then we're replacing
+that substring by the left hand side. And finally, this entire, string here is
+replaced by E. And we wind up at the start symbol. So we began with an input string.
+This is our input string up here. Alright put string of tokens and we end with the
+start symbol down here And if you read the moves in this direction If you start at
+the bottom and read towards the top. Well, these are just productions. And in fact
+this whole thing is a derivation. This is just a normal derivation going from bottom
+to top. But in this direction when we run it backwards beginning with the string
+towards the start symbol, we call these reductions. And I haven't told you exactly
+how we decided what reductions to do, and you might wonder, well, how I knew to do
+this particular sequence of reductions. Well, here's another interesting property
+of bottom-up parsing. So, if you read the productions backwards, they trace a
+rightmost derivation, so if we begin here with e, so we're gonna--so remember the
+parser is actually going in this direction, so this is the direction of
+parsing here. But now we're gonna look at the steps the parser took in reverse, and
+we're going to see that it was, in fact, a rightmost derivation. So here, E went to
+T+E. Well, E was the only non terminal. But then E here is the one that's
+expanded, it's the rightmost non terminal. And then this T is expanded, it's also the
+rightmost non terminal to get int. And now this T is the rightmost tom-, non
+terminal. It's expanded to get Int times T. And then this is the only end right
+most non terminal, and so we wind up with the whole input string, Int times Int plus
+int. And this leads us to The first important f act about bottom up parsing,
+which is that a bottom up parser traces a rightmost derivation in reverse, all
+right? So if you're ever having trouble with bottom up parsing, it's always
+helpful to go back to this basic fact. Bottom up parser traces a rightmost
+derivation, but it does so in reverse by using reductions instead of productions.
+So here's the series of reductions again. Shown on the left And here is the parse
+tree, that is constructed, from those reductions. And this is actually I think,
+a very helpful picture, if we animate it, to see the sequence of steps, and to see
+what a bottom up parser is really doing. So here we begin with the input string.
+Over here And we show the same input string here. And now we're just going to
+walk through the sequence of steps that the, bottom up parser takes A series of
+reductions. And show how it builds an entire parse tree. And the basic idea is
+that in each step we're performing a reduction. And remember when we do a
+reduction we replace the children of the right hand side of sum production by its
+left hand side. And just like when we were doing top down parson well, we will do the
+same thing here. In the input, and then we make T its parent. And now you can see
+what's going to happen. A top down parser begins with the start symbol, and produces
+the tree incrementally by expanding some non terminal, at the frontier. At the
+current, at a current leaf of the partially constructed parse tree. The
+bottom up parsers is going to begin with all the leaves of the eventual pars tree
+The entire input. And it's going to build little trees on top of those. And it's
+going to be pasting together all the sub-trees that it's put together so far to
+build the complete tree. Let's walk a few more steps and see how that happens. So in
+the next step, we go from Int times T to T, so Int times and the sub tree rooted at
+the other T, become children of this non terminal T and you can see we've taken
+these three sub trees here, and pasted them together into a larger tree. So as we
+go throug h the parcer, bigger and bigger portions of the original input are gonna
+be pasted together into larger and larger trees. And the next reduction takes the
+Int to the far into the input, and reduces it to T. And that gets reduced to E, and
+then. At the very end the three remaining sub trees are all pasted together into one
+parse tree for the whole thing with a start symbol as the root.

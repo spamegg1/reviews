@@ -249,7 +249,7 @@ if __name__ == '__main__':
 
     # Example test case (PlaintextMessage)
     msg = Message("test")
-    print(msg.build_shift_dict(2))
+    # print(msg.build_shift_dict(2))
     plaintext = PlaintextMessage('hello', 2)
     print('Expected Output: jgnnq')
     print('Actual Output:', plaintext.get_message_text_encrypted())
@@ -257,6 +257,11 @@ if __name__ == '__main__':
     # Example test case (CiphertextMessage)
     ciphertext = CiphertextMessage('jgnnq')
     print('Expected Output:', (24, 'hello'))
+    print('Actual Output:', ciphertext.decrypt_message())
+
+    # Example test case (CiphertextMessage)
+    ciphertext = CiphertextMessage('fdw')
+    print('Expected Output:', (23, 'cat'))
     print('Actual Output:', ciphertext.decrypt_message())
 
     # TODO: WRITE YOUR TEST CASES HERE

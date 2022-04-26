@@ -1,0 +1,25 @@
+It turns out that this left string, this stuff to the left
+of the vertical bar can be implemented by a stack, and that's because we only do
+reduced operations immediately to the left of the vertical bar. So it's always suffix
+of the string to left of the vertical bar, where the reduction is happening so what a
+shift move then does is to push a terminal onto the stack. It reads one token of
+input, and pushed it onto the stack. And then a reduce, pops some number symbols
+off of the stack. That's the production right hand side. And then it pushed one
+non-terminal onto the stack. And that's the production, left hand side. Now it can
+happen that in a given state, that more than one action, shift or reduce, may lead
+to a valid parse. So in particular, if it's legal to shift or reduce, if you can
+do either one of those things, then we say there is a shift re duce conflict. The
+parser could either read one token of input and push it on the stack, or it
+could perform a reduction. If it's legal to reduce by two different productions,
+then there is what is called a reduce/reduce conflict. Okay. So reduce,
+reduce conflicts are, are always bad, are almost always bad. They indicate usually
+some kind of serious problem with the grammar. Shift reduce conflicts are not
+good, but they're often easier to remove. So if you have reduce, reduce conflicts
+particularly when you're building your, grammar for cool, then you're doing
+something seriously wrong. If you have shift reduce conflicts then that, that's
+to be almost expected, because of You're probably going to need to use precedence
+declarations, Remove them, and we'll talk about that some more in another video. But
+in general, if you have either one of these conflicts, it means that, there's
+some state in which the parser doesn't know what to do. And you either need to
+rewrite the grammar, or give it a hint as to what it should do in order to
+successfully parse your language.
