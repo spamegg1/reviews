@@ -13,6 +13,41 @@ Temperature data (not included in repo, 444MB zip file) is from: http://alaska.e
 style: number min_depth: 0 max_depth: 6 
 ```
 
+-   [Introduction](#Introduction)
+    -   [Before you start coding](#Before%20you%20start%20coding)
+    -   [Notes for Spark users](#Notes%20for%20Spark%20users)
+-   [1st milestone: data extraction](#1st%20milestone:%20data%20extraction)
+    -   [Milestone overview](#Milestone%20overview)
+    -   [Data files](#Data%20files)
+    -   [Stations](#Stations)
+    -   [Temperatures](#Temperatures)
+    -   [Data extraction](#Data%20extraction)
+-   [2nd milestone: basic visualization](#2nd%20milestone:%20basic%20visualization)
+    -   [Milestone overview](#Milestone%20overview)
+    -   [Spatial interpolation](#Spatial%20interpolation)
+    -   [Linear interpolation](#Linear%20interpolation)
+    -   [Visualization](#Visualization)
+    -   [Appendix: scrimage cheat sheet](#Appendix:%20scrimage%20cheat%20sheet)
+        -   [Image type and companion object.](#Image%20type%20and%20companion%20object.)
+-   [3rd milestone: interactive visualization](#3rd%20milestone:%20interactive%20visualization)
+    -   [Milestone overview](#Milestone%20overview)
+    -   [Tile generation](#Tile%20generation)
+    -   [Integration with a Web application](#Integration%20with%20a%20Web%20application)
+    -   [Future integration with a more complete Web application](#Future%20integration%20with%20a%20more%20complete%20Web%20application)
+-   [4th milestone: Data manipulation](#4th%20milestone:%20Data%20manipulation)
+    -   [Milestone overview](#Milestone%20overview)
+    -   [Grid generation](#Grid%20generation)
+    -   [Average and deviation computation](#Average%20and%20deviation%20computation)
+-   [5th milestone: value-added information visualization](#5th%20milestone:%20value-added%20information%20visualization)
+    -   [Visualization](#Visualization)
+    -   [Deviation tiles generation](#Deviation%20tiles%20generation)
+-   [6th (and last) milestone: user interface polishing](#6th%20(and%20last)%20milestone:%20user%20interface%20polishing)
+    -   [Layers](#Layers)
+    -   [Signals](#Signals)
+        -   [Reminder on Signals](#Reminder%20on%20Signals)
+    -   [Methods to implement](#Methods%20to%20implement)
+    -   [Running the Web application](#Running%20the%20Web%20application)
+
 # Introduction
 Download the [assignment](https://moocs.scala-lang.org/~dockermoocs/handouts-coursera-2.13/observatory.zip) and the [dataset](https://moocs.scala-lang.org/~dockermoocs/scala-capstone-data.zip) and extract them somewhere on your file system. The assignment archive contains an sbt project starter, while the dataset only contains the data you are going to use.
 
@@ -212,6 +247,7 @@ Your records contain the average temperature over a year, for each station’s l
 ![mercator projection](mercator.svg)
 
 In this figure, the red crosses represent the weather stations. As you can see, you will have to spatially interpolate the data in order to guess the temperature corresponding to the location of each pixel (such a pixel is represented by a green square in the picture). Then you will have to convert this temperature value into a pixel color based on a color scale:
+
 ![colors](color-scale.png)
 
 This color scale means that
@@ -246,6 +282,7 @@ Note that the great-circle distance formula is known to have rounding errors for
 - `dist = r * deltaSigma`
 
 ![great circle angle formula](great-circle-angle-formula.svg)
+
 However, running the inverse distance weighting algorithm with small distances will result in huge numbers (since we divide by the distance raised to the power of `p`), which can be a problem. A solution to this problem is to directly use the known temperature of the close (less than 1 km) location as a prediction.
 
 ## Linear interpolation
