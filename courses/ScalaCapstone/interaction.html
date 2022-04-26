@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Climate Observatory</title>
+    <link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.2/dist/leaflet.css" />
+    <style>
+      * { box-sizing: border-box; }
+      html, body { height: 100%; margin: 0; padding: 0; }
+    </style>
+  </head>
+  <body>
+    <script src="https://npmcdn.com/leaflet@1.0.0-rc.2/dist/leaflet.js"></script>
+    <script>
+      var mapElement = document.createElement("div");
+      mapElement.setAttribute("style", "height: 100%;");
+      var map = L.map(mapElement, { zoomControl: false, maxZoom: 3 });
+      map.setView(L.latLng(48.0, 14.0), 3);
+      L.tileLayer("https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png").addTo(map);
+      L.tileLayer("target/temperatures/2015/{z}/{x}-{y}.png").addTo(map);
+      map.addControl(L.control.zoom({ position: "bottomright" }));
+      document.body.appendChild(mapElement);
+      map.invalidateSize();
+    </script>
+  </body>
+</html>
