@@ -9,44 +9,40 @@ https://s3-eu-west-1.amazonaws.com/scala-capstone/index.html
 
 Temperature data (not included in repo, 444MB zip file) is from: http://alaska.epfl.ch/files/scala-capstone-data.zip
 
-```toc
-style: number min_depth: 0 max_depth: 6 
-```
-
 -   [Introduction](#Introduction)
-    -   [Before you start coding](#Before%20you%20start%20coding)
-    -   [Notes for Spark users](#Notes%20for%20Spark%20users)
--   [1st milestone: data extraction](#1st%20milestone:%20data%20extraction)
-    -   [Milestone overview](#Milestone%20overview)
-    -   [Data files](#Data%20files)
+    -   [Before you start coding](#Before-you-start-coding)
+    -   [Notes for Spark users](#Notes-for-Spark-users)
+-   [1st milestone data extraction](#1st-milestone-data-extraction)
+    -   [Milestone overview](#Milestone-overview)
+    -   [Data files](#Data-files)
     -   [Stations](#Stations)
     -   [Temperatures](#Temperatures)
-    -   [Data extraction](#Data%20extraction)
--   [2nd milestone: basic visualization](#2nd%20milestone:%20basic%20visualization)
-    -   [Milestone overview](#Milestone%20overview)
-    -   [Spatial interpolation](#Spatial%20interpolation)
-    -   [Linear interpolation](#Linear%20interpolation)
+    -   [Data extraction](#Data-extraction)
+-   [2nd milestone basic visualization](#2nd-milestone-basic-visualization)
+    -   [Milestone overview](#Milestone-overview)
+    -   [Spatial interpolation](#Spatial-interpolation)
+    -   [Linear interpolation](#Linear-interpolation)
     -   [Visualization](#Visualization)
-    -   [Appendix: scrimage cheat sheet](#Appendix:%20scrimage%20cheat%20sheet)
-        -   [Image type and companion object.](#Image%20type%20and%20companion%20object.)
--   [3rd milestone: interactive visualization](#3rd%20milestone:%20interactive%20visualization)
-    -   [Milestone overview](#Milestone%20overview)
-    -   [Tile generation](#Tile%20generation)
-    -   [Integration with a Web application](#Integration%20with%20a%20Web%20application)
-    -   [Future integration with a more complete Web application](#Future%20integration%20with%20a%20more%20complete%20Web%20application)
--   [4th milestone: Data manipulation](#4th%20milestone:%20Data%20manipulation)
-    -   [Milestone overview](#Milestone%20overview)
-    -   [Grid generation](#Grid%20generation)
-    -   [Average and deviation computation](#Average%20and%20deviation%20computation)
--   [5th milestone: value-added information visualization](#5th%20milestone:%20value-added%20information%20visualization)
+    -   [Appendix: scrimage cheat sheet](#Appendix:-scrimage-cheat-sheet)
+        -   [Image type and companion object.](#Image-type-and-companion-object.)
+-   [3rd milestone interactive visualization](#3rd-milestone-interactive-visualization)
+    -   [Milestone overview](#Milestone-overview)
+    -   [Tile generation](#Tile-generation)
+    -   [Integration with a Web application](#Integration-with-a-Web-application)
+    -   [Future integration with a more complete Web application](#Future-integration-with-a-more-complete-Web-application)
+-   [4th milestone Data manipulation](#4th-milestone-Data-manipulation)
+    -   [Milestone overview](#Milestone-overview)
+    -   [Grid generation](#Grid-generation)
+    -   [Average and deviation computation](#Average-and-deviation-computation)
+-   [5th milestone value-added information visualization](#5th-milestone-value-added-information-visualization)
     -   [Visualization](#Visualization)
-    -   [Deviation tiles generation](#Deviation%20tiles%20generation)
--   [6th (and last) milestone: user interface polishing](#6th%20(and%20last)%20milestone:%20user%20interface%20polishing)
+    -   [Deviation tiles generation](#Deviation-tiles-generation)
+-   [6th (and last) milestone user interface polishing](#6th-(and-last)-milestone-user-interface-polishing)
     -   [Layers](#Layers)
     -   [Signals](#Signals)
-        -   [Reminder on Signals](#Reminder%20on%20Signals)
-    -   [Methods to implement](#Methods%20to%20implement)
-    -   [Running the Web application](#Running%20the%20Web%20application)
+        -   [Reminder on Signals](#Reminder-on-Signals)
+    -   [Methods to implement](#Methods-to-implement)
+    -   [Running the Web application](#Running-the-Web-application)
 
 # Introduction
 Download the [assignment](https://moocs.scala-lang.org/~dockermoocs/handouts-coursera-2.13/observatory.zip) and the [dataset](https://moocs.scala-lang.org/~dockermoocs/scala-capstone-data.zip) and extract them somewhere on your file system. The assignment archive contains an sbt project starter, while the dataset only contains the data you are going to use.
@@ -121,7 +117,7 @@ Logger.getLogger("org.apache.spark").setLevel(Level.WARN)
 ```
 You may also want to refer to the [Dataset vs DataFrame vs RDD](https://www.coursera.org/learn/scala-spark-big-data/lecture/yrfPh/datasets) discussion at the end of the last video of the [Spark course](https://www.coursera.org/learn/scala-spark-big-data) so that you can choose the best API for this project.
 
-# 1st milestone: data extraction
+# 1st milestone data extraction
 ## Milestone overview
 First milestone consists in extracting meaningful information from dataset. The methods to implement live in the `Extraction.scala` file. You are given several `.csv` files containing two kinds of data:
 - Weather station’s locations (`stations.csv` file) ;
@@ -235,7 +231,7 @@ Seq(
 ```
 Note that the method signatures use the collection type `Iterable`, so, at the end, you will have to produce such values, but your internal implementation might use some other data type, if you think that it would have better performance.
 
-# 2nd milestone: basic visualization
+# 2nd milestone basic visualization
 ## Milestone overview
 This milestone consists in producing images showing the content of the temperature records. You will have to complete the file **Visualization.scala**. But first, remember to update the grading milestone number:
 ```scala
@@ -333,7 +329,7 @@ To check that some predicate holds for all the pixels of an image, use the `fora
 
 Also, note that `scrimage` defines a `Color` type, which could be ambiguous with our `Color` definition. Beware to not import `scrimage`’s `Color`.
 
-# 3rd milestone: interactive visualization
+# 3rd milestone interactive visualization
 ## Milestone overview
 This milestone consists in producing images compatible with most Web based map visualization tools, so that you can see your data in an interactive Web page. You will have to complete the file **Interaction.scala**. But first, remember to update the grading milestone number:
 ```scala
@@ -421,7 +417,7 @@ In your case, this data will be the result of `Extraction.locationYearlyAverageR
 - the data associated with the year, and 
 - computes the tile and writes it on your filesystem.
 
-# 4th milestone: Data manipulation
+# 4th milestone Data manipulation
 ## Milestone overview
 One of the primary goals of this project is to be able to visualize the evolution of the climate. If you tried to visualize the temperatures of different years in the previous milestone, you might have noticed that it is actually quite hard to really measure how the temperatures have evolved since 1975.
 
@@ -480,7 +476,7 @@ def deviation(temperatures: Iterable[(Location, Temperature)],
 ```
 This method takes temperature data and a grid containing normal temperatures, and returns a grid containing temperature deviations from the normals.
 
-# 5th milestone: value-added information visualization
+# 5th milestone value-added information visualization
 The goal of this milestone is to produce tile images from the grids generated at the previous milestone. You will have to complete the file Visualization2.scala. But first, remember to update the grading milestone number:
 ```scala
 val milestone: Int = 5
@@ -547,7 +543,7 @@ Note that this process is going to be very CPU consuming, or might even crash if
 - Reduce the quality of the tiles. For instance, instead of computing 256×256 images, compute 128×128 images (that’ll be 4 times fewer pixels to compute) and then scale them to fit the expected tile size; 
 - Reduce the quality of the spatial interpolation. For instance, instead of having grids with 360×180 points, you can use a grid with 120×60 points (that’s going to be 9 times fewer points to compute).
 
-# 6th (and last) milestone: user interface polishing
+# 6th (and last) milestone user interface polishing
 This (last!) milestone consists in implementing an interactive user interface so that users can select which data set (either the temperatures or the deviations) as well as which year they want to observe. You will have to complete the file **Interaction2.scala**. But first, remember to update the grading milestone number:
 ```scala
 val milestone: Int = 6
