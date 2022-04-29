@@ -1,4 +1,5 @@
-## No programming assignment this week!
+## Start doing PA1 this week!
+It’s in the `dist/assignments/PA1` directory.
 
 ### Compiling and running COOL programs
 
@@ -17,8 +18,6 @@ class Main {
     main(): Int { 1 };
 }
 ```
-
-
 
 in a file, like `1.cl` and you compile it with 
 
@@ -46,7 +45,8 @@ Loaded: ../lib/trap.handler
 COOL program successfully executed
 ```
 
-Your COOL program successfully executed! Cool!
+Your COOL program successfully executed! Cool! 
+If this does not work, use the older version of `spim` provided in the `dist` folder.
 
 You can also look into the `1.s` MIPS assembly file, it’s not a binary file, so it can be opened and viewed in a text editor, somewhat human readable:
 

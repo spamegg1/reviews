@@ -42,13 +42,13 @@ Key: PA = Programming Assignment
 
 | **Week** | Videos                                   | Quiz / Exam | PA assigned | PA due |
 | -------- | ---------------------------------------- | ----------- | ----------- | ------ |
-| 1        | Course Overview Cool: The Course Project |             |             |        |
-| 2        | Lexical Analysis Finite Automata         | Quiz #1     | PA1         |        |
+| 1        | Course Overview Cool: The Course Project |             | PA1         |        |
+| 2        | Lexical Analysis Finite Automata         | Quiz #1     | PA2         | PA1    |
 | 3        | Parsing Top-Down Parsing                 | Quiz #2     |             |        |
-| 4        | Bottom-Up Parsing I Bottom-Up Parsing II | Quiz #3     | PA2         | PA1    |
+| 4        | Bottom-Up Parsing I Bottom-Up Parsing II | Quiz #3     | PA3         | PA2    |
 | 5        | Semantic Analysis and Type Checking      | Midterm     |             |        |
-| 6        | Cool Type Checking Runtime Organization  | Quiz #4     | PA3         | PA2    |
+| 6        | Cool Type Checking Runtime Organization  | Quiz #4     | PA4         | PA3    |
 | 7        | Code Generation Operational Semantics    | Quiz #5     |             |        |
-| 8        | Local Optimization Global Optimization   | Quiz #6     | PA4         | PA3    |
+| 8        | Local Optimization Global Optimization   | Quiz #6     | PA5         | PA4    |
 | 9        | Register Allocation Garbage Collection   |             |             |        |
-| 10       | Java                                     | Final Exam  |             | PA4    |
+| 10       | Java                                     | Final Exam  |             | PA5    |

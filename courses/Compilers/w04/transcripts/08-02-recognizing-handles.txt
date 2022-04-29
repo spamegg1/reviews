@@ -1,0 +1,150 @@
+Welcome back, in this video we're gonna talk about the key ideas behind techniques
+for recognizing handles. There is good news and bad news when it comes to
+recognizing handles. The bad news is that there is no known efficient algorithm that
+recognizes handles in general. So for an arbitrary grammar, we don't have a fast
+way to find the handles when we're parsing. The good news is that there are
+heuristics for guessing handles, and for some context free grammars, for some
+fairly large classes of context free grammars, these heuristics always identify
+the handles correctly. We can illustrate the situation with a Venn diagram. If we
+start with a set of all context free grammars, then the unambiguous context
+free grammars are a sub-set of those, and then an even smaller set are called the
+LR(k) grammars. And here, just to remind you, 'l' stands for left to right scan,
+'r' stands for rightmost variation, and 'k' stands for the number of tokens of
+look ahead. Now the LRK grammars are one of the most general deterministic families
+of deterministic grammars that we know of. But those aren't the ones that are
+actually used in practice. Most of the bottom up tools that are practical, use
+what are called the LALRK grammars, which are a subset of the LRK grammars. And then
+what we're gonna talk mostly about is a simplification of those called the simple
+LR grammars, or the SLRK context free grammars. And these containment
+relationships or [inaudible] that is, there are grammars that are [inaudible]. R
+k but not s l r k, for every k, and similarly there are grammars that are l r
+k for every k that are not l a l r k. As we've already said, it's not obvious how
+to detect handles. So, what does the parser know? Well, it sees the stack. At
+each step it knows the stack that it has already, constructed. And so let's see how
+much progress we can make just thinking about, what information we can get from
+the stack. So here's a definition. We're going to say that alpha is a viable
+prefix. If there is some omega, such that alpha bar omega is a configuration, a
+valid configuration of a shift reduce parse. Now keep in mind that the alpha
+here. This is the stack. And the omega here is the rest of the input. And what
+does that means? That means the parser knows this part. The parser knows alpha,
+it doesn't know much of omega. It can do some look-ahead, it can look at a small
+prefix of omega, usually just one token, but it certainly doesn't know the whole
+thing. So what does a viable prefix mean? Well, a viable prefix is a string that
+does not extend past the right end of the handle. And the reason we call it a viable
+prefix is because it is a prefix of the handle. So as long as the parser has
+viable prefixes on the stack, no parsing error has been detected. And really the
+definition is just giving a name to something, it's not anything very deep,
+the fact that alpha bar omega is, is viable, that's just saying we haven't
+encountered an error. That this is some state of a shift reduce parse. It hasn't
+said yet how we're going to identity it or anything like that; it's just saying that
+these are the valid states of shift reduced parse. Now the definition is
+useful in one way if it bring us to the last important fact, important fact number
+three about bottom up parsing. In this effort, any grammar, the set of viable
+prefixes is a regular language, and this is really an amazing fact, and one that's
+going to take us a little while to demonstrate, but this is the key to bottom
+up parsing. At least all the bottom up parsing tools are based on this fact, that
+the set of viable prefix can be recognized by a finite automaton. So, we're going to
+show how to compute this automaton that accepts the viable prefixes, but first
+we're going to need a number of additional definitions. The first definition we need
+is the idea of an item. Now an item is a production that just has a dot somewhere
+on the right hand side. So here's an example. Let's take the production, T goes
+to open paren, E closed paren. What we're going to do is we're just gonna put the
+dot in eve ry possible position on the right hand side. So we'll have one item
+where the dot is all the way at the left end. We'll have one where the dot is all
+the way at the right end. And then we'll have, items where the dot is between every
+pair of consecutive symbols. So in this case, there are four items for the
+production. One special case is, what do we do with epsilon productions? Well, for
+an epsilon production, there is no, there are no symbols on the right hand side.
+We'll just say there is one item, X goes to dot. And these items, you'll see them
+referred to, if you, if you look in help, pages and in the literature, as, the LR
+zero items. Now we're ready to discuss how we recognize viable prefixes. And the
+problem is that the stack has only bits and pieces of the right hand side of
+productions. In general most of the time, we don't have a complete right hand side
+on top of the stack. Most of the time, we only have a part of the right hand side.
+And. It turns out that what is on the stack is actually not just random it's,
+it's it actually has a very special structure. In, in these bits and pieces
+are always prefixes of right hand sides of productions. That is in any successful
+parse what is on the stack always has to be a prefix of the right hand side of some
+production or productions. Let's take a look at an example. Let's consider the
+input open paren, [inaudible] closed paren. And here's one of our favorite
+grammars. Now, this configurations, where I have open paren E, [inaudible], on the
+stack. Remember that this is our stack. And we have the close [inaudible] in the
+input. This is actually a state or a valid state of a shift [inaudible]. And you can
+see here that, open paren E is a prefix of the production. T goes to open paren E,
+close paren. And after we shift the remaining close paren onto the stack, then
+we'll have the complete right hand side, and it will be ready to reduce. So this is
+where the items come in. The item, T goes to open paren E. Dot, closed paren. This
+describes this state of affairs. I t says that so far, we have seen open paren E of
+this production. And we're hoping in the future to see the closed paren. So another
+way of thinking about it is that this item records the fact that we're working on
+this production. And then so far we've seen this much. Everything to the left of
+the dot is what we've already seen and is what is on the stack and. What is to the
+right of the dot is what we're waiting to see before we could possibly reduce. And
+we may or may not see that, remember, the parser doesn't know the input. In this
+case of course, it's the very next, next symbol and so it can see in the
+look-ahead, but you know at this point in time the parser doesn't know for sure
+what's coming up and, you know, and, and, if this dot were further to the left there
+might be many, many more symbols that we had to go, before we could perform the
+reduction. So anyway, what's to the left of that records what we've already seen.
+And what is to the right of the dot, says that what we are waiting to see on the
+stack, before we can perform a reduction. And now we could talk about the structure
+of the stack. So you see it's not just arbitrary collections of symbols. In fact,
+it has this very particular structure. So the stack is actually a stack of prefixes
+of right hand sides. So the stack always has this organization where there's a
+bunch of prefixes, stacked up, literally stacked up on the stack. And what's going
+to happen is that the ice prefix, if you were to pick a prefix out of this stack of
+prefixes, While that must be the prefix of some production. Okay. The right hand side
+of sum production And what that means is that, that prefix, that [inaudible] prefix
+on the stack, will eventually reduce to the left hand side of that production. So
+it will eventually reduce to, XI in this case. And then that XI has to be Part of
+the missing suffix, of the prefix that is below it on the stack. So if I look at the
+previous prefix the one that's right below, prefix [inaudible] on the stack
+Then when I perform this reducti on that XI needs to extend that prefix to be
+closer to a complete right hand side of that particular reduction. Okay so in
+particular there's going to be some production. That is going to; already have
+a portion of its right hand side on the stack. So prefix of I minus one. And X I
+is going to extend that prefix, and then there's gonna be some more stuff possibly
+that we're waiting to see, even after the X I is put there. And recursively, all the
+prefixes above prefix K eventually have to reduce to the missing part of the right
+hand side of prefix K, the alpha K that goes on the right hand side. [inaudible]
+This image, you have a stack of prefixes we're always working on the top-most
+prefix on the stack, so you will be always working here on the right and shifting and
+reducing, but every time we perform a reduction. That has to extend the prefix
+immediately below it on the stack. And when these, when a bunch of prefixes have
+been removed from the stack through reductions, then we, when we get to work
+on the prefixes that are lower in the stack. So let's illustrate this idea with
+an example. So here is another input string, and we're gonna use the same
+grammar. You can, you can rewind if you want to see the grammar again. But let's
+consider this state where we have open paren, [inaudible] star on the stack. And
+we have int, close paren remaining in the input, 'kay? And so what items would
+record, what is the, what is the stack structure here and how do the items record
+it? Well let's start here at the bottom, let's actually work from the bottom up. So
+we have in start the top of our stack, so we this is the right hand side that we're
+currently working on, and that would be a prefix to this production T goes to int
+star T. Okay? So what this says is that we're looking you know, we, we've seen in
+stars so far, and we're waiting to see [inaudible]. I'm not showing the items,
+but I'm just showing the productions that this is eventually going to use. Now, the
+one that's below it here, the, the prefix that's below it o n the stack is right
+here in between the open paren and the int. This one's an interesting case. It's
+actually epsilon. So there's nothing there now on the stack. But eventually once the
+int star has reduced to T. Okay? Then that T is going to reduce to E. And currently,
+of course, there's not a T there at all. So we've only seen epsilon. We've seen
+none of the prefix of this production on the stack. And then for the last
+production, the one deepest in the stack, we're currently, we've currently seen an
+open paren. And, we're w-, and we think we're working on this production. T goes
+to open paren, E closed paren, alright? So when this E is produced, that will extend
+this right hand side. And now we can record all of this with the stack of
+items, T goes to open paren dot E, E goes to dot T, and T goes to N star dot T.
+Okay, and we just record what we said on the previous slide, that so far, we see
+the open paren of this production. We've seen nothing out of the right hand side of
+this production, and we've seen N star so far of this production. And just notice
+how the left hand side of each of these productions is going to eventually become
+part of the right hand side of the. Of the right, part of the right hand side of the
+production we are working on just below it in the stack. So when we've reduced this
+instar T to T that will extend this production, when it reaches E that will
+extend this production To summarize this video, we can say a little more precisely
+how we go about recognizing viable prefixes. The crux of the problem is going
+to be to recognize a sequence of partial right had sides of production. Where each
+of those partial right hand sides can eventually reduce to part of the missing
+suffix of its predecessor Next time, in the next video we're going to actually
+give the algorithm for implementing this idea.

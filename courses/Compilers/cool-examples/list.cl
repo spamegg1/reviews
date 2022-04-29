@@ -26,18 +26,18 @@
 class List {
     -- Define operations on empty lists.
 
-    isNil() : Bool { true };
+    isNil(): Bool { true };
 
     -- Since abort() has return type Object and head() has return type
     -- Int, we need to have an Int as the result of the method body,
     -- even though abort() never returns.
 
-    head()  : Int { { abort(); 0; } };
+    head(): Int { { abort(); 0; } };
 
     -- As for head(), the self is just to make sure the return type of
     -- tail() is correct.
 
-    tail()  : List { { abort(); self; } };
+    tail(): List { { abort(); self; } };
 
     -- When we cons and element onto the empty list we get a non-empty
     -- list. The (new Cons) expression creates a new list cell of class
@@ -46,11 +46,8 @@ class List {
     -- conforms to the return type List, because Cons is a subclass of
     -- List.
 
-    cons(i : Int) : List {
-        (new Cons).init(i, self)
-    };
+    cons(i: Int): List { (new Cons).init(i, self) };
 };
-
 
 (*
  *  Cons inherits all operations from List. We can reuse only the cons
@@ -67,26 +64,17 @@ class List {
  *)
 
 class Cons inherits List {
-
-    car : Int;    -- The element in this list cell
-
-    cdr : List;    -- The rest of the list
-
-    isNil() : Bool { false };
-
-    head()  : Int { car };
-
-    tail()  : List { cdr };
-
-    init(i : Int, rest : List) : List {
-        {
-            car <- i;
-            cdr <- rest;
-            self;
-        }
-    };
+    car: Int;     -- The element in this list cell
+    cdr: List;    -- The rest of the list
+    isNil(): Bool { false };
+    head() : Int { car };
+    tail() : List { cdr };
+    init(i: Int, rest: List): List {{
+        car <- i;
+        cdr <- rest;
+        self;
+    }};
 };
-
 
 (*
  *  The Main class shows how to use the List class. It creates a small
@@ -95,14 +83,13 @@ class Cons inherits List {
  *)
 
 class Main inherits IO {
-
-    mylist : List;
+    mylist: List;
 
     -- Print all elements of the list. Calls itself recursively with
     -- the tail of the list, until the end of the list is reached.
-
-    print_list(l : List) : Object {
-        if l.isNil() then out_string("\n")
+    print_list(l: List): Object {
+        if l.isNil() then
+            out_string("\n")
         else {
             out_int(l.head());
             out_string(" ");
@@ -120,15 +107,13 @@ class Main inherits IO {
     -- List, and thus the method isNil in the List class is called and
     -- returns true.
 
-    main() : Object {
+    main(): Object {{
+        mylist <- new List.cons(1).cons(2).cons(3).cons(4).cons(5);
+        while (not mylist.isNil()) loop
         {
-            mylist <- new List.cons(1).cons(2).cons(3).cons(4).cons(5);
-            while (not mylist.isNil()) loop
-            {
-                print_list(mylist);
-                mylist <- mylist.tail();
-            }
-            pool;
+            print_list(mylist);
+            mylist <- mylist.tail();
         }
-    };
+        pool;
+    }};
 };

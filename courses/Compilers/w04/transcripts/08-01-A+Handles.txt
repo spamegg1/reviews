@@ -1,0 +1,53 @@
+In this video, we're going to introduce another important concept in bottom-up
+parsing, the notion of a handle. To review, bottom up parsing is these two
+kinds of actions: we have shift moves, which just read one token of input and
+move the vertical bar one to the right, And reduced moves, which replace the right
+hand side of a production [inaudible] to the left of the vertical bar by a
+production left hand side. So in this case, the production must have been A goes
+to XY. And also reviewing what we did in the last video, the left string can be
+implemented by a stack, where the top of the stack is marked by the vertical bar.
+So shift pushes the terminal on to the stack and reduce pops zero or more symbols
+of the stack, and that's gonna be the right hand stack of some production. And
+then it's going to push one non-terminal on to the stack which is the left hand
+side of that same production. And the key question in bottom of parsing and the one
+we haven't addressed at all yet is how do we decide when to shift and when to
+reduce. So let's take a look at this example grammar. And let's think about a
+step of a parse where we've shifted one token onto the stack. We have Nth on the
+stack, and then we have times N plus N still to go that we haven't seen yet. Now
+at this point we could decide to reduce by T goes to N because we have the production
+T goes to Nth right here. And so we could then get into this particul-, potential
+state, or this particular state, where we have T on the stack and then the rest of
+the input that looks like that. A-, but you can see that this would be a mistake.
+There is no production in the grammar that begins Hence T times. There's no
+production up here that looks like T times. And therefore if we were to, to, to
+make this move, we would get stuck. We could continue to do reductions, to
+rummage around in the string. But we would never be able to get back to the start
+symbol. Because there is no way to deal a sub string that has t times something in
+it. So what that shows us is that we don't always want to reduce just because we have
+the right-hand side of a production on top of the stack. To repeat that, even if
+there's the right-hand side of some production sitting right there on top of
+the stack, it might be a mistake to do a reduction. We might want to wait and do
+our reduction someplace else. And the idea about how we decide is that we only want
+to reduce if the result can still be reduced to the start symbol. So let's take
+a look at a right most innervations. So, beginning with the start symbol, we get to
+some state after, after some number of steps where that means, just an arbitrary
+number of steps. We get to some state X is the right most non-terminal and then the
+next step is to replace X with by the right hand side of some production. And
+remember, again, with bottom up parsing, the parsers are actually going in this
+direction, okay. So, this is the reduction direction. The derivation direction, the
+production direction, Because that's the easiest way to talk about what strings are
+derived. We wanna begin with a start symbol. But the [inaudible], but the
+parser's actually going against the flow of these arrows. Anyway if this is a
+rightmost derivation Then we say that alpha beta is a handle of alpha beta
+omega. And that just means that, yes, it would be okay in this situation to reduce
+beta to X. And we could replace beta by X, because it's not a mistake. We can still,
+by some sequence of moves, get back to the start symbol. You know, by, by doing more
+reductions. So handles formulize the intuition about where it is okay to do a
+reduction. A handle is just a reduction that also allows further reduction back to
+the start symbol And we clearly only want to do reduction at handles. If we do a
+reduction at a place that is not a handle even though it looks like it's the right
+hand side or maybe actually be the right hand side of some production, that does
+not mean. That it's actually a handle, and we might, if we could reduce there, we may
+get stuck. So all we said so far is what a handle is. We've defined, a handle, We
+haven't said anything about how to find the handles. And actually, how we find the
+handles is gonna consume much of the rest of our discussion of parsing.
