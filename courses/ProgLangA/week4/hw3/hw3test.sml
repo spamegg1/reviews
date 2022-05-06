@@ -4,6 +4,21 @@
 (* All the tests should evaluate to true. For example, the REPL should say: val test1 = true : bool *)
 use "hw3.sml";
 
+(* test data *)
+val f = (fn (x,y) => x > y)
+val h = (fn (x,y) => x >= y)
+val five = [1, 2, 3, 4, 5]
+val pat1 = Wildcard
+val pat2 = Variable "pat2"
+val pat3 = UnitP
+val pat4 = ConstP 17
+val pat5 = TupleP [pat1, pat2, pat3, pat4]
+val pat6 = ConstructorP("pat5", pat5)
+val pat7 = TupleP [pat1, pat1, pat1, pat1, pat1, pat1, pat1]
+val pat8 = TupleP [pat1, TupleP [pat5, pat2], pat2, pat7,
+    TupleP [pat7, pat3, pat4], pat6]
+val val5 = Tuple [Const(1), Const(2), Unit, Const(17)]
+
 val test1a = only_capitals [] = []
 val test1b = only_capitals ["A", "B", "C"] = ["A", "B", "C"]
 val test1c = only_capitals ["a", "B", "C"] = ["B", "C"]
@@ -28,8 +43,6 @@ val test3f = longest_string2 ["A", "bc", "bC"] = "bC"
 val test3g = longest_string2 ["ABC", "bcA", "bC", "abc"] = "abc"
 val test3h = longest_string2 ["ABC", "bcA", "abcd", "bC", "ABCD", "abc"] = "ABCD"
 
-val f = (fn (x,y) => x > y)
-val h = (fn (x,y) => x >= y)
 val test4a1 = longest_string_helper f [] = ""
 val test4b1 = longest_string_helper f ["A", "bc", "C"] = "bc"
 val test4c1 = longest_string_helper f ["ABC", "bc", "C"] = "ABC"
@@ -72,18 +85,13 @@ val test5f = longest_capitalized ["abc", "DEF", "ABC", "def"] = "DEF"
 val test6a = rev_string "" = ""
 val test6b = rev_string "abc" = "cba"
 
-val test7a = first_answer (fn x => if x > 0 then SOME x else NONE) [1, 2, 3, 4, 5]
-    = 1
-val test7b = first_answer (fn x => if x > 1 then SOME x else NONE) [1, 2, 3, 4, 5]
-    = 2
-val test7c = first_answer (fn x => if x > 2 then SOME x else NONE) [1, 2, 3, 4, 5]
-    = 3
-val test7d = first_answer (fn x => if x > 3 then SOME x else NONE) [1, 2, 3, 4, 5]
-    = 4
-val test7e = first_answer (fn x => if x > 4 then SOME x else NONE) [1, 2, 3, 4, 5]
-    = 5
+val test7a = first_answer (fn x => if x > 0 then SOME x else NONE) five = 1
+val test7b = first_answer (fn x => if x > 1 then SOME x else NONE) five = 2
+val test7c = first_answer (fn x => if x > 2 then SOME x else NONE) five = 3
+val test7d = first_answer (fn x => if x > 3 then SOME x else NONE) five = 4
+val test7e = first_answer (fn x => if x > 4 then SOME x else NONE) five = 5
 val test7f = ((first_answer (fn x => if x > 5 then SOME x else NONE)
-    [1, 2, 3, 4, 5]; false)  handle NoAnswer => true)
+                five; false)  handle NoAnswer => true)
 val test8a = all_answers (fn x => if x = 1 then SOME [x] else NONE) [] = SOME []
 val test8b = all_answers (fn x => if x = 1 then SOME [x] else NONE)
     [2, 3, 4, 5, 6, 7] = NONE
@@ -95,16 +103,6 @@ val test8e = all_answers (fn x => if x = 3 then SOME [x] else NONE) [3]
     = SOME [3]
 val test8f = all_answers (fn x => if x > 1 then SOME [x-2, x-1] else NONE) [2,3]
     = SOME [0, 1, 1, 2]
-
-val pat1 = Wildcard
-val pat2 = Variable "pat2"
-val pat3 = UnitP
-val pat4 = ConstP 17
-val pat5 = TupleP [pat1, pat2, pat3, pat4]
-val pat6 = ConstructorP("pat5", pat5)
-val pat7 = TupleP [pat1, pat1, pat1, pat1, pat1, pat1, pat1]
-val pat8 = TupleP [pat1, TupleP [pat5, pat2], pat2, pat7,
-    TupleP [pat7, pat3, pat4], pat6]
 
 val test9a0 = count_wildcards Wildcard = 1
 val test9a1 = count_wildcards pat1 = 1
@@ -132,8 +130,6 @@ val test10h = check_pat (pat5) = true
 val test10i = check_pat (pat6) = true
 val test10j = check_pat (pat7) = true
 val test10k = check_pat (pat8) = false
-
-val val5 = Tuple [Const(1), Const(2), Unit, Const(17)]
 
 val test11a = match (Const(1), UnitP) = NONE
 val test11b = match (Const(17), pat4) = SOME []
