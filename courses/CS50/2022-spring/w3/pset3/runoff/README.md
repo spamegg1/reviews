@@ -175,6 +175,7 @@ Complete the `tabulate` function.
 - Recall that at each stage in the runoff, every voter effectively votes for  their top-preferred candidate who has not already been eliminated.
 
 <details><summary>Hints</summary>
+
 - Recall that `voter_count` stores the number of voters in the election and that, for each voter in our election, we want to count one ballot.
 - Recall that for a voter `i`, their top choice candidate is represented by `preferences[i][0]`, their second choice candidate by `preferences[i][1]`, etc.
 - Recall that the `candidate` `struct` has a field called `eliminated`, which will be `true`  if the candidate has been eliminated from the election.
