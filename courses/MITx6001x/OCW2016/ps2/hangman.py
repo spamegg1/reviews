@@ -193,16 +193,17 @@ def match_with_gaps(my_word, other_word):
         False otherwise:
     """
     # FILL IN YOUR CODE HERE AND DELETE "pass"
-    my_word_no_spaces = ''.join(my_word.split(' '))
-    length = len(my_word_no_spaces)
-    if length != len(other_word):
+    word = ''.join(my_word.split(' '))
+    if len(word) != len(other_word):
         return False
-    for i in range(length):
-        if my_word_no_spaces[i] == '_':
-            if other_word[i] in my_word:
+
+    for i in range(len(word)):
+        if word[i] == '_':
+            if other_word[i] in word:
                 return False
-    return all(pair[0] == '_' or pair[0] == pair[1]
-               for pair in zip(my_word_no_spaces, other_word))
+        elif word[i] != other_word[i]:
+            return False
+    return True
 
 
 def show_possible_matches(my_word):
@@ -257,7 +258,6 @@ def hangman_with_hints(secret_word):
     # FILL IN YOUR CODE HERE AND DELETE "pass"
     guesses_left = 6
     warnings_left = 3
-    score = 0
     won_game = False
     letters_guessed = []
     guess_so_far = get_guessed_word(secret_word, letters_guessed)
@@ -327,23 +327,25 @@ def hangman_with_hints(secret_word):
 # lines above that were used to run the hangman function, and then uncomment
 # these two lines and run this file to test!
 # Hint: You might want to pick your own secret_word while you're testing.
+def tests():
+    assert not match_with_gaps("te_ t", "tact")
+    assert match_with_gaps("ta_ t", "tact")
+    assert not match_with_gaps("a_ ple", "apple")
+    assert match_with_gaps("a_ _ le", "apple")
+    assert not match_with_gaps("a_ _ le", "banana")
+    print("Tests pass.")
 
 
 if __name__ == "__main__":
+    tests()
     # pass
 
     # To test part 2, comment out the pass line above and
     # uncomment the following two lines.
-
     # secret_word = choose_word(wordlist)
-    # hangman("else")
     # hangman(secret_word)
-
-###############
 
     # To test part 3 re-comment out the above lines and
     # uncomment the following two lines.
-
     # secret_word = choose_word(wordlist)
-    hangman_with_hints("apple")
     # hangman_with_hints(secret_word)
