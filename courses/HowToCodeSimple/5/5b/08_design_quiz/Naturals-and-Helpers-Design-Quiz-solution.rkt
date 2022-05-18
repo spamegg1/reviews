@@ -4,7 +4,7 @@
 
 ;; ======================================================================
 ;; Constants
-(define COOKIES .)
+(define COOKIES empty-image) ;; I removed the actual cookie image here.
 
 ;; ======================================================================
 ;; Data Definitions
@@ -155,8 +155,9 @@
 (check-expect (sink (cons "solid"
                           (cons "solid"
                                 (cons "bubble" (cons "bubble" empty)))))
-              (cons "bubble" (cons "solid"
-                                   (cons "solid" (cons "bubble" empty)))))
+              (cons "bubble"
+                    (cons "solid"
+                          (cons "solid" (cons "bubble" empty)))))
 ;(define (sink lob) empty) ; stub
 ;<template from ListOfBlob>
 (define (sink lob)

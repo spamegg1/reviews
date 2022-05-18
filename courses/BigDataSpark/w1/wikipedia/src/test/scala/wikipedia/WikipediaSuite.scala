@@ -2,22 +2,20 @@ package wikipedia
 
 import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext
-import org.apache.spark.SparkContext._
-import org.junit._
+import org.apache.spark.SparkContext.*
 
-class WikipediaSuite {
+class WikipediaSuite extends munit.FunSuite:
   def initializeWikipediaRanking(): Boolean =
-    try {
+    try
       WikipediaRanking
       true
-    } catch {
+    catch
       case ex: Throwable =>
         println(ex.getMessage)
         ex.printStackTrace()
         false
-    }
 
-  import WikipediaRanking._
+  import WikipediaRanking.*
 
   /**
     * Creates a truncated string representation of a list, adding ", ...)" if there
@@ -27,7 +25,7 @@ class WikipediaSuite {
     * @return A preview of the list, containing at most n elements.
     */
   def previewList[A](l: List[A], n: Int = 10): String =
-    if (l.length <= n) l.toString
+    if l.length <= n then l.toString
     else l.take(n).toString.dropRight(1) + ", ...)"
 
   /**
@@ -38,7 +36,7 @@ class WikipediaSuite {
     * @param expected The expected list
     * @tparam A Type of the list elements
     */
-  def assertSameElements[A](actual: List[A], expected: List[A]): Unit = {
+  def assertSameElements[A](actual: List[A], expected: List[A]): Unit =
     val givenSet = actual.toSet
     val expectedSet = expected.toSet
 
@@ -60,12 +58,11 @@ class WikipediaSuite {
     assert(noMissingElements,
       s"""|$noMatchString
           |The given collection is missing some expected elements: ${previewList(missing.toList, 5)}""".stripMargin)
-  }
 
   // Conditions:
   // (1) the language stats contain the same elements
   // (2) they are ordered (and the order doesn't matter if there are several languages with the same count)
-  def assertEquivalentAndOrdered(actual: List[(String, Int)], expected: List[(String, Int)]): Unit = {
+  def assertEquivalentAndOrdered(actual: List[(String, Int)], expected: List[(String, Int)]): Unit =
     // (1)
     assertSameElements(actual, expected)
     // (2)
@@ -73,16 +70,15 @@ class WikipediaSuite {
       !(actual zip actual.tail).exists({ case ((_, occ1), (_, occ2)) => occ1 < occ2 }),
       "The given elements are not in descending order"
     )
-  }
 
-  @Test def `'occurrencesOfLang' should work for (specific) RDD with one element`: Unit = {
+  test("'occurrencesOfLang' should work for (specific) RDD with one element") {
     assert(initializeWikipediaRanking(), " -- did you fill in all the values in WikipediaRanking (conf, sc, wikiRdd)?")
     val rdd = sc.parallelize(Seq(WikipediaArticle("title", "Java Jakarta")))
     val res = (occurrencesOfLang("Java", rdd) == 1)
     assert(res, "occurrencesOfLang given (specific) RDD with one element should equal to 1")
   }
 
-  @Test def `'rankLangs' should work for RDD with two elements`: Unit = {
+  test("'rankLangs' should work for RDD with two elements") {
     assert(initializeWikipediaRanking(), " -- did you fill in all the values in WikipediaRanking (conf, sc, wikiRdd)?")
     val langs = List("Scala", "Java")
     val rdd = sc.parallelize(List(WikipediaArticle("1", "Scala is great"), WikipediaArticle("2", "Java is OK, but Scala is cooler")))
@@ -91,7 +87,7 @@ class WikipediaSuite {
     assert(res)
   }
 
-  @Test def `'makeIndex' creates a simple index with two entries`: Unit = {
+  test("'makeIndex' creates a simple index with two entries") {
     assert(initializeWikipediaRanking(), " -- did you fill in all the values in WikipediaRanking (conf, sc, wikiRdd)?")
     val langs = List("Scala", "Java")
     val articles = List(
@@ -105,7 +101,7 @@ class WikipediaSuite {
     assert(res)
   }
 
-  @Test def `'rankLangsUsingIndex' should work for a simple RDD with three elements`: Unit = {
+  test("'rankLangsUsingIndex' should work for a simple RDD with three elements") {
     assert(initializeWikipediaRanking(), " -- did you fill in all the values in WikipediaRanking (conf, sc, wikiRdd)?")
     val langs = List("Scala", "Java")
     val articles = List(
@@ -120,7 +116,7 @@ class WikipediaSuite {
     assert(res)
   }
 
-  @Test def `'rankLangsReduceByKey' should work for a simple RDD with five elements`: Unit = {
+  test("'rankLangsReduceByKey' should work for a simple RDD with five elements") {
     assert(initializeWikipediaRanking(), " -- did you fill in all the values in WikipediaRanking (conf, sc, wikiRdd)?")
     val langs = List("Scala", "Java", "Groovy", "Haskell", "Erlang")
     val articles = List(
@@ -138,5 +134,5 @@ class WikipediaSuite {
 
 
 
-  @Rule def individualTestTimeout = new org.junit.rules.Timeout(100 * 1000)
-}
+  import scala.concurrent.duration.given
+  override val munitTimeout = 100.seconds

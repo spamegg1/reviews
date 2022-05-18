@@ -35,22 +35,22 @@ object StudentTasks extends AutoPlugin {
   //  so we customize unmanagedSources below instead)
   private val scalafixLinting = Def.taskDyn {
     if (new File(".scalafix.conf").exists()) {
-      (scalafix in Compile).toTask(" --check").dependsOn(compile in Compile)
+      (Compile / scalafix).toTask(" --check").dependsOn(Compile / compile)
     } else Def.task(())
   }
 
   override lazy val projectSettings = Seq(
     // Run scalafix linting in parallel with the tests
-    (test in Test) := {
+    (Test / test) := {
       scalafixLinting.value
-      (test in Test).value
+      (Test / test).value
     },
 
     packageSubmissionSetting,
     submitSetting,
 
     fork := true,
-    connectInput in run := true,
+    run / connectInput := true,
     outputStrategy := Some(StdoutOutput),
     scalafixConfig := {
       val scalafixDotConf = (baseDirectory.value / ".scalafix.conf")
@@ -65,20 +65,20 @@ object StudentTasks extends AutoPlugin {
   val packageSubmissionZipSettings = Seq(
     packageSubmissionZip := {
       val submission = crossTarget.value / "submission.zip"
-      val sources = (packageSourcesOnly in Compile).value
-      val binaries = (packageBinWithoutResources in Compile).value
-      IO.zip(Seq(sources -> "sources.zip", binaries -> "binaries.jar"), submission)
+      val sources = (Compile / packageSourcesOnly).value
+      val binaries = (Compile / packageBinWithoutResources).value
+      IO.zip(Seq(sources -> "sources.zip", binaries -> "binaries.jar"), submission, None)
       submission
     },
-    artifactClassifier in packageSourcesOnly := Some("sources"),
-    artifact in (Compile, packageBinWithoutResources) ~= (art => art.withName(art.name + "-without-resources"))
+    packageSourcesOnly / artifactClassifier := Some("sources"),
+    Compile / packageBinWithoutResources / artifact ~= (art => art.withName(art.name + "-without-resources"))
   ) ++
   inConfig(Compile)(
     Defaults.packageTaskSettings(packageSourcesOnly, Defaults.sourceMappings) ++
     Defaults.packageTaskSettings(packageBinWithoutResources, Def.task {
       val relativePaths =
-        (unmanagedResources in Compile).value.flatMap(Path.relativeTo((unmanagedResourceDirectories in Compile).value)(_))
-      (mappings in (Compile, packageBin)).value.filterNot { case (_, path) => relativePaths.contains(path) }
+        (Compile / resources).value.flatMap(Path.relativeTo((Compile / resourceDirectories).value)(_))
+      (Compile / packageBin / mappings).value.filterNot { case (_, path) => relativePaths.contains(path) }
     })
   )
 
@@ -130,7 +130,7 @@ object StudentTasks extends AutoPlugin {
 
     val args: Seq[String] = Def.spaceDelimited("[path]").parsed
     val s: TaskStreams = streams.value // for logging
-    val jar = (packageSubmissionZip in Compile).value
+    val jar = (Compile / packageSubmissionZip).value
 
     val base64Jar = prepareJar(jar, s)
 
@@ -146,15 +146,19 @@ object StudentTasks extends AutoPlugin {
 
     val args: Seq[String] = Def.spaceDelimited("<arg>").parsed
     val s: TaskStreams = streams.value // for logging
-    val jar = (packageSubmissionZip in Compile).value
+    val jar = (Compile / packageSubmissionZip).value
 
     val assignmentDetails =
       courseraId.?.value.getOrElse(throw new MessageOnlyException("This assignment can not be submitted to Coursera because the `courseraId` setting is undefined"))
     val assignmentKey = assignmentDetails.key
     val courseName =
       course.value match {
-        case "capstone" => "scala-capstone"
+        case "progfun1" => "scala-functional-programming"
+        case "progfun2" => "scala-functional-program-design"
+        case "parprog1" => "scala-parallel-programming"
         case "bigdata"  => "scala-spark-big-data"
+        case "capstone" => "scala-capstone"
+        case "reactive" => "scala-akka-reactive"
         case other      => other
       }
 

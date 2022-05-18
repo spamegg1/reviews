@@ -1,7 +1,5 @@
-course := "progfun1"
+course := "bigdata"
 assignment := "example"
-scalaVersion := "2.13.1"
+scalaVersion := "3.1.0"
 scalacOptions ++= Seq("-language:implicitConversions", "-deprecation")
-libraryDependencies += "com.novocode" % "junit-interface" % "0.11" % Test
-
-testOptions in Test += Tests.Argument(TestFrameworks.JUnit, "-a", "-v", "-s")
+libraryDependencies += "org.scalameta" %% "munit" % "0.7.26" % Test
