@@ -1,10 +1,10 @@
 # StackOverflow
 
-To start, first download the assignment: [stackoverflow.zip](https://moocs.scala-lang.org/~dockermoocs/handouts-coursera-2.13/stackoverflow.zip). For this assignment, you also need to download the data (170 MB):
+To start, first download the assignment: [https://moocs.scala-lang.org/~dockermoocs/handouts/scala-3/stackoverflow.zip](https://moocs.scala-lang.org/~dockermoocs/handouts/scala-3/stackoverflow.zip "stackoverflow.zip")
 
-https://moocs.scala-lang.org/~dockermoocs/bigdata/stackoverflow.csv
+For this assignment, you will work with the stackoverflow dataset (84 MB): [https://moocs.scala-lang.org/~dockermoocs/bigdata/stackoverflow-grading.csv](https://moocs.scala-lang.org/%7Edockermoocs/bigdata/stackoverflow-grading.csv)
 
-and place it in the folder: **src/main/resources/stackoverflow** in your project directory.
+The file will be automatically downloaded when your code is compiled for the first time.
 
 The overall goal of this assignment is to implement a distributed k-means algorithm which clusters posts on the popular question-answer platform StackOverflow according to their score. Moreover, this clustering should be executed in parallel for different programming languages, and the results should be compared.
 

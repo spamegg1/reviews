@@ -2,19 +2,18 @@ package stackoverflow
 
 import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext
-import org.apache.spark.SparkContext._
+import org.apache.spark.SparkContext.*
 import org.apache.spark.rdd.RDD
-import org.junit._
-import org.junit.Assert.assertEquals
 import java.io.File
+import scala.io.{ Codec, Source }
+import scala.util.Properties.isWin
 
-object StackOverflowSuite {
-  val conf: SparkConf = new SparkConf().setMaster("local").setAppName("StackOverflow")
+object StackOverflowSuite:
+  val conf: SparkConf = new SparkConf().setMaster("local[2]").setAppName("StackOverflow")
   val sc: SparkContext = new SparkContext(conf)
-}
 
-class StackOverflowSuite {
-  import StackOverflowSuite._
+class StackOverflowSuite extends munit.FunSuite:
+  import StackOverflowSuite.*
 
 
   lazy val testObject = new StackOverflow {
@@ -28,7 +27,7 @@ class StackOverflowSuite {
     override def kmeansMaxIterations = 120
   }
 
-  @Test def `testObject can be instantiated`: Unit = {
+  test("testObject can be instantiated") {
     val instantiatable = try {
       testObject
       true
@@ -39,5 +38,5 @@ class StackOverflowSuite {
   }
 
 
-  @Rule def individualTestTimeout = new org.junit.rules.Timeout(100 * 1000)
-}
+  import scala.concurrent.duration.given
+  override val munitTimeout = 300.seconds
