@@ -1,15 +1,31 @@
 course := "bigdata"
 assignment := "timeusage"
 
-scalaVersion := "2.12.8"
+scalaVersion := "3.1.0"
 scalacOptions ++= Seq("-language:implicitConversions", "-deprecation")
 libraryDependencies ++= Seq(
-  "com.novocode" % "junit-interface" % "0.11" % Test,
-  ("org.apache.spark" %% "spark-core" % "2.4.3"),
-  ("org.apache.spark" %% "spark-sql" % "2.4.3")
-)
-dependencyOverrides ++= Seq(
-  ("com.fasterxml.jackson.core" % "jackson-databind" % "2.6.7")
+  excludes(("org.apache.spark" %% "spark-core" % "3.2.0").cross(CrossVersion.for3Use2_13)),
+  excludes(("org.apache.spark" %% "spark-sql" % "3.2.0").cross(CrossVersion.for3Use2_13)),
+  excludes("io.github.vincenzobaz" %% "spark-scala3" % "0.1.3"),
+  "org.scalameta" %% "munit" % "0.7.26" % Test
 )
 
-testOptions in Test += Tests.Argument(TestFrameworks.JUnit, "-a", "-v", "-s")
+//netty-all replaces all these excludes
+def excludes(m: ModuleID): ModuleID =
+  m.exclude("io.netty", "netty-common").
+    exclude("io.netty", "netty-handler").
+    exclude("io.netty", "netty-transport").
+    exclude("io.netty", "netty-buffer").
+    exclude("io.netty", "netty-codec").
+    exclude("io.netty", "netty-resolver").
+    exclude("io.netty", "netty-transport-native-epoll").
+    exclude("io.netty", "netty-transport-native-unix-common").
+    exclude("javax.xml.bind", "jaxb-api").
+    exclude("jakarta.xml.bind", "jaxb-api").
+    exclude("javax.activation", "activation").
+    exclude("jakarta.annotation", "jakarta.annotation-api").
+    exclude("javax.annotation", "javax.annotation-api")
+
+// Without forking, ctrl-c doesn't actually fully stop Spark
+run / fork := true
+Test / fork := true

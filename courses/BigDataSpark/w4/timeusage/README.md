@@ -1,6 +1,6 @@
-To start, first download the assignment: [timeusage.zip](https://moocs.scala-lang.org/~dockermoocs/handouts-coursera-2.13/timeusage.zip). For this assignment, you also need to download the data (164 MB):
+To start, first download the assignment: [https://moocs.scala-lang.org/~dockermoocs/handouts/scala-3/timeusage.zip](https://moocs.scala-lang.org/~dockermoocs/handouts/scala-3/timeusage.zip "timeusage.zip"). For this assignment, you also need to download the data (164 MB):
 
-https://moocs.scala-lang.org/~dockermoocs/bigdata/atussum.csv
+[https://moocs.scala-lang.org/~dockermoocs/bigdata/atussum.csv](https://moocs.scala-lang.org/~dockermoocs/bigdata/atussum.csv)
 
 and place it in the folder **src/main/resources/timeusage/** in your project directory.
 

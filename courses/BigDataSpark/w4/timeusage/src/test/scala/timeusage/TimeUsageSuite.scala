@@ -1,10 +1,8 @@
 package timeusage
 
 import org.apache.spark.sql.{ColumnName, DataFrame, Row}
-import org.junit.{Assert, Test}
-import org.junit.Assert.assertEquals
-
 import scala.util.Random
+import scala.util.Properties.isWin
 
-class TimeUsageSuite {
-}
+class TimeUsageSuite extends munit.FunSuite:
+  println("You can add tests here")
