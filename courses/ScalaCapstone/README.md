@@ -45,7 +45,7 @@ Temperature data (not included in repo, 444MB zip file) is from: http://alaska.e
     -   [Running the Web application](#Running-the-Web-application)
 
 # Introduction
-Download the [assignment](https://moocs.scala-lang.org/~dockermoocs/handouts-coursera-2.13/observatory.zip) and the [dataset](https://moocs.scala-lang.org/~dockermoocs/scala-capstone-data.zip) and extract them somewhere on your file system. The assignment archive contains an sbt project starter, while the dataset only contains the data you are going to use.
+Download the assignment([https://moocs.scala-lang.org/~dockermoocs/handouts/scala-3/observatory.zip](https://moocs.scala-lang.org/~dockermoocs/handouts/scala-3/observatory.zip "assignment")) and the [dataset](https://moocs.scala-lang.org/~dockermoocs/scala-capstone-data.zip) and extract them somewhere on your file system. The assignment archive contains an sbt project starter, while the dataset only contains the data you are going to use.
 
 Note that the sbt project requires Java 8. Be sure that you have this version of the JVM installed on your environment.
 
@@ -265,11 +265,7 @@ For temperatures between thresholds, say, between 12°C and 32°C, you will have
 |-60|   0|   0|   0|
 
 ## Spatial interpolation
-You will have to implement the method `predictTemperature`. This method takes a sequence of known temperatures at the given locations, and a location where we want to guess the temperature, and returns an estimate based on the inverse distance weighting algorithm:  https://en.wikipedia.org/wiki/Inverse_distance_weighting
-
-(you can use any `p` value greater or equal to 2; try and use whatever works best for you!).
-
-To approximate distance between two locations, we suggest you use great-circle distance formula: https://en.wikipedia.org/wiki/Great-circle_distance
+You will have to implement the method `predictTemperature`. This method takes a sequence of known temperatures at the given locations, and a location where we want to guess the temperature, and returns an estimate based on the inverse distance weighting algorithm:  https://en.wikipedia.org/wiki/Inverse_distance_weighting (you can use any `p` value greater or equal to 2; try and use whatever works best for you!). To approximate distance between two locations, we suggest you use great-circle distance formula: https://en.wikipedia.org/wiki/Great-circle_distance
 
 Note that the great-circle distance formula is known to have rounding errors for short distances (a few meters), but that’s not a problem for us because we don’t need such a high degree of precision. Thus, you can use the first formula given on the Wikipedia page, expanded to cover some edge cases like equal locations and antipodes:
 - `deltaSigma = 0` for equal points, 
@@ -286,12 +282,22 @@ We're providing you with a simple case class for representing color; you can see
 ```scala
 case class Color(red: Int, green: Int, blue: Int)
 ```
-You will have to implement the method `interpolateColor`. This method takes a sequence of reference temperature values and their associated color, and a temperature value, and returns an estimate of the color corresponding to the given value, by applying a linear interpolation algorithm: https://en.wikipedia.org/wiki/Linear_interpolation
+You will have to implement the following method:
+```scala
+def interpolateColor(points: Iterable[(Temperature, Color)], value: Temperature): Color
+```
+This method takes a sequence of reference temperature values and their associated color, and a temperature value, and returns an estimate of the color corresponding to the given value, by applying a linear interpolation algorithm: https://en.wikipedia.org/wiki/Linear_interpolation
 
 Note that the given points are not sorted in a particular order.
 
 ## Visualization
-Once you have completed the above steps you can implement the `visualize` method to build an image (using the scrimage library) where each pixel shows the temperature corresponding to its location.
+Once you have completed the above steps you can implement the `visualize` method to build an image (using the [scrimage](https://index.scala-lang.org/sksamuel/scrimage) library) where each pixel shows the temperature corresponding to its location.
+```scala
+def visualize(
+  temperatures: Iterable[(Location, Temperature)],
+  colors: Iterable[(Temperature, Color)]
+): Image
+```
 
 Note that 
 - the `(x,y)` coordinates of the top-left pixel is `(0,0)`, and
@@ -311,21 +317,43 @@ So...
 - this means that `latitude = 90 - y`
 
 ## Appendix: scrimage cheat sheet
-Here is a description of `scrimage`’s API parts that are relevant for you.
+Here is a description of scrimage’s API parts that are relevant for your work.
 
-### Image type and companion object.
-A simple way to construct an image is to use constructors that take an `Array[Pixel]` as parameter.
-
-In such a case, the array must contain exactly width × height elements, in the following order:
-- the first element is the top-left pixel,
-- followed by all the pixels of the top row,
-- followed by the other rows.
-
-A simple way to construct a pixel from RGB values is to use this constructor. To write an image into a PNG file, use the output method. For instance: 
+-   **ImmutableImage** [https://www.javadoc.io/doc/com.sksamuel.scrimage/scrimage-core/4.0.12/com/sksamuel/scrimage/ImmutableImage.html](https://www.javadoc.io/doc/com.sksamuel.scrimage/scrimage-core/4.0.12/com/sksamuel/scrimage/ImmutableImage.html "doc")
+-   A simple way to construct an image is to use the constructor **Image.wrapPixels** ([https://www.javadoc.io/static/com.sksamuel.scrimage/scrimage-core/4.0.12/com/sksamuel/scrimage/ImmutableImage.html#wrapPixels-int-int-com.sksamuel.scrimage.pixels.Pixel:A-com.sksamuel.scrimage.metadata.ImageMetadata-](https://www.javadoc.io/static/com.sksamuel.scrimage/scrimage-core/4.0.12/com/sksamuel/scrimage/ImmutableImage.html#wrapPixels-int-int-com.sksamuel.scrimage.pixels.Pixel:A-com.sksamuel.scrimage.metadata.ImageMetadata- "doc")). It takes as parameters the image width and height, the pixels of the image as a flat `Array[Pixel]`, and the image metadata (of type **ImageMetadata**)
+  
+  The array must contain exactly width × height elements, in the following order: the first element is the top-left pixel, followed by all the pixels of the top row, followed by the other rows. You can create an instance of **ImageMetadata** by calling the method **empty** as shown in the code snippet below:
 ```scala
-myImage.output(new java.io.File("target/some-image.png"))
+// Create an image of 200 by 150 pixels
+val width = 200
+val height = 150
+val pixels =
+  for
+    y <- 0 until width
+    x <- 0 until height
+    red = 0
+    green = 0
+    blue = 0
+    alpha = 0
+  yield Pixel(x, y, red, green, blue, alpha)
+
+ImmutableImage.wrapPixels(width, height, pixels.toArray, ImageMetadata.empty)
 ```
-To check that some predicate holds for all the pixels of an image, use the `forall` method.
+-   A simple way to construct a pixel from RGB values is to use this constructor: [https://www.javadoc.io/doc/com.sksamuel.scrimage/scrimage-core/latest/com/sksamuel/scrimage/pixels/Pixel.html#%3Cinit%3E(int,int,int,int,int,int)](https://www.javadoc.io/doc/com.sksamuel.scrimage/scrimage-core/latest/com/sksamuel/scrimage/pixels/Pixel.html#%3Cinit%3E(int,int,int,int,int,int) "doc"). The first two parameters are **x** and **y**, which are the location of the constructed pixel.
+
+- To write an image into a PNG file, use one of the extension methods provided in the package object under **com.sksamuel.scrimage.implicits**. Those implicits are already imported for you. For instance, **myImage.output(new java.io.File("target/some-image.png"))**
+```scala
+implicit class RichImmutableImage(image: ImmutableImage) {
+  def output(file: File)(implicit writer: ImageWriter): File = image.output(writer, file)
+  def output(path: Path)(implicit writer: ImageWriter): Path = image.output(writer, path)
+  def output(path: String)(implicit writer: ImageWriter): Path = image.output(writer, path)
+}
+```
+
+- To check that some predicate holds for all the pixels of an image, use the **forall** extension method provided under the package object **com.sksamuel.scrimage.implicits**, which is imported for you:
+```scala
+def forall(predicate: Pixel => Boolean): Boolean
+```
 
 Also, note that `scrimage` defines a `Color` type, which could be ambiguous with our `Color` definition. Beware to not import `scrimage`’s `Color`.
 
@@ -351,7 +379,12 @@ Coordinates in this system are represented by the Tile case class, defined in `m
 ```scala
 case class Tile(x: Int, y: Int, zoom: Int)
 ```
-The tile method converts a tile's geographic position to its corresponding GPS coordinates, by applying the Web Mercator projection:
+Remember that you are free to add methods to this case class, but that you should not remove or rename its fields.
+You have to implement the following two methods:
+```scala
+def tileLocation(tile: Tile): Location
+```
+This method converts a tile's geographic position to its corresponding GPS coordinates, by applying the Web Mercator [projection](http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#Mathematics).
 ```scala
 def tile(temperatures: Iterable[(Location, Temperature)],
          colors      : Iterable[(Temperature, Color)],
@@ -362,8 +395,7 @@ This method returns a 256×256 image showing the given temperatures, using the g
 
 Note that the pixels of the image must be a little bit transparent so that when we will overlay the tile on the map, the map will still be visible. We recommend using an alpha value of 127.
 
-*Hint*: you will have to compute the corresponding latitude and longitude of each pixel within a tile. A simple way to achieve that is to rely on the fact that each pixel in a tile can be thought of a subtile at a higher zoom level (256 = 2⁸):
-   https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#Subtiles
+*Hint*: you will have to compute the corresponding latitude and longitude of each pixel within a tile. A simple way to achieve that is to rely on the fact that each pixel in a tile can be thought of a [subtile](https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#Subtiles) at a higher zoom level (256 = 2⁸):
 
 ## Integration with a Web application
 Once you are able to generate tiles, you can embed them in a Web page. To achieve this you first have to generate all the tiles for zoom levels going from 0 to 3. (Actually you don’t have to generate all the tiles, since this operation consumes a lot of CPU. You can choose to generate tiles for just one zoom level, e.g. 2).
