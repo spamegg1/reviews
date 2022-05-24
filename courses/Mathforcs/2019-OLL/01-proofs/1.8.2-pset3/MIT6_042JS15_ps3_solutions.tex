@@ -1,0 +1,241 @@
+\documentclass[14pt]{extarticle} 
+\usepackage{amsmath,mathtools,amsfonts,amsthm,amssymb,hyperref}
+\usepackage{wasysym,geometry,bussproofs,latexsym,parskip,bookmark}
+\newtheorem{defn}{Definition}
+\newtheorem{thm}{Theorem}
+\newtheorem{claim}{Claim}
+\newtheorem{lemma}{Lemma}
+\hypersetup{colorlinks,allcolors=blue,linktoc=all}
+\geometry{a4paper} 
+\geometry{margin=0.5in}
+\title{Math for CS 2019 Problem Set 3 solutions}
+\author{https://github.com/spamegg1}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Problem 1}
+The Fibonacci numbers $F_0, F_1, F_2, \ldots$ are defined as follows:
+
+\begin{displaymath}
+   F_n \Coloneqq \left\{
+     \begin{array}{lr}
+       0 & \text{ if } n = 0\\
+       1 & \text{ if } n = 1\\
+       F_{n-1} + F_{n-2} & \text{ if } n > 1\\
+     \end{array}
+   \right.
+\end{displaymath} 
+Prove, using Strong Induction, the following closed-form formula for $F_n$:
+$$
+F_n = \frac{p^n - q^n}{\sqrt{5}}
+$$
+where $p = \frac{1 + \sqrt{5}}{2}$ and $q = \frac{1 - \sqrt{5}}{2}$.
+
+\textit{Hint:} Note that $p$ and $q$ are the roots of $x^2 - x - 1 = 0$, so $p^2 = p+1$ and $q^2 = q+1$.
+\begin{proof}
+For all natural numbers $n$ let $P(n)$ be the statement: $F_n = \frac{p^n - q^n}{\sqrt{5}}$.
+
+There are two base cases to prove. First $P(0)$.
+
+$F_0 = 0$, by definition of $F_n$. 
+$$
+\frac{p^0 - q^0}{\sqrt{5}} = \frac{1 - 1}{\sqrt{5}} = 0
+$$
+So $\displaystyle F_0 = \frac{p^0 - q^0}{\sqrt{5}}$, which means $P(0)$ is true. Next is $P(1)$.
+
+$F_1 = 1$, by definition of $F_n$. 
+$$
+\frac{p^1 - q^1}{\sqrt{5}} = \frac{\frac{1 + \sqrt{5}}{2} - \frac{1 - \sqrt{5}}{2}}{\sqrt{5}} = \frac{\frac{1 + \sqrt{5} - 1 + \sqrt{5}}{2}}{\sqrt{5}} = \frac{\frac{2\sqrt{5}}{2}}{\sqrt{5}} = 1
+$$
+So $\displaystyle F_1 = \frac{p^1 - q^1}{\sqrt{5}}$, which means $P(1)$ is true.
+
+Now the Strong Induction step. Assume $n > 1$ and assume that for all natural numbers $k < n$, $P(k)$ is true. We want to prove $P(n)$ is true.
+
+By the induction hypothesis, $P(n - 2)$ is true and $P(n - 1)$ is true. So:
+$$
+F_{n-2} = \frac{p^{n-2} - q^{n-2}}{\sqrt{5}}
+$$
+and
+$$
+F_{n-1} = \frac{p^{n-1} - q^{n-1}}{\sqrt{5}}
+$$
+We want to prove $\displaystyle F_{n} = \frac{p^{n} - q^{n}}{\sqrt{5}}$.
+$$
+\begin{array}{cccc}
+F_n & = & F_{n-1} + F_{n-2} & \text{(by definition of } F_n) \\
+ & = & \displaystyle \frac{p^{n-1} - q^{n-1}}{\sqrt{5}} + \frac{p^{n-2} - q^{n-2}}{\sqrt{5}}& \text{(by induction hypothesis)}\\
+ & = & \displaystyle \frac{(p^{n-1} + p^{n-2}) - (q^{n-1} + q^{n-2})}{\sqrt{5}} & \\
+ & = & \displaystyle \frac{p^{n-2}(p + 1) - q^{n-2}(q + 1)}{\sqrt{5}} & \\
+ & = & \displaystyle \frac{p^{n-2}(p^2) - q^{n-2}(q^2)}{\sqrt{5}} & \text{(by the properties of }p, q) \\
+ & = &\displaystyle \frac{p^{n} - q^{n}}{\sqrt{5}} & 
+\end{array}
+$$
+This proves $P(n)$. Therefore by the Principle of Strong Induction $P(n)$ is true for all natural numbers $n$.
+\end{proof}
+
+\section{Problem 2}
+The Block Stacking Game goes as follows: 
+
+You begin with a stack of $n$ boxes. 
+
+Then you make a sequence of moves. 
+
+In each move, you divide one stack of boxes into two nonempty stacks. 
+
+The game ends when you have $n$ stacks, each containing a single box.
+
+You earn points for each move; in particular, if you divide one stack of height $a + b$ into two stacks with heights $a$ and $b$, then you score $ab$ points for that move.
+
+Your overall score is the sum of the points that you earn for each move. What strategy should you use to maximize your total score?
+
+Define the potential, $p(S)$, of a stack of blocks, $S$, to be $k(k - 1)/2$ where $k$ is the number of blocks in $S$. 
+
+Define the potential, $p(A)$, of a set of stacks, $A$, to be the sum of the potentials of the stacks in $A$.
+
+Show that for any set of stacks, $A$, if a sequence of moves starting with $A$ leads to another set of stacks, $B$, then $p(A) \geq p(B)$, and the score for this sequence of moves is $p(A) - p(B)$.
+
+\textit{Hint:} Try induction on the number of moves to get from $A$ to $B$.
+\begin{proof}
+Intuitively, the best strategy is to divide stacks as evenly (in half) as possible, to maximize the product $ab$ in each move.
+
+Let us try to formulate the problem so that it can be solved by induction using the hint.
+
+For a natural number $n$, define $Q(n)$ to be the statement: 
+
+``For any set of stacks $A$, and for any set of stacks $B$ that can be reached from $A$ by a sequence of $n$ moves, $p(A) \geq p(B)$, and the score for this sequence of moves is $p(A) - p(B)$.''
+
+We want to prove that $Q(n)$ is true for all natural numbers $n$.
+
+\textbf{Base Case.} We need to prove $Q(0)$. Assume that $A, B$ are any sets of stacks where $B$ can be reached from $A$ by a sequence of 0 moves.
+
+Notice that, in this case, we make 0 moves, so $A$ and $B$ are the same set of stacks. Therefore $p(A) = p(B)$, and the score we get is 0, which is equal to $p(A) - p(B)$. So we see that $Q(0)$ is true.
+
+\textbf{Induction Step.} Now assume $n \geq 0$ and assume that $Q(n)$ is true, we want to prove that $Q(n+1)$ is true.
+
+Assume $A,B$ are any sets of stacks where $B$ can be reached from $A$ by a sequence of $n+1$ moves $m_1, m_2, \ldots, m_{n+1}$.
+
+Define $C$ to be the set of stacks that is reached from $A$ by making the sequence of moves $m_1, m_2, \ldots, m_{n}$. (Then $B$ is reached from $C$ by making one more move $m_{n+1}$.)
+
+By the induction hypothesis, $p(A) \geq p(C)$ and the score for the sequence of moves $m_1, m_2, \ldots, m_{n}$ is $p(A) - p(C)$.
+
+For an individual stack $S$, define $s(S)$ (size) to be the number of blocks in that stack.
+
+Define $C_1, \ldots, C_k$ to be all the individual stacks of $C$.
+
+Then the move $m_{n+1}$ splits \textit{one of these stacks} to reach $B$. For the sake of keeping the notation simple, say, without loss of generality, that it splits the stack $C_1$. (Otherwise it would be some stack $C_i$ for some $i \in \{1, \ldots, k\}$, but we can simply swap the places of $C_1$ and $C_i$. This does not affect the potential, or the score.) Say the move $m_{n+1}$ splits stack $C_1$, which has size, say, $a + b$, into two stacks of size $a$ and $b$.
+
+For our proof we will have to compare $p(C)$ to $p(B)$, so we need to compute both. First let's take a look at the potential of $C$. Remember that we are assuming stack $C_1$ has size $a+b$:
+$$
+p(C) = p(C_1) + \ldots + p(C_k) = \frac{(a+b)(a+b-1)}{2} + \sum_{j = 2}^k \frac{s(C_j)(s(C_j) - 1)}{2}
+$$
+
+Let us try to calculate $p(B)$. The stacks of $B$ are the same as the stacks $C_1, \ldots, C_k$ of $C$, with the exception of stack $C_1$, which has been split into two stacks of size $a$ and $b$. So:
+$$
+p(B) = \frac{a(a-1)}{2} + \frac{b(b-1)}{2} + \sum_{j = 2}^k \frac{s(C_j)(s(C_j) - 1)}{2}
+$$
+
+To prove $Q(n+1)$ we need to show that $p(A) \geq p(B)$ and the score for the sequence of moves $m_1, \ldots, m_{n+1}$ is equal to $p(A) - p(B)$. Let's start with the second one.
+
+By the induction hypothesis, the score for the sequence of moves $m_1, \ldots, m_n$ is $p(A) - p(C)$.
+
+The score for the move $m_{n+1}$ is $ab$.
+
+So, the score for the sequence of moves $m_1, \ldots, m_{n+1}$ is $p(A) - p(C) + ab$.
+
+So we need to prove that $p(A) - p(B) = p(A) - p(C) + ab$. 
+
+This is equivalent to proving that $p(C) - p(B) = ab$.
+
+$$
+\begin{array}{cccc}
+p(C) - p(B) & = &\displaystyle \left( \frac{(a+b)(a+b-1)}{2} + \sum_{j = 2}^k \frac{s(C_j)(s(C_j) - 1)}{2}\right)\\
+ &   &\displaystyle - \left(\frac{a(a-1)}{2} + \frac{b(b-1)}{2} + \sum_{j = 2}^k \frac{s(C_j)(s(C_j) - 1)}{2}\right) \\
+ & = & \displaystyle \frac{(a+b)(a+b-1)}{2} - \frac{a(a-1)}{2} - \frac{b(b-1)}{2}\\
+ & = &\displaystyle \frac{1}{2}((a + b)(a + b - 1) - a(a-1) - b(b-1)) \\
+ & = &\displaystyle \frac{1}{2}(a^2 + ab - a + ba + b^2 - b - (a^2-a) - (b^2-b))\\
+ & = &\displaystyle \frac{1}{2}(a^2 + 2ab - a + b^2 - b - a^2+a - b^2+b)\\
+ & = &\displaystyle \frac{1}{2}\,(2ab)\\
+ & = &\displaystyle ab\\
+\end{array}
+$$
+
+Now all that's left to prove is $p(A) \geq p(B)$. 
+
+By the induction hypothesis $p(A) \geq p(C)$. 
+
+By the above, we know that $p(C) = p(B) + ab$. We also know that $ab > 0$. 
+
+So $p(A) \geq p(C) = p(B) + ab \geq p(B)$, which proves $p(A) \geq p(B)$.
+
+Thus we have proved $Q(n+1)$. So by the Principle of Induction, $Q(n)$ is true for all natural numbers $n$.
+\end{proof}
+
+\section{Problem 3}
+Let $A$, $B$, and $C$ be sets, and let $f: B \rightarrow C$ and $g: A \rightarrow B$ be functions. 
+
+Let $h: A \rightarrow C$ be the composition, $f \circ g$, that is, $h(x) = f(g(x))$ for $x \in A$. 
+
+Prove or disprove the following claims:
+
+\textit{Hint:} Arguments based on “arrows” using Definition 4.4.2 are fine.
+
+\subsection{(a)}
+If $h$ is surjective, then $f$ must be surjective.
+\begin{proof}
+This is true. Let's prove it.
+
+Assume $h$ is surjective. By definition of surjectivity, for all $c \in C$ there exists $a \in A$ such that $h(a) = c$.
+
+We want to prove that $f$ is surjective. We want to prove that for all $c \in C$ there exists $b \in B$ such that $f(b) = c$.
+
+Assume $c \in C$. There exists $a \in A$ such that $h(a) = c$. By definition of $h$, we know that $h(a) = f(g(a))$. So $g(a)$ must be defined. (Note that $g$ does not have to be total for this to be true!)
+
+Then define $b = g(a) \in B$. So $f(b) = f(g(a)) = c$. So we have shown that there exists $b \in B$ such that $f(b) = c$. This proves that $f$ is surjective.
+\end{proof}
+
+\subsection{(b)}
+If $h$ is surjective, then $g$ must be surjective.
+\begin{proof}
+This is false. Let's give a counterexample. It would be much easier to explain with pictures, but it's difficult for me to draw pictures in \LaTeX.
+
+Define sets $A = \{a\}$, $B = \{b_1, b_2\}$ and $C = \{c\}$.
+
+Define $g: A \rightarrow B$ by $g(a) = b_1$. Notice that $g$ is not surjective.
+
+Define $f : B \rightarrow C$ by $f(b_1) = c$ and $f(b_2) = c$.
+
+With these definitions, we see that $h(a) = f(g(a)) = f(b_1) = c$.
+
+Notice that $h(x) = f(g(x))$ is surjective, because for every element $y \in C$, there is an element $x \in A$ such that $h(x) = y$. (In fact $h$ is bijective, both $A$ and $C$ have exactly 1 element, and $h(a) = c$.)
+\end{proof}
+
+\subsection{(c)}
+If $h$ is injective, then $f$ must be injective.
+\begin{proof}
+This is false. The same counterexample from part (b) works. $h$ is bijective in that example, but $f$ is not injective, because $f(b_1) = f(b_2)$. (To put it in Prof. Meyer's terms, $f$ does not have the ``$\leq 1$ arrow-in property'' because there are two arrows coming in to $c$.)
+\end{proof}
+
+\subsection{(d)}
+If $h$ is injective and $f$ is total, then $g$ must be injective.
+\begin{proof}
+This is true. Let's prove it.
+
+Assume $h$ is injective and $f$ is total. This means:
+
+For all $c \in C$ there is at most one $a \in A$ such that $h(a) = c$, and
+
+for all $b \in B$, $f(b)$ is defined.
+
+We want to prove that $g$ is injective, in other words for all $b \in B$ there is at most one $a \in A$ such that $g(a) = b$.
+
+Argue by contradiction and assume that there exists $b \in B$ such that there are at least two $a_1, a_2 \in A, a_1 \neq a_2$ such that $g(a_1) = b$ and $g(a_2) = b$.
+
+We know that $f(b)$ is defined. It's an element of $C$, let's say $f(b) = c \in C$.
+
+So $h(a_1) = f(g(a_1)) = f(b) = c$ and $h(a_2) = f(g(a_2)) = f(b) = c$. This contradicts the fact that $h$ is injective!
+
+Thus our assumption was false, therefore $g$ is injective.
+\end{proof}
+
+\end{document}

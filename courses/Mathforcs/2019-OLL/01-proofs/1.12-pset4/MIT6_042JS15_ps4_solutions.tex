@@ -1,0 +1,256 @@
+\documentclass[14pt]{extarticle} 
+\usepackage{amsmath,mathtools,amsfonts,amsthm,amssymb,hyperref}
+\usepackage{wasysym,geometry,bussproofs,latexsym,parskip,bookmark}
+\newtheorem{defn}{Definition}
+\newtheorem{thm}{Theorem}
+\newtheorem{claim}{Claim}
+\newtheorem{lemma}{Lemma}
+\hypersetup{colorlinks,allcolors=blue,linktoc=all}
+\geometry{a4paper} 
+\geometry{margin=0.5in}
+\title{Math for CS 2015/2019 Problem Set 4 solutions}
+\author{https://github.com/spamegg1}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Problem 1}
+A robot moves on the two-dimensional integer grid. It starts out at $(0,0)$ and is allowed to move in any of these four ways:
+
+1. $(+2, -1)$: right 2, down 1
+
+2. $(-2, +1)$: left 2, up 1
+
+3. $(+1, +3)$
+
+4. $(-1, -3)$
+
+Prove that this robot can never reach $(1, 1)$.
+\begin{proof}
+1. Argue by contradiction and assume that there is a sequence of moves that starts at $(0,0)$ and ends at $(1,1)$.
+
+2. Let's say that, in this sequence of moves, the move $(+2, -1)$ was used a total number of $a$ times, $(-2, +1)$ $b$ times, $(+1, +3)$ $c$ times and $(-1, -3)$ $d$ times. (Here $a,b,c,d$ are natural numbers.)
+
+3. Then the final grid location of the robot is:
+
+$$
+a(+2, -1) + b(-2, +1) + c(+1, +3) + d(-1, -3) = (2a-2b+c-d, b-a+3c-3d)
+$$
+
+4. Since the final location is $(1,1)$, we have
+
+$$
+(2a-2b+c-d, b-a+3c-3d) = (1,1)
+$$
+
+So $2(a - b) + (c - d) = 1$, and $-(a - b) + 3(c - d) = 1$.
+
+5. Consider the 2x2 system of linear equations: $2x + y = 1$, $-x + 3y = 1$.
+
+6. Solving for $y$ in the first equation we get $y = -2x + 1$. 
+
+7. Plugging this into the second equation we get $-x + 3(-2x+1) = 1$. 
+
+8. So $-7x + 3 = 1$, and solving for $x$ we get that the unique solution is $x = 2/7$ and $y = 3/7$.
+
+9. So the only possible solution to the equations in step (4) is: $a - b = 2/7$ and $c - d = 3/7$. This is a contradiction to the fact that $a,b,c,d$ are natural numbers.
+
+10. Therefore our initial assumption was false, so it's impossible for the robot to reach $(1,1)$.
+\end{proof}
+
+\section{Problem 2}
+Let $L$ be some convenient set whose elements will be called \textit{labels}. The labeled binary trees, LBT’s, are defined recursively as follows:
+
+\textbf{Definition. Base case:} if $l$ is a label, then $\langle l, \mathsf{leaf}\rangle$ is an LBT, and
+
+\textbf{Constructor case:} if $B$ and $C$ are LBT’s, then $\langle l, B, C \rangle$ is an LBT.
+
+The leaf-labels and internal-labels of an LBT are defined recursively in the obvious way:
+
+\textbf{Definition. Base case:} The set of leaf-labels of the LBT $\langle l, \mathsf{leaf} \rangle$ is $\{l\}$, and its set of internal-labels is the empty set.
+
+\textbf{Constructor case:} The set of leaf labels of the LBT $\langle l, B, C \rangle$ is the union of the leaf-labels of $B$ and of $C$,
+the set of internal-labels is the union of $\{l\}$ and the sets of internal-labels of $B$ and of $C$.
+
+The set of labels of an LBT is the union of its leaf- and internal-labels.
+
+The LBT’s with unique labels are also defined recursively:
+
+\textbf{Definition. Base case:} The LBT $\langle l, \mathsf{leaf}\rangle$ has unique labels.
+
+\textbf{Constructor case:} If $B$ and $C$ are LBT’s with unique labels, no label of $B$ is a label $C$ and vice-versa, and $l$ is not a label of $B$ or $C$, then $\langle l, B, C\rangle$ has unique labels.
+
+If $B$ is an LBT, let $n_B$ be the number of distinct internal-labels appearing in $B$ and $f_B$ be the number of distinct leaf labels of $B$. Prove by structural induction that
+
+$$
+f_B = n_B + 1
+$$
+
+for all LBT’s $B$ with unique labels. This equation can obviously fail if labels are not unique, so your proof had better use uniqueness of labels at some point; be sure to indicate where.
+\begin{proof}
+We want to prove $f_B = n_B + 1$ for all LBT's $B$ with unique labels. So assume that $B$ is an LBT with unique labels. Argue by Structural Induction.
+
+\textbf{Base Case.} $B$ is of the form $\langle l, \mathsf{leaf}\rangle$.
+
+In this case $B$ has no internal-labels, and only one leaf-label. So $f_B = 1$ and $n_B = 0$, so the equation $f_B = n_B+1$ is true in this case.
+
+\textbf{Constructor case.} $B$ is of the form $\langle l, C, D \rangle$ where:
+
+$C$ and $D$ are LBT’s with unique labels, 
+
+no label of $C$ is a label $D$ and vice-versa, and 
+
+$l$ is not a label of $C$ or $D$.
+
+Remember that we want to prove $f_B = n_B+1$. 
+
+1. By the induction hypothesis, $f_C = n_C+1$ and $f_D = n_D + 1$.
+
+2. First let's compute $f_B$. $f_B$ is defined as the number of distinct leaf-labels of $B$. Since $B = \langle l, C, D \rangle$, and $l$ is an internal-label, the leaf-labels of $B$ come from $C$ and $D$ only. 
+
+3. Since $C$ and $D$ have no labels in common, all distinct leaf-labels of $B$ are all distinct leaf-labels of $C$ together with all distinct leaf-labels of $D$.
+
+4. So $f_B = f_C + f_D$. 
+
+5. Using the induction hypothesis on (4) we get $f_B = f_C + f_D = (n_C + 1) + (n_D + 1) = n_C + n_D + 2$.
+
+6. Now let's calculate $n_B$. $n_B$ is defined as the number of distinct internal-labels of $B$. Since $B = \langle l, C, D \rangle$, and $l$ is an internal-label, the internal-labels of $B$ come from $C$ and $D$, together with $l$.
+
+7. Since $C$ and $D$ have no labels in common, and $l$ does not appear in $C$ or $D$, we have $n_B = n_C + n_D + 1$. 
+
+8. Using (5) and (7) together we see that $f_B = n_C + n_D + 2 = (n_C + n_D + 1) + 1 = n_B + 1$.
+
+Therefore by the Principle of Structural Induction, $f_B = n_B+1$ for all LBT's $B$ with unique labels.
+\end{proof}
+
+\section{Problem 3}
+In this problem you will prove a fact that may surprise you—or make you even more convinced that set theory is nonsense: the half-open unit interval is actually the “same size” as the nonnegative quadrant of the
+real plane! Namely, there is a bijection from $(0, 1]$ to $[0, \infty) \times [0, \infty)$.
+
+\subsection{(a)}
+Describe a bijection from $(0, 1]$ to $[0, \infty)$.
+
+\textit{Hint:} $1/x$ almost works.
+
+\begin{proof}
+Define $f: (0, 1] \to [0, \infty)$ by $\displaystyle f(x) = \frac{1}{x} - 1$ for all $x \in (0,1]$. 
+
+This is a bijection, because $y = 1/x$ is a bijection from $(0,1]$ to $[1, \infty)$, so subtracting 1 from the output makes it a bijection from $(0,1]$ to $[0, \infty)$.
+\end{proof}
+
+\subsection{(b)}
+An infinite sequence of the decimal digits $\{0, 1, \ldots , 9\}$ will be called \textit{long} if it does not end with all 0’s. An equivalent way to say this is that a long sequence is one that has infinitely many occurrences of nonzero digits. Let $L$ be the set of all such long sequences. Describe a bijection from $L$ to the half-open real interval $(0, 1]$.
+
+\textit{Hint:} Put a decimal point at the beginning of the sequence.
+
+\begin{proof}
+Define $f: L \to (0, 1]$ as follows: given an infinite sequence $x = a_1, a_2, a_3, \ldots$ in $L$, define $f(x)$ to be the real number in $(0, 1]$ with the decimal representation $0.a_1a_2a_3\ldots$
+
+$f$ is injective, because... ??? (not entirely sure about this. These are basically infinite series. There's the issue of convergence, maybe two different sequences can converge to the same real number? Use a theorem about real numbers? Have to use the fact that these are LONG sequences.)
+
+$f$ is surjective because... ??? (use a theorem about the real numbers? Have to use the fact that these are LONG sequences.)
+\end{proof}
+
+\subsection{(c)}
+Describe a surjective function from $L$ to $L^2$ that involves alternating digits from two long sequences.
+
+\textit{Hint:} The surjection need not be total.
+
+\begin{proof}
+We have to define a function $f: L \to L\times L$ in a backwards way. 
+
+Suppose we are given $(y, z) \in L^2$, in other words we are given two long sequences $y = a_1,a_2,a_3,\ldots$ and $z = b_1,b_2,b_3\ldots$ which do not end with all 0's.
+
+Then we can construct the infinite sequence $x = a_1,b_1,a_2,b_2,a_3,b_3,\ldots$ Notice that this sequence is in $L$, because it does not end with all 0's (otherwise $y$ and $z$ would end with all 0's).
+
+This gives us an injection $g: L^2 \to L$ defined by $g(y,z) = x$ where $x,y,z$ are as defined above. (Notice $g$ is total.)
+
+Consider the inverse of this function $f: L \to L^2$ defined by $f(x) = (y,z)$ where $x,y,z$ are as above. (The inverse of $g$ exists, because $g$ is injective.)
+
+Notice that $f$ may not be total, because not all long sequences in $L$ have to be of the form $x = a_1,b_1,a_2,b_2,a_3,b_3,\ldots$ that is obtained by interleaving two other long sequences. So we are defining $f$ on a subset $L' \subset L$ of sequences that have this form. ($L'$ is the ``forward-image'' of $g$, denoted by $g(L^2)$, the set of outputs of $g$ obtained by applying $g$ to all possible inputs in its domain.)
+
+But that's OK. We just need a surjection $L \to L^2$, it does not have to be total.
+
+However $f$ is surjective, because it's the inverse of $g$ which was injective. $g$ was defined on every input in $L^2$, so the output of $f$ covers all of $L^2$.
+\end{proof}
+
+\subsection{(d)}
+Prove the following lemma and use it to conclude that there is a bijection from $L^2$ to $(0, 1]^2$.
+
+\textbf{Lemma 3.1.} Let $A$ and $B$ be nonempty sets. If there is a bijection from $A$ to $B$, then there is also a bijection from $A \times A$ to $B \times B$.
+
+\begin{proof}
+1. Assume there is a bijection $f: A \to B$.
+
+2. Define $g: (A \times A) \to (B \times B)$ by $g(a_1, a_2) = (f(a_1), f(a_2))$ for all $(a_1, a_2) \in A \times A$.
+
+3. We want to prove $g$ is bijective.
+
+4. To prove that $g$ is injective, assume $a_1, a_2, a_3, a_4 \in A$ and assume $g(a_1, a_2) = g(a_3, a_4)$. We need to show that $a_1 = a_3$ and $a_2 = a_4$.
+
+5. 
+$$
+\begin{array}{ccc}
+g(a_1, a_2) & = & g(a_3, a_4) \\
+(f(a_1), f(a_2)) & = & (f(a_3), f(a_4)) \\
+\end{array}
+$$
+
+So $f(a_1) = f(a_3)$ and $f(a_2) = f(a_4)$. 
+
+6. Since $f$ is injective, (5) implies that $a_1 = a_3$ and $a_2 = a_4$. So $g$ is injective too.
+
+7. To prove that $g$ is surjective, assume $(b_1, b_2) \in B \times B$ is an arbitrary member of $B \times B$. We need to show that there exists $(a_1, a_2) \in A \times A$ such that $g(a_1, a_2) = (b_1, b_2)$.
+
+8. Since $f$ is surjective, there exists $a_1 \in A$ such that $b_1 = f(a_1)$.
+
+9. Since $f$ is surjective, there exists $a_2 \in A$ such that $b_2 = f(a_2)$.
+
+10. Therefore $g(a_1, a_2) = (f(a_1), f(a_2)) = (b_1, b_2)$. 
+
+11. So there exists $(a_1, a_2) \in A \times A$ such that $g(a_1, a_2) = (b_1, b_2)$. Therefore $g$ is surjective.
+
+12. By (6) and (11) $g$ is bijective. This finishes the proof of Lemma 3.1.
+\end{proof}
+
+By part (b) there is a bijection from $L$ to $(0, 1]$. Therefore by Lemma 3.1 there is a bijection from $L^2$ to $(0, 1]^2$.
+
+\subsection{(e)}
+Conclude from the previous parts that there is a surjection from $(0, 1]$ to $(0, 1]^2$. Then appeal to the Schröder-Bernstein Theorem to show that there is actually a bijection from $(0, 1]$ to $(0, 1]^2$.
+
+\begin{proof}
+1. By part (b) there is a bijective function $f: (0, 1] \to L$.
+
+2. By part (c) there is a surjective function $g: L \to L^2$.
+
+3. By part (d) there is a bijective function $h: L^2 \to (0,1]^2$.
+
+4. Define $i: (0,1] \to (0,1]^2$ by $i(x) = h(g(f(x)))$. Let us prove that $i$ is surjective too. We need to prove that for all $z \in (0,1]^2$ there exists $w \in (0,1]$ such that $i(w) = z$.
+
+5. Assume $z \in (0,1]^2$. Since $h$ is surjective, there exists $y \in L^2$ such that $z = h(y)$.
+
+6. Since $g$ is surjective, there exists $x \in L$ such that $y = g(x)$.
+
+7. Since $f$ is surjective, there exists $w \in (0,1]$ such that $x = f(w)$.
+
+8. Therefore there exists $w \in (0, 1]$ such that $i(w) = h(g(f(w))) = h(g(x)) = h(y) = z$. So $i$ is surjective.
+
+9. Let us define an injective function $j: (0,1] \to (0,1]^2$. For all $x \in (0,1]$ define $j(x) = (x, x)$. This function is clearly injective: if $(x, x) = (y, y)$ then $x = y$.
+
+10. By (8) there exists a surjective function $(0,1] \to (0,1]^2$ and by (9) there exists an injective function $(0,1] \to (0,1]^2$. Therefore by the Schröder-Bernstein theorem, there exists a bijective function $(0,1] \to (0,1]^2$.
+\end{proof}
+
+\subsection{(f)}
+Complete the proof that there is a bijection from $(0, 1]$ to $[0, \infty)^2$.
+
+\begin{proof}
+1. By part (a) there is a bijection from $(0, 1]$ to $[0, \infty)$.
+
+2. By (1) and Lemma 3.1, there is a bijection $f: (0, 1]^2 \to [0, \infty)^2$.
+
+3. By part (e) there is a bijection $g: (0,1] \to (0,1]^2$.
+
+4. Define $h: (0, 1] \to [0, \infty)^2$ by $h(x) = f(g(x))$, Then $h$ is a bijection too (because it's the composition of two bijections).
+\end{proof}
+
+\end{document}

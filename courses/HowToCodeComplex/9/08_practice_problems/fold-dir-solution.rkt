@@ -108,7 +108,7 @@
 ;; String Dir -> Boolean
 ;; look for a dir named name, if found produce true, otherwise produce false
 (check-expect (find "D4" D6) true)
-(check-expect (find "D8"  D4) false)
+(check-expect (find "D8" D4) false)
 
 ; <template as call to fold-dir>
 (define (find name dir)
