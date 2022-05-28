@@ -1,0 +1,213 @@
+\documentclass[14pt]{extarticle} 
+\usepackage{amsmath,mathtools,amsfonts,amsthm,amssymb,hyperref}
+\usepackage{wasysym,geometry,bussproofs,latexsym,parskip,bookmark}
+\newtheorem{defn}{Definition}
+\newtheorem{thm}{Theorem}
+\newtheorem{claim}{Claim}
+\newtheorem{lemma}{Lemma}
+\hypersetup{colorlinks,allcolors=blue,linktoc=all}
+\geometry{a4paper} 
+\geometry{margin=0.5in}
+\title{Math for CS 2015/2019 Problem Set 7 solutions}
+\author{https://github.com/spamegg1}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Problem 1}
+Let $R$ and $S$ be transitive binary relations on the same set, $A$. Which of the following new relations must also be transitive? For each part, justify your answer with a brief argument if the new relation is transitive and a counterexample if it is not.
+
+(I will think of binary relations in terms of sets, like in Chapter 4.4 ``Binary Relations''. So a binary relation $R$ on $A$ is a subset of $A \times A$. A binary relation is very similar to a function, but not necessarily single-valued. Same input can have multiple different outputs.)
+
+\subsection{(a) $R^{-1}$} 
+Let's clarify: $R^{-1}$ is just like function inversion. So the meaning of $a R^{-1} b$ is that $b R a$, in other words the pair $(a, b) \in A \times A$ is a member of $R^{-1} \subseteq A \times A$ iff the pair $(b,a)$ is a member of $R \subseteq A \times A$. (Defined on page 92, Chapter 4.4.5)
+\begin{proof}
+1. Assume $R$ is transitive. We want to prove that $R^{-1}$ is transitive.
+
+2. Assume $a, b, c \in A$ and assume $a R^{-1}b$ and $b R^{-1}c$. We want to prove $a R^{-1} c$.
+
+3. By definition of $R^{-1}$, from (2) we have $b R a$ and $c R b$.
+
+4. Since $R$ is transitive, by (3) we have $c R a$.
+
+5. By definition of $R^{-1}$ we have $a R^{-1} c$. So $R^{-1}$ is transitive.
+\end{proof}
+
+\subsection{(b) $R \cap S$} 
+Let's clarify: relations are similar to functions, but they are sets, so here we have set intersection. Both $R$ and $S$ are subsets of $A \times A$. So $R \cap S \subseteq A \times A$. This means that the pair $(a, b) \in A \times A$ is a member of $R \cap S$ iff it is a member of both $R$ and of $S$. We will switch back and forth between the two notations $a R b$ and $(a, b) \in R$ for convenience, they mean the same thing.
+\begin{proof}
+1. Assume $R, S$ are transitive. We want to prove that $R \cap S$ is transitive.
+
+2. Assume $a, b, c \in A$ and assume $(a,b) \in (R \cap S)$ and $(b,c) \in (R \cap S)$. We want to prove $(a,c) \in (R \cap S)$.
+
+3. By definition of $R \cap S$, from (2) we have $(a,b) \in R$, $(a,b) \in S$, $(b,c) \in R$ and $(b,c) \in S$.
+
+4. By (3) we have $a R b$ and $b R c$; and $a S b$ and $b S c$.
+
+5. Since $R$ is transitive, by (4) we have $a R c$.
+
+6. Since $S$ is transitive, by (4) we have $a S c$.
+
+7. By (5) and (6) we have $(a,c) \in (R \cap S)$. So $R \cap S$ is transitive.
+\end{proof}
+\subsection{(c) $R \circ R$} 
+Let's clarify: here $\circ$ is function composition. So the meaning of $a (R \circ R) b$ is that there exists some $c \in A$ such that $a R c$ and $c R b$.
+\begin{proof}
+1. Assume $R$ is transitive. We want to prove that $R \circ R$ is transitive.
+
+2. Assume $a, b, c \in A$ and assume $a (R \circ R) b$ and $b (R \circ R) c$. We want to prove $a (R \circ R) c$.
+
+3. By definition of $R \circ R$, from (2) we have:
+
+there exists $d_1 \in A$ such that $a R d_1$ and $d_1 R b$, and
+
+there exists $d_2 \in A$ such that $b R d_2$ and $d_2 R c$.
+
+4. By (3) $a R d_1$ and $d_1 R b$, and since $R$ is transitive, we have $a R b$.
+
+5. By (3) $b R d_2$ and $d_2 R c$, and since $R$ is transitive, we have $b R c$.
+
+6. So there exists $b \in A$ such that $a R b$ and $b R c$, which proves $a (R \circ R) c$. So $R \circ R$ is transitive.
+\end{proof}
+\subsection{(d) $R \circ S$}
+Let's clarify: here $\circ$ is function composition. So the meaning of $a (R \circ S) b$ is that there exists some $c \in A$ such that $a R c$ and $c S b$. 
+\begin{proof}
+This one is false. We will give a counterexample of the set $A$ and two transitive binary relations $R, S$ on $A$, where $R \circ S$ is not transitive. (Drawing a picture would be much easier and clearer, but it's too difficult to do that here in \LaTeX.)
+
+1. Define $A = \{a,b,c,d\}$.
+
+2. Define a binary relation $R$ on $A$ by $R = \{(a,c), (b,d), (c,c), (d,d)\}$ (or, in other words, $aRc, bRd, cRc, dRd$).
+
+3. Define a binary relation $S$ on $A$ by $S = \{(a,a),(b,b),(c,b),(d,b),(d,c)\}$ (or, in other words, $aSa, bSb, cSb, dSb, dSc$).
+
+4. By (3) and (4), we have the composed relation 
+
+$$
+R \circ S = \{(a,b),(b,b),(b,c),(c,b),(d,b),(d,c)\}
+$$
+(or, in other words, $a(R\circ S)b, b(R\circ S)b, b(R\circ S)c, c(R\circ S)b, d(R\circ S)b, d(R\circ S)c$).
+
+5. Notice that $R$ is transitive: we have $aRc$ and $cRc$ and $aRc$; $bRd$ and $dRd$ and $dRd$.
+
+6. Notice that $S$ is transitive: we have $cSb$ and $bSb$ and $cSb$; $dSb$ and $bSb$ and $dSb$; $dSc$ and $cSb$ and $dSb$.
+
+7. Notice that $R \circ S$ is not transitive. We have $a(R \circ S)b$ and $b(R \circ S)c$ but not $a(R \circ S)c$.
+\end{proof}
+
+\section{Problem 2}
+Let $R_1$ and $R_2$ be two equivalence relations on a set, A. Prove or give a counterexample to the claims that the following are also equivalence relations:
+\subsection{(a) $R_1 \cap R_2$}
+\begin{proof}
+1. Assume $R_1$ and $R_2$ are equiv. rel.s on $A$. Want to prove $R_1 \cap R_2$ is an equiv. rel. on $A$.
+
+2. To prove reflexivity, assume $a \in A$. We want to show $(a,a) \in R_1 \cap R_2$. Since $R_1$ is reflexive, $(a,a) \in R_1$. Since $R_2$ is reflexive, $(a,a) \in R_2$. Therefore $(a,a) \in R_1 \cap R_2$. So $R_1 \cap R_2$ is reflexive.
+
+3. To prove symmetry, assume $a,b \in A$ and assume $(a,b) \in R_1 \cap R_2$. We want to prove $(b,a) \in R_1 \cap R_2$. Since $R_1$ is symmetric, $(b,a) \in R_1$. Since $R_2$ is symmetric, $(b,a) \in R_2$. Therefore $(b,a) \in R_1 \cap R_2$. So $R_1 \cap R_2$ is symmetric.
+
+4. To prove transitivity, assume $a,b,c \in A$ and assume $(a,b) \in R_1 \cap R_2$ and $(b,c) \in R_1 \cap R_2$. We want to prove $(a,c) \in R_1 \cap R_2$. Since $R_1$ is transitive, $(a,c) \in R_1$. Since $R_2$ is transitive, $(a,c) \in R_2$. Therefore $(a,c) \in R_1 \cap R_2$. So $R_1 \cap R_2$ is transitive.
+
+5. By (2), (3) and (4) $R_1 \cap R_2$ is an equivalence relation.
+\end{proof}
+
+\subsection{(b) $R_1 \cup R_2$} 
+\begin{proof}
+This one is false. We will give a counterexample of a set $A$ with two equivalence relations $R_1, R_2$ on $A$ where $R_1 \cup R_2$ is not an equivalence relation. (Drawing a picture would be much easier and clearer, but it's too difficult to do that here in \LaTeX.)
+
+1. Define $A = \{a,b,c\}$.
+
+2. Define a binary relation $R_1$ on $A$ by $R_1 = \{(a,a), (b,b), (c,c), (a,b), (b,a)\}$.
+
+3. Define a binary relation $R_2$ on $A$ by $R_2 = \{(a,a),(b,b),(c,c),(b,c),(c,b)\}$.
+
+4. By (3) and (4), we have the union relation 
+
+$$
+R_1 \cup R_2 = \{(a,a), (b,b), (c,c), (a,b), (b,a), (b,c),(c,b)\}
+$$
+
+5. Notice that $R_1$ is an equivalence relation:
+
+it is reflexive since it contains all 3 of $(a,a), (b,b), (c,c)$;
+
+it is symmetric because it contains $(a,b)$ and $(b,a)$;
+
+it is transitive because it contains $(a,b),(b,a),(a,a)$, and $(b,a),(a,b),(b,b)$.
+
+6. Notice that $R_2$ is an equivalence relation:
+
+it is reflexive since it contains all 3 of $(a,a), (b,b), (c,c)$;
+
+it is symmetric because it contains $(b,c)$ and $(c,b)$;
+
+it is transitive because it contains $(b,c),(c,b),(b,b)$, and $(c,b),(b,c),(c,c)$.
+
+7. Notice that $R \cup S$ is not transitive. We have $(a,b) \in R \cup S$ and $(b,c) \in R \cup S$ but not $(a,c) \in R \cup S$.
+\end{proof}
+
+\section{Problem 3}
+Determine which among the four graphs pictured in Figure 1 are isomorphic. For each pair of isomorphic graphs, describe an isomorphism between them. For each pair of graphs that are not isomorphic, give a property that is preserved under isomorphism such that one graph has the property, but the other does not. For at least one of the properties you choose, prove that it is indeed preserved under isomorphism (you only need prove one of them).
+\begin{proof}
+1. Node degrees are preserved under isomorphism. $G_3$ is not isomorphic to $G_1, G_2, G_4$. Because $G_3$ has two nodes with degree 4 (namely, nodes number 8 and 10), but all nodes of $G_1, G_2, G_4$ have degree 3. 
+
+2. Cycle lengths are preserved under isomorphism. $G_2$ is not isomorphic to $G_1$ and $G_4$. Because $G_2$ has many cycles of length 4 (for example $1 \rightarrow 6 \rightarrow 9 \rightarrow 5 \rightarrow 1$), but $C_1$ and $C_4$ have no cycles of length 4.
+
+3. So that leaves only $G_1$ and $G_4$. I believe they are isomorphic, but too sick and tired right now to write down the isomorphism explicitly! I hope you can finish this part.
+\end{proof}
+
+\section{Problem 4}
+Let’s say that a graph has “two ends” if it has exactly two vertices of degree 1 and all its other vertices have degree 2. For example, here is one such graph:
+
+\subsection{(a)}
+A line graph is a graph whose vertices can be listed in a sequence with edges between consecutive vertices only. So the two-ended graph above is also a line graph of length 4. 
+
+Prove that the following theorem is false by drawing a counterexample.
+
+{\bf False Theorem.} Every two-ended graph is a line graph.
+\begin{proof}
+I cannot draw pictures here, but think of a graph with 5 nodes. The first two nodes are connected to each other, so they are the ``two ends'' with degree 1. Separately from these two, the other 3 nodes form a triangle among themselves, so they all have degree 2. Clearly this is not a line graph.
+\end{proof}
+
+\subsection{(b)}
+Point out the first erroneous statement in the following bogus proof of the false theorem and describe the error.
+
+{\it Bogus proof.} We use induction. The induction hypothesis is that every two-ended graph with $n$ edges is a path.
+
+{\bf Base case ($n = 1$):} The only two-ended graph with a single edge consists of two vertices joined by an edge: Sure enough, this is a line graph.
+
+{\bf Inductive case:} We assume that the induction hypothesis holds for some $n \geq 1$ and prove that it holds for $n + 1$. 
+
+Let $G_n$ be any two-ended graph with $n$ edges. By the induction assumption, $G_n$ is a line graph.
+
+Now suppose that we create a two-ended graph $G_{n+1}$ by adding one more edge to $G_n$. This can be done in only one way: the new edge must join an endpoint of $G_n$ to a new vertex; otherwise, $G_{n + 1}$ would not be two-ended.
+
+Clearly, $G_{n+1}$ is also a line graph. Therefore, the induction hypothesis holds for all graphs with $n + 1$ edges, which completes the proof by induction.
+\begin{proof}
+The error is in ``Therefore, the induction hypothesis holds for all graphs with $n + 1$ edges''.
+
+We haven't proved that the induction hypothesis holds for all graphs with $n+1$ edges. We only proved it for a specific graph with $n+1$ edges.
+
+We started with an arbitrarily chosen two-ended graph $G_n$ with $n$ edges. By the induction hypothesis this is a line graph.
+
+Then we added an edge to this graph to obtain a two-ended graph $G_{n+1}$. And we argued $G_{n+1}$ must also be a line-graph (because there is no other way to add an edge to $G_n$ to get a two-ended graph).
+
+But $G_{n+1}$ is not an arbitrarily chosen two-ended graph with $n+1$ edges!
+
+There could be many other two-ended graphs with $n+1$ edges out there, which cannot be obtained by adding an edge to a two-ended graph with $n$ edges.
+
+First we would have to prove that every two-ended graph with $n+1$ edges HAS TO BE obtained by adding an edge to a two-ended graph with $n$ edges. I don't think that's true though.
+
+The statements leading up to ``Therefore...'' are technically correct, but they are not useful or relevant.
+
+An attempt at a correct proof would go like this (even though we know a correct proof does not exist):
+
+{\bf Inductive case:} We assume that the induction hypothesis holds for some $n \geq 1$ and prove that it holds for $n + 1$.
+
+Let $G_{n+1}$ be any two-ended graph with $n+1$ edges. (This is how you CORRECTLY use an arbitrarily chosen $n+1$-edge graph.) 
+
+(...remove one edge from $G_{n+1}$ SOMEHOW, to obtain a two-ended graph $G_n$.)
+
+(...use the induction hypothesis to show that $G_n$ is a line graph.)
+
+(...then add back the removed edge, use the fact that $G_n$ is a line graph SOMEHOW to prove that $G_{n+1}$ is also a line graph.)
+\end{proof}
+\end{document}
