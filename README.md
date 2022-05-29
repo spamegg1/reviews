@@ -605,6 +605,7 @@ Apparently there was a part about [Functional Reactive programming](https://www.
 Anyway, putting aside the jokes, I'm fine with the OOP in these courses, and Odersky says that he considers it not a true paradigm, but orthogonal to all the paradigms, such that it can be added to all the paradigms: logic, functional, imperative... these courses are still technically "functional", they focus on functions and don't have mutation; the OOP is just used for "code organization purposes". I guess initially I was upset to see any classes/traits/inheritance at all, because of my own expectations from "functional" in the title of these courses. It still feels very strange to me (I'd rather use Haskell's typeclass derivation as an "inheritance" mechanism) but it's a minor point.
 
 *Update (July 2021):* The Scala 3 version of the course is [here](https://www.coursera.org/learn/scala-functional-program-design).
+*Update (June 2022)* They removed the "upgrade to submit" nonsense on the Week 3 "Type Directed Programming" quizzes, but only in the Scala 2 version. The Scala 2 and Scala 3 versions have the same questions, so I verified my answers are correct on the Scala 2 version.
 
 ***Course 3*** can be summed up as: `.par`. Yep, that's pretty much it! You take a normal Scala collection (List, Array, Iterable, Seq, Traversable, whatever) and append `.par` at the end, and it becomes... a PARALLEL collection! YAY! Unlike Intro to Parallel Programming you don't have to write the parallel code yourself. Scala compiler takes care of it. No messing around with double pointers! This course is super easy and super short. Even the last PA about Builders and Combiners took me 15 minutes or so. However there is once again some deprecation. The "parallel agnostic" data structures (like `GenSeq` and variants) that are taught in the last weeks are now deprecated in Scala; in fact the assignments even say "don't use them!" So there is some self-contradictory material going on.
 
@@ -692,6 +693,8 @@ Week 5 goes in a completely different direction from what's been done up until n
 Week 6 is a bit self-defeating but it shows the self-awareness of the theory. The instructor admits that formal concepts are too strict and rigid, and having just one counterexample in your data can violate an implication that holds, say, 99% of the time. Moreover there is the issue of having a lattice that has way too many concepts that it becomes unreadable and impossible to understand. So, statistical and probabilistic methods are introduced to handle "noisy data" (support, confidence, frequency, stability, concept probability) and throw away less relevant data (iceberg lattices). Quizzes are easier but have some really nitty gritty number crunching with some of the probability calculations. I had to write 1-2 lines of Python code to do it right and fast.
 
 *Spam's recommendation:* I would say... don't take this course except for fun and (super hard!) challenge. You'll need a very strong set theory/logic background. I enjoyed it because I have that already. Despite that I had a really hard time. You can learn more mainstream data analysis/mining/classification techniques instead.
+
+*Update (June 2022)* Coursera allegedly removed courses from Russia, but it's still there! At least for me.
 
 ### <a name="fsopen"></a> Fullstack Open
 
