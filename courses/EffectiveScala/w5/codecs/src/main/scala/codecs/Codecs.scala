@@ -10,7 +10,7 @@ sealed trait Json:
    * Try to decode this JSON value into a value of type `A` by using
    * the given decoder.
    *
-   * Note that you have to explicitly fix `A` 
+   * Note that you have to explicitly fix `A`
    * type parameter when you call the method:
    *
    * {{{
@@ -35,7 +35,7 @@ trait Encoder[-A]:
   def encode(value: A): Json        /** Encodes a value of type `A` into JSON */
 
     /**
-    * Transforms this `Encoder[A]` into an `Encoder[B]`, 
+    * Transforms this `Encoder[A]` into an `Encoder[B]`,
     * given a transformation function from `B` to `A`.
     *
     * For instance, given a `Encoder[String]`, we can get an `Encoder[UUID]`:
@@ -73,12 +73,12 @@ trait EncoderInstances:
 
   /** An encoder for `String` values */
   // TODO Implement the `Encoder[String]` given instance
-  given stringEncoder: Encoder[String] =
+  given stringEncoder: Encoder[String] =                                 // TODO
     Encoder fromFunction (s => Json.Str(String(s)))
 
   /** An encoder for `Boolean` values */
   // TODO Define a given instance of type `Encoder[Boolean]`
-  given booleanEncoder: Encoder[Boolean] =
+  given booleanEncoder: Encoder[Boolean] =                               // TODO
     Encoder fromFunction (Json.Bool(_))
 
   /**
@@ -118,7 +118,7 @@ object ObjectEncoder:
       def encode(value: A): Json.Obj = f(value)
 
   /**
-    * An encoder for values of type `A` that produces a 
+    * An encoder for values of type `A` that produces a
     * JSON object with one field named according to the supplied `name`
     * and containing the encoded value.
     */
@@ -148,7 +148,7 @@ trait Decoder[+A]:
 
 
   /**
-    * Transforms this `Decoder[A]` into a `Decoder[B]`, 
+    * Transforms this `Decoder[A]` into a `Decoder[B]`,
     * given a transformation function from `A` to `B`.
     *
     * This operation is also known as “map”.
@@ -180,58 +180,65 @@ trait DecoderInstances:
   given unitDecoder: Decoder[Unit] =
     Decoder fromPartialFunction { case Json.Null => () }
 
-  /** A decoder for `Int` values. 
+  /** A decoder for `Int` values.
     * Hint: use the `isValidInt` method of `BigDecimal`. */
   // TODO Define a given instance of type `Decoder[Int]`
-  given intDecoder: Decoder[Int] = Decoder fromPartialFunction {
+  given intDecoder: Decoder[Int] = Decoder fromPartialFunction {         // TODO
     case Json.Num(value) if value.isValidInt => value.toInt }
 
   /** A decoder for `String` values */
   // TODO Define a given instance of type `Decoder[String]`
-  given stringDecoder: Decoder[String] =
+  given stringDecoder: Decoder[String] =                                 // TODO
     Decoder fromPartialFunction { case Json.Str(value) => value }
 
   /** A decoder for `Boolean` values */
   // TODO Define a given instance of type `Decoder[Boolean]`
-  given booleanDecoder: Decoder[Boolean] =
+  given booleanDecoder: Decoder[Boolean] =                               // TODO
     Decoder fromPartialFunction { case Json.Bool(value) => value }
 
   /**
     * A decoder for JSON arrays. It decodes each item of the array
     * using the given `decoder`. The resulting decoder succeeds only
     * if all the JSON array items are successfully decoded.
-    * 
-    * Hint: you should first check that the JSON value to decode is a JSON
-    * array, and if it is the case you should iterate over its JSON elements
-    * (e.g., with `foldLeft`) to decode them.
-    * The value returned by `foldLeft` should be an `Option[List[A]]`.
-    * The first parameter of `foldLeft` is the value to return in case the
-    * JSON array to decode is empty, so it would be a successful (`Some`)
-    * empty list of `A`.
-    * Your iteration function should try to decode each element if the
-    * previous elements could be successfully decoded, otherwise it
-    * should return `None`.
     */
-  given listDecoder[A](using decoder: Decoder[A]): Decoder[List[A]] =
-    type OLA = Option[List[A]]
-    val initVal: OLA = Some(List[A]())
-
-    def iterFun(nextElt: Json, decList: OLA): OLA =
-      (nextElt.decodeAs[A], decList) match
-        case (Some(value), Some(lst)) => Some(value :: lst)
-        case (_, _) => None
-
-    def decFun(json: Json): OLA = json match
-      case Json.Arr(items) => items.foldRight(initVal)(iterFun)
+  given listDecoder[A](using decoder: Decoder[A]): Decoder[List[A]] =    // TODO
+    // Decode the provided `item` with the provided `decoder`. If this succeeds,
+    // return the decoded item **prepended** to the `previouslyDecodedItems`.
+    def decodeAndPrepend(item: Json,
+      previouslyDecodedItems: List[A]): Option[List[A]] =                // TODO
+      item.decodeAs[A] match
+        case Some(value) => Some(value :: previouslyDecodedItems)
+        case None        => None
+    // Decode the `item` only if the previous items were successfully decoded.
+    // In case `maybePreviouslyDecodedItems` is `None` (which means at least
+    // one of the previous items failed to be decoded), return `None`.
+    // Otherwise, decode the provided `item` and prepend it to the previously
+    // decoded items (use the method `decodeAndPrepend`).
+    def processItem(item: Json,
+      maybePreviouslyDecodedItems: Option[List[A]]): Option[List[A]] =   // TODO
+      maybePreviouslyDecodedItems match
+        case Some(lst) => decodeAndPrepend(item, lst)
+        case None      => None
+    // Decodes all the provided JSON items. Fails if any item fails to
+    // be decoded.
+    // Iterates over the items, and tries to decode each item if the
+    // previous items could be successfully decoded.
+    def decodeAllItems(items: List[Json]): Option[List[A]] =            // GIVEN
+      items.foldRight(Some(List.empty[A]))(processItem)
+    // Finally, write a decoder that checks whether the JSON value to decode
+    // is a JSON array.
+    //   - if it is the case, call `decodeAllItems` on the array items,
+    //   - otherwise, return a failure (`None`)
+    Decoder fromFunction {                                               // TODO
+      case Json.Arr(items) => decodeAllItems(items)
       case _ => None
-
-    Decoder fromFunction decFun
+    }
 
   /**
     * A decoder for JSON objects. It decodes the value of a field of
     * the supplied `name` using the given `decoder`.
     */
-  def field[A](name: String)(using decoder: Decoder[A]): Decoder[A] =
+  def field[A](name: String)(using decoder: Decoder[A]): Decoder[A] =    // TODO
     Decoder fromPartialFunction
       { case Json.Obj(fields) => decoder.decode(fields(name)).get }
 
@@ -244,13 +251,13 @@ object Person extends PersonCodecs
 trait PersonCodecs:
 
   /** The encoder for `Person` */
-  given Encoder[Person] = ObjectEncoder
+  given Encoder[Person] = ObjectEncoder                                 // GIVEN
     .field[String]("name")
     .zip(ObjectEncoder.field[Int]("age"))
     .transform[Person](user => (user.name, user.age))
 
   /** The corresponding decoder for `Person` */
-  given Decoder[Person] = Decoder
+  given Decoder[Person] = Decoder                                        // TODO
     .field[String]("name")
     .zip(Decoder.field[Int]("age"))
     .transform[Person](user => Person(user._1, user._2))
@@ -267,12 +274,12 @@ trait ContactsCodecs:
   // The JSON representation of a value of type `Contacts` should be
   // a JSON object with a single field named “people” containing an
   // array of values of type `Person` (reuse the `Person` codecs)
-  given Encoder[Contacts] = ObjectEncoder
+  given Encoder[Contacts] = ObjectEncoder                                // TODO
     .field[List[Person]]("people")
     .transform[Contacts](_.people)
 
   // ... then implement the decoder
-  given Decoder[Contacts] = Decoder
+  given Decoder[Contacts] = Decoder                                      // TODO
     .field[List[Person]]("people")
     .transform[Contacts](Contacts(_))
 
