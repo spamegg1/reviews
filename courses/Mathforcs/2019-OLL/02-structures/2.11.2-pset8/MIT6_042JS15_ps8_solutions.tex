@@ -15,37 +15,77 @@
 \tableofcontents
 
 \section{Problem 1}
+Prove Corollary 11.10.12: If all edges in a finite weighted graph have distinct weights, then the graph has a unique MST in the course textbook.
 
+{\it Hint:} Suppose $M$ and $N$ were different MST’s of the same graph. Let $e$ be the smallest edge in one and not the other, say $e \in M - N$, and observe that $N + e$ must have a cycle.
 \begin{proof}
+First let's clarify: when we are talking about MST's, the graph $G$ is always finite, connected, edge-weighted and undirected, and the edge weights are always positive (even though the textbook does not make this clear due to its informal conversational style of writing).
 
+Let's follow the hint. Recall the notation $w(e)$ to denote the edge weight of an edge $e$.
+
+1. Assume $G$ is a finite weighted graph with all edges having distinct weights.
+
+2. Argue by contradiction and assume $G$ has two different MST's, $M$ and $N$. Notice that $w(M) = w(N)$, since they are both MST's of the same graph $G$.
+
+3. Since $M$ and $N$ are different, there exists an edge that belongs to one of them but not both. So $(M-N) \cup (N-M)$ is nonempty. 
+
+4. Let $e$ be the edge in $(M-N) \cup (N-M)$ with the smallest weight. We don't know if $e \in M-N$ or $e \in N-M$, but these two cases have similar proofs, so without loss of generality, assume $e \in M-N$.
+
+5. Say $e$ is the edge between the two nodes $a$ and $b$. Since $G$ is connected, there is a path in $G$ between the nodes $a$ and $b$. 
+
+6. Since $N$ spans $G$, $N$ contains edges that touch all the nodes on this path. Since $N$ is a tree, there is a path $p$ in $N$ between the nodes $a$ and $b$.
+
+7. Since $e$ is not in $N$, $e$ is not part of the path $p$. So $N + e$ contains a cycle that starts and ends at $a$. (The path $p$ starts at $a$ and ends at $b$, then $e$ connects $b$ to $a$, completing the cycle.)
+
+8. Case 1: all the edges of the path $p$ are in $M \cap N$.
+
+?. Case 2: there exists an edge $g$ on the path $p$ that belongs to $(M-N) \cup (N-M)$.
 \end{proof}
 
 \section{Problem 2}
+A basic example of a simple graph with chromatic number $n$ is the complete graph on $n$ vertices, that is $\chi (K_n) = n$. This implies that any graph with $K_n$ as a subgraph must have chromatic number at least $n$. It’s a common misconception to think that, conversely, graphs with high chromatic number must contain a large complete subgraph. In this problem we exhibit a simple example countering this misconception, namely a graph with chromatic number four that contains no {\it triangle} (length three cycle) and hence no subgraph isomorphic to $K_n$ for $n \geq 3$. Namely, let $G$ be the 11-vertex graph of Figure 1. The reader can verify that $G$ is triangle-free.
 \subsection{(a)}
-
+Show that $G$ is 4-colorable.
 \begin{proof}
 \end{proof}
-
 \subsection{(b)}
+Prove that $G$ can't be colored with 3 colors.
 \begin{proof}
 \end{proof}
 
 \section{Problem 3}
-
+The preferences among 4 boys and 4 girls are partially specified in the following table:
+$$
+\begin{array}{|c c c c c|}
+\hline
+B1: & G1 & G2 & - & - \\
+B2: & G2 & G1 & - & - \\
+B3: & - & - & G4 & G3 \\
+B4: & - & - & G3 & G4 \\
+\hline 
+G1: & B2 & B1 & - & - \\
+G2: & B1 & B2 & - & - \\
+G3: & - & - & B3 & B4 \\
+G4: & - & - & B4 & B3 \\
+\hline 
+\end{array}
+$$
 \subsection{(a)}
+Verify that
+$$
+(B1, G1), (B2, G2), (B3, G3), (B4, G4)
+$$
+will be a stable matching whatever the unspecified preferences may be.
 \begin{proof}
 \end{proof}
-
 \subsection{(b)}
+Explain why the stable matching above is neither boy-optimal nor boy-pessimal and so will not be an outcome of the Mating Ritual.
 \begin{proof}
 \end{proof}
-
 \subsection{(c)}
+Describe how to define a set of marriage preferences among $n$ boys and $n$ girls which have at least $2^{n/2}$ stable assignments.
+
+{\it Hint:} Arrange the boys into a list of $n/2$ pairs, and likewise arrange the girls into a list of $n/2$ pairs of girls. Choose preferences so that the $k$th pair of boys ranks the $k$th pair of girls just below the previous pairs of girls, and likewise for the $k$th pair of girls. Within the $k$th pairs, make sure each boy’s first choice girl in the pair prefers the other boy in the pair.
 \begin{proof}
 \end{proof}
-
-\subsection{(d)}
-\begin{proof}
-\end{proof}
-
 \end{document}

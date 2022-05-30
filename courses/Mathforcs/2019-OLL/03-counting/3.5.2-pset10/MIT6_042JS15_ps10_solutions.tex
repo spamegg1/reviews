@@ -15,37 +15,85 @@
 \tableofcontents
 
 \section{Problem 1}
+Suppose you have seven dice—each a different color of the rainbow, otherwise the dice are standard, with faces numbered 1 to 6. A roll is a sequence specifying a value for each die in rainbow (ROYGBIV) order.
+For example, one roll is $(3, 1, 6, 1, 4, 5, 2)$ indicating that the red die showed a 3, the orange die showed 1, the yellow 6, ...
 
+For the problems below, describe a bijection between the specified set of rolls and another set that is easily counted using the Product, Generalized Product, and similar rules. Then write a simple arithmetic formula, possibly involving factorials and binomial coefficients, for the size of the set of rolls. You do not need to prove that the correspondence between sets you describe is a bijection, and you do not need to simplify the expression you come up with.
+
+For example, let $A$ be the set of rolls where 4 dice come up showing the same number, and the other 3 dice also come up the same, but with a different number. Let $R$ be the set of seven rainbow colors and $S \Coloneqq [1, 6]$ be the set of dice values. 
+
+Define $B \Coloneqq P_{S,2} \times R_3$, where $P_{S,2}$ is the set of 2-permutations of $S$ and $R_3$ is the set of size-3 subsets of $R$. Then define a bijection from $A$ to $B$ by mapping a roll in $A$ to the sequence in $B$ whose first element is a pair consisting of the number that came up three times followed by the number that came up four times, and whose second element is the set of colors of the three matching dice. 
+
+For example, the roll
+$$
+(4, 4, 2, 2, 4, 2, 4) \in A
+$$
+maps to
+$$
+((2, 4), \{\text{yellow}, \text{green}, \text{indigo}\}) \in B
+$$
+Now by the Bijection rule $|A| = |B|$, and by the Generalized Product and Subset rules,
+$$
+|B| = 6 \cdot 5 \cdot \binom{7}{3}
+$$
+\subsection{(a)}
+For how many rolls do exactly two dice have the value 6 and the remaining five dice all have different values? Remember to describe a bijection and write a simple arithmetic formula.
+
+Example: (6, 2, 6, 1, 3, 4, 5) is a roll of this type, but (1, 1, 2, 6, 3, 4, 5) and (6, 6, 1, 2, 4, 3, 4) are not.
 \begin{proof}
+\end{proof}
+\subsection{(b)}
+For how many rolls do two dice have the same value and the remaining five dice all have different values? Remember to describe a bijection and write a simple arithmetic formula.
 
+Example: (4, 2, 4, 1, 3, 6, 5) is a roll of this type, but (1, 1, 2, 6, 1, 4, 5) and (6, 6, 1, 2, 4, 3, 4) are not.
+\begin{proof}
+\end{proof}
+\subsection{(c)}
+For how many rolls do two dice have one value, two different dice have a second value, and the remaining three dice a third value? Remember to describe a bijection and write a simple arithmetic formula.
+
+Example: (6, 1, 2, 1, 2, 6, 6) is a roll of this type, but (4, 4, 4, 4, 1, 3, 5) and (5, 5, 5, 6, 6, 1, 2) are not.
+\begin{proof}
 \end{proof}
 
 \section{Problem 2}
+Answer the following questions with a number or a simple formula involving factorials and binomial coefficients. Briefly explain your answers.
 \subsection{(a)}
+How many ways are there to order the 26 letters of the alphabet so that no two of the vowels a, e, i, o, u appear consecutively and the last letter in the ordering is not a vowel?
 
+Hint: Every vowel appears to the left of a consonant.
 \begin{proof}
 \end{proof}
-
 \subsection{(b)}
+How many ways are there to order the 26 letters of the alphabet so that there are at least two consonants immediately following each vowel?
+\begin{proof}
+\end{proof}
+\subsection{(c)}
+In how many different ways can $2n$ students be paired up?
+\begin{proof}
+\end{proof}
+\subsection{(d)}
+Two $n$-digit sequences of digits 0,1,. . . ,9 are said to be of the same type if the digits of one are a permutation of the digits of the other. For $n = 8$, for example, the sequences 03088929 and 00238899 are the same type. How many types of $n$-digit sequences are there?
 \begin{proof}
 \end{proof}
 
 \section{Problem 3}
-
 \subsection{(a)}
+Use the Multinomial Theorem 14.6.5 to prove that
+$$
+(x_1 + \ldots x_n)^p \equiv x_1^p + \ldots x_n^p \,\,\,(\text{mod}\,\,p)
+$$
+for all primes $p$. (Do not prove it using Fermat’s “little” Theorem. The point of this problem is to offer an independent proof of Fermat’s theorem.)
+
+Hint: Explain why $\binom{p}{k_1, k 2, \ldots, k_n}$ is divisible by $p$ if all the $k_i$’s are positive integers less than $p$.
 \begin{proof}
 \end{proof}
 
 \subsection{(b)}
+Explain how (a) immediately proves Fermat’s Little Theorem 8.10.8: 
+$$
+n^{p-1} \equiv 1 (\text{mod }p)
+$$
+when $n$ is not a multiple of $p$.
 \begin{proof}
 \end{proof}
-
-\subsection{(c)}
-\begin{proof}
-\end{proof}
-
-\subsection{(d)}
-\begin{proof}
-\end{proof}
-
 \end{document}
