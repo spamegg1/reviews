@@ -172,6 +172,15 @@ After solidifying the tests and the signature, I started thinking about the func
 
 Now, the really interesting part is: all the stuff I explained above, I was actually doing all of it subconsciously! Only after I was done, I realized "OMG, I've been totally using the How to Code discipline here!" I must have successfully internalized it even though on the surface of it it looks not applicable to a language like Python.
 ```
+**One more thought:** Maybe I'm not being clear about what I mean. There is a very deep result in Mathematics and Computer Science named [Curry-Howard isomorphism](https://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence) that shows the equivalence between proofs and computer programs. Here is one of the Haskell guys who explains it, and its rich history, much better than I can, in a super entertaining way: [Propositions as Types by Philip Wadler](https://www.youtube.com/watch?v=IOiZatlZtGU)
+After you watch that, you might have better appreciation for Lambdas. Then, Racket lets you write the Greek letter Lambda literally in your code!
+```scheme
+(define (filled? schedule slots)
+ (cond [(empty? slots) true]
+  [else (andmap
+          (λ (slot) (have-slot? slot schedule))
+          slots)]))
+```
 
 *Spam's recommendation:* I am personally biased to like these courses. Definitely take if you are interested in pursuing functional programming. I've seen some people struggle with Programming Languages A, B, C without these courses (PLA uses ML to teach very similar functional programming principles, and PLB uses the same language, Racket) so definitely take at least the first of these two courses before PLABC if you've never seen functional programming, recursion and the like. 
 

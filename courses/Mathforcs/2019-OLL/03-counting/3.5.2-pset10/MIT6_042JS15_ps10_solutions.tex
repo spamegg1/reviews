@@ -41,6 +41,111 @@ For how many rolls do exactly two dice have the value 6 and the remaining five d
 
 Example: (6, 2, 6, 1, 3, 4, 5) is a roll of this type, but (1, 1, 2, 6, 3, 4, 5) and (6, 6, 1, 2, 4, 3, 4) are not.
 \begin{proof}
+\subsubsection{General counting principles}
+I will do these problems in an unnecessarily long way, because I've run into many learners who really struggle with thinking about counting complex things.
+
+Say we want to choose $k$ elements from a set of $n$ elements. There are 4 categories of choices with counting formulas: 
+
+ordered without repetitions: Permutations $\displaystyle = \frac{n!}{(n-k)!}$,
+
+ordered with repetitions: Tuples $ = n^k$,
+
+unordered without repetitions: Combinations $\displaystyle = \binom{n}{k} = \frac{n!}{k!(n-k)!}$.
+
+unordered with repetitions: Combinations with rep.s $\displaystyle = \binom{k+n-1}{n-1}$.
+
+\subsubsection{A simpler version of the problem}
+Let's think about a simpler, smaller problem of the same type. Imagine there were only 3 colors, only 4 roll values 1,2,3,4, and we wanted to find the rolls that have exactly one die with 4, and the other 2 had different values.
+
+{\bf First approach}
+
+Removing 4, the remaining values are 1,2,3. So we need 2-permutations of them: (1,2), (2,1), (1,3), (3,1), (2,3), (3,2). 
+
+What is the formula to count this number, 6? We start with 3 elements, we want to choose 2 elements from it, without repetitions. And we want the order to matter, so that (1,2) is different than (2,1).
+
+So, what we want is: ``ordered without repetitions''. This means permutations, with $n = 3, k = 2$. So $\frac{3!}{(3-2)!} = \frac{6}{1} = 6$.
+
+Then we can write down all the rolls we are looking for:
+
+For (1,2): (4,1,2), (1,4,2), (1,2,4)
+
+For (2,1): (4,2,1), (2,4,1), (2,1,4)
+
+For (1,3): (4,1,3), (1,4,3), (1,3,4)
+
+For (3,1): (4,3,1), (3,4,1), (3,1,4)
+
+For (2,3): (4,2,3), (2,4,3), (2,3,4)
+
+For (3,2): (4,3,2), (3,4,2), (3,2,4)
+
+How are we counting this? For each 2-permutation, say (1,2), we are inserting 4 into one of the 3 locations: (here) 1 (or here) 2 (or here). So that's simply choosing 1 thing out of 3 things = 3. That's one way to think about it. 
+
+{\bf Second approach}
+
+Here's another way to think: let's consider all the 2-element subsets of $\{1, 2, 3\}$, which are $\{1,2\}, \{1,3\}, \{2,3\}$. These are ``unordered without repetitions'', which is Combinations, with $n = 3, k = 2$: $\binom{3}{2} = \frac{3!}{2!(3-2)!} = \frac{6}{2} = 3$.
+
+For each subset, say $\{1,2\}$, we add the 4 to it to create a new set $\{1,2,4\}$ and then we compute all the 3! = 6 permutations (``ordered without repetitions'') of this 3-element set: (4,1,2), (1,4,2), (1,2,4), (4,2,1), (2,4,1), (2,1,4).
+
+\subsubsection{Generalizing the approaches}
+Do these ideas work if we had more than one copy of 4 to add? Let's check. Imagine we have 4 colors, we are looking for 4 dice rolls, exactly two of which are 4, and the other 2 different.
+
+{\bf First approach again}
+
+In our first way of thinking, say we take the 2-permutation (1,2) of the set $\{1,2,3\}$. (Just like before there are 6 of them.) Then we insert the first copy of 4 in one of the 3 places (here) 1 (or here) 2 (or here):
+
+(4,1,2), (1,4,2), (1,2,4).
+
+Now we have to insert the second copy of 4 into each one of these, again in 3 places:
+
+For (4,1,2): (4,4,1,2), (4,1,4,2), (4,1,2,4)
+
+For (1,4,2): (4,1,4,2), (1,4,4,2), (1,4,2,4)
+
+For (1,2,4): (4,1,2,4), (1,4,2,4), (1,2,4,4)
+
+So there are 9 of them. But there are duplicates here: (4,1,2,4), (1,4,2,4), and (4,1,4,2) are all listed twice. Removing those we end up with 6 in total, instead of 9. So we need to figure out why the duplicates are showing up. Maybe the idea of inserting a 4 to the ``spaces in between'' is not the right idea.
+
+Instead of inserting the two 4s one at a time, let's think of inserting both of them. The final tuple is a 4-tuple like $(1,2,4,4)$. There are 4 ``slots'' to insert two 4s, so this is a combination $\binom{4}{2} = 6$. That's the right count (which wasn't clear when we had to deal with only one 4), it gives us 6 instead of 9.
+
+When we do the same procedure for the permutation (2,1) we get 6 more rolls that are different from the above 6. So we get a total of 12 rolls from (1,2) and (2,1). We'd get 12 more from (1,3) and (3,1), and 12 more from (2,3), (3,2) for a total of 36.
+
+{\bf Second approach again}
+
+From $\{1,2,3\}$ we choose the 2-element subsets (there are 3 of them as before). Then, say for the subset $\{1,2\}$ we add two 4s to it to obtain a new collection $\{4,4,1,2\}$, and we compute all the 4-permutations of this: $\frac{4!}{(4-4)!} = 24$. 
+
+However half of these will be duplicates, because the two copies of 4 are indistinguishable. So dividing by 2! (the number of ways of ordering the 4s we have) we get 12.
+
+We'd get 12 more from the subset $\{1,3\}$ and 12 more from $\{2,3\}$ for a total of 36 again.
+
+\subsubsection{Counting the actual problem}
+Now for the real problem. Using the first approach:
+
+There are $\frac{5!}{(5-5)!} = 120$ different 5-permutations of the set $\{1,2,3,4,5\}$. For each permutation we would like to add two 6s to them. The final result has length 7, and we need to choose 2 spots out of 7 for placing the 6s. There are $\binom{7}{2} = 21$ ways to do that. So there are $130 \cdot 21 = 2520$ rolls of the kind we want.
+
+Now using the second approach:
+
+We need 7 dice rolls, exactly 2 of which is 6, and the other 5 are all different (from the set $\{1,2,3,4,5\}$). $7-2 = 5$, so we need to choose 5-element subsets of $\{1,2,3,4,5\}$, so $k = 5$. 
+
+This is calculated with Combinations using: $\binom{n}{k} = \binom{5}{5} = \frac{5!}{5!(5-5)!} = 1$. Makes sense, there is only one 5-element subset of $\{1,2,3,4,5\}$.
+
+Then we add two 6s to this subset to obtain the colection $\{6,6,1,2,3,4,5\}$ which has $n = 7$ elements, and find all the $k = 7$-permutations of this set: $\frac{7!}{(7-7)!} = 7! = 5040$. But there are $2! = 2$ ways to order the two 6s, so half of them are duplicated. So there are a total $5040/2 = 2520$ rolls.
+
+\subsubsection{The bijection}
+
+Finally let's write down the bijection. We should have done that first! Then we could have easily counted. But I included the above for the sake of learning. Writing out the bijection first is sometimes very difficult.
+
+Define $A$ to be the set of 7 rolls where exactly 2 of the rolls are 6 and the remaining 5 are all different from each other. 
+
+Define $S \Coloneqq [1,5]$, define $P_{S,5}$ to be the set of all 5-permutations of $S$, define $R \Coloneqq [1,7]$, define $C_{R, 2}$ to be the set of 2-combinations of $R$, and define $B = P_{S,5} \times C_{R,2}$.
+
+Define $f: A \to B$ as follows: given a 7-roll in $A$ like 
+$$
+a = (6, 2, 6, 1, 3, 4, 5)
+$$
+define $f(a)$ to be the element $(p, c)$ of $B$ where $p$ is the ordered 5-tuple consisting of $\{1,2,3,4,5\}$ that appears in $a$ in order when we ignore the 6s in $a$ (in this case (2,1,3,4,5)), and $c$ is the pair that shows which slots are occupied by the two 6s (in this case $\{1,3\}$ because the first and third numbers in $a$ are 6s).
+
+This bijection describes our first approach. Can you write a bijection for the second approach?
 \end{proof}
 \subsection{(b)}
 For how many rolls do two dice have the same value and the remaining five dice all have different values? Remember to describe a bijection and write a simple arithmetic formula.

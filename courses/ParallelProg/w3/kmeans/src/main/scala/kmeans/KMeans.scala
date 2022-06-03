@@ -12,7 +12,7 @@ class KMeans extends KMeansInterface:
 
   def generatePoints(k: Int, num: Int): ParSeq[Point] =
     val (randx, randy, randz) = (Random(1), Random(3), Random(5))
-    (0 until num)
+    val res = (0 until num)
       .map({ i =>
         val x = ((i + 1) % k) * 1.0 / k + randx.nextDouble() * 0.5
         val y = ((i + 5) % k) * 1.0 / k + randy.nextDouble() * 0.5
@@ -20,13 +20,17 @@ class KMeans extends KMeansInterface:
         Point(x, y, z) })
       .to(mutable.ArrayBuffer)
       .par
+    //println(s"generatePoints:\n k=${k}\n, num=${num}\n, res=${res}\n")
+    res
 
   def initializeMeans(k: Int, points: ParSeq[Point]): ParSeq[Point] =
     val rand = Random(7)
-    (0 until k)
+    val res = (0 until k)
       .map(_ => points(rand.nextInt(points.length)))
       .to(mutable.ArrayBuffer)
       .par
+    //println(s"initializeMeans:\n k=${k}\n, points=${points}\n, res=${res}\n")
+    res
 
   def findClosest(p: Point, means: IterableOnce[Point]): Point =
     val it = means.iterator
@@ -41,20 +45,25 @@ class KMeans extends KMeansInterface:
       if distance < minDistance then
         minDistance = distance
         closest = point
-
+    //println(s"findClosest:\n p=${p},\n means=${means},\n res=${closest}") // remove
     closest
 
   def classify(points: ParSeq[Point], means: ParSeq[Point])
                              : ParMap[Point, ParSeq[Point]] =
     val ptsGp: ParMap[Point, ParSeq[Point]] =                            // TODO
       points groupBy (findClosest(_, means))
+    //println(s"classify: ptsGp = ${ptsGp}")
 
     val missedMeans: ParSeq[Point] = means diff (ptsGp.keys.toSeq)
+    //println(s"classify: missedMeans = ${missedMeans}")
 
     val missedMap: ParMap[Point, ParSeq[Point]] =
       (for mean <- missedMeans yield mean -> ParSeq[Point]()).toMap
+    //println(s"classify: missedMap = ${missedMap}")
 
-    ptsGp ++ missedMap
+    val res = ptsGp ++ missedMap
+    //println(s"classify:\n points=${points},\n means=${means},\n res = ${res}")
+    res
 
   def findAverage(oldMean: Point, points: ParSeq[Point]): Point =
     if   points.isEmpty
@@ -68,25 +77,35 @@ class KMeans extends KMeansInterface:
         y += p.y
         z += p.z
       }
-      Point(x / points.length, y / points.length, z / points.length)
+      val res = Point(x / points.length, y / points.length, z / points.length)
+      //println(s"findAverage:\n oldMean=${oldMean},\n points=${points},\n res= ${res}")
+      res
 
   def update(classified: ParMap[Point, ParSeq[Point]],
-             oldMeans: ParSeq[Point]): ParSeq[Point] =
-    oldMeans map (oldMean => findAverage(oldMean, classified(oldMean)))  // TODO
+             oldMeans: ParSeq[Point]): ParSeq[Point] =                   // TODO
+    val res = oldMeans map
+      (oldMean => findAverage(oldMean, classified(oldMean)))
+    //println(s"update:\n classified=${classified},\n oldMeans=${oldMeans},\n res=${res}")
+    res
 
   def converged(eta: Double, oldMeans: ParSeq[Point],
                 newMeans: ParSeq[Point]): Boolean =                      // TODO
-    oldMeans
-      .zip(newMeans)
-      .forall(pair => pair._1.squareDistance(pair._2) <= eta)
+    val res =
+      oldMeans
+        .zip(newMeans)
+        .forall(pair => pair._1.squareDistance(pair._2) <= eta)
+    //println(s"converged:\n eta=${eta},\n oldMeans=${oldMeans},\n newMeans=${newMeans},\n res=${res}")
+    res
 
-  @tailrec
+  @tailrec                     // your implementation needs to be tail recursive
   final def kMeans(points: ParSeq[Point], means: ParSeq[Point],
                    eta: Double): ParSeq[Point] =
     val newMeans: ParSeq[Point] = update(classify(points, means), means) // TODO
+    //println(s"kMeans: temporary newMeans=${newMeans}")
     if   !converged(eta, means, newMeans)
     then kMeans(points, newMeans, eta)
-    else newMeans // your implementation need to be tail recursive
+    else newMeans
+
 
 /** Describes one point in three-dimensional space.
  *
