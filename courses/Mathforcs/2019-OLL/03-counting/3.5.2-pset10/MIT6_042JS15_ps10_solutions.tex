@@ -42,7 +42,7 @@ For how many rolls do exactly two dice have the value 6 and the remaining five d
 Example: (6, 2, 6, 1, 3, 4, 5) is a roll of this type, but (1, 1, 2, 6, 3, 4, 5) and (6, 6, 1, 2, 4, 3, 4) are not.
 \begin{proof}
 \subsubsection{General counting principles}
-I will do these problems in an unnecessarily long way, because I've run into many learners who really struggle with thinking about counting complex things.
+I will do these problems in an unnecessarily long way, because I've run into many learners who really struggle with thinking about counting complex things. (I will also deliberately show a wrong way of thinking about one of the problems.)
 
 Say we want to choose $k$ elements from a set of $n$ elements. There are 4 categories of choices with counting formulas: 
 
@@ -55,7 +55,7 @@ unordered without repetitions: Combinations $\displaystyle = \binom{n}{k} = \fra
 unordered with repetitions: Combinations with rep.s $\displaystyle = \binom{k+n-1}{n-1}$.
 
 \subsubsection{A simpler version of the problem}
-Let's think about a simpler, smaller problem of the same type. Imagine there were only 3 colors, only 4 roll values 1,2,3,4, and we wanted to find the rolls that have exactly one die with 4, and the other 2 had different values.
+Let's think about a simpler, smaller problem of the same type. Imagine there were only 3 colors ROY, only 4 roll values 1,2,3,4, and we wanted to find the rolls that have exactly one die with 4, and the other 2 had different values.
 
 {\bf First approach}
 
@@ -88,7 +88,7 @@ Here's another way to think: let's consider all the 2-element subsets of $\{1, 2
 For each subset, say $\{1,2\}$, we add the 4 to it to create a new set $\{1,2,4\}$ and then we compute all the 3! = 6 permutations (``ordered without repetitions'') of this 3-element set: (4,1,2), (1,4,2), (1,2,4), (4,2,1), (2,4,1), (2,1,4).
 
 \subsubsection{Generalizing the approaches}
-Do these ideas work if we had more than one copy of 4 to add? Let's check. Imagine we have 4 colors, we are looking for 4 dice rolls, exactly two of which are 4, and the other 2 different.
+Do these ideas work if we had more than one copy of 4 to add? Let's check. Imagine we have 4 colors ROYG, we are looking for 4 dice rolls, exactly two of which are 4, and the other 2 different.
 
 {\bf First approach again}
 
@@ -106,7 +106,7 @@ For (1,2,4): (4,1,2,4), (1,4,2,4), (1,2,4,4)
 
 So there are 9 of them. But there are duplicates here: (4,1,2,4), (1,4,2,4), and (4,1,4,2) are all listed twice. Removing those we end up with 6 in total, instead of 9. So we need to figure out why the duplicates are showing up. Maybe the idea of inserting a 4 to the ``spaces in between'' is not the right idea.
 
-Instead of inserting the two 4s one at a time, let's think of inserting both of them. The final tuple is a 4-tuple like $(1,2,4,4)$. There are 4 ``slots'' to insert two 4s, so this is a combination $\binom{4}{2} = 6$. That's the right count (which wasn't clear when we had to deal with only one 4), it gives us 6 instead of 9.
+Instead of inserting the two 4s one at a time, let's think of inserting both of them. The final tuple is a 4-tuple like $(1,2,4,4)$. There are 4 ``slots'' (colors) to insert two 4s, so this is a combination $\binom{4}{2} = 6$. That's the right count (which wasn't clear when we had to deal with only one 4), it gives us 6 instead of 9.
 
 When we do the same procedure for the permutation (2,1) we get 6 more rolls that are different from the above 6. So we get a total of 12 rolls from (1,2) and (2,1). We'd get 12 more from (1,3) and (3,1), and 12 more from (2,3), (3,2) for a total of 36.
 
@@ -114,36 +114,57 @@ When we do the same procedure for the permutation (2,1) we get 6 more rolls that
 
 From $\{1,2,3\}$ we choose the 2-element subsets (there are 3 of them as before). Then, say for the subset $\{1,2\}$ we add two 4s to it to obtain a new collection $\{4,4,1,2\}$, and we compute all the 4-permutations of this: $\frac{4!}{(4-4)!} = 24$. 
 
-However half of these will be duplicates, because the two copies of 4 are indistinguishable. So dividing by 2! (the number of ways of ordering the 4s we have) we get 12.
+However half of these will be duplicates, because the two copies of 4 are the same as each other. So dividing by 2! (the number of ways of ordering the 4s we have) we get 12.
 
 We'd get 12 more from the subset $\{1,3\}$ and 12 more from $\{2,3\}$ for a total of 36 again.
 
 \subsubsection{Counting the actual problem}
 Now for the real problem. Using the first approach:
 
-There are $\frac{5!}{(5-5)!} = 120$ different 5-permutations of the set $\{1,2,3,4,5\}$. For each permutation we would like to add two 6s to them. The final result has length 7, and we need to choose 2 spots out of 7 for placing the 6s. There are $\binom{7}{2} = 21$ ways to do that. So there are $130 \cdot 21 = 2520$ rolls of the kind we want.
+There are $\frac{5!}{(5-5)!} = 120$ different 5-permutations of the set $\{1,2,3,4,5\}$. For each permutation we would like to add two 6s to them. The final result has length 7 (seven colors ROYGBIV), and we need to choose 2 colors out of 7 for the 6s. There are $\binom{7}{2} = 21$ ways to do that. So there are $130 \cdot 21 = 2520$ rolls of the kind we want.
 
 Now using the second approach:
 
-We need 7 dice rolls, exactly 2 of which is 6, and the other 5 are all different (from the set $\{1,2,3,4,5\}$). $7-2 = 5$, so we need to choose 5-element subsets of $\{1,2,3,4,5\}$, so $k = 5$. 
+We need 7 colored dice rolls, exactly 2 of which is 6, and the other 5 are all different (from the set $\{1,2,3,4,5\}$). $7-2 = 5$, so we need to choose 5-element subsets of $\{1,2,3,4,5\}$, so $k = 5$. 
 
 This is calculated with Combinations using: $\binom{n}{k} = \binom{5}{5} = \frac{5!}{5!(5-5)!} = 1$. Makes sense, there is only one 5-element subset of $\{1,2,3,4,5\}$.
 
 Then we add two 6s to this subset to obtain the colection $\{6,6,1,2,3,4,5\}$ which has $n = 7$ elements, and find all the $k = 7$-permutations of this set: $\frac{7!}{(7-7)!} = 7! = 5040$. But there are $2! = 2$ ways to order the two 6s, so half of them are duplicated. So there are a total $5040/2 = 2520$ rolls.
 
+Nice! Both approaches yield the same result, which is a good indication that our solution is correct.
+
 \subsubsection{The bijection}
 
 Finally let's write down the bijection. We should have done that first! Then we could have easily counted. But I included the above for the sake of learning. Writing out the bijection first is sometimes very difficult.
 
-Define $A$ to be the set of 7 rolls where exactly 2 of the rolls are 6 and the remaining 5 are all different from each other. 
+Define $A$ to be the set of 7 colored rolls where exactly 2 of the rolls are 6 and the remaining 5 are all different from each other. 
 
-Define $S \Coloneqq [1,5]$, define $P_{S,5}$ to be the set of all 5-permutations of $S$, define $R \Coloneqq [1,7]$, define $C_{R, 2}$ to be the set of 2-combinations of $R$, and define $B = P_{S,5} \times C_{R,2}$.
+Define $S \Coloneqq [1,5]$, 
+
+define $P_{S,5}$ to be the set of all 5-permutations (ordered) of $S$, 
+
+define $R$ to be the set of seven colors ROYGBIV, 
+
+define $C_{R, 2}$ to be the set of 2-element subsets of $R$, and 
+
+define $B = P_{S,5} \times C_{R,2}$.
 
 Define $f: A \to B$ as follows: given a 7-roll in $A$ like 
 $$
 a = (6, 2, 6, 1, 3, 4, 5)
 $$
-define $f(a)$ to be the element $(p, c)$ of $B$ where $p$ is the ordered 5-tuple consisting of $\{1,2,3,4,5\}$ that appears in $a$ in order when we ignore the 6s in $a$ (in this case (2,1,3,4,5)), and $c$ is the pair that shows which slots are occupied by the two 6s (in this case $\{1,3\}$ because the first and third numbers in $a$ are 6s).
+define $f(a)$ to be the element $(p, c)$ of $B$ where 
+
+$p$ is the ordered 5-tuple consisting of $\{1,2,3,4,5\}$ that appears in $a$ in order when we ignore the 6s in $a$ (in this case (2,1,3,4,5)), and 
+
+$c$ is the pair of ROYGBIV colors of the two dice that have the two 6s (in this case $\{R,Y\}$ because the first and third numbers in $a$ are 6s).
+
+Notice that these two pieces of information uniquely determine the roll, because we can determine the colors of the remaining 5 rolls: the dice values (2,1,3,4,5) (are forced to) belong to the dice with the colors OGBIV, in order.
+
+The arithmetic formula is:
+$$
+|A| = |B| = |P_{S,5}|\cdot|C_{R,2}| = 5! \cdot \binom{7}{2} = 120 \cdot \frac{7\cdot 6}{2} = 120 \cdot 21 = 2520
+$$
 
 This bijection describes our first approach. Can you write a bijection for the second approach?
 \end{proof}
@@ -152,12 +173,141 @@ For how many rolls do two dice have the same value and the remaining five dice a
 
 Example: (4, 2, 4, 1, 3, 6, 5) is a roll of this type, but (1, 1, 2, 6, 1, 4, 5) and (6, 6, 1, 2, 4, 3, 4) are not.
 \begin{proof}
+This is very similar to the previous problem. Intuitively, the answer should be six times the result from part (a), which is 15120. 
+
+Consider the example (4, 2, 4, 1, 3, 6, 5).
+
+First, we need to choose one of the 6 die values. This value will be the ``two dice have the same value''. Say, 4.
+
+Then, we need to choose two colors from ROYGBIV for the dice of these two values. In this case $\{R,Y\}$, because the 4s appear in the first and third places in the 7-tuple.
+
+Then, we need to choose an ordered 5-tuple from the remaining 5 distinct die values, like (2,1,3,6,5). They belong to the remaining dice colors OGBIV in the 7-tuple, in order.
+
+These three pieces of information uniquely describes the 7-tuple (4, 2, 4, 1, 3, 6, 5). So here is the bijection:
+
+Define $A$ to be the set of 7 rolls where exactly 2 of the rolls have the same value, and the remaining 5 are all different from each other. 
+
+Define $S \Coloneqq [1,6]$, 
+
+for $1 \leq i \leq 6$ define $P_i \Coloneqq S - i$ (the set of die values 1,2,3,4,5,6 with the $i$th value removed, so for example $P_3 = \{1,2,4,5,6\}$),
+
+for $1 \leq i \leq 6$ define $P_i^5$ to be the set of all 5-permutations (ordered) of $P_i$,
+
+define $P^5 \Coloneqq P_1^5 \cup P_2^5 \cup P_3^5 \cup P_4^5 \cup P_5^5 \cup P_6^5$ (notice that this is a disjoint union, the sets $P_i^5$ have no elements in common with each other),
+
+define $R$ to be the set of seven colors ROYGBIV,
+
+define $C_{R, 2}$ to be the set of 2-element subsets of $R$, and 
+
+define $B = P^5 \times C_{R,2}$.
+
+Define $f: A \to B$ as follows: given a 7-roll in $A$ like 
+$$
+a = (4, 2, 4, 1, 3, 6, 5)
+$$
+define $f(a)$ to be the element $(p, c)$ of $B$ where:
+
+if $s \in S$ is the die value in $a$ that is repeated twice (in this case 4), then:
+
+$p$ is the ordered 5-tuple in $P_s^5$ that appears in $a$ in order when we ignore the two $s$'s in $a$ (in this case (2,1,3,6,5)), and 
+
+$c$ is the pair that shows which colors are the two dice with the $s$ values (in this case $\{R,Y\}$ because the first and third numbers in $a$ are 4s).
+
+The arithmetic formula is:
+$$
+|A| = |B| = |P^5|\cdot|C_{R_2}| = |P_1^5 \cup P_2^5 \cup P_3^5 \cup P_4^5 \cup P_5^5 \cup P_6^5| \cdot \binom{7}{2}
+$$
+continuing, keeping in mind that all the $P_i^5$ are disjoint:
+$$
+|A| = |B| = 6 \cdot |P_1^5| \cdot \frac{7 \cdot 6}{2} = 6 \cdot 5! \cdot 21 = 6 \cdot 120 \cdot 21 = 15120
+$$
 \end{proof}
 \subsection{(c)}
 For how many rolls do two dice have one value, two different dice have a second value, and the remaining three dice a third value? Remember to describe a bijection and write a simple arithmetic formula.
 
 Example: (6, 1, 2, 1, 2, 6, 6) is a roll of this type, but (4, 4, 4, 4, 1, 3, 5) and (5, 5, 5, 6, 6, 1, 2) are not.
 \begin{proof}
+Consider the example (6, 1, 2, 1, 2, 6, 6).
+
+First, we have to choose a 3-element subset of the dice values $S = \{1,2,3,4,5,6\}$. (In this case it's $\{1,2,6\}$.)
+
+Then we decide which two of these 3 elements should have 3 copies (in this case, 6). This can be done by choosing the 1-element subsets of it.
+
+Once that's decided, the other two elements (in this case 1 and 2) are forced to have 2 copies each, adding up to 7 dice rolls.
+
+After that we need to: 
+
+choose 3 colors out of 7 ROYGBIV for the dice that have the value with 3 copies (in this case $\{R,I,B\}$ because 6 appears in first, sixth, seventh rolls), then 
+
+choose 2 colors out of the remaining 4 colors (in this case OYGV) for the dice with the smaller of the other values with 2 copies (in this case, the value 1, comes from the dice with colors $\{O,G\}$), then
+
+the remaining value with 2 copies (in this case, 2) is forced to come from the dice with the remaining 2 colors (in this case $\{Y,V\}$).
+
+Here is the bijection:
+
+Define $A$ to be the set of 7 rolls where two dice have one value, two different dice have a second value, and the remaining three dice a third value.
+
+Define $S \Coloneqq \{1,2,3,4,5,6\}$ (dice values),
+
+define $S_3$ to be the set of 3-element subsets of $S$ (which 3 distinct die values are used),
+
+define $W \Coloneqq [1,3]$ (which of the 3 elements have 3 copies, the first, the second, or the third),
+
+define $R$ to be the set of seven colors,
+
+define $R_3$ to be the set of 3-element subsets of $R$ (indicating the  colors of the dice that have the value with 3 copies),
+
+for all $i$ ranging over $R_3$, define $R_2^i$ be the set of 2-element subsets of the 4-element set $R - i$ (out of the remaining 4 colors, 2 colors for the dice that have the smaller of the remaining 2 die values, because that value also has 2 copies),
+
+define $\displaystyle R_{3,2} \Coloneqq \{ (i, j) | \,\, i \in R_3, \, j \in R_2^i\}$,
+
+define $B \Coloneqq S_3 \times W \times R_{3,2}$.
+
+Define $f : A \to B$ as follows, for each $a \in A$ like
+$$
+a = (6, 1, 2, 1, 2, 6, 6)
+$$
+define $f(a)$ to be the tuple $(s_3, w, r_{3,2}) \in B$ where:
+
+$s_3$ is the set of 3 distinct dice values that appear in $a$: $\{1,2,6\}$,
+
+$w$ indicates which element of $s_3$ (in order) has 3 copies: since 6 has 3 copies, in this case $w = 3$ (the third element in $s_3$ is 6),
+
+$r_{3,2} = (x, y) \in R_2$ where:
+
+$x$ is the set of 3 colors of the dice that have the value with 3 copies in $a$: in this case 6 appears in first, sixth, seventh place of $a$, so 6 comes from the dice that have colors $x = \{R,I,V\}$, 
+
+$y$ is the set of 2 colors, from among the remaining 4 colors, in this case OYGB, of the dice that have the smaller of the two remaining values of $s_3$; in this case the remaining two values are 1,2, and 1 is smaller, and 1 appears in second and fourth place in $a$, so $y = \{Y,G\}$.
+
+From this, the 2 colors of the dice for the only remaining value, which is 2, are determined, they have to be the remaining 2 colors $\{O,B\}$.
+
+The arithmetic formula is:
+$$
+|A| = |B| = |S_3| \cdot |O| \cdot |R_{3,2}| = \binom{6}{3} \cdot 3 \cdot |R_{3,2}| = \frac{6\cdot 5 \cdot 4}{3\cdot 2\cdot 1}\cdot 3 \cdot |R_{3,2}| = 60|R_{3,2}|
+$$
+Computing $|R_{3,2}|$ is a bit trickier. It's a set of pairs $(i, j)$ where $i$ ranges over $R_3$, the 3-element subsets of $R$; and $j$ ranges over $R_2^i$, the 2-element subsets of the remaining 4 elements $R - i$ of $R$. 
+
+How many $i$'s are there, and how many $j$'s are there for each $i$? If the number of $j$'s for each $i$ is fixed and does not depend on which $i$ is under consideration, then we could multiply these two numbers.
+
+We know 
+$$
+|R_3| = \binom{7}{3} = \frac{7\cdot 6 \cdot 5}{3\cdot 2\cdot 1} = 35 
+$$
+and we know for each $i \in R_3$:
+$$
+|R_2^i| = \binom{4}{2} = \frac{4\cdot 3}{2\cdot 1} = 6 
+$$
+because no matter which 4-element set $R - i$ is, it always has 4 elements, so the number of ways to choose 2-element subsets from $R-i$ is always the same. So
+$$
+|R_{3,2}| = \binom{7}{3} \cdot \binom{4}{2}
+$$
+
+Finishing the arithmetic formula:
+$$
+|A| = |B| = \binom{6}{3}\cdot 3 \cdot \binom{7}{3} \cdot \binom{4}{2} =  20 \cdot 3 \cdot 35 \cdot 6 = 12600
+$$
+
+I think the approach I have in this problem (just for the counting part) is pretty straightforward and it's probably how most people would approach it (first pick 3 values out of 6, then pick which one will have 3 copies, then pick 3 colors for it, then pick 2 out of 4 remaining colors for the next value). But there is probably an easier way to describe the bijection, please let me know.
 \end{proof}
 
 \section{Problem 2}
@@ -167,30 +317,210 @@ How many ways are there to order the 26 letters of the alphabet so that no two o
 
 Hint: Every vowel appears to the left of a consonant.
 \begin{proof}
+Let's think about a much smaller problem first. Let's say we have the letters a,b,c,d,e. So 5 letters total, 2 vowels. Let's try to write down all the permutations of abcde where a and e do not appear next to each other, or at the end.
+
+ab-c-ed ab-d-ec ab-ec-d ab-ed-c ac-b-ed ac-d-eb 
+
+ac-eb-d ac-ed-b ad-b-ec ad-c-eb ad-eb-c ad-ec-b
+
+b-ac-ed b-ad-ec b-ec-ad b-ed-ac
+
+c-ab-ed c-ad-eb c-eb-ad c-ed-ab
+
+d-ab-ec d-ac-eb d-eb-ac d-ec-ab
+
+eb-ac-d eb-ad-c eb-c-ad eb-d-ac ec-ab-d ec-ad-b 
+
+ec-b-ad ec-d-ab ed-ab-c ed-ac-b ed-b-ac ed-c-ab 
+
+So for each vowel (a,e) there are 12 that start with it, and for each consonant (b,c,d) there are 4 that start with it. For a total of 36.
+
+The vowels a, e are always followed by a consonant. For the first vowel a, there are 3 consonants we can ``pair it up with''. Then, for the next vowel e, there are 2 consonants we can pair it up with. So there are $3 \cdot 2 = 6$ ways to pair.
+
+After the pairings, we have 3 ``blocks'' that we can order as we want: ``a + consonant'', ``e + consonant'' and the last consonant that's left over. No matter how we order these 3 blocks, two vowels are never next to each other, and a vowel is never the last letter. There are $3! = 6$ ways to order 3 blocks.
+
+So, the total is $6 \cdot 6 = 36$ ways, as expected!
+
+Let's apply this to the whole alphabet. We start with 5 vowels and 21 consonants.
+
+There are 21 consonants to pair up with a.
+
+After that, there are 20 consonants to pair up with e.
+
+After that, there are 19 consonants to pair up with i.
+
+After that, there are 18 consonants to pair up with o.
+
+After that, there are 17 consonants to pair up with u.
+
+After the pairings, we have 5 vowel-consonant pairs, plus the 16 consonants that are left over. So there are 21 ``blocks'' we can safely order however we want, without two vowels being next to each other, or having a vowel at the end.
+
+So the formula is:
+$$
+21 \cdot 20 \cdot 19 \cdot 18 \cdot 17 \cdot 21!
+$$
+Notice that this is equal to:
+$$
+\binom{21}{5} \cdot 5! \cdot 21!
+$$
 \end{proof}
+Because we can also think of the problem like this: 
+
+we need to choose 5 consonants out of the 21 consonants. There are $\binom{21}{5}$ ways to do that. 
+
+Then, these 5 consonants need to be paired up with aeiou. These pairings are the same as ordering the 5 consonants, so there are $5!$ ways to do that.
+
+Finally there are $21!$ ways to order the 16 consonants + 5 pairs.
 \subsection{(b)}
 How many ways are there to order the 26 letters of the alphabet so that there are at least two consonants immediately following each vowel?
 \begin{proof}
+We can use an idea similar to part (a). 
+
+Out of the 21 consonants, choose two to immediately follow a. For example, let's say it's $\{b,c\}$. Then these two consonants can be ordered in 2! ways: abc, acb
+
+Out of the remaining 19 consonants, choose two to be grouped with e. Again, there are 2! ways to order them.
+
+Out of the remaining 17 consonants, choose two to be grouped with i. Again, there are 2! ways to order them.
+
+Out of the remaining 15 consonants, choose two to be grouped with o. Again, there are 2! ways to order them.
+
+Out of the remaining 13 consonants, choose two to be grouped with u. Again, there are 2! ways to order them.
+
+Now there are 11 consonants left, along with the 5 ``one vowel + two consonant'' groups, a total of 16 groups that we can order however we want.
+
+So the formula is:
+$$
+\binom{21}{2}\cdot 2!\cdot\binom{19}{2}\cdot2!\cdot\binom{17}{2}\cdot2!\cdot\binom{15}{2}\cdot2!\cdot\binom{13}{2}\cdot 2!\cdot 16!
+$$
 \end{proof}
 \subsection{(c)}
 In how many different ways can $2n$ students be paired up?
 \begin{proof}
+Here is another unnecessarily long solution with deliberately wrong ways to think about things, and how to correct them.
+
+Let's work on some small cases to get an idea about the problem. Consider $n = 2$ and consider 4 students a,b,c,d. Here are all the 3 possible ways to pair them: 
+
+ab-cd ac-bd ad-bc
+
+Let's try to reason about this. For the first student, there are 4 choices. We want to pair this student with another, for which there are 3 choices. Once this pairing is done, the remaining 2 students are forced to pair up with each other.
+
+But that gives us $4 \cdot 3 = 12$ possibilities, right? That's 4 times the correct count. There are too many overlaps. The issue is that our procedure takes order into account: ``do this, then do this, then do this...'' which creates many overlaps. How can we account for the overlaps? 
+
+It's important to detect when your approach introduces ordering to a problem where you are choosing unordered things. You should also know how to account for the orderings, and divide the result by the number of ways to order things to get the correct result.
+
+For example, it doesn't matter if we create the first pair by choosing a first, and b second, or the other way around. The pairing ab-cd is the same as ba-cd. Since a pair consists of 2 people, there are 2! ways to order them. Every pair is counted twice (by taking order into account). So we have to divide by 2!.
+
+But wait! There is another way overlaps happen. For example, the pairing ab-cd (first creating the pair ab, which forces cd) is the same as cd-ab (first creating the pair cd, which forces ab). So we also need to divide by the number of ways pairs can be ordered. Since there are 2 pairs, we have to divide by 2!.
+
+So we need to divide the total count 12 by $2! \cdot 2!$, which gives us 12/4 = 3, the right answer.
+
+Let's see if this idea generalizes. Let's try $n = 3$ on the students a,b,c,d,e,f. 
+
+There are 6 choices for the first student of the first pair. 
+
+Then there are 5 choices for the second student of the first pair. 
+
+4 and 3 for the next pair. 
+
+Once 4 students have been paired, the remaining 2 students are forced to become the last, third pair. 
+
+The first and second pairs can be ordered in 2! ways each, and the 3 pairs can be ordered in 3! ways. So we expect $6\cdot 5 \cdot 4 \cdot 3 / (2! \cdot 2! \cdot 3!) = 15$ ways to pair up 6 students.
+
+ab-cd-ef ab-ce-df ab-cf-de
+
+ac-bd-ef ac-be-df ac-bf-de
+
+ad-bc-ef ad-be-cf ad-bf-ce
+
+ae-bc-df ae-bd-cf ae-bf-cd
+
+af-bc-de af-bd-ce af-be-cd
+
+Indeed there are only 15 ways to pair them!
+
+We don't have to divide by 2!'s if we ignore the order in which the 2 students in a pair are chosen. We can do that by using combinations (which are unordered).
+
+OK... the general solution for $2n$ students goes as follows:
+
+There are $\binom{2n}{2}$ ways to choose a 2-element subset, i.e. the first pair of students.
+
+There are $\binom{2n-2}{2}$ ways to choose a 2-element subset, i.e. the second pair of students, from the remaining $2n-2$.
+
+And so on.
+
+Finally, there are $\binom{4}{2}$ ways to choose the second-to-last pair of students. Then the last remaining 2 students are forced to pair up.
+
+There are $n$ pairs of students, so there are $n!$ ways to order the pairs. If we multiply the above numbers, we are overcounting by a factor of $n!$ (because we don't care about the order of the pairs), so we will have to divide by that.
+
+The formula is:
+$$
+\frac{\binom{2n}{2}\cdot\binom{2n-2}{2}\cdot\binom{2n-4}{2}\cdot\ldots\cdot\binom{4}{2}}{n!} = \frac{(2n)!}{(2!)^n\cdot n!} = \binom{2n}{2, 2, \ldots, 2} / n!
+$$
+It's almost the same as the Subset Split rule (with 2-2-2-...-2 splits of a set of $2n$ elements) with the multinomial coefficient, but we have to divide by $n!$ because we don't care about the order (whereas a split cares about the order).
 \end{proof}
+
 \subsection{(d)}
-Two $n$-digit sequences of digits 0,1,. . . ,9 are said to be of the same type if the digits of one are a permutation of the digits of the other. For $n = 8$, for example, the sequences 03088929 and 00238899 are the same type. How many types of $n$-digit sequences are there?
+Two $n$-digit sequences of digits $0,1,\ldots,9$ are said to be of the same type if the digits of one are a permutation of the digits of the other. For $n = 8$, for example, the sequences 03088929 and 00238899 are the same type. How many types of $n$-digit sequences are there?
 \begin{proof}
+Let's look at a smaller example, say $n = 3$.
+
+Consider the 3-digit sequences 113, 131, 311. They are of the same type. The type is determined by the multiset $\{1,1,3\}$. Another example:
+
+Consider the 3-digit sequences 456, 465, 546, 564, 645, 654. They are of the same type. The type is determined by the set $\{4,5,6\}$.
+
+So a type is determined by an $n$-element set of digits. But the set is allowed to have repetitions (as in the first example) so it's a multiset. The number of such multisets is the number of types. So how many of these $n$-element multisets of digits are there?
+
+Here we are choosing $n$ unordered elements (with repetitions allowed), from a collection of 10 items: $\{0,1,2,3,4,5,6,7,8,9\}$. If you remember our discussion from the first problem, this falls into the category of ``unordered with repetitions'': Combinations with rep.s $\displaystyle = \binom{10+n-1}{10-1} = \binom{n+9}{9}$.
+
+Let's verify this number on some examples. 
+
+Consider $n = 1$. All the 1-digit sequences are 0, 1, 2, 3, 4, 5, 6, 7, 8, 9; and each one of them is a type, so there are 10 types. This agrees with the formula $\binom{n+9}{9} = \binom{1+9}{9} = \binom{10}{9} = \binom{10}{1} = 10$.
+
+Consider $n = 2$. There are 100 2-digit sequences, from 00 to 99. There are 10 types that only have one sequence each: 00, 11, 22, 33, 44, 55, 66, 77, 88, 99. The remaining 90 sequences belong to 45 types, each of which contain exactly 2 sequences (like 12 and 21, 37 and 73, and so on). There is a total of 55 types.
+
+This agrees with the formula $\binom{n+9}{9} = \binom{2+9}{9} = \binom{11}{9} = \binom{11}{2} = \frac{11 \cdot 10}{2} = 55$.
 \end{proof}
 
 \section{Problem 3}
 \subsection{(a)}
 Use the Multinomial Theorem 14.6.5 to prove that
 $$
-(x_1 + \ldots x_n)^p \equiv x_1^p + \ldots x_n^p \,\,\,(\text{mod}\,\,p)
+(x_1 + \ldots + x_n)^p \equiv x_1^p + \ldots x_n^p \,\,\,(\text{mod}\,\,p)
 $$
 for all primes $p$. (Do not prove it using Fermat’s “little” Theorem. The point of this problem is to offer an independent proof of Fermat’s theorem.)
 
 Hint: Explain why $\binom{p}{k_1, k 2, \ldots, k_n}$ is divisible by $p$ if all the $k_i$’s are positive integers less than $p$.
 \begin{proof}
+1. By the Multinomial Theorem,
+$$
+(x_1 + \ldots + x_n)^p = \sum_{k_1 + \ldots + k_m = p} \binom{p}{k_1, \ldots, k_m}x_1^{k_1} \ldots x_m^{k_m}
+$$
+where the summation ranges over all the possible splits $(k_1, \ldots, k_m)$ of $p$.
+
+2. For any split $(k_1, \ldots, k_m)$ of $p$, consider the multinomial coefficient 
+$$
+\binom{p}{k_1, \ldots, k_m} = \frac{p!}{k_1!\cdot\ldots\cdot k_m!}
+$$
+By definition this is a positive integer. It is equal to 1 exactly when one of the $k_i$ is equal to $p$, with all the other $k_i$'s being zero. For example, when $k_1 = p, k_2 = 0, \ldots, k_m = 0$, or when $k_1 = 0, k_2 = p, k_3 = 0, \ldots, k_m = 0$, etc. In the summation, these cases correspond to $x_1^p, x_2^p, \ldots$
+
+3. Assume that the multinomial coefficient is not equal to 1, in other words, all of the $k_i$ are less than $p$. This means that all the factorials in the denominator get canceled by the numbers among $p! = p \cdot (p-1) \cdot (p-2) \cdot \ldots 3 \cdot 2 \cdot 1$. 
+
+4. However, keep in mind that $p$ is a prime, so it is not divisible by any of the factors of $k_1, \ldots, k_m$, because those are all strictly smaller than $p$. 
+
+5. So, once the denominator is completely canceled out from the numerator, $p$ will be among the remaining factors. 
+
+6. Therefore, if the multinomial coefficient is not equal to 1, then it is divisible by $p$.
+
+7. Putting (1), (2) and (6) together, we get:
+$$
+\sum_{k_1 + \ldots + k_m = p} \binom{p}{k_1, \ldots, k_m}x_1^{k_1} \ldots x_m^{k_m} \equiv x_1^p + \ldots + x_m^p \text{ mod }p
+$$
+because the multinomial coefficient is equal to 1 only for the terms $x_1^p, \ldots, x_m^p$ and is divisible by $p$ for all the other terms.
+
+8. By (1) and (7),
+$$
+(x_1 + \ldots + x_n)^p \equiv x_1^p + \ldots x_n^p \,\,\,(\text{mod}\,\,p)
+$$
 \end{proof}
 
 \subsection{(b)}
@@ -200,5 +530,19 @@ n^{p-1} \equiv 1 (\text{mod }p)
 $$
 when $n$ is not a multiple of $p$.
 \begin{proof}
+1. Assume $n$ is not a multiple of $p$.
+
+2. Let $x_1 = 1, x_2 = 1, \ldots, x_n = 1$. By part (a) we get
+$$
+(1 + \ldots + 1)^p \equiv 1^p + \ldots 1^p \,\,\,(\text{mod}\,\,p)
+$$
+3. Rewriting (2) we have
+$$
+n^p \equiv n \,\,\,(\text{mod}\,\,p)
+$$
+4. Since $n$ is not a multiple of $p$, we can divide both sides of (3) by $n$ and the equivalence still holds modulo $p$:
+$$
+n^{p-1} \equiv 1 \,\,\,(\text{mod}\,\,p)
+$$
 \end{proof}
 \end{document}
