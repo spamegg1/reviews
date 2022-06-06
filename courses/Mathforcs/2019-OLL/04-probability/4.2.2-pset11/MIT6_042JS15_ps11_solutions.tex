@@ -18,16 +18,43 @@
 \subsection{(a)}
 Let R be an 82x4 rectangular matrix each of whose entries are colored red, white or blue. Explain why at least two of the 82 rows in R must have identical color patterns.
 \begin{proof}
+We have a set of $n = 3$ colors: RWB. We want to choose $k = 4$ elements from it, with repetitions allowed. Since we are considering color patterns, the order matters: RBRR is not the same pattern as BRRR or RRBR or RRRB.
+
+This falls under the category ``ordered with repetitions'', which is calculated by the ``Tuples'' formula: $n^k = 3^4 = 81$. (This also explains why the problem used the number 82.)
+
+So there are 81 distinct 4-color patterns but we have 82 rows. By the Pigeonhole Principle, at least two rows have the same (ordered) color pattern.
 \end{proof}
 \subsection{(b)}
 Conclude that R contains four points with the same color that form the corners of a rectangle.
 \begin{proof}
+Since there are only 3 colors and each row consists of 4 colors, by the Pigeonhole Principle each row contains at least one color that occurs at least twice. (Like: RWBR, or BWWR etc.)
+
+Consider the two rows $r_1$ and $r_2$ from part (a) that have the same color pattern. For example:
+$$
+\begin{array}{ccccc}
+. & . & . & . & \text{ (more rows above)} \\
+R & W & B & R & (r_1) \\
+. & . & . & . & \\
+. & . & . & . & \text{ (more rows between)} \\
+. & . & . & . & \\
+R & W & B & R & (r_2) \\
+. & . & . & . & \text{ (more rows below)}
+\end{array}
+$$
+Consider the color $c$ (R in the above example) that occurs at least twice in $r_1$ and $r_2$. The two occurrences of $c$ in $r_1$ and the two occurrences of $c$ in $r_2$ line up with each other and form a rectangle where all 4 corners have the same color:
 \end{proof}
 \subsection{(c)}
 Now show that the conclusion from part (b) holds even when R has only 19 rows.
 
 Hint: How many ways are there to pick two positions in a row of length four and color them the same?
 \begin{proof}
+On each row, there are 4 positions. So there are $\binom{4}{2} = 6$ ways to choose two of the 4 positions.
+
+There are 3 colors RWB, so there are 3 ways to color those two position with the same color (RR, WW, BB).
+
+So there are $6 \cdot 3 = 18$ different ways to pick two positions in a row and color them the same.
+
+If we have at least 19 rows, by the Pigeonhole Principle, there are at least two rows, which have the same two positions colored with the same color. These four positions form a rectangle with corners having the same color (like in part (b)).
 \end{proof}
 
 \section{Problem 2}
@@ -39,10 +66,44 @@ Prove that you have no better strategy than to take the top card—which means y
 Hint: Prove by induction the more general claim that for a randomly shuffled deck of n cards that are red or black—not necessarily with the same number of red cards and black cards—there is no better strategy
 than taking the top card.
 \begin{proof}
+Let's follow the hint. For all integers $n \geq 1$ define $S(n)$ to be the statement:
+
+In a game with any deck of $n$ randomly shuffled red or black cards, there is no better strategy than taking the top card. In other words, the probability of winning the game by drawing the top card is greater than or equal to the probability of winning the game by drawing any later cards.
+
+{\bf Base Case.} Let's prove $S(1)$. In this case there is only one card on the deck, so according to the rules I am forced to take this card. Since there is only one possible strategy, $S(1)$ is vacuously true.
+
+{\bf Inductive Case.} Now assume $n \geq 1$ and assume $S(n)$ is true. We want to prove $S(n+1)$. 
+
+1. Consider a deck of $n+1$ cards. Let's say there are $r$ red cards and $b$ black cards, and $r + b = n+1$. Also remember that we could have any number of red and black cards, so $0 \leq r \leq n+1$ and $0 \leq b \leq n+1$.
+
+2. Define $P(k)$ to denote the probability of winning by drawing the $k$th  card from the top of the deck.
+
+3. The probability $P(1)$ of winning by drawing the top card is $\displaystyle \frac{b}{n+1}$.
+
+4. Let's look at the probability $P(2)$ of winning by skipping the first card and drawing the second card.
+
+If we skip the top card, and the top card is red, then there are $n$ cards left, with $b$ black cards, so in this case the probability is $\displaystyle \frac{b}{n}$.
+
+If we skip the top card, and the top card is black, then there are $n$ cards left, with $b-1$ black cards, so in this case the probability is $\displaystyle \frac{b-1}{n}$.
+
+5. The probability of the top card being red is $\displaystyle\frac{r}{n+1} = \frac{n+1-b}{n+1}$, and the probability of the top card being black is $\displaystyle\frac{b}{n+1}$. So by (4):
+$$
+P(2) = \frac{n+1-b}{n+1} \cdot \frac{b}{n} + \frac{b}{n+1}\cdot\frac{b-1}{n} = \frac{b}{n+1}
+$$
+
+6. We claim that $P(1) \geq P(2)$. Indeed, they are actually equal!
+
+7. When we skip the top card, we are left with a game with a deck of $n$ cards. The probability of winning by taking the top card in this game is $P(2)$. By the induction hypothesis, this is greater than or equal to the probability $P(k)$ of winning by taking any later cards $k \geq 3$.
+
+8. By (6) and (7), $P(1)$ is greater than or equal to $P(k)$ for all $k \geq 2$. So the probability of winning (the $n+1$ card game) by taking the top card is greater than or equal to the probability of winning (the $n+1$ card game) by taking any later cards. This proves $S(n+1)$.
+
+By the principle of Mathematical Induction, $S(n)$ is true for all $n \geq 1$.
+
+Now the problem is solved by letting $n = 52$, $r = b = 26$.
 \end{proof}
 
 \section{Problem 3}
-Suppose you have three cards: Ace of Hearts, Ace of Spades, and a Jack. From these, you choose a random hand (that is, each card is equally likely to be chosen) of two cards, and let K be the number of Aces in your hand. You then randomly pick one of the cards in the hand and reveal it.
+Suppose you have three cards: Ace of Hearts, Ace of Spades, and a Jack. From these, you choose a random hand (that is, each card is equally likely to be chosen) of two cards, and let $K$ be the number of Aces in your hand. You then randomly pick one of the cards in the hand and reveal it.
 \subsection{(a)}
 Describe a simple probability space (that is, outcomes and their probabilities) for this scenario, and list the outcomes in each of the following events:
 
@@ -54,11 +115,131 @@ Describe a simple probability space (that is, outcomes and their probabilities) 
 
 4. the revealed card is an Ace.
 \begin{proof}
+Abbreviating Ace of Hearts as AH, Ace of Spades as AS, Jack as J, here is the probability space for all the possible hands you can draw:
+
+AH, AS (probability of drawing this hand is 1/3) (K = 2)
+
+AH, J (probability of drawing this hand is 1/3) (K = 1)
+
+AS, J (probability of drawing this hand is 1/3) (K = 1)
+
+Here is the full probability space, when we include the picked-then-revealed card (first tuple is hand, second is card):
+
+((AH, AS), AH) (probability: 1/6) (K = 2)
+
+((AH, AS), AS) (probability: 1/6) (K = 2)
+
+((AH, AS), J) (probability: 0) (K = 2)
+
+((AH, J), AH) (probability: 1/6) (K = 1)
+
+((AH, J), AS) (probability: 0) (K = 1)
+
+((AH, J), J) (probability: 1/6) (K = 1)
+
+((AS, J), AH) (probability: 0) (K = 1)
+
+((AS, J), AS) (probability: 1/6) (K = 1)
+
+((AS, J), J) (probability: 1/6) (K = 1)
+
+Now for the events 1-4.
+
+1. $[K \geq 1]$, (that is, your hand has an Ace in it).
+
+The outcomes that belong to this event are: all 9 outcomes.
+
+2. Ace of Hearts is in your hand.
+
+The outcomes that belong to this event are: the first 6 outcomes.
+
+3. the revealed card is an Ace of Hearts,
+
+The outcomes that belong to this event are:
+
+((AH, AS), AH) (probability: 1/6) (K = 2)
+
+((AH, J), AH) (probability: 1/6) (K = 1)
+
+((AS, J), AH) (probability: 0) (K = 1)
+
+4. the revealed card is an Ace.
+
+The outcomes that belong to this event are:
+
+((AH, AS), AH) (probability: 1/6) (K = 2)
+
+((AH, AS), AS) (probability: 1/6) (K = 2)
+
+((AH, J), AH) (probability: 1/6) (K = 1)
+
+((AH, J), AS) (probability: 0) (K = 1)
+
+((AS, J), AH) (probability: 0) (K = 1)
+
+((AS, J), AS) (probability: 1/6) (K = 1)
 \end{proof}
 
 \subsection{(b)}
 Then calculate $Pr[K = 2 | E]$ for E equal to each of the four events in part (a). Notice that most, but not all, of these probabilities are equal. 
 \begin{proof}
+1. Here $E = [K \geq 1]$. To calculate $Pr[K = 2 | K \geq 1]$ we look at all the outcomes for $K \geq 1$, which are all 9 outcomes (whose probabilities add up to 1), and select those for which $K = 2$.
+
+These are:
+
+((AH, AS), AH) (probability: 1/6) (K = 2)
+
+((AH, AS), AS) (probability: 1/6) (K = 2)
+
+((AH, AS), J) (probability: 0) (K = 2)
+
+These probabilities add up to 1/3. 
+
+So $Pr[K = 2 | K \geq 1]$ is (1/3) / 1 = 1/3.
+
+2. Here E = Ace of Hearts is in your hand. The outcomes for E are the first 6 outcomes (whose probabilities add up to 2/3). 
+
+Among these 6 outcomes, those with $K = 2$ are:
+
+((AH, AS), AH) (probability: 1/6) (K = 2)
+
+((AH, AS), AS) (probability: 1/6) (K = 2)
+
+((AH, AS), J) (probability: 0) (K = 2)
+
+These probabilities add up to 1/3. 
+
+So $Pr[K = 2 | \text{Ace of Hearts is in your hand}]$ is (1/3) / (2/3) = 1/2.
+
+3. Here E = the revealed card is an Ace of Hearts. The outcomes for E are:
+
+((AH, AS), AH) (probability: 1/6) (K = 2)
+
+((AH, J), AH) (probability: 1/6) (K = 1)
+
+((AS, J), AH) (probability: 0) (K = 1)
+
+Among these 3 outcomes (whose probabilities add up to 1/3), those with $K = 2$ is just the first one (probability 1/6).
+
+So $Pr[K = 2 | \text{the revealed card is an Ace of Hearts}]$ is (1/6) / (1/3) = 1/2.
+
+4. Here E = the revealed card is an Ace. The outcomes for E are:
+
+((AH, AS), AH) (probability: 1/6) (K = 2)
+
+((AH, AS), AS) (probability: 1/6) (K = 2)
+
+((AH, J), AH) (probability: 1/6) (K = 1)
+
+((AH, J), AS) (probability: 0) (K = 1)
+
+((AS, J), AH) (probability: 0) (K = 1)
+
+((AS, J), AS) (probability: 1/6) (K = 1)
+
+These probabilities add up to 2/3. Among these 6 outcomes, those with $K = 2$ are just the first two (whose probabilities add up to 1/3).
+
+So $Pr[K = 2 | \text{the revealed card is an Ace}]$ is (1/3) / (2/3) = 1/2.
 \end{proof}
 
 Now suppose you have a deck with $d$ distinct cards, $a$ different kinds of Aces (including an Ace of Hearts), you draw a random hand with $h$ cards, and then reveal a random card from your hand.
@@ -66,6 +247,11 @@ Now suppose you have a deck with $d$ distinct cards, $a$ different kinds of Aces
 \subsection{(c)}
 Prove that Pr[Ace of Hearts is in your hand] = $h/d$.
 \begin{proof}
+Ace of Hearts is only one of the $d$ distinct cards. Each card in the hand has an equal probability $1/d$ of being the Ace of Hearts. (The number of Aces is not relevant, because Ace of Hearts is a unique, distinct card on its own. All the kinds of Aces are different.) Pr[Ace of Hearts is in your hand] is equal to:
+
+Pr[(the first card of the hand is AH) or (the second card of the hand is AH) or ... (the $h$th card of the hand is AH)].
+
+This is equal to the sum of the individual probabilities Pr[$k$th card of the hand is AH], because these events are independent of each other. Each one of these probabilities is $1/d$, so Pr[Ace of Hearts is in your hand] = $1/d + 1/d + \ldots + 1/d = h/d$.
 \end{proof}
 
 \subsection{(d)}
@@ -74,6 +260,50 @@ $$
 Pr[K = 2 \,|\, \text{Ace of Hearts is in your hand}] = Pr[K = 2] \cdot \frac{2d}{ah}
 $$
 \begin{proof}
+1. Let's compute $Pr[K=2]$. 
+
+There are $\displaystyle\binom{d}{h}$ ways to choose a hand of $h$ cards. 
+
+There are $\displaystyle\binom{a}{2}$ ways to choose exactly 2 Aces. And then,
+
+there are $\displaystyle\binom{d-a}{h-2}$ ways to choose the remaining $h-2$ non-Ace cards, to create a hand of $h$ cards with exactly 2 Aces. Therefore:
+$$
+Pr[K=2] = \frac{\binom{a}{2}\binom{d-a}{h-2}}{\binom{d}{h}}
+$$
+2. Let's compute $Pr[K = 2 \text{ and AH is in your hand}]$.
+
+There are $\displaystyle\binom{d}{h}$ ways to choose a hand of $h$ cards.
+
+There is 1 way to choose Ace of Hearts. And then,
+
+there are $a-1$ ways to choose one more Ace from the remaining Aces (so we have exactly two), and then
+
+there are $\displaystyle\binom{d-a}{h-2}$ ways to choose the remaining $h-2$ elements of the hand from the remaining $d-a$ non-Ace cards, to complete the hand of $h$ cards.
+
+So:
+$$
+Pr[K = 2 \text{ and AH is in your hand}] = \frac{(a-1) \cdot \binom{d-a}{h-2}}{\binom{d}{h}}
+$$
+
+3. By part (c), $Pr[\text{AH is in your hand}] = h/d$.
+
+4. Notice that
+$$
+Pr[K = 2 \,|\, \text{AH is in your hand}] = \frac{Pr[K = 2 \text{ and AH is in your hand}]}{Pr[\text{AH is in your hand}]}
+$$
+
+5. Using (2) and (3) on (4), we get:
+$$
+Pr[K = 2 \,|\, \text{AH is in your hand}] = \frac{\displaystyle\frac{(a-1) \cdot \binom{d-a}{h-2}}{\binom{d}{h}}}{h/d}
+$$
+6. Multiplying both the numerator and the denominator by $a/2$ in (5) we get
+$$
+Pr[K = 2 \,|\, \text{AH is in your hand}] = \frac{\displaystyle\frac{\frac{a(a-1)}{2}\cdot \binom{d-a}{h-2}}{\binom{d}{h}}}{\frac{a}{2} \cdot \frac{h}{d}}
+$$
+7. Notice that $\frac{a(a-1)}{2} = \binom{a}{2}$, so the numerator is the same as $Pr[K=2]$ from step (1). Using this in (6) we get
+$$
+Pr[K = 2 \,|\, \text{AH is in your hand}] = \frac{Pr[K=2]}{\frac{a}{2} \cdot \frac{h}{d}} = Pr[K=2] \cdot \frac{2d}{ah}
+$$
 \end{proof}
 
 \subsection{(e)}
@@ -82,6 +312,18 @@ $$
 Pr[K = 2 \,|\, \text{the revealed card is an Ace}] = Pr[K = 2 \,|\, \text{Ace of Hearts is in your hand}]
 $$
 \begin{proof}
-\end{proof}
+1. It's easy to compute $Pr[\text{the revealed card is an Ace}]$. There are $d$ cards, $a$ of them are Aces, exactly 1 card is revealed, and every card has an equal chance of being revealed. So this probability is $a/d$. (Hand size is not relevant: exactly 1 card is revealed no matter what the hand size is. First choosing $h$ cards out of $d$ cards, then choosing 1 card from those $h$ cards to be revealed, is the same as directly choosing 1 card out of $d$ cards to be revealed.)
 
+2. It is also easy to compute $Pr[\text{Ace revealed}\,|\,K = 2]$. If there are exactly 2 Aces among the $h$ cards in the hand, then this probability is simply $2/h$.
+
+3. By Bayes' Theorem:
+$$
+Pr[K = 2 \,|\, \text{Ace revealed}] = \frac{Pr[ \text{Ace revealed}\,|\,K = 2] \cdot Pr[K = 2]}{Pr[\text{Ace revealed}]}
+$$
+4. Using (1) and (2) in (3), we get
+$$
+Pr[K = 2 \,|\, \text{Ace revealed}] = \frac{(2/h) \cdot Pr[K = 2]}{a/d} = Pr[K=2] \cdot \frac{2d}{ah}
+$$
+5. By part (d) the RHS of (4) is equal to $Pr[K = 2 \,|\, \text{AH is in your hand}]$, which proves part (e).
+\end{proof}
 \end{document}
