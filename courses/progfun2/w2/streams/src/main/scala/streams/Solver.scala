@@ -28,7 +28,7 @@ trait Solver extends GameDef:
    * that are inside the terrain.
    */
   def neighborsWithHistory(b: Block, history: List[Move])                // TODO
-      : LazyList[(Block, List[Move])] =
+                            : LazyList[(Block, List[Move])] =
     b
       .legalNeighbors
       .map((block, move) => (block, move :: history))
@@ -40,7 +40,7 @@ trait Solver extends GameDef:
    * make sure that we don't explore circular paths.
    */
   def newNeighborsOnly(neighbors: LazyList[(Block, List[Move])],         // TODO
-                       explored: Set[Block])
+                        explored: Set[Block])
                                 : LazyList[(Block, List[Move])] =
     neighbors filter ((block, _) => !explored.contains(block))
 

@@ -14,38 +14,248 @@
 \maketitle
 \tableofcontents
 
-\section{Problem 1}
-
+\section{Problem 1 (Probable Satisfiability)}
+Truth values for propositional variables $P, Q, R$ are chosen independently, with
+$$
+Pr[P = \text{True}] = 1/2, \,\,\, Pr[Q = \text{True}] = 1/3, \,\,\, Pr[R = \text{True}] = 1/5
+$$
+What is the probability that the formula
+$$
+(P \text{ IMPLIES } Q) \text{ IMPLIES } R
+$$
+is true?
 \begin{proof}
-
 \end{proof}
 
-\section{Problem 2}
-\subsection{(a)}
+\section{Problem 2 (Induction, Trees)}
+A simple graph, $G$, is said to have width 1 iff there is a way to list all its vertices so that each vertex is adjacent to at most one vertex that appears earlier in the list.
 
+Prove that every finite tree has width one.
+\begin{proof}
+\end{proof}
+
+\section{Problem 3 (Number Theory)}
+Indicate whether the following statements are true or false. For each of the false statements, give coun­terexamples. All variables range over the integers, $\mathbb{Z}$.
+\subsection{(a)}
+For all $a,b$ there are $x,y$ such that $ax + by = 1$.
 \begin{proof}
 \end{proof}
 
 \subsection{(b)}
-\begin{proof}
-\end{proof}
-
-\section{Problem 3}
-
-\subsection{(a)}
-\begin{proof}
-\end{proof}
-
-\subsection{(b)}
+gcd$(mb+r, b)$ = gcd$(r,b)$ for all $m, r, b$.
 \begin{proof}
 \end{proof}
 
 \subsection{(c)}
+$k^{p-1} \equiv 1$ (mod $p$) for every prime $p$ and every $k$.
 \begin{proof}
 \end{proof}
 
 \subsection{(d)}
+For primes $p \neq q$, $\phi(pq) = (p-1)(q-1)$ where $\phi$ is Euler's totient function.
 \begin{proof}
 \end{proof}
+
+\subsection{(e)}
+If $a$ and $b$ are relatively prime to $d$ then
+$$
+[ac \equiv bc] \text{ (mod $d$)} \text{ IMPLIES } [a \equiv b] \text{ (mod $d$)}
+$$
+\begin{proof}
+\end{proof}
+
+\section{Problem 4 (Scheduling \& DAGs)}
+Sauron finds that conquering Middle Earth breaks down into a bunch of tasks. Each task can be completed by a horrible creature called a Ringwraith in exactly one week. Sauron realizes the prerequisite structure among the tasks defines a partial order. He has $n$ tasks in his partial order, with a maximum length chain of $t$ tasks.
+
+In order to complete all $n$ tasks in $t$ weeks, Sauron will need to have crew of Ringwraiths working in parallel. In answering the following questions, do not make any assumptions about the values of $n$ and $t$ besides $1 \leq t \leq n$.
+
+\subsection{(a)} 
+Write a simple formula involving $n$ and $t$ for the smallest number of Ringwraiths that Sauron could possibly need.
+
+\subsection{(b)} On the other hand, if Sauron is unlucky, he may need a crew of Ringwraiths as large as $n - t + 1$ in order to conquer Middle Earth in $t$ weeks. Describe a partial order with $n$ tasks and maximum length chain of $t$ that would require this many Ringwraiths.
+\begin{proof}
+\end{proof}
+
+\section{Problem 5 (Simple Graphs)}
+The degree sequence of a simple graph $G$ with $n$ vertices is the length-$n$ sequence of the degrees of the vertices listed in weakly increasing order. For example, if $G$ is a 3-vertex line graph, then its degree sequence is $(1,1,2)$. On the other hand, $(0,0,2)$ is not a degree sequence, since in any graph with an edge, there are at
+least two vertices of positive degree, namely, the endpoints of the edge.
+
+Briefly explain why each of the following sequences is not a degree sequence of any connected simple graph.
+
+\subsection{(a)}
+$(1,2,3,4,5,6,7)$
+\subsection{(b)}
+$(1,3,3,4,4,4)$
+\subsection{(c)}
+$(1,1,1,1)$
+\subsection{(d)}
+$(1,2,3,4,4)$
+\begin{proof}
+\end{proof}
+
+\section{Problem 6 (Big Oh)}
+Define two functions $f,g$ that are incomparable under big Oh:
+$$
+f \neq O(g) \text{  and  } g \neq O(f)
+$$
+\begin{proof}
+\end{proof}
+
+\section{Problem 7 (Counting)}
+In a standard 52-card deck (13 ranks and 4 suits), a hand is a 5-card subset of the set of 52 cards. Express the answer to each part as a formula using factorial, binomial, or multinomial notation.
+\subsection{(a)}
+Let $H_{NP}$ be the set of all hands that include no pairs; that is, no two cards in the hand have the same rank. What is $|H_{NP}|$?
+\begin{proof}
+\end{proof}
+\subsection{(b)}
+Let $H_{S}$ be the set of all hands that are straights, i.e. the ranks of the five cards are consecutive. The order of the ranks is (A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, A); note that A appears twice. What is $|H_{S}|$?
+\begin{proof}
+\end{proof}
+\subsection{(c)}
+Let $H_{F}$ be the set of all hands that are flushes; that is, the suits of the five cards are identical. What is $|H_{F}|$?
+\begin{proof}
+\end{proof}
+\subsection{(d)}
+Let $H_{SF}$ be the set of all straight flush hands; that is, the hand is both a straight and a flush. What is $|H_{SF}|$?
+\begin{proof}
+\end{proof}
+\subsection{(e)}
+Let $H_{HC}$ be the set of all high-card hands; that is, hands that do not include pairs, are not straights, and are not flushes. What is $|H_{HC}|$?
+\begin{proof}
+\end{proof}
+
+\section{Problem 8 (Conditional Probability)}
+Here’s a variation of Monty Hall’s game: the contestant still picks one of three doors, with a prize randomly placed behind one door and goats behind the other two. But now, instead of always opening a door to reveal a goat, Monty instructs Carol to randomly open one of the two doors that the contestant hasn’t picked. This means she may reveal a goat, or she may reveal the prize. If she reveals the prize, then the entire game is restarted, that is, the prize is again randomly placed behind some door, the contestant again picks a door, and so on until Carol finally picks a door with a goat behind it. Then the contestant can choose to stick with his original choice of door or switch to the other unopened door. He wins if the prize is behind the door he
+finally chooses.
+
+To analyze this setup, we define two events:
+
+$GP$: The event that the contestant guesses the door with the prize behind it on his first guess.
+
+$OP$: The event that the game is restarted at least once. Another way to describe this is as the event that the door Carol first opens has a prize behind it.
+
+Give the values of the following probabilities:
+\subsection{(a)}
+$Pr[OP \,\,|\,\, \overline{GP}]$
+\begin{proof}
+\end{proof}
+
+\subsection{(b)}
+$Pr[OP]$
+\begin{proof}
+\end{proof}
+
+\subsection{(c)}
+the probability that the game will continue forever
+\begin{proof}
+\end{proof}
+
+\subsection{(d)}
+When Carol finally picks the goat, the contestant has a choice of sticking or switching. Let’s say that the contestant adopts the strategy of sticking. Let W be the event that the contestant wins with this strategy, and let $w \Coloneqq Pr[W]$. Express the following conditional probabilities as simple closed forms in terms of $w$.
+\subsubsection{i.}
+$Pr[W \,\,|\,\, GP]$
+\begin{proof}
+\end{proof}
+
+\subsubsection{ii.}
+$Pr[W \,\,|\,\, \overline{GP}\cap OP]$
+\begin{proof}
+\end{proof}
+
+\subsubsection{iii.}
+$Pr[W \,\,|\,\, \overline{GP}\cap \overline{OP}]$
+\begin{proof}
+\end{proof}
+
+\subsection{(e)}
+What is the value of $Pr[W]$?
+\begin{proof}
+\end{proof}
+
+\subsection{(f)}
+Let $R$ be the number of times the game is restarted before Carol picks a goat. What is $Ex[R]$? (You may express the answer as a simple closed form in terms of $p \Coloneqq Pr[OP]$.)
+\begin{proof}
+\end{proof}
+
+\section{Problem 9 (Expectation)}
+A simple graph with $n$ vertices is constructed by randomly placing an edge between every two vertices with probability $p$. These random edge placements are performed independently.
+\subsection{(a)}
+What is the probability that a given vertex of the graph has degree two?
+\begin{proof}
+\end{proof}
+
+\subsection{(b)}
+What is the expected number of nodes with degree two? (You may express your answer in terms of $t$, where $t$ is the answer to part (a).)
+\begin{proof}
+\end{proof}
+
+\section{Problem 10 (Variance, Sums)}
+You have a coin with probability $p$ of flipping heads. For your first try, you flip it once. For your second try, you independently flip it twice. You continue until the nth try, where you independently flip it $n$ times. You win a try if you flip all heads. Let $W$ be the number of winning tries. Write a closed-form expression for $Var[W]$.
+\begin{proof}
+\end{proof}
+
+\section{Problem 11 (Markov \& Chebyshev)}
+Albert has a gambling problem. He plays 35 hands of draw poker, 30 hands of black jack, and 20 hands of stud poker per day. He wins a hand of draw poker with probability 1/7, a hand of black jack with probability 1/6, and a hand of stud poker with probability 1/5. Let $W$ be the expected number of hands that Albert wins in a day.
+\subsection{(a)}
+What is $Ex[W ]$?
+\begin{proof}
+\end{proof}
+
+\subsection{(b)}
+What would the Markov bound be on the probability that Albert will win at least 45 hands on a given day?
+\begin{proof}
+\end{proof}
+
+\subsection{(c)}
+Assume the outcomes of the card games are pairwise independent. What is $Var[W ]$? You may answer with a numerical expression that is not completely evaluated.
+\begin{proof}
+\end{proof}
+
+\subsection{(d)}
+What would the Chebyshev bound be on the probability that Albert will win at least 45 hands on a given day? You may answer with a numerical expression that includes the constant $v = Var[W ]$.
+\begin{proof}
+\end{proof}
+
+\section{Problem 12 (Random Walks)}
+Give simple examples of random walk graphs with the following properties.
+\subsection{(a)}
+A graph with an uncountable number of stationary distributions.
+\begin{proof}
+\end{proof}
+
+\subsection{(b)}
+A graph with unique stationary distribution that is not strongly connected.
+\begin{proof}
+\end{proof}
+
+\subsection{(c)}
+A strongly connected graph with an initial distribution that does not converge to the stationary distribu­tion.
+\begin{proof}
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \end{document}

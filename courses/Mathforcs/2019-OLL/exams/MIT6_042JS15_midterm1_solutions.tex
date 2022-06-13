@@ -14,38 +14,245 @@
 \maketitle
 \tableofcontents
 
-\section{Problem 1}
-
+\section{Problem 1 (An irrational number)}
+Prove that $\sqrt[7]{35}$ is irrational.
 \begin{proof}
+1. Argue by contradiction and assume $\sqrt[7]{35}$ is rational.
 
+2. By definition of a rational number, there exist integers $a, b$ such that $b \neq 0$, $a$ and $b$ have no common divisors, and $\sqrt[7]{35} = a / b$.
+
+3. Taking 7th powers of both sides we get
+$$
+35 = (a/b)^7 = a^7 / b^7
+$$
+4. Multiply both sides by $b^7$ to get
+$$
+35b^7 = a^7
+$$
+5. Since 5 divides the left hand side (because of 35), 5 also divides the right hand side. So 5 divides $a^7$, which implies that 5 divides $a$.
+
+6. By definition of divisibility, there exists an integer $k$ such that $a = 5k$. Replacing $a$ with this, we get
+$$
+35b^7 = (5k)^7 = 5^7k^7
+$$
+7. Dividing both sides by 5 we get
+$$
+7b^7 = 5^6k^7
+$$
+8. Since 5 divides the right hand side, 5 also divides the left hand side. Since 5 does not divide 7, 5 divides $b^7$. This implies 5 divides $b$.
+
+9. This means that $a$ and $b$ have a common factor, namely 5, a contradiction.
+
+10. Therefore our initial assumption was false, and $\sqrt[7]{35}$ is irrational.
 \end{proof}
 
-\section{Problem 2}
-\subsection{(a)}
-
+\section{Problem 2 (Well Ordering Principle)}
+Use the Well Ordering Principle to prove that the equation
+$$
+3a^4 + 9b^4 = c^4
+$$
+has no positive integer solutions.
 \begin{proof}
+1. Argue by contradiction and assume that the equation has positive integer solutions $(a,b,c)$. 
+
+2. Define the set
+$$
+S \Coloneqq \{a \in \mathbb{N} \,\,|\,\,\text{there is a positive integer solution }(a,b,c) \text{ to the equation}\}
+$$
+
+3. By (1), $S$ is nonempty. Therefore by the Well-Ordering Principle $S$ has a smallest element $a_0$. So there is a positive integer solution $(a_0, b_0, c_0)$ to the equation.
+
+4. By (3) 
+$$
+3a_0^4 + 9b_0^4 = c_0^4
+$$ 
+Notice that 3 divides the left hand side, so 3 must also divide the right hand side.
+
+5. By (4), 3 divides $c_0^4$, and therefore 3 divides $c_0$. So there exists a positive integer $k$ such that $c_0 = 3k$.
+
+6. By (4) and (5)
+$$
+3a_0^4 + 9b_0^4 = (3k)^4 = 3^4k^4
+$$
+7. Divide both sides of (6) by 3 to get
+$$
+a_0^4 + 3b_0^4 = 3^3k^4
+$$
+8. By an argument similar to (4) and (5), we can see that 3 also divides $a_0$. So there is a positive integer $m$ such that $a_0 = 3m$.
+
+9. Similar to steps (6) and (7) we get
+$$
+3^3m^4 + b_0^4 = 3^2k^4
+$$
+10. Repeating a similar argument once more, we see that 3 divides $b_0$, so there is a positive integer $n$ such that $b_0 = 3n$, and we get
+$$
+3^3m^4 + (3n)^4 = 3^3m^4 + 3^4n^4 = 3^2k^4
+$$
+and dividing by 9 we get
+$$
+3m^4 + 9n^4 = k^4
+$$
+11. We found another positive solution $(m, n, k)$ where $m < a$ (because $a = 3m$), which contradicts the fact that $a$ was the smallest with this property. 
+
+12. So our assumption in (1) is false and the equation has no positive solutions.
+\end{proof}
+
+\section{Problem 3 (Predicate Logic)}
+Express each of the following predicates and propositions in formal logic notation. The domain of discourse is the nonnegative integers, $\mathbb{N}$. Moreover, in addition to the propositional operators, variables and quantifiers, you may define predicates using addition, multiplication, and equality symbols, but no exponentiation (like
+$x^y$) and no integer constants like 0 or 1.
+
+For example, the predicate ``$x \geq y$'' could be expressed by the following logical formula:
+$$
+\exists w.(y + w = x)
+$$
+Now that we can express $\geq$, it’s OK to use it to express other predicates. For example, the predicate $x < y$ can now be expressed as
+$$
+y \geq x \text{ AND NOT}(x = y)
+$$
+For each of the predicates below, describe a logical formula to express it. It is OK to use in the logical formula any of the predicates previously expressed.
+\subsection{(a)}
+$x = 1$
+\begin{proof}
+We can define 1 as the unit element of multiplication:
+$$
+\forall w.(w \cdot x = w)
+$$
 \end{proof}
 
 \subsection{(b)}
+$m$ is a divisor of $n$ (notation: $m \mid n$)
 \begin{proof}
-\end{proof}
-
-\section{Problem 3}
-
-\subsection{(a)}
-\begin{proof}
-\end{proof}
-
-\subsection{(b)}
-\begin{proof}
+Using multiplication and equality:
+$$
+\exists w.(w \cdot m = n)
+$$
 \end{proof}
 
 \subsection{(c)}
+$n$ is a prime number.
 \begin{proof}
+Using ``is a divisor of'' from part (b) and ``is equal to 1'' from part (a):
+$$
+NOT(\exists w.(NOT(w = 1)\,\, AND \,\, (w \mid n)))
+$$
 \end{proof}
 
 \subsection{(d)}
+$n$ is a power of a prime.
 \begin{proof}
+This is tricky! We are not allowed to use exponentiation. We can say that $n$ is divisible by only one prime. Using ``is a prime'' from part (c):
+$$
+\exists p.(isPrime(p) \,\, AND \,\,(p \mid n) \,\, AND
+$$
+$$
+\forall q.((isPrime(q) \,\, AND \,\, NOT(p = q)) \,\, IMPLIES \,\, NOT(q \mid n)))
+$$
 \end{proof}
 
+\section{Problem 4 (Binary Relations)}
+Formulas defining functions from integers to integers are listed below. For each function, indicate whether it is
+
+B, a bijection [= 1 out, = 1 in],
+
+S, surjection [$\geq$ 1 in], but not a bijection,
+
+I, an injection [$\leq$ 1 in], but not a bijection,
+
+N, neither an injection nor a surjection.
+\subsection{(a)}
+$a(x) \Coloneqq x^2$
+\begin{proof}
+N.
+
+Not an injection because $a(-1) = a(1) = 1$. 
+
+Not a surjection because the range of $a$ is the nonnegative integers, so the range does not include negative integers.
+\end{proof}
+\subsection{(b)}
+$b(x) \Coloneqq x+2$
+\begin{proof}
+B.
+
+$b$ is injective because $b(x) = b(y)$ implies $x + 2 = y + 2$ which implies $x = y$.
+
+$b$ is surjective, because for all integers $y$ in the range, there is an integer $x = y - 2$ in the domain such that $b(x) = y$, since $b(x) = b(y - 2) = y-2+2 = y$.
+\end{proof}
+\subsection{(c)}
+$c(x) \Coloneqq 2x$
+\begin{proof}
+I.
+
+$c$ is injective because $c(x) = c(y)$ implies $2x = 2y$ which implies $x = y$.
+
+Not a surjection because the range is the set of all even integers, so the range does not include odd integers.
+\end{proof}
+\subsection{(d)}
+$d(x) \Coloneqq -x$
+\begin{proof}
+B.
+
+$d$ is injective because $d(x) = d(y)$ implies $-x = -y$ which implies $x = y$.
+
+$d$ is surjective because for all integers $y$ in the range, there is an integer $x = -y$ in the domain such that $d(x) = y$ (since $d(-y) = -(-y) = y$).
+\end{proof}
+\subsection{(e)}
+$e(x) \Coloneqq \lfloor x/2\rfloor$, that is, the quotient of $x$ divided by 2.
+\begin{proof}
+S.
+
+Not an injection because $e(2) = 1$ but also $e(3) = 1$ too.
+
+$e$ is surjective because for all integers $y$ in the range, there is an integer $x = 2y$ in the domain such that $e(x) = y$ (since $e(2y) = \lfloor (2y)/2 \rfloor = \lfloor y \rfloor = y$).
+\end{proof}
+
+\section{Problem 5 (Class Teams by Induction)}
+A class of any size of 18 or more can be assembled from student teams of sizes 4 and 7. Prove this by induction (of some kind), using the induction hypothesis:
+$$
+S(n) \Coloneqq \text{ a class of $n + 18$ students can be assembled from teams of sizes 4 and 7.}
+$$
+\begin{proof}
+First we have to interpret ``can be assembled from student teams of sizes 4 and 7.'' Should there be at least one team of each size? Or can there be only size-4 teams, or only size-7 teams?
+
+For example, if we consider a class of 21, it can be assembled by 3 teams of size 7. It cannot be assembled in any way that includes a team of size 4, because: 
+
+if we use only 1 team of 4, then 21 - 4 = 17 is not divisible by 7; 
+
+if we use only 2 teams of 4, then 21 - 8 = 13 is not divisible by 7; 
+
+if we use only 3 teams of 4, then 21 - 12 = 9 is not divisible by 7; 
+
+if we use only 4 teams of 4, then 21 - 16 = 5 is not divisible by 7; and finally,
+
+if we use 5 teams of 4, then 21 - 20 = 1 is not divisible by 7.
+
+So the only way to assemble a class of 21 is to use ONLY teams of size 7.
+
+This means that the number of teams of each size must be allowed to be 0, so the number of teams of each size should be a nonnegative integer. This is important for the rest of the proof.
+
+{\bf Base Case.} 18 = 4 + 7 + 7, so a class of 0 + 18 students can be assembled from teams of sizes 4 and 7. Therefore $S(0)$ is true.
+
+{\bf Induction Step.} 
+
+1. Assume $n \geq 0$ and assume $S(n)$ is true. We want to prove $S(n+1)$ is true.
+
+2. By the induction hypothesis, there exists nonnegative integers $p, q$ such that
+$$
+n + 18 = 4p + 7q
+$$
+3. Case 1: $q = 0$. 
+
+In this case $n + 18 = 4p$ which implies $p \geq 5$. So we can write
+$$
+(n+1) + 18 = 4p + 1 = 4p + (21 - 20) = 4(p - 5) + 7(3)
+$$
+and both $p - 5$ and 3 are nonnegative integers. So a class of $(n+1)+18$ students can be assembled from teams of size 4 and 7, proving $S(n+1)$.
+
+4. Case 2: $q \geq 1$. By (2) we have
+$$
+(n+1) + 18 = 4p + 7q + 1 = 4p + 7q + (8 - 7) = 4(p+2) + 7(q-1)
+$$
+and both $p+2$ and $q-1$ are nonnegative integers. So a class of $(n+1)+18$ students can be assembled from teams of size 4 and 7, proving $S(n+1)$.
+
+5. By the Principle of Mathematical Induction $S(n)$ is true for all nonnegative integers $n$.
+\end{proof}
 \end{document}

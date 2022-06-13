@@ -23,7 +23,7 @@ enum Json:
    * Try to decode this JSON value into a value of type `A` by using
    * the contextual decoder.
    *
-   * Note that you have to explicitly fix `A` type parameter 
+   * Note that you have to explicitly fix `A` type parameter
    * when you call the method:
    *
    * {{{
@@ -74,7 +74,6 @@ trait EncoderInstances:
 
   /** An encoder for `Int` values */
   given Encoder[Int] =
-    //Encoder fromFunction (n => Json.Num(BigDecimal(n)))
     Encoder fromFunction (n => Json.Num(BigDecimal(n)))
 
   /** An encoder for `String` values */
@@ -113,7 +112,7 @@ trait ObjectEncoder[-A] extends Encoder[A]:
 object ObjectEncoder:
 
   /**
-    * Convenient method for creating an instance of object encoder 
+    * Convenient method for creating an instance of object encoder
     * from a function `f`
     */
   def fromFunction[A](f: A => Json.Obj): ObjectEncoder[A] =
@@ -121,8 +120,8 @@ object ObjectEncoder:
       def encode(value: A): Json.Obj = f(value)
 
   /**
-    * An encoder for values of type `A` that produces a JSON object with one 
-    * field named according to the supplied `name` and containing 
+    * An encoder for values of type `A` that produces a JSON object with one
+    * field named according to the supplied `name` and containing
     * the encoded value.
     */
   def field[A](name: String)(using encoder: Encoder[A]): ObjectEncoder[A] =
@@ -187,7 +186,7 @@ trait DecoderInstances:
         if   value.isValidInt
         then Some(value.toInt)
         else None
-      case _ => None )
+      case _ => None)
 
   /** A decoder for `String` values */
   // Define a given value of type `Decoder[String]`

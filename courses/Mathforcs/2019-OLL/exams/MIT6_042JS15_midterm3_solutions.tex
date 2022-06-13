@@ -14,38 +14,131 @@
 \maketitle
 \tableofcontents
 
-\section{Problem 1}
+\section{Problem 1 (Scheduling)}
+The following DAG describes the prerequisites among tasks $\{A, \ldots, H \}$.
 
-\begin{proof}
+$A \to D$,
 
-\end{proof}
+$B \to E, B \to F$,
 
-\section{Problem 2}
+$C \to F$,
+
+$D \to E$, 
+
+$E \to G$,
+
+$F \to H$.
 \subsection{(a)}
-
+What are the two maximum size antichains?
 \begin{proof}
 \end{proof}
 
 \subsection{(b)}
-\begin{proof}
-\end{proof}
-
-\section{Problem 3}
-
-\subsection{(a)}
-\begin{proof}
-\end{proof}
-
-\subsection{(b)}
+If each task takes unit time to complete, what is the minimum parallel time to complete all the tasks?
 \begin{proof}
 \end{proof}
 
 \subsection{(c)}
+What is the minimum parallel time if no more than two tasks can be completed in parallel?
+\begin{proof}
+\end{proof}
+
+\section{Problem 2 (Partial Orders \& Equivalence)}
+Let A be a nonempty set.
+\subsection{(a)}
+Describe a single relation on $A$ that is both an equivalence relation and a weak partial order on $A$.
+\begin{proof}
+\end{proof}
+
+\subsection{(b)}
+Prove that the relation of part (a) is the only relation on A with these properties.
+\begin{proof}
+\end{proof}
+
+\section{Problem 3 (Simple Graphs)}
+\subsection{(a)}
+Give an example of a simple graph that has two vertices $u \neq v$ and two distinct paths between $u$ and $v$, but no cycle including either $u$ or $v$.
+
+Hint: There is an example with 5 vertices.
+\begin{proof}
+\end{proof}
+
+\subsection{(b)}
+Prove that if there are different paths between two vertices in a simple graph, then the graph has a cycle.
+\begin{proof}
+\end{proof}
+
+\section{Problem 4 (Trees \& Coloring)}
+Prove by induction that, using a fixed set of $n > 1$ colors, there are exactly $n\cdot(n-1)^{m-1}$ different colorings of any tree with $m$ vertices.
+\begin{proof}
+\end{proof}
+
+\section{Problem 5 (Stable Marriage)}
+The Mating Ritual for finding stable marriages works without change when there are at least as many, and possibly more, men than women. You may assume this. So the Ritual ends with all the women married and
+no rogue couples for these marriages, where an unmarried man and a married woman who prefers him to her spouse is also considered to be a ``rogue couple.''
+
+Let Alice be one of the women, and Bob be one of the men. Circle the properties below that are preserved invariants of the Mating Ritual when there are at least as many men as women.
+\subsection{(a)}
+Alice has a suitor (man who is serenading her) whom she prefers to Bob.
+\begin{proof}
+\end{proof}
+
+\subsection{(b)}
+Alice is the only woman on Bob's list.
+\begin{proof}
+\end{proof}
+
+\subsection{(c)}
+Alice has no suitor.
 \begin{proof}
 \end{proof}
 
 \subsection{(d)}
+Bob prefers Alice to the women he is serenading.
 \begin{proof}
 \end{proof}
 
+\subsection{(e)}
+Bob is serenading Alice.
+\begin{proof}
+\end{proof}
+
+\subsection{(f)}
+Bob is not serenading Alice.
+\begin{proof}
+\end{proof}
+
+\subsection{(g)}
+Bob's list of women to serenade is empty.
+\begin{proof}
+\end{proof}
+
+\section{Problem 6 (Sums \& Integrals)}
+There is a number $a$ such that
+$$
+\sum_{i=1}^{\infty}i^p
+$$
+converges to a finite value iff $p < a$.
+\subsection{(a)}
+What is the value of $a$?
+\begin{proof}
+\end{proof}
+
+\subsection{(b)}
+Circle all of the following that would be good approaches as part of a proof that this value of $a$ is correct.
+{\bf (i)} Find a closed form for
+$$
+$$
+{\bf (ii)} Find a closed form for
+$$
+$$
+{\bf (iii)} Induction on $p$.
+
+{\bf (iv)} Induction on $n$ using the following sum
+$$
+\sum_{i=1}^n i^p
+$$
+{\bf (v)} Compare the series term-by-term with the Harmonic series.
+\begin{proof}
+\end{proof}
 \end{document}
