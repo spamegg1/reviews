@@ -139,10 +139,12 @@ u = p_0 - e_0 - \ldots - e_m - p_m = v = q_n - f_n - \ldots - f_0 - q_0 = u
 $$
 3. So assume that $p$ and $q$ have a node in common (except $u$ and $v$). Say $k \geq 1$ is the smallest with the property that $p_k = q_l$ for some $l$.
 
-4. If $p$ and $q$ have exactly one node $p_k = q_l$ in common, then following $p_k$ to $v$ along $p$, then following along $q$ back to $p_k$ gives us the cycle:
+4. Assume $p$ and $q$ have exactly one node $p_k = q_l$ in common. If $k = 1$ (so that $p_k$ is connected to $u$) then following $p_k$ to $v$ along $p$, then following along $q$ back to $p_k$ gives us the cycle:
 $$
 p_k - e_k - \ldots - e_m - p_m = v = q_n - f_n - \ldots - f_l - q_l = p_k
 $$
+If instead $k > 1$ then similarly we can start from $u$, travel to $p_k$ and travel back to $u$ to get a cycle.
+
 5. Otherwise $p$ and $q$ have at least two nodes in common. Say $k_1 < k_2$ are the two smallest with the property that $p_{k_1} = q_{l_1}$ and $p_{k_2} = q_{l_2}$ for some $l_1 < l_2$. 
 
 Then, going from $p_{k_1}$ to $p_{k_2}$ along $p$, then going back from $p_{k_2}$ to $p_{k_1}$ along $q$ gives us the cycle:
