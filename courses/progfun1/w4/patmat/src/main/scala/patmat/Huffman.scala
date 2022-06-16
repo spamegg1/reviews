@@ -12,9 +12,9 @@ package patmat
  * The weight of a `Fork` node is the sum of the weights of these leaves.
  */
 abstract class CodeTree
-case class Fork(left: CodeTree,
-                right: CodeTree,
-                chars: List[Char],
+case class Fork(left  : CodeTree,
+                right : CodeTree,
+                chars : List[Char],
                 weight: Int) extends CodeTree
 case class Leaf(char: Char, weight: Int) extends CodeTree
 
@@ -26,11 +26,11 @@ trait Huffman extends HuffmanInterface:
 
   // Part 1: Basics
   def weight(tree: CodeTree): Int = tree match                           // TODO
-    case Fork(left, right, _, _) => weight(left) + weight(right)
+    case Fork(_, _, _, wght) => wght
     case Leaf(_, wght) => wght
 
   def chars(tree: CodeTree): List[Char] = tree match                     // TODO
-    case Fork(left, right, _, _) => chars(left) ::: chars(right)
+    case Fork(_, _, chs, _) => chs
     case Leaf(char, _) => List(char)
 
   def makeCodeTree(left: CodeTree, right: CodeTree) =
@@ -130,9 +130,9 @@ trait Huffman extends HuffmanInterface:
    * the list of code trees contains only one single tree, 
    * and then return that singleton list.
    */
-  def until(done: List[CodeTree] => Boolean,
+  def until(done : List[CodeTree] => Boolean,
             merge: List[CodeTree] => List[CodeTree])
-           (trees: List[CodeTree]): List[CodeTree] =                     // TODO
+           (trees: List[CodeTree]) : List[CodeTree] =                    // TODO
     if   done(trees)
     then trees
     else until(done, merge)(merge(trees))
@@ -146,7 +146,7 @@ trait Huffman extends HuffmanInterface:
    * and creates a code tree based on them.
    */
   def createCodeTree(chars: List[Char]): CodeTree =                      // TODO
-    val freqs = times(chars)
+    val freqs  = times(chars)
     val leaves = makeOrderedLeafList(freqs)
     until(singleton, combine)(leaves).head
 

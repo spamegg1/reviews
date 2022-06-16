@@ -130,12 +130,27 @@ Since $B$ is c-d, and $\{1\}$ is c-d (because it's finite), and we used only two
 \subsection{(d)}
 Show that $\{01\}^*$ is c-d.
 \begin{proof}
+(thanks to monogon)
+
 Again, just to get a better feel for it, let's write down $\{01\}^*$:
 $$
 \{01\}^* = \{\lambda, 01, 0101, 010101, 01010101, 0101010101, \ldots\}
 $$
+Consider the language
+$$
+X = B\cdot\{00, 11\}\cdot B
+$$
+$X$ is c-d because $B$ is c-d and $\{00, 11\}$ is c-d (because it's finite) and we used two more concatenation operations.
 
-???
+Notice that $X$ is the set of all binary words that contain at least one occurrence of 00 or contain at least one occurrence of 11.
+
+Then the complement of $X$, let's call it $Y$, is also c-d. Notice that $Y$ is the set of all binary words that have no occurrences of 00 and no occurrences of 11. 
+
+Notice that $\{01\}^* \subset Y$ but they are not the same. $Y$ still contains strings of odd length like 01010 or 101. We have to remove odd length strings, and even length strings that start with 1 and end with 0.
+
+Let $Z$ be the set of all binary words that start with a 0 and end with a 1, from part (b). Then $W = Y \cap Z$ is also c-d.
+
+Finally notice that $W = \{01\}^*$, because members of $W$ must have all the properties of $Y$ and $Z$: does not contain any occurrences of 00 or 11, starts with 0, ends with 1.
 \end{proof}
 
 \subsection{(e)}
@@ -236,7 +251,41 @@ Therefore $(R \cdot S) \cap 0^* = \emptyset$, so $R \cdot S$ is boring.
 
 We want to prove that $\overline{(R \cdot S)} \cap 0^*$ is finite, which will prove that $R \cdot S$ is boring.
 
-???
+There are 3 subcases: 
+
+both $R \cap 0^*$ and $S \cap 0^*$ are infinite,
+
+$R \cap 0^*$ is infinite and $S \cap 0^*$ is finite, 
+
+$R \cap 0^*$ is finite and $S \cap 0^*$ is infinite.
+
+8. Consider the first Subcase. Assume both $R \cap 0^*$ and $S \cap 0^*$ are infinite.
+
+Since $R \cap 0^*$ is infinite and $R$ is boring, $\overline{R} \cap 0^*$ is finite. Same for $S$. $\overline{S} \cap 0^*$ is finite.
+
+Let $m$ denote the length of the longest all-zero string in $\overline{R}$, and let $n$ denote the length of the longest all-zero string in $\overline{S}$. 
+
+Then $R$ contains every all-zero string of length $m+1$ or longer, and $S$ contains every all-zero string of length $n+1$ or longer.
+
+Then $R \cdot S$ at least contains every all-zero string of length $m+n+2$ or longer. So $\overline{R \cdot S}$ can only contain all-zero strings of length at most $m+n+1$.
+
+So $\overline{(R \cdot S)} \cap 0^*$ is finite, proving that $R\cdot S$ is boring.
+
+The proofs for the other two Subcases are very similar, I will do only one:
+
+9. Consider the second Subcase. Assume $R \cap 0^*$ is infinite and $S \cap 0^*$ is finite.
+
+Since $R \cap 0^*$ is infinite and $R$ is boring, $\overline{R} \cap 0^*$ is finite.
+
+Let $m$ denote the length of the longest all-zero string in $\overline{R}$, and let $n$ denote the length of the shortest all-zero string in $S$.
+
+Then $R$ contains every all-zero string of length $m+1$ or longer.
+
+Then $R \cdot S$ contains every all-zero string of length $m+n+1$ or longer. So $\overline{R \cdot S}$ can contain all-zero strings of length at most $m+n$.
+
+So $\overline{(R \cdot S)} \cap 0^*$ is finite, proving that $R\cdot S$ is boring.
+
+10. The last Subcase is similar to the previous one (swap $R$ and $S$).
 \end{proof}
 \subsection{(h)}
 Explain why all c-d languages are boring.
@@ -249,5 +298,4 @@ Also notice that if $S$ is boring, then $\overline{S}$ is also boring.
 
 Therefore, all c-d languages are boring, because c-d languages are obtained from finite sets (which are all boring) by a finite number of union, concatenation, complement operations (which all preserve boringness by the above arguments).
 \end{proof}
-
 \end{document}
