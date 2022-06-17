@@ -25,6 +25,28 @@ $$
 $$
 is true?
 \begin{proof}
+$(P \text{ IMPLIES } Q) \text{ IMPLIES } R$ is logically equivalent to:
+$\neg(\neg P \vee Q)\vee R$ which is logically equivalent to: $(P \wedge \neg Q) \vee R$.
+
+Let's write a truth table, along with the probability of each event:
+$$
+\begin{array}{|c c c|c|c|c|}
+P & Q & R & P \wedge \neg Q & (P \wedge \neg Q) \vee R & \text{probability}\\ 
+\hline 
+T & T & T & F & T & (1/2)(1/3)(1/5) = 1/30\\
+T & T & F & F & F & (1/2)(1/3)(4/5) = 4/30\\
+T & F & T & T & T & (1/2)(2/3)(1/5) = 2/30\\
+T & F & F & T & T & (1/2)(2/3)(4/5) = 8/30\\
+F & T & T & F & T & (1/2)(1/3)(1/5) = 1/30\\
+F & T & F & F & F & (1/2)(1/3)(4/5) = 4/30\\
+F & F & T & F & T & (1/2)(2/3)(1/5) = 2/30\\
+F & F & F & F & F & (1/2)(2/3)(4/5) = 8/30
+\end{array}
+$$
+So the probability that our formula is true is:
+$$
+\frac{1}{30} + \frac{2}{30} + \frac{8}{30} + \frac{1}{30} + \frac{2}{30} = \frac{14}{30}
+$$
 \end{proof}
 
 \section{Problem 2 (Induction, Trees)}
@@ -32,6 +54,21 @@ A simple graph, $G$, is said to have width 1 iff there is a way to list all its 
 
 Prove that every finite tree has width one.
 \begin{proof}
+Argue by induction on the number $n$ of nodes of a tree.
+
+{\bf Base Case.} $n = 1$. Assume $T$ is a finite tree with $1$ node. In this case we can list the only node, say $v_0$ of $T$. There are no edges, so the adjacency condition is vacuously satisfied.
+
+{\bf Induction Step.} Assume $n \geq 1$ and assume every finite tree with $n$ nodes has width one. Assume $T$ is a finite tree with $n+1$ nodes.
+
+Consider a leaf $l$ of $T$ (a leaf is a ``terminal node'' of a tree, in other words, a node with degree 1). Say $l$ is connected to an internal node $v$ with edge $e$.
+
+Consider the tree $T'$ obtained from $T$ by removing $l$ and $e$. ($T'$ is still a tree, because we only removed a leaf, so it's still connected and cycle-free.)
+
+$T'$ has $n$ nodes. By the induction hypothesis there is a list $v_0, v_1, \ldots, v_n$ of all the nodes of $T'$ such that each node is adjavent to at most 1 node earlier in the list.
+
+Now consider the list of nodes $v_0, \ldots, v_n, l$ of $T$. We know that $l$ is adjacent to exactly one node $v$, which is earlier in the list, among the $v_0, \ldots, v_n$. Therefore $T$ also has width 1. This finishes the proof of the Induction Step.
+
+By the Principle of Mathematical Induction, every finite tree has width 1.
 \end{proof}
 
 \section{Problem 3 (Number Theory)}
@@ -39,21 +76,25 @@ Indicate whether the following statements are true or false. For each of the fal
 \subsection{(a)}
 For all $a,b$ there are $x,y$ such that $ax + by = 1$.
 \begin{proof}
+False: choose $a = b = 2$. Argue by contradiction and assume there are $x,y$ such that $2x + 2y = 1$. Then $x + y = 1/2$, a contradiction since $x + y$ has to be an integer.
 \end{proof}
 
 \subsection{(b)}
 gcd$(mb+r, b)$ = gcd$(r,b)$ for all $m, r, b$.
 \begin{proof}
+True.
 \end{proof}
 
 \subsection{(c)}
 $k^{p-1} \equiv 1$ (mod $p$) for every prime $p$ and every $k$.
 \begin{proof}
+False: choose $k = 4$ and $p = 2$. Then $4^{2-1} \equiv 0$ (mod $2$).
 \end{proof}
 
 \subsection{(d)}
 For primes $p \neq q$, $\phi(pq) = (p-1)(q-1)$ where $\phi$ is Euler's totient function.
 \begin{proof}
+True.
 \end{proof}
 
 \subsection{(e)}
@@ -62,6 +103,7 @@ $$
 [ac \equiv bc] \text{ (mod $d$)} \text{ IMPLIES } [a \equiv b] \text{ (mod $d$)}
 $$
 \begin{proof}
+False: choose $a = 2, b = 3, c = 5, d = 5$. $a = 2$ and $b = 3$ are relatively prime to $d = 5$, $ac = 10$, $bc = 15$ and $10 \equiv 15 \text{ (mod $5$)}$ but it is not true that $2 \equiv 3 \text{ (mod $5$)}$.
 \end{proof}
 
 \section{Problem 4 (Scheduling \& DAGs)}
@@ -71,9 +113,17 @@ In order to complete all $n$ tasks in $t$ weeks, Sauron will need to have crew o
 
 \subsection{(a)} 
 Write a simple formula involving $n$ and $t$ for the smallest number of Ringwraiths that Sauron could possibly need.
+\begin{proof}
+If $t = n$ and the whole partial order is a chain, then only 1 Ringwraith is needed, since no tasks can be parallelized.
+
+More generally, for any $1 \leq t \leq n$, the smallest number of Ringwraiths needed corresponds to the situation of minimum parallelizability; in other words, having as long chains as possible.
+
+If the partial order consists entirely of max length ($t$) chains (maybe with the exception of the last one, which might end up shorter than $t$ if $n$ is not a multiple of $t$), then there are $\displaystyle\left\lceil \frac{n}{t} \right\rceil$ chains, each of which requires 1 Ringwraith, so the smallest number of Ringwraiths is $\displaystyle\left\lceil \frac{n}{t} \right\rceil$.
+\end{proof}
 
 \subsection{(b)} On the other hand, if Sauron is unlucky, he may need a crew of Ringwraiths as large as $n - t + 1$ in order to conquer Middle Earth in $t$ weeks. Describe a partial order with $n$ tasks and maximum length chain of $t$ that would require this many Ringwraiths.
 \begin{proof}
+Consider the partial order of $n$ tasks, where $t$ of these tasks form a prerequisite chain, and the remaining $n-t$ tasks are incomparable to each other and to the chain. Then the chain requires 1 Ringwraith, and the other $n-t$ tasks can be parallelized, each requiring 1 Ringwraith, for a total of $n-t+1$ Ringwraiths.
 \end{proof}
 
 \section{Problem 5 (Simple Graphs)}
@@ -84,13 +134,33 @@ Briefly explain why each of the following sequences is not a degree sequence of 
 
 \subsection{(a)}
 $(1,2,3,4,5,6,7)$
+\begin{proof}
+This graph has 7 vertices, and one of the vertices has degree 7. That's not possible in a simple graph! Each vertex can have degree at most 6.
+\end{proof}
 \subsection{(b)}
 $(1,3,3,4,4,4)$
+\begin{proof}
+The sum of all the vertex degrees in this graph is 19, which is impossible. The sum of all degrees must be even (because it's equal to 2 times the total number of edges).
+\end{proof}
 \subsection{(c)}
 $(1,1,1,1)$
+\begin{proof}
+The sum of the degrees is 4, which means there are only 2 edges in the graph. This is not possible in a connected graph! The only way to have a graph with 4 vertices and 2 edges, where each vertex has degree 1, is  by splitting the 4 vertices into two pairs, say $a,b$ and $c,d$, where there is an edge between $a$ and $b$ and an edge between $c$ and $d$. This is a disconnected graph.
+\end{proof}
 \subsection{(d)}
 $(1,2,3,4,4)$
 \begin{proof}
+The sum of degrees is 14, so there are 7 edges total.
+
+Consider the vertex $v$ that has degree 1 in this graph. It is only connected to one other vertex via the edge, let's say $e$; so removing $v$ and $e$ should result in another connected graph.
+
+Now the remaining graph has a degree sequence which is one of the 3 possibilities: $(1,3,4,4), (2,2,4,4)$ or $(2,3,3,4)$.
+
+This reduces the sum of degrees to 12, the number of edges to 6, and the number of vertices to 4. If a simple graph of 4 vertices has 6 edges, then it must be the complete graph $K_4$, which has degree sequence $(3, 3, 3, 3)$.
+
+So this is a contradiction!
+
+(Another way to get a contradiction is: after removing $l$ and $e$, we are left with 4 vertices and at least one vertex of degree 4, but a vertex can have at most degree 3 in a simple graph with 4 vertices.)
 \end{proof}
 
 \section{Problem 6 (Big Oh)}
@@ -99,6 +169,7 @@ $$
 f \neq O(g) \text{  and  } g \neq O(f)
 $$
 \begin{proof}
+I think that $f(x) = |x\sin(x)|$, $g(x) = |x\cos(x)|$ will do the job, but I'm not sure.
 \end{proof}
 
 \section{Problem 7 (Counting)}
@@ -106,22 +177,74 @@ In a standard 52-card deck (13 ranks and 4 suits), a hand is a 5-card subset of 
 \subsection{(a)}
 Let $H_{NP}$ be the set of all hands that include no pairs; that is, no two cards in the hand have the same rank. What is $|H_{NP}|$?
 \begin{proof}
+There are $\binom{13}{5}$ ways to choose 5 distinct ranks from the 13 possible ranks.
+
+For each one of the 5 ranks, there are 4 ways to choose a suit. So
+$$
+|H_{NP}| = \binom{13}{5} \cdot 4^5
+$$
 \end{proof}
 \subsection{(b)}
 Let $H_{S}$ be the set of all hands that are straights, i.e. the ranks of the five cards are consecutive. The order of the ranks is (A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, A); note that A appears twice. What is $|H_{S}|$?
 \begin{proof}
+There are 10 possible straight sequences:
+
+A, 2, 3, 4, 5
+
+2, 3, 4, 5, 6
+
+3, 4, 5, 6, 7
+
+4, 5, 6, 7, 8
+
+5, 6, 7, 8, 9
+
+6, 7, 8, 9, 10
+
+7, 8, 9, 10, J
+
+8, 9, 10, J, Q
+
+9, 10, J, Q, K
+
+10, J, Q, K, A
+
+For each sequence, there are $4^5$ ways to choose the suits. So
+$$
+|H_{S}| = 10 \cdot 4^5
+$$
 \end{proof}
 \subsection{(c)}
 Let $H_{F}$ be the set of all hands that are flushes; that is, the suits of the five cards are identical. What is $|H_{F}|$?
 \begin{proof}
+There are 4 ways to choose a suit. Then there are $\binom{13}{5}$ ways to choose a hand from the 13 cards of that suit. So
+$$
+|H_{F}| = 4 \cdot \binom{13}{5}
+$$
 \end{proof}
 \subsection{(d)}
 Let $H_{SF}$ be the set of all straight flush hands; that is, the hand is both a straight and a flush. What is $|H_{SF}|$?
 \begin{proof}
+As before there are 10 possible straight sequences. For each sequence, there are 4 ways to choose a suit (because all 5 cards must have the same suit).
+$$
+|H_{SF}| = 10 \cdot 4
+$$
 \end{proof}
 \subsection{(e)}
 Let $H_{HC}$ be the set of all high-card hands; that is, hands that do not include pairs, are not straights, and are not flushes. What is $|H_{HC}|$?
 \begin{proof}
+First notice that the set of hands that include pairs and the set of hands that are straights are disjoint. If a hand contains a pair, it cannot be a straight (because a straight has 5 different ranks, the pair has two cards of the same rank).
+
+Second notice that the set of hands that include pairs and the set of hands that are flushes are disjoint. If a hand contains a pair, it cannot be a flush (because the pair must have 2 different suits, but a flush can only have one suit).
+
+However straights and flushes are unfortunately not disjoint. But we can still count them: the number of straights $+$ the number of flushes $-$ the number of straight-flushes (because those are counted twice in the sum).
+
+So... all high-card hands are: all possible hands $-$ all hands that contain pairs $-$ (all straight hands $+$ all flush hands $-$ all straight-flush hands).
+
+Notice that all possible hands $-$ all hands that contain pairs is equal to $|H_{NP}|$ from part (a). So:
+$$
+|H_{HC}| = |H_{NP}| - (|H_{S}| + |H_{F}| - |H_{SF}|) = \binom{13}{5} \cdot 4^5 - 10 \cdot 4^5 - 4 \cdot \binom{13}{5} + 10 \cdot 4
+$$
 \end{proof}
 
 \section{Problem 8 (Conditional Probability)}
@@ -182,16 +305,55 @@ A simple graph with $n$ vertices is constructed by randomly placing an edge betw
 \subsection{(a)}
 What is the probability that a given vertex of the graph has degree two?
 \begin{proof}
+For a given vertex $v$, there are $n-1$ other vertices. $v$ has degree 2 iff it has an edge with 2 of the other $n-1$ vertices, and no edges with the other $n-3$ vertices.
+
+There are $\displaystyle \binom{n-1}{2}$ ways to choose 2 vertices from $n-1$ vertices.
+
+For each such selection, the probability of $v$ having an edge with those 2, and no edges with the remaining $n-3$ is:
+$$
+p^2 \cdot (1-p)^{n-3}
+$$
+So if we add these, we get the total probability $t$ that $v$ has degree 2 (because random edge placements are independent, and all the events of choosing 2 vertices that $v$ is adjacent to are disjoint):
+$$
+t = \binom{n-1}{2} \cdot p^2 \cdot (1-p)^{n-3}
+$$
 \end{proof}
 
 \subsection{(b)}
 What is the expected number of nodes with degree two? (You may express your answer in terms of $t$, where $t$ is the answer to part (a).)
 \begin{proof}
+This is simply equal to $nt$. 
+
+We can see this easily as follows: for each vertex $v$, define an indicator variable $I_v$ that is 1 if $v$ has degree 2, 0 otherwise. 
+
+Then by Lemma 18.4.2 (page 752), the expected value $Ex[I_v]$ of this indicator variable is equal to the probability $Pr[deg(v)=2]$ that $v$ has degree 2, which is $t$ from part (a) above.
+
+By the Linearity of Expectation (or alternatively by Theorem 18.5.4, where $i$th event is ``$i$th vertex has degree 2''), the expected number of nodes with degree 2 is equal to the sum of the expected values of the indicator variable for each vertex, which is $nt$.
 \end{proof}
 
 \section{Problem 10 (Variance, Sums)}
-You have a coin with probability $p$ of flipping heads. For your first try, you flip it once. For your second try, you independently flip it twice. You continue until the nth try, where you independently flip it $n$ times. You win a try if you flip all heads. Let $W$ be the number of winning tries. Write a closed-form expression for $Var[W]$.
+You have a coin with probability $p$ of flipping heads. For your first try, you flip it once. For your second try, you independently flip it twice. You continue until the $n$th try, where you independently flip it $n$ times. You win a try if you flip all heads. Let $W$ be the number of winning tries. Write a closed-form expression for $Var[W]$.
 \begin{proof}
+We win the first try with probability $p$, lose the first try with probability $1 - p$.
+
+We win the second try with probability $p^2$, lose the second try with probability $1 - p^2$.
+
+And so on.
+
+We win the $n$th try with probability $p^n$, lose the $n$th try with probability $1 - p^n$.
+
+By the Linearity of Expectation, the expected number of winning tries is:
+$$
+Ex[W] = 1 \cdot p + 1 \cdot p^2 + \ldots + 1 \cdot p^n = p(1 + p + \ldots + p^{n-1}) = p\cdot\frac{1 - p^n}{1 - p}
+$$
+By similar reasoning, $Var[W]$ is:
+$$
+\begin{array}{ccc}
+Ex[(W - Ex[W])^2] & = & \left(1 - p\frac{1 - p^n}{1 - p}\right)^2 p + \left(1 - p\frac{1 - p^n}{1 - p}\right)^2 p^2 + \ldots + \left(1 - p\frac{1 - p^n}{1 - p}\right)^2 p^n \\
+& = & \left(1 - p\frac{1 - p^n}{1 - p}\right)^2\cdot(p + p^2 + \ldots + p^{n}) \\
+& = & \left(1 - p\frac{1 - p^n}{1 - p}\right)^2 \cdot p\cdot\frac{1 - p^n}{1 - p} \\
+\end{array}
+$$
 \end{proof}
 
 \section{Problem 11 (Markov \& Chebyshev)}
@@ -232,30 +394,4 @@ A graph with unique stationary distribution that is not strongly connected.
 A strongly connected graph with an initial distribution that does not converge to the stationary distribu­tion.
 \begin{proof}
 \end{proof}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 \end{document}

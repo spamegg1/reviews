@@ -108,10 +108,10 @@ CHIP CPU {
     Or(a=zr, b=ng, out=zrOrNg);           // zr or ng
     Not(in=zrOrNg, out=pos);              // pos (not zr and not ng)
     And(a=pos, b=instruction[0], out=JGT);// pos AND jjj=001 (instruction[0]=1)
-    And(a=zr, b=instruction[1], out=JEQ); // zr AND jjj=010 (instruction[1]=1)
-    //Or(a=JGT, b=JEQ, out=JGE);            // GT or EQ -> GE (greater than or equal)
-    And(a=ng, b=instruction[2], out=JLT); // ng AND jjj=100 (instruction[2]=1)
-    //Not(in=JEQ, out=JNE);                 // not EQ -> NE (not equal)
+    And(a=zr,  b=instruction[1], out=JEQ);// zr  AND jjj=010 (instruction[1]=1)
+    And(a=ng,  b=instruction[2], out=JLT);// ng  AND jjj=100 (instruction[2]=1)
+    // Or(a=JGT, b=JEQ, out=JGE);         // GT or EQ -> GE (greater than or equal)
+    // Not(in=JEQ, out=JNE);              // not EQ -> NE (not equal to 0)
     Or(a=JEQ, b=JLT, out=JLE);            // EQ or LT -> LE (less than or equal)
     Or(a=JLE, b=JGT, out=JMP);            // load PC if cond met and jump if cond
 
