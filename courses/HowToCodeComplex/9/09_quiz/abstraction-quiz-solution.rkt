@@ -166,29 +166,29 @@
                make-region cons
                "Continent" "Country" "Province" "State" "City" empty CANADA)
               CANADA)
-(define (fold-region c1 c2 b1 b2 b3 b4 b5 b6 r)
-  (local [(define (fn-for-region r)
-            (c1 (region-name r)
-                (fn-for-type (region-type r))
-                (fn-for-lor (region-subregions r))))
+(define (fold-region c1 c2 b1 b2 b3 b4 b5 b6 r)                      ; returns Y
+  (local [(define (fn-for-region r)                                  ; returns Y
+            (c1 (region-name r)                                         ; String
+                (fn-for-type (region-type r))                                ; X
+                (fn-for-lor (region-subregions r))))                         ; Z
 
-          (define (fn-for-type t)
-            (cond [(string=? t "Continent") b1]
+          (define (fn-for-type t)                                    ; returns X
+            (cond [(string=? t "Continent") b1]                 ; each b is an X
                   [(string=? t "Country") b2]
                   [(string=? t "Province") b3]
                   [(string=? t "State") b4]
                   [(string=? t "City") b5]))
 
-          (define (fn-for-lor lor)
+          (define (fn-for-lor lor)                                   ; returns Z
             (cond [(empty? lor) b6]
                   [else
-                   (c2 (fn-for-region (first lor))
-                       (fn-for-lor (rest lor)))]))]
-    (fn-for-region r)))
+                   (c2 (fn-for-region (first lor))                           ; Y
+                       (fn-for-lor (rest lor)))]))]                          ; Z
+    (fn-for-region r)))                                                      ; Y
 
 (define (all-regions r)
-  (local [(define (c1 name type lor)
-            (cons name lor))]
+  (local [(define (c1 name type lor)                     ; String X list -> list
+            (cons name lor))]           ; c2 = append: Y Z -> Z, so Y = Z = list
     (fold-region c1 append empty empty empty empty empty empty r)))
 
 #;;this works

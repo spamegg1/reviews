@@ -46,22 +46,22 @@ WORDLIST = load_words()
 
 
 def is_word_guessed(secret_word, letters_guessed):
-    '''
+    """
     secret_word: string, the word the user is guessing
     letters_guessed: list, what letters have been guessed so far
     returns: boolean, True if all letters of secret_word are in letters_guessed;
                       False otherwise
-    '''
+    """
     return all(map(lambda x: x in letters_guessed, secret_word))
 
 
 def get_guessed_word(secret_word, letters_guessed):
-    '''
+    """
     secret_word: string, the word the user is guessing
     letters_guessed: list, what letters have been guessed so far
     returns: string, comprised of letters and underscores that represents
       what letters in secret_word have been guessed so far.
-    '''
+    """
     result = ''
     for letter in secret_word:
         if letter in letters_guessed:
@@ -72,11 +72,11 @@ def get_guessed_word(secret_word, letters_guessed):
 
 
 def get_available_letters(letters_guessed):
-    '''
+    """
     letters_guessed: list, what letters have been guessed so far
     returns: string, comprised of letters that represents what letters have
     not yet been guessed.
-    '''
+    """
     import string
     letters = string.ascii_lowercase
     result = ''
@@ -87,7 +87,7 @@ def get_available_letters(letters_guessed):
 
 
 def hangman(secret_word):
-    '''
+    """
     secret_word: string, the secret word to guess.
 
     Starts up an interactive game of Hangman.
@@ -105,7 +105,7 @@ def hangman(secret_word):
       user has not yet guessed.
 
     Follows the other limitations detailed in the problem write-up.
-    '''
+    """
     print("Welcome to the game, Hangman!")
     print("I am thinking of a word that is " + str(len(secret_word)) +
           " letters long.")
