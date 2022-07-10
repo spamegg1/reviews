@@ -7,7 +7,8 @@ object WikipediaData:
 
   private[wikipedia] def lines: List[String] =
     Option(getClass.getResourceAsStream("/wikipedia/wikipedia-grading.dat")) match
-      case None => sys.error("Please download the dataset as explained in the assignment instructions")
+      case None => sys.error(
+        "Please download the dataset as explained in the assignment instructions")
       case Some(resource) =>
         Source
           .fromInputStream(resource)(Codec.UTF8)
