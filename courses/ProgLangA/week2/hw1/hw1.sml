@@ -43,7 +43,7 @@ fun dates_in_month (dates: date list, month: int): date list =
             else rest
         end
 
-(*  returns list of dates that are in any of the months in the list of months
+(*  returns list of dates that are in any of the months in the list of months  
  *  Assumes that int list has no numbers repeated  *)
 fun dates_in_months (dates: date list, months: int list): date list =
     if   null months
