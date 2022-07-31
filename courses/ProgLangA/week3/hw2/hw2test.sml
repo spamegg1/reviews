@@ -128,3 +128,63 @@ val test11k = officiate([(Clubs, Ace)], [], 10) = 5
 val test11l = officiate([], [Draw], 10) = 5
 val test11m = ((officiate(
     [], [Discard(Diamonds, Num(9))], 10); false) handle IllegalMove => true)
+
+(* for testing the careful_player function *)
+type property = card list -> card list -> move list -> int -> bool
+
+fun play_one_move(held: card list)(cards: card list)(moves: move list)
+    : card list * card list * move list =
+    case (cards, moves) of
+      (_, [])               => (held, cards, moves) (* no move possible *)
+    | (_, Discard c :: ms)  => (remove_card(held, c, IllegalMove), cards, ms)
+    | ([], Draw :: ms)      => (held, cards, moves) (* no cards left to draw *)
+    | (c :: cs, Draw :: ms) => (c :: held, cs, ms)
+
+(* the value of the held cards never exceeds the goal *)
+fun prop1(held: card list)(_: card list)(_: move list)(goal: int): bool =
+    sum_cards(held) <= goal
+
+(* A card is drawn whenever the goal is more than 10
+   greater than the value of the held cards. *)
+fun prop2(held: card list)(_: card list)(moves: move list)(goal: int)
+    : bool =
+    goal - sum_cards(held) <= 10 orelse hd moves = Draw
+
+(* If a score of 0 is reached, there must be no more moves. *)
+fun prop3(held: card list)(cards: card list)(moves: move list)(goal: int)
+: bool =
+    score(held, goal) > 0 orelse moves = []
+
+(* If it is possible to reach a score of 0 by discarding a card
+   followed by drawing a card, then this must be done. *)
+fun prop4(held: card list)(cards: card list)(moves: move list)(goal: int)
+    : bool =
+    held = [] orelse
+    cards = [] orelse
+    not (zero_possible([], held, cards, goal)) orelse
+    hd moves = Discard (hd held) andalso
+    hd (tl moves) = Draw
+
+fun test_one_prop(held: card list)(cards: card list)(careful: move list)
+    (goal: int)(prop: property): bool =
+    if careful = []
+    then prop held cards careful goal
+    else let
+        val (held', cards', moves') = play_one_move held cards careful
+    in
+        prop held' cards' moves' goal andalso
+        test_one_prop held' cards' moves' goal prop
+    end
+
+fun test_all_props(held: card list)(cards: card list)(careful: move list)
+    (goal: int)(props: property list): bool =
+    let
+        val checks: bool list = List.map
+            (test_one_prop held cards careful goal)
+            props
+    in
+        List.foldr (fn (x, y) => x andalso y) true checks
+    end
+
+val props: property list = [prop1, prop2, prop3, prop4]
+val test12a = test_all_props

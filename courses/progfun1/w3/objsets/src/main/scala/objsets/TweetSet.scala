@@ -117,7 +117,7 @@ class Empty extends TweetSet:
 
   def contains(tweet: Tweet): Boolean = false
 
-  def incl(tweet: Tweet): TweetSet = NonEmpty(tweet, Empty(), Empty())
+  def incl(tweet: Tweet): TweetSet = NonEmpty(tweet, new Empty, new Empty)
 
   def remove(tweet: Tweet): TweetSet = this
 

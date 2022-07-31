@@ -198,7 +198,7 @@ You will first have to implement a method `locateTemperatures` with the followin
 def locateTemperatures(year            : Year,
                        stationsFile    : String,
                        temperaturesFile: String
-                    ): Iterable[(LocalDate, Location, Temperature)]
+): Iterable[(LocalDate, Location, Temperature)]
 ```
 This method should return the list of all the temperature records converted in degrees Celsius along with their date and location (ignore data coming from stations that have no GPS coordinates). You should not round the temperature values.
 
@@ -293,10 +293,9 @@ Note that the given points are not sorted in a particular order.
 ## Visualization
 Once you have completed the above steps you can implement the `visualize` method to build an image (using the [scrimage](https://index.scala-lang.org/sksamuel/scrimage) library) where each pixel shows the temperature corresponding to its location.
 ```scala
-def visualize(
-  temperatures: Iterable[(Location, Temperature)],
-  colors: Iterable[(Temperature, Color)]
-): Image
+def visualize(temperatures: Iterable[(Location, Temperature)],
+  									colors: Iterable[(Temperature, Color)]
+												 ): Image
 ```
 
 Note that 
@@ -435,9 +434,10 @@ This is going to take a lot of time, but you can make the process faster:
 
 Finally, you will have to implement the following method:
 ```scala
-def generateTiles[Data](yearlyData   : Iterable[(Year, Data)],
-                        generateImage: (Year, Tile, Data) => Unit
-                                    ): Unit
+def generateTiles[Data](
+  yearlyData   : Iterable[(Year, Data)],
+  generateImage: (Year, Tile, Data) => Unit
+              ): Unit
 ```
 
 This method generates all the tiles for a given dataset `yearlyData`, for zoom levels 0 to 3 (included).
@@ -483,8 +483,8 @@ The grid associates every grid location with a temperature. You are free to inte
 
 You will have to implement the following helper method:
 ```scala
-def makeGrid(temperatures: Iterable[(Location, Temperature)])
-                         : GridLocation => Temperature
+def makeGrid(temperatures: Iterable[(Location, Temperature)]
+            ): GridLocation => Temperature
 ```
 It takes as parameter the temperatures associated with their location and returns the corresponding grid.
 
@@ -498,7 +498,7 @@ When we generate the map, we'll have to get the temperature of every point on th
 You will have to implement the following two methods:
 ```scala
 def average(temperatures: Iterable[Iterable[(Location, Temperature)]]
-                       ): GridLocation => Temperature
+           ): GridLocation => Temperature
 ```
 This method takes a sequence of temperature data over several years (each “temperature data” for one year being a sequence of pairs of average yearly temperature and location), and returns a grid containing the average temperature over the given years at each location.
 ```scala
@@ -607,7 +607,7 @@ A Signal is a value that can change over time:
 ```scala
 val x = Signal(0)  // Initialize x’s value to “0”
 println(x())       // Read x’s current value (“0”)
-x()= x() + 1       // Change x’s value
+x() = x() + 1      // Change x’s value
 println(x())       // “1”
 ```
 Signals can depend on other Signals. In such a case, when the value of a Signal changes, the Signals that depend on it are automatically updated:
@@ -615,7 +615,7 @@ Signals can depend on other Signals. In such a case, when the value of a Signal 
 val x = Signal(0)
 val y = Signal(x() * 2)  // y depends on x’s value
 println(y())             // “0”
-x()= x() + 1
+x() = x() + 1
 println(y())             // “2”
 ```
 Note that, in the above example, if we didn’t want to introduce a dependency between `x` and `y` we would have to first capture the current value of `x` in a usual `val`:
@@ -642,7 +642,7 @@ def yearSelection(selectedLayer: Signal[Layer],
 This method takes the selected layer and the year slider value and returns the actual selected year, so that this year is not out of the layer bounds (remember that `Year` is just a type alias for `Int`).
 ```scala
 def layerUrlPattern(selectedLayer: Signal[Layer],
-                    selectedYear : Signal[Year]
+                     selectedYear: Signal[Year]
                                 ): Signal[String]
 ```
 This method takes the selected layer and the selected year and returns the pattern of the URL to use to retrieve the tiles. You will return a relative URL (starting by target/).
@@ -650,14 +650,15 @@ This method takes the selected layer and the selected year and returns the patte
 Note that the `LayerName` id member corresponds to the sub-directory name you had generated the tiles in. This URL pattern is going to be used by the mapping library to retrieve the tiles, so it must follow a special syntax, as described here (you can ignore the “s” parameter).
 ```scala
 def caption(selectedLayer: Signal[Layer],
-           selectedYear: Signal[Year]
-           ): Signal[String]
+             selectedYear: Signal[Year]
+           							): Signal[String]
 ```
 This method takes the selected layer and the selected year and returns the text information to display. The text to display should be the name of the layer followed by the selected year, between parenthesis.
 
 For instance, if the selected layer is the temperatures layer and the selected year is 2015, it should return “Temperatures (2015)”.
 
 ## Running the Web application
+
 Once you have implemented the above methods, you are ready to finally run the whole application. Execute the following sbt command:
 ```sh
 capstoneUI/fastOptJS

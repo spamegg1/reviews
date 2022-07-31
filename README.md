@@ -105,7 +105,7 @@ The instructor is a big proponent of [Aspect Oriented Programming](https://en.wi
 
 Second course teaches you generic recipes and formulas for building bigger, more complex data types from basic data types. When combining types they are kept as orthogonal as possible to separate concerns and decrease coupling. These principles are simply built-in to later, more serious FP languages like Haskell and Scala, which have built-in type checkers, algebraic data types, and automated test generation (``quickCheck` and `scalaCheck`). The "enumeration" and "one-of" types taught in these courses are replicated in Scala (`enum` and "sealed traits") and Haskell, which are used in "pattern matching" (you'll learn this in Prog Lang Part A). Pattern matching in these languages are just like the templates used in this course.
 
-In addition to functional programming, the courses also teach you general principles from all paradigms and languages such as encapsulation, data abstraction, type inference and testing; and many examples of data structures and algorithms such as binary search trees, general graphs and maze solving.
+In addition to functional programming, the courses also teach you general principles from all paradigms and languages such as encapsulation, data abstraction, type inference and testing; the practices of domain analysis, design and refactoring; and many examples of data structures and algorithms such as binary search trees, general graphs, backtracking search, and maze solving. The instructor gives you an unusually high amount of time doing one-on-one coding and talking-through-the-code not found in other courses.
 
 First course ends with a Space Invaders type game (it's cool that Racket has a built-in way of doing events/mutation called "big bang"), while second course ends with a very difficult programming assignment of brute-force solving a scheduling problem for TAs and office hours. You will also write other fun and challenging stuff like a Sudoku solver, a fractal image generator, and so on. This is recursion on steroids basically. There are no auto-graders to which you submit your code. You'll be the judge of the correctness of your code. I'm told you can pay edX to have your final exam graded by the instructor, but don't do that.
 
@@ -185,6 +185,10 @@ After you watch that, you might have better appreciation for Lambdas. Then, Rack
 ```
 
 *Spam's recommendation:* I am personally biased to like these courses. Definitely take if you are interested in pursuing functional programming. I've seen some people struggle with Programming Languages A, B, C without these courses (PLA uses ML to teach very similar functional programming principles, and PLB uses the same language, Racket) so definitely take at least the first of these two courses before PLABC if you've never seen functional programming, recursion and the like. 
+
+Enjoy your time in Dr Racket's dungeon!!!
+
+![drracket](inspiration.png)
 
 I have the following advice but it still does not work for many people due to poor educational backgrounds, honestly I'm getting depressed and about to give up on this problem. So take it with a grain of salt:
 

@@ -17,6 +17,7 @@ def bisearch(salary, inv_rate, semi_raise, down_pay):
     left, portion, right = 0, 5000, 10000
     steps = 1
     saving = savings(salary, portion, inv_rate, semi_raise)
+    #print(f'{left} {right} {portion} {steps} {saving}')
 
     while abs(saving - down_pay) >= 100.0:
         if saving < down_pay:
@@ -27,6 +28,7 @@ def bisearch(salary, inv_rate, semi_raise, down_pay):
         portion = (left + right) // 2
         steps += 1
         saving = savings(salary, portion, inv_rate, semi_raise)
+        #print(f'{left} {right} {portion} {steps} {saving}')
 
     return portion, steps
 

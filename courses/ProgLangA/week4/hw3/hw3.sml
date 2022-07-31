@@ -126,10 +126,10 @@ fun check_pat(p: pattern): bool =
 
 fun match(v: valu, p: pattern): (string * valu) list option =
     case (v, p) of
-      (_, Wildcard)       => SOME []
-    | (_, Variable str)   => SOME [(str, v)]
-    | (Unit, UnitP)       => SOME []
-    | (Const i, ConstP j) => if i = j then SOME [] else NONE
+      (_, Wildcard)               => SOME []
+    | (_, Variable str)           => SOME [(str, v)]
+    | (Unit, UnitP)               => SOME []
+    | (Const i, ConstP j)         => if i = j then SOME [] else NONE
     | (Tuple vlist, TupleP plist) =>
         if   List.length vlist = List.length plist
         then all_answers match(ListPair.zip(vlist, plist))

@@ -141,3 +141,30 @@ fun officiate(cards: card list, moves: move list, goal: int): int =
     in
         state([], cards, moves)
     end
+
+(* assume held1 and cards are both nonempty. *)
+fun zero_possible(
+    held1: card list, held2: card list, cards: card list, goal: int
+): bool =
+    if held2 = [] then false
+    else if score((hd cards :: held1) @ tl held2, goal) = 0
+    then true
+    else zero_possible(hd held2 :: held1, tl held2, cards, goal)
+
+fun careful_helper(
+    cards: card list, goal: int, held: card list, acc: move list
+): move list =
+    if goal - sum_cards(held) > 10 andalso not cards = []
+    then careful_helper(tl cards, goal, hd cards :: held, Draw :: acc)
+    else if score(held, goal) = 0 then acc
+    else if not cards = [] andalso not held = [] then
+    let
+        val first = hd held
+        val discard_then_draw =
+    in
+        if score((hd cards) :: (tl held), goal) = 0
+        then Discard
+        else
+    end
+
+fun careful_player(cards: card list, goal: int): move list = nil
