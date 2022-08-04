@@ -2,7 +2,7 @@
  * Programming Assignment 1
  * Implementation of a simple stack machine.
  * Skeleton file
- * compile with: coolc stack.cl atoi.cl
+ * compile with: coolc stack.cl atoi.cl test.cl
  *)
 
 class List {                                                  -- list of strings
@@ -113,7 +113,7 @@ class Main inherits IO {
     };
 
     main(): Object {{
-        -- runTests(); -- see test.cl
-        runMachine();
+        (new Test).runTests(); -- see test.cl
+        --runMachine();
     }};
 };
