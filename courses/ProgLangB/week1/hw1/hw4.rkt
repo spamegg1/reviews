@@ -27,8 +27,10 @@
 ;; assumes: n is non-negative
 (define (stream-for-n-steps s n)
   (cond [(= 0 n) empty]
-        [else (local [(define thunk (s))]
-        (cons (car thunk) (stream-for-n-steps (cdr thunk) (- n 1))))]))
+        ;[else (local [(define thunk (s))]
+        [else (letrec ([thunk (s)])
+                (cons (car thunk)
+                      (stream-for-n-steps (cdr thunk) (- n 1))))]))
 
 ;; -> Stream
 ;; produces stream of natural numbers except numbers divisible by 5 are negated:

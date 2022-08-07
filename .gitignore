@@ -5,8 +5,10 @@ sml.json
 .scalafix.conf
 *.dat
 target/
+compiled/
 project/target/
 project/project/
 resources/
 .bsp/
 *.log
+*.rkt~
