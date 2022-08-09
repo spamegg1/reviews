@@ -61,6 +61,11 @@ val test12c: bool = myfilter (fn n => n > 0) [1, ~2, ~3, 4, 5, ~6] = [1, 4, 5]
 
 val test13a: bool = myfoldl (fn (x, y) => x + y) 0 [1, 2, 3, 4, 5, 6] = 21
 val test13b: bool = myfoldl (fn (x, y) => x - y) 0 [1, 2, 3, 4, 5, 6] = 3
+val test13c: bool = myfoldl2 (fn (x, y) => x + y) 0 [1, 2, 3, 4, 5, 6] = 21
+val test13d: bool = myfoldl2 (fn (x, y) => x - y) 0 [1, 2, 3, 4, 5, 6] = 3
+val test13e: bool = myfoldr (fn (x, y) => x + y) 0 [1, 2, 3, 4, 5, 6] = 21
+val test13f: bool = myfoldr (fn (x, y) => x - y) 0 [1, 2, 3, 4, 5, 6] = ~3
+
 
 val bottomtree4: int tree = node {value=4, left=leaf, right=leaf}
 val bottomtree5: int tree = node {value=5, left=leaf, right=leaf}

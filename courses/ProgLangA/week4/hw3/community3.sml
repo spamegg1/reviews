@@ -142,9 +142,18 @@ fun myfilter (pred: 'a -> bool) (lst: 'a list) : 'a list =
 Implement foldl using foldr on functions. (This is challenging.)
 spamegg's note: one way is to simply reverse the list and use foldr,
 but I'm not sure if this is the solution they intended.
+   foldl f init [x1, x2, ..., xn]
+    returns
+    f(xn,...,f(x2, f(x1, init))...)
+    or init if the list is empty.
 *)
 fun myfoldl (f: 'a * 'b -> 'b) (init: 'b) (lst: 'a list) : 'b =
     foldr f init (rev lst)
+
+fun myfoldl2 (f: 'a * 'b -> 'b) (init: 'b) (lst: 'a list) : 'b =
+    case lst of
+      [] => init
+    | x :: xs => myfoldl2 f (f(x, init)) xs
 
 (* 14. this solution is taken from Forums, not by me!
         I just added function signatures. - spamegg
