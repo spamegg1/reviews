@@ -10,6 +10,19 @@
 
 (require rackunit)
 
+; these are for the mupl-map tests
+(define mupl-fun (fun #f "x" (add (var "x") (int 7))))
+(define mupl-val (apair (int 1) (apair (int 2) (aunit))))
+(define result   (apair (int 8) (apair (int 9) (aunit))))
+
+(define mupl-recfun                                ; calculates length of MUPL lists
+  (fun "mupl-recfun" "x"
+    (ifaunit (var "x")
+             (int 0)
+             (add (int 1)
+                  (call (var "mupl-recfun")
+                        (snd (var "x")))))))
+
 (define tests
   (test-suite
    "Sample tests for Assignment 5"
@@ -21,6 +34,9 @@
    ;; check mupllist to racketlist with normal list
    (check-equal? (mupllist->racketlist (apair (int 3) (apair (int 4) (aunit))))
                  (list (int 3) (int 4)) "mupllist->racketlist test")
+   (check-equal? (mupllist->racketlist (apair (apair (int 3) (aunit)) (aunit)))
+                 (list (apair (int 3) (aunit)))
+                 "mupllist->racketlist test2")
 
    ;; tests if ifgreater returns (int 2)
    (check-equal? (eval-exp (ifgreater (int 3) (int 4) (int 3) (int 2)))
@@ -32,8 +48,12 @@
 
    ;; call test
    (check-equal? (eval-exp
-                  (call (closure '() (fun #f "x" (add (var "x") (int 7)))) (int 1)))
+                  (call (closure '() mupl-fun) (int 1)))
                  (int 8) "call test")
+
+   ;; call recursive test
+   (check-equal? (eval-exp (call mupl-recfun mupl-val))
+                 (int 2) "call recursive test")
 
    ;; snd test
    (check-equal? (eval-exp (snd (apair (int 1) (int 2))))
@@ -56,11 +76,8 @@
                  (int 4) "ifeq test")
 
    ;; mupl-map test
-   (check-equal? (eval-exp (call
-                            (call mupl-map
-                                  (fun #f "x" (add (var "x") (int 7))))
-                            (apair (int 1) (aunit))))
-                 (apair (int 8) (aunit)) "mupl-map test")
+   (check-equal? (eval-exp (call (call mupl-map mupl-fun) mupl-val))
+                 result "mupl-map test")
 
    ;; problems 1, 2, and 4 combined test
    (check-equal? (mupllist->racketlist

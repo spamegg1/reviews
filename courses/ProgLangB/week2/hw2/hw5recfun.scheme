@@ -1,0 +1,200 @@
+; Let's say we have this MUPL recursive function that returns length of a list
+; (we are using ifaunit from Problem 3)
+(define mupl-recfun
+  (fun "mupl-recfun" "x"
+    (ifaunit (var "x")
+             (int 0)
+             (add (int 1)
+                  (call (var "mupl-recfun")
+                        (snd (var "x")))))))
+
+; Consider the following MUPL list with 2 elements:
+(define mupl-val (apair (int 1) (apair (int 2) (aunit))))
+
+; Consider the function call that calculates the length of this list:
+(call mupl-recfun mupl-val)
+
+; How does eval-exp evaluate this function call?
+(eval-exp (call mupl-recfun mupl-val)) ; should return (int 2)
+
+; Let's walk through it step-by-step.
+; 1. eval-exp calls eval-under-env with an empty environment:
+(eval-under-env (call mupl-recfun mupl-val) null)
+
+; 2. eval-under-env checks if this is a call by using (call? ...)
+(call? (call mupl-recfun mupl-val)) ; this is TRUE.
+
+; 3. eval-under-env must evaluate the two arguments of (call ...)
+; The second one evaluates to the argument of our recursive function.
+; How does eval-under-env evaluate these two? Recursively, by calling itself!
+; (using Python-like pseudocode here)
+cls = (eval-under-env mupl-recfun null)
+arg = (eval-under-env mupl-val null)
+
+; 4. For the first one, eval-under-env checks if mupl-recfun is a (fun ...).
+(fun? mupl-recfun) ; this is TRUE.
+
+; this will evaluate to a closure with the current environment:
+cls = (closure null mupl-recfun)
+
+; 5. For the second one, eval-under-env checks if mupl-val is a (apair ...)
+(apair? mupl-val) ; this is TRUE.
+
+; Then it evaluates the first and the second of the pair recursively:
+mupl-val = (apair
+            (eval-under-env (int 1) null)
+            (eval-under-env (apair (int 2) (aunit)) null))
+; it does the same thing once again for the second part.
+; Both (aunit) and the int values evaluate to themselves,
+; so mupl-val also evaluates to itself.
+mupl-val = (apair (int 1) (apair (int 2) (aunit))) ; nothing changed
+
+; So we end up with:
+arg = mupl-val
+
+; 6. The first one should evaluate to a closure, otherwise it's an error.
+(closure? cls)
+(closure? (closure null mupl-recfun)) ; this is TRUE. Otherwise, it's an error.
+
+; 7. We take the function part of the closure.
+myfun = (closure-fun cls)
+      = (closure-fun (closure null mupl-recfun))
+      ;              (closure  env     fun     )
+      = mupl-recfun
+
+; 8. We need to extend the environment.
+; We add the function's parameter (which is fun-formal) along with its argument
+; as a 2-element list to the existing environment.
+; So, in our case the parameter is "x" and this will be "bound" to arg,
+; which is mupl-val, in the extended environment.
+; We take existing environment:
+env = (closure-env cls)
+    = (closure-env (closure null mupl-recfun))
+    ;              (closure  env     fun     )
+    = null
+
+; We take the argument name:
+varname = (fun-formal myfun)
+        = (fun-formal mupl-recfun)
+        = (fun-formal (fun "mupl-recfun" "x"   ...  ))
+        ;             (fun    nameopt  formal  body )
+        = "x"
+; We create a "pair" that binds "x" to arg:
+(list varname arg) = (list "x" mupl-val)
+; and finally we add this to our environment:
+newenv = (cons (list varname arg) null)
+       = (cons (list "x" mupl-val) null)
+       = (list (list "x" mupl-val))
+
+; 9. In the case of a recursive function, we also need to add the function's
+; name to our environment, so that it can be looked up on subsequent calls.
+; We first check if the function has a proper name,
+; or if it's anonymous with an #f value for the name:
+(fun-nameopt myfun) = (fun-nameopt mupl-recfun)
+                    = (fun-nameopt (fun "mupl-recfun"  "x"   ...  ))
+                    ;              (fun    nameopt   formal  body )
+                    = "mupl-recfun" ; this is NOT #f, we have to add it to env.
+
+; So, same deal: we associate the variable name "mupl-recfun" with its closure.
+; We make a "pair" out of them as a 2-element list,
+(list (fun-nameopt myfun) cls) = (list "mupl-recfun" (closure null mupl-recfun))
+; And we add it to the already-extended environment:
+newnewenv = (cons (list "mupl-recfun" (closure null mupl-recfun)) newenv)
+
+; 10. CURRENTLY THE ENVIRONMENT LOOKS LIKE THIS:
+(list (list "mupl-recfun" cls) (list "x" mupl-val))
+; it has two values: mupl-val is bound to the variable name "x",
+; and the closure of mupl-recfun is bound to the variable name "mupl-recfun".
+
+; 11. FINALLY, we evaluate the function's body under the extended environment:
+(eval-under-env (fun-body mupl-recfun) newnewenv)
+; which is:
+(eval-under-env
+ (ifaunit (var "x")                                 ; this part is function body
+          (int 0)
+          (add (int 1)
+               (call (var "mupl-recfun")
+                     (snd (var "x")))))
+ (list (list "mupl-recfun" (closure null mupl-recfun))   ; this part is the env.
+       (list "x" mupl-val)))
+
+; 12. Now I have to simplify some details, otherwise it gets too long.
+; eval-under-env has to evaluate an (ifaunit ...) expression.
+; ifaunit checks if
+(var "x")
+; is aunit or not. It's not, so we will evaluate the last expression
+(add (int 1)
+     (call (var "mupl-recfun")
+           (snd (var "x"))))
+; under the environment
+(list (list "mupl-recfun" (closure null mupl-recfun)) (list "x" mupl-val))
+
+; 13. This means that eval-under-env now has to evaluate an (add ...) expression
+; under the current environment. So it has to evaluate the two expressions:
+(int 1)
+; and
+(call (var "mupl-recfun")
+      (snd (var "x")))
+; We know that ints evaluate to themselves. The part we are interested in
+; is the second one, the (call ...) expression.
+
+; 14. Same as before, we first evaluate the two arguments of (call ...)
+; First one is
+(var "mupl-recfun")
+; which has to use envlookup. Remember our current environment is:
+(list (list "mupl-recfun" cls) (list "x" mupl-val))
+; So we look up "mupl-recfun" in this environment, and we find its value cls.
+(envlookup (list (list "mupl-recfun" (closure null mupl-recfun))
+                 (list "x" mupl-val)) "mupl-recfun")
+    = (closure null mupl-recfun)
+
+; 15. Then we have to evaluate the second argument of (call ...), which is:
+(snd (var "x"))
+; Again, skipping some details here, to evaluate this snd expression we first
+; have to evaluate
+(var "x")
+; which is then evaluated by using envlookup again, which results in
+(envlookup (list (list "mupl-recfun" cls) (list "x" mupl-val)) "x")
+    = mupl-val
+; Then eval-under-env will evaluate
+(snd mupl-val)
+; which is
+arg = (apair (int 2) (aunit))
+
+; 16. We check if the first argument is really a closure, and yes it is...
+; so we get the function part of the closure:
+myfun = (closure-fun cls)
+      = (closure-fun (closure null mupl-recfun))
+      ;              (closure  env     fun     )
+      = mupl-recfun
+
+; 17. Then we do the same things again.
+; We get the environment part of the closure:
+env = (closure-env cls)
+    = (closure-env (closure null mupl-recfun))
+    ;              (closure  env     fun     )
+    = null
+; We extend it with the variable of the function, bound to the argument:
+varname = (fun-formal myfun) = (fun-formal mupl-recfun) = "x"
+(list varname arg) = (list "x" (apair (int 2) (aunit)))
+newenv = (cons (list "x" (apair (int 2) (aunit))) null)
+
+; We extend it further with the name of the function, bound to the closure:
+(list (fun-nameopt myfun) cls) = (list "mupl-recfun" (closure null mupl-recfun))
+; And we add it to the already-extended environment:
+newnewenv = (cons (list "mupl-recfun" (closure null mupl-recfun)) newenv)
+          = (list (list "mupl-recfun" (closure null mupl-recfun))
+                  (list "x" (apair (int 2) (aunit))))
+
+; 18. Again, we finally evaluate the body under this new environment:
+(eval-under-env
+ (ifaunit (var "x")                                 ; this part is function body
+          (int 0)
+          (add (int 1)
+               (call (var "mupl-recfun")
+                     (snd (var "x")))))
+ (list (list "mupl-recfun" (closure null mupl-recfun))   ; this part is the env.
+       (list "x" (apair (int 2) (aunit)))))
+
+; AND REMEMBER, WE HAVE TO (add (int 1)) TO THE RESULT OF THIS!
+; And so it goes on like this.
