@@ -20,8 +20,8 @@ fun all_except_option(s: string, lst: string list): string list option =
             val same = same_string(x, s)
         in
             case rest of
-              NONE   => if same then SOME(xs) else NONE
-            | SOME y => if same then rest else SOME(x :: y)
+              NONE    => if same then SOME(xs) else NONE
+            | SOME ys => if same then rest else SOME(x :: ys)
         end
 
 (*  returns list of other strings from lists that contain given string
@@ -151,20 +151,20 @@ fun zero_possible(
     then true
     else zero_possible(hd held2 :: held1, tl held2, cards, goal)
 
-fun careful_helper(
+(* fun careful_helper(
     cards: card list, goal: int, held: card list, acc: move list
 ): move list =
-    if goal - sum_cards(held) > 10 andalso not cards = []
-    then careful_helper(tl cards, goal, hd cards :: held, Draw :: acc)
+    if goal - sum_cards(held) > 10 andalso not(cards = [])
+    then careful_helper(tl cards, goal, (hd cards) :: held, Draw :: acc)
     else if score(held, goal) = 0 then acc
-    else if not cards = [] andalso not held = [] then
+    else if not(cards = []) andalso not(held = []) then
     let
         val first = hd held
-        val discard_then_draw =
+        (* val discard_then_draw = *)
     in
         if score((hd cards) :: (tl held), goal) = 0
         then Discard
-        else
-    end
+        else Discard
+    end *)
 
 fun careful_player(cards: card list, goal: int): move list = nil
