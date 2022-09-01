@@ -67,7 +67,7 @@ fun longest_string_helper(f: int * int -> bool): string list -> string =
 val longest_string3: string list -> string =
     longest_string_helper(fn (x, y) => x > y)
 
-(*  returns longest string in list, "" if list is empty, latest in case of tie  *)
+(* returns longest string in list, "" if list is empty, latest in case of tie *)
 val longest_string4: string list -> string =
     longest_string_helper(fn (x, y) => x >= y)
 
@@ -132,7 +132,7 @@ fun match(v: valu, p: pattern): (string * valu) list option =
     | (Const i, ConstP j)         => if i = j then SOME [] else NONE
     | (Tuple vlist, TupleP plist) =>
         if   List.length vlist = List.length plist
-        then all_answers match(ListPair.zip(vlist, plist))
+        then all_answers match (ListPair.zip(vlist, plist))
         else NONE
     | (Constructor(s1, v), ConstructorP(s2, p)) =>
         if   s1 = s2

@@ -10,7 +10,7 @@ Let's imagine that we have a case expression with different patterns, like
 
 Where `x` is of certain type `t` that we could infer out of the patterns `p1`, `p2`, `...`, `pn`.
 
-In summary, the objective of the challenge exercise is to create an algorithm that (like the SML compiler), is capable of inferring the type t of x based on the patterns p1, p2, ..., pn.
+In summary, the objective of the challenge exercise is to create an algorithm that (like the SML compiler), is capable of inferring the type `t` of `x` based on the patterns `p1, p2, ..., pn`.
 
 These patterns are provided as the second argument of the challenge exercise function and they represent every one of the branches in a case expression.
 
@@ -22,7 +22,7 @@ We would not need the first argument of the challenge exercise except constructo
 case c of Red => ... | Green => ... | _ => ...
 ```
 
-We cannot tell what is the type of Red\verb|Red|Red or Green\verb|Green|Green here. Likewise, in the challenge exercise if we found a constructor like:
+We cannot tell what is the type of `Red` or `Green` here. Likewise, in the challenge exercise if we found a constructor like:
 
 ```haskell
 Constructor("Red",UnitP)
@@ -55,7 +55,7 @@ fun b(x) =
       | a => 3
 ```
 
-The compiler would determine that x has type int. How? Easy: one of the patterns is a integer constant. Thus, the other pattern named a must be an integer as well. And there you have it, we just inferred the type of x.
+The compiler would determine that `x` has type `int`. How? Easy: one of the patterns is a integer constant. Thus, the other pattern named `a` must be an integer as well. And there you have it, we just inferred the type of `x`.
 
 In our challenge exercise, this pattern would be expressed as
 
@@ -67,7 +67,7 @@ And our algorithm should say that the answer is `SOME` `IntT` which corresponds 
 
 **Example 2:**
 
-A piece of code like the following would not even compile, because we cannot infer a common type for all patterns. The types in the different patterns are conflicting. We cannot tell if x\verb|x|x is an int or an option.
+A piece of code like the following would not even compile, because we cannot infer a common type for all patterns. The types in the different patterns are conflicting. We cannot tell if `x` is an int or an option.
 
 ```haskell
 fun b(x) = 
@@ -80,7 +80,7 @@ fun b(x) =
 Thus, consider the following pattern, corresponding with the code above:
 
 ```haskell
-[ConstP 10, Variable "a", ConstructorP("SOME",Variable “x”)]
+[ConstP 10, Variable "a", ConstructorP("SOME",Variable "x")]
 ```
 
 This cannot produce a common type and the answer our algorithm yields should be `NONE`, equivalent with the compiler throwing an error due to incapacity to determine a common type.
@@ -97,7 +97,7 @@ fun c(x) =
       | _ => 3
 ```
 
-What is the type of x?
+What is the type of `x`?
 
 Well, we can easily infer it's a tuple of three elements. Based on the patterns, we know the second and third elements of this tuple are integers. The first one, on the other hand, can be "anything".
 
@@ -170,7 +170,7 @@ fun g(x) =
       | _ => 3
 ```
 
-What is the type of x? Well, we can easily infer they are all of type auto.
+What is the type of `x`? Well, we can easily infer they are all of type auto.
 
 So, the following argument:
 
@@ -194,7 +194,7 @@ So, we must first define our first argument:
 [("Empty","list",UnitT),("List","list",TupleT[Anything, Datatype "list"])]
 ```
 
-The trick is to notice that the polymorphic type 'a corresponds to anything here, and so the type inference becomes a bit trickier later on.
+The trick is to notice that the polymorphic type `'a` corresponds to anything here, and so the type inference becomes a bit trickier later on.
 
 Now if we had this function
 
@@ -229,7 +229,7 @@ fun h(x) =
     | List(k,_) => 1
 ```
 
-In this case k could be anything. So, we represent these branches as:
+In this case `k` could be anything. So, we represent these branches as:
 
 ```haskell
 [ConstructorP("Empty",UnitP),ConstructorP("List",TupleP[Variable "k", Wildcard])]
@@ -267,8 +267,8 @@ Now for the "most lenient" pattern. In the assignment we get two examples.
 The first one suggest that we have two patterns of the form:
 
 ```haskell
-TupleP[Variable “x”, Variable “y”] 
-TupleP[Wildcard, Wildcard].
+TupleP[Variable "x", Variable "y"] 
+TupleP[Wildcard, Wildcard]
 ```
 
 This would correspond to something like
@@ -280,9 +280,9 @@ fun m(w) =
         | (_,_) => 1
 ```
 
-Interestingly this would not compile, since the patterns are redundant, namely, we would alway go out throught the first branch. But this was simply used with illustration purposes.
+Interestingly this would not compile, since the patterns are redundant, namely, we would always go out through the first branch. But this was simply used with illustration purposes.
 
-We can infer that w is a tuple with two elements that can be of anything. So the answer to this type of patterns should be:
+We can infer that `w `is a tuple with two elements that can be of anything. So the answer to this type of patterns should be:
 
 ```haskell
 TupleT[Anything, Anything]

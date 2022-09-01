@@ -36,8 +36,11 @@
 ;; produces stream of natural numbers except numbers divisible by 5 are negated:
 ;; 1, 2, 3, 4, -5, 6, 7, 8, 9, -10, 11, ... etc.
 (define funny-number-stream
-  (letrec ([f (lambda (x) (cons (if (= 0 (remainder x 5)) (- x) x)
-                                (lambda () (f (+ x 1)))))])
+  (letrec ([f (lambda (x)
+                (cons (if (= 0 (remainder x 5))
+                          (- x)
+                          x)
+                      (lambda () (f (+ x 1)))))])
     (lambda () (f 1))))
 
 ;; -> Stream
