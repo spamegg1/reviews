@@ -28,7 +28,7 @@ We cannot tell what is the type of `Red` or `Green` here. Likewise, in the chall
 Constructor("Red",UnitP)
 ```
 
-How could we possibly infer the type of this constructor unless we had some additional information?  And so this explains why we need a first argument of the challenge function containing a type list. It is nothing but our definition of datatypes. 
+How could we possibly infer the type of this constructor unless we had some additional information?  And so this explains why we need a first argument of the challenge function containing a type list. It is nothing but our definition of datatypes.
 
 ```haskell
 datatype color = Red | Green | Blue
@@ -44,12 +44,12 @@ datatype color = Red | Green | Blue
 
 Now let's consider several examples:
 
-**Example 1**
+#### **Example 1**
 
 Suppose we had this function:
 
 ```haskell
-fun b(x) = 
+fun b(x) =
    case x of
        (10) => 1
       | a => 3
@@ -65,12 +65,12 @@ In our challenge exercise, this pattern would be expressed as
 
 And our algorithm should say that the answer is `SOME` `IntT` which corresponds with the type the compiler would infer.
 
-**Example 2:**
+#### **Example 2:**
 
 A piece of code like the following would not even compile, because we cannot infer a common type for all patterns. The types in the different patterns are conflicting. We cannot tell if `x` is an int or an option.
 
 ```haskell
-fun b(x) = 
+fun b(x) =
    case x of
       (10) => 1
       | SOME x => 3
@@ -85,12 +85,12 @@ Thus, consider the following pattern, corresponding with the code above:
 
 This cannot produce a common type and the answer our algorithm yields should be `NONE`, equivalent with the compiler throwing an error due to incapacity to determine a common type.
 
-**Example 3:**
+#### **Example 3:**
 
 Let's do a more complicated example now:
 
 ```haskell
-fun c(x) = 
+fun c(x) =
     case x of
         (a,10,_) => 1
       | (b,_,11) => 2
@@ -109,7 +109,7 @@ This would correspond with:
 
 And the answer given by our algorithm should be: `SOME TupleT[Anything,IntT,IntT]`.
 
-**Example 4:**
+#### **Example 4:**
 
 Let's use a datatype now.
 
@@ -126,7 +126,7 @@ Then we need to define the first argument of our challenge function as:
 Let's say now that we have a function like this:
 
 ```haskell
-fun f(x) = 
+fun f(x) =
    case x of
      Red => 0
      | _ => 1
@@ -144,7 +144,7 @@ Our algorithm should go over the patterns and say this is of type:
 SOME (Datatype "color")
 ```
 
-**Example 5:**
+#### **Example 5:**
 
 Let's use now a more complex datatype
 
@@ -163,7 +163,7 @@ This would correspond to a first argument as follows:
 Let's say now that we had a function like this:
 
 ```haskell
-fun g(x) = 
+fun g(x) =
    case x of
         Sedan(a) => 1
       | Truck(b,_) => 2
@@ -180,7 +180,7 @@ So, the following argument:
 
 Should yield `SOME (Datatype "auto")`.
 
-**Example 6:**
+#### **Example 6:**
 
 Let's now define a polymorphic type to make this interesting
 
@@ -199,10 +199,10 @@ The trick is to notice that the polymorphic type `'a` corresponds to anything he
 Now if we had this function
 
 ```haskell
-fun j(x) = 
+fun j(x) =
    case x of
        Empty => 0
-     | List(10,Empty) => 1 
+     | List(10,Empty) => 1
      | _ => 3
 ```
 
@@ -218,12 +218,12 @@ Should yield: `SOME (Datatype "list")`.
 
 This case is tricky, because `ConstP(10)` needs to correspond with `Anything` in the constructors metadata as you can see above.
 
-**Example 7:**
+#### **Example 7:**
 
 Let's consider this variation of the previous case:
 
 ```haskell
-fun h(x) = 
+fun h(x) =
    case x of
       Empty => 0
     | List(k,_) => 1
@@ -241,12 +241,12 @@ And once more, notice how `Variable "k"` needs to correspond with `Anything` in 
 
 So, in the previous example `ConstP(10)` and now `Variable "x"` can be considered "compatible with" `Anything`.
 
-**Example 8:**
+#### **Example 8:**
 
 Just another example
 
 ```haskell
-fun g(x) = 
+fun g(x) =
    case x of
       Empty => 0
     | List(Sedan(c),_) => 1
@@ -260,21 +260,21 @@ Corresponding with:
 
 Should evidently yield `SOME (Datatype "list")`.
 
-**Example 9:**
+#### **Example 9:**
 
 Now for the "most lenient" pattern. In the assignment we get two examples.
 
 The first one suggest that we have two patterns of the form:
 
 ```haskell
-TupleP[Variable "x", Variable "y"] 
+TupleP[Variable "x", Variable "y"]
 TupleP[Wildcard, Wildcard]
 ```
 
 This would correspond to something like
 
 ```haskell
-fun m(w) = 
+fun m(w) =
     case w of
           (x,y) => 0
         | (_,_) => 1
@@ -290,7 +290,7 @@ TupleT[Anything, Anything]
 
 What is meant by "most lenient" is that the type `TupleT[IntT, IntT]` (for example) is also a fine type for all the patterns, but it is not as "lenient" (does not match as many values as) `TupleT[Anything,Anything]` so `TupleT[IntT, IntT]` is not correct.
 
-**Example 10:**
+#### **Example 10:**
 
 The second example of the "most lenient" requirement is similar but a little more interesting.
 
@@ -304,7 +304,7 @@ TupleP[Wildcard, TupleP[Wildcard,Wildcard]]
 Which would correspond with
 
 ```haskell
-fun m(w) = 
+fun m(w) =
     case w of
       (_,(_,_)) => 0
     | (_,_) => 1
@@ -319,3 +319,232 @@ TupleT[Anything, TupleT[Anything, Anything]]
 ```
 
 Which is the expected answer by the challenge exercise. But yet again, the compiler would not handle this type of expression without errors.
+
+## Strategy for solving the HW3 Challenge Problem
+
+### Wishful thinking: daydreaming about an approach
+
+Imagine we have a list of patterns
+
+```haskell
+val patterns = [pat1, pat2, ..., patn]
+```
+
+We want to find out if these patterns have a common type.
+
+If even just two of these patterns fail to have a common type, then the whole list fails to have a common type.
+
+So let's imagine we have some method of taking two patterns and checking if they can have a common type, and if so, finding that type. Say we do this for `pat1` and `pat2`. Say they have a common type `typ1`.
+
+```haskell
+[pat1, pat2, pat3, ..., patn]
+   \    /
+    typ1
+```
+
+Now we have to check `pat3` but now we have to compare a type `typ1`and a pattern `pat3`, instead of two patterns. So we would need another method that handles a type and a pattern.
+
+Let's try to change our thinking. What if we first converted the whole list of patterns to their types:
+
+```haskell
+[pat1, pat2, ..., patn]
+   |     |          |
+   V     V          V
+[typ1, typ2, ..., typn]
+```
+
+Now we can have a method that checks if two types have a common type (remember this, count 1), and we can FOLD over the list of types with this binary operation.
+
+Cool! This might work. So we need two things: a function that takes a `pattern` and converts it to its proper, accurate type, and a function that takes two `typ`s and finds their common `typ`, if it exists.
+
+### Converting a `pattern` to a `typ`
+
+Most of the `pattern` kinds are easily converted to `typ`s:
+
+```haskell
+-- pattern    typ
+Wildcard => Anything
+Variable => Anything
+ConstP   => IntT
+UnitP    => UnitT
+```
+
+But the last two kinds of `pattern`, namely `TupleP` and `ConstructorP` are complicated, because they are recursive and contain `pattern`s in them.
+
+#### Handling `TupleP`
+
+In the case of `TupleP` the argument is a `pattern list`, so we could recursively convert all of the `pattern`s in that list, and add a `TupleT` at the beginning, and we're done:
+
+```haskell
+TupleP [pat1, pat2, ..., patn] => TupleT [typ1, typ2, ..., typn]
+```
+
+#### Handling `ConstructorP`
+
+Finally `ConstructorP` patterns are even more complicated. They need to be "looked up" in the "metadata" that is provided in the first argument of `typecheck_patterns`. For example, for the `pattern`
+
+```haskell
+ConstructorP("Red", UnitP)
+```
+
+we need metadata like
+
+```haskell
+[("Red", "color", UnitT)]
+```
+
+So there are a few instances where this can fail.
+
+1. We look up `"Red"` in the metadata, but we cannot find it! For example:
+
+    ```haskell
+    pattern: ConstructorP("Red", UnitP)
+    metadata: [("Sedan", "color", Datatype "color")]
+    ```
+
+2. We look up `"Red"` in the metadata, we find an entry for it, but the third element (the `typ`) does not match the second argument (the `pattern`) of the constructor. For example:
+
+    ```haskell
+    pattern: ConstructorP("Red", UnitP)
+    metadata: [("Red", "color", IntT)]
+    ```
+
+    Here the `pattern` argument of the constructor, `UnitP`, has type `UnitT`, which does not have a common `typ` with `IntT`. So we have to recursively convert the `pattern` argument of the constructor, and verify that it has a common `typ` with the third part of the metadata entry (remember this, count 2).
+
+    THIS IS VERY CRUCIAL! Because we just discovered that our conversion function must call our "take two `typ`s and find their common `typ`" function. If we also find out that the "common `typ`" function has to call the conversion function... then we will be forced to use MUTUAL RECURSION. You can use MR in SML like this:
+
+    ```haskell
+    fun f() =
+        let
+            fun a() = -- some code involving b()
+            and b() = -- some code involving a()
+        in
+            a()
+        end
+    ```
+
+    Notice `b()` does not have the `fun` keyword in front of it. Instead it has the `and` keyword (which is different than `andalso`, the boolean operator). Hopefully we won't need MR.
+
+3. We look up `"Red"` in the metadata, we find it OK, but the `pattern` argument of the constructor is yet another constructor that fails to have a `typ` by itself (due to reasons 1 or 2 above). For example:
+
+    ```haskell
+    pattern: ConstructorP("Red", ConstructorP("Empty", UnitP))
+    metadata: [("Red", "color", Datatype "color")]
+    ```
+
+    So we have to make sure the `pattern` argument converts OK. This suggests that our conversion function should return a `typ option`. We'll tackle this later.
+
+### Merging two `typ`s into a common type
+
+There are 5 kinds of `typ`, so there are 25 possible match-ups between two `typ`s. But we can ignore most of them:
+
+```haskell
+Anything       -- can match all 5 typs
+UnitT          -- can only match UnitT
+IntT           -- can only match IntT
+TupleT[...]    -- can only match TupleT[...]
+Datatype "..." -- can only match Datatype "..."
+```
+
+#### Handling `TupleT`
+
+Notice that `TupleT lst1` can match `TupleT lst2` if and only if `lst1` and `lst2` have the same length, and each `typ` in `lst1`, in order, can match the corresponding `typ` in `lst2`, in order:
+
+```haskell
+TupleT [typ1a, typ2a, ..., typna]
+          ^      ^           ^
+          |      |           | must have common typ
+          V      V           V
+TupleT [typ1b, typ2b, ..., typnb]
+```
+
+So we can "zip" the two lists, then find the common `typ`s of the pairs `(typ1a, typ1b), ..., (typna, typnb)` recursively. Then the common `typ` of the tuples will be 
+
+```haskell
+TupleT [commontyp1, commontyp2, ..., commontypn]
+```
+
+But first we have to know that these pairs of the zipped lists *do* have common `typ`s! (remember this, count 3) If even one pair fails to have a common `typ` then the whole `TupleT`s fail to have a common `typ`.
+
+#### Handling `Datatype "str"`
+
+Note that two `Datatype`s can match if and only if they have the same string argument, like:
+
+```haskell
+Datatype "color" <-> Datatype "color"
+```
+
+#### Do we use `typ` or `typ option`?
+
+We were thinking of our "merge two types" function as `typ * typ -> typ`. But remember that `typecheck_patterns` is supposed to return a `typ option`, because it's possible for two types not to have a common type, therefore impossible to be merged. (remember this, count 4)
+
+That's OK. We can add a simple helper function that merges two `typ option`s instead, by using our previous `typ` merging function.
+
+### Deciding the signatures
+
+Time to start nailing down the design. Of course we will do this with the type signatures.
+
+Working backwards from the end: remember that `typecheck_patterns` must have type
+
+```haskell
+typecheck_patterns: (string * string * typ) list * (pattern list) -> typ option
+```
+
+We said that we'd have a function with type
+
+```haskell
+merge: (typ option) * (typ option) -> (typ option)
+```
+
+and we would use this to FOLD over the `pattern list`. Wait, what? We can only do that with a `typ option list`.
+
+So we have to take the `pattern list` and convert it to a `typ option list`. For this, we can have a function 
+
+```haskell
+convert: pattern -> typ option
+```
+
+and we can `List.map` this function over the `pattern list`. But... for our conversion we also need the metadata to look up stuff. Since we want to map this function, we'd have to pass the metadata down as an argument. So let's take advantage of currying!
+
+```haskell
+convert: (string * string * typ) list -> pattern -> typ option
+```
+
+For the `merge` function, we can take two `typ option`s, remove the `option` part (throw away the `SOME`), merge the two `typ`s, then wrap it back up with an `option` again. But only if they are both `SOME`, and only if the `typ`s that are inside the `SOME`s are "merge-able" (count 5 !). 
+
+This situation of checking if two `typ`s are merge-able kept coming up 5 times. So it seems convenient (almost necessary) to have a separate function for checking if two `typ`s *can* have a common `typ` at all:
+
+```haskell
+compatible: typ * typ -> bool
+```
+
+After that, *if* two `typ`s are compatible, then we can have a separate function that computes that common type. This will lead to a bit of code duplication, but the overall design is much cleaner by using `compatible` in many different places. Here's the signature of the common type calculator:
+
+```haskell
+-- assumes the typs are compatible
+coalesce: typ * typ -> typ
+```
+
+#### Summary of the signatures
+
+It looks like we don't have to use mutual recursion after all! So we've got so far:
+
+```haskell
+-- does not depend on others, is recursive. Just do case (s, t) of...
+fun compatible(s: typ, t: typ): bool
+
+-- uses compatible in ConstructorP case, is recursive.
+fun convert(metadata: (string * string * typ) list)(p: pattern): typ option
+
+-- assumes s, t are compatible, is recursive in the TupleT case.
+fun coalesce(s: typ, t: typ): typ 
+
+-- non-recursive, uses compatible and coalesce. Very simple!
+fun merge(s: typ option, t: typ option): typ option
+
+-- maps convert over list, then folds with merge. Very simple!
+fun typecheck_patterns(
+  metadata: (string * string * typ) list, patterns: pattern list
+): typ option
+```
+

@@ -31,10 +31,10 @@ Use do_until to implement factorial.
 *)
 fun factorial1 (n: int): int =
     let
-        val pred = fn (x, _) => x <> 0
-        val f = fn (x, acc) => (x - 1, x * acc)
+        fun nonzero(x, _) = x <> 0
+        fun multiply(count, product) = (count - 1, count * product)
     in
-        #2 (do_until f pred (n, 1))
+        #2 (do_until multiply nonzero (n, 1))
     end
 
 (* 4.

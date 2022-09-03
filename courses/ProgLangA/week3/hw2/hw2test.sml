@@ -109,82 +109,24 @@ val test10c = score ([(Hearts, Num 2), (Clubs, Num 4)], 5) = 3
 val test10d = score ([(Hearts, Num 2), (Diamonds, Num 4)], 10) = 2
 val test10e = score ([(Hearts, Num 10), (Diamonds, Num 4)], 10) = 6
 
-val test11a = officiate ([(Hearts, Num 2),(Clubs, Num 4)],[Draw], 15) = 6
-val test11b = officiate ([(Hearts, Num 2),(Clubs, Num 4)],[Draw,Draw], 15) = 9
-val test11c = officiate ([(Hearts, Num 9),(Clubs, Num 8)],[Draw,Draw], 15) = 6
-val test11d = officiate (
-    [(Hearts, Num 2), (Clubs, Num 4)], [Draw, Draw, Discard(Clubs, Num 4)], 15) = 6
-val test11e = officiate ([(Clubs, Ace), (Spades, Ace), (Clubs, Ace), (Spades, Ace)],
-                        [Draw, Draw, Draw, Draw], 42) = 3
-val test11f = officiate ([(Clubs, Ace)], [Draw], 42)= 15
-val test11g = officiate ([(Clubs, Ace), (Spades, Ace)], [Draw, Draw], 42) = 10
-val test11h = officiate ([(Clubs, Ace), (Spades, Ace), (Clubs, Ace)],
+val test11a = officiate([(Hearts, Num 2), (Clubs, Num 4)], [Draw], 15) = 6
+val test11b = officiate([(Hearts, Num 2), (Clubs, Num 4)], [Draw, Draw], 15) = 9
+val test11c = officiate([(Hearts, Num 9), (Clubs, Num 8)], [Draw, Draw], 15) = 6
+val test11cc = officiate([(Hearts, Num 9),(Clubs, Num 8), (Spades, Ace)],
+    [Draw, Draw, Draw], 15) = 6
+val test11d = officiate([(Hearts, Num 2), (Clubs, Num 4)],
+    [Draw, Draw, Discard(Clubs, Num 4)], 15) = 6
+val test11e = officiate(
+    [(Clubs, Ace), (Spades, Ace), (Clubs, Ace), (Spades, Ace)],
+    [Draw, Draw, Draw, Draw], 42) = 3
+val test11f = officiate([(Clubs, Ace)], [Draw], 42)= 15
+val test11g = officiate([(Clubs, Ace), (Spades, Ace)], [Draw, Draw], 42) = 10
+val test11h = officiate([(Clubs, Ace), (Spades, Ace), (Clubs, Ace)],
                         [Draw, Draw, Draw], 42) = 4
-val test11i = ((officiate(
-    [(Clubs, Jack), (Spades, Num(8))], [Draw, Discard(Hearts, Jack)],
-                         42); false)  handle IllegalMove => true)
+val test11i = ((officiate([(Clubs, Jack), (Spades, Num(8))],
+    [Draw, Discard(Hearts, Jack)], 42); false) handle IllegalMove => true)
 val test11j = officiate([], [], 10) = 5
 val test11k = officiate([(Clubs, Ace)], [], 10) = 5
 val test11l = officiate([], [Draw], 10) = 5
-val test11m = ((officiate(
-    [], [Discard(Diamonds, Num(9))], 10); false) handle IllegalMove => true)
-
-(* for testing the careful_player function *)
-type property = card list -> card list -> move list -> int -> bool
-
-fun play_one_move(held: card list)(cards: card list)(moves: move list)
-    : card list * card list * move list =
-    case (cards, moves) of
-      (_, [])               => (held, cards, moves) (* no move possible *)
-    | (_, Discard c :: ms)  => (remove_card(held, c, IllegalMove), cards, ms)
-    | ([], Draw :: ms)      => (held, cards, moves) (* no cards left to draw *)
-    | (c :: cs, Draw :: ms) => (c :: held, cs, ms)
-
-(* the value of the held cards never exceeds the goal *)
-fun prop1(held: card list)(_: card list)(_: move list)(goal: int): bool =
-    sum_cards(held) <= goal
-
-(* A card is drawn whenever the goal is more than 10
-   greater than the value of the held cards. *)
-fun prop2(held: card list)(_: card list)(moves: move list)(goal: int)
-    : bool =
-    goal - sum_cards(held) <= 10 orelse hd moves = Draw
-
-(* If a score of 0 is reached, there must be no more moves. *)
-fun prop3(held: card list)(cards: card list)(moves: move list)(goal: int)
-: bool =
-    score(held, goal) > 0 orelse moves = []
-
-(* If it is possible to reach a score of 0 by discarding a card
-   followed by drawing a card, then this must be done. *)
-fun prop4(held: card list)(cards: card list)(moves: move list)(goal: int)
-    : bool =
-    held = [] orelse
-    cards = [] orelse
-    not (zero_possible([], held, cards, goal)) orelse
-    hd moves = Discard (hd held) andalso
-    hd (tl moves) = Draw
-
-fun test_one_prop(held: card list)(cards: card list)(careful: move list)
-    (goal: int)(prop: property): bool =
-    if careful = []
-    then prop held cards careful goal
-    else let
-        val (held', cards', moves') = play_one_move held cards careful
-    in
-        prop held' cards' moves' goal andalso
-        test_one_prop held' cards' moves' goal prop
-    end
-
-fun test_all_props(held: card list)(cards: card list)(careful: move list)
-    (goal: int)(props: property list): bool =
-    let
-        val checks: bool list = List.map
-            (test_one_prop held cards careful goal)
-            props
-    in
-        List.foldr (fn (x, y) => x andalso y) true checks
-    end
-
-val props: property list = [prop1, prop2, prop3, prop4]
-val test12a = test_all_props
+val test11m = ((officiate([], [Discard(Diamonds, Num(9))], 10); false)
+    handle IllegalMove => true)

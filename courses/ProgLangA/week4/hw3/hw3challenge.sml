@@ -40,14 +40,13 @@ fun compatible(s: typ, t: typ): bool = case (s, t) of
     |   (IntT, IntT)   => true
     |   (Datatype str1, Datatype str2) => str1 = str2
     |   (TupleT lst1, TupleT lst2) =>
-        if not(length lst1 = length lst2)
+        if length lst1 <> length lst2
         then false
         else let
             val zipped = ListPair.zip(lst1, lst2)
-            val coals = List.map compatible zipped
-            val check_all = List.all (fn x => x = true) coals
+            val checked = List.map compatible zipped
         in
-            check_all
+            List.all (fn x => x = true) checked  (* are all pairs compatible? *)
         end
     |   _ => false
 
@@ -61,18 +60,16 @@ fun p2t(triples: (string * string * typ) list)(p: pattern): typ option =
     |   TupleP lst =>
         let
             val converted = List.map (p2t triples) lst
-            val check_all = List.all isSome converted
         in
-            if check_all
+            if List.all isSome converted
             then SOME(TupleT (List.map valOf converted))
             else NONE
         end
     |   ConstructorP(str, pat) =>
         let
             val lookup = List.find (fn (s1, s2, t) => s1 = str) triples
-            val other_typ = p2t triples pat
         in
-            case (lookup, other_typ) of
+            case (lookup, p2t triples pat) of
                 (NONE, _) => NONE           (* could not find str in metadata *)
             |   (_, NONE) => NONE                     (* pat fails to convert *)
             |   (SOME(s1, s2, t), SOME(t')) =>
@@ -83,11 +80,11 @@ fun p2t(triples: (string * string * typ) list)(p: pattern): typ option =
 
 (* Merges two types to their common type. Assumes the types are compatible. *)
 fun coalesce(s: typ, t: typ): typ = case (s, t) of
-        (Anything, x)  => x
-    |   (x, Anything)  => x
+        (Anything,  x) => x
+    |   ( x, Anything) => x
     |   (UnitT, UnitT) => UnitT
-    |   (IntT, IntT)   => IntT
-    |   (Datatype str1, Datatype str2) => Datatype str1 (* assume str1 = str2 *)
+    |   ( IntT,  IntT) => IntT
+    |   (Datatype s1, Datatype s2) => Datatype s1           (* assume s1 = s2 *)
     |   (TupleT lst1, TupleT lst2) =>           (* assume len lst1 = len lst2 *)
         TupleT (List.map coalesce (ListPair.zip(lst1, lst2)))
     |   _ => s         (* to satisfy type checker. This case shouldn't happen *)
@@ -106,11 +103,7 @@ fun merge(s: typ option, t: typ option): typ option =
 fun typecheck_patterns(
     triples: (string * string * typ) list, pats: pattern list
 ): typ option =
-    let
-        val typs: typ option list = List.map (p2t triples) pats
-    in
-        case typs of
-            [t] => t
-        |   t :: ts => List.foldl merge t ts
-        |   _ => NONE (* to satisfy type checker. This case should not happen *)
-    end
+    case List.map (p2t triples) pats of           (* convert all pats to typs *)
+        t :: [] => t
+    |   t :: ts => List.foldl merge t ts
+    |   _ => NONE     (* to satisfy type checker. This case should not happen *)

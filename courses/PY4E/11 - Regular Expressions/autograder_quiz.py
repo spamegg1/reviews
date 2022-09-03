@@ -59,6 +59,7 @@ for string in strings:
 
 print(sum(numbers))
 
+handle.close()
 
 # Optional: Just for Fun
 # There are a number of different ways to approach this problem. While we don't

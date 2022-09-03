@@ -1,5 +1,5 @@
 (* Programming Languages, Dan Grossman *)
-(* Section 6: Static Versus Dyanamic Typing, Part 1 *)
+(* Section 6: Static Versus Dynamic Typing, Part 1 *)
 
 datatype t = Int of int | String of string
 fun f y = if y > 0 then Int(y+y) else String "hi"
@@ -15,7 +15,7 @@ val z = cube 7
 (* fun f g = (g 7, g true) *) (* does not type-check *)
 (* val pair_of_pairs = f (fn x => (x,x)) *)
 
-datatype tort = Int of int 
+datatype tort = Int of int
               | String of string
               | Cons of tort * tort
               | Fun of tort -> tort
@@ -27,14 +27,14 @@ val _ = if true
 
 (* does not type-check *)
 (*
-fun pow x y =  
-    if y = 0 
+fun pow x y =
+    if y = 0
     then 1
     else x * pow (x,y-1)
 *)
 
 (* wrong algorithm *)
 fun pow x y =  (* curried *)
-    if y = 0 
+    if y = 0
     then 1
     else x + pow x (y-1) (* oops *)

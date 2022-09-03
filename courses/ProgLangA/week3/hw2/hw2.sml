@@ -3,8 +3,7 @@
 (* if you use this function to compare two strings (returns true if the same
    string), then you avoid several of the functions in problem 1 having
    polymorphic types that may be confusing *)
-fun same_string(s1 : string, s2 : string) =
-    s1 = s2
+fun same_string(s1 : string, s2 : string) = s1 = s2
 
 (* put your solutions for problem 1 here *)
 
@@ -13,26 +12,27 @@ fun same_string(s1 : string, s2 : string) =
  *  assumes string occurs in list at most once  *)
 fun all_except_option(s: string, lst: string list): string list option =
     case lst of
-      [] => NONE
-    | x :: xs =>
+        [] => NONE
+    |   x :: xs =>
         let
             val rest = all_except_option(s, xs)
-            val same = same_string(x, s)
         in
-            case rest of
-              NONE    => if same then SOME(xs) else NONE
-            | SOME ys => if same then rest else SOME(x :: ys)
+            case (same_string(x, s), rest) of
+                (true,  NONE)     => SOME(xs)
+            |   (false, NONE)     => NONE
+            |   (true,  SOME(ys)) => rest
+            |   (false, SOME(ys)) => SOME(x :: ys)
         end
 
 (*  returns list of other strings from lists that contain given string
  *  assumes each list has no repetitions  *)
 fun get_substitutions1(lst: string list list, s: string): string list =
     case lst of
-      [] => []
-    | x :: xs =>
+        [] => []
+    |   x :: xs =>
         case all_except_option(s, x) of
-          NONE   =>     get_substitutions1(xs, s)
-        | SOME y => y @ get_substitutions1(xs, s)
+            NONE   =>     get_substitutions1(xs, s)
+        |   SOME y => y @ get_substitutions1(xs, s)
 
 (*  returns list of other strings from lists that contain given string
  *  assumes each list has no repetitions, is tail recursive  *)
@@ -40,11 +40,11 @@ fun get_substitutions2(lst: string list list, s: string): string list =
     let
         fun aux(lst, s, acc) =
             case lst of
-              [] => acc
-            | x :: xs =>
+                [] => acc
+            |   x :: xs =>
                 case all_except_option(s, x) of
-                  NONE   => aux(xs, s, acc)
-                | SOME y => aux(xs, s, acc @ y)
+                    NONE   => aux(xs, s, acc)
+                |   SOME y => aux(xs, s, acc @ y)
     in
         aux(lst, s, [])
     end
@@ -78,17 +78,19 @@ exception IllegalMove
 (*  returns color of card  *)
 fun card_color(card: card): color =
     case card of
-      (Clubs, _)    => Black
-    | (Diamonds, _) => Red
-    | (Hearts, _)   => Red
-    | (Spades, _)   => Black
+        (Clubs, _)    => Black
+    |   (Diamonds, _) => Red
+    |   (Hearts, _)   => Red
+    |   (Spades, _)   => Black
+
+fun card_rank(card: card): rank = case card of (_, x) => x
 
 (*  returns value of card  *)
 fun card_value(card: card): int =
     case card of
-      (_, Num i) => i
-    | (_, Ace)   => 11
-    | (_, _)     => 10
+        (_, Num i) => i
+    |   (_, Ace)   => 11
+    |   (_, _)     => 10
 
 (*  remove card from list (only once), raise exception if card not in list  *)
 fun remove_card([]: card list, _: card, e: exn): card list = raise e
@@ -141,30 +143,4 @@ fun officiate(cards: card list, moves: move list, goal: int): int =
     in
         state([], cards, moves)
     end
-
-(* assume held1 and cards are both nonempty. *)
-fun zero_possible(
-    held1: card list, held2: card list, cards: card list, goal: int
-): bool =
-    if held2 = [] then false
-    else if score((hd cards :: held1) @ tl held2, goal) = 0
-    then true
-    else zero_possible(hd held2 :: held1, tl held2, cards, goal)
-
-(* fun careful_helper(
-    cards: card list, goal: int, held: card list, acc: move list
-): move list =
-    if goal - sum_cards(held) > 10 andalso not(cards = [])
-    then careful_helper(tl cards, goal, (hd cards) :: held, Draw :: acc)
-    else if score(held, goal) = 0 then acc
-    else if not(cards = []) andalso not(held = []) then
-    let
-        val first = hd held
-        (* val discard_then_draw = *)
-    in
-        if score((hd cards) :: (tl held), goal) = 0
-        then Discard
-        else Discard
-    end *)
-
-fun careful_player(cards: card list, goal: int): move list = nil
+(* Challenge stuff *)
