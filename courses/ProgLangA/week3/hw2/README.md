@@ -258,11 +258,11 @@ When implementing functions that take a `gamestate` as input, it is very useful 
 
 ```haskell
 fun somefun(st: gamestate) =
-		let
-				val (hand, deck, goal, scor) = st -- destructuring
-		in
-				someval
-		end
+    let
+        val (hand, deck, goal, scor) = st -- destructuring
+    in
+        someval
+    end
 ```
 
 This way we have easy access to the `gamestate` components.
@@ -308,10 +308,10 @@ we should have another `if/then` under the `then`:
 ```haskell
     else if goal - (sum of held cards) > 10
     then 
-    		if cards = [] then
-    		    ???
-    		else
-    		    ???
+        if cards = [] then
+            ???
+        else
+            ???
 ```
 
 ### Summarizing the type signatures
