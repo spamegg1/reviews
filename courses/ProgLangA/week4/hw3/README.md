@@ -548,3 +548,8 @@ fun typecheck_patterns(
 ): typ option
 ```
 
+### This works!
+
+I was able to pass the grader and get the 105% max extra credit score with this approach!
+
+![challenge-proof](challenge-proof.png)

@@ -408,6 +408,12 @@ val all_in_one_test: bool = check_all_props(moves, start)
 -- use even more randomly generated inputs! Repeat!
 ```
 
+### This isn't just nonsense...
+
+I was able to pass the grader and got the 104% max extra credit score with this approach!
+
+![challenge-proof](challenge-proof.png)
+
 ### Feeling a bit crazy?
 
 Why not give it a shot to develop a property based testing library for SML? Take a look at Haskell's Quickcheck for ideas. 
