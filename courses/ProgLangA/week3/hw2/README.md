@@ -29,7 +29,7 @@ fun silly xs =
        | x :: [] => case helper_function x of
                         NONE => ""
                       | SOME i => ""
-                      | x :: xs' => "" (* Error related to this line. It is a branch of the *inner* case *)
+                      | x :: xs' => "" -- Error related to this line. It is a branch of the *inner* case
 ```
 
 which is wrong (it's not what you intended and it doesn't type-check).  You need to wrap the inner case expression in parentheses:
@@ -57,14 +57,19 @@ These are very nice and useful to have:
 ```haskell
 -- applies f to each element of list
 fun mymap(f: 'a -> 'b)(alist: 'a list): 'b list
+
 -- applies binary operation f to pairs by going through list
 fun myfold(f: ('a * 'b) -> 'b)(zero: 'b)(alist: 'a list): 'b
+
 -- returns only elements of list that satisfy predicate
 fun myfilter(pred: 'a -> bool)(alist: 'a list): 'a list
+
 -- returns true if at least one element in list satisfies predicate
 fun myexists(pred: 'a -> bool)([]: 'a list): bool
+
 -- returns true if all elements in list satisfy predicate
 fun myall(pred: 'a -> bool)(lst: 'a list): bool
+
 -- assumes lists have equal length.
 fun myzip(alist: 'a list)(blist: 'b list): ('a * 'b) list
 ```
@@ -117,19 +122,19 @@ First let's attempt to implement `careful_player` and write some pseudo code, in
 ```haskell
 -- this is not actual code, it is pseudo code
 fun careful_player(deck: card list, goal: int): move list =
-		-- 3rd property: if score is 0, there are no more moves.
-		if score = 0
-		then []
-		
-		-- 2nd property: always draw if more than 10 away from goal
-		else if goal - (sum of held cards) > 10
-		then Draw :: (recursive call to careful_player)
-		
-		-- 4th property: if possible to reach 0 by discard-draw, then do it.
-		else if (it's possible to discard-then-draw to reach 0 score)
-		then Discard(something) :: Draw :: (recursive call)
-		
-		else []
+    -- 3rd property: if score is 0, there are no more moves.
+    if score = 0
+    then []
+
+    -- 2nd property: always draw if more than 10 away from goal
+    else if goal - (sum of held cards) > 10
+    then Draw :: (recursive call to careful_player)
+
+    -- 4th property: if possible to reach 0 by discard-draw, then do it.
+    else if (it's possible to discard-then-draw to reach 0 score)
+    then Discard(something) :: Draw :: (recursive call)
+
+    else []
 ```
 
 We already notice several issues: the inputs `cards` and `goal` do not provide us enough to verify all properties. We need the list of held cards to check the 2nd and 4th properties. There is also the 1st property (that sum of held cards should not exceed the `goal`) which did not factor into choosing `move`s, but we still need to verify it.
