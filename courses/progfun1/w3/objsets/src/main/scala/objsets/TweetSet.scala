@@ -224,3 +224,4 @@ object Main extends App:
   // Print the trending tweets
   GoogleVsApple.trending foreach println
   //TweetReader.allTweets foreach println
+  //TweetReader.ParseTweets.getTweetData("mashable", TweetData.mashable) foreach println
