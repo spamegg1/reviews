@@ -98,3 +98,16 @@
                         (set! next-to-replace
                               (remainder (+ next-to-replace 1) n))
                         ans)))))))
+
+;; Challenge problem
+;; Integer Integer -> Boolean
+;; Evaluates e1 once, evaluates e2 until it's not less than e1, returns #t
+(define-syntax while-less
+  (syntax-rules (do)
+    [(while-less e1 do e2)
+     (let ([l e1])
+       (letrec ([loop (lambda ()
+                        (if (>= e2 l)
+                            #t
+                            (loop)))])
+         (loop)))]))

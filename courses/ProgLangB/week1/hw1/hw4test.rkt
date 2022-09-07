@@ -28,9 +28,9 @@
    (check-equal? (sequence 3 2 1) empty)
 
    ; string-append-map test
-   (check-equal? (string-append-map
-                  (list "dan" "dog" "curry" "dog2")
-                  ".jpg") '("dan.jpg" "dog.jpg" "curry.jpg" "dog2.jpg") "string-append-map test")
+   (check-equal? (string-append-map (list "dan" "dog" "curry" "dog2") ".jpg")
+                '("dan.jpg" "dog.jpg" "curry.jpg" "dog2.jpg")
+                "string-append-map test")
 
    (check-equal? (string-append-map empty ".jpg") empty)
 
@@ -40,28 +40,36 @@
    (check-equal? (list-nth-mod (list 0 1 2 3 4) 6) 1 "list-nth-mod test")
 
    ; stream-for-n-steps test
-   (check-equal? (stream-for-n-steps nats 0) empty "stream-for-n-steps test")
-   (check-equal? (stream-for-n-steps ones 2) (list 1 1) "stream-for-n-steps test")
-   (check-equal? (stream-for-n-steps nats 5) (list 1 2 3 4 5) "stream-for-n-steps test")
+   (check-equal? (stream-for-n-steps nats 0)
+                 empty "stream-for-n-steps test")
+   (check-equal? (stream-for-n-steps ones 2)
+                 (list 1 1) "stream-for-n-steps test")
+   (check-equal? (stream-for-n-steps nats 5)
+                 (list 1 2 3 4 5) "stream-for-n-steps test")
 
    ; funny-number-stream test
    (check-equal? (stream-for-n-steps funny-number-stream 16)
-                 (list 1 2 3 4 -5 6 7 8 9 -10 11 12 13 14 -15 16) "funny-number-stream test")
+                 (list 1 2 3 4 -5 6 7 8 9 -10 11 12 13 14 -15 16)
+                 "funny-number-stream test")
 
    ; dan-then-dog test
-   (check-equal? (stream-for-n-steps dan-then-dog 1) (list "dan.jpg") "dan-then-dog test")
-   (check-equal? (stream-for-n-steps dan-then-dog 2) (list "dan.jpg" "dog.jpg") "dan-then-dog test")
+   (check-equal? (stream-for-n-steps dan-then-dog 1)
+                 (list "dan.jpg") "dan-then-dog test")
+   (check-equal? (stream-for-n-steps dan-then-dog 2)
+                 (list "dan.jpg" "dog.jpg") "dan-then-dog test")
    (check-equal? (stream-for-n-steps dan-then-dog 3)
                  (list "dan.jpg" "dog.jpg" "dan.jpg") "dan-then-dog test")
 
    ; stream-add-zero test
-   (check-equal? (stream-for-n-steps (stream-add-zero ones) 1) (list (cons 0 1)) "stream-add-zero test")
+   (check-equal? (stream-for-n-steps (stream-add-zero ones) 1) (list (cons 0 1))
+                  "stream-add-zero test")
    (check-equal? (stream-for-n-steps (stream-add-zero ones) 2)
                  (list (cons 0 1) (cons 0 1)) "stream-add-zero test")
    (check-equal? (stream-for-n-steps (stream-add-zero nats) 3)
                  (list (cons 0 1) (cons 0 2) (cons 0 3)) "stream-add-zero test")
    (check-equal? (stream-for-n-steps (stream-add-zero dan-then-dog) 3)
-                 (list (cons 0 "dan.jpg") (cons 0 "dog.jpg") (cons 0 "dan.jpg")) "stream-add-zero test")
+                 (list (cons 0 "dan.jpg") (cons 0 "dog.jpg") (cons 0 "dan.jpg"))
+                  "stream-add-zero test")
 
    ; cycle-lists test
    (check-equal? (stream-for-n-steps (cycle-lists (list 1 2 3) (list "a" "b")) 3)
@@ -74,28 +82,32 @@
 
    ; vector-assoc test
    (check-equal? (vector-assoc 4
-                               (vector (cons 2 1) (cons 3 1) (cons 4 1) (cons 5 1)))
+                  (vector (cons 2 1) (cons 3 1) (cons 4 1) (cons 5 1)))
                  (cons 4 1) "vector-assoc test")
    (check-equal? (vector-assoc 0
-                               (vector (cons 2 1) (cons 3 1) (cons 4 1) (cons 5 1)))
+                  (vector (cons 2 1) (cons 3 1) (cons 4 1) (cons 5 1)))
                  #false "vector-assoc test")
    (check-equal? (vector-assoc 0
                                (vector 1 2 3 4 5))
                  #false "vector-assoc test")
    (check-equal? (vector-assoc 0 (vector empty)) #false "vector-assoc test")
    (check-equal? (vector-assoc (cons 1 2)
-                               (vector (cons 2 1) (cons 3 1) (cons 4 1) (cons (cons 1 2) 1)))
+                               (vector (cons 2 1) (cons 3 1) (cons 4 1)
+                                       (cons (cons 1 2) 1)))
                  (cons (cons 1 2) 1) "vector-assoc test")
 
    ; cached-assoc tests
-   (check-equal? ((cached-assoc (list (cons 1 2) (cons 3 4)) 3) 3) (cons 3 4) "cached-assoc test")
-   (check-equal? ((cached-assoc (list (cons 1 2) (cons 3 4)) 1) 3) (cons 3 4) "cached-assoc test")
-   (check-equal? ((cached-assoc (list (cons 1 2) (cons 3 4) (cons 5 6)) 1) 5) (cons 5 6) "cached-assoc test")
+   (check-equal? ((cached-assoc (list (cons 1 2) (cons 3 4)) 3) 3)
+                  (cons 3 4) "cached-assoc test")
+   (check-equal? ((cached-assoc (list (cons 1 2) (cons 3 4)) 1) 3)
+                  (cons 3 4) "cached-assoc test")
+   (check-equal? ((cached-assoc (list (cons 1 2) (cons 3 4) (cons 5 6)) 1) 5)
+                  (cons 5 6) "cached-assoc test")
 
    ; while-less test
-   #;
-   (check-equal? (while-less 7 do (begin (set! a (+ a 1)) a)) #t "while-less test")
-
+   ; this should print x 5 times, increase a to 7, stop, and return #t
+   (check-equal? (while-less 7 do (begin (set! a (+ a 1)) (print "x") a))
+                  #t "while-less test")
    ))
 
 (require rackunit/text-ui)

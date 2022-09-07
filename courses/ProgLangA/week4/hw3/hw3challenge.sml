@@ -46,7 +46,7 @@ fun compatible(s: typ, t: typ): bool = case (s, t) of
             val zipped = ListPair.zip(lst1, lst2)
             val checked = List.map compatible zipped
         in
-            List.all (fn x => x = true) checked  (* are all pairs compatible? *)
+            List.all (fn x => x) checked         (* are all pairs compatible? *)
         end
     |   _ => false
 
@@ -67,7 +67,7 @@ fun p2t(triples: (string * string * typ) list)(p: pattern): typ option =
         end
     |   ConstructorP(str, pat) =>
         let
-            val lookup = List.find (fn (s1, s2, t) => s1 = str) triples
+            val lookup = List.find (fn (s1, _, _) => s1 = str) triples
         in
             case (lookup, p2t triples pat) of
                 (NONE, _) => NONE           (* could not find str in metadata *)
