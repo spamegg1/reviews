@@ -90,7 +90,8 @@ except ImportError:
     base64 = binascii = None
 else:
     # Python 3.1 deprecates decodestring in favor of decodebytes
-    _base64decode = getattr(base64, 'decodebytes', base64.decodestring)
+    #_base64decode = getattr(base64, 'decodebytes', base64.decodestring)
+    _base64decode = getattr(base64, 'decodebytes', base64.decodebytes)
 
 # _s2bytes: convert a UTF-8 str to bytes if the interpreter is Python 3
 # _l2bytes: convert a list of ints to bytes if the interpreter is Python 3

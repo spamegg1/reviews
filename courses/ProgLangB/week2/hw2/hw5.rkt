@@ -157,12 +157,126 @@
 
 ;; We will test this function directly, so it must do
 ;; as described in the assignment
-(define (compute-free-vars e) "CHANGE")
+;(define (compute-free-vars e) "CHANGE")
+(define (compute-free-vars e)
+  (struct res (e fvs)) ; result type of f (could also use a pair)
+    (define (f e)
+      (cond [(var? e) (res e (set (var-string e)))]
+            [(int? e) (res e (set))]
+            [(add? e) (let ([r1 (f (add-e1 e))]
+                            [r2 (f (add-e2 e))])
+                        (res (add (res-e r1) (res-e r2))
+                             (set-union (res-fvs r1) (res-fvs r2))))]
+            [(ifgreater? e) (let ([r1 (f (ifgreater-e1 e))]
+                                  [r2 (f (ifgreater-e2 e))]
+                                  [r3 (f (ifgreater-e3 e))]
+                                  [r4 (f (ifgreater-e4 e))])
+                              (res (ifgreater (res-e r1)
+                                              (res-e r2)
+                                              (res-e r3)
+                                              (res-e r4))
+                                   (set-union (res-fvs r1)
+                                              (res-fvs r2)
+                                              (res-fvs r3)
+                                              (res-fvs r4))))]
+            [(fun? e) (let* ([r (f (fun-body e))]
+                             [fvs (set-remove (res-fvs r) (fun-formal e))]
+                             [fvs (if (fun-nameopt e)
+                                      (set-remove fvs (fun-nameopt e))
+                                      fvs)])
+                        (res (fun-challenge (fun-nameopt e) (fun-formal e)
+                                            (res-e r) fvs)
+                            fvs))]
+            [(call? e) (let ([r1 (f (call-funexp e))]
+                             [r2 (f (call-actual e))])
+                        (res (call (res-e r1) (res-e r2))
+                             (set-union (res-fvs r1) (res-fvs r2))))]
+            [(mlet? e) (let* ([r1 (f (mlet-e e))]
+                              [r2 (f (mlet-body e))])
+                         (res (mlet (mlet-var e) (res-e r1) (res-e r2))
+                              (set-union (res-fvs r1)
+                                         (set-remove (res-fvs r2) (mlet-var e)))))]
+            [(apair? e) (let ([r1 (f (apair-e1 e))]
+                              [r2 (f (apair-e2 e))])
+                          (res (apair (res-e r1) (res-e r2))
+                             (set-union (res-fvs r1) (res-fvs r2))))]
+            [(fst? e) (let ([r (f (fst-e e))])
+                        (res (fst (res-e r))
+                             (res-fvs r)))]
+            [(snd? e) (let ([r (f (snd-e e))])
+                        (res (snd (res-e r))
+                             (res-fvs r)))]
+            [(aunit? e) (res e (set))]
+            [(isaunit? e) (let ([r (f (isaunit-e e))])
+                            (res (isaunit (res-e r))
+                                 (res-fvs r)))]))
+    (res-e (f e)))
 
 ;; Do NOT share code with eval-under-env because that will make
 ;; auto-grading and peer assessment more difficult, so
 ;; copy most of your interpreter here and make minor changes
-(define (eval-under-env-c e env) "CHANGE")
+;(define (eval-under-env-c e env) "CHANGE")
+(define (eval-under-env-c e env)
+  (cond [(fun-challenge? e)
+         (closure (set-map (fun-challenge-freevars e)
+                           (lambda (s) (cons s (envlookup env s))))
+                  e)]
+        [(aunit? e) e]
+        [(int? e) e]
+        [(fun? e) (closure env e)]
+        [(var? e) (envlookup env (var-string e))]
+        [(add? e)
+         (let ([v1 (eval-under-env-c (add-e1 e) env)]
+               [v2 (eval-under-env-c (add-e2 e) env)])
+           (if (and (int? v1)
+                    (int? v2))
+               (int (+ (int-num v1)
+                       (int-num v2)))
+               (error "MUPL addition applied to non-number")))]
+        [(ifgreater? e)
+         (let ([v1 (eval-under-env-c (ifgreater-e1 e) env)]
+               [v2 (eval-under-env-c (ifgreater-e2 e) env)])
+           (if (and (int? v1)
+                    (int? v2))
+               (if (> (int-num v1) (int-num v2))
+                   (eval-under-env-c (ifgreater-e3 e) env)
+                   (eval-under-env-c (ifgreater-e4 e) env))
+               (error "MUPL ifgreater applied to non-number")))]
+        [(mlet? e)
+         (let* ([v (eval-under-env-c (mlet-e e) env)]
+                [newenv (cons (cons (mlet-var e) v) env)])
+           (eval-under-env-c (mlet-body e) newenv))]
+        [(apair? e)
+         (apair (eval-under-env-c (apair-e1 e) env)
+                (eval-under-env-c (apair-e2 e) env))]
+        [(fst? e)
+         (let ([v (eval-under-env-c (fst-e e) env)])
+           (if (apair? v)
+               (apair-e1 v)
+               (error "MUPL fst applied to non-pair")))]
+        [(snd? e)
+         (let ([v (eval-under-env-c (snd-e e) env)])
+           (if (apair? v)
+               (apair-e2 v)
+               (error "MUPL snd applied to non-pair")))]
+        [(isaunit? e)
+         (let ([v (eval-under-env-c (isaunit-e e) env)])
+           (if (aunit? v) (int 1) (int 0)))]
+        [(call? e)
+         (let ([cl (eval-under-env-c (call-funexp e) env)]
+               [arg (eval-under-env-c (call-actual e) env)])
+           (if (closure? cl)
+               (let ([myfun (closure-fun cl)])
+               (eval-under-env-c
+                 (fun-challenge-body myfun)
+                 (let ([newenv (cons
+                               (cons (fun-challenge-formal myfun) arg)
+                                     (closure-env cl))])
+               (if (fun-challenge-nameopt myfun)
+                   (cons (cons (fun-challenge-nameopt myfun) cl) newenv)
+                   newenv))))
+               (error "MUPL call's funexp is not a closure")))]
+        [#t (error (format "bad MUPL expression: ~v" e))]))
 
 ;; Do NOT change this
 (define (eval-exp-c e)

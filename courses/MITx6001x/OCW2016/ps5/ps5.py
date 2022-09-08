@@ -6,7 +6,6 @@
 import feedparser
 import string
 import time
-import threading
 from project_util import translate_html
 from mtTkinter import *
 from datetime import datetime
