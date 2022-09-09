@@ -36,7 +36,7 @@ object WikipediaRanking extends WikipediaRankingInterface:
 
   val sc: SparkContext = new SparkContext(conf)                          // TODO
 
-  // Hint: use a combination of `sc.parallelize`, 
+  // Hint: use a combination of `sc.parallelize`,
   // `WikipediaData.lines` and `WikipediaData.parse`
   val wikiRdd: RDD[WikipediaArticle] =                                   // TODO
     sc.parallelize(WikipediaData.lines map WikipediaData.parse, 4)
@@ -81,7 +81,7 @@ object WikipediaRanking extends WikipediaRankingInterface:
       .flatMap(fun)                           // RDD[(String, WikipediaArticle)]
       .groupByKey                   // RDD[(String, Iterable[WikipediaArticle])]
 
-  /* (2) Compute the language ranking again, but now using the inverted index. 
+  /* (2) Compute the language ranking again, but now using the inverted index.
    *     Can you notice a performance improvement?
    *
    *   Note: this operation is long-running. It can potentially run for
@@ -96,8 +96,8 @@ object WikipediaRanking extends WikipediaRankingInterface:
       .sortBy(-_._2)
 
   /* (3) Use `reduceByKey` so that the computation of the index
-   *     and the ranking are combined.     
-   *     Can you notice an improvement in performance compared to measuring 
+   *     and the ranking are combined.
+   *     Can you notice an improvement in performance compared to measuring
    *     *both* the computation of the index
    *     and the computation of the ranking? If so, can you think of a reason?
    *
@@ -124,7 +124,7 @@ object WikipediaRanking extends WikipediaRankingInterface:
     val langsRanked: List[(String, Int)] =
       timed("Part 1: naive ranking", rankLangs(langs, wikiRdd))
 
-    /* An inverted index mapping languages to wikipedia pages 
+    /* An inverted index mapping languages to wikipedia pages
      * on which they appear */
     def index: RDD[(String, Iterable[WikipediaArticle])] =
       makeIndex(langs, wikiRdd)

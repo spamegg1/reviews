@@ -793,7 +793,7 @@ Another downside is how we keep bulldozing over code we have previously written,
 
 https://www.coursera.org/learn/logic-introduction/
 
-Let me start by saying that I have a PhD in Mathematical Logic. So I can do this course in my sleep. (And on many occasions I did. Fun dreams!) I took this course to help out some others who were having trouble. I finished in 3-4 days.
+Let me start by saying that I've studied quite a bit of Mathematical Logic before. So I can do this course in my sleep. (And on many occasions I did. Fun dreams!) I took this course to help out some others who were having trouble. I finished in 3-4 days.
 
 The ["textbook"](http://intrologic.stanford.edu/intrologic/public/textbook.php) for this course is garbage (but it's free!). It pains me to say that to my fellow Logician colleagues. It's a bunch of "hypercards" (slides) put together. The book clocks under 150 pages but it's like they took a 600 page book and threw away all the explanations, definitions, theorems, proofs, exercises and did a really crappy Cliff Notes version of it. BONE DRY. Not only that, but there is a feeling that they are being punished for every extra word, so the explanations are deliberately terse, vague and confusing. Some of the prose is terrible, so many learners on Discord were confused by the explanations and asked for help. I know of two learners who dropped this course after week 3 or 4. There is no way you can understand what's going on by reading the book, especially in the later sections, unless you already know Logic. This is FORMAL SYMBOLIC MATHEMATICAL Logic, not "general" Logic.
 
@@ -823,7 +823,7 @@ So they changed the weird grading functionality (and hopefully got rid of that H
 
 ***Update March 2022:*** Most of the course material is no longer working. The links to the “External Tools” from Coursera to Stanford website simply lead to blank pages. I left a scathing comment on Coursera discussion forums.
 
-*Spam's recommendation:* **Don’t take this.** ~~Don't take this. Or rather, just take the earlier sections (first 4-5 chapters maybe?). It's a free, "as-is" resource you can use, if you are very smart, willing to find a proper, actual textbook, do lots of Internet searches and learn on your own, somehow making up for the absence of a prof and TA. If you are super strong already and want to do Prolog, then take it. It overlaps with the Prolog course to a great extent (I actually thought they were written by the same people at first!)~~ ***Definitely take some Logic (it's the best thing in life)*** but unfortunately I do not know of a good undergraduate, entry-level alternative. I only learned it at the graduate level.
+*Spam's recommendation:* **Don’t take this.** ~~Don't take this. Or rather, just take the earlier sections (first 4-5 chapters maybe?). It's a free, "as-is" resource you can use, if you are very smart, willing to find a proper, actual textbook, do lots of Internet searches and learn on your own, somehow making up for the absence of a prof and TA. If you are super strong already and want to do Prolog, then take it. It overlaps with the Prolog course to a great extent (I actually thought they were written by the same people at first!)~~ ***Definitely take some Logic (it's the best thing in life).*** A good alternative is the "Introduction to Formal Logic" by the [ForallX project](https://forallx.openlogicproject.org/).
 
 ### <a name="eff"></a> Effective Programming in Scala
 
