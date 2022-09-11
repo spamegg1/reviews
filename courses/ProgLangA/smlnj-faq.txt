@@ -1,0 +1,2341 @@
+!!!!! WARNING: This document is out of date !!!!!
+
+1. Language
+
+1.1. Core
+
+1.1.1. Types and type checking
+
+Q: [value restriction]
+Why do the following produce this "type vars not generalized ..."
+warning message? (SML/NJ 110)
+
+  - [] @ [];
+  stdIn:17.1-17.8 Warning: type vars not generalized because of
+     value restriction are instantiated to dummy types (X1,X2,...)
+  val it = [] : ?.X1 list
+
+
+  - raise Overflow;
+  stdIn:7.1-7.15 Warning: type vars not generalized because of
+     value restriction are instantiated to dummy types (X1,X2,...)
+
+  uncaught exception overflow
+    raised at: stdIn:7.7-7.15
+
+  - let fun f x = 1
+  =  in f
+  = end;
+  stdIn:7.1-9.6 Warning: type vars not generalized because of
+     value restriction are instantiated to dummy types (X1,X2,...)
+  val it = fn : ?.X1 -> int
+---------
+A: This is the "value restriction" introduced by SML '97.  See the SML
+'97 Conversion Guide for a thorough explanation.
+Note: In SML/NJ 110, these produce warning messages; some earlier
+working versions produced error messages instead.
+
+
+Q: Is there a way to suppress the top-level value restriction warnings?
+---------
+A: Yes, the warning can be suppressed by setting the flag
+
+  Compiler.Control.valueRestrictionTopWarn : bool ref
+
+to false (the default is true).  This (obviously) controls
+value restriction warnings in the top level.  If you want
+to see _more_ warnings rather than less, setting
+
+  Compiler.Control.valueRestrictionLocalWarn : bool ref
+
+to true will turn on value restriction warnings for local
+declarations (which might conceivably be useful for debugging).
+
+
+Q: Is real an equality type?
+---------
+A: It was in SML '90 and SML/NJ 0.93, but it is not in SML '97 and SML/NJ 110.
+So
+
+   1.0 = 1.0;
+
+will cause a type error because "=" demands arguments that have an equality
+type.  Also, real literals cannot be used in patterns.
+
+
+Q: I get sml source code from students and want to check if it is correct.
+In the first step i would like to know, if the signature of functions
+is the same as I expect.
+How can I compare one signature (i.e. value type) in sml to another?
+Example:
+  (* function provided by student, my have wrong signature *)
+  fun fx(a,b) = a ^ b;
+  (* my program should evaluate, if the signature is correct *)
+  val SigOK = if(fx = fn: string * string -> string) then true else false;
+----------
+A: If the function in question is named foo, and it's type should
+be <ty>, you could (after loading the student's definition), evaluate
+
+  val x: <ty> = foo
+
+and see if that generates a type error.  However, you cannot detect
+such a type error in a program.
+
+
+Q: On the subject of explicitly bound type variables, the only purpose
+I came up with was declaring constraints on types of arguments, e.g.,
+
+     fun 'a flip(x: 'a, y: 'a) = (y,x);
+
+to say that flip is only usable on pairs whose components have the
+same type, even though there would not be any other reason for this
+constraint to hold.  Is this feature also a partial workaround for the
+new constraints on nongeneralizable types?
+--------
+A: This explicit type parameter feature should be the prefered way to
+indicate the scope of type variables used in type constraints as in
+your example above.  Before one could write (and still can write)
+
+   fun flip(x: 'a, y: 'a) = (y,x);
+
+where the type variable 'a is implicitly scoped at this declaration,
+but the rules that determine the scope of a type variable appearing
+in a type constraint are rather arcane, and even experienced ML
+programmers are occasionally fooled.  Experience has shown that
+a requirement for explicit binding of type parameters would have
+been a better idea.
+
+These explicit type parameters do not provide a way of overriding
+the value restriction.  A declaration like
+
+  val 'a x : 'a list ref = ref nil
+
+must still cause an error indicating violation of the value
+restriction.
+
+Q: Why does this cause an error message? [explicit type variable can't be
+instantiated]
+
+  - fun f (x : 'a -> bool) = x 10;
+  stdIn:7.26-7.30 Error: operator and operand don't agree [literal]
+    operator domain: 'a
+    operand:         int
+    in expression:
+      x (10 : int)
+
+I guess that the 'a must end up being quantified over in the final
+type? [Yes]
+
+Is there notation for an "unqualified" part of a type (ie I care that the
+return type is int, but the input type can be anything)?
+-----------
+A: No.
+
+
+1.1.2. Patterns and variables
+
+Q: Running SML 0.93 on a Sparc-Solaris2.5, I encountered this
+problem when I misspelled "Overflow" in an exception handler
+and it worked anyway.  Is there an error in the matching of exception
+names?
+Transcript:
+
+  - exception X;
+  exception X
+  - fun p() = raise X;
+  val p = fn : unit -> 'a
+  - p() handle X => 0;
+  val it = 0 : int
+  - p() handle Y => 0;		(* where Y is unbound *)
+  val it = 0 : int
+--------
+A: The Y is interpreted as a pattern variable (of type exn) that will
+match any exception, including, as in this case, X.
+
+Q: It seems I can bind exceptions to names, say
+   exception bla;
+   val x = bla;
+and  'raise x' will generate an exception 'bla'
+However, if I try to handle the exception 'x', it will
+handle every exception (x is handled as a wildcard pattern).
+There seems to be a deep asymmetry in the behavior of
+exceptions. Is this wanted?
+---------
+A: Yes.  It is just an instance of the usual distinction between
+a constructor and a variable, and there is nothing special to
+exceptions in this behavior.  E.g.
+
+  val x = nil;
+
+  case [3] of x => 0 | z::y => z;
+
+The occurrence of "x" in the first rule of the case expression is
+a binding occurrence of a new variable "x" that is distinct from
+the variable x in the first declaration.  The variable "x" in the
+case rule is a pattern that will match any value, hence the case
+expression will return 0.
+
+
+Q: Why do real literals in patterns cause an error?
+
+  Standard ML of New Jersey, Version 109.25, February 1, 1997 [CM;
+  autoload enabled]
+  - fun f (0) = 0 | f (_) = 1;
+  val f = fn : int -> int
+  - fun f (0.0) = 0 | f (_) = 1;
+  stdIn:17.8-17.14 Error: syntax error: deleting  REAL RPAREN EQUALOP
+----------------
+A: real is no longer an equality type, so real literals are no longer
+supported in patterns in SML '97.  You have to bind the real value to
+a variable and use Real.==.
+
+
+Q: Since in SML'97 the type real is no longer an eqtype, datatypes
+that use it are not equality types and so the equality operator = and
+even in some cases pattern matching can't be used.  Is there a way of
+making a nonequality datatype into an equality type by supplying a
+user-defined equality?
+---------
+A: Well, the problem with reals is that they really aren't an equality
+type, strickly speaking, and we have acknowledged that fact in SML
+'97.  As you observed, this means that datatypes involving reals won't
+be equality types either, and that real literals are no longer
+accepted in pattern matching.  This issue is discussed in some detail
+in the Basis section documenting the Real module.
+The "workaround" is simply to use Real.== to test equality of
+two real numbers.  For datatypes defined using reals, you'll
+have to define your own equality function on the datatype in terms
+of the structure of the type and the Real.== function.
+
+
+1.1.3. Exceptions
+
+Q: Is there any way to determine what exceptions may be raised from
+within a given function?
+----------
+A: Kwang Yi and his group at KAIST have developed an exception
+analyzing program for SML/NJ.  See project reference.
+
+  http://pllab.kaist.ac.kr/~kwang/
+  kwang@cs.kaist.ac.kr
+
+See also recent papers, like that of Leroy/? in ML Workshop 98.
+
+
+1.1.4. Optimization
+
+Q: [Allen Stoughton] When compiling an expression like
+
+      f n + f n
+
+    is it EVER the case that code is generated that will only compute
+    (f n)'s value once?  If so, can you say anything about when this
+    kind of optimization is done?
+------------
+A: [Zhong] No, the current compiler is not supporting this kind of optimizations.
+
+We might implement something like this in the future; of course, only
+when "f n" does not incur any side effects.
+
+Q: [Allen Stoughton] When compiling an expression like
+
+      f x ^ g y ^ h z
+
+    do you generate code that first concatenates (f x) and (g y), and then
+    concatenates the result of this concatentation with the value of h z?
+    Or does the code wait for all three strings to be known, and then
+    carry out one ternary concatenation (only doing storage allocation
+    once)?
+----------
+A: [Zhong] The compiler is not sophisticated on this either. It will
+concatenate (f x) and (g y), and then concatenate the result with (h
+z).
+
+
+
+1.2. Modules
+
+1.2.0. General
+
+Q: What is the relation between modules in SML and objects in OO langauges?
+
+Q: [Allyn Dimock] Recursive modules
+I hit a situation where I want to define a datatype as follows:
+
+datatype foo =
+  simple of int
+| messy of int * foo Set
+
+The problem that I have is that I would like to use a SML/NJ Util library
+definition of a set.
+
+The SML/NJ utility library however defines a set functor, and sml
+doesn't allow a recursive definition of the sort:
+
+datatype foo =
+  simple of int
+| messy of int * fooSet
+
+and
+structure FooSet = SplaySetFn(struct
+				type ord_key = foo
+				val compare = fn(x,y) => ...
+			      end)
+and
+type fooSet = FooSet.set
+
+val bar : foo = ...
+
+Using polymorphism won't help with the forward reference since it
+would leave an unbound type variable in the definition of FooSet:
+
+datatype 'a foo =
+  simple of int
+| messy of int * 'a
+
+and
+structure FooSet = SplaySetFn(struct
+				type ord_key = 'a foo
+				val compare = fn(x,y) => ...
+			      end)
+and
+type fooSet = FooSet.set
+
+val bar: fooSet foo = ...
+
+Have I hit an inherent limitation or is there a clever workaround that
+I am missing?
+--------
+A: [dbm] Basically, you have an met an inherent limitation.  If the usual
+trick of parameterizing the type doesn't work (as you pointed out
+it doesn't here), there is no way to have a recursive definition
+with a functor call, or even a simple structure definition, in the
+middle.
+
+Many people have asked for a way of defining mutually recursive
+structures (e.g. mutually recursive abstract syntax of commands
+and expressions, each in its own module).  This could be done, though
+the set of mutually recursive modules would almost certainly have
+to be compiled as a single compilation unit, so they would not be
+truly "separate" modules.  However, having recursive definitions
+involving functor applications appears much more difficult, and
+mutually recursive functors would be even more mind-boggling.
+
+
+Q: I was interested to see that SML/NJ supports higher-order
+modules.  But browsing your web site I couldn't find a document
+that defines this extension to SML '97.  Does such a document
+exist?
+---------
+A: There is a description of higher-order modules at:
+
+  http://www.smlnj.org/doc/features.html
+
+
+1.2.1. Signatures
+
+Q: What happened to "open" (and "local") in signatures?
+---------
+A: These were dropped in SML '97.  See the Conversion Guide (Section x.x.x).
+
+
+Q: Norman Ramsey
+I'm not sure how to 'merge' signatures
+
+  signature A = sig val x : int end
+
+  signature B = sig include A val y : int end
+  signature C = sig include A val z : int end
+
+and now I want a D that includes x y and z but I can't write
+
+  signature D = sig include B include C end
+
+because of Error: duplicate value specifications for x caused by include
+
+surely there is a workaround for this problem, but I couldn't find
+sufficient documentation on the web page.  Help?
+----------------------------------------------------------------------
+A: Include is a poor substitute for an elaborate calculus of signature
+constructions.  The basic rule is that multiple specifications are
+simply not allowed.  But to satisfy popular demand, SML/NJ allows for
+"merging" of compatible type specifications (for some undocumented but
+plausible definition of compatible).  I have to check what the SML96
+definition allows, but we didn't try to extend the functionality of
+include beyond SML90.
+
+Q: [Norman Ramsey, 8/96]
+I desperately need to know how to do the following
+
+  signature A = sig type t (* more stuff *) end
+
+  signature B = sig include A (* now force type t = int *) end
+
+ > Include is a poor substitute for an elaborate calculus of signature
+ > constructions.
+
+I am ready, willing, and able to learn a better calculus, but I can't
+find any pointers.
+
+ > The basic rule is that multiple specifications are
+ > simply not allowed.  But to satisfy popular demand, SML/NJ allows for
+ > "merging" of compatible type specifications (for some undocumented but
+ > plausible definition of compatible).
+
+Hmm, I may be one of those popular demanders.
+
+At the moment, I have a signature
+
+signature S = sig
+  type x = int * bool
+  type y = real -> real
+  type z
+  datatype p = ONE of z | TWO of z * z
+  ...
+end
+
+You get the idea.
+I would like to define signature S' with the following property:
+
+  S' is the same as S, except type z = x * y
+
+So functors importing structures matching S' can make assumptions that
+aren't warranted according to the more general S.  Is there a way for
+me to do this in 109.16?  If so, how do I find out what it is?
+
+For the time being, I have defined
+
+signature S' = sig
+  include S
+  (* type z = x * y *)
+end
+
+but this is hardly satisfactory...
+
+Q: [Val Tannen] Opaque signature constraints
+
+       structure S :> SIG = ...
+
+  appear in the 2nd edition of Paulson's book but SML of NJ 0.93 doesn't
+  seem to recognize the syntax (unless I am screwing up somewhere). Can
+  you confirm that this is a feature implemented in versions 1.xx but
+  not earlier?
+
+   Val
+
+A: [Carl Gunter] Yes, it's part of SML'96.  It allows signatures to be
+opaque rather than transparent, but isn't part of SML ('87).  I hope
+you can work around this one; there is a construct called an
+`abstraction' that has a similar effect, but I'm not sure if the
+semantics is identical.  You might try
+
+abstraction S : SIG = ...
+
+in .93 to see how different it might be.
+---------
+A: For a structure declaration,
+
+  structure S :> SIG = <strexp>  (* SML96 *)
+
+will be equivalent to
+
+  abstraction S : SIG = <strexp>  (* SML/NJ 0.93 through 109.19 *)
+
+SML/NJ 110 will implement the ":>" construct, and we'll retain the
+abstraction declaration for a while for backward compatibility.  The
+":>" form is a bit more general, since it can be used with a
+functor result constraint.  For instance,
+
+  functor F(X: SIG) :> RSIG = <strexp>
+  structure S = F(A)    (* S is abstract! *)
+
+defines a functor whose results are all abstract instances of RSIG.
+Currently in SML/NJ one would have to obtain abstraction by naming
+the result in an abstraction declaration:
+
+  functor F(X: SIG) : RSIG = <strexp>
+  abstraction S : RSIG = F(A)   (* S is abstract *)
+
+
+Q: [Manuel Fahndrich]
+I used local and open in signatures mainly to
+avoid having to type entire structure paths for types. E.g.
+
+signatures S =
+  sig
+     structure T : T
+
+     local
+       open T
+     in
+        val f : t -> t
+     end
+  end
+
+where type t is defined in T. The workaround I'm using now is to
+simply write T.t instead of t everywhere. For substantial signatures
+with many strucures, this makes the code really ugly, especially if
+one uses meaningful structure and type names.
+
+
+Q: Why does the following code fail?
+
+  signature Sig =
+  sig
+    ...
+    datatype Constraint = ...
+    structure ConSet : ORD_SET
+    sharing type Constraint = ConSet.item
+    ...
+  end
+
+This causes
+
+  Error: rigid type spec in sharing: item
+-------------
+A: The reason for the error message is the fact that in the ORD_SET
+signature, the specification for type item defines it in terms of
+Key.ord_key
+
+  signature ORD_SET =
+    sig
+      structure Key : ORD_KEY
+      type item = Key.ord_key
+      ...
+    end
+
+This makes "item" a "rigid" type, and in SML '97 rigid types cannot
+be used in sharing constraints.  What you have to do in this case is
+replace
+
+  structure ConSet : ORD_SET
+  sharing type Constraint = ConSet.item
+
+with
+
+  structure ConSet : ORD_SET
+    where type Key.ord_key = Constraint
+
+since Key.ord_key is "flexible" (i.e. not constrained by a
+definition).
+
+The error message caused by this may not occur until the signature is
+used for a functor parameter.  The error is only detected when a
+signature is "instantiated", which happens when it is used as a
+functor parameter or as the constraint in an opaque signature matchine
+(":>").  If the flag xxx is not set, we don't instantiate a signature
+automatically at the point where the signature is defined, in which
+case the error message can occur later, or perhaps never.
+
+Q: Why doesn't the following work?
+
+  signature S =
+  sig
+    type t
+    type u
+  end
+
+  signature S' = S where type t = u
+----------
+A: Short answer: scoping of the rhs of the where definition.
+Long Answer: The reason why the right hand side type expression in a
+"where type" definition cannot mention types in the body of the
+signature being modified is that this can introduce dependancies that
+are inconsistent with the order that things were specified in the
+signature.  For instance
+
+  signature S =
+  sig
+    type t
+    datatype u = U of t
+    structure A :
+    sig
+      type v
+      val x : v * u
+    end
+  end
+
+  signature S' = S where type t = v list
+
+My prefered interpretation of the where type is to eliminate it by
+moving the definition in to the affected type specification (t in
+this case), which in this example would yield:
+
+  signature S' =
+  sig
+    type t = v list
+    datatype u = U of t
+    structure A :
+    sig
+      type v
+      val x : v * u
+    end
+  end
+
+The problem here is that v is not in scope where t is specified
+(or if it is, it refers to a different type than the one in
+substructure A.  In some cases this can be fixed by permuting the
+order of the specifications, but not in this case because the
+signature of A indirectly depends on t (via u).
+
+The rules for determining when the modified signature could be
+rearranged to make the where type definition work would be fairly
+complicated.  We chose to avoid this by interpreting the rhs of the
+where type clause in the prevailing environment, which does not
+include the body of the signature.
+
+So in your example, you must write out the definition of S' explicitly
+as
+
+  signature S' =
+  sig
+    type t
+    type u = t
+  end
+
+
+Q: [sharing/defn specs] Why doesn't the following work?
+
+  signature ADDRESS =
+   sig
+    type T
+    datatype address = A
+    sharing type T = address
+   end
+
+  signature PROTOCOL =
+   sig
+    structure Address: sig type T end
+    structure Address: ADDRESS where type T = Address.T
+   end
+
+  functor T (Tcp: PROTOCOL) : PROTOCOL =
+  struct
+    open Tcp
+  end
+
+  - use "bogus.sml";
+  [opening bogus.sml]
+  bogus.sml:14.9-17.4 Error: type address must be a datatype
+
+Actually, there is a conflict here, and the signature
+PROTOCOL should be rejected.  The sharing specification
+in ADDRESS effectively defines T to be the same as the
+datatype A.  Then the "where type" definition in PROTOCOL
+defines T and indirectly A, to be the same as the formal type
+Address.T.  A datatype (A or T in ADDRESS) can be defined
+to be equal to another datatype (assuming their specifications are
+consistent), but it cannot be defined to be equal
+to some nondatatype like Address.T.
+
+Note that the where type is trying to redefine Address.T --
+it is not defining Address.T.  If you rewrote PROTOCOL as
+
+  signature PROTOCOL =
+    sig
+     structure Address: ADDRESS
+     structure Address: sig type T = Address.T end
+  (* or, eqivalently:
+     structure Address: sig type T end where type T = Address.T
+  *)
+    end
+
+then it should work.
+
+Strictly speaking, it is not entirely clear whether  SML '97 definition
+admits any definitions applying to datatype specs, such as
+
+  signature S =
+  sig
+    datatype t = K
+    structure A :
+     sig datatype t = K end
+     where type t = t
+  end
+
+But if one assumes that an implicit eta-reduction is allowed in rule
+(64), this can be admitted.
+
+
+1.2.2. Structures
+
+Q[3]: I am taking a course at UNM with George Luger.  I am trying to use
+the module system in sml-nj and am having problems.  Is there a way to
+create an instance of a structure inside a function?  All of the examples I
+have seen show structure instances being created at the ML prompt.
+---------
+A: I'm afraid not.  In the grammar for SML, there is a distinction
+between "structure level" declarations (strdec) and "expression level"
+declarations (dec).  strdec includes dec, but not vice versa, which
+means that structures can contain expression level declarations
+(types, exceptions, values), but expressions, in particular let
+expressions, cannot contain structure declarations.
+
+This is somewhat inconsistent, since it is actually no more difficult
+to accomodate structure and functor declarations within an expression
+than it is to accomodate type declarations, which are allowed.  There
+has been discussion about removing this restriction, but it hasn't
+happened so far.
+
+The types defined within an expression are be treated statically, even
+if they are defined within the body of a function.  Here is an example
+
+  fun f (x) =
+      let datatype t = A | B
+          fun g A = true
+	    | g B = false
+       in if x < 0 then g A else g B
+      end
+
+This is a rather pointless example that uses a locally defined
+datatype t for intermediate results within the function body.  Only
+one datatype t will be created (at compile time), even though the
+function f may be called many times.  The new SML 96 definition
+does not allow the type t to "escape" from this definition as a
+part of the type of f, so you couldn't write something like
+
+  fun f (x) =
+      let datatype t = A | B
+       in if x < 0 then A else B
+      end
+
+because this would have the type int -> t, where t is the type defined
+inside of f.  Under the old (SML 90) definition, this was allowed,
+and the two expression "f 0" and "f 1" would have the same type,
+though this type would have no name at the top level.
+
+The moral of this story is that if structures as well as types could
+be defined inside of expressions (and therefore inside of functions),
+the type information associated with those structures would be fixed
+at compile time.  So the only variable aspect of the structure would
+be the value components, implying that you could probably achieve
+the same effect replacing a structure with a record of values, and
+a functor by an ordinary function.
+
+
+1.2.3. Functors
+
+Q: In binary-dict.sml(a file in the distributed library),
+the following line:
+
+  functor BinaryDict (K : ORD_KEY) : DICT =
+
+needs to be changed to
+
+  functor BinaryDict (structure K : ORD_KEY) : DICT =
+                      ^^^^^^^^^
+Otherwise, the code could not work with "Standard ML
+of New Jersey, Version 0.93" when I applied "BinaryDict"
+to some structure of signature ORD_KEY. The error
+message says that some specs in ORD_KEY are not matched,
+which is NOT informative at all.  This literally took me
+hours to figure out the cause of the problem.
+---------
+A: The functor
+
+  functor BinaryDict1 (K : ORD_KEY) : DICT = ...
+
+must be applied to a structure matching the signature ORD_KEY.
+
+On the other hand, a functor defined by
+
+  functor BinaryDict2 (structure K : ORD_KEY) : DICT = ...
+
+must be applied to an argument matching the signature
+
+  sig structure K : ORD_KEY end
+
+In the case of the library functor, the first alternative is
+clearly more natural.
+
+The confusion is probably caused by trying to apply BinaryDict
+using the wrong syntax, e.g.
+
+  structure Result = BinaryDict1(structure K = Argument)
+
+which will fail because this is actually an abbreviation for
+
+  structure Result = BinaryDict1(struct structure K = Argument end)
+
+The correct form of functor call would be
+
+  structure Result = BinaryDict1(Argument)
+
+assuming Argument matches ORD_KEY.
+
+It is debatable whether this syntactic sugar is worth the potential
+confusion (or actual confusion in your case).
+
+Q: Why does the following use of structure sharing not work anymore?
+
+  functor F (structure S : A) : sig structure T : A sharing T = S end = ...
+---------
+A: In SML '97, the paths in sharing specs must be local to the signature
+containing the sharing spec, and in this case "S" is not local.
+In SML/NJ, using the "where structure" extension, this can be rewritten
+as
+
+  functor F (structure S : A) : sig structure T : A end where T = S = ...
+
+but in plain SML '97, the (definitional) structure sharing would have
+to be replaced by the relevant type definition specs.
+
+======================================================================
+
+2. Libraries and environment (e.g. top-level bindings).
+
+Q: Function xxx (e.g. exportFn, ordof) used to be visible at top
+level, but is not in SML/NJ 110.  Where did it go?
+---------
+A: See the Top Level Environment Comparison, and the Basis
+documentation description of top level bindings in SML/NJ 110, and
+how they differ from earlier versions (specifically SML/NJ 0.93).
+
+
+Q: What is the SML '97 equivalent of "ordof" in SML/NJ 0.93?
+---------
+A: The old ordof function is equivalent to Char.ord o String.sub.  You
+can find documentation for SML/NJ at our web site
+
+	http://www.smlnj.org/index.html
+
+There you can find a porting guide that explains how to port your
+SML'90 programs to SML'97.
+
+
+
+Q: I have a problem with the 'arrayoflist' command.I get the following
+error even though I opened the structure Array:
+
+- val arr = arrayoflist l;
+ stdIn:39.11-39.22 Error: unbound variable or constructor: arrayoflist
+ stdIn:39.1-39.24 Error: nongeneralizable type variable
+
+Could you please tell me why?
+--------
+A: In SML '97 this is now called Array.fromList.  See the Basis
+library documentation.
+
+
+Q: I need a function that takes an argument of some type and returns a
+string. Wikstrom's book suggests the "makestring" function but SML/NJ
+110 doesn't accept it. Has the name of the function changed in this
+version?
+----------
+A: SML/NJ version 110 implements the SML'97 revisions to the Standard
+ML language, which includes the new Basis Library.  In the new Basis,
+the function "makestring" has been replaced with various functions in
+the structures corresponding to the basic types, e.g. Bool.toString,
+Int.toString, Real.toString.
+
+For information on SML'97 and how to translate some of the pre-97 code
+to SML'97 + Basis code, have a look at
+  http://www.smlnj.org/doc/Conversion/index.html
+
+The Basis Library documentation:
+  http://www.smlnj.org/Basis
+
+General information on SML/NJ:
+  http://www.smlnj.org
+
+
+Q: Are there textbooks that are based on the new SML '97 defition?
+----------
+A: Yes.  We recommend the following:
+
+  ML for the Working Programmer (2nd edition), by Larry C. Paulson
+  Elements of ML Programming, ML97 Edition, by Jeffrey D. Ullman
+
+
+Q: Will SML/NJ ever implement the PACK_REAL signature?
+---------
+A: [jhr] After we unify the code generators to all use the MLRISC
+framework, I think we will add primitive support for the
+various Packing operations (including PackReal{N}).
+
+
+Q: Is there any support at all in SML/NJ for converting between
+8-element word8 vectors and 64-bit IEEE reals?
+---------
+A: ?
+
+
+Q: What is the status of IntInf?
+--------
+A: IntInf is an optional structure, according to the basis.  An
+incomplete version of IntInf (missing bitwise operations) is available
+at the top-level in SML/NJ 110.  However, it is not fully integrated:
+LargeInt is not defined to be IntInf, overloading is not extended to
+IntInf versions of the arithmetic and order operations, and there is
+no support for IntInf literals.
+
+
+Q: Where is IntInf?  Why is it not "first-class" (with support for
+literals, overloading, LargeInt=IntInf)?
+--------
+A: [jhr] The IntInf structure is optional; implementations may choose
+to provide it, but it isn't required.  At this time SML/NJ doesn't
+provide IntInf.  The SML/NJ Library does have a big-num package, but
+it isn't highly tuned yet.
+
+
+Q: Could you tell me how the access protection is determined for a
+file created using TextIO.openOut, and whether there is any way in SML
+to choose what the access proctections should be.  OS.FileSys lets you
+find out wht the access privledge is, but it doesn't let you set it.
+----------
+A: There is no portable semantics of such an operation; you have to
+use OS-specific mechanisms, like Posix.FileSys.chmod.  Here is an
+example of a function that makes a file executable:
+
+  structure PF = Posix.FileSys
+
+  fun makeX f = let
+	val m = PF.ST.mode(PF.stat f)
+	val m_x = PF.S.flags[m, PF.S.ixusr, PF.S.ixgrp, PF.S.ixoth]
+	in
+	  PF.chmod (f, m_x)
+	end
+
+
+Q: What support does SML/NJ provide for writing pretty printers?
+---------
+A: The built-in pretty printing facilities are in Compiler.PrettyPrint,
+documented in
+
+  http://www.smlnj.org/doc/Compiler/pages/prettyprint.html
+
+There is a utility module that provides some useful extensions to this
+pretty printing interface in
+
+  $SMLNJ/src/compiler/MiscUtil/print/pputil.s??.
+
+where $SMLNJ is the SML/NJ system directory.
+
+The "public" pretty printing library, which is more flexible than the
+built in one, is in the directory $SMLNJ/src/smlnj-lib/PP.  There is a
+README file there, but I don't know whether any documentation exists
+beyond the source code (John?).
+
+
+Q: Random number library documentation?
+Unfortunately I have been unable to find documentation on the random
+number library. Therefore I have been forced to guess about the
+functionality. I need random numbers with a start seed from the timer.
+My first approach is therefore the following code:
+
+---------------------------------------------
+struct ...
+...
+	(* RANDOM NUMBER GENERATION *)
+
+	val seed =
+	    let
+		val Date.DATE(d) = Date.fromTime(Time.now())
+		val m            = #minute d
+		val s            = #second d
+	    in
+		m,s)
+	    end
+
+        (* random(l,h) returns a random integer, r, l<=r<=h
+	 Input must fullfill: l<=h *)
+	fun random (l,h) = Random.randRange (l,h) seed
+...
+end
+----------------------------------------------
+
+Q: Have I missed some sources of information?
+A: [emden]
+The source code files random-sig.sml and random.sml in src/smlnj-lib/Util
+are reasonably well commented.
+Q: Am I feeding a proper seed to the Random.rand function?
+Q: Are all integers allowed as input to Random.rand?
+A: Yes, to both questions, assuming the code you sent is changed from
+> 	    in
+> 		m,s)
+> 	    end
+to
+> 	    in
+> 		Random.rand (m,s)
+>
+> 	    end
+Q: How the ... do I extract the (microseconds modulo maxInt) from the
+   Time.now() function.
+A: The type Time.time is abstract (even though it might be implemented as
+TIME{sec,usec}), so you need to do something like:
+
+let
+  val now = Time.now ()
+  val sec = Time.fromSeconds(Time.toSeconds now)
+  val usec = Time.toMicroseconds (Time.-(now, sec))
+in
+  Int.mod (usec, maxInt)
+end
+
+Q: [Paulson, 10/96]
+Isabelle contains the following code (for inserting a string into the
+compiler's input):
+
+fun use_string commands =
+   Compiler.Interact.use_stream (open_string (implode commands));
+
+Unfortunately, with SML/NJ 109.19 this results in errors:
+
+NJ1xx.ML:102.4-102.32 Error: unbound variable or constructor: use_stream in
+path Compiler.Interact.use_stream
+NJ1xx.ML:102.34-102.45 Error: unbound variable or constructor: open_string
+
+What has happened to these functions?
+--------
+
+
+Q: I'm running NT now on my notebook and desktop (having abandoned Apple).
+I discovered that the Posix structure is apparently missing from
+109.25, at least under the NT distribution.  Has it been renamed or is
+this an oversight?  I need it because I want to do Posix.FileSys.chdir.
+--------
+A: [Lorenz] Short answer: use OS.FileSys.chDir which is part of the new basis and
+must be implemented (and is for all the SML/NJ platforms including NT).
+See http://www.research.att.com/~jhr/sml/basis/os-file-sys.html
+
+Long Answer: Yes, Posix is available in NT, but not via SML/NJ.
+This is because if one links with Posix libraries, the Win32 libraries
+(all the gui stuff, for example) become inaccessible.  We therefore decided
+to shun Posix under NT (it's basically only there so that Microsoft can sell
+NT to certain customers) so that we may access the full functionality of NT
+in the future.  The basis was designed to support a least-common-denominator
+of Unix, Win32, and MacOS.  Hence the OS structure.
+A: [Reppy] Posix == Unix.  The Posix compatibility provided by WindowsNT
+is a joke (only there so that they can get government contracts).  Use
+OS.FileSys.chDir, which is OS independent.
+
+Q: Are there any plans to provide something like the C++ STL?  The
+standard basis library doesn't include canned algorithms like STL
+does.
+---------
+A: A number of such algorithms are available in the smlnj-lib, which is
+a supplemental library distributed with the system.  The first version
+of the smlnj-lib was part of the 0.93 distribution, but it has been
+extensively revised in parallel with the creation of the SML '97
+standard Basis library.  The documentation for the new version is
+still being created, but you can check out the signatures in the
+source code of the smlnj-lib directory.
+
+
+3. Compiler
+
+3.1. Platforms
+
+Q: What versions of IRIX are supported in SML/NJ 110?
+----------
+A: We have tested 5.2, 5.3(?), 6.2, 6.3, and 6.4.  There has been a
+report that it does not work under 6.5, but we haven't been able to
+confirm this locally.
+[jhr] Actually, it is easier to build the system under Irix 6.3 (which
+is 32-bit by default) than under 6.2 or 6.4.  If you install the
+system under 5.3, then things should work under 6.x too.
+
+
+Q: could you please tell me whether it's possible to get a distribution
+for SML running on an INTEL/LINUX platform - the documentation seems
+to indicate BSD/MACH only.
+Q: Is there a version of SML available for the Pentium processor?
+----------
+A: Yes, for variants of Unix (linux, solaris, FreeBSD, etc.) and
+Windows NT/95.
+
+
+Q: Just wondering if a port of SML/NJ exists for the DEC Alpha.
+---------
+A: Yes, our current working versions, and the upcoming version 110, run
+on DEC Alpha's under OSF/1 and Digital Unix.  Port for Alpha/Linux is
+not available, and may not be straightforward.
+[jhr] We haven't been able to figure out how to port SML/NJ to Linux/Alpha.
+The problem is that we haven't been able to figure out how to specify
+a 32-bit executable (we do not support 64-bit machines yet).  There
+is a way to do this in the Digital Unix loader, so it should be
+possible.  We just do not know how.
+
+Q: Is there a version of SML-NJ running on a DEC-Alpha box under Linux
+(e.g. Red Hat)?
+--------
+A: No, because of linker problems(?).  Linux/alpha does not support a
+32-bit model like Digital(Compaq) Unix.
+
+A: [Lal] Some time back I did some experiments on a DEC-Alpha running
+linux, and I had a very difficult time getting my program loaded into
+32-bit address space. The appropriate options to gcc did not seems to
+work. SML/NJ on the Alpha is a 32-bit version so everything must be
+loaded into 32-bit address space.
+
+
+Q: Does SML/NJ run under DOS?
+--------
+A: No, only Windows 95 and NT, using the Win32 APIs
+(also Linux, FreeBSD, Solaris on x86).  Moscow ML used to run under
+DOS, and may still do so.
+
+
+Q: Does SML/NJ run under Windows 98 as well as Windows 95 and NT?
+---------
+A: Yes.
+
+
+Q: Where can I get a ML compiler for OS2, is there any?
+---------
+There was at one time a port of SML/NJ for OS2, but this has not been
+maintained.  So SML/NJ 110 is not available on OS2.
+
+
+Q[7]: Does SML/NJ run on PowerPC Macintoshes
+   (a) under MacOS,
+   (b) under Linux?
+---------
+A: SML/NJ 0.93 ran on Macs using the M68 code generator (needs
+"SofwareFPU" (shareware) to run on PowerPC Macs).  SML/NJ 110 does not
+run on Macs.  The next release, Version 111, will run on PPC Macs
+under MacOS 8.x, and it should be possible to port it to MkLinux or
+LinuxPPC without great difficulty, and also to MacOS X Server
+(Rhapsody).  Also, Moscow ML is currently available on MacOS.
+
+
+Q: Is there an OS/2 port?  Is one planned?
+---------
+A: There have been OS/2 ports working temporarily in the past (Peter
+Bertlesen), but none is available now, and we have no plans to do
+a port ourselves.
+
+
+Q: Can CML be compiled under Windows?  Under Linux?
+--------
+A: Not under SML/NJ 110.  But it is supported in later working
+versions, such as 110.9.1 and later.
+CML should work under Linux in 110.
+
+
+Q: Does SML/NJ 0.93 work on a PC running linux or solaris?
+---------
+A: [WARNING -- 0.93 is no longer supported, and all users are strongly
+urged to convert their applications to SML/NJ 110.]
+
+SML/NJ 110 runs on PCs under both Linux and Solaris (as well as
+FreeBSD, Windows 9X, and Windows NT.
+
+There is no known port of 0.93 for solaris/x86.  A Linux port of 0.93
+was available from other sources, although it is unknown whether this
+port still works on more recent versions of Linux, and as far as we
+know it is not maintained.  Here is the relevant section of the
+comp.lang.ml FAQ:
+
+  Linux:
+  ------
+  (Thanks to Ralf Reetz, Peter Su, and Mark Leone)
+
+  This is a port of Standard ML of New Jersey (SML/NJ) to Linux. It is
+  based on the work of Mark Leone (mleone@cs.cmu.edu) who did the port
+  for i386/i486 machines. The current binary was compiled using Linux
+  0.99.7a.  Shared lib 4.3.3.
+
+  This port was done by Sanford Barr (sbarr@cs.sunysb.edu) based on the
+  original port of 0.91 by Hermano Moura (moura@dcs.glasgow.ac.uk) and
+  Andre Santos (andre@dcs.glasgow.ac.uk).
+
+  Various ftp sites seem to carry SML/NJ version 0.93 for Linux:
+
+	  tsx-11.mit.edu:/pub/linux/sources/usr.bin/
+		  njsml.93.src.tar.z
+		  njsml.93.linux.README
+		  njsml.93.linux.README.NEW
+		  njsml.93.linux.diffs.z
+
+	  ftp.cs.sunysb.edu:/pub/linux/
+		  njsml.93.bin.z
+		  njsml.93.mo.i386.z
+		  njsml.93.linux.README
+		  njsml.93.linux.diffs.z
+		  njsml.93.src.tar.z
+
+	  ftp.dcs.glasgow.ac.uk:/pub/linux/
+		  njsml.93.linux.diffs.z
+		  njsml.93.src.tar.z
+		  smlnj-0.93-linux.README
+
+  16M of ram is suggested if you wish to do anything serious with
+  the system.  Also, a 386-40 or better would be helpful.
+
+  KNOWN BUGS AND DEFICIENCIES:
+  1 Some minimal precision problems exist when a 387 emulator is
+    used.
+  2 ML functions System.Directory.listDir and System.Directory.getWD not
+    working at the moment.
+  3 There have been reported problems with the Div exceptions
+    (real & int). The problems have been corrected.  See:
+	  ftp.id.dth.dk (Internet 130.225.76.51)
+	  file pub/sestoft/sml93-linux99pl12/sml.gz
+    That version also allows profiling; see the README file.
+
+
+3.2. CM (Compilation Manager)
+
+Q: [Zhong] Under certain situations, a set of files are made into a
+group mainly because they are shared by two pieces of software, see
+util/UTIL.cm in all-files.cm and MLRISC/*.cm. Is there a way that
+would allow this kind of sharing, yet still ban competing copies
+across all these groups?
+----------
+A: [Matthias] The only one I can think of right now is to put a
+definition of the form
+
+	signature BLAH = BLAH
+
+into one of the sources (or perhaps into a source of its own) of the
+client group.  But that's a hack, of course.
+
+
+Q: I am trying to use CM's dot functionality to print out a dependency
+graph, but I couldn't find DOT software anywhere to produce a
+postscript file.  Could you possibly point me to it?
+---------
+A: ?
+
+
+Q: Is it possible to do cross compilation?  I.e. to generate .bin
+files for an architecture different from the one on which the compiler
+is running (e.g. generate x86 .bin files while running on a sparc)?
+----------
+A: retarget?
+
+
+Q: Can I load .bin files created by CM "directly", i.e. in sml without
+CM or in sml-cm without using CM.make?  [In current working versions,
+CM is fully integrated into sml, so this is no longer so relevant.]
+--------
+A: A plain sml (non-CM) can load the .bin files produced by sml-cm.  So
+you could build your application as usual using sml-cm, and then do
+
+    CM.sa "load";
+
+to create a file "load" with commands to load the bin files.  Now
+start up the regular sml, use "load" and then exportFn.
+
+
+Q: Does an SML runtime with CM integrated use hardcoded paths that are
+determined at compile time?  The reason I ask is that I would like to
+compile SML/NJ in a temporary location and move the final binaries to
+a shared location (like /usr/local or /opt) at install time.  Will CM
+be able to locate its .BIN files if I do this?
+---------
+A: Yes, this should be possible, though we have not set things up
+specifically to support this nor have we documented the process.
+We'll try to correct that in future versions.
+
+CM uses an internal path (a list of directory names) to look up
+description names (Section 10 of the CM Manual).  This is set by
+default during installation to:
+
+  [".", "<installation directory>/lib"]
+
+where <installation directory> represents the absolute path of the
+directory where the install script is run.
+
+If the binaries (the contents of the CM subdirectories for libraries)
+are moved to a new directory, the CM path needs to be updated.  This
+can be done by resetting the CM path using CM.set_path and then
+creating a new heap image using SMLofNJ.exportML, or it can be done on
+a per-user, per-session basis by having users set the shell variable
+CM_PATH appropriately.  In the recent working versions of SML/NJ
+(Version 110.6 and later), shell variables can also be used to tell CM
+where various tools like ML-Yacc and ML-Lex are to be found (CM_LEX,
+CM_YACC, CM_BURG,...).
+
+A: [Blume] The general idea is that moving binaries etc. should work
+fine as long as CM can still find them.  As you pointed out, this can
+be achieved by setting the search path correctly.  There is guaranteed
+trouble if absolute library names are somehow hardcoded into the
+description files because that would suppress the path mechanism.
+
+I think we really ought to provide an install-time option for
+specifying where the files will eventually reside.  (At the moment the
+install script simply assumes, that it will be the current directory.)
+Most CM parameters can be controlled via environment variables.
+Moreover, the default (for absent environment variables) can be chosen
+at the time the binfiles are loaded during the initial bootstrap step.
+
+For example, if the current directory is
+
+	/u/blume/Scratch/ml-install/110.8
+
+but everything should eventually be under
+
+        /usr/local/smlnj
+
+then one could specify a "default" search path by setting
+
+	setenv CM_PATH_DEFAULT /usr/local/smlnj/lib
+        setenv CM_YACC_DEFAULT /usr/local/smlnj/bin/ml-yacc
+        setenv CM_LEX_DEFAULT  /usr/local/smlnj/bin/ml-lex
+        setenv CM_BURG_DEFAULT /usr/local/smlnj/bin/ml-burg
+
+just before running "makeml" or the equivalent thereof.
+
+Of course, now the so-created heap image won't be able to find the
+libraries _while the installation is running_ because they haven't
+been moved to their final location yet.
+
+The remedy for this is to (at installation time) _also_ define a
+different set of environment variables which are used to control
+the initial value of the parameters on a session-by-session basis:
+
+	setenv CM_PATH `pwd`/lib
+        setenv CM_YACC `pwd`/bin/ml-yacc
+        setenv CM_LEX  `pwd'/bin/ml-lex
+        setenv CM_BURG `pwd`/bin/ml-burg
+
+Such a setup avoids the need for the eventual user to define these
+variables in her .login file, because the correct "final" defaults
+will have been hard-wired into the heap image.
+
+
+3.3. Debugging
+
+Q: Is there a debugger for SML/NJ?  What ever happened to Tolmach's
+debugger for SML/NJ 0.93?
+----------
+A: The short answer is no.  Andrew Tolmach developed a very interesting
+debugger for SML/NJ for his Princeton PhD.  This debugger supported
+breakpoints, stepping both backwards and forwards through a
+computation (time travel), and the printing of values (function
+arguments and results and local variable bindings).  It was
+implemented by adding instrumentation code at the abstract syntax
+level, so it was (mostly) insensitive to optimizations performed by
+the compiler.  The instrumentation was fairly expensive in terms of
+code size and therefore compilation time; it increased the code size
+by about a factor of four, if I recall correctly.  The runtime
+performace impact was also about of a factor of four, but this was
+considered acceptible.
+
+Unfortunately, the Tolmach debugger has not been maintained.  It
+last worked with the 0.93 version of the compiler (which is still
+available).  We have discussed trying to rehabilitate the debugger,
+but it is a nontrivial task given the new representation optimizations
+provided by the FLINT middle end.  Since the runtime representation
+of a data value may be transformed in sophisticated ways, and may
+change dynamically during a computation, it is hard for a debugger to
+figure out how to print an arbitrary value, even if it can determine
+it's static type (which Tolmach's debugger was able to do).  Zhong
+Shao has some ideas about how to use the representation type
+information created and maintained by FLINT to support printing
+dynamic values, but as far as I know there has been no concrete work
+on a new debugger.
+
+So for the time being we continue to relying primarily on print
+statements (and the type checker, of course!) for debugging.  In the
+past I have used fairly sophisticated debugging invironments like
+those of Symbolics Lisp and Interlisp, and I'll take ML's type system
+any day.  Of course, the ideal would be to have the type system,
+the agressive compiler optimizations, and a full featured debugger
+as well, but we haven't had the resources to achieve that.
+
+The MLWorks system from Harlequin does have a debugger, but I have not
+used it, so I can't comment on how well it works.  But that is another
+option to look into.
+
+
+Q: I have looked and have not been able to identify a trace facility in sml
+similar to that in lisp or prolog.  Is there such a facility?
+--------
+A: Sorry, but we do not have a trace facility in SML/NJ.  The MLWorks
+compiler from Harlequin has some debugging facilities.
+
+The closest thing we have to a trace facility is the execution
+profiler, which at least can give information about which functions
+are called and how many times.  We hope to provide additional
+debugging tools in a future release.
+
+
+3.4. Foreign Function Interface (interfacing with C/C++)
+
+Q: How can I integrate C or C++ code with SML/NJ?
+----------
+A: This is typically done in one of two ways:
+1) by registering a C function with ML using the Unsafe.CInterface
+structure.  This requires that the C functions adhere to SML/NJ's
+data representation.  To see how this is done, see src/runtime/c-libs/
+for examples.
+
+2) by using the higher-level C interface found in the src/smlnj-c/
+directory.  The README file gives some info and a paper on my web
+page gives more details.  You'll need 109.32 for this to compile
+out of the box.
+
+Note that both methods will drastically change as soon as
+the system is cut over to the C++ runtime, which will use an
+IDL-based stub compiler to generate foreign function interfaces.
+
+
+3.5. Bugs
+
+Q: How do I report a bug in SML/NJ or it's tools and libraries?
+----------
+
+3.6. Incremental compilation, Interactive loop
+
+Q: SML/NJ has an interactive loop.  Does that mean it uses an interpreter?
+----------
+A: SML/NJ is always generating optimized machine code, even for
+definitions and expressions you type into the interactive top level.
+CM also generates ".bin" files which contain binary code, linkage
+information, and static environment information (e.g. types).  These
+.bin files are loaded into the interactive system by CM, but cannot
+yet be directly linked to produce an executable.  The function
+SMLofNJ.exportFn can be called in the interactive system to produce
+a heap image file that can be run as a stand-alone application.  The
+exportFn function is documented at
+
+  http://www.smlnj.org/doc/SMLofNJ/pages/smlnj.html
+
+3.7. Memory management
+
+Q: I have a question regarding adjusting the heap size in SML/NJ. Is it
+possible to set the initial heap size to say 100Mb in order to
+postpone garbage collection? I have looked in the different signatures
+including the GC signature under SMLofNJ.Internals but I didn't find
+anything that controls the heap size.
+---------
+A: Yes (wizard answer?)
+
+3.8 Testing
+
+Q: Is there a compiler test suite for SML/NJ?
+----------
+A: Yes, there is a set of compiler test suites for SML/NJ, and they
+are available in the SML/NJ svn repository, under project testing.
+
+
+4. Usage
+
+4.1. Writing and running programs
+
+Q: I have downloaded the Windows 95 version of SML-NJ. I have it running, but I
+don't know how to execute a program. How do I write a program in some sort
+of editor then run it? At this point all I know how to do is type in
+commands and interpret them immediately.
+---------
+A: [Lorenz]
+Supposing you have an editor (gnu emacs for 95/NT is freely available
+from june.cs.washington.edu:pub/ntemacs/), you can either "use" a file
+containing your SML source code, e.g.
+
+  use "prog.sml";
+
+to load it at the top-level prompt, or, preferably use the Compilation
+Manager (CM) to manage a set of source files.  CM is built into the
+sml-cm version of the compiler in 110.0.3.  Documentation on CM is
+available at:
+
+  http://www.smlnj.org/doc/CM
+
+
+Q: How does one use the .bin files produced by CM?  How do they get
+loaded into the SML compiler?
+----------
+A: The .bin files produced by CM get loaded automatically by CM in
+response to a call of CM.make or CM.make'.  What files are loaded is
+controlled by the relevant CM description file(s) (*.cm).  There is
+no way to manually load specific .bin files.
+
+Q: What is the difference between CM's .bin files and the heap image
+files produced by exportML and exportFn?
+---------
+A: .bin files are loaded under the control of CM.  They contain
+compiled code and linking information for a single "compilation
+unit" (i.e. a source file).  Heap image files contain a frozen state
+of the entire SML heap.  These can be run by being passed as the
+"@SMLload" parameter to sml or directly to the sml runtime system.
+
+
+Q: How i can quit from sml-nj for win32?
+---------
+A: Control-Z (^Z) followed by a carriage return.
+   (^Z is win32's end-of-file character.)
+A: Enter "OS.Process.exit OS.Process.success;" at the interactive prompt.
+
+
+Q: What extensions should SML source files have?
+---------
+A: The system does not require any particular extensions for SML source
+files, but there are some common conventions.
+
+  foo.sml      general sml source, structure and functor declarations
+  foo.sig      signatures
+  foo-sig.sml  signatures
+
+  foo.cm       CM description files
+
+
+Q: How to I find out information about error messages and how to
+interpret them and correct the problem?
+---------
+A: See the error message catalogue.
+
+
+Q: I was told that there were some command line options to be placed
+after type "sml" at the unix command prompt.  What are these options
+and where are they documented?
+--------
+A: [jhr] The SML/NJ run-time system accepts a small number of command-line
+options, which are prefixed with "@SML".  For the most part, you
+don't need to know about these, but there are three that might be
+useful:
+
+	@SMLalloc	-- specify the allocation space size
+	@SMLdebug	-- specify a file for run-time system messages
+	@SMLload	-- specify a heap image to load
+
+For example,
+
+	sml @SMLalloc=1M @SMLdebug=/dev/null @SMLload=foo
+
+will execute the heap image foo.<arch>-<opsys> (for your given
+architecture and operating system) with messages directed to
+/dev/null and an allocation space of 1 Megabyte.
+
+
+Q: How can I read numbers and similar sorts of data values from
+files?
+---------
+A: As far as reading integers, etc. from strings or input streams, you
+can look up Int.fromString and Int.scan (and Real.fromString,
+Real.scan, etc.) in the Basis library documentation.  There are
+corresponding Int.toString, Int.fmt for converting integers to
+strings, and similar functions for other basic types.  Also, there are
+modules Format and Scan in the SML/NJ Library (src/smlnj-lib/Util)
+that provide some more functions for translating basic types to and
+from strings.  Unfortunately the SML/NJ Library documentation hasn't
+been brought up to date, so you have to resort to reading the
+signature source code for documentation.  The old 0.93 documentation
+for the SML/NJ Library may be of some use though.
+
+
+Q: How can I determine the current interactive prompt settings?  How
+can I change them?
+----------
+A: The prompt strings are stored in the string reference values
+Compiler.Control.primaryPrompt and Compiler.Control.secondaryPrompt,
+and can be changed by setting these references:
+
+  Standard ML of New Jersey, Version 110.0.3, January 30, 1998
+  - Compiler.Control.primaryPrompt;
+  val it = ref "- " : string ref
+  - Compiler.Control.secondaryPrompt;
+  val it = ref "= " : string ref
+  - Compiler.Control.primaryPrompt := "% ";
+  val it = () : unit
+  % 3;
+  val it = 3 : int
+  %
+
+The documentation for the Compiler.Control structure is at the
+following URL:
+
+  http://www.smlnj.org/doc/Compiler/pages/control.html
+
+
+4.2. loading libraries
+
+Q: How do you load the libraries in our version of ml?  We need things like
+sin, ln, etc.
+Q: I can't seem to be able to load up the library or some of the
+library functions into the ML environment. Is there a simple way to
+do this?
+----------------------------------------------------------------------
+For the Basis library described in the Web pages, you don't have to do
+anything to load the modules -- they are there by default.  Only those
+functions and types defined in the top level environment (see
+
+  http://www.research.att.com/~jhr/sml/basis/top-level-chapter.html)
+
+can be accessed directly.  All other Basis functions have to be
+accessed using a qualified name or path, such as Int.toString or
+List.filter, or else by opening the relevant structure (e.g. "open
+List").  Opening structures should be done with care though, since
+it can hide overloaded top-level identifiers.  For instance, if
+you do "open Int" at top level, then "+" is no longer overloaded --
+it just denotes the + operation from Int.
+
+Q: How do I access the standard mathematical functions in SML/NJ?
+
+  - exp(3.0);
+  stdIn:17.1-17.4 Error: unbound variable or constructor: exp
+
+I downloaded and installed smlnj-lib and unix-lib.
+------------
+A: These math operations are in the Math structure, which is part of
+the built-in Basis library, so you don't have to load any external
+libraries to access them.  However, some of the Math functions that
+used to be bound at top level in SML/NJ 0.93 are no longer visible at
+top level in SML '97.  You have to use Math.exp, Math.sin, etc.  See the
+top-level environment comparison table.
+
+
+4.3. Printing
+
+Q: I am working on a simulation program and need to print the contents
+of current lists. What is the best way to do so? Is formatList a good
+choice? If so, is there a sample usage of it?
+---------
+
+Q: Is it possible to disaple PrettyPrinting of signatures, i.e. to display
+all signatures in one line, not depending on the length of a signature?
+(i.e. suppress the printing of signatures at top level).
+---------
+A: Compiler.Control.Print.printSignatures : bool ref (default true).
+
+
+Q: How to you control top level printing:
+In the SML/NJ 0.96, one had control of some of the toplevel value printer
+parameters, through:
+   System.Control.Print.printDepth
+   System.Control.Print.printLength
+   System.Control.Print.printLoop
+   System.Control.Print.stringDepth
+
+However, there seems to be no access to the Control structure in 109.26.1,
+unless one has an SML/NJ instance with the `visible compiler' option.
+These variables are very useful in coding, especially since the system
+defaults are very conservative.
+
+It could be that they <em>are</em> around somewhere and I just am not seeing
+them, of course.
+--------
+A: These control variables now live in Compiler.Control.Print.
+
+
+Q: SML clearly has a print function that can print any structure since it
+does so for the `val it =` output at the end of a call.  But when I
+try to use the builtin print function, it says print is not defined
+for that type.  How can I print general things without returning them
+as my top level result ?
+--------
+A: This is a fairly common question, and I'll try to add it to
+the FAQ page for SML/NJ.  The way that the interactive top-level
+loop prints results is special because it uses a "meta" print
+function that is passed both the value to be printed and the
+internal data structure representing that value's type (i.e.
+a value of type Type.ty in the compiler).
+
+If you wanted to have a general purpose, user-level print function,
+what would it's type be?  Since you would want to print values
+of any type, I guess it would have to be polymorphic:
+
+  val print : 'a -> unit
+
+or equivalently, one might define a general toString function
+
+  val toString : 'a -> string
+
+The problem is that the nature of polymorphic functions is that
+they work in a uniform way, independently of the actual type that
+instantiates the type variable 'a.  That is, a polymorphic function
+cannot dispatch off it's type variable and do different things for
+different types.  But this is exactly what a generic print to
+toString function would have to do.  Therefore it is theoretically
+impossible to define a generic, polymorphic print function.
+
+If we added a type "dynamic" to the language, which is a type that
+bundles a value with a representation of its type, then it would be
+possible to provide a version of the top-level printing function that
+would work on values of type dynamic:
+
+  val dynPrint : dynamic -> unit
+
+Values of type dynamic might be created by a special primitive
+expression:
+
+  dynamic e
+
+which would evaluate to a pair <v,ty> where v is the normal value
+of e and ty is (a representation of) the type computed statically
+for e by the type checker.
+
+Trying to define a polymorphic print function in terms of dynamic
+and dynPrint, as in
+
+  fun print 'a (x: 'a) = dynPrint(dynamic x)
+
+would not work very well, since the statically computed type of
+x in the body would be the generic type variable 'a, and this gives
+no information for printing.
+
+
+4.3. Foreign function interface
+
+Q: I want to know how to execute other languages compiled object code.
+Q: How do you link SML code with C/C++ code?
+Q: Does SML/NJ have a foreign function interface?
+Q: Where can I find documentation on how to interface C code with SML/NJ?
+----------
+A: [Lorenz,2/97] One way to do this is to use the SML/NJ C interface.
+In the current working version (109.25), this is in src/smlnj-c/ The
+README file in that directory explains how to enable this interface.
+You can also find examples there.
+
+A slightly out-of-date paper that describes this interface is also available.
+Let me know if you would like a copy.
+
+The SMLNJ-C library now has it's own web page.
+
+  http://www.smlnj.org/doc/SMLNJ-C/index.html
+
+
+4.5. I/O
+
+Q: 109.23 on linux rejects the following function:
+
+fun standardEmitLine stream (n, l) =
+    let fun putc c = TextIO.StreamIO.output1(stream, c)
+        fun puts s = TextIO.output(stream, s)
+        fun emit(0, l) = (List.app puts l; putc #"\n")
+	  | emit(n, l) = (putc #" "; emit(n-1, l))
+    in  if n >= 0 then emit(n, l)
+        else (puts "((pp error: negative indent))"; emit(0, l))
+    end
+
+The reason is that the two outstream types are different (I think).
+
+Shouldn't I expect TextIO to include a sharing constraint that says
+
+  sharing type outstream = StreamIO.outstream
+
+and similarly for some other types?
+
+If not, how should I write a single character to a TextIO.outstream?
+Convert it to a string?
+--------
+A: TextIO.StreamIO.outstream and TextIO.outstream are different types with
+different semantics (RTFM for details).
+
+You can use TextIO.output1(stream, c) to output a character to TextIO.outstream.
+
+
+Q[2]:
+I'm having a problem accessing the imperative IO functionality.
+I can't seem to make the connection with open_out, output, std_out, etc.
+
+Could there be something ultra-obvious I'm missing, like the fact that
+it's not included in the working distribution, or I'm not opening the
+right structure?  Or is it just my own naivete...
+----------
+A: SML/NJ 109.25 implements (most of) the 1996 version of SML.  A major part
+of the changes in the 1996 version is a completely new basis library.  This
+is documented at:
+
+	http://www.smlnj.org/Basis
+
+The I/O operations live in the TextIO and BinIO structures.
+A: You might also find a chart I made useful.  It compares the old
+SML/NJ top level environment with the new SML 96 Basis environment.
+You'll find it at the URL
+
+  http://www.smlnj.org/top-level-comparison
+
+The main SML/NJ web site is at http://www.smlnj.org.
+
+
+4.6. Top Level
+
+Q: opening Time structure masks overloaded operator
+I wanted to use the time basis library so I could give a reading
+based on time. In addition, I could make a timer for controling the times
+when events happen, etc. But I ran into a huge problem - nothing new
+right.... but check this out.
+
+Imagine what it would be like if, say after opening a basis library,
+you could only use that type thru the remainder of your code?
+
+  boa 1 % sml
+  Standard ML of New Jersey, Version 109.25, February 1, 1997
+
+  (* I opened the time library *)
+  - open Time;
+  open Time
+  exception Time = Time
+  val zeroTime = TIME {sec=0,usec=0} : time
+  val fromReal = fn : real -> time
+  val toReal = fn : time -> real
+  val toSeconds = fn : time -> int
+  val fromSeconds = fn : int -> time
+  val toMilliseconds = fn : time -> int
+  val fromMilliseconds = fn : int -> time
+  val toMicroseconds = fn : time -> int
+  val fromMicroseconds = fn : int -> time
+  val + = fn : time * time -> time
+  val - = fn : time * time -> time
+  val compare = fn : time * time -> order
+  val < = fn : time * time -> bool
+  val <= = fn : time * time -> bool
+  val > = fn : time * time -> bool
+  val >= = fn : time * time -> bool
+  val now = fn : unit -> time
+  val toString = fn : time -> string
+  val fromString = fn : string -> time option
+  val fmt = fn : int -> time -> string
+  val scan = fn : (char,'a) StringCvt.reader -> (time,'a) StringCvt.reader
+
+  (* I even specified that it's an INT *)
+  - fun test(x:int, y) = y - x;
+  stdIn:2.17-2.22 Error: operator and operand don't agree (tycon mismatch)
+    operator domain: time * time
+    operand:         time * int
+    in expression:
+      - (y,x)
+
+---------
+A: This is a common pitfall, but it is just the semantics of the
+language.  If you rebind one of the special overloaded operators like
+"+", you have hidden the overloaded version.  The best and simplest
+solution would be to eliminate the anomalous case of overloaded
+symbols.  A less drastic solution is to discourage the use of open
+(which we do), where users may inadvertently hide something they need.
+Of course, the integer form of + is not really lost -- you could
+always use Int.+, as in
+
+  fun test(x:int, y) = Int.+(y,x);  (* or Int.- in the above example. *)
+
+Some would probably suggest that overloaded operators should "absorb"
+new bindings introduced by open, but this would complicate the
+language more than I would like.  Overloading is a bit of a wart on
+the design that was knowingly added to satisfy percieved "popular
+demand",  and I'd like to keep it's impact as limited as possible.
+
+
+Q: What can I do about this? It seems to me that this specifies the
+function:
+
+  cos : real -> real
+  * : real -> real?
+
+Should this not produce a real? are these not all reals?
+
+  - 2.0 * cos (3.4);
+  stdIn:1.1-38.5 Error: operator and operand don't agree (tycon mismatch)
+    operator domain: int * int
+    operand:         real * real
+    in expression:
+      * (2.0,cos (3.4))
+---------
+A: It looks to me like you have opened the Int structure at top level.
+This causes the special overloaded version of * to be replaced by
+Int.* : int * int -> int.  Overloaded symbols are "fragile" in this
+way -- if you hide them by rebinding the symbol, either explicitly or
+with a an open declaration, the overloading is gone.
+
+You can still use the real version of *, but you have to refer to it
+by the long name Real.*.
+
+Standard ML of New Jersey, Version 109.26.1, April 2, 1997 [CM; autoload enabled]
+- 2.0 * Math.cos(3.4);
+val it = ~1.93359638516 : real
+- open Int;
+open Int
+...
+val * = fn : int * int -> int
+...
+- op +;
+val it = fn : int * int -> int
+- 2.0 * Math.cos(3.4);
+stdIn:21.1-21.20 Error: operator and operand don't agree [tycon mismatch]
+  operator domain: int * int
+  operand:         real * real
+  in expression:
+    * (2.0,Math.cos (3.4))
+- Real.*(2.0,Math.cos(3.4));
+val it = ~1.93359638516 : real
+
+
+4.7 Exporting images
+
+Q: In SML/NJ 0.93, exportML and exportFn produced Unix executables, now
+they don't.  How do you use the files these produce?
+--------
+A: With regard to your problem with exportFn, exportFn and exportML now
+create heap image files instead of Unix executables.  In order to run
+them, you have to use them as arguments to the runtime system, as in
+the following example.
+
+  Standard ML of New Jersey, Version 109.25.2, March 3, 1997
+]
+  - fun foo(arg1,args) =
+  =     (print arg1; print "\n";
+  =      app (fn s => (print s; print "\n")) args;
+  =      OS.Process.success);
+  val foo = fn : string * string list -> ?.OS_Process.status
+  - SMLofNJ.exportFn("foo",foo): unit;
+  write 1,0: 1108 bytes [0xee690000..0xee690454) @ 0x2000
+  ...  (a bunch of output as image is written, followed by exit to shell)
+  vex$ ls -l foo*
+  -rw-rw-r--   1 dbm        510064 Mar 21 17:55 foo.sparc-solaris
+  vex$ run.sparc-solaris foo.sparc-solaris x y z
+  run.sparc-solaris: Fatal error -- unable to open heap image "sml-image"
+
+  vex$ run.sparc-solaris @SMLload=foo.sparc-solaris x y z
+  run.sparc-solaris
+  x
+  y
+  z
+  vex$
+
+Here the sparc/solaris runtime is run.sparc-solaris.  The image file
+produced by SMLofNJ.exportFn is foo.sparc-solaris, and it's name is passed
+to the runtime system in the argument "@SMLload=foo.sparc-solaris".
+When the image is executed it prints the command name ("run.sparc-solaris"
+bound to arg1) followed by the rest of the command line arguments
+(bound to args), omitting the arguments starting with "@SML", which
+rare directed to the SML runtime system rather than the ML program.
+
+Note that you can say:
+
+  run.sparc-solaris @SMLload=foo x y z
+
+and the run-time figures out the architecture/os suffix for you.  Another
+way to do this is to use the sml command itself (which is just a shell
+script):
+
+  sml @SMLload=foo x y z
+
+
+4.8. Coding style conventions
+
+Q: What are the conventions for capitalizing various classes of identifiers?
+----------
+A: Here are the conventions normally used in the Basis and the SML/NJ
+compiler and library code:
+
+  variables:
+    symbolic or initial lower case (embedded caps for multiword: getItem)
+  data and exception constructors:
+    initial cap (or, rarely, symbolic, like ::)
+    [historical exceptions: nil, true, false]
+  types:
+    lower case, embedded caps for multiword
+  signatures:
+    all caps (underscores for multiword: PRIORITY_QUEUE)
+  structures and functors:
+    initial caps, embedded caps for multiword
+
+These conventions are not enforced, of course, though violations of
+the variable/constructor conventions ought to cause warning messages
+because of the danger of a constructor turning into a variable when
+it is misspelled.
+
+
+4.9. Performance, Resources
+
+Q: My program fails by exhausting virtual memory.  What can I do?
+----------
+A: (1) increase swap space on your computer
+   (2) improve your algorithms to reduce space used
+   (3) wait for the new runtime system in Version 111, which will be
+       more efficient in its use of virtual memory
+
+
+4.10 Network interfaces
+
+Q: Can SML/NJ programs access network facilities?
+Q: Is there a TCP/IP library available?
+Q: Does SML/NJ have support for sockets?
+----------
+A: Yes (on Unix; WinSock support is in the works).  The structures
+INetSock, NetHostDB, and Socket are what you want.  This is a proposed
+SML'97 Basis Library API, but the documentation is not finished yet.
+Our current interal draft of the Basis documentation does have a
+chapter on Sockets (Chapter 20).  The documentation will be included
+the next time that the SML'97 basis web pages are updated (RSN).  The
+sockets API is part of the Basis Library.
+----------
+A: There is also the Foxnet implementation of a full TCP/IP stack in
+SML/NJ, and in addition an http server and other network software.
+
+
+5. Download and Installation
+
+Q: Are there mirror sites for downloading the SML/NJ distribution?
+----------
+A: Yes.  See the Software page.
+
+
+Q: What do I need to install SML/NJ 110 on Windows?  Do I need MS Visual C++,
+MASM, etc?
+----------
+A: All you need is the installer program, 110-smlnj.exe, (a
+self-installing .exe).  You need Visual C++, etc. if you want to
+recompile the runtime for some reason (e.g. if you want to add
+embedded C code).  If you want to recompile the compiler, you'll need
+the sml bin files (110-bin.x86-win32) the makeml script from the
+sml-nj source directory (110-sml-nj.tar.gz), and a ksh to run makeml
+(either MKS or UWIN will do).
+
+
+Q: In order install SML under Solaris (or any Unix), do I need the
+binary distribution?  Is it possible to instal SML from source and
+say a C compiler?
+---------
+A: No, you can't bootstrap the SML/NJ compiler from source alone.
+You need the bin files (say, bin.x86-unix for Solaris/x86), the
+src/sml-nj directory (just for the makeml script), the src/runtime
+directory, and a C compiler and assembler to compile the run-time
+system.  The easy way is to first follow the normal installation
+procedure (using the config/install.sh script), and then you will
+be able to recompile the compiler from the SML source (if. for
+instance, you have modified the source).  The installation
+instructions are at:
+
+  http://www.smlnj.org/software.html
+
+
+Q: I am using Slackware Linux 2.0.0. Which files should I d/l
+to run sml?
+
+This is explained in
+
+  http://www.smlnj.org/software.html
+
+At the minimum, you need config.tgz.
+
+
+Q: How can I load CML into SML, and how can I make an executable from
+it?  [More generally, how to install CML.]
+---------
+A: ?
+
+
+Q: Is there a set of tests that I can run to check if my build
+of SML/NJ went through fine?
+---------
+A: We don't provide any tests.  Generally, if the install script
+finishes without errors, things should be fine, since the compiler
+gets exercised quite a bit during the installation process.
+
+There is a set of SML/NJ regression tests available in the
+testing project of the svn repository, but this would be overkill
+for your purposes.
+
+
+Q: I have installed SML/NJ on my Linux box sucessfully.  However, it
+seems that it takes lot of space (>17MB). I wonder if i can remove the
+directory smlnj/src ( I have tried. Still works, but i notice that all
+the *.cm files at smlnj/lib have alias point to smlnj/src).
+---------
+A: Some of the sources in smlnj/src can be removed, some are needed if
+you want to use some of the SML/NJ libraries.
+You should keep:
+  smlnj/src/smlnj-lib     (the smlnj library)
+  smlnj/src/ml-yacc/lib   (the library used by ml-yacc generated code)
+  smlnj/src/cml           (Concurrent ML library)
+  smlnj/src/eXene	  (X Windows graphics library)
+Everything else in smlnj/src can be removed.
+
+
+6. Documentation
+
+Q: Is there a packaged version of the HTML Basis documentation that one
+can download?
+Q: I'd like to put the doucmentation for the new standard basis on my
+laptop, so I can work even when not connected, but I'd prefer not to
+download each file by hand with netscape.  Is there a tar file
+somehwere that has them all?
+----------
+A: Yes. The URL is: ...
+
+
+Q: Is the SML '97 Conversion Guide available as a postscript document?
+----------
+A: Not yet.  Should be available in the spring of 1999.
+
+
+Q: Do you know where I can find documentation about graphic,
+Input/Output, math., and other libraries supported by 'Standard ML of
+New Jersey'.
+----------
+A: See the Users Guide web page, Basis documentation pages, SML/NJ
+Library pages.
+
+
+Q[2]: Where can I find documentation of the SML/NJ Library?
+----------
+A: There is a web page for the SML/NJ Library, but it does not lead to
+documentation for the individual modules.  For now, look at the source
+code of the signatures, which are generally commented.  [Where do you
+find the source code?]  The Porting Guide at
+
+  http://www.smlnj.org/doc/smlnj-lib/PORTING
+
+is of some use in relating old names to new.
+
+
+Q: Where can I find documentation for ML-Lex and ML-Yacc?
+----------
+A: See the Users Guide web page.
+
+
+Q: Is there documentation for the "visible compiler" modules?
+----------
+A: Not yet.
+
+
+Q: Are there any newsgroups covering SML?
+----------
+A: There are a couple of newsgroups that carry discussions about ML.
+The primary one is comp.lang.ml, but there are often messages about
+ML in the comp.lang.functional newsgroup, which covers functional
+programming in general.  These newsgroups are mentioned in our
+web page at the following URL:
+
+  http://www.smlnj.org/doc/index.html
+
+We're also happy to accept questions directed to
+smlnj-dev-list@lists.sourceforge.net, which reaches the SML/NJ development
+group.
+
+
+7. Tools
+
+7.1. ML-Doc
+
+Q[4]: I've seen some references to an SGML DTD called ML-Doc, both in
+the SML Basis Library and in the source tree of SLM/NJ 109.xx.
+
+Is the DTD available, and are there any publicly available versions of
+the tools used to covert ML-Doc to HTML (and/or LaTeX) i.e. the tools
+used in src/cml/doc/mkhtml.sh.
+---------
+A: Yes (jhr?).
+
+
+7.2 Profiler
+
+Q: Where should I look for documentation for this structure?
+Does CM interact with the profiler in any pleasant way at all, or do
+I have to do something like
+  Compiler.Profile.setMode ACTIVE
+  <get CM to rebuild the world>
+  <run my code>
+  Compiler.Profile.report mumble
+
+And what's the difference between ACTIVE and LATENT?
+----------
+A: [Blume] Well, isn't this pleasant enough... :-)
+Seriously, that's exactly what you have to do at the moment.
+I think that in LATENT mode the compiler will insert the
+instrumentation code, in ACTIVE mode existing instrumentation code
+will be effective.
+[jhr] LATENT means instrumentation is inserted, and ACTIVE means that
+instrumentation is inserted and timing statistics are collected.
+Really, these should be two separate controls.  I believe that
+profiling is broken right now; I was thinking of fixing the
+API when I fix the code.
+
+
+7.3. Misc
+
+Q: Is there a pretty-printing utility for sml code?
+---------
+A: Not that we know of.
+
+
+Q: I'm interested in any work/product for integrating functional languages
+with COM/CORBA (especially for Standard ML and Haskell) and for concrete
+applications using such an integration (I didn't find anything in the FAQ).
+---------
+A: There is H/Direct for Haskell, being developed by Eric Meier and Simon
+Peyton-Jones.  Riccardo Pucella once worked on an
+analog of H/Direct for SML/NJ.  Contact Riccardo for further
+information.
+
+
+8. Support
+
+Q: Is there a technical support phone number for SML/NJ?
+Q: How can I get technical support for SML/NJ?
+---------
+A: There is no "technical support phone #" (this is FREE software, after all).
+First look at the web site, http://www.smlnj.org.  If you can't find
+what you need there, try emailing us at sml-dev-list@lists.sourceforge.net.
+
+SML/NJ is an "open source" system, so potentially any advanced user can
+learn the internals of the system and voluntarily help to support and
+improve the system.
+
+
+Q: How can one report a bug?
+---------
+A:
+
+
+Q: How can one check on what bugs have been reported, or check the
+status of a particular bug?
+--------
+A: The various bug records are available at
+
+    http://www.smlnj.org/bugs/index.html
+
+
+9. SML '90 to SML '97 (SML/NJ 0.93 to SML/NJ 110) Conversion
+
+Q: In SML/NJ 110, various structures (Bits, ByteArray, Name, etc.)
+have disappeared or changed names?  How can I find out what the
+SML '97 (SML/NJ 110) equivalents are?
+----------
+A: See the SML '97 Conversion Guide.  (Two issues: changes in Basis,
+and changes in SML/NJ Library.)
+
+
+10. Windows
+
+Q: How do I set the default directory of the SML interactive loop?
+---------
+A: [Riccardo] You can change the default working directory by
+modifying the appropriate entry in the properties of the shortcut that
+invokes SML (this is done the same way it is done for all Windows
+programs).  Note that if SML is invoked from the command-line, the
+current directory will be the working directory of the command-line.
+
+Q: How can I do graphical interface programming under Windows in
+SML/NJ?  Can I use the Windows graphics API's from an SML program?
+---------
+A: eXene, the SML/NJ graphical interface library is X-based, so it
+isn't available for Windows.  There are two possible solutions.
+
+(1) See the documentation for smlnj-c, Lorenz Huelsbergen's C foreign
+function library.  A couple of years ago a summer student of Lorenz
+used a version of this library to support a fairly large subset of
+the Windows graphical API, and it might be possible to get this
+working again with some effort.
+
+(2) There is a tcl/tk interface library called sml_tk, which might be
+made to work under Windows without much effort.  A more advanced
+tcl/tk interface library is being considered for the next release, and
+this should work under Windows.
+
+
+11. Miscellaneous
+
+Q: Can SML programs communicate with a network?  Interact with
+web browsers?
+---------
+SML/NJ provides a full BSD sockets API (not on Windows yet).  If
+you need to do network communication, it has it.  Also, there
+is a library (part of the SML/NJ Library bundle) for parsing
+and prettyprinting HTML.  We use this in our documentation
+generation tools.
+
+
+======================================================================
+Unsorted
+--------
+
+Q: How does one control the depth of printing, so that result values
+are printed more fully, instead of an abbreviated form like eq(one(#),two(#))?
+---------
+A: I'm not sure I understand you (I was thrown off by the ambiguity
+of the word "typed"), but I guess what you mean is that you want
+results to be printed to greater depth.  This is controlled by
+the variable
+
+  Compiler.Control.Print.printDepth : int ref
+
+which controls the depth of recursion to which the top-level printer
+will go.  Related variables are
+
+  Compiler.Control.Print.printLengh : int ref
+  Compiler.Control.Print.stringDepth : int ref
+
+which determine how much of a long list or string (respectively) gets
+printed.  See the URL
+
+  http://www.smlnj.org/doc/Compiler/pages/printcontrol.html
+
+
+Q: Where can I find docomentation about graphical interfaces in SML.
+--------
+A: There are two main choices right now: eXene and sml_tk.  There is
+an eXene manual, but it's not available at our web site now.  You'll
+have to ask John Reppy for documentation.
+For sml_tk, look at
+
+  http://www.informatik.uni-bremen.de/~cxl/sml_tk/
+
+The new 2.1 version should be compatible with SML/NJ 110.
+
+
+Q: Are there equivalents of lex and yacc for SML/NJ?
+--------
+A: Yes, we have ML-Lex and ML-Yacc for building lexical analyzers and
+parsers.  Look under the "Documentation" heading on the SML/NJ web
+page:
+
+  http://www.smlnj.org
+
+There are other compiler-oriented tools like ML-Burg and MLRISC for
+building compiler back-ends (code generators), but I suspect you are
+mainly interested in front-end tools.  What kind of compiler building
+project are you interested in?  There are a bunch of projects involving
+compiler research using SML/NJ.  See under our Links page:
+
+  http://www.smlnj.org/links.html
+
+By the way, you might get in touch with the Foxnet group at CMU
+(Bob Harper, Peter Lee, and their students and postdocs).  They
+have a lot of SML-based programming expertese.  It fact, they have
+implemented their own SML compiler, TILT.  This is the group that
+implemented TCP/IP and other network software (like a web server)
+in SML.  See
+
+  http://www.cs.cmu.edu/afs/cs/project/fox/mosaic/HomePage.html
+
+
+Q: Is the body of a comment treated as unanalyzed text or
+is it tokenized, so, for instance
+
+ (* "abc*)def" *)
+
+is a well formed comment?
+---------
+A: tokenized?
+
+
+Q: Is there a mailing list on SML/NJ I could join (other than
+comp.lang.ml that is)?
+---------
+A: Lal George maintains a mailing list for announcements of new
+working (i.e. developmental) versions, for those brave users eager to
+try the latest thing.  Otherwise, we use comp.lang.ml for all public
+news, or our Web pages at
+
+  http://www.smlnj.org
+
+
+Q: Will every release of sml/nj be free, also for commercial purposes.
+----------
+A: Yes.  Our license is based on the MIT X-Windows license, and is about
+as liberal as we could make it short of putting the SML/NJ in the
+public domain.  You can use, redistribute, and modify the system.
+In other words, SML/NJ is "open source", or "freeware".
+
+
+Q: Why don't you use the GNU Public License for SML/NJ?
+----------
+A: It's too restrictive.
+
+
+Q: Is SML/NJ Y2K "compliant"?
+---------
+A: The Date structure in the SML '97 Basis library uses type int to
+represent the year, so SML programs using the Date structure are
+certainly safe.  Any user defined data structures representing dates
+would most likely do the same, unless the programmer was quite
+perverse and used something like a byte vector or array of lenth
+two (which would be less efficient than an int) for a year field.
+
+So I would say that sensibly used, SML is free of Y2K problems.

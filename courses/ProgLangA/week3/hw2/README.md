@@ -113,7 +113,7 @@ So now we can think about the type signature of our "next state" function that a
 fun next_state(st: gamestate)(mv: move): gamestate
 ```
 
-This way, we can verify a property continually throughout the game by taking current game state, advancing by one move, then checking the new game state satisfies the property.
+This way, we can verify a property continually throughout the game by taking current game state, advancing by one move, then checking that the new game state satisfies the property.
 
 #### Thinking about `careful_player`
 
@@ -174,7 +174,7 @@ So now we come to the weird part of this (for you probably). The idea in propert
 
 We have some method of generating hundreds of random inputs. A library like Haskell's `Quickcheck` would do this for us, but we don't have that in SML, so we'll still be writing some data "by hand".
 
-In our case, this would be randomly generated inputs of a starting deck and starting goal pairs. For example, we would have hundreds of decks like
+In our case, this would be randomly generated pairs of a starting deck and a starting goal. For example, we would have hundreds of decks like
 
 ```haskell
 val cards: card list = [(Hearts, Num 2), (Spades, Num 7), (Clubs, Jack), (Diamonds, Ace)]
@@ -193,7 +193,7 @@ Then we run our property tests on a game played with the starting state of:
 - empty hand `[]`,
 - `cards` as the starting deck,
 - The `goal` value as the starting goal,
-- `score([], goal)` as the starting score of this state.
+- `score([], goal)` as the starting score of this state (which is always `goal div 2`).
 
 The property tests recursively go through every move in a `move list`, verifying that the properties hold at every single move. For example, `prop1` takes the starting `gamestate`
 
@@ -398,7 +398,7 @@ fun check_all_props(moves: move list, st: gamestate): bool = myall ??? propertie
 -- Data
 -- then add some data here! Random starting decks with different goal values...
 val cards: card list = [???] -- some randomly generated cards...
-val goal: int = ???          -- some randomly generated number
+val goal: int = ???          -- some randomly generated nonnegative integer
 val start: gamestate = ([], cards, goal, goal div 2) -- score is always goal/2 at first
 val moves: move list = careful_player(cards, goal)
 
@@ -440,9 +440,9 @@ You get the idea.
 
 Let's use it!
 
-### Using QCheck to test our work
+## Using QCheck to test our work
 
-#### Installation
+### Installation
 
 This is for SMLNJ 110.79, which I installed on Ubuntu 22.04 with `sudo apt install smlnj`.
 
@@ -508,7 +508,7 @@ val it = true : bool
 - 
 ```
 
-#### Usage
+### Usage
 
 We need to add this line to our `.sml` files now, whenever we use anything from the `QCheck` library:
 
@@ -518,7 +518,7 @@ open QCheck;
 
 Now we can do `use "name-of-your-file.sml";` as usual.
 
-#### How to write random tests with properties
+### How to write random tests with properties
 
 First we need to define some type aliases.
 
@@ -543,14 +543,14 @@ The first argument is a pair of functions: a "generator" (with type `'a Gen.gen`
 For example if we want to generate random integers and print them, we can use these:
 
 ```haskell
--- here 'a = int, here Gen.Int.int gives us an int Gen.gen
+-- here 'a = int
 -- int Gen.gen    (int -> string) option 
 (  Gen.Int.int,     SOME Int.toString  )
 ```
 
 The second argument is also a pair: a `string` (that represents the name of the test), and a function (with type `'a prop -> unit`). This function represents the property that we want to test. But it's a bit more complicated and harder to explain. 
 
-For example, we can use an `'a -> bool` function, and apply `pred` (a utility HOF provided by `QCheck`) to it to get it into the desired format:
+For example, we can use an `'a -> bool` function, and apply `pred` (a utility HOF provided by `QCheck`) to get it into the desired format:
 
 ```haskell
 -- here we have an int -> bool function, and pred turns it into int prop
@@ -570,10 +570,10 @@ val y = ==> (both_odd, sum_even) -- same thing, different notation
 So here is an example of random 100 tests for integer pairs:
 
 ```haskell
-fun show_pair(x, y) = Int.toString x ^ " , " ^ Int.toString y 				-- print function
-val pair_gen = Gen.zip(Gen.Int.int, Gen.Int.int) 											-- generator
-val test_name = "odd + odd = even" 																		-- name of test
-val prop_pair = ==>(both_odd, sum_even) 															-- property to check
+fun show_pair(x, y) = Int.toString x ^ " , " ^ Int.toString y         -- print function
+val pair_gen = Gen.zip(Gen.Int.int, Gen.Int.int)                      -- generator
+val test_name = "odd + odd = even"                                    -- name of test
+val prop_pair = ==>(both_odd, sum_even)                               -- property to check
 val test = checkGen (pair_gen, SOME show_pair) (test_name, prop_pair) -- 100 tests
 ```
 
@@ -594,7 +594,7 @@ odd + odd = even.......FAILED  (99/100 passed)
 counter-examples:       643968495 , 707765063
 ```
 
-#### What we need
+### What we need
 
 We need 4 things:
 
@@ -603,9 +603,9 @@ We need 4 things:
 - names for our tests (trivial!)
 - ways to express the 4 properties we want to test (slightly difficult)
 
-#### Writing custom generators for our data types
+### Writing custom generators for our data types
 
-##### Generator for `Num of int`
+#### Generator for `Num of int`
 
 First we need a generator that selects from the range of integers 2, 3, ..., 10: `Gen.range(2, 10)`. With that, we can create a generator for `Num` (which is part of `rank`). To "apply" a datatype constructor we have to use the `Gen.map` function provided by `QCheck`:
 
@@ -613,7 +613,7 @@ First we need a generator that selects from the range of integers 2, 3, ..., 10:
 val gen_num = Gen.map Num (Gen.range(2, 10))
 ```
 
-##### Generator for `rank`
+#### Generator for `rank`
 
 Here we have to choose from a list of possibilities. To generate `Jack, Queen, King, Ace` we use a generator that always returns the same value: `lift`.
 
@@ -623,7 +623,7 @@ val gen_rank = Gen.choose #[
 ]
 ```
 
-##### Generator for `suit`
+#### Generator for `suit`
 
 Very similar to `rank`:
 
@@ -633,7 +633,7 @@ val gen_suit = Gen.choose #[
 ]
 ```
 
-##### Generator for `card`
+#### Generator for `card`
 
 We just "zip" the generators for `rank` and `suit`:
 
@@ -641,7 +641,7 @@ We just "zip" the generators for `rank` and `suit`:
 val gen_card = Gen.zip(gen_suit, gen_rank)
 ```
 
-##### Generator for `card list`
+#### Generator for `card list`
 
 There is a provided function `Gen.list` which takes a `bool gen` and our `gen_card` from above as input. One `bool gen` is also provided: `Gen.flip` (which is like a coin flip).
 
@@ -649,7 +649,7 @@ There is a provided function `Gen.list` which takes a `bool gen` and our `gen_ca
 val gen_card_list = Gen.list Gen.flip gen_card
 ```
 
-##### Generator for `int`
+#### Generator for `int`
 
 We already have this (provided by `QCheck`):
 
@@ -657,7 +657,7 @@ We already have this (provided by `QCheck`):
 Gen.Int.int
 ```
 
-##### Generator for `card list * int`
+#### Generator for `card list * int`
 
 Just zip it again (the `int` represents the `goal` value):
 
@@ -665,7 +665,7 @@ Just zip it again (the `int` represents the `goal` value):
 val gen_card_list_goal = Gen.zip(gen_card_list, Gen.Int.int)
 ```
 
-##### Expressing our properties in a way `QCheck` can understand
+#### Expressing our properties in a way `QCheck` can understand
 
 Our properties have types:
 
@@ -693,7 +693,7 @@ fun prop_to_pred (prp: property) =
     --    _____this function has type card list * int -> bool______
 ```
 
-#### Feeding the generators into the test cases
+### Feeding the generators into the test cases
 
 Finally we can do the random testing of the 4 properties from before:
 
@@ -728,7 +728,7 @@ It's interesting that roughly 50% of the test are passing, isn't it? This is pro
 
 If we bothered to write the optional printing function, `QCheck` would show us the counterexamples, so we could confirm our suspicions. But I'm too lazy for that!
 
-##### Fixing the generators
+#### Fixing the generators
 
 So we have to fix this by requiring the generated `goal` value to be nonnegative. It's fine to restrict it to the range, say, `(0, 100)`. Change this:
 

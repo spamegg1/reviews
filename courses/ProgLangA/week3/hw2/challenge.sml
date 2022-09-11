@@ -1,38 +1,11 @@
 use "hw2.sml";
 
-(*  general utility HOFs *)
-fun mymap(func: 'a -> 'b)([]: 'a list): 'b list = []
-|   mymap func (x :: xs) = (func x) :: mymap func xs
+(*  general utility *)
+val minlist = List.foldl Int.min 0
 
-fun myfilter(pred: 'a -> bool)([]: 'a list): 'a list = []
-|   myfilter pred (x :: xs) =
-        if (pred x)
-        then x :: (myfilter pred xs)
-        else (myfilter pred xs)
-
-fun myexists(_: 'a -> bool)([]: 'a list): bool = false
-|   myexists pred (x :: xs) = (pred x) orelse (myexists pred xs)
-
-fun myfold(func: ('a * 'b) -> 'b)(zero: 'b)([]: 'a list): 'b = zero
-|   myfold func zero (x :: xs) = myfold func (func(x, zero)) xs
-
-fun mymin(x: int, y: int): int = if x < y then x else y
-
-fun minlist(ints: int list): int = case ints of
-        [] => 0
-    |   [n] => n
-    |   n :: ns => myfold mymin n ns
-
-fun myall(func: 'a -> bool)(lst: 'a list): bool =
-    myfold (fn (x, y) => (func x) andalso y) true lst
-
-(*  assumes lists have equal length. *)
-fun myzip([]: 'a list)([]: 'b list): ('a * 'b) list = []
-|   myzip(x :: xs)(y :: ys) = (x, y) :: myzip xs ys
-
-(*  helpers for score_challenge  *)
+(*  helpers for score_challenge *)
 fun new_sums([]: int list, value: int): int list = [value]
-|   new_sums(sums, value) = mymap (fn x => x + value) sums
+|   new_sums(sums, value) = List.map (fn x => x + value) sums
 
 fun sum_cards_challenge([]: card list): int list = [0]
 |   sum_cards_challenge(cards) =
@@ -53,9 +26,9 @@ fun score_challenge(heldcards: card list, goal: int): int =
         val same: bool = all_same_color(heldcards)
         fun prelim_fun(sum: int): int =
             if sum > goal then (sum - goal) * 3 else goal - sum
-        val prelims: int list = mymap prelim_fun sums
+        val prelims: int list = List.map prelim_fun sums
         fun result(prelim: int): int = prelim div (if same then 2 else 1)
-        val results: int list = mymap result prelims
+        val results: int list = List.map result prelims
     in
         minlist results
     end
@@ -69,7 +42,7 @@ fun state_challenge(
         state_challenge(remove_card(held, c, IllegalMove), cs, ms, goal)
 |   state_challenge(held, [], Draw :: ms, goal) = score_challenge(held, goal)
 |   state_challenge(held, c :: cs, Draw :: ms, goal) =
-        if myall (fn sum => sum > goal) (sum_cards_challenge(c :: held))
+        if List.all (fn sum => sum > goal) (sum_cards_challenge(c :: held))
         then score_challenge(c :: held, goal)
         else state_challenge(c :: held, cs, ms, goal)
 
@@ -100,7 +73,7 @@ fun next_state(st: stat)(mv: move): stat =
             then st
             else (c :: held, cs, gl, score(c :: held, gl))
         |   (_, _, Discard(c)) =>
-            if myfind(c, held)
+            if List.exists (fn x => x = c) held
             then
                 let
                     val newheld = remove_card(held, c, IllegalMove)
@@ -132,11 +105,11 @@ fun possible_to_discard_then_draw(st: stat): bool =
         |   (h :: hs, c :: cs) =>
             let
                 val discard_states: stat list =
-                    mymap (fn crd => next_state st (Discard crd)) held
+                    List.map (fn crd => next_state st (Discard crd)) held
                 val discard_then_draw_states: stat list =
-                    mymap (fn sta => next_state sta Draw) discard_states
+                    List.map (fn sta => next_state sta Draw) discard_states
             in
-                myexists (fn (_, _, _, scr) => scr = 0) discard_then_draw_states
+                List.exists (fn (_, _, _, scr) => scr = 0) discard_then_draw_states
             end
     end
 
@@ -145,11 +118,11 @@ fun discard_then_draw(st: stat): stat * card =
     let
         val (held, cards, _, _) = st
         val discard_states: (stat * card) list =
-            mymap (fn crd => (next_state st (Discard crd), crd)) held
+            List.map (fn crd => (next_state st (Discard crd), crd)) held
         val discard_then_draw_states: (stat * card) list =
-            mymap (fn (sta, crd) => (next_state sta Draw, crd)) discard_states
+            List.map (fn (sta, crd) => (next_state sta Draw, crd)) discard_states
         val zero_states: (stat * card) list =          (* guaranteed nonempty *)
-            myfilter (fn ((_, _, _, scr), _) => scr = 0) discard_then_draw_states
+            List.filter (fn ((_, _, _, scr), _) => scr = 0) discard_then_draw_states
     in
         case zero_states of                     (* just to avoid using hd, tl *)
             [] => (st, (Hearts, Ace))           (* dummy, should never happen *)
@@ -214,7 +187,7 @@ fun check_prop(prop: property, mvs: moves, st: stat): bool =
     |   m :: ms => prop(st, mvs) andalso check_prop(prop, ms, next_state st m)
 
 fun check_all(mvs: moves, st: stat) =
-    myall (fn prop => check_prop(prop, mvs, st)) properties
+    List.all (fn prop => check_prop(prop, mvs, st)) properties
 
 (* tests for score_challenge *)
 val t12a = score_challenge([(Hearts,Ace),(Diamonds,Ace)],10) = minlist [4,3,18]
@@ -237,8 +210,8 @@ val ms3: moves = careful_player(cards, 30)
 val ms4: moves = careful_player(cards, 40)
 val ms5: moves = careful_player(cards, 50)
 val mvs = [ms1, ms2, ms3, ms4, ms5]
-val moves_stats: (moves * stat) list = myzip mvs stats
-val all_in_one_test = myall check_all moves_stats
+val moves_stats: (moves * stat) list = ListPair.zip(mvs, stats)
+val all_in_one_test = List.all check_all moves_stats
 
 
 (*  Automated randomly generated property-based testing with QCheck

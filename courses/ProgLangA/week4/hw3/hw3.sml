@@ -96,12 +96,12 @@ fun all_answers(_: 'a -> 'b list option)([]: 'a list): 'b list option = SOME []
               NONE => NONE
             | SOME bs' => SOME(bs' @ bs)
 
-val count_wildcards: pattern -> int = g (fn x => 1) (fn x => 0)
+val count_wildcards: pattern -> int = g (fn _ => 1) (fn _ => 0)
 
-val count_wild_and_variable_lengths: pattern -> int = g (fn x => 1) String.size
+val count_wild_and_variable_lengths: pattern -> int = g (fn _ => 1) String.size
 
 fun count_some_var(s: string, p: pattern): int =
-    g (fn x => 0) (fn x => if x = s then 1 else 0) p
+    g (fn _ => 0) (fn x => if x = s then 1 else 0) p
 
 (*  returns true if all variable names in pattern are same  *)
 fun check_pat(p: pattern): bool =
