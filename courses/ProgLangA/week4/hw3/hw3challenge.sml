@@ -1,10 +1,10 @@
-datatype pattern =                     (* Corresponding typ: *)
-      Wildcard                         (* Anything *)
-    | Variable of string               (* Anything *)
-    | UnitP                            (* UnitT *)
-    | ConstP of int                    (* IntT *)
-    | TupleP of pattern list           (* TupleT [typs] *)
-    | ConstructorP of string * pattern (* Datatype str *)
+datatype pattern =                       (* Corresponding typ: *)
+        Wildcard                         (* Anything *)
+    |   Variable of string               (* Anything *)
+    |   UnitP                            (* UnitT *)
+    |   ConstP of int                    (* IntT *)
+    |   TupleP of pattern list           (* TupleT [typs] *)
+    |   ConstructorP of string * pattern (* Datatype str *)
 
 (* some examples of patterns *)
 val pat1 = Wildcard
@@ -18,11 +18,11 @@ val pat8 = TupleP [pat1, TupleP [pat5, pat2], pat2, pat7,
                    TupleP [pat7, pat3, pat4], pat6]
 
 datatype typ =
-      Anything           (* any type of value is okay *)
-    | UnitT              (* type for Unit *)
-    | IntT               (* type for integers *)
-    | TupleT of typ list (* tuple types *)
-    | Datatype of string (* some named datatype *)
+        Anything           (* any type of value is okay *)
+    |   UnitT              (* type for Unit *)
+    |   IntT               (* type for integers *)
+    |   TupleT of typ list (* tuple types *)
+    |   Datatype of string (* some named datatype *)
 
 (* some examples of typs *)
 val anythg: typ = Anything
@@ -34,23 +34,15 @@ val nested: typ = TupleT [dtype, tuple]
 
 (*  Checks if two typs have a common type.  *)
 fun compatible(s: typ, t: typ): bool = case (s, t) of
-        (Anything, _)  => true
-    |   (_, Anything)  => true
+        (Anything,  _) => true
+    |   (_,  Anything) => true
     |   (UnitT, UnitT) => true
-    |   (IntT, IntT)   => true
-    |   (Datatype str1, Datatype str2) => str1 = str2
-    |   (TupleT lst1, TupleT lst2) =>
-        if length lst1 <> length lst2
-        then false
-        else let
-            val zipped = ListPair.zip(lst1, lst2)
-            val checked = List.map compatible zipped
-        in
-            List.all (fn x => x) checked         (* are all pairs compatible? *)
-        end
+    |   ( IntT,  IntT) => true
+    |   (Datatype s1, Datatype s2) => s1 = s2
+    |   (TupleT lst1, TupleT lst2) => ListPair.allEq compatible (lst1, lst2)
     |   _ => false
 
-(* Converts a single pattern to its typ. Uses compatible. *)
+(*  Converts a single pattern to its typ. Uses compatible. *)
 fun p2t(triples: (string * string * typ) list)(p: pattern): typ option =
     case p of
         Wildcard   => SOME(Anything)
@@ -61,7 +53,7 @@ fun p2t(triples: (string * string * typ) list)(p: pattern): typ option =
         let
             val converted = List.map (p2t triples) lst
         in
-            if List.all isSome converted
+            if   List.all isSome converted
             then SOME(TupleT (List.map valOf converted))
             else NONE
         end
@@ -73,7 +65,7 @@ fun p2t(triples: (string * string * typ) list)(p: pattern): typ option =
                 (NONE, _) => NONE           (* could not find str in metadata *)
             |   (_, NONE) => NONE                     (* pat fails to convert *)
             |   (SOME(s1, s2, t), SOME(t')) =>
-                if compatible(t, t')
+                if   compatible(t, t')
                 then SOME(Datatype s2)
                 else NONE                   (* pat incompatible with metadata *)
         end
@@ -95,15 +87,15 @@ fun merge(s: typ option, t: typ option): typ option =
         (NONE, _) => NONE
     |   (_, NONE) => NONE
     |   (SOME(s1), SOME(t1)) =>
-        if compatible(s1, t1)
+        if   compatible(s1, t1)
         then SOME(coalesce(s1, t1))
         else NONE
 
 (* Assumes the list of patterns is not empty. *)
 fun typecheck_patterns(
-    triples: (string * string * typ) list, pats: pattern list
+    triples: (string * string * typ) list, patterns: pattern list
 ): typ option =
-    case List.map (p2t triples) pats of           (* convert all pats to typs *)
+    case List.map (p2t triples) patterns of       (* convert all pats to typs *)
         t :: [] => t
     |   t :: ts => List.foldl merge t ts
     |   _ => NONE     (* to satisfy type checker. This case should not happen *)

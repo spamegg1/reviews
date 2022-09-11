@@ -176,8 +176,10 @@ fun careful_helper(st: stat): moves =
         else []
     end
 
-fun careful_player(cards: card list, gl: int): move list =
-    careful_helper([], cards, gl, gl div 2)
+fun start(cs: deck, gl: goal): stat = ([], cs, gl, gl div 2)
+
+fun careful_player(cards: deck, gl: goal): moves =
+    careful_helper(start(cards, gl))
 
 (*   property-based testing for careful_player  *)
 type property = stat * moves -> bool
@@ -211,7 +213,7 @@ fun check_prop(prop: property, mvs: moves, st: stat): bool =
         [] => true
     |   m :: ms => prop(st, mvs) andalso check_prop(prop, ms, next_state st m)
 
-fun check(mvs: moves, st: stat) =
+fun check_all(mvs: moves, st: stat) =
     myall (fn prop => check_prop(prop, mvs, st)) properties
 
 (* tests for score_challenge *)
@@ -220,7 +222,7 @@ val t12b = score_challenge(
     [(Hearts, Ace), (Diamonds, Ace), (Spades, Ace), (Clubs, Ace)], 10
 ) = minlist [6, 12, 42, 72, 102]
 
-(*  tests for careful_player  *)
+(*  manual property-based tests for careful_player  *)
 val cards: deck = [
     (Hearts, Num 2), (Spades, Num 7), (Clubs, Jack), (Diamonds, Ace)]
 val st1: stat = ([], cards, 10, 5)
@@ -236,4 +238,31 @@ val ms4: moves = careful_player(cards, 40)
 val ms5: moves = careful_player(cards, 50)
 val mvs = [ms1, ms2, ms3, ms4, ms5]
 val moves_stats: (moves * stat) list = myzip mvs stats
-val all_in_one_test = myall check moves_stats
+val all_in_one_test = myall check_all moves_stats
+
+
+(*  Automated randomly generated property-based testing with QCheck
+    On the SML REPL, first you must run: CM.make "$/qcheck.cm";
+    After that, run: use "challenge.sml";
+*)
+open QCheck;
+
+(*  generators *)
+val gen_num = Gen.map Num (Gen.range(2, 10))
+val gen_rank = Gen.choose #[
+    Gen.lift Jack, Gen.lift Queen, Gen.lift King, Gen.lift Ace, gen_num
+]
+val gen_suit = Gen.choose #[
+    Gen.lift Clubs, Gen.lift Diamonds, Gen.lift Hearts, Gen.lift Spades
+]
+val gen_card = Gen.zip(gen_suit, gen_rank)
+val gen_card_list = Gen.list Gen.flip gen_card
+val gen_card_list_goal = Gen.zip(gen_card_list, Gen.range(0, 100))
+
+(*  test *)
+fun prop_to_pred prp =
+    pred (fn (cs, gl) => prp(start(cs, gl), careful_player(cs, gl)))
+val test_prop1 = checkGen (gen_card_list_goal, NONE) ("prop1", prop_to_pred prop1)
+val test_prop2 = checkGen (gen_card_list_goal, NONE) ("prop2", prop_to_pred prop2)
+val test_prop3 = checkGen (gen_card_list_goal, NONE) ("prop3", prop_to_pred prop3)
+val test_prop4 = checkGen (gen_card_list_goal, NONE) ("prop4", prop_to_pred prop4)

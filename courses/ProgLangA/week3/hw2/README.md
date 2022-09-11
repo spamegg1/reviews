@@ -52,7 +52,7 @@ This requires quite a bit of design and modeling. I am familiar with property ba
 
 ### General utility HOFs
 
-These are very nice and useful to have: 
+These are very nice and useful to have:
 
 ```haskell
 -- applies f to each element of list
@@ -170,9 +170,9 @@ This also goes into `careful_helper` as one of the cases in the long `if/else` b
 
 ### Testing
 
-So now we come to the weird part of this (for you probably). The idea in property based testing goes like this. 
+So now we come to the weird part of this (for you probably). The idea in property based testing goes like this.
 
-We have some method of generating hundreds of random inputs. A library like Haskell's `Quickcheck` would do this for us, but we don't have that in SML, so we'll still be writing some data "by hand". 
+We have some method of generating hundreds of random inputs. A library like Haskell's `Quickcheck` would do this for us, but we don't have that in SML, so we'll still be writing some data "by hand".
 
 In our case, this would be randomly generated inputs of a starting deck and starting goal pairs. For example, we would have hundreds of decks like
 
@@ -244,7 +244,7 @@ We need a function, that takes a `property`, a `move list` and a starting `games
 fun check_prop(prop: property, moves: move list, st: gamestate): bool
 ```
 
-If there are no more moves left, it should return `true`. 
+If there are no more moves left, it should return `true`.
 
 If there is at least one move `m`, then `prop` should be `true` with the current state `st` and the current set of `moves`, and...
 
@@ -307,7 +307,7 @@ we should have another `if/then` under the `then`:
 
 ```haskell
     else if goal - (sum of held cards) > 10
-    then 
+    then
         if cards = [] then
             ???
         else
@@ -380,7 +380,7 @@ val prop2: property = fn ((hand, _, goal, _), moves) => ???
 -- If a score of 0 is reached, there must be no more moves.
 val prop3: property = fn ((_, _, _, scor), moves) => ???
 
--- If it is possible to reach a score of 0 by discarding a card 
+-- If it is possible to reach a score of 0 by discarding a card
 -- followed by drawing a card, then this must be done.
 val prop4: property = fn (st, moves) => ???
 
@@ -416,7 +416,7 @@ I was able to pass the grader and got the 104% max extra credit score with this 
 
 ### Feeling a bit crazy?
 
-Why not give it a shot to develop a property based testing library for SML? Take a look at Haskell's Quickcheck for ideas. 
+Why not give it a shot to develop a property based testing library for SML? Take a look at Haskell's Quickcheck for ideas.
 
 Primarily you'll have to figure out how to generate random elements of a given (possibly complicated) type of data. This is done "dependently". For example how would you generate random data for `gamestate`?
 
@@ -435,3 +435,322 @@ type card = suit * rank
 To generate random `card`s you would have to know how to generate random `suit`s and know how to generate random `rank`s, and so on...
 
 You get the idea.
+
+***Update:*** Turns out there is a property-based testing library for SML inspired by Haskell's Quickcheck: [Qcheck](https://github.com/league/qcheck)
+
+Let's use it!
+
+### Using QCheck to test our work
+
+#### Installation
+
+This is for SMLNJ 110.79, which I installed on Ubuntu 22.04 with `sudo apt install smlnj`.
+
+```bash
+git clone https://github.com/league/qcheck
+cd qcheck
+make -f Makefile.nj
+```
+
+Now this created a file named `qcheck.cm` in a hidden folder inside the `qcheck` directory
+
+```ba
+.cm/x86-unix/qcheck.cm
+```
+
+We need to move this into SMLNJ's library directory, which is `/usr/lib/smlnj/lib` for me. But we also have the option of placing it elsewhere, not messing up the default installation.
+
+I'm going to create some nested folders in my home directory like this: 
+
+```bash
+~/.smlnj/lib/qcheck.cm/.cm/x86-unix
+```
+
+This is not necessary, but I'm just imitating the `/lib/qcheck.cm` folder format just to follow SMLNJ's own library folder structure under `/usr/lib/smlnj/lib`).
+
+So I place the file `qcheck.cm` in there, so it now has the path
+
+```bash
+~/.smlnj/lib/qcheck.cm/.cm/x86-unix/qcheck.cm
+```
+
+The extra nested folders `.cm/x86-unix/` is just SMLNJ's own convention.
+
+Now we need to tell SMLNJ where to find it. Normally this is done by editing the file `/usr/lib/smlnj/lib/pathconfig` but again we will avoid messing up the default install. This requires creating a file named `.smlnj-pathconfig` inside the home directory.
+
+```bash
+cd # this puts me back in my home directory
+nano .smlnj-pathconfig # or use whatever text editor you want
+```
+
+We only need to tell it to find the `qcheck.cm` folder. Add this line to the `.smlnj-pathconfig` file:
+
+```bash
+qcheck.cm ~/.smlnj/lib/qcheck.cm
+```
+
+Save, close. Now we can run the REPL and load the `QCheck` library like this:
+
+```bash
+ ➜ sml
+Standard ML of New Jersey v110.79 [built: Sat Oct 26 12:27:04 2019]
+- CM.autoload "$/qcheck.cm";
+[autoloading]
+[library $smlnj/cm/cm.cm is stable]
+[library $smlnj/internal/cm-sig-lib.cm is stable]
+[library $/pgraph.cm is stable]
+[library $smlnj/internal/srcpath-lib.cm is stable]
+[library $SMLNJ-BASIS/basis.cm is stable]
+[library $SMLNJ-BASIS/(basis.cm):basis-common.cm is stable]
+[autoloading done]
+[library $/qcheck.cm is stable]
+val it = true : bool
+- 
+```
+
+#### Usage
+
+We need to add this line to our `.sml` files now, whenever we use anything from the `QCheck` library:
+
+```haskell
+open QCheck;
+```
+
+Now we can do `use "name-of-your-file.sml";` as usual.
+
+#### How to write random tests with properties
+
+First we need to define some type aliases.
+
+```haskell
+type 'a pred = 'a -> bool
+type 'a prop = 'a * stats -> bool option * stats
+type 'a rep = 'a -> string option
+```
+
+(Don't worry about `stats` for now.)
+
+Here `pred` is just like our properties. For testing `careful_player`, here `'a` would be `card list * int`.
+
+`Qcheck` has a function called `checkGen`. It's a curried function, and takes two arguments.
+
+```haskell
+val checkGen : 'a Gen.gen * 'a rep -> string * 'a prop -> unit
+```
+
+The first argument is a pair of functions: a "generator" (with type `'a Gen.gen`) and an optional "printing function" (with type `'a rep`).
+
+For example if we want to generate random integers and print them, we can use these:
+
+```haskell
+-- here 'a = int, here Gen.Int.int gives us an int Gen.gen
+-- int Gen.gen    (int -> string) option 
+(  Gen.Int.int,     SOME Int.toString  )
+```
+
+The second argument is also a pair: a `string` (that represents the name of the test), and a function (with type `'a prop -> unit`). This function represents the property that we want to test. But it's a bit more complicated and harder to explain. 
+
+For example, we can use an `'a -> bool` function, and apply `pred` (a utility HOF provided by `QCheck`) to it to get it into the desired format:
+
+```haskell
+-- here we have an int -> bool function, and pred turns it into int prop
+pred (fn x => x mod 2 = 0)
+```
+
+Another way to create the `'a prop` type function is to use `implies` (another utility HOF provided by `QCheck`) with two predicates:
+
+```haskell
+fun both_odd(x, y) = odd x andalso odd y -- (int * int) -> bool
+fun sum_even(x, y) = even (x + y)        -- (int * int) -> bool 
+-- adding two odd integers should give us an even integer
+val x: (int * int) prop = implies(both_odd, sum_even)
+val y = ==> (both_odd, sum_even) -- same thing, different notation
+```
+
+So here is an example of random 100 tests for integer pairs:
+
+```haskell
+fun show_pair(x, y) = Int.toString x ^ " , " ^ Int.toString y 				-- print function
+val pair_gen = Gen.zip(Gen.Int.int, Gen.Int.int) 											-- generator
+val test_name = "odd + odd = even" 																		-- name of test
+val prop_pair = ==>(both_odd, sum_even) 															-- property to check
+val test = checkGen (pair_gen, SOME show_pair) (test_name, prop_pair) -- 100 tests
+```
+
+When we run this, we get output that looks like this:
+
+```haskell
+odd + odd = even.......ok      (90 passed)   
+odd + odd = even.......ok      (91 passed)   
+odd + odd = even.......FAILED  (91/92 passed) 
+odd + odd = even.......FAILED  (92/93 passed) 
+odd + odd = even.......FAILED  (93/94 passed) 
+odd + odd = even.......FAILED  (94/95 passed) 
+odd + odd = even.......FAILED  (95/96 passed) 
+odd + odd = even.......FAILED  (96/97 passed) 
+odd + odd = even.......FAILED  (97/98 passed) 
+odd + odd = even.......FAILED  (98/99 passed) 
+odd + odd = even.......FAILED  (99/100 passed)
+counter-examples:       643968495 , 707765063
+```
+
+#### What we need
+
+We need 4 things:
+
+- a generator for `card list * int` (this will be the most difficult part!)
+- an optional printer for `card list * int` (we could ignore this if we want)
+- names for our tests (trivial!)
+- ways to express the 4 properties we want to test (slightly difficult)
+
+#### Writing custom generators for our data types
+
+##### Generator for `Num of int`
+
+First we need a generator that selects from the range of integers 2, 3, ..., 10: `Gen.range(2, 10)`. With that, we can create a generator for `Num` (which is part of `rank`). To "apply" a datatype constructor we have to use the `Gen.map` function provided by `QCheck`:
+
+```haskell
+val gen_num = Gen.map Num (Gen.range(2, 10))
+```
+
+##### Generator for `rank`
+
+Here we have to choose from a list of possibilities. To generate `Jack, Queen, King, Ace` we use a generator that always returns the same value: `lift`.
+
+```haskell
+val gen_rank = Gen.choose #[
+    Gen.lift Jack, Gen.lift Queen, Gen.lift King, Gen.lift Ace, gen_num
+]
+```
+
+##### Generator for `suit`
+
+Very similar to `rank`:
+
+```haskell
+val gen_suit = Gen.choose #[
+    Gen.lift Clubs, Gen.lift Diamonds, Gen.lift Hearts, Gen.lift Spades
+]
+```
+
+##### Generator for `card`
+
+We just "zip" the generators for `rank` and `suit`:
+
+```haskell
+val gen_card = Gen.zip(gen_suit, gen_rank)
+```
+
+##### Generator for `card list`
+
+There is a provided function `Gen.list` which takes a `bool gen` and our `gen_card` from above as input. One `bool gen` is also provided: `Gen.flip` (which is like a coin flip).
+
+```haskell
+val gen_card_list = Gen.list Gen.flip gen_card
+```
+
+##### Generator for `int`
+
+We already have this (provided by `QCheck`):
+
+```haskell
+Gen.Int.int
+```
+
+##### Generator for `card list * int`
+
+Just zip it again (the `int` represents the `goal` value):
+
+```haskell
+val gen_card_list_goal = Gen.zip(gen_card_list, Gen.Int.int)
+```
+
+##### Expressing our properties in a way `QCheck` can understand
+
+Our properties have types:
+
+```haskell
+type property: gamestate * move list -> bool
+```
+
+But the inputs to `careful_player` have type `card list * int`. We are not generating random `gamestate` data.
+
+We take the randomly generated `card list * int` data, which represents the deck of cards and the goal.
+
+Then we create a "starting state" like we did with `careful_helper`:
+
+```haskell
+fun start(cards: card list, goal: int): gamestate = ([], cards, goal, goal div 2)
+```
+
+The predicate we pass to `checkGen` has to be of type `card list * int -> bool`. So we can write a function that converts a `property` we have, into a `QCheck` predicate. We have to create a `gamestate` by using `start` above, and we need a `move list` which comes from the output of `careful_player` that we are testing.
+
+Once again we make use of the provided `pred` function:
+
+```haskell
+fun prop_to_pred (prp: property) =
+    pred (fn (cs, gl) => prp(start(cs, gl), careful_player(cs, gl)))
+    --    _____this function has type card list * int -> bool______
+```
+
+#### Feeding the generators into the test cases
+
+Finally we can do the random testing of the 4 properties from before:
+
+```haskell
+val test_prop1 = checkGen (gen_card_list_goal, NONE) ("prop1", prop_to_pred prop1)
+val test_prop2 = checkGen (gen_card_list_goal, NONE) ("prop2", prop_to_pred prop2)
+val test_prop3 = checkGen (gen_card_list_goal, NONE) ("prop3", prop_to_pred prop3)
+val test_prop4 = checkGen (gen_card_list_goal, NONE) ("prop4", prop_to_pred prop4)
+```
+
+Everything passes, except our `prop1` case:
+
+```haskell
+prop1..................FAILED  (54/99 passed) 
+prop1..................FAILED  (54/100 passed)
+...
+prop2..................ok      (99 passed)    
+prop2..................ok      (100 passed) 
+...
+prop3..................ok      (99 passed)    
+prop3..................ok      (100 passed) 
+...
+prop4..................ok      (99 passed)    
+prop4..................ok      (100 passed) 
+```
+
+Does this mean our `careful_player` is actually wrong? No, probably not. Let's think about it. 
+
+`prop1` says that the sum of the held cards should not exceed the goal. But we didn't take care of the correct boundaries for the `goal` values that we randomly generated. If we generated negative starting `goal` values, then the property will be violated even if the held cards is empty! 
+
+It's interesting that roughly 50% of the test are passing, isn't it? This is probably because the `Gen.Int.int` tries to generate roughly equal numbers of positive and negative integers. 
+
+If we bothered to write the optional printing function, `QCheck` would show us the counterexamples, so we could confirm our suspicions. But I'm too lazy for that!
+
+##### Fixing the generators
+
+So we have to fix this by requiring the generated `goal` value to be nonnegative. It's fine to restrict it to the range, say, `(0, 100)`. Change this:
+
+```haskell
+val gen_card_list_goal = Gen.zip(gen_card_list, Gen.range(0, 100))
+```
+
+Yep! That was the issue:
+
+```haskell
+prop1..................ok      (99 passed) 
+prop1..................ok      (100 passed)
+...
+prop2..................ok      (99 passed)    
+prop2..................ok      (100 passed) 
+...
+prop3..................ok      (99 passed)    
+prop3..................ok      (100 passed) 
+...
+prop4..................ok      (99 passed)    
+prop4..................ok      (100 passed) 
+```
+
+Yay! :joy:
+
