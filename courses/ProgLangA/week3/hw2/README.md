@@ -466,7 +466,13 @@ I'm going to create some nested folders in my home directory like this:
 ~/.smlnj/lib/qcheck.cm/.cm/x86-unix
 ```
 
-This is not necessary, but I'm just imitating the `/lib/qcheck.cm` folder format just to follow SMLNJ's own library folder structure under `/usr/lib/smlnj/lib`).
+This is not necessary, but I'm just imitating SMLNJ's own 
+
+```bash
+/usr/lib/smlnj/lib/xxx.cm/.cm/x86-unix/ 
+```
+
+folder naming format for a library file `xxx.cm`.
 
 So I place the file `qcheck.cm` in there, so it now has the path
 
@@ -474,9 +480,13 @@ So I place the file `qcheck.cm` in there, so it now has the path
 ~/.smlnj/lib/qcheck.cm/.cm/x86-unix/qcheck.cm
 ```
 
-The extra nested folders `.cm/x86-unix/` is just SMLNJ's own convention.
+Now we need to tell SMLNJ where to find it. Normally this is done by editing the file 
 
-Now we need to tell SMLNJ where to find it. Normally this is done by editing the file `/usr/lib/smlnj/lib/pathconfig` but again we will avoid messing up the default install. This requires creating a file named `.smlnj-pathconfig` inside the home directory.
+```bash
+/usr/lib/smlnj/lib/pathconfig
+```
+
+but again we will avoid messing up the default install. This requires creating a file named `.smlnj-pathconfig` inside the home directory.
 
 ```bash
 cd # this puts me back in my home directory

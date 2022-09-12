@@ -4,10 +4,10 @@ The fifth and last course of the Coursera Functional Programming in Scala Specia
 
 Interactively views temperatures and deviations all over the world from 1975 to 2015.
 
-An online working version of the project:
+An on-line working version of the project:
 https://s3-eu-west-1.amazonaws.com/scala-capstone/index.html
 
-Temperature data (not included in repo, 444MB zip file) is from: http://alaska.epfl.ch/files/scala-capstone-data.zip
+Temperature data (not included in repository, 444 MB zip file) is from: http://alaska.epfl.ch/files/scala-capstone-data.zip
 
 -   [Introduction](#Introduction)
     -   [Before you start coding](#Before-you-start-coding)
@@ -23,7 +23,7 @@ Temperature data (not included in repo, 444MB zip file) is from: http://alaska.e
     -   [Spatial interpolation](#Spatial-interpolation)
     -   [Linear interpolation](#Linear-interpolation)
     -   [Visualization](#Visualization)
-    -   [Appendix: scrimage cheat sheet](#Appendix:-scrimage-cheat-sheet)
+    -   [Appendix on scrimage cheat sheet](#Appendix-on-scrimage-cheat-sheet)
         -   [Image type and companion object.](#Image-type-and-companion-object.)
 -   [3rd milestone interactive visualization](#3rd-milestone-interactive-visualization)
     -   [Milestone overview](#Milestone-overview)
@@ -69,23 +69,21 @@ The grader uses a JVM with limited memory: only 1.5 GB are available. It means t
 
 Our goal in this project is to give you as much freedom as possible in the solution space. Unfortunately, in order to be able to grade your work, we will ask you to implement some methods, for which we have fixed the type signature, and which may influence your solution. For instance, most of them are using Scala’s standard **Iterable** datatype, but not all concrete implementations of **Iterable** may scale to the high volume of data required by the project (the grader is not going to use a high volume of data, though). 
 
-So, while you must not change the code that is provided with the project, your actual implementation should use appropriate and efficient data types in order to perform incremental and parallel computations. For this purpose, we have added several dependencies to the build: [Spark](http://spark.apache.org/), [Akka Streams](http://doc.akka.io/docs/akka/2.4/scala/stream/), [Monix](https://monix.io/) and [fs2](http://fs2.co/). You can use any of these libraries, if you want to, or just use the standard Scala library. However, note that the provided build just makes these libraries available in the classpath, but it does not configure their execution environment.
+So, while you must not change the code that is provided with the project, your actual implementation should use appropriate and efficient data types in order to perform incremental and parallel computations. For this purpose, we have added several dependencies to the build: [Spark](http://spark.apache.org/), [Akka Streams](http://doc.akka.io/docs/akka/2.4/scala/stream/), [Monix](https://monix.io/) and [fs2](http://fs2.co/). You can use any of these libraries, if you want to, or just use the standard Scala library. However, note that the provided build just makes these libraries available in the class path, but it does not configure their execution environment.
 
 If you decide to use one of the above libraries, you might find it easier to implement the actual functionality in separate methods with different signatures. You can just consider the provided methods as "probes" into your code that the grader can use. For instance, if you want to use Spark RDDs and we provide a **locateTemperatures** method that requires an **Iterable**, you could implement it in the following way:
 ```scala
 // Provided method:
 def locationYearlyAverageRecords(
-    records: Iterable[(LocalDate, Location, Temperature)]
-          ): Iterable[(Location, Temperature)] = {
+  records: Iterable[(LocalDate, Location, Temperature)]
+        ): Iterable[(Location, Temperature)] =
   sparkAverageRecords(sc.parallelize(records)).collect().toSeq
-}
  
 // Added method:
 def sparkAverageRecords(
-    records: RDD[(LocalDate, Location, Temperature)]
-          ): RDD[(Location, Temperature)] = {
+  records: RDD[(LocalDate, Location, Temperature)]
+				): RDD[(Location, Temperature)] =
   ??? // actual work done here
-}
 ```
 Ultimately, you'll have to write your own **Main** to generate the map, so you have the freedom to organize your code the way you want. The **Main** doesn't have to use the provided methods, you can simply chain your own methods together instead. We want you to think about program structure, so don't feel too boxed in by the provided methods.
 
@@ -195,14 +193,15 @@ case class Location(lat: Double, lon: Double)
 ```
 You will first have to implement a method `locateTemperatures` with the following signature:
 ```scala
-def locateTemperatures(year            : Year,
-                       stationsFile    : String,
-                       temperaturesFile: String
+def locateTemperatures(
+  year            : Year,
+  stationsFile    : String,
+  temperaturesFile: String
 ): Iterable[(LocalDate, Location, Temperature)]
 ```
 This method should return the list of all the temperature records converted in degrees Celsius along with their date and location (ignore data coming from stations that have no GPS coordinates). You should not round the temperature values.
 
-The file paths are resource paths, so they must be absolute locations in your classpath (so that you can read them with `getResourceAsStream`). For instance, the path for the resource file `1975.csv` is `/1975.csv`, and loading it using `scala.io.Source` can be achieved as follows:
+The file paths are resource paths, so they must be absolute locations in your class path (so that you can read them with `getResourceAsStream`). For instance, the path for the resource file `1975.csv` is `/1975.csv`, and loading it using `scala.io.Source` can be achieved as follows:
 ```scala
 val path = "/1975.csv"
 Source.fromInputStream(getClass.getResourceAsStream(path), "utf-8")
@@ -219,8 +218,8 @@ Seq(
 In order to study the climate we want to remove variations due to seasons. So, we want to compute average temperature, over a year, for every station. To achieve that, you will have to implement the following method:
 ```scala
 def locationYearlyAverageRecords(
-    records: Iterable[(LocalDate, Location, Temperature)]
-          ): Iterable[(Location, Temperature)]
+  records: Iterable[(LocalDate, Location, Temperature)]
+				): Iterable[(Location, Temperature)]
 ```
 This method should return average temperature at each location, over a year. For instance, with the data given in the examples, this method would return the following sequence:
 ```scala
@@ -291,11 +290,13 @@ This method takes a sequence of reference temperature values and their associate
 Note that the given points are not sorted in a particular order.
 
 ## Visualization
+
 Once you have completed the above steps you can implement the `visualize` method to build an image (using the [scrimage](https://index.scala-lang.org/sksamuel/scrimage) library) where each pixel shows the temperature corresponding to its location.
 ```scala
-def visualize(temperatures: Iterable[(Location, Temperature)],
-  									colors: Iterable[(Temperature, Color)]
-												 ): Image
+def visualize(
+  temperatures: Iterable[(Location, Temperature)],
+        colors: Iterable[(Temperature, Color)]
+): Image
 ```
 
 Note that 
@@ -315,7 +316,8 @@ So...
 - where latitude goes from 90 to -89 
 - this means that `latitude = 90 - y`
 
-## Appendix: scrimage cheat sheet
+## Appendix on scrimage cheat sheet
+
 Here is a description of scrimage’s API parts that are relevant for your work.
 
 -   **ImmutableImage** [https://www.javadoc.io/doc/com.sksamuel.scrimage/scrimage-core/4.0.12/com/sksamuel/scrimage/ImmutableImage.html](https://www.javadoc.io/doc/com.sksamuel.scrimage/scrimage-core/4.0.12/com/sksamuel/scrimage/ImmutableImage.html "doc")
@@ -385,9 +387,11 @@ def tileLocation(tile: Tile): Location
 ```
 This method converts a tile's geographic position to its corresponding GPS coordinates, by applying the Web Mercator [projection](http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#Mathematics).
 ```scala
-def tile(temperatures: Iterable[(Location, Temperature)],
-         colors      : Iterable[(Temperature, Color)],
-         tile        : Tile): Image
+def tile(
+  temperatures: Iterable[(Location, Temperature)],
+  colors      : Iterable[(Temperature, Color)],
+  tile        : Tile
+): Image
 ```
 
 This method returns a 256×256 image showing the given temperatures, using the given color scale, at the location corresponding to the given zoom, x and y values.
@@ -408,6 +412,7 @@ whose (x, y) coordinates are (0, 0). For the zoom level “1”, there are four 
 
 The `interaction.html` file contains a minimalist Web application displaying a map and a temperature overlay.
 In order to integrate your tiles with the application, you must generate them in files located according to the following scheme:
+
 ```sh
 target/temperatures/2015/<zoom>/<x>-<y>.png
 ```
@@ -437,7 +442,7 @@ Finally, you will have to implement the following method:
 def generateTiles[Data](
   yearlyData   : Iterable[(Year, Data)],
   generateImage: (Year, Tile, Data) => Unit
-              ): Unit
+): Unit
 ```
 
 This method generates all the tiles for a given dataset `yearlyData`, for zoom levels 0 to 3 (included).
@@ -447,9 +452,10 @@ In your case, this data will be the result of `Extraction.locationYearlyAverageR
 - a year,
 - the coordinates of the tile to generate, and
 - the data associated with the year, and 
-- computes the tile and writes it on your filesystem.
+- computes the tile and writes it on your file system.
 
 # 4th milestone Data manipulation
+
 ## Milestone overview
 One of the primary goals of this project is to be able to visualize the evolution of the climate. If you tried to visualize the temperatures of different years in the previous milestone, you might have noticed that it is actually quite hard to really measure how the temperatures have evolved since 1975.
 
@@ -483,8 +489,9 @@ The grid associates every grid location with a temperature. You are free to inte
 
 You will have to implement the following helper method:
 ```scala
-def makeGrid(temperatures: Iterable[(Location, Temperature)]
-            ): GridLocation => Temperature
+def makeGrid(
+  temperatures: Iterable[(Location, Temperature)]
+): GridLocation => Temperature
 ```
 It takes as parameter the temperatures associated with their location and returns the corresponding grid.
 
@@ -497,19 +504,21 @@ When we generate the map, we'll have to get the temperature of every point on th
 ## Average and deviation computation
 You will have to implement the following two methods:
 ```scala
-def average(temperatures: Iterable[Iterable[(Location, Temperature)]]
-           ): GridLocation => Temperature
+def average(
+  temperatures: Iterable[Iterable[(Location, Temperature)]]
+): GridLocation => Temperature
 ```
 This method takes a sequence of temperature data over several years (each “temperature data” for one year being a sequence of pairs of average yearly temperature and location), and returns a grid containing the average temperature over the given years at each location.
 ```scala
-def deviation(temperatures: Iterable[(Location, Temperature)],
-                   normals: GridLocation => Temperature
-                         ): GridLocation => Temperature
+def deviation(
+  temperatures: Iterable[(Location, Temperature)],
+  		 normals: GridLocation => Temperature
+					   ): GridLocation => Temperature
 ```
 This method takes temperature data and a grid containing normal temperatures, and returns a grid containing temperature deviations from the normals.
 
 # 5th milestone value-added information visualization
-The goal of this milestone is to produce tile images from the grids generated at the previous milestone. You will have to complete the file Visualization2.scala. But first, remember to update the grading milestone number:
+The goal of this milestone is to produce tile images from the grids generated at the previous milestone. You will have to complete the file `Visualization2.scala`. But first, remember to update the grading milestone number:
 ```scala
 val milestone: Int = 5
 ```
@@ -543,19 +552,21 @@ Here are the RGB values of these colors:
 ## Visualization
 You will have to implement the following methods:
 ```scala
-def bilinearInterpolation(point: CellPoint,
-                            d00: Temperature,
-                            d01: Temperature,
-                            d10: Temperature,
-                            d11: Temperature
-                              ): Temperature
+def bilinearInterpolation(
+  point: CellPoint,
+    d00: Temperature,
+    d01: Temperature,
+    d10: Temperature,
+    d11: Temperature
+): Temperature
 ```
 This method takes the coordinates (`x` and `y` values between 0 and 1) of the location to estimate the temperature at, and the 4 known temperatures as shown in the above figure, and returns the estimated temperature at location `(x, y)`.
 ```scala
-def visualizeGrid(grid  : GridLocation => Temperature,
-                  colors: Iterable[(Temperature, Color)],
-                  tile  : Tile
-                       ): Image
+def visualizeGrid(
+  grid  : GridLocation => Temperature,
+  colors: Iterable[(Temperature, Color)],
+  tile  : Tile
+): Image
 ```
 This method takes a grid, a color scale and the coordinates of a tile, and returns the 256×256 image of this tile, where each pixel has a color computed according to the given color scale applied to the grid values.
 
@@ -598,9 +609,11 @@ This method returns the layers you want the user to be able to visualize. Each l
 The user interface implementation will use your `availableLayers` to build buttons allowing to choose which layer to enable. The value over time of the enabled layer is represented by a `Signal[Layer]` value (the same Signal as in the progfun2 course).
 
 ## Signals
+
 In this part of the assignment you are going to reuse the Signal abstraction introduced in the “Functional Program Design in Scala” course.
 
 ### Reminder on Signals
+
 In case you didn’t follow this course or you need to refresh your memory, here is a short reminder on Signals.
 
 A Signal is a value that can change over time:
@@ -629,29 +642,33 @@ println(y())         // “0” (update of x did not trigger an update on y)
 ```
 
 ## Methods to implement
+
 You will have to implement the following signals:
 ```scala
 def yearBounds(selectedLayer: Signal[Layer]): Signal[Range]
 ```
 This method takes the selected layer signal and returns the years range supported by this layer.
 ```scala
-def yearSelection(selectedLayer: Signal[Layer],
-                  sliderValue  : Signal[Year]
-                              ): Signal[Year]
+def yearSelection(
+  selectedLayer: Signal[Layer],
+    sliderValue: Signal[Year]
+): Signal[Year]
 ```
 This method takes the selected layer and the year slider value and returns the actual selected year, so that this year is not out of the layer bounds (remember that `Year` is just a type alias for `Int`).
 ```scala
-def layerUrlPattern(selectedLayer: Signal[Layer],
-                     selectedYear: Signal[Year]
-                                ): Signal[String]
+def layerUrlPattern(
+  selectedLayer: Signal[Layer],
+   selectedYear: Signal[Year]
+): Signal[String]
 ```
 This method takes the selected layer and the selected year and returns the pattern of the URL to use to retrieve the tiles. You will return a relative URL (starting by target/).
 
 Note that the `LayerName` id member corresponds to the sub-directory name you had generated the tiles in. This URL pattern is going to be used by the mapping library to retrieve the tiles, so it must follow a special syntax, as described here (you can ignore the “s” parameter).
 ```scala
-def caption(selectedLayer: Signal[Layer],
-             selectedYear: Signal[Year]
-           							): Signal[String]
+def caption(
+  selectedLayer: Signal[Layer],
+   selectedYear: Signal[Year]
+): Signal[String]
 ```
 This method takes the selected layer and the selected year and returns the text information to display. The text to display should be the name of the layer followed by the selected year, between parenthesis.
 
