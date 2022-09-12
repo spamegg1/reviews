@@ -76,13 +76,13 @@ If you decide to use one of the above libraries, you might find it easier to imp
 // Provided method:
 def locationYearlyAverageRecords(
   records: Iterable[(LocalDate, Location, Temperature)]
-        ): Iterable[(Location, Temperature)] =
+): Iterable[(Location, Temperature)] =
   sparkAverageRecords(sc.parallelize(records)).collect().toSeq
  
 // Added method:
 def sparkAverageRecords(
   records: RDD[(LocalDate, Location, Temperature)]
-				): RDD[(Location, Temperature)] =
+): RDD[(Location, Temperature)] =
   ??? // actual work done here
 ```
 Ultimately, you'll have to write your own **Main** to generate the map, so you have the freedom to organize your code the way you want. The **Main** doesn't have to use the provided methods, you can simply chain your own methods together instead. We want you to think about program structure, so don't feel too boxed in by the provided methods.
@@ -92,6 +92,7 @@ Last, note that there is a **src/test/** directory with test files for each mile
 We recommend that you write tests here to check your solutions, but do not remove the existing code.
 
 ## Before you start coding
+
 Before you start coding, there are two files that you should know about. First, **package.scala** introduces type aliases that will be used throughout the project:
 ```scala
 type Temperature = Double
@@ -108,6 +109,7 @@ case class Color(red: Int, green: Int, blue: Int)
 There is one case class for every coordinate system that we use, and an additional **Color** case class that may be useful for creating images. We will introduce each one of these again when relevant. **You are free to add methods to these case classes if you deem it appropriate, but you must not change their parameters.**
 
 ## Notes for Spark users
+
 The output of the grader is limited to 64 kB, but Spark produces a lot of logs by default. Often, this makes it impossible to read the whole grader feedback. Consequently, we suggest you to tune the log level of Spark like so:
 ```scala
 import org.apache.log4j.{Level, Logger}
@@ -116,7 +118,9 @@ Logger.getLogger("org.apache.spark").setLevel(Level.WARN)
 You may also want to refer to the [Dataset vs DataFrame vs RDD](https://www.coursera.org/learn/scala-spark-big-data/lecture/yrfPh/datasets) discussion at the end of the last video of the [Spark course](https://www.coursera.org/learn/scala-spark-big-data) so that you can choose the best API for this project.
 
 # 1st milestone data extraction
+
 ## Milestone overview
+
 First milestone consists in extracting meaningful information from dataset. The methods to implement live in the `Extraction.scala` file. You are given several `.csv` files containing two kinds of data:
 - Weather station’s locations (`stations.csv` file) ;
 - Temperature records for a year (files `1975.csv`, `1976.csv`, etc.).
@@ -182,6 +186,7 @@ Here, the lines respectively indicate that:
 - At the same station, the average temperature was 35.6 °F on January 29th.
 
 ## Data extraction
+
 To make our method signatures as clear as possible, we've introduced the following global type aliases in `package.scala`:
 ```scala
 type Temperature = Double // °C
@@ -219,7 +224,7 @@ In order to study the climate we want to remove variations due to seasons. So, w
 ```scala
 def locationYearlyAverageRecords(
   records: Iterable[(LocalDate, Location, Temperature)]
-				): Iterable[(Location, Temperature)]
+): Iterable[(Location, Temperature)]
 ```
 This method should return average temperature at each location, over a year. For instance, with the data given in the examples, this method would return the following sequence:
 ```scala
@@ -283,7 +288,10 @@ case class Color(red: Int, green: Int, blue: Int)
 ```
 You will have to implement the following method:
 ```scala
-def interpolateColor(points: Iterable[(Temperature, Color)], value: Temperature): Color
+def interpolateColor(
+  points: Iterable[(Temperature, Color)], 
+   value: Temperature
+): Color
 ```
 This method takes a sequence of reference temperature values and their associated color, and a temperature value, and returns an estimate of the color corresponding to the given value, by applying a linear interpolation algorithm: https://en.wikipedia.org/wiki/Linear_interpolation
 
@@ -502,6 +510,7 @@ There are two approaches here:
 When we generate the map, we'll have to get the temperature of every point on the grid at least once. With this information in mind, think about which approach is more suitable and chose the best one for you.
 
 ## Average and deviation computation
+
 You will have to implement the following two methods:
 ```scala
 def average(
@@ -512,8 +521,8 @@ This method takes a sequence of temperature data over several years (each “tem
 ```scala
 def deviation(
   temperatures: Iterable[(Location, Temperature)],
-  		 normals: GridLocation => Temperature
-					   ): GridLocation => Temperature
+       normals: GridLocation => Temperature
+): GridLocation => Temperature
 ```
 This method takes temperature data and a grid containing normal temperatures, and returns a grid containing temperature deviations from the normals.
 
