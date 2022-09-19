@@ -279,10 +279,11 @@ object Main:
     val maybeJsonString = parseJson(""" "foo" """)
     val maybeJsonObj    = parseJson(""" { "name": "Alice", "age": 42 } """)
     val maybeJsonObj2   = parseJson(""" { "name": "Alice", "age": "42" } """)
+    val maybeJsonObj3   = parseJson(""" [1,2,3] """)
     // Uncomment the following lines as you progress in the assignment
     println(maybeJsonString flatMap (_.decodeAs[Int]))                   // None
     println(maybeJsonString flatMap (_.decodeAs[String]))           // Some(foo)
     println(maybeJsonObj flatMap (_.decodeAs[Person])) // Some(Person(Alice,42))
     println(maybeJsonObj2 flatMap (_.decodeAs[Person]))                  // None
     println(renderJson(Person("Bob", 66)))            // {"name":"Bob","age":66}
-
+    println(maybeJsonObj3 flatMap (_.decodeAs[List[Int]]))  // Some(List(1,2,3))

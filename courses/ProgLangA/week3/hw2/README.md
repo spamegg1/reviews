@@ -460,16 +460,16 @@ Now this created a file named `qcheck.cm` in a hidden folder inside the `qcheck`
 
 We need to move this into SMLNJ's library directory, which is `/usr/lib/smlnj/lib` for me. But we also have the option of placing it elsewhere, not messing up the default installation.
 
-I'm going to create some nested folders in my home directory like this: 
+I'm going to create some nested folders in my home directory like this:
 
 ```bash
 ~/.smlnj/lib/qcheck.cm/.cm/x86-unix
 ```
 
-This is not necessary, but I'm just imitating SMLNJ's own 
+This is not necessary, but I'm just imitating SMLNJ's own
 
 ```bash
-/usr/lib/smlnj/lib/xxx.cm/.cm/x86-unix/ 
+/usr/lib/smlnj/lib/xxx.cm/.cm/x86-unix/
 ```
 
 folder naming format for a library file `xxx.cm`.
@@ -480,7 +480,7 @@ So I place the file `qcheck.cm` in there, so it now has the path
 ~/.smlnj/lib/qcheck.cm/.cm/x86-unix/qcheck.cm
 ```
 
-Now we need to tell SMLNJ where to find it. Normally this is done by editing the file 
+Now we need to tell SMLNJ where to find it. Normally this is done by editing the file
 
 ```bash
 /usr/lib/smlnj/lib/pathconfig
@@ -515,7 +515,7 @@ Standard ML of New Jersey v110.79 [built: Sat Oct 26 12:27:04 2019]
 [autoloading done]
 [library $/qcheck.cm is stable]
 val it = true : bool
-- 
+-
 ```
 
 ### Usage
@@ -554,11 +554,11 @@ For example if we want to generate random integers and print them, we can use th
 
 ```haskell
 -- here 'a = int
--- int Gen.gen    (int -> string) option 
+-- int Gen.gen    (int -> string) option
 (  Gen.Int.int,     SOME Int.toString  )
 ```
 
-The second argument is also a pair: a `string` (that represents the name of the test), and a function (with type `'a prop -> unit`). This function represents the property that we want to test. But it's a bit more complicated and harder to explain. 
+The second argument is also a pair: a `string` (that represents the name of the test), and a function (with type `'a prop -> unit`). This function represents the property that we want to test. But it's a bit more complicated and harder to explain.
 
 For example, we can use an `'a -> bool` function, and apply `pred` (a utility HOF provided by `QCheck`) to get it into the desired format:
 
@@ -571,7 +571,7 @@ Another way to create the `'a prop` type function is to use `implies` (another u
 
 ```haskell
 fun both_odd(x, y) = odd x andalso odd y -- (int * int) -> bool
-fun sum_even(x, y) = even (x + y)        -- (int * int) -> bool 
+fun sum_even(x, y) = even (x + y)        -- (int * int) -> bool
 -- adding two odd integers should give us an even integer
 val x: (int * int) prop = implies(both_odd, sum_even)
 val y = ==> (both_odd, sum_even) -- same thing, different notation
@@ -590,16 +590,16 @@ val test = checkGen (pair_gen, SOME show_pair) (test_name, prop_pair) -- 100 tes
 When we run this, we get output that looks like this:
 
 ```haskell
-odd + odd = even.......ok      (90 passed)   
-odd + odd = even.......ok      (91 passed)   
-odd + odd = even.......FAILED  (91/92 passed) 
-odd + odd = even.......FAILED  (92/93 passed) 
-odd + odd = even.......FAILED  (93/94 passed) 
-odd + odd = even.......FAILED  (94/95 passed) 
-odd + odd = even.......FAILED  (95/96 passed) 
-odd + odd = even.......FAILED  (96/97 passed) 
-odd + odd = even.......FAILED  (97/98 passed) 
-odd + odd = even.......FAILED  (98/99 passed) 
+odd + odd = even.......ok      (90 passed)
+odd + odd = even.......ok      (91 passed)
+odd + odd = even.......FAILED  (91/92 passed)
+odd + odd = even.......FAILED  (92/93 passed)
+odd + odd = even.......FAILED  (93/94 passed)
+odd + odd = even.......FAILED  (94/95 passed)
+odd + odd = even.......FAILED  (95/96 passed)
+odd + odd = even.......FAILED  (96/97 passed)
+odd + odd = even.......FAILED  (97/98 passed)
+odd + odd = even.......FAILED  (98/99 passed)
 odd + odd = even.......FAILED  (99/100 passed)
 counter-examples:       643968495 , 707765063
 ```
@@ -698,9 +698,8 @@ The predicate we pass to `checkGen` has to be of type `card list * int -> bool`.
 Once again we make use of the provided `pred` function:
 
 ```haskell
-fun prop_to_pred (prp: property) =
-    pred (fn (cs, gl) => prp(start(cs, gl), careful_player(cs, gl)))
-    --    _____this function has type card list * int -> bool______
+fun prop_to_pred (prp: property) = pred (fn (cs, gl) =>
+    check_prop(prp, careful_player(cs, gl), start(cs, gl)))
 ```
 
 ### Feeding the generators into the test cases
@@ -717,24 +716,17 @@ val test_prop4 = checkGen (gen_card_list_goal, NONE) ("prop4", prop_to_pred prop
 Everything passes, except our `prop1` case:
 
 ```haskell
-prop1..................FAILED  (54/99 passed) 
 prop1..................FAILED  (54/100 passed)
-...
-prop2..................ok      (99 passed)    
-prop2..................ok      (100 passed) 
-...
-prop3..................ok      (99 passed)    
-prop3..................ok      (100 passed) 
-...
-prop4..................ok      (99 passed)    
-prop4..................ok      (100 passed) 
+prop2..................ok      (100 passed)
+prop3..................ok      (100 passed)
+prop4..................ok      (100 passed)
 ```
 
-Does this mean our `careful_player` is actually wrong? No, probably not. Let's think about it. 
+Does this mean our `careful_player` is actually wrong? No, probably not. Let's think about it.
 
-`prop1` says that the sum of the held cards should not exceed the goal. But we didn't take care of the correct boundaries for the `goal` values that we randomly generated. If we generated negative starting `goal` values, then the property will be violated even if the held cards is empty! 
+`prop1` says that the sum of the held cards should not exceed the goal. But we didn't take care of the correct boundaries for the `goal` values that we randomly generated. If we generated negative starting `goal` values, then the property will be violated even if the held cards is empty!
 
-It's interesting that roughly 50% of the test are passing, isn't it? This is probably because the `Gen.Int.int` tries to generate roughly equal numbers of positive and negative integers. 
+It's interesting that roughly 50% of the test are passing, isn't it? This is probably because the `Gen.Int.int` tries to generate roughly equal numbers of positive and negative integers.
 
 If we bothered to write the optional printing function, `QCheck` would show us the counterexamples, so we could confirm our suspicions. But I'm too lazy for that!
 
@@ -749,17 +741,10 @@ val gen_card_list_goal = Gen.zip(gen_card_list, Gen.range(0, 100))
 Yep! That was the issue:
 
 ```haskell
-prop1..................ok      (99 passed) 
 prop1..................ok      (100 passed)
-...
-prop2..................ok      (99 passed)    
-prop2..................ok      (100 passed) 
-...
-prop3..................ok      (99 passed)    
-prop3..................ok      (100 passed) 
-...
-prop4..................ok      (99 passed)    
-prop4..................ok      (100 passed) 
+prop2..................ok      (100 passed)
+prop3..................ok      (100 passed)
+prop4..................ok      (100 passed)
 ```
 
 Yay! :joy:

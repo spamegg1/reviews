@@ -47,9 +47,10 @@
 ;; produces stream that alternates between the strings "dan.jpg" and "dog.jpg"
 (define dan-then-dog
   (local [(define (aux flag)
-            (lambda () (cons (cond [flag "dan.jpg"]
-                                   [else "dog.jpg"])
-                             (aux (not flag)))))]
+            (lambda ()
+                    (cons (cond [flag "dan.jpg"]
+                                [else "dog.jpg"])
+                          (aux (not flag)))))]
     (aux true)))
 
 ;; Stream -> Stream

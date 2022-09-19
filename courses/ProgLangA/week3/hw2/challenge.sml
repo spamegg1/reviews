@@ -233,8 +233,8 @@ val gen_card_list = Gen.list Gen.flip gen_card
 val gen_card_list_goal = Gen.zip(gen_card_list, Gen.range(0, 100))
 
 (*  test *)
-fun prop_to_pred prp =
-    pred (fn (cs, gl) => prp(start(cs, gl), careful_player(cs, gl)))
+fun prop_to_pred prp = pred (fn (cs, gl) =>
+    check_prop(prp, careful_player(cs, gl), start(cs, gl)))
 val test_prop1 = checkGen (gen_card_list_goal, NONE) ("prop1", prop_to_pred prop1)
 val test_prop2 = checkGen (gen_card_list_goal, NONE) ("prop2", prop_to_pred prop2)
 val test_prop3 = checkGen (gen_card_list_goal, NONE) ("prop3", prop_to_pred prop3)
