@@ -72,7 +72,7 @@
     (thunk 0)))
 
 ;; Value Vector -> Pair or False
-;; acts similarly to Racket's assoc function, but accepts vectors instead of lists
+;; acts like to Racket's assoc function, but accepts vectors instead of lists
 ;; produces first pair with a first field equal to given value, false otherwise
 ;; allows vector elements not to be pairs, in which case it skips them
 (define (vector-assoc v vec)
@@ -89,16 +89,17 @@
 ;; produces function of one argument that acts like Racket's assoc,
 ;; which has an n-element vector-cache. Assumes: n is positive
 (define (cached-assoc lst n)
-  (let ([cache (make-vector n #f)]
-        [next-to-replace 0])
-    (lambda (v)
-      (or (vector-assoc v cache)
-          (let ([ans (assoc v lst)])
-            (and ans
-                 (begin (vector-set! cache next-to-replace ans)
-                        (set! next-to-replace
-                              (remainder (+ next-to-replace 1) n))
-                        ans)))))))
+  (local [(define cache (make-vector n #f))
+          (define index 0)
+          (define (helper v)
+            (local [(define lookup (vector-assoc v cache))]
+              (or lookup
+                  (local [(define result (assoc v lst))]
+                    (and result
+                         (begin (vector-set! cache index result)
+                                (set! index (remainder (+ 1 index) n))
+                                result))))))]
+    helper))
 
 ;; Challenge problem
 ;; Integer Integer -> Boolean

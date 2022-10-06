@@ -12,3 +12,5 @@ resources/
 .bsp/
 *.log
 *.rkt~
+*_rkt.dep
+*_rkt.zo

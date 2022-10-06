@@ -97,15 +97,13 @@
                [arg (eval-under-env (call-actual e) env)])
            (if (closure? cl)
                (let ([myfun (closure-fun cl)])
-               (eval-under-env (fun-body myfun)
-                               (let ([newenv (cons
-                                              (cons (fun-formal myfun) arg)
-                                              (closure-env cl))])
-                                 (if (fun-nameopt myfun)
-                                     (cons
-                                      (cons (fun-nameopt myfun) cl)
-                                      newenv)
-                                     newenv))))
+               (eval-under-env
+                (fun-body myfun)
+                (let ([newenv
+                      (cons (cons (fun-formal myfun) arg) (closure-env cl))])
+                  (if (fun-nameopt myfun)
+                      (cons (cons (fun-nameopt myfun) cl) newenv)
+                      newenv))))
                (error "MUPL call's funexp is not a closure")))]
         [#t (error (format "bad MUPL expression: ~v" e))]))
 

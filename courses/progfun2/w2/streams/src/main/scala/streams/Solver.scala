@@ -74,12 +74,12 @@ trait Solver extends GameDef:
     then LazyList()
     else
       val (block, history) = initial.head
-      val neighbors        = neighborsWithHistory(block, history)
-      val newNeighbors     = newNeighborsOnly(neighbors, explored)
-      val newExplored      = explored ++ newNeighbors.toSet.map(_._1)
-      val newInitial       = initial.tail ++ newNeighbors
+      val neighbors        = neighborsWithHistory(block, history)          // LL
+      val newNeighbors     = newNeighborsOnly(neighbors, explored)         // LL
+      val newInitial       = initial.tail #::: newNeighbors                // LL
+      val newExplored      = explored ++ newNeighbors.toSet.map(_._1)     // Set
 
-      initial ++ from(newInitial, newExplored)
+      initial #::: from(newInitial, newExplored)
 
   /**
    * The lazy list of all paths that begin at the starting block.
