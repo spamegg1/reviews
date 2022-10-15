@@ -12,27 +12,37 @@ def savings(start, portion, inv_rate, semi_raise):
 
     return saving
 
+def bisearch_one_step(saving, down_pay, left, right, portion, steps):
+    new_left, new_right, new_steps = left, right, steps + 1
+
+    if saving < down_pay:
+        new_left = portion
+    else:
+        new_right = portion
+
+    new_portion = (new_left + new_right) // 2
+
+    return (new_left, new_right, new_portion, new_steps)
+
+
+def bisearch_many(salary, inv_rate, semi_raise, down_pay,
+    left, right, portion, steps):
+
+    saving = savings(salary, portion, inv_rate, semi_raise)
+    if abs(saving - down_pay) < 100:
+        return portion, steps
+
+    result = bisearch_one_step(saving, down_pay, left, right, portion, steps)
+    new_left, new_right, new_portion, new_steps = result
+    
+    return bisearch_many(salary, inv_rate, semi_raise, down_pay,
+                         new_left, new_right, new_portion, new_steps)
+    
 
 def bisearch(salary, inv_rate, semi_raise, down_pay):
-    left, portion, right = 0, 5000, 10000
-    steps = 1
-    saving = savings(salary, portion, inv_rate, semi_raise)
-    #print(f'Down pay: {down_pay}, Salary: {salary}')
-    #print(f'{left} {right} {portion} {steps} {saving}')
-
-    while abs(saving - down_pay) >= 100.0:
-        if saving < down_pay:
-            left = portion
-        else:
-            right = portion
-
-        portion = (left + right) // 2
-        steps += 1
-        saving = savings(salary, portion, inv_rate, semi_raise)
-        #print(f'{left} {right} {portion} {steps} {saving}')
-
-    return portion, steps
-
+    left, right, portion, steps = 0, 10000, 5000, 1
+    return bisearch_many(salary, inv_rate, semi_raise, down_pay,
+                         left, right, portion, steps)
 
 def optimal_saving_rate(salary, inv_rate, semi_raise, down_pay):
     max_saving = savings(salary, 10000, inv_rate, semi_raise)
