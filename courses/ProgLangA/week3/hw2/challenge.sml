@@ -215,7 +215,7 @@ val all_in_one_test = List.all check_all moves_stats
 
 
 (*  Automated randomly generated property-based testing with QCheck
-    On the SML REPL, first you must run: CM.make "$/qcheck.cm";
+    On the SML REPL, first you must run: CM.autoload "$/qcheck.cm";
     After that, run: use "challenge.sml";
 *)
 open QCheck;
