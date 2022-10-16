@@ -339,7 +339,7 @@ The book is written in a very friendly, conversational style. It makes all kinds
 
 You should definitely type the C code snippets in each chapter by hand. The book spends a few chapters to teach you the C thread API (which HtK DID NOT!). You can even compile and run these code snippets on your machine. The book covers A LOT of things. It's split into 3 easy pieces: Virtualization (deals with process API, system calls, kernel traps/context switches, Scheduling Theory and algorithms, virtual memory systems, paging), Concurrency (threads, synchronization primitives like semaphores, condition variables, locks) and Persistence (data/file/I/O systems). The book is long (600 pages) but very very easy to read. I finished the first two of the three easy pieces in about a month. 
 
-Check the author's site as he is planning an update and some other excellent free books.
+Check the author's site as he is planning an update and some other excellent free books. (There are also lecture videos [here](https://pages.cs.wisc.edu/~remzi/Classes/537/Spring2018/Discussion/videos.html) but I haven't used them personally, so I can't say much about their quality.)
 
 *Spam's recommendation:* Look no further. This is THE BOOK if you want to understand operating systems. It's OK if you don't.
 
