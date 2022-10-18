@@ -140,6 +140,10 @@ val test21a: bool = not_so_quick_sort [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
     = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 val test21b: bool = not_so_quick_sort [9, 0, 8, 1, 7, 2, 6, 3, 5, 4]
     = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+val test21c: bool = not_so_quick_sort [] = []
+val test21d: bool = not_so_quick_sort [1] = [1]
+val test21e: bool = not_so_quick_sort [2, 1] = [1, 2]
+val test21f: bool = not_so_quick_sort [2, 3, 1] = [1, 2, 3]
 
 val test22a: bool = fullDivide (2, 40) = (3, 5)
 val test22b: bool = fullDivide (3, 10) = (0, 10)
