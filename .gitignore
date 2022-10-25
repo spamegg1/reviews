@@ -5,6 +5,8 @@ sml.json
 .scalafix.conf
 *.dat
 target/
+.bloop/
+.metals/
 compiled/
 project/target/
 project/project/
@@ -14,3 +16,4 @@ resources/
 *.rkt~
 *_rkt.dep
 *_rkt.zo
+metals.sbt
