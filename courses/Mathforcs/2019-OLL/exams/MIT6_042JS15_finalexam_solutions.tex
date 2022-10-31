@@ -118,12 +118,12 @@ If $t = n$ and the whole partial order is a chain, then only 1 Ringwraith is nee
 
 More generally, for any $1 \leq t \leq n$, the smallest number of Ringwraiths needed corresponds to the situation of minimum parallelizability; in other words, having as long chains as possible.
 
-If the partial order consists entirely of max length ($t$) chains (maybe with the exception of the last one, which might end up shorter than $t$ if $n$ is not a multiple of $t$), then there are $\displaystyle\left\lceil \frac{n}{t} \right\rceil$ chains, each of which requires 1 Ringwraith, so the smallest number of Ringwraiths is $\displaystyle\left\lceil \frac{n}{t} \right\rceil$.
+If the partial order consists entirely of exactly max length ($t$) chains (maybe with the exception of the last one, which might end up shorter than $t$ if $n$ is not a multiple of $t$), then there are $\displaystyle\left\lceil \frac{n}{t} \right\rceil$ chains, each of which requires 1 Ringwraith, so the smallest number of Ringwraiths is $\displaystyle\left\lceil \frac{n}{t} \right\rceil$.
 \end{proof}
 
 \subsection{(b)} On the other hand, if Sauron is unlucky, he may need a crew of Ringwraiths as large as $n - t + 1$ in order to conquer Middle Earth in $t$ weeks. Describe a partial order with $n$ tasks and maximum length chain of $t$ that would require this many Ringwraiths.
 \begin{proof}
-Consider the partial order of $n$ tasks, where $t$ of these tasks form a prerequisite chain, and the remaining $n-t$ tasks are incomparable to each other and to the chain. Then the chain requires 1 Ringwraith, and the other $n-t$ tasks can be parallelized, each requiring 1 Ringwraith, for a total of $n-t+1$ Ringwraiths.
+Consider the partial order of $n$ tasks, where $t$ of these tasks form a prerequisite chain, and the remaining $n-t$ tasks are incomparable to each other and to the chain. Then the chain requires 1 Ringwraith, and the other $n-t$ tasks can be parallelized, each requiring 1 Ringwraith, for a total of $n-t+1$ Ringwraiths. (It still takes $t$ weeks due to the length $t$ chain which cannot be parallelized.)
 \end{proof}
 
 \section{Problem 5 (Simple Graphs)}

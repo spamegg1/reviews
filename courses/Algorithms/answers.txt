@@ -57,6 +57,8 @@ Answers to Algorithms Illuminated Part 1
     (Problem 2.4) n^2 << n^2log_2(n) << n^(log_2(n)) << 2^n << 2^(2^n)
     (Problem 2.5) 2^(log_2(n)) << n^2log_2(n) << n^(5/2) << 2^(2^(log_2(n))) << 2^(n^2)
 (Chapter 3)
+    (Optional Theory Problem)
+        You are given as input an unsorted array of n distinct numbers, where n is a power of 2. Give an algorithm that identifies the second-largest number in the array, and that uses at most n+log_⁡2(n)−2 comparisons.
     (Problem 3.1) FastPower implemented in Python in fastpower.py, running time is O(log(n)).
         To be precise it uses exactly 2log_2(n) multiplications and divisions total.
     (Problem 3.2) Unimodal algorithm implemented in Python in unimodal.py, running time O(logn).
