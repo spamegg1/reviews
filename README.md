@@ -13,6 +13,7 @@ Updated May 2021 (Fullstack Open, Intro to Logic)
 
 Updated July 2021 (Effective Programming in Scala)
 
+- [Learning tips](#tips)
 - [Harvard's CS50 (first half)](#cs50)
 - [CS50, second half, Final Project](#cs50-2)
 - [How to Code 1 & 2](#how-to-code)
@@ -46,6 +47,27 @@ Updated July 2021 (Effective Programming in Scala)
 - [Fullstack Open](#fsopen)
 - [Introduction to Logic](#logic)
 - [Effective Programming in Scala](#eff)
+
+### <a name="tips"></a> Learning tips
+- Prioritize math. Math is the root of all the thinking patterns and the concepts.
+- It's all about doing what you don't want/like to do. (Just like life in general) It's very difficult and usually not all that pleasant.
+- Don't worry about time.
+- Avoid instant gratification.
+- Understand both positive and negative reinforcement, and use them both to your advantage.
+- Don't rely on search engines, go to proper resources. Accessing *information* in millions of little bits and pieces don't lead to long-term *knowledge*. The human brain needs to "chunk" bits of info by connecting them together into a meaningful whole. Relying too heavily on web searches works against this.
+- Resist the urge to guess. THINK instead!
+- Take your hands off the keyboard, get pencil and paper, work it out first.
+- Go slowly. Completing fast is NOT an achievement.
+- Exercise good judgment on what's important and what isn't. Don't get stuck on silly points.
+- Recognize missing pieces and inadequacies in the resources.
+- Think contextually, not literally/mechanically.
+- Be self-reflective about your code. Refactor often.
+- Don't rush to pass the tests. 
+- Don't rush to do web searches or seek help. Stay with it, always try to answer your own questions first. Use the :duck: debugger to your advantage!
+- Have faith in the courses/languages that seem "pointless" or "useless" to you initially. The point/understanding will come to you later, it takes time.
+- Readability and comments are more important than optimization.
+- Learn how to enjoy things you don't like, things that are too easy/hard, or things you find boring.
+- Split your mind into two people: teacher and student. Assume the teacher's role and explain what you learned to the student. You can practice this anywhere, anytime (on the bus, in the shower, when you're exercising, etc.)
 
 ### <a name="cs50"></a> Harvard's CS50 (first half)
 
@@ -163,19 +185,23 @@ Here’s one learner’s perspective: *It took me three tries to finally be read
 
 ***Even more updates (July 2021):*** I told this story on Discord:
 
-```
-That's awesome to hear! Let me tell you an interesting story.
+> That's awesome to hear! Let me tell you an interesting story.
+>
+> A few days ago I was writing some Python code for a problem in the OCW version of the MIT course to help out someone struggling with it. It's a complicated problem with a lot of variables (the one about paying off down payment for a house, using bisection search) and mutation of state. The problem is long and wordy, and doesn't mention writing any functions or anything.
+>
+> I vaguely came up with an idea for a function. I started writing tests for it, without entirely knowing what the function was supposed to do. I started writing the signature (input/output types) of the function, and this kept changing a little bit as I've read more of the problem. I started to realize how the variables should be interpreted (int, float, boolean etc.) and wrote comments describing them.
+>
+> After solidifying the tests and the signature, I started thinking about the function. There is no "template" of a function for this problem, but a "template" slowly started appearing in my mind, I could see the overall structure of the function. I started writing some skeleton code just marking the outline of the function, leaving a lot of things blank. So this was effectively a "template" that I created for this problem/function. Eventually I zeroed in on those blank parts and it was very clear what to write in them. And it worked and passed the tests.
+>
+> Now, the really interesting part is: all the stuff I explained above, I was actually doing all of it subconsciously! Only after I was done, I realized "OMG, I've been totally using the How to Code discipline here!" I must have successfully internalized it even though on the surface of it it looks not applicable to a language like Python.
 
-A few days ago I was writing some Python code for a problem in the OCW version of the MIT course to help out someone struggling with it. It's a complicated problem with a lot of variables (the one about paying off down payment for a house, using bisection search) and mutation of state. The problem is long and wordy, and doesn't mention writing any functions or anything.
+You will be **forced** to deal with structural data types and mutual recursion (which you learn in Complex Data) when you encounter language grammars: first in Prog Langs Part B, then in Nand2Tetris Part 2:
 
-I vaguely came up with an idea for a function. I started writing tests for it, without entirely knowing what the function was supposed to do. I started writing the signature (input/output types) of the function, and this kept changing a little bit as I've read more of the problem. I started to realize how the variables should be interpreted (int, float, boolean etc.) and wrote comments describing them.
+![jack-grammar-mr](jack-grammar-mr.png)
 
-After solidifying the tests and the signature, I started thinking about the function. There is no "template" of a function for this problem, but a "template" slowly started appearing in my mind, I could see the overall structure of the function. I started writing some skeleton code just marking the outline of the function, leaving a lot of things blank. So this was effectively a "template" that I created for this problem/function. Eventually I zeroed in on those blank parts and it was very clear what to write in them. And it worked and passed the tests.
-
-Now, the really interesting part is: all the stuff I explained above, I was actually doing all of it subconsciously! Only after I was done, I realized "OMG, I've been totally using the How to Code discipline here!" I must have successfully internalized it even though on the surface of it it looks not applicable to a language like Python.
-```
 **One more thought:** Maybe I'm not being clear about what I mean. There is a very deep result in Mathematics and Computer Science named [Curry-Howard isomorphism](https://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence) that shows the equivalence between proofs and computer programs. Here is one of the Haskell guys who explains it, and its rich history, much better than I can, in a super entertaining way: [Propositions as Types by Philip Wadler](https://www.youtube.com/watch?v=IOiZatlZtGU)
 After you watch that, you might have better appreciation for Lambdas. Then, Racket lets you write the Greek letter Lambda literally in your code!
+
 ```scheme
 (define (filled? schedule slots)
  (cond [(empty? slots) true]
