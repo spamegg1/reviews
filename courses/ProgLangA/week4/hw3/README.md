@@ -4,7 +4,7 @@ Contributed by Edwin Dalorzo
 
 Let's imagine that we have a case expression with different patterns, like
 
-```haskell
+```sml
   case x of p1 | p2 | ... | pn
 ```
 
@@ -18,25 +18,25 @@ If all the patterns in the case expression are compatible with some type t then 
 
 We would not need the first argument of the challenge exercise except constructor patterns do not "tell us" what type they are. For instance, consider a case expression like:
 
-```haskell
+```sml
 case c of Red => ... | Green => ... | _ => ...
 ```
 
 We cannot tell what is the type of `Red` or `Green` here. Likewise, in the challenge exercise if we found a constructor like:
 
-```haskell
+```sml
 Constructor("Red",UnitP)
 ```
 
 How could we possibly infer the type of this constructor unless we had some additional information?  And so this explains why we need a first argument of the challenge function containing a type list. It is nothing but our definition of datatypes.
 
-```haskell
+```sml
 datatype color = Red | Green | Blue
 ```
 
   Would become somewhat like:
 
-```haskell
+```sml
 [ (  "Red", "color", UnitT),
   ("Green", "color", UnitT),
   ( "Blue", "color", UnitT) ]
@@ -48,7 +48,7 @@ Now let's consider several examples:
 
 Suppose we had this function:
 
-```haskell
+```sml
 fun b(x) =
    case x of
        (10) => 1
@@ -59,7 +59,7 @@ The compiler would determine that `x` has type `int`. How? Easy: one of the patt
 
 In our challenge exercise, this pattern would be expressed as
 
-```haskell
+```sml
 [ConstP 10, Variable "a"]
 ```
 
@@ -69,7 +69,7 @@ And our algorithm should say that the answer is `SOME` `IntT` which corresponds 
 
 A piece of code like the following would not even compile, because we cannot infer a common type for all patterns. The types in the different patterns are conflicting. We cannot tell if `x` is an int or an option.
 
-```haskell
+```sml
 fun b(x) =
    case x of
       (10) => 1
@@ -79,7 +79,7 @@ fun b(x) =
 
 Thus, consider the following pattern, corresponding with the code above:
 
-```haskell
+```sml
 [ConstP 10, Variable "a", ConstructorP("SOME",Variable "x")]
 ```
 
@@ -89,7 +89,7 @@ This cannot produce a common type and the answer our algorithm yields should be 
 
 Let's do a more complicated example now:
 
-```haskell
+```sml
 fun c(x) =
     case x of
         (a,10,_) => 1
@@ -103,7 +103,7 @@ Well, we can easily infer it's a tuple of three elements. Based on the patterns,
 
 This would correspond with:
 
-```haskell
+```sml
 [TupleP[Variable "a", ConstP 10, Wildcard], TupleP[Variable "b", Wildcard, ConstP 11], Wildcard]
 ```
 
@@ -113,19 +113,19 @@ And the answer given by our algorithm should be: `SOME TupleT[Anything,IntT,IntT
 
 Let's use a datatype now.
 
-```haskell
+```sml
 datatype color = Red | Green | Blue
 ```
 
 Then we need to define the first argument of our challenge function as:
 
-```haskell
+```sml
 [("Red","color",UnitT),("Green","color",UnitT),("Blue","color",UnitT)]
 ```
 
 Let's say now that we have a function like this:
 
-```haskell
+```sml
 fun f(x) =
    case x of
      Red => 0
@@ -134,13 +134,13 @@ fun f(x) =
 
 Corresponding with something like:
 
-```haskell
+```sml
 [ConstructorP("Red", UnitP), Wildcard]
 ```
 
 Our algorithm should go over the patterns and say this is of type:
 
-```haskell
+```sml
 SOME (Datatype "color")
 ```
 
@@ -148,7 +148,7 @@ SOME (Datatype "color")
 
 Let's use now a more complex datatype
 
-```haskell
+```sml
 datatype auto =  Sedan of color
                | Truck of int * color
                | SUV
@@ -156,13 +156,13 @@ datatype auto =  Sedan of color
 
 This would correspond to a first argument as follows:
 
-```haskell
+```sml
 [("Sedan","auto", Datatype "color"),("Truck","auto",TupleT[IntT, Datatype "color"]),("SUV","auto",UnitT)]
 ```
 
 Let's say now that we had a function like this:
 
-```haskell
+```sml
 fun g(x) =
    case x of
         Sedan(a) => 1
@@ -174,7 +174,7 @@ What is the type of `x`? Well, we can easily infer they are all of type auto.
 
 So, the following argument:
 
-```haskell
+```sml
 [ConstructorP("Sedan", Variable "a"), ConstructorP("Truck", TupleP[Variable "b", Wildcard]), Wildcard]
 ```
 
@@ -184,13 +184,13 @@ Should yield `SOME (Datatype "auto")`.
 
 Let's now define a polymorphic type to make this interesting
 
-```haskell
+```sml
 datatype 'a list = Empty | List of 'a * 'a list
 ```
 
 So, we must first define our first argument:
 
-```haskell
+```sml
 [("Empty","list",UnitT),("List","list",TupleT[Anything, Datatype "list"])]
 ```
 
@@ -198,7 +198,7 @@ The trick is to notice that the polymorphic type `'a` corresponds to anything he
 
 Now if we had this function
 
-```haskell
+```sml
 fun j(x) =
    case x of
        Empty => 0
@@ -210,7 +210,7 @@ Evidently the patterns are of type list, but not just that, but a list of intege
 
 So, the following argument corresponding to the patterns in the function:
 
-```haskell
+```sml
 [ConstructorP("Empty",UnitP),ConstructorP("List",TupleP[ConstP 10, ConstructorP("Empty",UnitP)]), Wildcard]
 ```
 
@@ -222,7 +222,7 @@ This case is tricky, because `ConstP(10)` needs to correspond with `Anything` in
 
 Let's consider this variation of the previous case:
 
-```haskell
+```sml
 fun h(x) =
    case x of
       Empty => 0
@@ -231,7 +231,7 @@ fun h(x) =
 
 In this case `k` could be anything. So, we represent these branches as:
 
-```haskell
+```sml
 [ConstructorP("Empty",UnitP),ConstructorP("List",TupleP[Variable "k", Wildcard])]
 ```
 
@@ -245,7 +245,7 @@ So, in the previous example `ConstP(10)` and now `Variable "x"` can be considere
 
 Just another example
 
-```haskell
+```sml
 fun g(x) =
    case x of
       Empty => 0
@@ -254,7 +254,7 @@ fun g(x) =
 
 Corresponding with:
 
-```haskell
+```sml
 [ConstructorP("Empty",UnitP),ConstructorP("List",TupleP[ConstructorP("Sedan", Variable "c"), Wildcard])]
 ```
 
@@ -266,14 +266,14 @@ Now for the "most lenient" pattern. In the assignment we get two examples.
 
 The first one suggest that we have two patterns of the form:
 
-```haskell
+```sml
 TupleP[Variable "x", Variable "y"]
 TupleP[Wildcard, Wildcard]
 ```
 
 This would correspond to something like
 
-```haskell
+```sml
 fun m(w) =
     case w of
           (x,y) => 0
@@ -284,7 +284,7 @@ Interestingly this would not compile, since the patterns are redundant, namely, 
 
 We can infer that `w `is a tuple with two elements that can be of anything. So the answer to this type of patterns should be:
 
-```haskell
+```sml
 TupleT[Anything, Anything]
 ```
 
@@ -296,14 +296,14 @@ The second example of the "most lenient" requirement is similar but a little mor
 
 The second example suggest a list of patterns like this:
 
-```haskell
+```sml
 TupleP[Wildcard, Wildcard]
 TupleP[Wildcard, TupleP[Wildcard,Wildcard]]
 ```
 
 Which would correspond with
 
-```haskell
+```sml
 fun m(w) =
     case w of
       (_,(_,_)) => 0
@@ -314,7 +314,7 @@ We can infer that w is a tuple of two elements, the first one can be anything, t
 
 So, if we had to infer this we had to say the type of this is
 
-```haskell
+```sml
 TupleT[Anything, TupleT[Anything, Anything]]
 ```
 
@@ -326,7 +326,7 @@ Which is the expected answer by the challenge exercise. But yet again, the compi
 
 Imagine we have a list of patterns
 
-```haskell
+```sml
 val patterns = [pat1, pat2, ..., patn]
 ```
 
@@ -336,7 +336,7 @@ If even just two of these patterns fail to have a common type, then the whole li
 
 So let's imagine we have some method of taking two patterns and checking if they can have a common type, and if so, finding that type. Say we do this for `pat1` and `pat2`. Say they have a common type `typ1`.
 
-```haskell
+```sml
 [pat1, pat2, pat3, ..., patn]
    \    /
     typ1
@@ -346,7 +346,7 @@ Now we have to check `pat3` but now we have to compare a type `typ1`and a patter
 
 Let's try to change our thinking. What if we first converted the whole list of patterns to their types:
 
-```haskell
+```sml
 [pat1, pat2, ..., patn]
    |     |          |
    V     V          V
@@ -361,8 +361,8 @@ Cool! This might work. So we need two things: a function that takes a `pattern` 
 
 Most of the `pattern` kinds are easily converted to `typ`s:
 
-```haskell
--- pattern    typ
+```sml
+(* pattern    typ *)
 Wildcard => Anything
 Variable => Anything
 ConstP   => IntT
@@ -375,7 +375,7 @@ But the last two kinds of `pattern`, namely `TupleP` and `ConstructorP` are comp
 
 In the case of `TupleP` the argument is a `pattern list`, so we could recursively convert all of the `pattern`s in that list, and add a `TupleT` at the beginning, and we're done:
 
-```haskell
+```sml
 TupleP [pat1, pat2, ..., patn] => TupleT [typ1, typ2, ..., typn]
 ```
 
@@ -383,13 +383,13 @@ TupleP [pat1, pat2, ..., patn] => TupleT [typ1, typ2, ..., typn]
 
 Finally `ConstructorP` patterns are even more complicated. They need to be "looked up" in the "metadata" that is provided in the first argument of `typecheck_patterns`. For example, for the `pattern`
 
-```haskell
+```sml
 ConstructorP("Red", UnitP)
 ```
 
 we need metadata like
 
-```haskell
+```sml
 [("Red", "color", UnitT)]
 ```
 
@@ -397,14 +397,14 @@ So there are a few instances where this can fail.
 
 1. We look up `"Red"` in the metadata, but we cannot find it! For example:
 
-    ```haskell
+    ```sml
     pattern: ConstructorP("Red", UnitP)
     metadata: [("Sedan", "color", Datatype "color")]
     ```
 
 2. We look up `"Red"` in the metadata, we find an entry for it, but the third element (the `typ`) does not match the second argument (the `pattern`) of the constructor. For example:
 
-    ```haskell
+    ```sml
     pattern: ConstructorP("Red", UnitP)
     metadata: [("Red", "color", IntT)]
     ```
@@ -413,13 +413,13 @@ So there are a few instances where this can fail.
 
     THIS IS VERY CRUCIAL! Because we just discovered that our conversion function must call our "take two `typ`s and find their common `typ`" function. If we also find out that the "common `typ`" function has to call the conversion function... then we will be forced to use MUTUAL RECURSION. You can use MR in SML like this:
 
-    ```haskell
+    ```sml
     fun f() =
         let
-            fun a() = -- some code involving b()
-            and b() = -- some code involving a()
+            fun a() = (* some code involving b() *)
+            and b() = (* some code involving a() *)
         in
-            a()
+            a() (* or b(), does not matter *)
         end
     ```
 
@@ -427,7 +427,7 @@ So there are a few instances where this can fail.
 
 3. We look up `"Red"` in the metadata, we find it OK, but the `pattern` argument of the constructor is yet another constructor that fails to have a `typ` by itself (due to reasons 1 or 2 above). For example:
 
-    ```haskell
+    ```sml
     pattern: ConstructorP("Red", ConstructorP("Empty", UnitP))
     metadata: [("Red", "color", Datatype "color")]
     ```
@@ -438,19 +438,19 @@ So there are a few instances where this can fail.
 
 There are 5 kinds of `typ`, so there are 25 possible match-ups between two `typ`s. But we can ignore most of them:
 
-```haskell
-Anything       -- can match all 5 typs
-UnitT          -- can only match UnitT
-IntT           -- can only match IntT
-TupleT[...]    -- can only match TupleT[...]
-Datatype "..." -- can only match Datatype "..."
+```sml
+Anything       (* can match all 5 typs *)
+UnitT          (* can only match UnitT *)
+IntT           (* can only match IntT *)
+TupleT[...]    (* can only match TupleT[...] *)
+Datatype "..." (* can only match Datatype "..." *)
 ```
 
 #### Handling `TupleT`
 
 Notice that `TupleT lst1` can match `TupleT lst2` if and only if `lst1` and `lst2` have the same length, and each `typ` in `lst1`, in order, can match the corresponding `typ` in `lst2`, in order:
 
-```haskell
+```sml
 TupleT [typ1a, typ2a, ..., typna]
           ^      ^           ^
           |      |           | must have common typ
@@ -460,7 +460,7 @@ TupleT [typ1b, typ2b, ..., typnb]
 
 So we can "zip" the two lists, then find the common `typ`s of the pairs `(typ1a, typ1b), ..., (typna, typnb)` recursively. Then the common `typ` of the tuples will be 
 
-```haskell
+```sml
 TupleT [commontyp1, commontyp2, ..., commontypn]
 ```
 
@@ -470,7 +470,7 @@ But first we have to know that these pairs of the zipped lists *do* have common 
 
 Note that two `Datatype`s can match if and only if they have the same string argument, like:
 
-```haskell
+```sml
 Datatype "color" <-> Datatype "color"
 ```
 
@@ -486,13 +486,13 @@ Time to start nailing down the design. Of course we will do this with the type s
 
 Working backwards from the end: remember that `typecheck_patterns` must have type
 
-```haskell
+```sml
 typecheck_patterns: (string * string * typ) list * (pattern list) -> typ option
 ```
 
 We said that we'd have a function with type
 
-```haskell
+```sml
 merge: (typ option) * (typ option) -> (typ option)
 ```
 
@@ -500,13 +500,13 @@ and we would use this to FOLD over the `pattern list`. Wait, what? We can only d
 
 So we have to take the `pattern list` and convert it to a `typ option list`. For this, we can have a function 
 
-```haskell
+```sml
 convert: pattern -> typ option
 ```
 
 and we can `List.map` this function over the `pattern list`. But... for our conversion we also need the metadata to look up stuff. Since we want to map this function, we'd have to pass the metadata down as an argument. So let's take advantage of currying!
 
-```haskell
+```sml
 convert: (string * string * typ) list -> pattern -> typ option
 ```
 
@@ -514,14 +514,14 @@ For the `merge` function, we can take two `typ option`s, remove the `option` par
 
 This situation of checking if two `typ`s are merge-able kept coming up 5 times. So it seems convenient (almost necessary) to have a separate function for checking if two `typ`s *can* have a common `typ` at all:
 
-```haskell
+```sml
 compatible: typ * typ -> bool
 ```
 
 After that, *if* two `typ`s are compatible, then we can have a separate function that computes that common type. This will lead to a bit of code duplication, but the overall design is much cleaner by using `compatible` in many different places. Here's the signature of the common type calculator:
 
-```haskell
--- assumes the typs are compatible
+```sml
+(* assumes the typs are compatible *)
 coalesce: typ * typ -> typ
 ```
 
@@ -529,20 +529,20 @@ coalesce: typ * typ -> typ
 
 It looks like we don't have to use mutual recursion after all! So we've got so far:
 
-```haskell
--- does not depend on others, is recursive. Just do case (s, t) of...
+```sml
+(* does not depend on others, is recursive. Just do case (s, t) of... *)
 fun compatible(s: typ, t: typ): bool
 
--- uses compatible in ConstructorP case, is recursive.
+(* uses compatible in ConstructorP case, is recursive. *)
 fun convert(metadata: (string * string * typ) list)(p: pattern): typ option
 
--- assumes s, t are compatible, is recursive in the TupleT case.
+(* assumes s, t are compatible, is recursive in the TupleT case. *)
 fun coalesce(s: typ, t: typ): typ 
 
--- non-recursive, uses compatible and coalesce. Very simple!
+(* non-recursive, uses compatible and coalesce. Very simple! *)
 fun merge(s: typ option, t: typ option): typ option
 
--- maps convert over list, then folds with merge. Very simple!
+(* maps convert over list, then folds with merge. Very simple! *)
 fun typecheck_patterns(
   metadata: (string * string * typ) list, patterns: pattern list
 ): typ option
