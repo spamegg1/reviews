@@ -184,6 +184,8 @@ So... what's the point of this long educational, pedagogical tirade? ***You have
 
 Here’s one learner’s perspective: *It took me three tries to finally be ready for this course. I made it to the half way mark to understand why this course is really important. I just wish I knew this in the beginning of last year when I first started.*
 
+Another: *The htc courses were really amazing, I feel bad I said they were useless and outdated. I want to thank the people who told me I should take them.*
+
 ***Even more updates (July 2021):*** I told this story on Discord:
 
 > That's awesome to hear! Let me tell you an interesting story.
