@@ -53,8 +53,7 @@ object InMemoryModel extends Model:
 
   def read(id: Id): Option[Task] = idStore get id
 
-  def complete(id: Id): Option[Task] =
-    idStore.updateWith(id)(opt => Some(opt.get.complete))                // TODO
+  def complete(id: Id): Option[Task] = update(id)(_.complete)            // TODO
 
   def update(id: Id)(f: Task => Task): Option[Task] =
     idStore.updateWith(id)(_.map(f))
