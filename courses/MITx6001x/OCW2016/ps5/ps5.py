@@ -112,6 +112,7 @@ class PhraseTrigger(Trigger):
                 return True
         return False
 
+
 # Problem 3
 # TODO: TitleTrigger
 class TitleTrigger(PhraseTrigger):

@@ -51,6 +51,7 @@ Updated July 2021 (Effective Programming in Scala)
 ### <a name="tips"></a> Learning tips
 - Use the REPL / interactive shell to your advantage! You can easily figure out all your basic questions by yourself if you experiment on the REPL.
 - Prioritize math. Math is the root of all the thinking patterns and the concepts.
+- Stop endlessly comparing different resources and trying to find the "best" resource. Pick a good resource, and go with it. Don't worry about minuscule differences, or "what I will be missing out".
 - It's all about doing what you don't want/like to do. (Just like life in general) It's very difficult and usually not all that pleasant.
 - Don't worry about time.
 - Avoid instant gratification.
