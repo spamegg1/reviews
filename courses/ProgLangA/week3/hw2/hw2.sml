@@ -51,9 +51,10 @@ fun get_substitutions2(lst: string list list, s: string): string list =
 
 (*  returns list of full names that can be produced
  *  by substituting only the first name *)
-fun similar_names(lst: string list list,
-    fullname: {first:string, last:string, middle:string})
-            : {first:string, last:string, middle:string} list =
+fun similar_names(
+    lst: string list list,
+    fullname: {first:string, last:string, middle:string}
+): {first:string, last:string, middle:string} list =
     let
         val {first=x, last=y, middle=z} = fullname
         fun sub_fn([]) = []
@@ -166,16 +167,17 @@ fun myfold(func: ('a * 'b) -> 'b)(zero: 'b)([]: 'a list): 'b = zero
 
 fun mymin(x: int, y: int): int = if x < y then x else y
 
-fun minlist(ints: int list): int = case ints of
-        [] => 0                                   (* dummy, should not happen *)
-    |   [n] => n
-    |   n :: ns => myfold mymin n ns
+fun minlist([]: int list): int = 0                (* dummy, should not happen *)
+|   minlist [n] = n
+|   minlist (n :: ns) = myfold mymin n ns
 
 fun myall(func: 'a -> bool)(lst: 'a list): bool =
     myfold (fn (x, y) => (func x) andalso y) true lst
 
 (*  assumes lists have equal length. *)
 fun myzip([]: 'a list)([]: 'b list): ('a * 'b) list = []
+|   myzip([])(y :: ys) = []                       (* dummy, should not happen *)
+|   myzip(x :: xs)([]) = []                       (* dummy, should not happen *)
 |   myzip(x :: xs)(y :: ys) = (x, y) :: myzip xs ys
 
 (*  helpers for score_challenge  *)

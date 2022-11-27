@@ -190,7 +190,8 @@ fun check_all(mvs: moves, st: stat) =
     List.all (fn prop => check_prop(prop, mvs, st)) properties
 
 (* tests for score_challenge *)
-val t12a = score_challenge([(Hearts,Ace),(Diamonds,Ace)],10) = minlist [4,3,18]
+val t12a = score_challenge([(Hearts, Ace), (Diamonds, Ace)], 10)
+    = minlist [4, 3, 18]
 val t12b = score_challenge(
     [(Hearts, Ace), (Diamonds, Ace), (Spades, Ace), (Clubs, Ace)], 10
 ) = minlist [6, 12, 42, 72, 102]
