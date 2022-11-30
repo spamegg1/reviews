@@ -67,10 +67,7 @@ object Anagrams extends AnagramsInterface:
   lazy val dictionaryByOccurrences: Map[Occurrences, List[Word]] =       // TODO
     dictionary
       .map(word => wordOccurrences(word) -> word)
-      .groupBy(_._1)
-      .view
-      .mapValues(list => list.map(_._2))
-      .toMap
+      .groupMap(_._1)(_._2)
 
   /** Returns all the anagrams of a given word. */
   def wordAnagrams(word: Word): List[Word] =                             // TODO
@@ -100,7 +97,7 @@ object Anagrams extends AnagramsInterface:
    */
   def combinations(occurrences: Occurrences): List[Occurrences] =        // TODO
     occurrences match
-      case Nil => List(Nil)
+      case Nil                 => List(Nil)
       case (char, int) :: tail =>
         val earlier = combinations(tail)
         val next =
@@ -181,11 +178,11 @@ object Anagrams extends AnagramsInterface:
 
     def helper(occ: Occurrences): List[Sentence] = occ match
       case Nil => List(List())
-      case _ =>
+      case _   =>
         for
           combo <- combinations(occ)
-          word <- dictionaryByOccurrences.getOrElse(combo, Nil)
-          rest <- helper(subtract(occ, combo))
+          word  <- dictionaryByOccurrences.getOrElse(combo, Nil)
+          rest  <- helper(subtract(occ, combo))
         yield
           word :: rest
 
