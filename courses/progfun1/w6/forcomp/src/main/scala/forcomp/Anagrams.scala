@@ -40,9 +40,7 @@ object Anagrams extends AnagramsInterface:
   def wordOccurrences(w: Word): Occurrences =                            // TODO
     w
       .toLowerCase
-      .groupBy(identity)
-      .view
-      .mapValues(_.size)
+      .groupMapReduce(identity)(_ => 1)(_ + _)
       .toList
       .sortBy(_._1)
 

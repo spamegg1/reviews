@@ -53,7 +53,7 @@ Updated July 2021 (Effective Programming in Scala)
 - Prioritize math. Math is the root of all the thinking patterns and the concepts.
 - Stop endlessly comparing different resources and trying to find the "best" resource. Pick a good resource, and go with it. Don't worry about minuscule differences, or "what I will be missing out".
 - It's all about doing what you don't want/like to do. (Just like life in general) It's very difficult and usually not all that pleasant.
-- Don't worry about time.
+- Don't worry about time. Don't take the provided "time estimates" seriously, they don't mean anything. They are usually huge underestimations or huge overestimations.
 - Avoid instant gratification.
 - Understand both positive and negative reinforcement, and use them both to your advantage.
 - Don't rely on search engines, go to proper resources. Accessing *information* in millions of little bits and pieces don't lead to long-term *knowledge*. The human brain needs to "chunk" bits of info by connecting them together into a meaningful whole. Relying too heavily on web searches works against this.
