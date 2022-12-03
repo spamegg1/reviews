@@ -49,24 +49,26 @@ Updated July 2021 (Effective Programming in Scala)
 - [Effective Programming in Scala](#eff)
 
 ### <a name="tips"></a> Learning tips
-- Use the REPL / interactive shell to your advantage! You can easily figure out all your basic questions by yourself if you experiment on the REPL.
-- Prioritize math. Math is the root of all the thinking patterns and the concepts.
+- Use the REPL / interactive shell to your advantage! You can easily figure out all your basic questions by yourself if you experiment on the REPL. This is infinitely superior to Googling it.
+- Prioritize math. Math is the root of all the thinking patterns and the concepts. Math is [metacognition](https://en.wikipedia.org/wiki/Metacognition).
 - Stop endlessly comparing different resources and trying to find the "best" resource. Pick a good resource, and go with it. Don't worry about minuscule differences, or "what I will be missing out".
 - It's all about doing what you don't want/like to do. (Just like life in general) It's very difficult and usually not all that pleasant.
-- Don't worry about time. Don't take the provided "time estimates" seriously, they don't mean anything. They are usually huge underestimations or huge overestimations.
+- Don't worry about time. Don't take the provided "time estimates" seriously, they don't mean anything. They are usually huge underestimations or huge overestimations. 
+- Don't measure your success or failure in terms of time ("this one problem took me X hours/days to do!"), time often is a poor measurement of difficulty (one tiny piece of missing knowledge can cause days/months of getting stuck, gaining that piece can solve a huge problem instantly). Measure it in terms of which concepts/ideas gave you an easy/hard time, what pieces of knowledge you gained or you were missing, how well and properly you handled the problems, how high/low was the complexity, whether you did it with solid understanding or not. Be metacognitive!
 - Avoid instant gratification.
 - Understand both positive and negative reinforcement, and use them both to your advantage.
 - Don't rely on search engines, go to proper resources. Accessing *information* in millions of little bits and pieces don't lead to long-term *knowledge*. The human brain needs to "chunk" bits of info by connecting them together into a meaningful whole. Relying too heavily on web searches works against this.
 - Resist the urge to guess. THINK instead!
 - Take your hands off the keyboard, get pencil and paper, work it out first.
-- Go slowly. Completing fast is NOT an achievement.
-- Exercise good judgment on what's important and what isn't. Don't get stuck on silly points.
+- Go slowly. Completing fast is NOT an achievement. Completing slowly usually is.
+- Exercise good judgment on what's important and what isn't. Don't get stuck on silly points. Try to see the main pedagogical point in something, rather than the "side things."
 - Recognize missing pieces and inadequacies in the resources.
 - Think contextually, not literally/mechanically.
-- Be self-reflective about your code. Refactor often.
+- Be self-reflective about your code. Refactor often. Be recursively self-reflective. Reflect on what you did, then reflect on your reflection.
 - Don't rush to pass the tests. 
 - Don't rush to do web searches or seek help. Stay with it, always try to answer your own questions first. Use the :duck: debugger to your advantage!
-- Have faith in the courses/languages that seem "pointless" or "useless" to you initially. The point/understanding will come to you later, it takes time.
+- Have faith in the courses/languages that seem "pointless" or "useless" to you initially. The point/understanding will come to you later, it takes time. Avoid the "resistance mentality". Stop asking "when will I ever use this?"
+- Develop a mindset that enjoys doing "useless" things or "abstract things with no practical purpose." Stop trying to immediately find a "real life use case". Abstraction works in a way that is extremely long term and unpredictable. You will see benefits years later.
 - Readability and comments are more important than optimization.
 - Learn how to enjoy things you don't like, things that are too easy/hard, or things you find boring.
 - Split your mind into two people: teacher and student. Assume the teacher's role and explain what you learned to the student. You can practice this anywhere, anytime (on the bus, in the shower, when you're exercising, etc.)

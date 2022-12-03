@@ -47,7 +47,6 @@ if __name__ == "__main__":
 
     portion_saved: float = float(
         input("Enter the percent of your salary to save, as a decimal: ")
-
     )
 
     total_cost: int = int(input("Enter the cost of your dream home: "))
