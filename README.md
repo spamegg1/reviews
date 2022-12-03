@@ -50,15 +50,16 @@ Updated July 2021 (Effective Programming in Scala)
 
 ### <a name="tips"></a> Learning tips
 - Use the REPL / interactive shell to your advantage! You can easily figure out all your basic questions by yourself if you experiment on the REPL. This is infinitely superior to Googling it.
-- Prioritize math. Math is the root of all the thinking patterns and the concepts. Math is [metacognition](https://en.wikipedia.org/wiki/Metacognition).
+- Prioritize logic and proofs. Logic is the root of all the thinking patterns and the concepts. Writing proofs is the best way to strengthen your [metacognition](https://en.wikipedia.org/wiki/Metacognition). "Coding is to programming what typing is to writing, if you learn to program by learning to code, you essentially only know how to type." In [this quote](https://www.youtube.com/watch?v=rkZzg7Vowao), writing/programming is math, more specifically writing proofs.
 - Stop endlessly comparing different resources and trying to find the "best" resource. Pick a good resource, and go with it. Don't worry about minuscule differences, or "what I will be missing out".
 - It's all about doing what you don't want/like to do. (Just like life in general) It's very difficult and usually not all that pleasant.
 - Don't worry about time. Don't take the provided "time estimates" seriously, they don't mean anything. They are usually huge underestimations or huge overestimations. 
-- Don't measure your success or failure in terms of time ("this one problem took me X hours/days to do!"), time often is a poor measurement of difficulty (one tiny piece of missing knowledge can cause days/months of getting stuck, gaining that piece can solve a huge problem instantly). Measure it in terms of which concepts/ideas gave you an easy/hard time, what pieces of knowledge you gained or you were missing, how well and properly you handled the problems, how high/low was the complexity, whether you did it with solid understanding or not. Be metacognitive!
+- Don't measure your success or failure in terms of time ("this one problem took me X hours/days to do!"), time often is a poor measurement of difficulty (one tiny piece of missing knowledge can cause days/months of getting stuck, gaining that piece can solve a huge problem instantly). 
+- Measure it in terms of which concepts/ideas gave you an easy/hard time, what pieces of knowledge you gained or you were missing, how well and properly you handled the problems, how high/low was the complexity, whether you did it with solid understanding or not. Be metacognitive!
 - Avoid instant gratification.
 - Understand both positive and negative reinforcement, and use them both to your advantage.
 - Don't rely on search engines, go to proper resources. Accessing *information* in millions of little bits and pieces don't lead to long-term *knowledge*. The human brain needs to "chunk" bits of info by connecting them together into a meaningful whole. Relying too heavily on web searches works against this.
-- Resist the urge to guess. THINK instead!
+- Resist the urge to guess. THINK instead! Don't get into the loop of: 1. typing some code, 2. running it to see "what happens", 3. change it a little, 4. rinse and repeat. This is the equivalent of pounding on a typewriter and hoping that you'll stumble into a great novel.
 - Take your hands off the keyboard, get pencil and paper, work it out first.
 - Go slowly. Completing fast is NOT an achievement. Completing slowly usually is.
 - Exercise good judgment on what's important and what isn't. Don't get stuck on silly points. Try to see the main pedagogical point in something, rather than the "side things."
