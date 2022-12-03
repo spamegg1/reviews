@@ -44,3 +44,4 @@ hs_err_pid*
 
 .tmcproject.yml
 .tmcproject.json
+course_config.toml
