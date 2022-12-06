@@ -1,5 +1,6 @@
 use "hw3challenge.sml";
 
+fun isNone(opt: 'a option): bool = not(isSome opt)
 type triple = string * string * typ
 
 (* test input data for typecheck_patterns *)
@@ -130,8 +131,8 @@ val inp15: triple list * pattern list = (
 (* test results for typecheck_patterns *)
 (* val test01: bool = typecheck_patterns inp01 = NONE
 val test02: bool = typecheck_patterns inp02 = NONE *)
-val test03: bool = typecheck_patterns inp03 = SOME(Anything)
-val test04: bool = typecheck_patterns inp04 = SOME(IntT)
+val test03: bool = typecheck_patterns inp03 = SOME Anything
+val test04: bool = typecheck_patterns inp04 = SOME IntT
 val test05: bool = typecheck_patterns inp05 = SOME(TupleT[Anything,IntT,IntT])
 val test06: bool = typecheck_patterns inp06 =
     SOME(TupleT[Anything, TupleT[Anything, Anything]])
@@ -139,18 +140,18 @@ val test07: bool = typecheck_patterns inp07 =
     SOME(TupleT[
             TupleT[TupleT[Anything]],
             TupleT[TupleT[Anything], TupleT[Anything]]])
-val test08a: bool = typecheck_patterns inp08a = NONE
-val test08b: bool = typecheck_patterns inp08b = NONE
+val test08a: bool = isNone(typecheck_patterns inp08a)
+val test08b: bool = isNone(typecheck_patterns inp08b)
 val test09a: bool = typecheck_patterns inp09a = SOME(Datatype "color")
 val test09b: bool = typecheck_patterns inp09b = SOME(Datatype "color")
 val test09c: bool = typecheck_patterns inp09c = SOME(Datatype "color")
-val test09d: bool = typecheck_patterns inp09d = NONE
+val test09d: bool = isNone(typecheck_patterns inp09d)
 val test10a: bool = typecheck_patterns inp10a = SOME(Datatype "auto")
-val test10b: bool = typecheck_patterns inp10b = NONE
-val test10c: bool = typecheck_patterns inp10c = NONE
-val test10d: bool = typecheck_patterns inp10d = NONE
+val test10b: bool = isNone(typecheck_patterns inp10b)
+val test10c: bool = isNone(typecheck_patterns inp10c)
+val test10d: bool = isNone(typecheck_patterns inp10d)
 val test11: bool = typecheck_patterns inp11 = SOME(Datatype "list")
 val test12: bool = typecheck_patterns inp12 = SOME(Datatype "list")
-val test13: bool = typecheck_patterns inp13 = NONE
-val test14: bool = typecheck_patterns inp14 = NONE
+val test13: bool = isNone(typecheck_patterns inp13)
+val test14: bool = isNone(typecheck_patterns inp14)
 val test15: bool = typecheck_patterns inp15 = SOME(TupleT[Anything, Anything])

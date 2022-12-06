@@ -45,10 +45,10 @@ fun compatible(s: typ, t: typ): bool = case (s, t) of
 (*  Converts a single pattern to its typ. Uses compatible. *)
 fun p2t(triples: (string * string * typ) list)(p: pattern): typ option =
     case p of
-        Wildcard   => SOME(Anything)
-    |   Variable _ => SOME(Anything)
-    |   UnitP      => SOME(UnitT)
-    |   ConstP _   => SOME(IntT)
+        Wildcard   => SOME Anything
+    |   Variable _ => SOME Anything
+    |   UnitP      => SOME UnitT
+    |   ConstP _   => SOME IntT
     |   TupleP lst =>
         let
             val converted = List.map (p2t triples) lst
@@ -64,7 +64,7 @@ fun p2t(triples: (string * string * typ) list)(p: pattern): typ option =
             case (lookup, p2t triples pat) of
                 (NONE, _) => NONE           (* could not find str in metadata *)
             |   (_, NONE) => NONE                     (* pat fails to convert *)
-            |   (SOME(s1, s2, t), SOME(t')) =>
+            |   (SOME(_, s2, t), SOME t') =>
                 if   compatible(t, t')
                 then SOME(Datatype s2)
                 else NONE                   (* pat incompatible with metadata *)
@@ -76,9 +76,9 @@ fun coalesce(s: typ, t: typ): typ = case (s, t) of
     |   ( x, Anything) => x
     |   (UnitT, UnitT) => UnitT
     |   ( IntT,  IntT) => IntT
-    |   (Datatype s1, Datatype s2) => Datatype s1           (* assume s1 = s2 *)
+    |   (Datatype s1, Datatype _) => Datatype s1            (* assume s1 = s2 *)
     |   (TupleT lst1, TupleT lst2) =>           (* assume len lst1 = len lst2 *)
-        TupleT (List.map coalesce (ListPair.zip(lst1, lst2)))
+        TupleT(List.map coalesce (ListPair.zip(lst1, lst2)))
     |   _ => s         (* to satisfy type checker. This case shouldn't happen *)
 
 (* Merges two typ options. Checks if they are compatible. *)
@@ -86,7 +86,7 @@ fun merge(s: typ option, t: typ option): typ option =
     case (s, t) of
         (NONE, _) => NONE
     |   (_, NONE) => NONE
-    |   (SOME(s1), SOME(t1)) =>
+    |   (SOME s1, SOME t1) =>
         if   compatible(s1, t1)
         then SOME(coalesce(s1, t1))
         else NONE

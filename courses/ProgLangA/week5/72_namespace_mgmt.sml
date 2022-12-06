@@ -3,15 +3,14 @@
 
 structure MyMathLib =
 struct
+    fun fact x =
+        if x = 0
+        then 1
+        else x * fact (x - 1)
 
-fun fact x =
-    if x=0
-    then 1
-    else x * fact (x - 1)
+    val half_pi = Math.pi / 2.0
 
-val half_pi = Math.pi / 2.0
-
-fun doubler y = y + y
+    fun doubler y = y + y
 
 end
 

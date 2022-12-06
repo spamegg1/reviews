@@ -63,6 +63,7 @@ Updated July 2021 (Effective Programming in Scala)
 #### Motivation, Mental Resilience
 
 - It's all about doing what you don't want/like to do. (Just like life in general) It's very difficult and usually not all that pleasant. It *has* to be a struggle; without struggle there is no growth. 
+- Adjust your expectations! [Your expectations are almost always too high](https://www.youtube.com/watch?v=Zjl2vmy02As), and they are your enemy. Falling short of your unrealistically high expectations will demotivate you quickly. This applies both to your expectations from yourself, and from the language / tools you use.
 - You are always *behind*, despite getting stronger. That's OK. Because when you get stronger, you notice the harder problems and set your sights on higher challenges. You notice how much was *beyond your vision* previously. It opens up a whole new world of more stuff you don't know. You didn't know *how much stuff there was that you didn't know.* Now you have a much better idea of how much you didn't know (it's *a lot more* than you thought!).
 - Don't focus on your perceived *deficiencies* ("I can't do this". "why can't I do this?", "why it takes me so long?", "why can't I see such a simple thing?"); instead remind yourself that you *are* growing over time, and the challenge is also growing along you. Knowing everything, solving everything easily would be very boring, wouldn't it?
 - Understand both positive and negative reinforcement, and use them both to your advantage.
@@ -79,7 +80,7 @@ Updated July 2021 (Effective Programming in Scala)
 #### Long term memory
 
 - Avoid instant gratification.
-- Don't rely on search engines, go to proper resources. Accessing *information* in millions of little bits and pieces don't lead to long-term *knowledge*. The human brain needs to "chunk" bits of info by connecting them together into a meaningful whole. Relying on web searches works against this.
+- Don't rely on searches (Google, StackOverFlow), go to proper resources. Accessing *information* in millions of little bits and pieces don't lead to long-term *knowledge*. The human brain needs to "chunk" bits of info by connecting them together into a meaningful whole. Relying on searches works against this.
 - Resist the urge to guess. THINK instead! 
 - Don't get into the loop of: 1. typing some code, 2. running it to see "what happens", 3. change it a little, 4. rinse and repeat. This is the equivalent of pounding on a typewriter and hoping that you'll stumble into a great novel.
 
@@ -87,11 +88,12 @@ Updated July 2021 (Effective Programming in Scala)
 
 - Exercise good judgment on what's important and what isn't. Don't get stuck on silly points. Try to see the main pedagogical point in something, rather than the "side things." Consider the possibility that you just asked a bad, or wrong, question.
 - Recognize missing pieces and inadequacies in the resources.
-- Think contextually, not literally / mechanically.
+- Think contextually, not literally / mechanically. 
+- However, there are situations where intuition works against you, so you'll have to recognize these. (Especially happens in logic and proofs at first.) In these cases, first you have to spend some time simply doing something mechanically without understanding it. The brain reforms its patterns and adapts to it after a while.
 
 #### Practical matters
 
-- Use the REPL / interactive shell to your advantage! You can easily figure out all your basic questions by yourself if you experiment on the REPL. This is infinitely superior to Googling it.
+- Use the REPL / interactive shell to your advantage! You can easily figure out all your basic questions by yourself if you experiment on the REPL. This is infinitely superior to Googling / StackOverFlowing it.
 - Be self-reflective about your code. Refactor often. Be recursively self-reflective. Reflect on what you did, then reflect on your reflection.
 - Don't rush to pass the tests. 
 - Don't rush to do web searches or seek help. Stay with it, always try to answer your own questions first. Use the :duck: debugger to your advantage!

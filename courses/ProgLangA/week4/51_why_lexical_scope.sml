@@ -4,18 +4,18 @@
 (* f1 and f2 are always the same, no matter where the result is used *)
 
 fun f1 y =
-    let
+let
     val x = y + 1
-    in
+in
     fn z => x + y + z
-    end
+end
 
 fun f2 y =
-    let
+let
     val q = y + 1
-    in
+in
     fn z => q + y + z
-    end
+end
 
 val x = 17 (* irrelevant *)
 val a1 = (f1 7) 4
@@ -24,11 +24,11 @@ val a2 = (f2 7) 4
 (* f3 and f4 are always the same, no matter what argument is passed in *)
 
 fun f3 g =
-    let
+let
     val x = 3 (* irrelevant *)
-    in
+in
     g 2
-    end
+end
 
 fun f4 g =
     g 2
@@ -49,19 +49,21 @@ fun f1 y =
 *)
 
 val x = "hi"
-val g = f1 7 (fn z => x + y + z) 7
-val z = g 6
+val g = f1 7 (fn z => x + y + z) 7 (* does not work in normal SML *)
+val z = g 6                        (* does not work in normal SML *)
 
 (* Being able to pass closures that have free variables (private data)
    makes higher-order functions /much/ more useful *)
-fun filter (f,xs) =
+fun filter(f, xs) =
     case xs of
-    [] => []
-      | x::xs' => if f x then x::(filter(f,xs')) else filter(f,xs')
+        []       => []
+    |   x :: xs' =>
+        if f x
+        then x :: filter(f, xs')
+        else filter(f, xs')
 
 fun greaterThanX x = fn y => y > x
 
 fun noNegatives xs = filter(greaterThanX ~1, xs)
 
-fun allGreater (xs,n) = filter (fn x => x > n, xs)
-
+fun allGreater(xs, n) = filter (fn x => x > n, xs)

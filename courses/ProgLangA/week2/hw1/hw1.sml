@@ -86,7 +86,7 @@ fun what_month(day: int): int =
 fun month_range(day1: int, day2: int): int list =
     if   day1 > day2
     then []
-    else what_month(day1) :: month_range(day1 + 1, day2)
+    else what_month day1 :: month_range(day1 + 1, day2)
 
 (*  returns oldest date in list, NONE if list empty  *)
 fun oldest(dates: date list): date option =
@@ -96,7 +96,7 @@ fun oldest(dates: date list): date option =
         let
             val tl_ans = oldest(tl dates)
         in
-            if not(isSome(tl_ans)) orelse is_older(hd dates, valOf(tl_ans))
+            if not(isSome tl_ans) orelse is_older(hd dates, valOf tl_ans)
             then SOME (hd dates)
             else tl_ans
         end

@@ -9,5 +9,4 @@
 
 (* 4 *) val y = 3
 
-(* 5 *) val z = f (x + y)
-
+(* 5 *) val z = f(x + y)

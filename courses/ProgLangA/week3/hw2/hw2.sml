@@ -18,10 +18,10 @@ fun all_except_option(s: string, lst: string list): string list option =
             val rest = all_except_option(s, xs)
         in
             case (same_string(x, s), rest) of
-                (true,  NONE)     => SOME(xs)
-            |   (false, NONE)     => NONE
-            |   (true,  SOME(ys)) => rest
-            |   (false, SOME(ys)) => SOME(x :: ys)
+                (true,  NONE)    => SOME xs
+            |   (false, NONE)    => NONE
+            |   (true,  SOME _)  => rest
+            |   (false, SOME ys) => SOME(x :: ys)
         end
 
 (*  returns list of other strings from lists that contain given string
@@ -57,8 +57,8 @@ fun similar_names(
 ): {first:string, last:string, middle:string} list =
     let
         val {first=x, last=y, middle=z} = fullname
-        fun sub_fn([]) = []
-        |   sub_fn(head::tail) = {first=head, last=y, middle=z} :: sub_fn(tail)
+        fun sub_fn [] = []
+        |   sub_fn(head::tail) = {first=head, last=y, middle=z} :: sub_fn tail
     in
         fullname :: sub_fn(get_substitutions2(lst, x))
     end
@@ -84,7 +84,7 @@ fun card_color(card: card): color =
     |   (Hearts, _)   => Red
     |   (Spades, _)   => Black
 
-fun card_rank(card: card): rank = case card of (_, x) => x
+fun card_rank(c: card): rank = #2 c
 
 (*  returns value of card  *)
 fun card_value(card: card): int =
@@ -94,7 +94,7 @@ fun card_value(card: card): int =
     |   (_, _)     => 10
 
 (*  checks if card is in card list.  *)
-fun myfind(c: card, []: card list): bool = false
+fun myfind(_: card, []: card list): bool = false
 |   myfind(x, c :: cs) = (x = c) orelse myfind(x, cs)
 
 (*  remove card from list (only once), raise exception if card not in list  *)
@@ -106,16 +106,16 @@ fun remove_card([]: card list, _: card, e: exn): card list = raise e
 
 (*  returns true if all cards in list have same color  *)
 fun all_same_color([]: card list): bool = true
-|   all_same_color([_]) = true
+|   all_same_color [_] = true
 |   all_same_color(head :: (neck :: rest)) =
-        card_color(head) = card_color(neck) andalso
+        card_color head = card_color neck andalso
         all_same_color(neck :: rest)
 
 (*  returns sum of values of cards in list  *)
 fun sum_cards(cards: card list): int =
     let
         fun aux([]: card list, sum: int): int = sum
-        |   aux(c :: cs, sum) = aux(cs, sum + card_value(c))
+        |   aux(c :: cs, sum) = aux(cs, sum + card_value c)
     in
         aux(cards, 0)
     end
@@ -123,8 +123,8 @@ fun sum_cards(cards: card list): int =
 (*  computes score for held cards  *)
 fun score(heldcards: card list, goal: int): int =
     let
-        val sum = sum_cards(heldcards)
-        val same = all_same_color(heldcards)
+        val sum = sum_cards heldcards
+        val same = all_same_color heldcards
         val prelim =
             if   sum > goal
             then (sum - goal) * 3
@@ -138,7 +138,7 @@ fun state(held: card list, _: card list, []: move list, goal: int): int =
     score(held, goal)
 |   state(held, cs, (Discard c) :: ms, goal) =
         state(remove_card(held, c, IllegalMove), cs, ms, goal)
-|   state(held, [], Draw :: ms, goal) = score(held, goal)
+|   state(held, [], Draw :: _, goal) = score(held, goal)
 |   state(held, c :: cs, Draw :: ms, goal) =
         if   sum_cards(c :: held) > goal
         then score(c :: held, goal)
@@ -150,10 +150,10 @@ fun officiate(cards: card list, moves: move list, goal: int): int =
 
 (* Challenge stuff *)
 (*  general utility HOFs *)
-fun mymap(func: 'a -> 'b)([]: 'a list): 'b list = []
+fun mymap(_: 'a -> 'b)([]: 'a list): 'b list = []
 |   mymap func (x :: xs) = (func x) :: mymap func xs
 
-fun myfilter(pred: 'a -> bool)([]: 'a list): 'a list = []
+fun myfilter(_: 'a -> bool)([]: 'a list): 'a list = []
 |   myfilter pred (x :: xs) =
         if (pred x)
         then x :: (myfilter pred xs)
@@ -162,7 +162,7 @@ fun myfilter(pred: 'a -> bool)([]: 'a list): 'a list = []
 fun myexists(_: 'a -> bool)([]: 'a list): bool = false
 |   myexists pred (x :: xs) = (pred x) orelse (myexists pred xs)
 
-fun myfold(func: ('a * 'b) -> 'b)(zero: 'b)([]: 'a list): 'b = zero
+fun myfold(_: ('a * 'b) -> 'b)(zero: 'b)([]: 'a list): 'b = zero
 |   myfold func zero (x :: xs) = myfold func (func(x, zero)) xs
 
 fun mymin(x: int, y: int): int = if x < y then x else y
@@ -176,8 +176,8 @@ fun myall(func: 'a -> bool)(lst: 'a list): bool =
 
 (*  assumes lists have equal length. *)
 fun myzip([]: 'a list)([]: 'b list): ('a * 'b) list = []
-|   myzip([])(y :: ys) = []                       (* dummy, should not happen *)
-|   myzip(x :: xs)([]) = []                       (* dummy, should not happen *)
+|   myzip [] (_ :: _) = []                        (* dummy, should not happen *)
+|   myzip (_ :: _) [] = []                        (* dummy, should not happen *)
 |   myzip(x :: xs)(y :: ys) = (x, y) :: myzip xs ys
 
 (*  helpers for score_challenge  *)
@@ -185,13 +185,13 @@ fun new_sums([]: int list, value: int): int list = [value]
 |   new_sums(sums, value) = mymap (fn x => x + value) sums
 
 fun sum_cards_challenge([]: card list): int list = [0]
-|   sum_cards_challenge(cards) =
+|   sum_cards_challenge cards =
     let
         fun aux([]: card list, sums: int list): int list = sums
         |   aux(c :: cs, sums) =
-                if card_rank(c) = Ace
+                if card_rank c = Ace
                 then aux(cs, new_sums(sums, 1) @ new_sums(sums, 11))
-                else aux(cs, new_sums(sums, card_value(c)))
+                else aux(cs, new_sums(sums, card_value c))
     in
         aux(cards, [])
     end
@@ -199,8 +199,8 @@ fun sum_cards_challenge([]: card list): int list = [0]
 (*  computes lowest score for held cards  *)
 fun score_challenge(heldcards: card list, goal: int): int =
     let
-        val sums: int list = sum_cards_challenge(heldcards)
-        val same: bool = all_same_color(heldcards)
+        val sums: int list = sum_cards_challenge heldcards
+        val same: bool = all_same_color heldcards
         fun prelim_fun(sum: int): int =
             if sum > goal then (sum - goal) * 3 else goal - sum
         val prelims: int list = mymap prelim_fun sums
@@ -217,7 +217,7 @@ fun state_challenge(
     score_challenge(held, goal)
 |   state_challenge(held, cs, (Discard c) :: ms, goal) =
         state_challenge(remove_card(held, c, IllegalMove), cs, ms, goal)
-|   state_challenge(held, [], Draw :: ms, goal) = score_challenge(held, goal)
+|   state_challenge(held, [], Draw :: _, goal) = score_challenge(held, goal)
 |   state_challenge(held, c :: cs, Draw :: ms, goal) =
         if myall (fn sum => sum > goal) (sum_cards_challenge(c :: held))
         then score_challenge(c :: held, goal)
@@ -237,7 +237,7 @@ type stat = card list * card list * int * int
  *)
 fun next_state(st: stat)(mv: move): stat =
     let
-        val (held, cards, gl, scr) = st
+        val (held, cards, gl, _) = st
     in
         case (held, cards, mv) of
             (_, [], Draw) => st
@@ -245,7 +245,7 @@ fun next_state(st: stat)(mv: move): stat =
             if sum_cards(c :: held) > gl
             then st
             else (c :: held, cs, gl, score(c :: held, gl))
-        |   (_, _, Discard(c)) =>
+        |   (_, _, Discard c) =>
             if myfind(c, held)
             then
                 let
@@ -264,7 +264,7 @@ fun possible_to_draw(st: stat): bool =
     in
         case cards of
             [] => false
-        |   c :: cs => sum_cards(c :: held) <= gl
+        |   c :: _ => sum_cards(c :: held) <= gl
     end
 
 (*  Checks if it's possible to reach 0 by discarding-then-drawing. *)
@@ -275,7 +275,7 @@ fun possible_to_discard_then_draw(st: stat): bool =
         case (held, cards) of
             (_, []) => false                          (* not possible to draw *)
         |   ([], _) => false                       (* not possible to discard *)
-        |   (h :: hs, c :: cs) =>
+        |   _ =>
             let
                 val discard_states: stat list =
                     mymap (fn crd => next_state st (Discard crd)) held
@@ -289,17 +289,20 @@ fun possible_to_discard_then_draw(st: stat): bool =
 (*  Assumes it's possible to reach 0 by discarding-then-drawing.  *)
 fun discard_then_draw(st: stat): stat * card =
     let
-        val (held, cards, _, _) = st
+        val (held, _, _, _) = st
+
         val discard_states: (stat * card) list =
             mymap (fn crd => (next_state st (Discard crd), crd)) held
+
         val discard_then_draw_states: (stat * card) list =
             mymap (fn (sta, crd) => (next_state sta Draw, crd)) discard_states
+
         val zero_states: (stat * card) list =          (* guaranteed nonempty *)
             myfilter (fn ((_, _, _, scr), _) => scr = 0) discard_then_draw_states
     in
         case zero_states of                     (* just to avoid using hd, tl *)
             [] => (st, (Hearts, Ace))           (* dummy, should never happen *)
-        |   x :: xs => x
+        |   x :: _ => x
     end
 
 fun careful_helper(st: stat): move list =
@@ -309,15 +312,15 @@ fun careful_helper(st: stat): move list =
     in
         if scr = 0 then
             []
-        else if gl - sum_cards(held) > 10 orelse possible_to_draw(st) then
-            if cards <> [] then
+        else if gl - sum_cards held > 10 orelse possible_to_draw st then
+            if not(null cards) then
                 Draw :: (careful_helper drawn_state)
             else [Draw] (* avoid inf loop if attempting to draw on empty deck *)
-        else if possible_to_discard_then_draw(st) then
+        else if possible_to_discard_then_draw st then
             let
-                val (newstate, discarded) = discard_then_draw(st)
+                val (newstate, discarded) = discard_then_draw st
             in
-                Discard(discarded) :: Draw :: careful_helper(newstate)
+                Discard discarded :: Draw :: careful_helper newstate
             end
         else []
     end

@@ -2,8 +2,10 @@
     credit goes to: spamegg *)
 use "community3.sml";
 
-val test1a: bool = compose_opt (fn x => NONE) (fn y => SOME y) 5 = NONE
-val test1b: bool = compose_opt (fn x => SOME x) (fn y => NONE) 5 = NONE
+fun isNone(opt: 'a option): bool = not(isSome opt)
+
+val test1a: bool = isNone(compose_opt (fn _ => NONE) (fn y => SOME y) 5)
+val test1b: bool = isNone(compose_opt (fn x => SOME x) (fn _ => NONE) 5)
 val test1c: bool = compose_opt (fn x => SOME (x * x)) (fn y => SOME(y * 2)) 5
     = SOME 100
 
@@ -11,7 +13,7 @@ val test2a: bool = do_until (fn x => x div 2) (fn x => x mod 2 <> 1) 1048576 = 1
 val test2b: bool = do_until (fn x => x div 2) (fn x => x mod 2 <> 1) 6 = 3
 val test2c: bool = do_until (fn x => x div 2) (fn x => x mod 2 <> 1) 10 = 5
 val test2d: bool = do_until (fn (x, acc) => (x - 1, x * acc))
-    (fn (x, acc) => x <> 0) (6, 1) = (0, 720)
+    (fn (x, _) => x <> 0) (6, 1) = (0, 720)
 
 val test3a: bool = factorial1 1 = 1
 val test3b: bool = factorial1 2 = 2

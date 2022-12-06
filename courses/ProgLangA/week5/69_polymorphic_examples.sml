@@ -22,11 +22,11 @@
 *)
 fun length xs =
     case xs of
-	[] => 0
-      | x::xs' => 1 + (length xs')
+        []       => 0
+    |   _ :: xs' => 1 + (length xs')
 
 
-(* 
+(*
    f : T1 * T2 * T3 -> T4
    x : T1
    y : T2
@@ -39,10 +39,10 @@ fun length xs =
    now replace unconstrained types /consistently/ with type variables:
      'a * 'a * 'b -> 'a * 'a * 'b
 *)
-fun f (x,y,z) =
+fun f(x, y, z) =
     if true
-    then (x,y,z)
-    else (y,x,z)
+    then (x, y, z)
+    else (y, x, z)
 
 (*
    compose : T1 * T2 -> T3
@@ -54,12 +54,11 @@ fun f (x,y,z) =
    from g being passed x, T2 = T4->T6 for some T6
    from f being passed result of g, T1 = T6->T7 for some T7
    from f being body of anonymous function, T7=T5
- 
+
    putting it all together:
      T1=T6->T5, T2=T4->T6, and T3=T4->T5
    so compose: (T6->T5) * (T4->T6) -> (T4->T5)
    now replace unconstrained types /consistently/ with type variables:
    ('a -> 'b) * ('c -> 'a) -> ('c -> 'b)
 *)
-fun compose (f,g) = fn x => f (g x)
-
+fun compose(f, g) = fn x => f(g x)

@@ -7,6 +7,8 @@
    For example, the REPL should say: val test1 = true : bool *)
 use "hw3.sml";
 
+fun isNone(opt: 'a option): bool = not(isSome opt)
+
 (* test data *)
 val f = (fn (x,y) => x > y)
 val h = (fn (x,y) => x >= y)
@@ -20,13 +22,13 @@ val pat6 = ConstructorP("pat5", pat5)
 val pat7 = TupleP [pat1, pat1, pat1, pat1, pat1, pat1, pat1]
 val pat8 = TupleP [pat1, TupleP [pat5, pat2], pat2, pat7,
     TupleP [pat7, pat3, pat4], pat6]
-val val5 = Tuple [Const(1), Const(2), Unit, Const(17)]
+val val5 = Tuple [Const 1, Const 2, Unit, Const 17]
 
-val test1a = only_capitals [] = []
+val test1a = null(only_capitals [])
 val test1b = only_capitals ["A", "B", "C"] = ["A", "B", "C"]
 val test1c = only_capitals ["a", "B", "C"] = ["B", "C"]
 val test1d = only_capitals ["A", "b", "C"] = ["A", "C"]
-val test1e = only_capitals ["a", "b", "c"] = []
+val test1e = null(only_capitals ["a", "b", "c"])
 
 val test2a = longest_string1 [] = ""
 val test2b = longest_string1 ["A", "bc", "C"] = "bc"
@@ -96,12 +98,12 @@ val test7e = first_answer (fn x => if x > 4 then SOME x else NONE) five = 5
 val test7f = ((first_answer (fn x => if x > 5 then SOME x else NONE)
                 five; false)  handle NoAnswer => true)
 val test8a = all_answers (fn x => if x = 1 then SOME [x] else NONE) [] = SOME []
-val test8b = all_answers (fn x => if x = 1 then SOME [x] else NONE)
-    [2, 3, 4, 5, 6, 7] = NONE
+val test8b = isNone(all_answers (fn x => if x = 1 then SOME [x] else NONE)
+    [2, 3, 4, 5, 6, 7])
 val test8c = all_answers (fn x => if x > 1 then SOME [x] else NONE) [2, 3, 4, 5]
     = SOME [2, 3, 4, 5]
-val test8d = all_answers (fn x => if x > 2 then SOME [x] else NONE)
-    [2, 3, 4, 5, 6, 7] = NONE
+val test8d = isNone(all_answers (fn x => if x > 2 then SOME [x] else NONE)
+    [2, 3, 4, 5, 6, 7])
 val test8e = all_answers (fn x => if x = 3 then SOME [x] else NONE) [3]
     = SOME [3]
 val test8f = all_answers (fn x => if x > 1 then SOME [x-2, x-1] else NONE) [2,3]
@@ -113,38 +115,39 @@ val test9a2 = count_wildcards pat7 = 7
 val test9a3 = count_wildcards pat5 = 1
 val test9a4 = count_wildcards pat8 = 17
 
-val test9b0 = count_wild_and_variable_lengths (Variable("a")) = 1
+val test9b0 = count_wild_and_variable_lengths (Variable "a") = 1
 val test9b1 = count_wild_and_variable_lengths pat2 = 4
 val test9b2 = count_wild_and_variable_lengths pat5 = 5
 val test9b3 = count_wild_and_variable_lengths pat8 = 17 + 4 + 4 + 4 + 4
 
-val test9c0 = count_some_var ("x", Variable("x")) = 1
+val test9c0 = count_some_var ("x", Variable "x") = 1
 val test9c1 = count_some_var ("pat2", pat8) = 4
 
-val test10a = check_pat (Variable("x")) = true
-val test10b = check_pat (TupleP [Variable("x"), Variable("y")]) = true
-val test10c = check_pat (TupleP [Variable("x"), Variable("y"), Variable("x")])
-    = false
-val test10d = check_pat (pat1) = true
-val test10e = check_pat (pat2) = true
-val test10f = check_pat (pat3) = true
-val test10g = check_pat (pat4) = true
-val test10h = check_pat (pat5) = true
-val test10i = check_pat (pat6) = true
-val test10j = check_pat (pat7) = true
-val test10k = check_pat (pat8) = false
+val test10a = check_pat (Variable "x")
+val test10b = check_pat (TupleP [Variable "x", Variable "y"])
+val test10c = not(check_pat (TupleP [Variable "x", Variable "y", Variable "x"]))
+val test10d = check_pat pat1
+val test10e = check_pat pat2
+val test10f = check_pat pat3
+val test10g = check_pat pat4
+val test10h = check_pat pat5
+val test10i = check_pat pat6
+val test10j = check_pat pat7
+val test10k = not(check_pat pat8)
 
-val test11a = match (Const(1), UnitP) = NONE
-val test11b = match (Const(17), pat4) = SOME []
-val test11c = match (Const(1), Wildcard) = SOME []
+val test11a = isNone(match (Const 1, UnitP))
+val test11b = match (Const 17, pat4) = SOME []
+val test11c = match (Const 1, Wildcard) = SOME []
 val test11d = match (Unit, Wildcard) = SOME []
 val test11e = match (Unit, pat3) = SOME []
-val test11f = match (Const(1), pat2) = SOME [("pat2", Const(1))]
-val test11g = match (Const(1), pat5) = NONE
-val test11h = match (Tuple[Const(1)], pat5) = NONE
-val test11i = match (val5, pat5) = SOME [("pat2", Const(2))]
-val test11j = match (Tuple[Const 17, Unit, Const 4, Constructor ("egg", Const 4),
-    Constructor("egg", Constructor ("egg", Const 4))], TupleP[Wildcard, Wildcard])
-    = NONE
+val test11f = match (Const 1, pat2) = SOME [("pat2", Const 1)]
+val test11g = isNone(match (Const 1, pat5))
+val test11h = isNone(match (Tuple[Const 1], pat5))
+val test11i = match (val5, pat5) = SOME [("pat2", Const 2)]
+val test11j = isNone(match(
+    Tuple[Const 17, Unit, Const 4, Constructor ("egg", Const 4),
+          Constructor("egg", Constructor ("egg", Const 4))],
+    TupleP[Wildcard, Wildcard]
+))
 
 val test12 = first_match Unit [UnitP] = SOME []

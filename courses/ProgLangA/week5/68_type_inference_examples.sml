@@ -1,12 +1,12 @@
 (* Programming Languages, Dan Grossman *)
 (* Section 4: Type Inference Examples *)
 
-(* 
+(*
    f : T1 -> T2 [must be a function; all functions take one argument]
    x : T1 [must have type of f's argument]
 
-   y : T3 
-   z : T4 
+   y : T3
+   z : T4
 
    T1 = T3 * T4 [else pattern-match in val-binding doesn't type-check]
    T3 = int [because (abs y) where abs : int -> int]
@@ -15,10 +15,12 @@
    So (abs y) + z : int, so let-expression : int, so body : int, so T2=int
    So f : int * int -> int
 *)
-fun f x = 
-   let val (y,z) = x in
-       (abs y) + z
-   end
+fun f x =
+let
+    val (y, z) = x
+in
+    (abs y) + z
+end
 
 (*
    sum : T1 -> T2 [must be a function; all functions take one argument]
@@ -38,9 +40,9 @@ fun f x =
    from that and T2 = int, we know f : int list -> int
 *)
 fun sum xs =
-   case xs of
-     [] => 0
-   | x::xs' => x + (sum xs')
+    case xs of
+        [] => 0
+    |   x :: xs' => x + (sum xs')
 
 (*
    type inference proceeds exactly like for sum for most of it:
@@ -61,8 +63,8 @@ fun sum xs =
    Note: The actual type-checker might gather facts in a different order and
    therefore report a different error, but it will report an error.
 *)
-fun broken_sum xs =
+(* fun broken_sum xs =
     case xs of
-	[] => 0
-      | x::xs' => x + (broken_sum x)
+        []       => 0
+    |   x :: xs' => x + (broken_sum x) *)
 
