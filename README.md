@@ -64,7 +64,7 @@ Updated July 2021 (Effective Programming in Scala)
 
 - It's all about doing what you don't want/like to do. (Just like life in general) It's very difficult and usually not all that pleasant. It *has* to be a struggle; without struggle there is no growth. 
 - Adjust your expectations! [Your expectations are almost always too high](https://www.youtube.com/watch?v=Zjl2vmy02As), and they are your enemy. Falling short of your unrealistically high expectations will demotivate you quickly. This applies both to your expectations from yourself, and from the language / tools you use.
-- You are always *behind*, despite getting stronger. That's OK. Because when you get stronger, you notice the harder problems and set your sights on higher challenges. You notice how much was *beyond your vision* previously. It opens up a whole new world of more stuff you don't know. You didn't know *how much stuff there was that you didn't know.* Now you have a much better idea of how much you didn't know (it's *a lot more* than you thought!).
+- You are always *behind*, despite getting stronger. That's OK. Because when you get stronger, you notice the harder problems and set your sights on higher challenges. You notice how much was *beyond your vision* previously. [It opens up a whole new world of more stuff you don't know](https://www.youtube.com/watch?v=TT81fe2IobI). You didn't know *how much stuff there was that you didn't know.* Now you have a much better idea of how much you didn't know (it's *a lot more* than you thought!).
 - Don't focus on your perceived *deficiencies* ("I can't do this". "why can't I do this?", "why it takes me so long?", "why can't I see such a simple thing?"); instead remind yourself that you *are* growing over time, and the challenge is also growing along you. Knowing everything, solving everything easily would be very boring, wouldn't it?
 - Understand both positive and negative reinforcement, and use them both to your advantage.
 - Learn how to enjoy things you don't like, things that are too easy / hard, or things you find boring.
@@ -98,11 +98,12 @@ Updated July 2021 (Effective Programming in Scala)
 - Don't rush to pass the tests. 
 - Don't rush to do web searches or seek help. Stay with it, always try to answer your own questions first. Use the :duck: debugger to your advantage!
 - Readability and comments are more important than optimization.
+- Avoid nesting code! Many of the courses show you to write functions inside functions etc. but avoid making that a habit. Pull them out and turn them into separate functions (you'll have to pass extra parameters).
 
 #### Loving the Abstract Void of Nothingness
 
-- Have faith in the courses / languages that seem "pointless" or "useless" to you initially. The point/understanding will come to you later, it takes time. Avoid the "resistance mentality". Stop asking "when will I ever use this?"
-- Develop a taste in math and computer science history. Do you know the extent of the massive influence and importance of 1960s and 1970s languages like Lisp (Racket) and ML (Standard ML) that you turn your nose up at?
+- Have faith in the courses / languages that seem "pointless" or "useless" to you initially. The point / understanding will come to you later, it takes time. Avoid the "resistance mentality". Stop asking "when will I ever use this?"
+- Develop a taste in math and computer science history. Do you know the extent of the massive influence and importance of 1960s and 1970s languages like Lisp (Racket) and ML (Standard ML) that you turn your nose up at? Did you know Lisp was one of the first "high-level" languages ever invented (in 1960s), and was influenced by how [mathematicians were doing programming before computers even existed](https://en.wikipedia.org/wiki/Lambda_calculus)? Did you know that all those parentheses of Racket was invented by a [logician](https://en.wikipedia.org/wiki/Jan_%C5%81ukasiewicz) (that's why it's called "Polish notation"), and they provide an extremely important [property](https://en.wikipedia.org/wiki/Homoiconicity)? Did you know that many features found in modern languages like Rust, Typescript were first invented in ML (in 1970s)?
 - Develop a mindset that enjoys doing "useless" things or "abstract things with no practical purpose." Stop trying to immediately find a "real life use case". Abstraction works in a way that is extremely long term and unpredictable. You will see benefits years later.
 
 ### <a name="cs50"></a> Harvard's CS50 (first half)
@@ -188,6 +189,43 @@ These courses teach general ways of thinking and form neural pathways in your br
 It's like breathing, walking, talking, swimming, riding a bicycle... things you do without thinking, things that are "in the back of your mind", things to which you would not directly attribute your success in some area. FUNDAMENTAL things.
 
 The "fake" languages used here are perfect for such purpose: extremely simple syntax, and they get out of your way completely, letting you purely focus on the systematic design (at the cost of having [too many parentheses](https://xkcd.com/297/)). Later on in "real" languages you will miss these features, trust me. (One analogy can be the comparison between the artificial language [Lojban](https://en.wikipedia.org/wiki/Lojban) with its perfectly clear and logical design, and natural languages, with all the inconsistencies, idiosyncrasies and ambiguities that natural languages usually come with.)
+
+To give a more specific example, the solution to the final exam problem (TA scheduling) in Complex Data can take up to 300 lines of ASL (Advanced Student Language) code, with fairly complicated looking functions. In a much higher-level language like Scala, the solution is around 30 lines (this could be shortened even further to about 20 lines: remove type aliases, remove the annotation, use just an integer instead of the `Slot` class, etc.):
+
+```scala
+case class Slot(i: Int)
+type Slots = List[Slot]
+
+case class TA(name: String, maxHours: Int, slots: Slots)
+type TAs = List[TA]
+
+type Schedule  =  Map[Slot, TA]
+type Schedules = List[Schedule]
+
+def taGoodForSlot(schedule: Schedule, slot: Slot, ta: TA): Boolean =
+  ta.slots.contains(slot) && schedule.values.count(_ == ta) < ta.maxHours
+
+@annotation.tailrec
+def solver(tas: TAs, slots: Slots, schedules: Schedules): Schedules =
+  slots match
+    case Nil          => schedules
+    case slot :: rest =>
+      val newSchedules =
+        for
+          schedule <- schedules
+          ta       <- tas
+          if taGoodForSlot(schedule, slot, ta)
+        yield
+          schedule + (slot -> ta)
+      solver(tas, rest, newSchedules)
+
+def solve(tas: TAs, slots: Slots): Option[Schedule] =
+  if   tas.isEmpty || slots.isEmpty
+  then None
+  else solver(tas, slots, List(Map())).headOption
+```
+
+This is due to how much "built-in" stuff (data structures and functions) there already is in Scala. **However, the fact that it takes 300 lines to do this in ASL is not a weakness! It's on purpose.** Because the course is about forcing you to think through all the fundamentals and "what's happening under the hood", instead of relying the nice features of the language to automate everything for you. **THAT'S THE IDEA.** Doing this in, let's say Python, would defeat the purpose.
 
 Many learners first focus on some language, or some tool and then are forced to "learn" these fundamentals later, in a disordered haphazard way, with a lot of pain, when they are stuck in a problem. They usually end up doing something like "keep trying until it works!" I experienced this first-hand with learners that I tutor on a daily basis. They skipped over the fundamentals and jumped to "more advanced things", only to suffer a lot. So I highly recommend reading the [Preface](https://htdp.org/2020-8-1/Book/part_preface.html) of the How to Design Programs textbook which is freely available. Not to say that these courses are the only place where you can learn fundamental skills and systematic program design, but it's really good.
 

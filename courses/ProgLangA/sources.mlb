@@ -1,3 +1,5 @@
+/home/spam/Public/qcheck/qcheck.mlb
+
 week1/hw0/hw0provided.sml
 week1/hw0/hw0solution.sml
 week1/hw0/hw0test.sml
@@ -40,6 +42,7 @@ week3/40_accumulators.sml
 week3/exp.sml
 
 week3/hw2/hw2.sml
+week3/hw2/challenge.sml
 week3/hw2/hw2provided.sml
 week3/hw2/hw2solution.sml
 week3/hw2/hw2test.sml

@@ -232,10 +232,10 @@ open QCheck;
 
 (*  generators *)
 val gen_num = Gen.map Num (Gen.range(2, 10))
-val gen_rank = Gen.choose #[
+val gen_rank: real -> rank * real = Gen.choose #[
     Gen.lift Jack, Gen.lift Queen, Gen.lift King, Gen.lift Ace, gen_num
 ]
-val gen_suit = Gen.choose #[
+val gen_suit: real -> suit * real = Gen.choose #[
     Gen.lift Clubs, Gen.lift Diamonds, Gen.lift Hearts, Gen.lift Spades
 ]
 val gen_card = Gen.zip(gen_suit, gen_rank)
