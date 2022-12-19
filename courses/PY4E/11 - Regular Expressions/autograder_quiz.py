@@ -71,7 +71,15 @@ handle.close()
 # print sum( [ ****** *** * in **********('[0-9]+',**************************.read()) ] )
 # Python 3:
 # import re
-# print( sum( [ ****** *** * in **********('[0-9]+',**************************.read()) ] ) )
+# print(sum([int(i) for i in re.findall('[0-9]+', open("regex_sum_1129910.txt").read())]))
 # Please don't waste a lot of time trying to figure out the shortest solution
 # until you have completed the homework. List comprehension is mentioned in
 # Chapter 10 and the read() method is covered in Chapter 7.
+regex = "java$"
+
+fhand = open('mbox.txt')
+count = 0
+for line in fhand:
+    if re.findall(regex, line):
+        count += 1
+print(count)

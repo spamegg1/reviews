@@ -120,7 +120,7 @@ val test17g: bool = not(isAnySorted [2, 3, 1])
 val test17h: bool = not(isAnySorted [3, 1, 2])
 val test17i: bool = isAnySorted [3, 2, 1]
 
-val test18a: bool = sortedMerge ([], []) = mynil
+val test18a: bool = null(sortedMerge ([], []))
 val test18b: bool = sortedMerge ([1, 2, 3], []) = [1, 2, 3]
 val test18c: bool = sortedMerge ([], [1, 2, 3]) = [1, 2, 3]
 val test18d: bool = sortedMerge ([1, 4, 7], [5, 8, 9]) = [1, 4, 5, 7, 8, 9]

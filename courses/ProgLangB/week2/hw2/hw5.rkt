@@ -100,7 +100,8 @@
                (eval-under-env
                 (fun-body myfun)
                 (let ([newenv
-                      (cons (cons (fun-formal myfun) arg) (closure-env cl))])
+                      (cons (cons (fun-formal myfun) arg)
+                            (closure-env cl))])
                   (if (fun-nameopt myfun)
                       (cons (cons (fun-nameopt myfun) cl) newenv)
                       newenv))))

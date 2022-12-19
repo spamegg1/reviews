@@ -103,7 +103,7 @@ Updated July 2021 (Effective Programming in Scala)
 #### Loving the Abstract Void of Nothingness
 
 - Have faith in the courses / languages that seem "pointless" or "useless" to you initially. The point / understanding will come to you later, it takes time. Avoid the "resistance mentality". Stop asking "when will I ever use this?"
-- Develop a taste in math and computer science history. Do you know the extent of the massive influence and importance of 1960s and 1970s languages like Lisp (Racket) and ML (Standard ML) that you turn your nose up at? Did you know Lisp was one of the first "high-level" languages ever invented (in 1960s), and was influenced by how [mathematicians were doing programming before computers even existed](https://en.wikipedia.org/wiki/Lambda_calculus)? Did you know that all those parentheses of Racket was invented by a [logician](https://en.wikipedia.org/wiki/Jan_%C5%81ukasiewicz) (that's why it's called "Polish notation"), and they provide an extremely important [property](https://en.wikipedia.org/wiki/Homoiconicity)? Did you know that many features found in modern languages like Rust, Typescript were first invented in ML (in 1970s)?
+- Develop a taste in math and computer science history. Do you know the extent of the massive influence and importance of 1960s and 1970s languages like Lisp (Racket) and ML (Standard ML) that you turn your nose up at? Did you know Lisp was one of the first "high-level" languages ever invented (in 1960s), and was influenced by how [mathematicians were doing programming before computers even existed](https://en.wikipedia.org/wiki/Lambda_calculus)? Did you know that all those parentheses of Racket was invented by a [logician](https://en.wikipedia.org/wiki/Jan_%C5%81ukasiewicz) (that's why it's called "Polish notation"), and they provide an extremely important [property](https://en.wikipedia.org/wiki/Homoiconicity)? Did you know that many features found in modern languages like Rust, Typescript were first invented in ML (in 1970s)? Did you know that Edsger Dijkstra never used a computer, [or even a type writer](https://en.wikipedia.org/wiki/Edsger_W._Dijkstra#Personality_and_working_style)?
 - Develop a mindset that enjoys doing "useless" things or "abstract things with no practical purpose." Stop trying to immediately find a "real life use case". Abstraction works in a way that is extremely long term and unpredictable. You will see benefits years later.
 
 ### <a name="cs50"></a> Harvard's CS50 (first half)
@@ -258,6 +258,10 @@ So... what's the point of this long educational, pedagogical tirade? ***You have
 Here’s one learner’s perspective: *It took me three tries to finally be ready for this course. I made it to the half way mark to understand why this course is really important. I just wish I knew this in the beginning of last year when I first started.*
 
 Another: *The htc courses were really amazing, I feel bad I said they were useless and outdated. I want to thank the people who told me I should take them.*
+
+One more: *This final project is really testing my limits with program design. I probably wouldn't have been able to write a program this complex without the design recipes.*
+
+I got some support: *It teaches programming in a very mathematical way, and I don't think you can fully appreciate that until you do discrete math. Then you'll come to realize how code is treated as proof (ideas like induction and recursion come up naturally) and not just a bunch of instructions.*
 
 ***Even more updates (July 2021):*** I told this story on Discord:
 
