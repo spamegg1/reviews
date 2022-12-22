@@ -5,12 +5,13 @@ def sqrtIter(guess: Double, x: Double): Double =
   else sqrtIter(improve(guess, x), x)
 
 def isGoodEnough(guess: Double, x: Double) =
-  if x <= 0.001 then
-    abs(guess * guess - x) < 0.0000001
-  else if x > 1.0e10 then
-    abs(guess * guess - x) < 1
-  else
-    abs(guess * guess - x) < 0.001
+  abs(guess - improve(guess, x)) < 0.001
+  // if x <= 0.001 then
+  //   abs(guess * guess - x) < 0.0000001
+  // else if x > 1.0e10 then
+  //   abs(guess * guess - x) < 1
+  // else
+  //   abs(guess * guess - x) < 0.001
 
 def improve(guess: Double, x: Double) = (guess + x / guess) / 2
 
@@ -26,4 +27,4 @@ sqrt(1.0e20)
 sqrt(1.0e30)
 sqrt(1.0e40)
 sqrt(1.0e45)
-// sqrt(1.0e46) // doesn't work
+sqrt(1.0e50)

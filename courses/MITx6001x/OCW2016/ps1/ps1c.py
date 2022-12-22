@@ -25,7 +25,7 @@ def bisearch_one_step(saving, down_pay, left, right, portion, steps):
     return (new_left, new_right, new_portion, new_steps)
 
 
-def bisearch_many(salary, inv_rate, semi_raise, down_pay,
+def bisearch(salary, inv_rate, semi_raise, down_pay,
     left, right, portion, steps):
 
     saving = savings(salary, portion, inv_rate, semi_raise)
@@ -35,14 +35,9 @@ def bisearch_many(salary, inv_rate, semi_raise, down_pay,
     result = bisearch_one_step(saving, down_pay, left, right, portion, steps)
     new_left, new_right, new_portion, new_steps = result
     
-    return bisearch_many(salary, inv_rate, semi_raise, down_pay,
-                         new_left, new_right, new_portion, new_steps)
+    return bisearch(salary, inv_rate, semi_raise, down_pay,
+                    new_left, new_right, new_portion, new_steps)
     
-
-def bisearch(salary, inv_rate, semi_raise, down_pay):
-    left, right, portion, steps = 0, 10000, 5000, 1
-    return bisearch_many(salary, inv_rate, semi_raise, down_pay,
-                         left, right, portion, steps)
 
 def optimal_saving_rate(salary, inv_rate, semi_raise, down_pay):
     max_saving = savings(salary, 10000, inv_rate, semi_raise)
@@ -50,14 +45,20 @@ def optimal_saving_rate(salary, inv_rate, semi_raise, down_pay):
     if max_saving < down_pay:
         print("It is not possible to pay the down payment in three years.")
     else:
-        portion, steps = bisearch(salary, inv_rate, semi_raise, down_pay)
+        left, right, portion, steps = 0, 10000, 5000, 1
+        portion, steps = bisearch(salary, inv_rate, semi_raise, down_pay,
+                                  left, right, portion, steps)
         print("Best savings rate:", portion / 10000)
         print("Steps in bisection search:", steps)
 
 
 def tests(inv_rate, semi_raise, down_pay):
-    assert (4411, 12) == bisearch(150000, inv_rate, semi_raise, down_pay)
-    assert (2206,  9) == bisearch(300000, inv_rate, semi_raise, down_pay)
+    left, right, portion, steps = 0, 10000, 5000, 1
+    assert (4411, 12) == bisearch(150000, inv_rate, semi_raise, down_pay,
+                                  left, right, portion, steps)
+    assert (2206,  9) == bisearch(300000, inv_rate, semi_raise, down_pay,
+                                  left, right, portion, steps)
+    print("Tests pass!")
 
 
 if __name__ == "__main__":

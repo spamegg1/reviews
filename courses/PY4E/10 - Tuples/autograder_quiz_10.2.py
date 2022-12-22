@@ -27,11 +27,10 @@ handle = open(name)
 hours = {}
 
 for line in handle:
-    if not line.startswith("From "):
-        continue
-    time = line.split()[5]
-    hour = time.split(":")[0]
-    hours[hour] = hours.get(hour, 0) + 1
+    if line.startswith("From "):
+        time = line.split()[5]
+        hour = time.split(":")[0]
+        hours[hour] = hours.get(hour, 0) + 1
 
 for k, v in sorted(hours.items()):
     print(f'{k} {v}')
