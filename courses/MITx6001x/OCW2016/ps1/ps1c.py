@@ -52,24 +52,55 @@ def optimal_saving_rate(salary, inv_rate, semi_raise, down_pay):
         print("Steps in bisection search:", steps)
 
 
-def tests(inv_rate, semi_raise, down_pay):
+def tests():
+    inv_rate, semi_raise, down_pay = 0.04, 0.07, 250000
     left, right, portion, steps = 0, 10000, 5000, 1
+
+    print("Testing savings:")
+    assert savings(150000, 5000, inv_rate, semi_raise) == 283387.20615677064
+    assert savings(150000, 2500, inv_rate, semi_raise) == 141693.60307838532
+    assert savings(150000, 3750, inv_rate, semi_raise) == 212540.40461757814
+    assert savings(300000, 5000, inv_rate, semi_raise) == 566774.4123135413
+    assert savings(300000, 2500, inv_rate, semi_raise) == 283387.20615677064
+    assert savings(300000, 1250, inv_rate, semi_raise) == 141693.60307838532
+    print("Testing savings: passed!")
+
+    print("Testing bisearch_one_step:")
+    assert (0, 5000, 2500, 2) == bisearch_one_step(
+        283387.20615677064, down_pay, 0, 10000, 5000, 1)
+    assert (2500, 5000, 3750, 3) == bisearch_one_step(
+        141693.60307838532, down_pay, 0, 5000, 2500, 2)
+    assert (3750, 5000, 4375, 4) == bisearch_one_step(
+        212540.40461757814, down_pay, 2500, 5000, 3750, 3)
+    assert (0, 5000, 2500, 2) == bisearch_one_step(
+        283387.20615677064, down_pay, 0, 10000, 5000, 1)
+    assert (2500, 5000, 3750, 3) == bisearch_one_step(
+        141693.60307838532, down_pay, 0, 5000, 2500, 2)
+    assert (3750, 5000, 4375, 4) == bisearch_one_step(
+        212540.40461757814, down_pay, 2500, 5000, 3750, 3)
+    print("Testing bisearch_one_step: passed!")
+
+    print("Testing bisearch:")
     assert (4411, 12) == bisearch(150000, inv_rate, semi_raise, down_pay,
                                   left, right, portion, steps)
     assert (2206,  9) == bisearch(300000, inv_rate, semi_raise, down_pay,
                                   left, right, portion, steps)
-    print("Tests pass!")
+    print("Testing bisearch: passed!")
+
+    print("All tests pass!")
 
 
-if __name__ == "__main__":
+def main():
     # Constants given to us by the problem
     SEMI_RAISE = 0.07
     INV_RATE = 0.04
     TOTAL_COST = 1000000
     DOWNPAY = TOTAL_COST * 0.25
 
-    tests(INV_RATE, SEMI_RAISE, DOWNPAY)    
-
     SALARY = float(input("Enter the starting salary: "))
     optimal_saving_rate(SALARY, INV_RATE, SEMI_RAISE, DOWNPAY)
-    
+
+
+if __name__ == "__main__":
+    tests()
+    # main()

@@ -1,3 +1,5 @@
+semi_raise = 0.07, inv_rate = 0.04, down_pay = 250000
+
 starting salary = 150000
 
 L   R    p   s    3-year saving

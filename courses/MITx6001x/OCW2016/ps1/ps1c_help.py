@@ -26,7 +26,7 @@ def bisearch(salary, inv_rate, semi_raise, down_pay, left, right, portion, steps
     # you can stop, and return portion and steps.
     # Otherwise, call bisearch_one_step with the savings.
     # This will give you new_left, new_right, new_portion, new_steps.
-    # Then call bisearch with these new values. (loop)
+    # Then call bisearch with these new values. (recursion instead of loop)
     # salary, inv_rate, semi_raise, down_pay stay unchanged.
 
 def optimal_saving_rate(salary, inv_rate, semi_raise, down_pay):
@@ -45,6 +45,7 @@ if __name__ == "__main__":
     # Then call optimal_saving_rate with that salary, and the above 3 constants.
 
 # Here is some testing data:
+# using: semi_raise = 0.07, inv_rate = 0.04, down_pay = 250000
 # ~
 # ~ starting salary = 150000
 # ~ Left Right Portion Steps 3-year saving
