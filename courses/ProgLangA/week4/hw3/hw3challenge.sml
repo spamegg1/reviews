@@ -84,8 +84,8 @@ fun coalesce(s: typ, t: typ): typ = case (s, t) of
 (* Merges two typ options. Checks if they are compatible. *)
 fun merge(s: typ option, t: typ option): typ option =
     case (s, t) of
-        (NONE, _) => NONE
-    |   (_, NONE) => NONE
+        (NONE, _)          => NONE
+    |   (_, NONE)          => NONE
     |   (SOME s1, SOME t1) =>
         if   compatible(s1, t1)
         then SOME(coalesce(s1, t1))

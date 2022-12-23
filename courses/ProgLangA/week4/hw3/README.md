@@ -243,6 +243,34 @@ So, in the previous example `ConstP(10)` and now `Variable "x"` can be considere
 
 #### **Example 8:**
 
+Let's consider this variation of the previous case:
+
+```sml
+fun h(x) =
+   case x of
+      []       => 0
+    | 1  :: xs => 1 (* an int list? *)
+    | () :: xs => 1 (* a unit list? *)
+    | _        => -1
+```
+
+In this case we represent these branches as:
+
+```sml
+TupleP[
+  ConstructorP("Empty", UnitP),
+  ConstructorP("List", TupleP[ConstP 1, Variable "xs"])
+  ConstructorP("List", TupleP[  UnitP , Variable "xs"])
+  Wildcard
+]
+```
+
+And the answer should be `Some(Datatype "List")`.
+
+And once more, notice how `ConstP 1` and `UnitP` can be considered "compatible with" `Anything`.
+
+#### **Example 9:**
+
 Just another example
 
 ```sml
@@ -260,7 +288,7 @@ Corresponding with:
 
 Should evidently yield `SOME (Datatype "list")`.
 
-#### **Example 9:**
+#### **Example 10:**
 
 Now for the "most lenient" pattern. In the assignment we get two examples.
 
@@ -290,7 +318,7 @@ TupleT[Anything, Anything]
 
 What is meant by "most lenient" is that the type `TupleT[IntT, IntT]` (for example) is also a fine type for all the patterns, but it is not as "lenient" (does not match as many values as) `TupleT[Anything,Anything]` so `TupleT[IntT, IntT]` is not correct.
 
-#### **Example 10:**
+#### **Example 11:**
 
 The second example of the "most lenient" requirement is similar but a little more interesting.
 
@@ -458,7 +486,7 @@ TupleT [typ1a, typ2a, ..., typna]
 TupleT [typ1b, typ2b, ..., typnb]
 ```
 
-So we can "zip" the two lists, then find the common `typ`s of the pairs `(typ1a, typ1b), ..., (typna, typnb)` recursively. Then the common `typ` of the tuples will be 
+So we can "zip" the two lists, then find the common `typ`s of the pairs `(typ1a, typ1b), ..., (typna, typnb)` recursively. Then the common `typ` of the tuples will be
 
 ```sml
 TupleT [commontyp1, commontyp2, ..., commontypn]
@@ -498,7 +526,7 @@ merge: (typ option) * (typ option) -> (typ option)
 
 and we would use this to FOLD over the `pattern list`. Wait, what? We can only do that with a `typ option list`.
 
-So we have to take the `pattern list` and convert it to a `typ option list`. For this, we can have a function 
+So we have to take the `pattern list` and convert it to a `typ option list`. For this, we can have a function
 
 ```sml
 convert: pattern -> typ option
@@ -510,7 +538,7 @@ and we can `List.map` this function over the `pattern list`. But... for our conv
 convert: (string * string * typ) list -> pattern -> typ option
 ```
 
-For the `merge` function, we can take two `typ option`s, remove the `option` part (throw away the `SOME`), merge the two `typ`s, then wrap it back up with an `option` again. But only if they are both `SOME`, and only if the `typ`s that are inside the `SOME`s are "merge-able" (count 5 !). 
+For the `merge` function, we can take two `typ option`s, remove the `option` part (throw away the `SOME`), merge the two `typ`s, then wrap it back up with an `option` again. But only if they are both `SOME`, and only if the `typ`s that are inside the `SOME`s are "merge-able" (count 5 !).
 
 This situation of checking if two `typ`s are merge-able kept coming up 5 times. So it seems convenient (almost necessary) to have a separate function for checking if two `typ`s *can* have a common `typ` at all:
 
@@ -537,7 +565,7 @@ fun compatible(s: typ, t: typ): bool
 fun convert(metadata: (string * string * typ) list)(p: pattern): typ option
 
 (* assumes s, t are compatible, is recursive in the TupleT case. *)
-fun coalesce(s: typ, t: typ): typ 
+fun coalesce(s: typ, t: typ): typ
 
 (* non-recursive, uses compatible and coalesce. Very simple! *)
 fun merge(s: typ option, t: typ option): typ option
