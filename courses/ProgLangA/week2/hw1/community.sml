@@ -483,3 +483,12 @@ as opposed to sorting them afterwards.
 *)
 (* fun all_products(pairlist: (int * int) list): int list = [] *)
 (* DO THIS YOURSELF! I AM TIRED. *)
+fun all_divisors(divisor: int, product: int): int list =
+    if      divisor > product
+    then    []
+    else if product mod divisor = 0
+    then    divisor :: all_divisors(divisor + 1, product)
+    else    all_divisors(divisor + 1, product)
+
+fun all_products(factors: (int * int) list): int list =
+    all_divisors(1, multiply factors)

@@ -176,3 +176,10 @@ val test24d: bool = multiply [(2, 1), (3, 1), (5, 1), (7, 1), (11, 1)]
 val test24e: bool = multiply [(2, 20)] = 1048576
 val test24f: bool = multiply [(2, 2), (3, 3), (5, 5)]
     = 2 * 2 * 3 * 3 * 3 * 5 * 5 * 5 * 5 * 5
+
+val test25a: bool = all_products [] = [1]
+val test25b: bool = all_products (factorize 1) = [1]
+val test25c: bool = all_products (factorize 20) = [1, 2, 4, 5, 10, 20]
+val test25d: bool = all_products (factorize 30) = [1, 2, 3, 5, 6, 10, 15, 30]
+(* val test25b: bool = all_products [] == []
+val test25c: bool = all_products [] == [] *)

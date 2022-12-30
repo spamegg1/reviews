@@ -147,7 +147,7 @@
         (fun "mupl-mapAddN" "i"
              (fun #f "mupl-list"
                   (call (call (var "map")
-                        (fun #f "x" (add (var "x") (var "i"))))
+                              (fun #f "x" (add (var "x") (var "i"))))
                         (var "mupl-list"))))))
 
 ;; Challenge Problem

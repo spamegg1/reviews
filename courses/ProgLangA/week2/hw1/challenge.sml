@@ -55,7 +55,7 @@ fun number_in_months_challenge(dates: (int * int * int) list, months: int list) 
 fun dates_in_months_challenge (dates: (int * int * int) list, months: int list) =
     dates_in_months(dates, remove_duplicates months)
 
-fun reasonable_date (date: int * int * int) =
+fun reasonable_date (date: int * int * int): bool =
 let
     fun get_nth (lst: int list, n: int) =
         if n = 1
