@@ -1,3 +1,7 @@
+# Hint for `countChange`
+
+![](countChange.png)
+
 # Recursion
 
 In this assignment, you will work with a functional representation of sets based on the mathematical notion of characteristic functions. The goal is to gain practice with higher-order functions.
