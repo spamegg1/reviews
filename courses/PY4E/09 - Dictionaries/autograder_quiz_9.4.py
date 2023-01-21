@@ -21,6 +21,8 @@ for line in handle:
     sender = line.split()[1]
     senders[sender] = senders.get(sender, 0) + 1
 
+handle.close()
+
 maximum = 0
 top_sender = ''
 for sender in senders:

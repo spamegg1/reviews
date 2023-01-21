@@ -1,4 +1,5 @@
 # Spam's CS Corner: Course Reviews
+
 DISCLAIMER: These are my subjective personal opinions! Make your own judgment. Also, I will talk a lot about my feelings! You are warned.
 
 I keep mentioning something called OSSU. [Here it is](https://github.com/ossu/computer-science/) in case you haven't heard of it.
@@ -76,6 +77,8 @@ Updated July 2021 (Effective Programming in Scala)
 - Don't measure your success or failure in terms of time ("this one problem took me X hours/days to do!"), time often is a poor measurement of difficulty (one tiny piece of missing knowledge can cause days/months of getting stuck, gaining that piece can solve a huge problem instantly). 
 - Measure it in terms of which concepts/ideas gave you an easy/hard time, what pieces of knowledge you gained or you were missing, how well and properly you handled the problems, how high/low was the complexity, whether you did it with solid understanding or not. Be metacognitive!
 - Go slowly. Completing fast is NOT an achievement. Completing slowly usually is.
+- *Those who proceed only very slowly can make much greater progress, provided they always follow the right path, than those who hurry and stray from it.*
+     - Rene Descartes, Discourse on Method
 
 #### Long term memory
 
@@ -156,7 +159,11 @@ https://www.edx.org/course/how-to-code-complex-data
 
 These courses are intended for absolute beginners but in OSSU they come after some other introductory courses. Personally I think it's more appropriate as someone's first course. Experienced functional programming teachers and academics claim that it's much easier for someone to learn FP if they were NOT exposed to programming before, but those used to procedural programming have a harder time.
 
-With that pedagogical point out of the way, let's get to the courses. They are two courses but really intended as one big course. You will use Racket, a [Lisp](https://lisp-lang.org/)-like language. Lisp has been around since the late 1960s I believe. Brace yourself (get it?) for tons of [parentheses](https://xkcd.com/297/)! Seriously, A LOT of parentheses. Recursion is the name of the game here. You will recurse till the cows come home, then recurse some more on the cows.
+With that pedagogical point out of the way, let's get to the courses. They are two courses but really intended as one big course. You will use Racket, a [Lisp](https://lisp-lang.org/)-like language. Lisp has been around since the late 1960s I believe. 
+
+> As one of the earliest programming languages, Lisp pioneered many ideas in [computer science](https://en.wikipedia.org/wiki/Computer_science), including [tree data structures](https://en.wikipedia.org/wiki/Tree_(data_structure)), [automatic storage management](https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)), [dynamic typing](https://en.wikipedia.org/wiki/Dynamic_typing), [conditionals](https://en.wikipedia.org/wiki/Conditional_(computer_programming)), [higher-order functions](https://en.wikipedia.org/wiki/Higher-order_function), [recursion](https://en.wikipedia.org/wiki/Recursion_(computer_science)), the [self-hosting compiler](https://en.wikipedia.org/wiki/Self-hosting_(compilers)),[[11\]](https://en.wikipedia.org/wiki/Lisp_(programming_language)#cite_note-Graham-11) and the [read–eval–print loop](https://en.wikipedia.org/wiki/Read–eval–print_loop).
+
+These courses teach most of these ideas in a bare-bones way from first principles. Brace yourself (get it?) for tons of [parentheses](https://xkcd.com/297/)! Seriously, A LOT of parentheses. Recursion is the name of the game here. You will recurse till the cows come home, then recurse some more on the cows.
 
 You'll be using an IDE called Dr. Racket, which is really excellent in my opinion. Comes with the language, debugger, code editor etc. everything installed. It comes pre-installed with 3 levels of the Racket language: Beginner Student, Intermediate Student, Advanced Student (and eventually you can take off ALL the training wheels and use the full Racket language). The instructor is great. He sits down and writes code with you in many videos. (I don't know why more courses don't do this live coding with the instructor.) You will be doing tons of small coding exercises, and lots of multiple choice quizzes. These are fairly easy and good.
 
