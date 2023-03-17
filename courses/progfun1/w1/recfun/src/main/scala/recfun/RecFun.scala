@@ -36,15 +36,17 @@ object RecFun extends RecFunInterface:
    * Exercise 3
    */
   def countChange(money: Int, coins: List[Int]): Int =                   // TODO
-    def helper(money: Int, coins: List[Int], acc: Int): Int =
-      (money, coins) match
-        case (0, _)   => acc
-        case (_, Nil) => acc
-        case (_, head :: tail) =>
-          if      money == head
-          then    acc + 1
-          else if money < head
-          then    acc
-          else    helper(money - head, coins, acc) + helper(money, tail, acc)
+    // def helper(money: Int, coins: List[Int], acc: Int): Int =
+      // (money, coins) match
+        // case (0, _)   => acc
+        // case (_, Nil) => acc
+        // case (_, head :: tail) => money compare head match
+          // case -1 => acc
+          // case 0  => acc + 1
+          // case 1  => helper(money - head, coins, acc) + helper(money, tail, acc)
+    // helper(money, coins.sorted, 0)
 
-    helper(money, coins.sorted, 0)
+    // simpler solution
+    if money == 0 then 1
+    else if money < 0 || coins.isEmpty then 0
+    else countChange(money, coins.tail) + countChange(money - coins.head, coins)

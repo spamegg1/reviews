@@ -41,6 +41,13 @@ class HuffmanSuite extends munit.FunSuite:
       assertEquals(decode(t1, encode(t1)("ab".toList)), "ab".toList)
   }
 
+  test("encoding a longer sentence with more characters gives optimal length") {
+    val text = "The quick brown fox jumped over the lazy dog.".toList
+    val optimalTree = createCodeTree(text)
+    val encodedBits = encode(optimalTree)(text)
+    assertEquals(encodedBits.length, 203)
+  }
+
 
   import scala.concurrent.duration.*
   override val munitTimeout = 10.seconds
