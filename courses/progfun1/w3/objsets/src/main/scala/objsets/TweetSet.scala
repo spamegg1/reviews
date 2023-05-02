@@ -11,22 +11,22 @@ class Tweet(val user: String, val text: String, val retweets: Int):
     "Text: " + text + " [" + retweets + "]"
 
 /**
- * This represents a set of objects of type `Tweet` in the form of a binary 
- * search tree. Every branch in the tree has two children (two `TweetSet`s). 
- * There is an invariant which always holds: for every branch `b`, all 
+ * This represents a set of objects of type `Tweet` in the form of a binary
+ * search tree. Every branch in the tree has two children (two `TweetSet`s).
+ * There is an invariant which always holds: for every branch `b`, all
  * elements in the left subtree are smaller than the tweet at `b`.
  * The elements in the right subtree are larger.
  *
  * Note that the above structure requires us to be able to compare two tweets
  * (we need to be able to say which of two tweets is larger, or if they are
- * equal). In this implementation, the equality / order of tweets is based on 
- * the tweet's text (see `def incl`). Hence, a `TweetSet` could not contain 
+ * equal). In this implementation, the equality / order of tweets is based on
+ * the tweet's text (see `def incl`). Hence, a `TweetSet` could not contain
  * two tweets with the same text from different users.
  *
  *
- * The advantage of representing sets as binary search trees is that the 
- * elements of the set can be found quickly. If you want to learn more you 
- * can take a look at the Wikipedia page [1], but this is not necessary 
+ * The advantage of representing sets as binary search trees is that the
+ * elements of the set can be found quickly. If you want to learn more you
+ * can take a look at the Wikipedia page [1], but this is not necessary
  * in order to solve this assignment.
  *
  * [1] http://en.wikipedia.org/wiki/Binary_search_tree
@@ -34,10 +34,10 @@ class Tweet(val user: String, val text: String, val retweets: Int):
 abstract class TweetSet extends TweetSetInterface:
 
   /**
-   * This method takes a predicate and returns a subset of all the 
+   * This method takes a predicate and returns a subset of all the
    * elements in the original set for which the predicate is true.
    *
-   * Question: Can we implement this method here, or should it 
+   * Question: Can we implement this method here, or should it
    * remain abstract and be implemented in the subclasses?
    */
   def filter(p: Tweet => Boolean): TweetSet =                            // TODO
@@ -63,15 +63,15 @@ abstract class TweetSet extends TweetSetInterface:
    * Calling `mostRetweeted` on an empty set should throw an exception of
    * type `java.util.NoSuchElementException`.
    *
-   * Question: Should we implement this method here, or should it 
+   * Question: Should we implement this method here, or should it
    * remain abstract and be implemented in the subclasses?
    */
   def mostRetweeted: Tweet                                               // TODO
     // Should not be implemented here. Very different in subclasses.
 
   /**
-   * Returns a list containing all tweets of this set, sorted by retweet 
-   * count in descending order. In other words, the head of the resulting 
+   * Returns a list containing all tweets of this set, sorted by retweet
+   * count in descending order. In other words, the head of the resulting
    * list should have the highest retweet count.
    *
    * Hint: the method `remove` on TweetSet will be very useful.
@@ -135,6 +135,7 @@ class Empty extends TweetSet:
     throw new java.util.NoSuchElementException
   def descendingByRetweet: TweetList = Nil                               // TODO
   def isEmpty: Boolean = true                                            // TODO
+  override def toString: String = "Empty"
 
 class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet:
   def filterAcc(p: Tweet => Boolean, acc: TweetSet): TweetSet =          // TODO
@@ -185,6 +186,8 @@ class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet:
     Cons(mostRetweeted, remove(mostRetweeted).descendingByRetweet)
 
   def isEmpty: Boolean = false                                           // TODO
+  override def toString: String =
+    s"NonEmpty(${elem.toString}, ${left.toString}, ${right.toString})"
 
 trait TweetList:
   def head: Tweet

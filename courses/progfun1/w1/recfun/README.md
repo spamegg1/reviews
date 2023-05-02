@@ -16,15 +16,15 @@ Do not forget to submit your work using the submit task from SBT. Please refer t
 
 The following pattern of numbers is called *Pascal's triangle*.
 
-​      1   
+​      1
 
-​    1 1  
+​    1 1
 
-  1 2 1 
+  1 2 1
 
- 1 3 3 1 
+ 1 3 3 1
 
-1 4 6 4 1   
+1 4 6 4 1
 
 ...
 

@@ -3,12 +3,12 @@ package patmat
 /**
  * A huffman code is represented by a binary tree.
  *
- * Every `Leaf` node of the tree represents one character 
+ * Every `Leaf` node of the tree represents one character
  * of the alphabet that the tree can encode.
  * The weight of a `Leaf` is the frequency of appearance of the character.
  *
  * The branches of the huffman tree, the `Fork` nodes,
- * represent a set containing all the characters present in the leaves below it. 
+ * represent a set containing all the characters present in the leaves below it.
  * The weight of a `Fork` node is the sum of the weights of these leaves.
  */
 abstract class CodeTree
@@ -39,30 +39,30 @@ trait Huffman extends HuffmanInterface:
   // Part 2: Generating Huffman trees
 
   /**
-   * In this assignment, we are working with lists of characters. 
-   * This function allows you to easily create a character list 
+   * In this assignment, we are working with lists of characters.
+   * This function allows you to easily create a character list
    * from a given string.
    */
   def string2Chars(str: String): List[Char] = str.toList
 
   /**
-   * This function computes for each unique character in the list `chars` the 
+   * This function computes for each unique character in the list `chars` the
    * number of times it occurs. For example, the invocation
    *
    *   times(List('a', 'b', 'a'))
    *
-   * should return the following 
+   * should return the following
    * (the order of the resulting list is not important):
    *
    *   List(('a', 2), ('b', 1))
    *
-   * The type `List[(Char, Int)]` denotes a list of pairs, where each pair 
-   * consists of a character and an integer. 
+   * The type `List[(Char, Int)]` denotes a list of pairs, where each pair
+   * consists of a character and an integer.
    * Pairs can be constructed easily using parentheses:
    *
    *   val pair: (Char, Int) = ('c', 1)
    *
-   * In order to access the two elements of a pair, 
+   * In order to access the two elements of a pair,
    * you can use the accessors `_1` and `_2`:
    *
    *   val theChar = pair._1
@@ -107,7 +107,7 @@ trait Huffman extends HuffmanInterface:
    * remaining elements of `trees` at a position such that the ordering by
    * weights is preserved.
    *
-   * If `trees` is a list of less than two elements, that list should be 
+   * If `trees` is a list of less than two elements, that list should be
    * returned unchanged.
    */
   def combine(trees: List[CodeTree]): List[CodeTree] =                   // TODO
@@ -126,8 +126,8 @@ trait Huffman extends HuffmanInterface:
    * where `trees` is of type `List[CodeTree]`, `singleton` and `combine`
    * refer to the two functions defined above.
    *
-   * In such an invocation, `until` should call the two functions until 
-   * the list of code trees contains only one single tree, 
+   * In such an invocation, `until` should call the two functions until
+   * the list of code trees contains only one single tree,
    * and then return that singleton list.
    */
   def until(done : List[CodeTree] => Boolean,
@@ -138,11 +138,11 @@ trait Huffman extends HuffmanInterface:
     else until(done, merge)(merge(trees))
 
   /**
-   * This function creates a code tree which is optimal 
+   * This function creates a code tree which is optimal
    * to encode the text `chars`.
    *
-   * The parameter `chars` is an arbitrary text. 
-   * This function extracts the character frequencies from that text 
+   * The parameter `chars` is an arbitrary text.
+   * This function extracts the character frequencies from that text
    * and creates a code tree based on them.
    */
   def createCodeTree(chars: List[Char]): CodeTree =                      // TODO
@@ -230,7 +230,7 @@ trait Huffman extends HuffmanInterface:
   type CodeTable = List[(Char, List[Bit])]
 
   /**
-   * This function returns the bit sequence that represents 
+   * This function returns the bit sequence that represents
    * the character `char` in the code table `table`.
    */
   def codeBits(table: CodeTable)(char: Char): List[Bit] =                // TODO
@@ -240,12 +240,12 @@ trait Huffman extends HuffmanInterface:
       ._2
 
   /**
-   * Given a code tree, create a code table which contains, for every character 
+   * Given a code tree, create a code table which contains, for every character
    * in the code tree, the sequence of bits representing that character.
    *
-   * Hint: think of a recursive solution: every sub-tree of the code tree `tree` 
-   * is itself a valid code tree that can be represented as a code table. 
-   * Using the code tables of the sub-trees, 
+   * Hint: think of a recursive solution: every sub-tree of the code tree `tree`
+   * is itself a valid code tree that can be represented as a code table.
+   * Using the code tables of the sub-trees,
    * think of how to build the code table for the entire tree.
    */
   def convert(tree: CodeTree): CodeTable = tree match                    // TODO
@@ -253,8 +253,8 @@ trait Huffman extends HuffmanInterface:
     case Fork(l, r, _, _) => mergeCodeTables(convert(l), convert(r))
 
   /**
-   * This function takes two code tables and merges them into one. 
-   * Depending on how you use it in the `convert` method above, this merge 
+   * This function takes two code tables and merges them into one.
+   * Depending on how you use it in the `convert` method above, this merge
    * method might also do some transformations on the two parameter code tables.
    */
   def mergeCodeTables(a: CodeTable, b: CodeTable): CodeTable =           // TODO
