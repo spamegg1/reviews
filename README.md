@@ -18,6 +18,8 @@ Updated May 2021 (Fullstack Open, Intro to Logic)
 
 Updated July 2021 (Effective Programming in Scala)
 
+Updated June 2023 (Kotlin for Java Developers)
+
 - [Learning tips](#tips)
 - [Harvard's CS50 (first half)](#cs50)
 - [CS50, second half, Final Project](#cs50-2)
@@ -52,6 +54,7 @@ Updated July 2021 (Effective Programming in Scala)
 - [Fullstack Open](#fsopen)
 - [Introduction to Logic](#logic)
 - [Effective Programming in Scala](#eff)
+- [Kotlin for Java Developers](#kotlin)
 
 ### <a name="tips"></a> Learning tips
 
@@ -963,3 +966,25 @@ Videos have good length (not too long, not too short), good pace and good explan
 *Update:* Some of the assignments had issues and we reported them, they got fixed and updated. Here is [one example](https://www.coursera.org/learn/effective-scala/discussions/forums/EEaf8gS4EeyCYg7yKO-RDw/threads/jvdu35EPEeyLxAroUu5PRw).
 
 *Spam's recommendation:* This course is excellent, take it! Later parts are not beginner friendly but you should be OK.
+
+### <a name="kotlin"></a> Kotlin for Java Developers
+
+[https://www.coursera.org/learn/kotlin-for-java-developers](https://www.coursera.org/learn/kotlin-for-java-developers)
+
+It's a course by [JetBrains](https://www.jetbrains.com/) who develops [Kotlin](https://kotlinlang.org/). It's a short course with 4 weeks. No need to install the language, instead you install IntelliJ. However this is not explained until the end of Week 2, really weird.
+
+Week 1 has a few short intro videos and nothing else. You get to see the language creator. The instructors have strong Czech accents so you might struggle with that. There are subtitles of course. The course assumes you know Java well, and starts teaching immediately with Kotlin-to-Java conversions, instead of teaching Kotlin from scratch. (This is the opposite of the approach the Scala courses take.) You'll immediately see Kotlin code you haven't learned, so you have to guess things.
+
+Week 2 has basics: values, variables, functions, control structures: if / when; loops: for, while, do-while; exceptions: try / except; ranges, etc. Instead of Scala / SML style full pattern matching, Kotlin has a syntactic sugar named `when` for a nicer version of `switch/case` from Java. Apparently it's a [deliberate design decision](https://programmingideaswithjake.wordpress.com/2016/08/27/improved-pattern-matching-in-kotlin/) not to add the full power of structured pattern matching, to avoid too much overhead. Understandable. Building on top of Java / JVM which does not support functional programming features is difficult. Other than that, Kotlin syntax is extremely similar to Scala (often identical).
+
+There are nice `is` and `in` operators like Python, which can be used with loops (I wish Scala had these). Thankfully there are no Java semicolons! Unfortunately lots of curly braces. Kotlin, like Scala, does not care about Java's checked exceptions. This causes issues with Java interop (calling Kotlin code from inside Java code) so you gotta be careful. `try` is an expression as in Scala. There is `data class` just like Scala's [`case class`](https://docs.scala-lang.org/tour/case-classes.html) that automatically extends `equals`, `hashCode`, `toString` etc. There is stuff I'm not used to, and not explained: `open class`.
+
+There are also extension functions, just like Scala 3's [extension methods](https://docs.scala-lang.org/scala3/book/ca-extension-methods.html). In Kotlin, they just get converted to static Java functions; so no `override`over regular class methods, but can be used for overloading. Apparently Kotlin is just JDK + some extensions (to keep runtime jar small). The language creator's talk on the importance of extensions (keeping your class method count small by moving functionality OUT) sounds like a tacit admission that OOP (bundling functions with data) is just a bad idea. Scala solves the same problem with [companion objects](https://docs.scala-lang.org/scala3/book/domain-modeling-tools.html#companion-objects) as a location for all the `static` functions.
+
+There are many in-video questions. Some are tricky, especially about Java interop. There are interactive ["playground"](https://play.kotlinlang.org/) (ungraded) programming exercises. Very simple. Mostly getting used to the syntax, nothing else. (The links on Coursera to the playground do not work on my browser, I had to right-click and "Open link in new tab".) Programming assignment is for the [Mastermind game](https://en.wikipedia.org/wiki/Mastermind_(board_game)). There are no assignment files to download, it's *inside* IntelliJ as a plugin. Submission to Coursera happens from IntelliJ as well. (You still have to get submission tokens from Coursera website.) Very tricky problem! I went with a purely functional solution. After I passed, their solution was functional too. They said "skip this for now and come back to it later, we haven't taught you this stuff yet!" LOL.
+
+Week 3 is about some disgusting `null` stuff, and nice functional programming. The programming assignment has multiple parts. It first tells you to go back to Week 2 and re-do it in a functional style! LOL. Kotlin collections and higher-order functions largely mimic Scala. I can write almost-Scala code, then change `=>` to `->` and be mostly done.
+
+Week 4 is about OOP. Why is this ordered so backwards? Weird. Like Scala, Kotlin improves on Java's OOP, so they show you the differences. Like in Scala, you don't need to explicitly define or use getters and setters. It's done automatically. Then they introduce lazy evaluation (again like Scala). Kotlin also has singleton objects and companion objects (again like Scala). Then parametric types (like Java / Scala). Also covers operator overloading conventions (not present in Java obviously). The programming assignment is the usual `Rational` class that is done to death in every course I took.
+
+*Spam's recommendation:* It's an OK course. It's short and easy, if you already know what they expect you to know. It's strangely organized and has a weird selection of topics. You won't be learning much (it doesn't really teach you), except just Kotlin syntax and Kotlin to Java conversions / compatibility. You won't learn any of the *kool Kotlin* stuff like coroutines (lazy suspensions) and structured concurrency. The course is on the low-to-mid side in terms of substance and quality. It feels a bit shallow. Not recommended, except if you are already super knowledgeable in Java / Scala and want to spend 3 afternoons. [Learn Java first](https://java-programming.mooc.fi/), then [get a nice Kotlin book](https://www.oreilly.com/library/view/programming-kotlin/9781680507287/) (by my favorite Java guy Venkat).
