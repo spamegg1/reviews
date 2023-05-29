@@ -971,7 +971,7 @@ Videos have good length (not too long, not too short), good pace and good explan
 
 [https://www.coursera.org/learn/kotlin-for-java-developers](https://www.coursera.org/learn/kotlin-for-java-developers)
 
-It's a course by [JetBrains](https://www.jetbrains.com/) who develops [Kotlin](https://kotlinlang.org/). It's a short course with 4 weeks (first week has nothing). No need to install the language, instead you install IntelliJ. However this is not explained until the end of Week 2, really weird.
+It's a course by [JetBrains](https://www.jetbrains.com/) who develops [Kotlin](https://kotlinlang.org/). It's a short course with 5 weeks (first week has nothing, so really 4). No need to install the language, instead you install IntelliJ. However this is not explained until the end of Week 2, really weird. There is no Kotlin REPL (IntelliJ has an experimental one), so you should keep the [playground](https://play.kotlinlang.org/) open in another tab next to Coursera.
 
 Week 1 has a few short intro videos and nothing else. You get to see the language creator. The instructors have strong Czech accents so you might struggle with that. There are subtitles of course. The course assumes you know Java well, and starts teaching immediately with Kotlin-to-Java conversions, instead of teaching Kotlin from scratch. (This is the opposite of the approach the Scala courses take.) You'll immediately see Kotlin code you haven't learned, so you have to guess things.
 
