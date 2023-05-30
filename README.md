@@ -1,6 +1,6 @@
 # Spam's CS Corner: Course Reviews
 
-Contact me: `spamegg#3510` on Discord, or [on Slack](https://join.slack.com/t/spamegg/shared_invite/zt-1vhzofzrl-ucBjeQEQkl9Ol3wpvL9VPw)
+Contact me: `spamegg#3510` on Discord, or [on Slack](https://join.slack.com/t/spamegg/shared_invite/zt-1vhzofzrl-ucBjeQEQkl9Ol3wpvL9VPw), or [on Matrix](https://matrix.to/#/!GQFJgtvxFByBVixTAi:matrix.org?via=matrix.org)
 
 > ***It soon became clear that the unconscious instincts for logic and language which had enabled me to succeed were not shared by the large majority of my students.*** - Susanna Epp (author of [Discrete Mathematics with Applications, 5th edition](https://www.amazon.com/Discrete-Mathematics-Applications-Susanna-Epp-ebook/dp/B07M87BWRC))
 
