@@ -1,0 +1,67 @@
+In this section, we'll focus on object-oriented
+programming in Kotlin. Overall, Kotlin doesn't introduce anything conceptually new here, the experience is very similar. However, Kotlin brings many small messages and
+practical improvements. Note that in this course, we assume that you
+already understand such concepts as inheritance
+or method riding. So I want to explain
+you the familiar ideas, but just show you
+the different syntax. The defaults in
+Kotlin are different. Any declaration is public
+and final by default. If you want to make it non-final, you explicitly need
+to mark it as open. Also, there is no package
+private visibility in Kotlin. There is new one, internal. That means that declaration is visible inside
+this same module. A module is a set of
+Kotlin files compiled together. It can be an intelliJ
+IDEA module, a Maven project, or
+Gradle source set. Now, to make sure you are
+familiar with these modifiers, find the correspondence
+between the modifiers applied members
+and their meaning. Final means that the declaration
+cannot be overridden, open is that they're opposite and it should be
+marked explicitly. Abstract is the same as in Java, it means that the declaration
+must be overridden. You explicitly added
+override modifier to member that override another
+member from the superclass. To avoid accidental
+overriding classes, override now is mandatory. You can't override something accidentally and not notice it. Now fill a table with explanation for
+visibility modifiers. Public is visible everywhere, internal is visible
+in the same module, protected is the same as in Java, it means that the declaration
+is visible in subclasses. However, there is a small
+difference with java. In Java, protected is also visible inside
+the same package, in Kotlin, it's no
+longer the case, protected is only
+about subclasses. Private differs in meaning for a class member and
+a top-level declaration, class members is visible
+inside the class and private top-level declaration is visible inside the same file. You may ask what happens under the hood at
+the bytecode level. For public and
+protected declarations, it's clear that there is
+the direct correspondence. Private functions and
+properties also stay private. A private class is converted
+to a package private class, because there is no such thing in Java as a private class. The main question is what
+happens with internal? A package private
+is different it's not the same as the same module. Under the hood, internal is transformed to
+a public declaration. However, the names of
+internal members at mangled. Here you have internal fun fool. At the bytecode,
+this function has a really long name which you can't accidentally use from Java. There is also difference
+with package structure. In Java, every class
+should be located in its own separate file even
+if the class is very small. In Kotlin, it's no
+longer the case, you can put several classes
+into one file, is especially useful
+if your classes are data classes that is
+small and simple. You can combine several classes connected to each
+other in one file. You can also put
+top-level declarations functions and properties and
+the class into one file. It makes sense to
+unit the class and all the utility members
+connects through this class and put them all
+together into one file. There is one more
+difference, in Kotlin, the package name doesn't need to correspond to
+the directory structure, your package name can
+be any name However, the Kotlin style guide still recommends you to meet
+on the first prefix, the company name from
+the directory structure, and keep everything else so that it was easier to
+navigate your code. After watching this video, you know that public
+and final used by default and [inaudible]
+is mandatory. You've also learned that you
+no longer need to create a separate file to store
+small simple class. Next, we are going to discuss the syntax focus
+structures in Kotlin.

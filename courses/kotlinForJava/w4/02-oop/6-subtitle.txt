@@ -1,0 +1,47 @@
+In this video, you'll learn how to define
+constants, to achieve better performance, and improve Java interoperability. If you define a constant of
+a primitive type of string in Kotlin, you can declare it using a const modifier,
+that will make it a compile-time constant. For reference types, if for some reason
+you don't want to generate getters under the hood,
+you apply the @JvmField annotation, that will instruct the compiler
+to generate only the field. In Java, if a primitive type or
+a string is define as a constant, and it's value is known at compile time,
+the compiler replaces the constant name everywhere in the code with this value,
+then it's called a compile-time constant. In Java, the rules for
+what is a constant are rather complicated. In Kotlin, all the compile-time
+constants are marked explicitly. When you add const to a property,
+that makes it a compile-time constant. The Kotlin compiler also inlines
+the value of such constant. It replaces its name with its
+value everywhere in the code. Note that it works only for
+primitive types and strings. @JvmField exposes a property as a field, it makes it public if
+a property is public. Then this field can be accessed from Java. It's useful for some frameworks
+that need public fields available. After you apply @JvmField annotation,
+no getter is generated for read-only property and
+no setter if the property is mutable. Here, prop is a top level property. So applying @JvmField is the same
+as defining static field directly. Note that you can also want to eliminate
+accessors for performance reasons. @JvmField makes a property static if
+used at the top level or inside object. If used inside the regular class,
+the regular field will be generated. To better understand how it works,
+there is a question. Which declarations will expose answer
+as a static field when used from Java? There are options with @JvmStatic,
+@JvmField or const. The right answer is @JvmField or
+const, not @JvmStatic. When you simply define
+a property inside an object, then it becomes available
+from Java only via a getter. Because the field, by default, is private. As the getter is only available
+as a member of instance field. To make it available as a static member,
+you can apply @JvmStatic annotation. In this case, however, you can only access the getter
+as a static member not the field. That means it doesn't make sense
+to apply @JvmStatic properties. To expose the field,
+apply the @JvmField annotation. In the case of primitive types and
+strings, you can use const modifier. The next question is, which declarations will inline
+the value in the resulting bytecode? That means the compiler
+will substitute the value instead of calling this property. Again, the same options. The right answer is the const modifier. That's exactly what the const does. With @JvmStatic, the compiler
+calls the getter under the hood. With @JvmField,
+the compiler calls the field. Only const property in the resulting
+bytecode will be replaced with the actual value. The last question kind of
+duplicates the first one. The difference is that now it's
+about a top level property. Which declaration will expose
+a top level property as a static field if used from Java? The answer is @JvmField and
+const as we've already discussed. If you declare a property
+at the top level, it will be accessible only by the getter. @JvmField eliminates the getter and
+const does the same

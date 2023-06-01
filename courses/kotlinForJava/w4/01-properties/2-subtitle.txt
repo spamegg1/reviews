@@ -1,0 +1,53 @@
+In this video, you'll see
+examples of how to define properties in interfaces and how to define
+extension properties. You can define a property
+in an interface. Why not? Under the hood, it's just a getter. Then you can redefine this getter in subclasses
+in the way you want. A question for you here. Which property among these two is calculated on each access? The nickname property
+with a custom getter in subscribingUser
+calculates the value each time you access it. The property in FacebookUser
+stores the value in a file. The property with a custom getter doesn't have
+the corresponding field. Note that all the properties in interfaces are open and can't
+be used in smart casts. Open means that they can be written in subclasses,
+they are not final. When you check whether
+the session user property is of type FacebokUser and
+afterward try to use a smart cast to access the account ID property
+of FacebookUser. The compiler shows you an arrow. It's impossible
+because this property has an open or custom getter. If a property has
+a custom getter, it's not safe to use it
+in a smart cast because the custom getter can return your new value on each access. There is no guarantee
+that after you cost there will be
+the same value. If the property is open, then the actual implementation
+in a subclass may have the custom getter which will return your different values
+on each access. So, it's also not safe. What you can do here, you can introduce
+a local variable, then this much cost applies. Alternatively, you can use other language mechanisms
+which we'll discuss later. Note also that smart casts don't also work for
+mutable properties, because the mutable property
+might be changed in a different thread after
+you have checked it for being of a specific type. To fix this, you again
+introduce a local variable. Sometimes smart casts will work from mutable
+local variables. In Kotlin, you can define
+extension properties. The syntax is very similar to the one of defining
+extension functions. You simply define a property, but specify their
+stereotypes cursed. You can access the receiver as this reference
+inside accessories. Or you can emit
+this reference and call members as in
+the second example. You can call extension properties as they warm member properties. The syntax looks nicer in
+the same way as it works for extension functions.
+The question for you. What do you think does the extension property to form any optimizations in terms
+of the stored value? Here, we have this ABC string and recoil an extension
+property twice on it. How many times
+the getter will be cold? Probably, it's somehow optimized
+and the value is stored. What's your guess? Of course, there are no optimizations. This extension property
+is compiled to the get medianChar static method with an extra parameter under the hood which is
+called Antes access. There is no magic here. Extension properties are very similar to extension functions, but their only difference
+is the difference syntax. The one without parenthesis
+when you call it a property. You can define mutable
+extension properties. Here, we define the mutable extension property lastChar
+on StringBuilder. It allow us to get or
+update the last character. You then can use it as a regular property with
+the concise syntax to access setChar that just
+assigns a value to a property. You've learned that you
+can define a property in an interface and why it
+can't be smart casts. You now know how to define a read-only or even mutable
+extension property. Next, we are going to discuss the concepts of lazy and
+later need properties.

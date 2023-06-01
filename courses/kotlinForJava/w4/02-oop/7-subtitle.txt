@@ -1,0 +1,82 @@
+In this video, we'll
+discuss generic. As in Java, you can define an interface or a class
+with a generic parameter. Then, when you use this class, you substitute a specific type, instead of a parameter. Here, we define
+functions that work separately with the list of
+ints or a list of strings. If your function should work
+with all generic types, rather than with a specific
+type like list of ints, you can make the
+function itself generic. You define a type parameter
+for a function and try to use this type parameter in
+the function declaration, into the function body. You can call a generic
+function on different types. When you call
+the filter function, list of T might become a list of filts of strings
+or something else. The generic type parameter T
+takes different values. Note that we don't know
+whether T is nullable or not. It might become either not
+nullable or a nullable type. You can call filter
+on the list of nullable ins or on a list
+of nullable strings. Nullable types are suitable
+as generic arguments. You can explicitly make
+the generic parameters nullable. Then, they substituted type
+also becomes nullable. The first or null
+function returns nullable type as a result. What do you call first a null on a list of ints you
+get unallable int. If it's called on a list
+of nullable elements, then T is nullable cell and nullable T remains
+simply nullable int. The question for you, can the list element type be nullable in the example below? Yes or no? You can easily pass a list of nullable elements as
+an argument here, so the element can be null. If you want to restrict the generic argument so
+that it was not nullable, you can specify a
+non-null upper bound. You add an upper bound right after the type
+parameter declaration using the same column which replaces the extents
+cube root in Kotlin. If you try to call a function
+expecting at least of non nullable elements passing a list of nullable elements, you'll get a compiler error. Nullable type is not a sub-type
+of non-nullable any, so such function can't
+be called like that. There is a useful library
+function that filters out all
+nulls from the list. It's called on the list
+of nullable elements and returns a list of
+nullable elements. No-null any upper
+bound emphasizes that the return list
+doesn't contain nulls. You can specify a
+different upper bound. In this case, you can pass both integer and double numbers, since they both extent number. An upper bound can be nullable. Here, you can pass an integer or a double number or
+null as an argument. As in Java, at
+the upper bound can contain the type parameter, this is the standard
+way to define a function that should work
+with comparable elements. To define multiple upper bound constraints
+prototype parameter, use the where syntax edge of
+the function declaration. Here, you can pass any type that extends to
+different interfaces, terrace sequence and aboundable. Stringbuilder implements both terrace sequence and dependable, so it's a valid argument
+for these function. Because of JVM
+platform constraints, you can't define two functions with the same JVM signature, the signature with
+erased generic type parameters. Here, we tried to define two extension functions on
+list int entries double. The functions differ only in
+generic type argument value, int versus double, and
+that's not enough, the Kotlin compiler
+doesn't allow that. However, applying
+one annotation can take this example and make
+such declaration legal. We've already discussed
+these annotation but apply it only to
+the whole file before. Check your guess.
+There's JvmName. When applied before
+the package declaration, it modifies the filename
+under the hood, but also can modify the name of the function
+at the bytecode. In this case, two functions now have different names
+at the bytecode. The first one is average, the second one is
+average of double. At the Jvm level, there are two
+different functions, so there is no error. However, from Kotlin, you use both functions simply
+by the average name. The. Kotlin compiler infers which function you want
+to call in each case. The question to check
+your understanding. How do you call
+the second faction prom Java? As average or average of double? Since the second function is named averageOfDouble
+at the bytecode, from Java you call it
+as averageOfDouble. Java sees the coating compiled code only through the bytecode. You add the dependencies on class files to mixed Kotlin
+and Java projects. That means from Java, you call the functions as they
+are named in the bytecode, but from Kotlin, different
+improvements are possible. For instance, in this case, you call both functions by simple average name
+when used from Kotlin. Later in a future course, we'll discuss a couple more
+features around generics, in-and-out multipliers used
+in an interface declaration and reification of type arguments possible to
+online functions only. Because these features are mostly used by library authors, you can safely ignore them for now if you come
+across out already reified curious in
+the code-base The purpose of the interface or function doesn't usually depend on these keywords. This video concludes our section about object-oriented
+programming. Next section we'll
+focus on conventions.

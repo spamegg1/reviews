@@ -1,0 +1,98 @@
+In this video, you'll learn
+the difference between object declaration and
+object expression, and what benefits
+companion object brings in comparison with
+Java static methods. Object is a singleton in Kotlin. Singleton is a class which
+has only one instance. By using object keywords, you create a clause and
+it's instance in one place. In Java, when you
+need a singleton, you probably do
+something like this. You will make the
+constructor private and create only one static
+instance field, which you instantiate right away. Because the constructor
+is private, it's impossible to create any other instance
+outside of this class. Under the hood, the
+object in Kotlin is absolutely the same as
+this Java singleton. Exactly the same code
+is generated. To use Java singleton, you call members on
+the instance field. If you need to use
+Kotlin object from Java, you would do the same thing. Note that from Kotlin, you simply call members
+on Kotlin object. Now, let's discuss
+object expressions. Despite this feature
+uses object keyword, it represents a different idea. Object expressions replace
+Java's anonymous classes. Imagine you need to
+implement an interface, override a couple of
+methods in a class. That's going to be the only
+usage of this new class, so you don't want to create
+a named class for that. In Java, you create an anonymous
+class in this situation. In Kotlin, you use
+object expressions. Note that whenever you interface, it has only one single
+abstract method, then you can use lambda. There is no need for
+object expression. But if you need to
+implement several methods, then you will use
+object expressions. The question: What do you think? Is the object
+expression a singleton? Is it true that for
+object expression, only one instance of the anonymous class
+is created or not? The answer is no. Object expressions and
+object declarations singletons are
+different concepts. A new instance of object expression is actually
+created for each call. If your object
+expression captures some variables from
+the outer context like here, then new instances of the anonymous class will need to use different values
+on each access. It's not even possible
+to optimize that. Each different call to register repository needs
+its own instance of the updated repository
+class which stores the corresponding value for the customer's variable. You can not only put inner or nested class
+inside another class, but also nested object. One of the examples of such nested object is
+a companion object. It's a nested object inside
+a class but a special one. The one which members can be
+accessed by the class name. In Kotlin, there are
+no static methods like in Java, and companion objects might
+be a replacement for that. I want to give you
+some motivation of why Kotlin has companion objects
+but not static methods. In which case, companion
+objects can be better. At first, companion object
+can implement an interface. Sometimes, we lack
+this feature in Java. It would be nice
+if a static method could override a member
+of an interface. But for static,
+that's not possible. Now, it's possible
+for companion object. Here, a companion object
+implements factory. You can use the companion
+object instance accessed simply by the class name as an instance of a factory. Another thing which you can
+do with companion object, is you can define
+extension straight. To distinguish an extension to a class from an extension
+to a companion object, you use the companion suffix. After that, you can call such extension function like a companion object member
+simply by the class name. There is no static
+keyword in Kotlin. There are no static members. You can ask, where you should now define the static members? The answer is, you
+can define them at the top level inside objects
+and inside companion object. By default, strive to put
+everything at the top level. This is the first place to put your previously
+static members in Java, but that's not always possible. Imagine your static method takes an instance of
+your class and needs to call a private member
+on it or create a new instance using
+the private constructor. You don't have the access
+to private members from the top-level functions
+outside of the class. You can only call it from an object or companion object
+inside the same class. By default, your functions
+defined in the companion object or in an object won't be
+compiled to static members. From Java, you can't call
+them as static members. But if you need that, you can add the
+JvmStatic annotation. The question: Which lines do you think won't compile in this code? The second line won't
+compile because we tried to access bar
+as a static function. But by default, it can't
+be accessed like that. To access it as static, you need to add
+JvmStatic annotation, which generates
+an additional static function to be called from Java. Note that from Java, you still can access companion object members as members of special
+companion instance. The same works with objects. If you need a member
+to be compiled as static and to be called
+a static from Java, add the JvmStatic annotation. What do you think? Is it possible to declare
+an inner object? The one that stores the reference to the outer class. Yes or no? The answer is no. The compiler gives you an error that inner modifier can't
+be used with object. Object is a singleton. So only one instance
+of the class B exists. There might be
+potentially many instances of the outer A class, isn't clear which exact
+reference should be stored then. You can define an
+object as nested inside another object
+or another class. You now know that object
+declaration is a singleton, object expression corresponds
+to a Java anonymous class, and JvmStatic annotation makes an object number visible
+as static from Java. Next, we'll discuss how you can define constants in Kotlin.

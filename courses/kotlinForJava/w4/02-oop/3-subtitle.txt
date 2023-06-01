@@ -1,0 +1,66 @@
+In Kotlin, you can use class modifiers to add
+new semantics to classes. Modifiers can instruct
+the compiler to generate new methods or introduce
+additional constraints. In this video, you'll
+learn the details about enum and data classes. Enum class represents
+an enumeration like in Java. If you need a class with
+a fixed number of values, you can define the these values
+as enum constants. The difference with Java is that now enum is not
+a separate instance, but a modifier before
+the class keyword. The most common way to work with enum constants is to
+use when expressions. You specify the actions
+that should be done for different
+enum constants. As a reminder, by default, you access enum constants
+by their full names. But, if you import enum constants you can use them without
+explicit specification. Inside enum class, you can define member functions
+and properties. Note the syntax of how we
+initialize the enum constants. You pause different values as constructor arguments
+inside the parenthesis. Afterwards, you call the methods and properties directly
+on enum constants. Probably, it's the only place when you need a semicolon in Kotlin to separate
+the enum constant list from the members list. Next, we're going to
+talk about data classes. We've already come
+across this feature, but now we're going to discuss what methods are
+generated under the hood. We'll cover the majority
+of the methods and leave the rest
+for the next section. Data modifier has equals, hashCode, to-string,
+and copy methods. You can call the copy method
+to copy an instance of the data class and specify only the arguments
+that must be changed. The rest values remain the same. Or, you can emit
+all the arguments and only explicitly
+copy the reference. In Java, everyone knows
+that one needs to call the equals method instead
+of the double equal sign. Otherwise, you get the
+reference equality instead of comparing the contents in the case when equals
+is redefined. In Kotlin, it's no
+longer the case. By default, when you use
+the double equals sign, it goes equals under the hood. If your class redefines equals, it will compare the elements
+in a meaningful way. If you still need reference
+equality for some reason, you can use
+the triple equal sign. The question for you is
+what will be printed here? The only difference is that the second class is
+defined as data class. The right answer
+is the third one. Let's try to understand
+what's going on here. By default, like in
+Java, in Kotlin, every class inherits
+default equals implementation, which just checks
+reference equality. When we compare reference
+of the type foo, we compare them by
+reference equality. Despite equals is called, by default, this equals
+is the trivial one. That is why these lines
+brings false. If we compare the reference that refer to
+the same object in memory, we'll get true obviously. For data classes, the right equals and hashCode
+methods are generated. We now compare the elements
+by their content. For the borrowed data class, here, we again call
+equals under the hood, but now equals
+compares the content, so we have true as a result. Note that the compiler only uses the properties
+defined inside the primary constructor for the automatically
+generated functions like to-string, equals and hashCode. To exclude a property from
+the generated implementations, declare it inside the class body like the nickname property
+in this example. Then, it won't be
+included in to-string representation and it's value won't be used to
+compare instances. Here, the first user equals this second one despite they have different values for
+the nickname property because on the email values
+are compared by default. You now know how to conveniently use enum constants by importing them or which methods are generated when you
+add date annotation. Next, we'll discuss
+suite classes, inner classes, and
+class delegation

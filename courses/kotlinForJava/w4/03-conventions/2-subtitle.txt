@@ -1,0 +1,125 @@
+In this video, you'll
+learn that many things that may look like built
+in language constructs, like accessing map elements
+using square brackets, actually work via conventions, and the same syntax might be supported for
+your custom process. In Kotlin, you can compare strings using this nice syntax. Not on these chains, but any classes that define
+comparative method. Under the hood, the
+comparison operators are all compiled using the comparative
+method comparisons. Note that if your class
+implements comparably interface, then you can
+automatically compare its instances using
+this nice syntax. Equality check, as we've
+already discussed, is compiled to calling
+equals under the hood. It not only invokes equals, but also correctly handles nulls. You no longer need
+to remember to check a variable for being not
+null before equality check. When you access the
+elements by index, that also works
+through a convention. Under the hood, the get and
+set methods are called. You can define get and
+set operator functions as members or extensions for
+your own custom classes. Note that you can put several arguments
+inside square brackets. In also works through
+a convention. When you check whether an element belongs
+to a map at least, or range, under the hood
+contains is called. Creating a range is
+another convention. Whenever you use
+the double-dot syntax, you actually call the range
+to operate your function. That means you can support the same syntax for
+your custom classes. For loop iteration also
+goes through a convention. In Kotlin, you can
+iterate over a string. I've told you
+that Kotlin string under the hood is a regular
+Java length string. But Java length string doesn't implement
+iterable interface. So in Java, you can't
+iterate over it. In Kotlin, that's possible
+because we can define this iterator operator as
+an extension function. Destructuring
+declarations allow you to define several variables at once by assigning one expression and automatically
+destructuring it. We've already seen examples of destructuring declaration
+syntax in the course. Here in both cases, we initialize two variables
+using one pair. The pair components
+are automatically assigned to the first and
+to the second variables. The similar this destructuring
+works in a for loop, or for lambda argument. Note that you always put
+the several variables that you want to initialize after the destructuring
+inside parentheses. That all works
+through a convention. Under the hood,
+the assignment syntax is compiled to calling
+component one, component two, etc functions. Whenever the expression has the right number of operator
+competent and functions, it can be used as the right hand side for this destructuring
+in initialization, also in for loop or
+inside the lambda. The Kotlin compiler generates the code using
+component functions. Note the difference between
+declaring two parameters and declaring a destruction pair
+inside of a parameter. You're always surrounded
+with a parenthesis of the variables which are
+the result of the destructuring. Note that iterating
+over list with this index also works using
+destructuring declarations. With index, extension function returns a list of index
+to value elements. Index value has component one
+and component two defined, and therefore can be used
+with destructuring syntax. You rarely need to add component operator
+functions by hand. You can use any data class as the right-hand side for the
+destructuring declarations, since the necessary
+component functions are automatically
+generated for it. Component methods are
+the remaining methods that we haven't yet discussed, which are automatically
+generated for data classes. The order of the destructured
+variables is set. For data class,
+the compiler simply follows the order of the
+constructor val arguments. Note that you can omit one of the new variables if you
+are not going to use it. Put underscore
+instead of its name. Then, it takes part
+in destructuring, but the variable is not created. Pair and index values classes are simply defined as
+data classes in the library. That's why the destructuring
+syntax works for them. The question, after declaring, which function you can use the following nicer syntax
+for your costume board class? The options are, it's enough to add
+set extension function, you need operator get
+function in this case, or a operator set function. The right answer is
+operator set function. You need the operator keyboard
+to make this index work. So the second function
+is not enough. In this case, we use
+the syntax for modification, and that's the set operator. Note that as for
+regular functions, the types don't need to be exact. You easily can
+define parameters of any type and pass
+ints as arguments. When you defined set operator, no additional get
+operator is required. This short syntax
+is replaced with a direct set function call
+in the bytecode. Another question, which
+elements do you think can be compared using
+these comparison operations? The are options, all primitives like int, double and boolean, string, elements implementing
+Comparable interface, or elements that define member extension operator
+function ComparedTo. Note that several options
+might be true here. We can't compare
+booleans by this syntax, what is graded true or false. That doesn't make any sense. All the rest elements can be compared to using this syntax, because the convention work
+through extensions, you can define
+an extension function compared to your class, and implement
+the necessary logic there. Imagine for the purpose
+of your algorithm, you need a specific way to
+compare for instance points. If Point implements Comparable, then the comparison logic
+becomes available everywhere. But if you define
+the CompareTo extension, you can make it private or
+internal in your module, so that it was available only for the purposes
+of your algorithm. Then, the operator syntax
+isn't visible for other parts of your application that uses the same point class. There is a powerful way
+to limit visibility, but make things convenient
+enough for some small parts. You can ask, how to
+debug with the Java, whether it's possible to use Java classes via
+the same conventions. The answer is yes. Operations syntax works fall Java methods with
+the right signature. In Java, there is
+no operator keyboard. But if Java method happens to
+be named in the right way, and to have the right signature, you can use the
+operator syntax for it, when you use these Java
+class from Kotlin. If a method is
+called differently, you can always add
+an extension and use it from Kotlin
+in a nicer manner. You learned a language mechanism
+called Conventions, that allows you to use language constructs like
+accessing by index, or follow-up iteration
+with your custom types. This discussion
+completes the module. The next module we
+will return you to the topic called Functional
+Operations and Collections. We'll discuss how the
+might work under the hood, which are sequences, and when to prefer sequences
+over collections. Also, we'll discuss
+the correspondence between Kotlin and Java types.

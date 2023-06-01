@@ -1,0 +1,46 @@
+In this section,
+you'll learn how to improve the experience
+of working with custom classes while operator overloading, and
+other conventions. In Kotlin, you can
+use this syntax of arithmetic operations
+not only primitives or strings, but for custom types as well. You define a function, a member or an extension with a specific name and
+mark it as operator. Then, you can use the concise syntax for working
+with your custom type. The operator keyboard
+is important here. It allows you to call
+plus as an operator. There is the fixed list
+of arithmetic operations. It's not that you
+can use any name. You can see the correspondence
+between the syntax and the operator name that allows
+you to use this syntax. There are no restrictions
+on parameter type. It doesn't have to be the
+same as the receiver type. For instance, you can
+define a function that multiplies the point
+and an integer number. There is a similar list
+of unary operations. Unary operator is a function
+without arguments which we can call as an operator
+on this specified receiver. Here is the list of
+unary operators. Prefix and post-fix
+forms of increment and decrement operators have
+the classical semantics. There are two possible meanings for their plusAssign operations. At first, it might be resolved to a plus function if
+the mutable variable is changed. That means you simply
+modify its value. Another option is the
+plusAssign function. If it is defined, then this operation might be resolved to plusAssign
+call under the hood. This convention works for list. If you use plus on
+the return list, pay attention that then it will create a new list and
+return it as a result. From mutableList, you can
+use plusAssign and it calls the corresponding
+plusAssign function. It's a bit confusing. To better understand that,
+answer this question. Borders printed in this example. There are two options. What's going on here is that we use not the right
+convention for list. List one is defined as a mutable variable which stores a
+reference to a read on the list. We need the list two variable purely to observe
+the initial list. The plusAssign operator
+doesn't modify it, but rather creates a new list and returns it as the result. In general, it's wrong to
+write the code like this. Under the hood, a new list
+is created if you define a region in the list as a
+var and add something to it. Be aware of that. It's another reason why
+to prefer val to var. Such a mistake can be done
+by someone using Kotlin. If we replace listOf and var
+with mutableListOf and val, then we get what we expect. Both references, just
+observe their modification. Now you know how to define arithmetic operations
+for your custom classes. Next, you will see how you can add embarrassing operations accessing by index and what are the conventions
+are supported.

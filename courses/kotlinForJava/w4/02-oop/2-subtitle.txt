@@ -1,0 +1,92 @@
+In this section, you'll learn the syntax for
+constructors in Kotlin, what is the difference between primary and secondary constructor and why the inheritance syntax also looks different
+than in Java. A constructor is
+a special function used to initialize
+a newly created object. We don't use
+new keyword in Kotlin. You call a constructor
+as a regular function. You can distinguish
+a constructor call from a function call
+because of the convention. The class name starts with an uppercase letter and you call the constructor
+by the class name, but the function name starts
+with a lowercase letter. If you define no
+constructors in the class, the cotton compiler generates one without parameters
+by default. That is why you can create an instance of the A class here. The default constructor was
+generated automatically. Often you need some arguments to create a new class instance. Then you define
+constructors explicitly. The main constructor is called
+the primary constructor. It has a very concise syntax
+when it's trivial. It only initializes the
+properties with his past values. Here we have two
+properties which I initialized with the values
+from the construction. The syntax is concise
+and readable. In Java, you have to write with the constructor code explicitly. After the class name
+inside the parenthesis, you specify the
+constructor parameters. You can put the complicated
+initialization logic inside the init section, which represents
+the constructor body. By default, you define properties inside of the class body
+between the curly braces. Here you can see the full syntax
+when you initialize the property with the corresponding
+constructor parameter in the constructor body. When you put val or var
+before the parameter, that automatically
+creates a property. Without val or var, it's on the
+constructor parameter. You can change the visibility of the constructor if needed. In this case, you need
+to explicitly use the constructor keyword and put it between the class name
+and the parenthesis. You can add private or internal visibility
+whatever you need. You can define
+secondary constructors. If default arguments
+don't do a job for you and you need
+a different argument list, you can do that. Each secondary constructor must call another secondary
+or primary constructor. You call another constructor
+using these keywords. Note that if a primary or a secondary constructor
+is present, no default constructor without
+arguments is generated, and then later on
+is automatically generated only if you define
+no other constructors. In Kotlin, the syntax to express inheritance is a bit
+different than in Java. You use colon to replace
+both extends and implements keywords at the parentheses while extending a class denoted
+the constructor call. If you need to pass any arguments to initialize the superclass, you put them inside
+these parenthesis. Use the super keyword to call the constructor of
+the parent class from the secondary constructor.
+The question. In which order
+the init section of parent and child clauses are
+called? What is printed? There are options, child,
+child-parent or parents-child. When you create an instance
+of a child class at first, parent construct is called and parents properties
+are initialized. Then child constructor is called and child properties
+are initialized. That works directly as in Java, and the subclass inherits
+all the properties of the superclass even if
+it can't access them. To create a correct
+instance of the subclass, the compiler should initialize all the inherited properties
+from the superclass, so it calls to
+the superclass constructor. The next question is about
+overriding properties. What will be printed
+in this example? One, two, or zero. The right answer is
+surprisingly zero. Now, let's understand why. In Java, it's
+impossible to override fields and under the hood
+in Kotlin is the same. When you override a property, in fact, you override
+a getter not a field. For instance, you can
+override a property that doesn't have a field with
+a property that has a field. That's totally legal. However, when
+both a property from a superclass and
+an overridden property in a subclass have fields, that might lead to
+unexpected results. Let's see what bytecode is generated for the Kotlin class
+in our example. As usual, we'll look at the corresponding Java code
+instead for simplicity. Note two things here. First, the foo get to is trivial, so a field and a getter
+correspond to the full property. Then because the property is open and can be
+overridden in a subclass, its usage inside the class is compiled to a getter code
+not a field code. Now, the generated code
+for the child class. Note that the
+overridden property in the parent class is also compiled to a field and a getter, and now it's another field. What happens when you create an instance
+of the child class? At first at the parent
+constructor is called, the parent constructor
+initializes the first fulfilled with one. But inside the init section, an overridden getter
+is called which calls get foo from
+the child class. Because the field in
+the child class is not yet initialized,
+zero is returned. That's why zero is printed here. In the playground
+right after the video, you'll find another
+illustration of the problems that
+can arise if you override a property
+and try to use it inside the constructor
+of the superclass. You've learned the syntax
+for constructors in Kotlin. Next, we'll discuss
+different modifiers that can be applied to classes.

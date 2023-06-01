@@ -1,0 +1,47 @@
+Why 'final' and 'public' are used by default? >> Picking 'public' and 'final' as default may seem controversial, because 'public' is the most permissive, right? So everyone can see this. And 'final' is the most restrictive:
+no one can override this. But there is a reason behind it. It's basically striking the balance between the needs
+of application developers and library developers. Application developers are a much
+bigger group of people, of course. Library developers are still
+a very important group of people. So we were going after making life as easy
+as possible for application developers without hurting the library developers too much. So for a library developer, it's very important
+to control how visible your API is, because if you accidentally publish anything
+then it's very hard to get back, right? And same for making things overridable. If you make something 'open' accidentally,
+it's a problem for a library. While in the application code,
+it doesn't matter that much, because nobody depends on you,
+you can easily change it back. Well, it does propagate through a big project, like if you have a huge multi-module project. Then one module is a library for another. It gets more and more important, but still that's a lot less of an issue in
+terms of retroactively taking things back. So we're looking at many use cases in
+application code and library code. And just decided on the most common things. Most commonly 'public' is the best
+choice for application code. Most commonly, 'final' is the best choice
+as well, because it enables things. 'public' just makes things visible. But 'final' also enables language
+features like smart casts, for example. If you have a 'val' that's
+a member in a class and it's just a simple thing,
+stores the value in the backing field, if it's open you can't smart cast it. Because you can't be sure that it's not
+overridden and not computed somehow. But if it's 'final', you can smart cast it, it makes the usability at the call site
+much better, so this is why 'final'. And 'public' is just the most popular visibility
+for declarations in application code bases. It wasn't an easy choice,
+it was debated until the very end, until right before Kotlin 1.0 was published. But I think we did find the right balance here, although it's an inherently debatable thing. So it's a very tightly constrained problem. >> Why there is no full pattern matching support in Kotlin? >> Well Kotlin's pattern matching
+capabilities are very limited. Well, strictly speaking, we don't have pattern matching
+as a language feature at all. What we have is 'when' expression
+plus smart casts, which covers a lot of functionality, of pattern
+matching, at least for simple use cases. It turns out that most use
+cases out there are simple. It was a basically a pragmatic language choice. We decided not to introduce a lot of syntax and a lot of other language machinery
+to have full pattern matching. What we sacrificed was the ability of
+matching deeply nested structures. But it turns out that our users,
+a lot of them at least, can be really happy with what we have. So our idea in the beginning was that we better try first without pattern matching and see
+how needed it is, so that we can add it later. We still have the design, we can
+introduce it in a later language version. But so far it hasn't been the most desired
+feature among the things we don't have. So I think if pattern matching makes it
+into Kotlin, it will be at some time later. We have more interesting
+things to add before that. >> Why companion objects? >> So this all starts with our issues with statics. If you think about it, there is something
+strange about a member in a class that is not actually calling its instances. You end up with classes full of only
+statics and no instance members at all. These classes are not really instantiated
+ever, so they are not proper abstractions. We wanted to get rid of this in Kotlin, and
+this is why we have top-level functions, so you can put all your utilities at the top-level. And not create classes that are not really
+types or not intended to be instantiated. But then you may need to call something
+on the class name, say 'class.something'. And to facilitate that, we use
+the idea of companion objects, when you can attach a singleton to a class,
+so that its members are called in the class name. This abstraction is
+somewhat more powerful, because such an object can extend
+other classes or implement interfaces. So there's more code reuse to it. And also it has a type. So you can define an extension for
+some class's companion object. Thus you have more flexibility, defining new API members on the class
+name outside of the class itself.
