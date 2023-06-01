@@ -1,0 +1,36 @@
+In this task, we need to implement
+two member extension functions, which later will be called
+as extensions on String, but only inside the specific
+context of the 'Words' class. Let's start with the first one,
+and comment this out for now. Let's implement our 'record' function. We need to call it as
+an extension on String. We simply can define
+an extension on String here. And it will be member extension, so it
+can access all the members of the class. What we need to do
+here is to simply add this 'String' receiver
+to the list of our words. And that's it. That will add this string when
+we call it to a list of our words. I was speaking about this member
+extension function so here it is an extension function but it is also a member
+because it's defined inside the class. And you can call such
+an extension function, which is defined in
+the context of the class, whenever 'this' reference,
+referring to the instance of the class, is available. It's clear that for instance you can
+call such function inside the class. We can say 'initialize' and add some first words here. Then you can call it inside the extension to the class 'Words'. So we say 'addFoo()', and here we can, inside this extension
+function we can also call this extension on String “foo" because this implicit receiver, implicit 'this' of the type 'Words' is available. That's clear that such function is possible to be called
+inside member functions and extension functions. But when you need to call such function,
+not inside the class and not inside an extension of the class but
+just somewhere, you can use all these
+auxiliary functions like 'with'. In this case you also have 'Words'
+available in this context, and therefore 'this' is available. 'this' refers to 'Words', and
+that's how the Kotlin compiler understands that it’s possible now to call these member extension functions. Now let's implement
+the second function, that should be 'operator' function. And again, it’s an extension to String,
+we have the 'operator' function 'unaryPlus()'. It must be called 'unaryPlus', and
+we simply call 'record' here. We can now check that
+everything works as expected. No, it won't work
+because I had this line commented. But now you see that these
+functions compile and work. That's how you may define
+these member extension functions. And later, in the next course, when we'll discuss how to
+write domain-specific languages in Kotlin, you'll see more examples like this,
+defining member extension functions and using them outside of the context. That might be considered as an introduction to the topic, when you see how you can define
+some special syntax for your class. Also, this example illustrates that you
+can use auxiliary functions like 'with' to work with member
+extension functions defined in your class.

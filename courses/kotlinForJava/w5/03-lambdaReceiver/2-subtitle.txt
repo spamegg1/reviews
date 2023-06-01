@@ -1,0 +1,74 @@
+In this video, you'll learn more library
+functions similar to with that look like built-in language constructs
+but just take lambda, lambda was a receiver
+as an argument. There are many similar to with functions defined in
+the standard library. I'll try to show you
+briefly when each one might be used and why we do
+have so many of them. What is the difference? We've already seen with, it takes an expression
+as an argument and uses it as the receiver inside
+of the following lambda. Here we can access members of window without
+explicit specification. We're just directly
+window properties. Run is very similar to with but it is defined
+as an extension, which makes it possible to use it with a null-able receiver. If the receiver, window
+in our case, can be null, then you can't use with because this will be
+null-able inside the lambda, then these can't be admitted, you will need to explicitly
+check whether it's not null. Run is helpful for such a case because you can use
+it with safe access. Run will be called only when
+the receiver is not null. But note that in many other cases run and with are interchangeable. You can use the whole expression
+as the receiver, here the run will
+be called only when windowById main exists
+and is not null. Apply is different because it returns the
+receiver as a result. We haven't used it, but actually with and drawn functions return
+the result of the lambda. The last expression inside the lambda will be the result
+of the whole invocation. Sometimes, however, it's
+convenient to return. the receiver as the result. For instance, in
+a chain of calls, you can call other methods afterward or again
+like in this example, simply assign the results
+to a variable. When you create
+a window instance, you might want to modify some of
+its properties right away. Apply is really useful for that because the result is
+the modified main window. Note that we assign the variable here only the result
+is non-null and if it's null we stop the current execution and
+return from the outer function. Also is similar to apply, it returns the receiver as well. However, there is
+the difference that it takes a regular lambda not lambda with a receiver
+as an argument. Lambda with the receiver is
+really useful when you can admit this reference because
+you only call it's members. However, there are cases when you pass the receiver
+is an argument, like here when we pass a window as an argument to
+the function showWindow. In this case,
+the also function is better because it takes
+a regular lambda as an argument. Here, it inside also
+refers to window. You can introduce the window
+name for it If you want. Sometimes you can
+explicitly prefer to change the lambda parameter name when you use also, that's possible. This table shows you the difference between
+all these functions. With goes in a cell
+together with run. With is only one
+non-extension function here. All other functions including
+run are extensions. The difference between
+them is which functions return the result
+of the lambda and which functions
+return the receiver. The functions in the first column take lambda with the
+receiver as an argument, with run as apply. The rest two take the regular
+lambda as an argument. Without looking back at the first slide with
+all the function decorations, you may practice
+your own understanding and find the correspondence between this function decorations and their implementations. Note that we consider only
+extension functions now, right afterward we'll
+discuss the answer. The table is very useful. At first, let's focus on the functions returning the
+receiver as the result. They should return
+explicit to this because this refers to the receiver
+inside the lambda. The other two functions return
+the result of the lambda. We now distinguish
+at least pairs of functions, after that we can go
+on and focus on which lambda do the functions
+take as an argument. Two functions take
+lambda with receiver, they expect a parameter of
+extension function type. This parameter of
+extension function type must be called as
+an extension function. If we call this block
+as an extension, then block corresponds to
+lambda with a receiver. The other two functions
+take a regular lambda and then call a variable of a function type as
+a regular function. That gives us the result. You now know what
+lambda receiver is and can you use
+many helpful functions defined in the standard library. Next section we'll dive into
+the topic of Kotlin types and explain the correspondence between Kotlin and Java types.

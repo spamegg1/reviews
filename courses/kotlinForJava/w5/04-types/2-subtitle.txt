@@ -1,0 +1,137 @@
+In this video, you'll see how the Kotlin
+type hierarchy looks, what Nothing type is used for, and why you can't
+use Unit instead. Kotlin has the top
+type in the hierarchy; Any, which is a super
+type of all types. Kotlin also has a bottom type which is a sub-type of
+all the other types. This one is called Nothing. Now, let's understand
+what it is used for and why it's
+called like this. The confusion is possible,
+because in Kotlin, we have two new types:
+Unit and Nothing, in comparison to Java's void. Unit is used instead of void, but Nothing has the name
+similar to void. It might be unclear why
+these types are different. Let's try to understand why. First, let's start with the Unit. In Kotlin, Unit is used
+always instead of void. Whenever you use void in Java, you use Unit in Kotlin. It denotes that
+no meaningful value is returned from this function. These two syntactic forms
+are equivalent. You can either specify
+unit explicitly, which no one does, or you can simply omit it. At the Bytecode, unit is
+replaced with Java void. In Kotlin, you always
+use it instead of void for the function
+that has no return value. Nothing is different
+to Unit and void. It means, the function
+never returns. You specify Nothing
+return type for the function that only
+throws an exception. In Kotlin, you can define such a function and use it instead of throwing an exception. Imagine there is a specific
+for your use case exception, and you're always thrown to read different details
+in messages. You can extract
+throwing this exception into a function and later call this function instead
+of all places where you had to throw
+an exception explicitly. If you specify that this
+function returns Nothing type, then the Kotlin compiler uses the information
+that this function can't be completed normally for type inference and while
+locating the dead code. Unit and Nothing names come
+from functional programming. If we look at their definitions, Unit is the type that
+allows only one value, while Nothing type has no values. You can think of one-unit value as of the fact that the function is complete
+and successful, and you can think of the fact
+that nothing has no values, as this function never completes. The function that only throws an exception cannot
+complete normally. Another way to put
+that is to say that the function returning Unit is expected to complete normally, while the function returning Nothing always
+completes abnormally. If you write a
+function that has an empty infinite while
+true loop inside, this function also
+never completes, and you can define Nothing
+return type for it. Using an empty infinite loop
+is not really practical, but the exception
+cases are helpful. You can use an expression
+of Nothing type anywhere where your otherwise
+would throw an exception. For instance, as an if branch. Here, if the condition
+is not satisfied, you can throw an
+exception or call the function that throws
+this specific exception. Let's look at more examples of expressions of Nothing type. TODO is a function defined
+in the standard library. It throws node implemented error. You can use throw as a
+part of other expressions. For example, it
+might be convenient to use it as a part
+of elvis operator. Here, you throw
+a meaningful exception when the left-hand
+expression is null. Fail can be your custom function throwing your exception defined for this specific use case. Even return can be used as a part of further
+expressions, it just works. Under the hood,
+the compiler interprets return as an expression
+of Nothing type. The question to you, which of the following expressions are expressions of Nothing type? When you throw an exception, this expression itself
+has Nothing type. When you call the function
+that throws an exception, that is also an expression
+of Nothing type. You can use a return as
+[inaudible] the expressions, and then the compiler interprets. It is also an expression
+of Nothing type. Note that you can use Kotlin unit as
+a standalone expression. It refers to one instance
+of Unit type. If you assign a function
+returning unit to a variable, then this variable will
+store this unit value. No one needs to assign it to variable or explicitly
+return a unit, since the compiler
+automatically enforce that when no other values returned,
+but that's possible. Now, let's discuss why we
+need a separate nothing type. Why we can't simply use unit for functions throwing
+exceptions or vice versa, Nothing for functions
+completing normally. At first, let's try to use a report inside
+the if expression, like we did for functions
+throwing exception. It doesn't really make sense. Report returns unit value, and this unit value will be stored in the answer variable. Answer might then contain either integer or
+unit as a result. That's probably not what we want. Now, let's imagine our fail
+function returns unit. We define a function that
+throws an exception, but we somehow forget to say
+that it returns nothing. Reuse the regular syntax and then it automatically
+returns unit. What happens in this case? We'll try to understand
+how the compiler infers the type of
+the resulting expression, and we'll use
+their representation of type hierarchy for that. Let's see how the compiler enforce the type of
+the answer variable. It should be a super type of expressions into first branch
+and to the second branch. At first, the compiler
+analyzes the integer constant. It has the Int type. The fail function, in
+our example, returns unit. The compiler enforce
+the super type for Int and unit, which is any. A function returning unit
+can be a sign to a variable. Then these variables
+terse Kotlin unit value. The unit value can't be
+stored in a variable of Int type but can be easily
+stored in any variable. That's why the compiler
+infers any as the type of this expression which totally
+is not what we want here. It happens if we use unit
+as the return type of fail. Now, let's correctly use
+Nothing and see what changes. The type of the first
+expression is again Int. In the second branch, we now have failed call
+which has Nothing type. Since Nothing is a sub-type
+of any other type, that allows the compiler to
+infer Int as the result. It's the right value because we're always
+throwing an exception, if condition is not satisfied. So only integer value can be stored in
+the answer variable. The Kotlin type system
+allows us to express that. That's why it's great that we have the Nothing type
+in the language. It allows us to use
+expressions of Nothing type, extracts throwing an
+exception into function and use this function as
+part of other expressions. Nothing is replaced by void. If your function returns nothing, then at the Bytecode, it will still return void because there is
+no Nothing type at JVM. That means that from Java, we use functions returning
+Nothing as returning void. In Kotlin, you use all the bunch of
+convenient Nothing features. Now, you can better
+understand the tab hierarchy. Any is the top type, nothing is the bottom type. However, that's not that easy because we also have
+nullable types. User type is a sub-type of nullable user type because it can assign user expression
+to a variable of nullable user type,
+but not vice-versa. Thus, the correct top type
+is nullable any, not any. An interesting question here is, what means these
+nullable Nothing type? Think of what is the simplest expression
+of nullable Nothing type. The answer is null constant. Say, you define a variable
+and initialize it with null. Then if you try to assign
+a new value to it, you bump into an arrow saying something
+about type mismatch. In first type is user, but nullable nothing
+was expected. You can know to
+the inferred nullable Nothing for user variable here. The same thing happens
+when you create a list and store null inside. Nullable Nothing and list of nullable Nothing types are
+inferred by the compiler. If you think about
+it, that makes sense. You can assign null as well as the variable that stores null
+to any other nullable type. If you have a variable
+of nullable Int, you can assign null there. Having a variable
+of nullable nothing is not really practical, but sometimes you can
+see similar errors, so it's good to know how it works from the compiler
+point of view. There is an easy solution
+that fixes this example. You specify the variable
+type explicitly whenever you want to
+initialize it to read null. Then it has the right type,
+the type you want. Now you know why Unit can't
+be instead of Nothing, and that the only expression nullable Nothing type
+is the null constant. Next, we will discuss how Kotlin nullable types
+interact with Java types.

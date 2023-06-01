@@ -1,0 +1,93 @@
+In this section, you will learn how the mechanism of
+inlining makes it possible to create
+library functions that look like
+built-in language construct. Under the Hood, lambdas
+might be inlined, which creates
+no performance overhead. We'll discuss what
+does that mean, how inlining works, and
+why it's important. But before we start, let's look at some small library functions so that we could later discuss why we can use them without any
+performance drawbacks. We already saw
+the round function. At first sight, it looks like a built-in language
+construct that runs the block of code
+and returns the result. But in fact, it's just a library function that
+takes lambda as an argument. The curly braces in bold here means that is really a Lambda. Another helpful function is let. This one can be used for
+coping with nullable types. You already learned many ways to work with nullable types, especially when you use expressions of
+nullable types as receivers, when you call a member or an extension on an expression
+of nullable type. However, there are often
+cases when you want to pass something as an argument
+only if it's non-null. For instance, here we have the getEmail function that
+returns nullable e-mail. We want to send an e-mail
+only if it's non-null. If it's null, then we do nothing. You can use explicit
+if tag for that, but let gives you an alternative. What you can do is, you can use let, which introduces a new name
+for the receiver. Then, you can access the receiver inside the lambda by
+the name of the argument. Note that here we
+use safe access. That means that recall the let function only if
+the receiver is non-null. We performed the sendEmail action only if the e-mail is non-null. You can use the whole expression
+as the receiver. You no longer need to introduce a new variable to be
+able to smart cast it. In essence, let itself
+introduces a new variable. Its name comes from
+functional programming, where let is used to
+introduce a new variable. Kotlin is not a pure
+functional language, you can just declare a variable. There is a syntax for that. However, for such use cases
+with nullability, let is really useful. To better understand
+how it works, I also have the
+following question. What is the type of
+it in the code below? The answer here is
+nullable e-mail. The problem is that we
+forgot to use Safe Access. That's going to happen
+that you remember to use let to cope with nullability, but forget to use it
+with Safe Access. Then, it refers to get e-mail directly and
+has a nullable type. The compiler then gives you
+a nullabe type mismatch. You can't call the send
+e-mail to function, which expects non-null value, and you can be
+surprised like why? The trick with let box is
+only if you use Safe Access, because you call the let function only if
+this is non-null. Then, "it" is known to be
+non-null inside the lambda. Now, the type of "it" is e-mail. Another example for
+let at nullability. Now, it's nullability
+and save typecast. Remember, the example when we have a property defined
+in an interface, it's an urban property, that's why you can't
+smart cast it. The compiler doesn't know how it can be written in
+this App classes. To smart cast, you need to copy the property to
+a new local variable. Let gives you an alternative. If the property session user can be cast to Facebook user, we perform an action on it. Otherwise, nothing happens. The meaning of
+two code snippets with explicit if and let is the same. Using let is just
+another way to write it. Here, we use save cast as with question mark to check
+of being the right type. If the cast is successful, then the result is non-null. In this case, what we
+call a let and insight let our lambda argument has
+the required non-null type. At first, these new let way might look inconvenient
+and unfamiliar. But I suppose after some time, you'll get used to it, and
+prefer using it more often. Now, let's go back to our discussion of
+useful functions in the library. Another one is takeIf, which returns the receiver if it satisfies the given
+predicate or returns null. Here, the result is the value
+of issue variable itself if it's status is fixed
+and null otherwise. Or, we might want to replace the patronymic name with
+null if it's empty, take the string if it is not
+empty, does exactly that. The question for you is, what is the result of
+takeIf call below? In this case, the receiver
+satisfies the predicate. Number is more than 10, so the receiver
+itself is returned, otherwise, null would be
+returned as a result. The takeIf function is extremely helpful inside chained calls. Imagine you need to
+continue a list of operations only if a
+predicate is satisfied. You can call this
+predicate on the result of the previous expression
+in the call chain. Using this safe operator
+after takeIf result continues to cause only if
+the predicate is satisfied. Otherwise, you have
+null as the result, and all the rest calls
+won't be called for you. Here, there are some open
+issues will be printed only if the "Filtered Open
+Issues List" is not empty. There is the opposite, takeUnless which
+returns the receiver if the predicate
+is not satisfied. There is another function that looks like a built-in
+language construct. It simply repeats an action
+for a given number of times. It's very convenient, and instead of for-loop
+with the indexes, for simple scenarios,
+you can use a repeat. Again, the same pattern. Repeat not a built in syntax, but a function defined
+in the library. Here, you can see
+the declarations for all the functions that
+we've just discussed. Run only runs the lambda, let runs the lambda on
+the receiver value. The receiver becomes
+the lambda argument. TakeIf and takeUnless nicely
+replace if into call chains, and repeat is an alternative
+for the for-loop. New syntax is used here. All these functions are
+declared as inline functions. Because of that, using these functions doesn't bring you any performance overhead. Next, we'll discuss why, and why it's so important.

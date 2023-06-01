@@ -1,0 +1,81 @@
+In this video, we'll
+compare operations on collections and
+sequences in detail. Let's look at
+a specific example of chained operations for
+working with the collection. It produces an integer result. First, we use operations on
+collections to convert it to sequences beyond
+their need to add a sequence as
+the first operation. That will perform all
+the operations in a lazy manner. Let's discuss in
+detail the difference between eager and
+the lazy evaluation. When you call the chained
+operations on collections, each operation produces
+a new collection as an intermediate result. It computes the result
+in an eager fresh. You can always observe the result up to
+an intermediate stage. When your use sequences
+and lazy evaluation, nothing happens until
+the result is needed. All the transformations for the first element are performed only when you call a terminal operation that
+requires the previous results. In this example, with
+sequences and lazy evaluation, we perform all
+the transformations for the first two elements
+and then find, already finds their answer
+and returns it. That means that we don't need to perform any operations
+for the rest elements. We don't need to transform them because we've already
+found their answer, so the result is not needed. That illustrates the laziness
+of the operation. We don't do anything
+unless it's needed. If we found the result already and some
+operations remain, then we don't perform them. Eager evaluation always performs all the operations
+for all the elements. That's the difference. Sometimes, the terms horizontal
+and vertical evaluations are used to describe
+the same idea. With the horizontal evaluation, you apply operations on the elements in
+a horizontal manner. At first, you perform all the operations for the elements in
+the first collection, then you perform the operations
+for the elements after the first
+transformations, and so on. With vertical evaluation,
+when the result is asked for, you first process
+the first element, and all the chained
+operations for it, then you apply all the chain operations for
+the second element, and so on, until
+the result is found. To practice your understanding, write the output up to the evaluation of
+the expressions below. At first, we call
+the operations on collections, and then replace
+them with sequences. Operations on collections. First, apply map to all
+the elements of the list, then apply filter to
+all the transformed elements. First all maps, then all filters. Here is the answer for
+the next line using sequence. Operation on sequences. First, apply map and filter
+to the first element, then map and filter to
+the second element, and so on. The interesting thing is that, here, in the last line,
+nothing gets printed. Nothing happens until the
+terminal operation is called. The operations are lazy, and until you explicitly ask for the result, nothing will happen. The intermediate sequences only store the operations
+to be performed. You can ask what is
+the difference between intermediate and terminal
+evaluations. It's very simple. Intermediate
+evaluations return you another sequence while terminal evaluations
+returning everything else. It might be a collection, some of the elements, a value, a boolean results, whether
+there are any elements, no elements, and so on. Until you pull this last
+operation, nothing happens. Note that when you
+work with sequences, the order of the operations
+might be important. Sometimes, you can apply the transformations
+in a different order. For instance here, if we
+first call map then filter, then map will be applied
+to all the elements. If we switch them, however, that map will be applied only to the elements that
+weren't filtered out. It's not always possible to switch the order
+of operations. But if it's possible,
+it might change the number of
+the resulting operations that will be performed. To practice that, write the output after the evaluation
+of the last expression. This exact example is illustrated in
+the previous picture. We filter out the first
+and third elements, and that means, we don't
+apply map to them. We only apply map to the elements that
+remain after filtering. Operations on
+collections are inlined. That works great
+for simple cases, but creates a significant performance overhead
+for chained calls, because intermediate
+collections are created. Sequences solved this problem by storing operations
+to be performed, and evaluating them
+in a lazy manner. Operations on sequences mainly duplicate operations
+on collections. You can convert your chained
+calls from collections to sequences by adding a
+sequence at the beginning. Now you know how
+to avoid creating intermediate collections for chained calls using sequences. Next, let's discuss how you can create sequence from scratch, when you don't have an initial collection
+you can convert to it.

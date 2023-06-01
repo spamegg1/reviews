@@ -1,0 +1,95 @@
+In this video, you'll learn about different ways
+to create a sequence. Sequence is a regular interface defined in the Kotlin
+standard library. It has one member function
+iterator marked with the operator modifier
+in order to make it possible to use
+sequence in for a loop. Note that despite sequence
+is very similar to iterable, which is implemented by all the collections
+and desirable ranges, they are defined as two
+different interfaces in order to distinguish eager and lazy ways
+of performing operations. Extensions on sequences mostly match extensions on
+iterables or collections. Having similar names for
+both groups of extensions, makes it really easy to change from eager to lazy evaluation. You only need to add
+one sequence call at the beginning
+of the call chain. Intermediate operations
+are the ones that return another sequence are
+not marked as inline. The operations to be
+performed must be stored to make it possible
+to call them later. Postponing the operations
+until they are needed is the core idea
+of the lazy evaluation. Because the action in a lambda
+must be stored somewhere, that means that
+the corresponding lambda cannot be inline. Terminal operations which
+return a primitive value, or a type, or a collection
+can be declared as an inline. If you need to build a sequence from scratch, for instance, you define a way to receive each new element
+from the network, you can use the
+generateSequence function. Here, it generates a
+sequence of random numbers. When the lambda that computes each new
+element returns no, the sequence is finished. Note how we used the takeIf function to
+check the predicate, and return null if
+this predicate is not satisfied. The generateSequence function can be useful when you need to read input and stop when
+a specific string is typed. You can use another
+overloaded version of the generateSequence function. It takes the first
+element into the way how to compute each new element based on the previous one. In this case, we generate an infinite sequence
+of integer numbers. Note that because this sequence
+is computed lazily, it might be infinite. Nothing happens until you
+explicitly ask for it. In this case, we only ask
+for the first five elements, and to they are returned. Note that because
+the same integer types as in Java hidden under the hood, you will still have
+integer overflow. To prevent it, you
+can use big integers. The question to you.
+How many times are the phrase generating element will be printed in
+the example below? What do you think? The options
+zero, one, or four. The right answer is zero because we only asked
+for the first element, and this first element
+is already given. Because sequences are
+evaluated lazily, nothing happens until you
+explicitly ask for it. Here, we only ask for
+the first element, so this lambda is never called. When you explicitly ask
+for other elements, then the necessary
+elements are generated. Another important
+functionality that you can use to generate
+a sequence is yield. Unlike in some other languages, yield is not a built-in
+language feature, it's a regular library
+function in Kotlin. You note the same part and again. Lots of things are
+implemented in the library, not as the language features. Yield allows you to yield
+elements in a custom way. The generic sequence
+functions that we saw before, are white constraint. The lambda there generates a sequence element must be either based on external sources or based on the previous element, but you cannot really
+customize that. With yield, you can generate any elements in
+any convenient order. You need to use yield inside lambda argument of
+the sequence function. We won't cover the details of implementation of yield now. Partly, we'll discuss that in the next section of
+lambdas with receiver. However, mainly, it is based
+on the future of coroutines. Coroutines deserve
+the whole separate chorus to be covered properly, so we'll talk about
+them separately later. For now, we'll discuss
+how yield works. Here, you see
+another example of how we can generate an infinite
+sequence of integers, now by using yield. You can yield one specific value or you can yield
+the whole list of sequence. Yield brokes lazily. It will be called in the lazy
+manner only when necessary. If something is not required, it won't be computed. You can yield any elements
+that you want. The core idea is that you can do any intermediate computations
+between these yieldings. To better understand how it
+works, answer this question. How many times one of
+the phrases starting with the yield will be printed
+in the following example? The right answer is zero. It was a tricky question because the take function is
+only an intermediate operation, it returns another sequence. But no elements are yielded until the terminal
+operation is called. In this case,
+no terminal operation is called, so nothing happens. Let's replace
+the take function with first which is
+a terminal operation, and see what happens then. In this specific example, only the first two yields
+statements will be called. The last statement is not needed because the result
+is powered earlier. Let's see how it works. At first, we use the first
+element by calling yield one. But then, we filter it out after mapping because it doesn't
+satisfy our predicate. Only after that, we use
+the range of elements three, four, and five, one by one. The first element three
+doesn't satisfy the predicate. Then we have
+the next element four, which satisfies the predicate. Because the first fraction
+needs only one element, it simply returns the answer, 16 becomes the answer, and only through first yield
+statements are called. We already found the answer, and that means we don't need to call the last part at all. The result is already found. That illustrates the lazy way of building a
+sequence using yield. Whenever you need some custom
+logic to build a sequence, you can use yield. To practice, implement
+the function that builds a sequence of
+fibonacci numbers using yield. You can declare a local
+variables inside the lambda, and then use these variables while yielding new elements
+in a sequence. Do this task in the playground
+right after the video. Later, watch the solution video.

@@ -1,0 +1,13 @@
+Our task here is to implement the function
+that builds a sequence of Fibonacci numbers using this 'buildSequence'
+function and the 'yield' mechanism. Let's do that. For convenience,
+let's store a pair of elements, the first two elements in a 'Pair'. At first, it will be 0 and 1, so these elements will denote the
+last two elements of our sequence. Because they are used to calculate
+each new element, we store two of them. And we store them as one 'Pair'. The first two are 0 and 1. Then we can say 'while (true)'
+because we don't know when we stop. This sequence might be infinite. And while 'true' at first we can
+yield each new element, we should 'yield()' it. We just return
+the first element in our pair. Then we need to update the elements. What we do is we say that now
+the second element becomes the first one, and the sum of the first and
+the second elements becomes the next element,
+the second element. Now if we run it (let's run it like this), we'll see that it's
+exactly the answer that we expected.

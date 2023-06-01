@@ -1,0 +1,130 @@
+In this video you'll learn how to mix Java
+and Kotlin code in terms of nullability. Java types are not divided into
+nullable and non-nullable types, so what happens when you call
+Java methods from Kotlin? Kotlin nullable types under the hood
+are implemented using annotations. If you use the same annotations
+to annotate your Java code, then annotated Java types will be
+visible from Kotlin as nullable and non-nullable Kotlin types accordingly. An interesting question is, what happens
+if you use unannotated Java types? These are probably the majority of
+Java types, let's discuss that. Such unannotated Java type
+will be visible from Kotlin as a regular Java type and
+it will behave like in Java. It even has a special name,
+it's called a platform type. It's neither nullable nor
+a non-nullable type. You can sometimes see the annotation
+type followed by the exclamation mark. It's annotation, not syntax. That means you can't declare a variable
+of such type in the Kotlin language. You can only sometimes find
+these type in error messages. If you see it, that means that
+this type came from Java and it is so-called of unknown nullability. A little bit of history first. The safest approach when you mix Java and Kotlin is to interpret each Java
+type as nullable Kotlin type. In this case, you are free from
+NullPointerExceptions because you have to always check for the types explicitly. And in Kotlin, this approach was tried
+at first, but it didn't work out well. Kotlin wanted it first to interpret
+each Java type as nullable type. But then the early adopters said that
+the code was full of exclamation marks and it wasn't really readable
+is the first problem. The second problem,
+which is more important, is that such an approach doesn't
+really work with generics. It wasn't a solution, so instead
+Kotlin uses the idea of platform type, which refers to the type
+that came from Java. When you see a platform type in
+an error message like in this example, most probably you can safely ignore it. The fact that you see the exclamation
+mark is not connected with the source of the problem. Here we try to assign String to Boolean. The problems lies in incompatible types,
+but is not connected with the fact
+that it's a platform type. Exclamation mark means that the type
+came from Java, but you need to look for a different source of the problem
+if you see it in error message. There is a question to you, you know that the platform type
+behaves like a regular Java type. What do you think would
+happen in this example? With the reference
+available of platform type, which stores now that came from Java. We have several options. NullPointerException is thrown,
+null is printed, compilation error, or
+IllegalStateException is thrown. The right answer here is
+NullPointerException. This code behaves like regular Java. That means that when we try to reference
+the variable of the platform type, we get NullPointerException. Kotlin compiler infers the type
+of session description as String platform type since this type
+is not annotated in Java. Kotlin allows you to dereference it,
+so you can use it as in Java. It's a known nullability, so
+it can probably work fine. However, you can also get
+a NullPointerException like in Java. If you use the safe access here, then everything is fine,
+you have null as a result. Now you know that if you mix Kotlin and
+Java, you'll still have NullPointerExceptions. It seems that Kotlin doesn't
+save you from NPEs in this case. For convenience, we have to sacrifice
+the 100 percentage null safety. The question than is whether it's still
+possible to prevent NullPointerExceptions, what can be done? There are still some things
+that you can do to achieve a better level of null safety. There are two main pieces of advice. At first,
+you can annotate your Java types. If that's not an option, it's useful just
+to specify explicitly types of variables, which get values from Java functions. Now let's consider these two
+pieces of advice in turn. First, let's talk about
+annotating Java types. Annotating Java types is easy,
+simply add @Nullable and @NotNull annotations to Java code and Kotlin will interpret annotated types
+as nullable and non-nullable types. You can annotate a function return tab,
+parameter types, and Kotlin will interpret
+the types accordingly. Different annotations are supported. Many frameworks define their
+own nullability annotations. Kotlin tries to support all of them. These annotations have different names,
+but they all mean the same. The question, what happens with the code
+after we add nullable notation? We have all the same possible options. Here we get a compilation error. Now Kotlin sees their description function
+as the function returning nullable String. Then it infers the type of the description
+variable as nullable String. That produces an error that you
+can't dereference a nullable String. Now Kotlin forces you to use
+either safe access arbitrator or another way to cope with nullable types. Annotating Java types really helps,
+however, you can ask whether you really need to
+annotate all Java types in your code base. And the answer is, if you have an option
+that might be used by default, you can specify only the other one. For instance,
+you can annotate only @Nullable types, if you pick @NotNull by default or
+vice versa. It's supported by a JSR-305. You need to introduce your own
+annotation that specifies the default. You annotate it itself with
+TypeQualifierDefault, define this code for applicability and specify which value,
+@Nullable or @NotNull, should be used by default. For instance, you can apply the declared
+@MyNonullByDefault annotation to a package. But then all the types in this package
+would be considered as annotated by your default choice,
+not null, in this example. Note that the Kotlin compiler
+interprets such problems as warnings. To explicitly make such warnings errors,
+you add the compiler option. Afterward, you get an error if the code
+doesn't compile because of nullable and non-nullable types, which are inferred
+using the specified default. That was all about the first option. You can annotate your Java types and
+you can specify the default annotation to reduce the number of annotations
+added to your Java code. Read the Kotlin documentation to find
+more details about JSR-305 support. However, annotating Java
+code isn't always possible. With these Java code can be an external
+library the party application that you don't want to touch or you don't
+want to annotate the Java code for some other reasons. There is still good advice on what can
+be done to minimize nullability issues when you write the code in Kotlin,
+which calls Java methods. The following example
+should be rather trivial. What happens if you add an explicit
+nullable type annotation for our previous example? The answer is straightforward. We annotate the type as nullable, which forces us to check the value
+explicitly for being non-null. Null is printed as a result. The other case is more interesting. What happens if you make the explicit
+variable type not nullable, but a regular String? The same options again. Now the last option is correct. You could have guessed that
+because all others were already present
+a IllegalStateException is thrown. Let's look deeper at what's going on here. If you specify the non-null type
+of a variable explicitly and assign to this variable
+something that comes from Java, formally an expression of a platform type,
+then Kotlin generates additional checks that will throw an exception if
+this expression turns out to be null. That is much better than getting
+NullPointerException sometime later because you know the source
+of the problem right away. You get the detailed
+message of what was null. It's much better than trying to
+guess which reference caused NPE and why like in Java. If you don't add explicit
+types specification, you have the same problems as in Java. Let's closely look at what happens in the
+bytecode when you define a variable and assign something that
+comes from Java to you. Kotlin compiler generates
+a special additional check that ensures that your right
+expression is not null. You can assign a value of a platform
+type to a non-nullable type. But if the actual value
+turns out to be null, then the exception will
+be thrown at wrong time. The similar check is generated for your
+public APIs that can be called from Java. The Kotlin compiler tries to
+check that what counts and supposed to be not null is not null. So no one could pass null while
+using the Kotlin function from Java. These intrinsic checks allow you to catch
+all the possible null problems earlier and with the detailed error messages. If you want, you can switch off
+generating these intrinsic checks, but they are really useful. But if it's critical for you, for
+example, for performance reasons or you don't use any Java libraries and
+don't mix Kotlin and Java, it's possible to switch it off
+using the compiler option. Now we've discussed both options
+of what you can do to prevent NullPointerExceptions if you mix
+Kotlin and Java in one project. When you mix Kotlin and Java code
+to prevent NPEs you can either add nullability annotations
+to your Java types. Or add explicit types
+specifications to the Kotlin codes that uses regular Java types. I would say that Kotlin null
+platform types represent a good compromise between safety and convenience. On the one hand, you have [INAUDIBLE] guarantees
+when you write pure Kotlin code. On the other hand, you lose these
+guarantees when you use Java libraries. However, that still works well for
+the majority of practical use cases. Next, we'll discuss how Kotlin List and
+Kotlin Mutable List correspond to Java ToDo List and what kinds of
+compromise we can achieve that.

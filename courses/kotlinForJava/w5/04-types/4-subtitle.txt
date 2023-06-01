@@ -1,0 +1,68 @@
+In this video, you'll learn about the correspondence between
+Kotlin collection types and Java collection types. While talking about extensions, we've discussed that
+Kotlin standard library contains a bunch of extension methods in
+Java collections, and when you create
+a collection in Kotlin, you actually create
+an instance of Java's standard collection
+under the hood. Thus, there should be
+the correspondence between the list in Kotlin and
+the interface Java.util.List. We already saw that
+other types are replaced at the bytecode
+with Java types. So probably, here it
+works the same way. However, it's not that
+straightforward because in Kotlin, we have both read-on the
+list and MutableList. They both somehow correspond
+to one Java.util.List. How it works then. Now, let's discuss that. List and mutablelist are simple interfaces
+defined in Kotlin, the collection package, and
+mutablelist extends List. Note that we specifically
+used the broad read-only to describe
+the interface list in Kotlin. It's not the same as immutable. It's not immutable data structure which cannot be changed. No. A read-only interface, just like mutating methods. The actual list can be modified via
+a different reference. The question to you, what happens when running
+the code below? Here, we create
+an immutable list, assign the mutable list
+variable to a read-only list, and modify the initial list. Are there options? The assignment won't compile, we can't modify the initial list, the initial list will be printed, all the modified list will be printed, what's your choice? This code compile is fine. What's happening here is at the read-only reference observes the mutation of the mutableList. Here the mutableList refers to the created List
+object in memory. Then, we assign
+the reference to this List to another variable of
+read-only List type. Having the variable of
+the read-only list, only means that you can't call add members on such a list, list likes mutating method. However, this list can
+be modified because there is another reference through which you can modify it. The read-only list will
+simply observe this change. At the bytecode,
+both Kotlin list and mutableList interfaces are
+replaced with Java.util.List. By default, when you create
+an instance of mutableList, Java.util.ArrayList
+will be created. Kotlin somehow pretend that Java.util.ArrayList implements
+kotlin.MutableList. There are some
+compiler magic when a Java interface is substituted
+by the Kotlin interface. Under the hood, it works via the same mechanism
+as nullable types. The similar idea of
+platform types is used. That's how the platform type for collection type is written. Again, you cannot define
+a variable of such type, you can only find it
+in array messages, or when you check in ID what type does
+this variable have. This platform type means
+that it came from Java, and it is a type of
+unknown mutability. We don't know whether it was intended to be
+mutable or read-only, so we can use such type as both. You can ask, why do we need this? Why do we need these read-only types at all if they are not
+truly immutable? The answer is that with Kotlin, it's now much more
+difficult or even impossible to break
+something accidentally. The problem with always having
+mutable methods in a List, is that you cannot understand that this List
+shouldn't be changed. For instance, it is
+a part of API and the API didn't intend to
+their list to be modified, but it's not a library, it's a piece of
+your own application. You usually simply
+return this variable in Java as of Java.util.List type, and in Java, you can accidentally
+call the add method, because you think it's a local
+collection, but it's not. In Kotlin, it's no
+longer the case. You can still call
+the modification method if you explicitly cost it to
+the mutable collection. But in this case, you really
+want to break this code. Accidentally, you can't do it, so such approach prevents
+from some possible errors. Like with nullable types, Kotlin collection types provide a good compromise between
+safety and convenience. You explicitly say whether
+a collection is intended to be modified by using
+a read-only or mutable type, and you can easily mix
+Kotlin and Java collection types because the same classes
+I used under the hood, no extra wrapping is needed. We've discussed
+the correspondence between Kotlin and Java types. You now know how to
+mix two languages, and better understand how the Kotlin types are represented
+at the bytecode level.

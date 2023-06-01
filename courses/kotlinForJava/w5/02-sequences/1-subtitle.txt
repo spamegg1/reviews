@@ -1,0 +1,48 @@
+In this section, you'll
+learn about sequences, and the difference between the same operations on
+collections and sequences. All the extension functions
+for collections which allow us to work with collections
+in a functional style, are defined as inline functions. As we discussed, that means their bodies are generated in the byte code instead
+of function calls. Another thing that we
+can notice looking at declarations is that these functions
+return new collections. For instance, filter creates a new collection that contains
+the result and returns it. To make sure you understand
+it, answer this question. How many collections are created while running
+the code below? The answer is three. Let's count all the
+intermediate collections. At first, we create an initial list which
+contains all the elements. Then when we call map, map creates a new collection
+and returns it as a result. Then we call filter, filter on its turn again creates a new collection
+and returns it. At last, we call max which
+just returns the value, that makes it three
+as the answer. When you use simple
+operations on collections, all the intermediate
+collections are created, and that's something
+to keep in mind. The benefit of in-lining the lambdas is as
+we already know, that there is
+no performance overhead, and they truly Berg's grade especially when you
+only use one function. For instance, when you
+need on the filtering, you call filter and
+everything is fine. However, if you have
+a chain of calls, several calls one after another, then you'll have
+a different kind of problem, probably a bigger
+performance overhead because an intermediate
+collection will be created for each of
+the chained calls. There is an option
+how to avoid it. This option is called sequences. Sequences can be
+compared in a sense with the Java eight streams because
+sequences and streams, both perform computations
+in a lazy manner. The coating sequences
+are called sequences because the name streams
+was already taken. When we mix Scotland with Java we want to avoid the confusion
+with clashed names. If we use operations
+on collections, they eagerly return the result, while the operations on sequences postponed the actual computation, and therefore avoid creating
+intermediate collections. How to convert from
+the least to sequence. That's very easy. You just add a sequence method which builds a sequence
+from a list. After that you can call all the same methods that are available for
+regular collections. If we try to print
+out the result, we see that there is
+no intermediate collection. Sequence objects are printed. These objects somehow draw the reference to the
+post-collection together with all the operations
+that need to be performed but they performed
+the postponed computation, only when the result is required. In the next video, we'll discuss how exactly
+it works in detail.

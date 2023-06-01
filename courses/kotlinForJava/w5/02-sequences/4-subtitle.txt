@@ -1,0 +1,85 @@
+In this video, you can
+practice your knowledge of Kotlin library functions
+and see that in some cases, several chained calls might be replaced with one function. The following code can be simplified and replaced with
+only one function call. This function will take
+a Lambda as an argument. Your task is to write
+only the function name. If you don't know the answer, you can check
+the condition list in AD, drag to find the right
+function or read the recommendation or simply guess and you'll learn
+the answer right afterward. In this case, count
+will do their job. Is the same as first filtering the collection and
+then getting its size. Obviously for one function call, no extra intermediate
+collections are created. For simple cases, you
+don't need to create all the ceremony of
+sequences or streams, you simply call one function. The advantage of
+Kotlin collections and sequences in comparison
+with Java streams. The simple code doesn't require the ceremony and looks
+as simple as it is. Do you know how to simplify this code using
+only one function? In Kotlin, there is a convenient
+sortedByDescending function, which sorts the
+collection of sequence by a given key in
+a descending order. The next question is about the pattern of when you
+first map the contents of a collection of sequence
+and then filter out nulls from the
+resulting list of sequence. Do you know the name of the function that does
+this job at one go? That's the mapNotNull function. Note that mapNotNull performs the same two
+operations at one go. So it's better than
+two separate calls. First map, then filter notNull. When you first stumble
+upon this function name, you can read it in two ways. It's either first
+filterNotNull elements, then map only those
+that are not null. Or alternatively, first
+map the elements, then filterNotNull the result. As you can see from this example, mapNotNull uses
+the second scenario. It's an exact replacement for map plus calling filterNotNull
+on the result. The first case can be often also expressed using mapNotNull. You simply use save access, or another mechanism to return null from Lambda in
+the element is null. The next question is about
+another pattern when you need to modify the map elements
+stored by the given key. If there is no element, you need to initialize it. Here, we fill in the map from the int key age
+two list of people, and initialize it for the not analyzed age is in
+newly-created mutable list. If the person is of a given age, it's added to
+the corresponding list. Do you know how to replace the highlighted code
+with one function call? Write only the function name. There is the convenient
+getOrPut function, which allows you to either get to the value
+by the given key, or put the default value
+if there is no such key. Note that the second argument for the getOPut function
+is a Lambda, and the Lambda body is
+called only if needed. Here, new instances of
+mutable list will be created only if they should
+be added to the map. If there is already age key, no list instance is created. The getOrPut function
+is enlightened, so there is no
+performance overhead from using the Lambda. The next question
+is how to replace this whole code
+with only one call. Note that the result will
+differ a bit because it will bear read-only map
+of entry down the list. But still, do you
+recognize this pattern? The right answer to this question is the
+groupBy function. It does exactly the
+same as the code above. It groups the elements
+by a given key and returns a map from the key
+to the corresponding group. The next question is about an analogue of the groupBy
+function for sequences. Do you know how to perform
+grouping in a lazy manner, like for other operations
+or sequences like filter and map without returning
+the result immediately? Write only the function name. GroupingBy does the job. Let's first see
+what's going on here. You can use groupBy both on
+collections and on sequences. It immediately builds a map from the specified key to a group
+of elements having this key. In this example, we then count each group size and have a map from age to group size
+as a result. However, sometimes you
+might want to perform grouping in a lazy manner so that the actual result or other
+required information based on the grouping could be later
+retrieved by request. GroupingBy like
+other lazy operations on sequences returns an object storing their operations to be performed rather than
+the resulting map itself. The grouping object stores the initial sequence
+and the grouping key so that the actual grouping could be performed when
+result is needed. EachCount is the function
+that can be called on such grouping object to
+get the size of each group. We have the same map from age to group size as a result as before. Later in the next course, we'll discuss other
+operations that might be performed on
+the grouping object. Now, you know about sequences and their difference
+with collections. When you have
+several chained calls, it's better to use sequences because they allow you to avoid performance overhead caused by creating intermediate
+collections. Know the Kotlin library
+because sometimes one function might be present that can do
+the necessary job for you. Next, you'll learn about
+Lambda as receiver. The feature that is really
+helpful for creating D cells, domain-specific
+languages in Kotlin.

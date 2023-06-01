@@ -1,0 +1,126 @@
+In this section, you'll learn about the powerful feature
+of the Kotlin language, which is called
+lambda with receiver. In essence, it might be
+considered as a union of two ideas of two other features: extension functions and lambdas. Now, we'll discuss
+what does that mean. Let`s try to read the example. We create a StringBuilder, append some strings to it, and then get
+the resulting string. Probably, we intend
+to somehow return it. The problem in
+this code, a small one. The one that everyone is
+used to working in general, is that you have to repeat the variable name several times, to call different
+operations on it. In slides, I have a very short name for
+the variable, but in real life, it probably will be
+called StringBuilder and you will have to repeat
+these names several times. In Kotlin, you can do that. You can use with for this case. I suppose it should be
+clear what's going on. You no longer need to repeat
+their civil several times. You can call all the members and extensions without
+explicit receiver specification, like members inside the class. But the most interesting
+thing on this slide, it's actually its name. It's called the with function, thus with is a regular function defined in the standard library. Here, we see the same pattern used as we've discussed before, something that looks like a
+built in language construct, is a regular function defined in the Kotlin
+standard library. In some other languages, with or similar concept is
+a language construct. To make it possible to define such functions in the library, Kotlin supports the concept
+of lambda with the receiver. Let's first find the lambda here. With is a regular function and lambda is
+its second argument. When we introduced lambdas, we've already talked
+about the rule that if lambda is
+the last argument, it can be moved out
+of the parenthesis. Another syntax is putting lambda explicitly as
+the second argument. No one does that because
+it's not very readable. But it demonstrates that with
+is a regular function call. So curly braces mark the lambda and this is an implicit receiver
+inside this lambda. Lambda with the
+receiver is a lambda with these reference
+available inside. As usual for these reference, it can then meet it. That's how we get this nice syntax without
+explicit to this. Lambda with the receiver is simply lambda with
+implicit to this. You can access these inside lambda and call members
+on the receiver. To check that you understand
+that, answer the question. What is the type of this
+in the following example? The type is StringBuilder, when we are talking
+about the with function, this refers to
+the first argument. Its type is the same as
+the type of the argument, which is StringBuilder here. There is a direct correspondence between regular functions
+and regular lambdas, and between extension functions and lambdas with receiver. The first name for lambdas with the receiver are
+voice extension lambdas. Sometimes people may call
+them extension lambdas because of this correspondence,
+is the synonym. At some point, we decided that lambda
+with the receiver is a most clear name
+which better explains the concept and illustrates
+what is going on. It is preferable for
+learning these feature. What is the correspondence? Inside the body of
+the extension function, you can use these as
+an implicit receiver. You can omit this and simply call the members
+of the receiver. Lambda with receiver
+is very similar, because of these
+inside this lambda. If you can omit it
+and simply call members without
+explicit specification. There is also correspondence between the ways how
+you call lambdas. We've discussed that you
+can store a lambda in a variable and the same works
+for lambda the receiver. You can see how the type for lambda with receiver
+looks in Kotlin. You put a receiver type
+before the parameter list, then follows the dot, then the perimeters as
+usual in the parenthesis. The return type is
+specified after the arrow, like forever the lambda. When you call a regular lambda, you call it as
+a regular function. You can call lambda
+of the receiver, you call it as
+an extension function. You see this correspondence. Regular lambdas correspond
+to regular functions, lambda's with the receiver correspond to
+extension functions. Another example
+that I want to show you is the buildString function. You don't need to use with
+for building a string, it was used for illustration. In real life, you
+can use buildString to build a StringBuilder
+and convert it to a string. It takes a lambda with
+the receiver as an argument. Now let's look under the hood and look at how the buildString
+function is implemented. We know that it takes lambda with the receiver
+as an argument. So it expect the parameter of extension function type
+to StringBuilder. What it does inside is
+something very simple. It creates a StringBuilder. In the end, it returns the resulting string
+from the StringBuilder. But without adding content
+to the StringBuilder, you'll get an empty string
+as the result. In the middle, you
+should somehow call all the actions on the StringBuilder
+provided in the lambda. Now, try to complete
+these buildString definition. The answer is that
+you call this lambda as an extension function on
+this StringBuilder variable. As we've discussed, you
+call the variables of extension function types
+as extension functions. This is exactly what you
+do inside this function. This line invokes the lambda body and performs all the actions
+specified there. In this case, it calls a bad actions specified
+in the lambda. Note that the
+buildString function is also declared as in line. Under the hood, the function body and the lambda body
+will be aligned. So no extra objects for storing
+lambda will be created. The same aligning magic works with lambdas with receivers. Lambda with receiver is
+this syntactic thing for the lambda that interprets one of its parameters as these. To some extent an
+extension function stores one of its parameters
+as the receiver, and the extension
+lambda does the same. That's how with is implemented. It's a very simple function, it only calls its second argument the lambda with receiver, on its first argument
+the receiver itself. You call block on the receiver argument as
+an extension function. Lambda with the receiver is a very powerful mechanism that allows us to create domain specific languages
+just as in Kotlin. The whole topic of
+how to do that, we'll discuss in
+the next course in detail. Right now, I only want
+to briefly mention that and show you that lambdas with receivers
+are really useful. In Kotlin, you can
+define the sales for any HTML like
+structure like HTML. Everyone knows HTML. That's why it is
+such a good example to illustrate the idea. This code looks like HTML
+but it's not a text, it's a irregular coding code, HTML and table
+a regular coding functions. You can see how you mix
+the coding language constructs like for
+loop with HTML syntax. All these curly braces denote in fact lambdas
+with receivers. I have mentioned that if the curly braces
+are called bold, that means they surround lambdas. Here they're also
+lambdas with receivers. Here invoke table function
+of the receiver of some specific type
+corresponding to HTML tag. Later, we'll discuss in detail how to define such functions. Another example that
+employs lambdas with receivers is
+gradual build scripts. Now gradual script can
+be written in Kotlin. You again can notice
+all the curly braces. As you expect, they are
+lambdas with receivers. You now know that
+lambda with receiver is simply lambda with
+an implicit inside. In this sense, it`s similar
+to an extension function. Later in the next course, we'll discuss how to use lambdas with receivers to
+create these cells, the main specific
+languages in Kotlin. Next let's see what
+other functions that use lambdas with receivers you may find in the Kotlin
+standard library.
