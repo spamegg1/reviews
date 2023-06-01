@@ -1,0 +1,13 @@
+Why nullability is so important? Nullability in the type system is also one of the key features of Kotlin. It's important because there are a lot of nulls around us. The introduction of null to earlier programming languages,
+is known to be called "billion dollar mistake". Because nulls are ubiquitous, NullPointerExceptions, attempts to dereference
+null pointers, are very common as an issue. Like, so many stack traces that you collect from any
+application will be NullPointerExceptions. Of course, it's something that occurs so often,
+that it's worth controlling better. Like not overlooking such exceptions or at least possibility
+of having such an exception, makes a lot of sense. So, this is why we support a control for nullability in
+the type system itself and not like in a library or somewhere. We try to integrate this as a very small number of
+language features, that are tightly connected together. We have non-null and nullable types, and handful operators that help you work with nullability, plus there is smart cast and so on, so forth. This machinery makes it easy to control nulls and also makes 'null' a first-class citizen, basically in the language. Because, before, like if you don't have this controller, the type system, it's an outlaw: using nulls for representing
+absence of things is an anti-pattern. In Kotlin it's a legitimate pattern, you can use it because the type system helps you track it. There is an important distinction in the approaches of tracking absences of things in different languages. One could think of creating like an 'Option' type for example, or 'Optional'. That's a class that wraps something and just
+represents existence or absence of something, Like an Optional of T, right? So, the biggest difference between the nullable
+types in Kotlin and this Optional, is that in Kotlin, we don't have to wrap anything. There is no extra object around your payload for one thing. Then, there was an important distinction regarding sub-typing. If you have a nullable type in Kotlin somewhere, then you can take a non-null value and simply assign there. With Optional, it doesn't work this way. If you have an Optional of String, you cannot simply assign a string into it, you have to wrap it first. Right. So, it makes many manipulations
+with types a lot smoother in Kotlin. I guess this is one of the most successful features in Kotlin. It's proven to be really useful and relevant
+one for real-life programming.

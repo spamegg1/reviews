@@ -1,0 +1,38 @@
+Let's see how we can complete this solution
+for the last task. I suppose that you've already solved that
+in the playground. This task is to check
+whether 20 percent of the drivers contribute
+80 percent of the income. To check that, at
+first we need to count the total income
+of all the drivers. For that, we use
+the cost of each trip, trip has a property cost. We sum up all the cost of all the trips and that
+is the total income. Note that we can use
+property references. After that, we build
+a sorted list of drivers income. We are not interested in
+which exact drivers are the top drivers and contributed to the majority
+of the income. We are okay with sorting
+quantity income values. Thus, here we have the list
+of doubles as the result. First, we group
+the trips by drivers to build a map from driver to
+all trips by these driver, then map function transforms
+each entry in this map. The first parameter
+represents driver, but we are interested in under
+the trips by this driver. We find the overall income
+of the specific driver. For that, we sum
+up the income for all the trips made by
+this specific driver. Again, we simply sum up the
+values returned by trip cost. Now, we have the total income and the list of sorted incomes
+for all the drivers. At last, we'll need to
+compare two numbers, the income of top drivers with 80 percent of the total income. Thus, we need to find the income of 20 percent of the top drivers. For this, we use
+sortedDriversIncome. The take function returns us the required number of
+the first elements in the list. We wanted the list consisting of only the first top drivers. We've already found this numberOfTopDrivers
+in the previous slide. Thus, we take the list
+consisting of only the income for
+the top drivers and count the sum of
+all the elements to find the total income
+of this top drivers. At last, we just compare these numbers and that
+gives us the result. That's how we can solve this checkParetoPrinciple
+function in a rather concise fashion. Other solutions
+are also possible. There are many ways
+to solve this task. I just wanted to share
+one possible solution.

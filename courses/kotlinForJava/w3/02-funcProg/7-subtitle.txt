@@ -1,0 +1,79 @@
+In this video, you'll learn what does return expression
+inside the lambda do, why it works like that, and how to safely use
+it for your purposes. Let's start with an example that sometimes might
+be really confusing. It's a puzzler, so you can expect something surprising as a result. The duplicate
+non-zero function is intended to duplicate
+all the elements except zero. The question is, what does
+it produce as a result? You can try to guess
+what's going on and later we'll
+discuss the details. The options are; a list
+of [inaudible] results, the same list but flattened
+or in other words, the list of all the non-zero
+elements or an empty list. The right answer here is an empty list which
+is really unexpected. You can easily write
+similar code and expect this function to print duplicated
+non-zero elements. Let's see what's going on here. Returning Kotlin always returns from a function marked with fun. That sound sink you may
+consider as a rule. It explains an empty list
+here as a result. When the function
+finds zero element, it returns an empty list but it returns an empty list
+from the whole function. That's why an empty list is
+printed out as a result. Let's discuss why
+it works this way. Why in Kotlin return returns
+from the outer function? Consider the following example
+when you have a regular for loop and inside this
+for loop you use return. Return simply returns
+from the function. If you convert the
+for loop to foreach, then you can't expect that return continue to
+behave in the same way. Return inside foreach returns from the whole function as well. In this scenario,
+we are glad that return returns from the whole function nudge
+from the lambda. That explains the motivation
+of white box like this. A lot of functions in Kotlin
+like for each behave like language constructs
+and we want to provide such almost language
+construct experience. What can you do if you need
+to return from and lambda? You can use the labels
+returns syntax. Here, the label return will return from the
+corresponding lambda. By default, you can
+use the name of the function that calls
+this lambda as a label. But if you want, you can specify any label name put it right before the lambda
+followed by add sine. Here we provided
+the customer name just L to label the Lambda. You then use this name
+in a labeled Return. Now that duplicate non zero function
+implementation uses labels, each returns, what do we expect? The flattened least of
+duplicated known zero numbers. There is another solution
+to the same problem. Instead of lambda, you can use a local function and then pass the reference
+to this local function. In this case, return
+behaves as expected. It returns from
+the local function marked with the pond keyboard. Now, the alternative solution is to use an anonymous function. If you don't want to invent
+a name for a local function, you can use an anonymous
+function instead. You can define an anonymous
+function in place, similar to the lambda when
+you pass it as an argument. In essence, it's simply an alternative syntax
+for lambdas,. They're under
+the hood implementation the compiled bytecode will be the same for lambda and
+an anonymous function, and the only difference
+is syntactic. You can now use a return
+which returns from the anonymous function
+marked with the fun keyword. What's more you can specify
+the return type for an anonymous function which
+is not possible for a lambda. Sometimes, it's possible
+to simply avoid return. In this case, we use
+the result of if instead of return and we get what
+we expect as a result. One more question to you. What do you think
+does label to return inside foreach correspond to break or continue
+inside for loop? There are tensors continuum. Breaks stops the for loop
+completely while continue stops only the current iteration and goes to the next one. Like continue, returned from a lambda only stops
+the current iteration, the current lambda, but
+doesn't stop the whole loop. Note that the angular turn
+doesn't correspond to break. They are the same only if the flourish iteration
+of for loop is the last statement
+in the function. Otherwise, they differ in whether this statement is following
+right afterword are called. Return returns from
+the whole function, while break completes only
+the for loop iteration. There is no direct analogs
+to break other than extracting the for each call
+to a separate function. This explanation of how
+those return inside lambda completes our discussion of functional programming so far. Later in the course, we'll return to the topic of operations on collections
+and discussed in lining and the difference between eager and lazy iteration. Our next module we'll focus on object-oriented
+programming in cotton which has some small
+differences with Java.

@@ -1,0 +1,78 @@
+In this video, you'll learn
+about function types. We'll also discuss
+how you can pass Lambda as an argument
+to Java method, and also touch a topic of
+function types and probability. In Kotlin, you can store
+Lambda in a variable, which type does the variable
+have in this case? If we specify
+this type explicitly, we'll see a so-called
+function type. First, parameter types
+are written inside the parentheses
+and then an arrow, then the return type. In this case, is
+the type that takes two integer parameters and returns an integer as a result. What will be the type of
+isEven variable here? In this case, we have
+a Lambda that takes Int as a parameter and
+returns Boolean as a result, you can see the
+corresponding function type. Note the difference
+between storing a Lambda and storing the result
+of applying this Lambda. Lambda is the whole function
+containing the logic of how to compute the Boolean result from the given Int argument, while the result is
+simply a Boolean value. You can call a variable a function type as
+a regular function, providing all the
+unnecessary arguments. In this case, you
+call a variable is even as it was
+irregular function is even. To call a Lambda stored
+in a variable might be convenient if you want to
+postpone calling a Lambda, store somewhere and
+call it on the later. When you store a Lambda
+and a variable, you can pass this variable whenever an expression of
+function type is expected. For instance, to
+all the functions working with collections in a functional
+style like any or filter. You can even call
+a Lambda directly, putting parentheses right
+after lambdas curly braces. However, such invocation
+looks a bit strange. If you need to call
+a Lambda right in place, better user run. The version with run
+does exactly the same, but it's much more readable
+than the code above. In Java, you can pass a Lambda instead of
+a SAM interface, an interface with
+only one single abstract method. In Kotlin, you can use
+the function types directly, but when you mix Kotlin and Java, you'd want to do the
+same as in Java. Whenever you call a method that takes SAM interface
+as a parameter, you can pass a Lambda as an argument to
+this method instead. In Kotlin, if you want to create an instance of
+such interface explicitly, you can use the outer generated SAM constructor
+like in this case, a runnable and pass a Lambda
+as its only argument. Now, let's talk about
+function types and nullability. I want to highlight the
+difference between function type that turns nullable value
+and nullable function type. To better understand that, answer, which lines
+here don't compile? What is the difference
+between these two types? The first one means that, return type is nullable. That's a possible
+mistake when you simply add a question mark
+after the function type. It means that you make the return type of
+this function type nullable, not the whole type itself. If you want to make
+the whole type nullable, you need to use the parentheses. In the example, you saw
+null in curly braces. It's a Lambda without arguments
+that always returns null. The next line shows that
+the variable which can straw either null reference or Lambda returning Int value. Let's go back to the task. The first line doesn't
+compile because you can't store null in a variable
+of a non nullable type. To store null, you
+need to declare a variable of a nullable type
+as in line three. The second line is fine
+because you need to hear a Lambda that can't
+return nullable Int. The Lambda in the second line always returns null, so it fits. The last line doesn't
+compile because the compiler expects the Lambda that
+returns only integer values. But here, we tried
+to assign there a Lambda which returns null, that is not allowed. You can ask, how you should call a variable of
+a nullable function type? You can't call it as a regular function
+because it's nullable. So which options do you have? You can check the variable
+explicitly for being not null, then you can simply call it because smart cost applies here and the value is smart cost to the value of non nullable type. An alternative is to use
+the safe access syntax, but in this case, you
+call it variable of function type by calling
+its invoked function. Each variable or function type
+can be called by invoke, but irregularly you don't need that since there is
+a simpler alternative, the syntax to call it directly. You've learned about
+function types. Next, we are going to
+discuss how trivia Lambdas might be replaced
+with Lambda references.

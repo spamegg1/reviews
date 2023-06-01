@@ -1,0 +1,56 @@
+In this section, we're going to discuss functional
+programming. You'll learn how to write code in a functional
+style in Kotlin. In this video, you'll learn how to define and use Lambdas. Lambda is an anonymous function that can be used
+as an expression, for instance, passed as an argument to
+another function vacation. In older versions of Java, anonymous classes were
+used for the same purpose. Modern developed
+languages including Kotlin as well as Java
+starting from Java 8, support Lambdas which provide more concise syntax for
+the same functionality. Having Lambdas in
+a language also makes it possible to work with collections
+in a functional style. You can use such
+functions as filter or map which make the overall
+code more readable. We'll discuss these functions
+in details soon. First, let's focus on
+the Lambda syntax. In Kotlin, Lambda always
+goes in curly braces. To distinguish
+regular curly braces, for instance, for if expression, from curly braces
+used in Lambdas, ID highlights in
+bold curly braces for Lambdas. When you see highlighted
+in bold curly braces, that means you see a Lambda. Inside curly braces, first
+you specify the parameters, then the arrow, then
+the.Lambda body. If you pass a Lambda
+as an argument, you can put the whole Lambda
+inside the parentheses. However, there is
+a better way to express that. You can move Lambda
+out with parentheses, if the Lambda is
+the last argument, and if the parentheses are empty, you can omit them. This way you have
+the nicer syntax. At first, the same
+syntactic convention of moving Lambda out of parentheses was used in groovy and it worked
+quite well there. Kotlin reuses the same idea which is proven to be
+really convenient. If the type of the
+argument can be inferred, if it's clear from the context, it can be omitted. If your Lambda has
+their own argument, you can replace its name with it. It's an automatically generated
+name for your Lambda, if it has only one argument, and you don't specify
+a different argument name. If you want to express some complicated logic and
+need a multi-line Lambda, then you just write several lines of code inside the parentheses. The last expression of
+this Lambda is the result. I want to highlight another
+mostly syntactic feature. If your Lambda takes
+a pair of values as an argument or as in
+this case map entry, you can use so-called
+destructuring syntax. The same syntax was used to iterate over a map in a for loop, by assigning a key and a value
+to separate variables. We'll discuss in the next module how exactly these
+destruction syntax works, but the usage is quite
+straightforward. Instead of declaring
+one Lambda parameter entry, you can declare
+two parameters at once but put them inside
+extra parentheses. The compiler will automatically destruct entry to key and value. That's quite convenient
+many functions take map entries in argument, and you can use this nicer syntax to work with such functions. If one of the Lambda
+parameters is not used, you can replace its name
+with the underscore. It's more readable
+and you don't need to invent a name for the parameter
+if it's not used. You've learnt
+the syntax for Lambdas. You now know that you can move a Lambda out of the parentheses, use it if it's the only argument, or use destructuring
+declaration syntax if one of the arguments is
+map entry or pair. Next, we're going to discuss the common operations
+on collections.

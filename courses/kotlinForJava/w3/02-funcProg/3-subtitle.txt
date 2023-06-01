@@ -1,0 +1,63 @@
+In this video, you can
+practice your understanding of what the common operations
+on collections do. We have a lot of examples
+of operations in use and each question will be
+followed by an explanation. In this quiz, we'll
+use the class Hero. It has name, age, and
+gender properties. Gender might be male or female
+or if it is unspecified, then null is stored. We will use the following values that are specified in the list. Your tasks for most
+of the questions will be to find the result
+of the expression. These heroes are based on
+the card game, Lifeboat. The first task is to find the result of
+this first expression. The answer is Sir Stephen. We obtain the last element
+in the list and, then we get his name. The Kotlin Standard Library
+contains useful functions. First, last, also
+firstOrNull, and lastOrNull. First and last throw an exception if there
+are no elements. FirstOrNull and lastOrNull return null if the list is empty. All these functions
+are overloaded and are available as the functions
+with predicates. Here, we use at the last
+function without arguments. But there is a similar one that takes a Lambda
+as an argument. For instance here,
+what is the result? The result is null
+because there is no elements satisfying
+the given predicate. There is no hero of age 30. FirstOrNull returns null. Then we use safe
+access and null is returned as the result
+of the whole expression. If we use the first function
+with the predicate, then we'll get no such element
+exception as a result. First must return
+no nullable element. So when there is
+no required element, it can only throw an exception. The next question uses the function that we
+haven't yet discussed, but I think you can guess
+what it is doing by its name. Distinct function returns only the elements which are
+distinct, different. Let's see step-by-step what
+is going on in this example. First, we map the heroes
+to a list of their ages. Then we call distinct on it. It returns a new list which contains only
+non-repetitive elements. In this case, the duplicate
+of 29 was removed. At last, we get the size of the resulting list
+which is five. The next question uses
+the filter function. Here, filter returns
+all the heroes whose age is less than 30. There are three such elements
+so the result is three. The next question
+is about partition. We use the partition
+function that divides the list of elements
+into two lists. The first list contains the elements that
+satisfy the predicate, heroes that are younger than 30. The second list contains
+all the rest elements, heroes that are not
+younger than 30. In our case, the size
+of both lists is three. The next question employs
+the function maxBy. You can use maxBy
+and minBy functions if the elements are not
+comparable themselves, but they can be compared by a property or in
+another specified way. Here, we compare
+elements by comparing the corresponding values
+of the age property. We find the maximum
+by comparing ages. This maxBy function returns
+the first element with the maximum value of the property or null if
+the collection is empty. Here, we find the oldest Hero
+which is The Captain. His name is the result. The next question is
+about predicates. We use all function. The result is false. We check whether all the heroes
+are younger than 50. That's not true because we
+have The Captain who is older. The next question is
+about the any predicate. The answer is true. We check whether any element in the collection satisfies
+the given predicate. There is the hero, Lady Lauren, which specifies female gender, as it therefore,
+satisfies this predicate.

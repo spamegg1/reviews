@@ -1,0 +1,88 @@
+In this video, you'll learn
+about member references, and we'll discuss what
+is the difference between bound and
+unbound references. Like Java, Kotlin has
+member references, which can replace
+simple Lambdas that only call a member function or
+return a member property, it can convert Lambda to member reference automatically
+when it's possible. The syntax for member reference
+is the same as in Java. First goes the class name, then the double colon, then
+the member which we refer. As we've previously
+discussed in Kotlin, you can store Lambda
+in a variable, however, you can't store
+a function in a variable. It's not like in a truly functional language where each function
+is a variable. No, in Kotlin there is a clear distinction between
+functions and variables, that are connected with how
+JVM works under the hood. If you try to assign
+a function to a variable, you'll get a compiler error. To fix this issue, use the function
+reference syntax. Function references allow
+you to store a reference to any defined function in
+a variable to be able to store it and qualitative it. Keep in mind that this syntax is just another way to call
+a function inside the Lambda, underlying implementation
+are the same. Here, the fruit
+analogous syntax is a Lambda that only
+calls is even faction. If a reproach member
+is a property, or it's a function that
+takes zero or one argument, then member reference
+syntax isn't that concise in comparison with
+the explicit Lambda syntax. However, if the reproached function
+takes several arguments, you have to repeat all the parameter names
+as Lambda parameters, and then explicitly
+pass them through, that makes this syntax robust. Member references allow you
+to hide all the parameters, because the compiler
+infers the types for you. You can pass a function
+reference as an argument, whenever your Lambda
+tends to grow too large and to become
+too complicated, it makes sense to extract Lambda code into
+a separate function, then you use a reference to this function instead
+of a huge Lambda. Now, I want to highlight
+the difference between bound and
+non-bound references. In Kotlin, you can create
+a boundary reference, let's us discuss what it is. In this example, we use
+a regular non-bound reference, which refers to a member
+of the person class. If we check what type
+this member reference has, we see that the first argument of the function type is person. Whenever we want to call
+this variable or function tab, we need to pass the person
+instance explicitly. If we look under
+the hood and check what Lambda does correspond
+to this member reference, we'll find that this Lambda
+takes two arguments, person and age limit, it simply calls
+the member function is older inside on
+the past personnel element. This reference is
+called non bound, since it's not bound to
+any specific instance, you can call it on any object
+of the person class. Bound reference is
+a member reference that is attached to a specific
+instance of the class. Here, the alice variable is an instance of
+the class person, and you can bound member efforts to these specific instance. If we look at the type of
+the bound member reference, we see that now
+there is no person parameter because the person
+instance is already set, the older function takes
+int as a parameter, and the bound reference also expect only int as an argument. If we check which Lambda corresponds to this member
+reference to the hood, we'll find the Lambda that calls the member is older on
+the bound instance. In this case, this bound
+instance is Alice variable. Member reference can be
+bound to these reference. Here, we'll return a predicate directly
+from the class person. This predicate is
+a member reference to his older function, that this is the object of which this member
+reference is bound to, and is usual for
+these we can emit it. Now, we have
+this nice short syntax without left-hand side, just reference to the member. To make sure you understand it, answer the question, what is the type of this member
+reference here? We have two options, either taking person or
+without person as an argument. The right answer
+is the second one, it is a bound reference which stores the person of
+this instance inside, the reference will always be bound to a specific instance
+of the person class. We can call getAgePredicate only at the specific instance, which becomes the bound object
+for member reference. Now the question for you, is isEven in this example
+a bound reference or not? Yes or no are
+the possible answers. The answer is no, because here it's
+just a reference to a top-level function. There is no stored object in which this function
+is bound to. Whenever you see the banks and reference without
+the left-hand side, it's either a reference to a top-level function
+or a bound reference. In ID you can always navigate and see which faction that this
+function reference refers to, it's a very convenient. Now you can use both bound and unbound references
+in your code. Bound reference store the object on which the member
+can delay to called, while I'm might be called on
+any object of a given type. Next, we are going to demystify
+one of the common pursers which may occur if you use return expression
+inside a Lambda.

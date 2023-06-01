@@ -1,0 +1,14 @@
+In this task, we need to
+define a variable so that the first cast returned a safe cast returned as
+null and the second one, customer novel type
+throw an exception. This task is a good illustration
+for the difference between safe cast and there are goal cast
+to our novel type. Any variable that stores not an integer value
+will do the job. So for instance, in
+this example you define a string, and after that, if you just use safe cast, then you get null as a result because that's
+how safe cast work. If it doesn't cast, it's
+simpler transfer null. But the difference with
+the custom novel type is that if your variable cannot
+be casted to a novel type, then you'll have here cost cast exception that
+the cost is impossible. So there's the difference between this safe cast and
+the customer novel type.

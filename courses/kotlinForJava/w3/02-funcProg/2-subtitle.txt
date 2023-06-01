@@ -1,0 +1,92 @@
+In this video, you'll learn the common
+operations that are used for working with collections
+in a functional style. As we've already discussed, the Kotlin standard
+library consists mostly of extensions
+on Java collections. A lot of these
+extensions work with the collections in a functional
+style and use lambdas. For instance, filter
+and map are defined in the Kotlin standard library
+as extension functions. Now, we'll discuss
+the most common operations and how exactly do they behave. Let's start with filter. It filters out the content
+of the list and keeps only their elements that satisfy the given predicate. In this case, we have the predicate checking
+that a number is even and only even numbers that are present in
+the resulting list. Map transform each element in a collection and stores all the resulting
+elements in a new list. Here, we find the square of each given number and the result
+is a list of squares. Now to that, the resulting
+list contains as many elements as
+the initial collection. There are several
+predicates checking whether the given facts
+about the elements are true. For instance, any
+checks that there is at least one element satisfying
+the given predicate, here, we check whether there is at least one even number in the least and
+the result is true. All checks whether
+all elements satisfy the predicate and none makes sure that none of the elements
+satisfies the given predicate. Find finds an element satisfying the given predicate and
+returns it as a result. If there is no required element,
+find returns null. You can use another name
+for the same predicate. This anonymous function
+is called firstOrNull. FirstorNull does
+the same as find, it returns you an element
+or null as a result. First takes a
+predicate and throws an exception if no elements satisfying the
+predicate was found. Count counts the number of elements that satisfy
+the given predicate. Partition divides the collection
+into two collections. Filter returns only the elements that satisfy the predicate, and in a sense, throws out all the elements that don't satisfy the predicate. If you need to keep
+both groups of elements that satisfy or do not
+satisfy the predicate, you can use the partition. It returns two collections, for the good elements
+and the remaining ones. If you need to divide your collection into
+more than two groups, you can use GroupBy. As an argument, you provide the way how to
+group the elements. What should be the grouping key? For instance, here we group personal elements by their age. The result is, map
+from the given key to a list of elements
+that satisfy this scheme. Here, the result is a map from the age to a list of
+all people of this age. This often the case that, as a result of grouping, you'd prefer one element
+instead of a list. If the key is unique, then it's more useful
+to have a map of the key to this unique
+element as a result. That's what they associateBy
+function does for you. It also performs groping, but it returns you
+one element as the map value. Note that, associateBy should be used to run the keys unique. If it's not, pay attention
+that duplicates are removed, so the last element
+will be chosen. If you key isn't unique, it's safer to use groupBy to avoid losing some
+of the elements. You can use as associate to
+build a map based on a list. As an argument, you pass
+allowed to creating the key value pair based
+on each list element, then associate builds a map by filling in specified
+keys and values. The first value in a pair
+becomes key in the map, the second becomes the value. Here, a plus it specifies
+how to create keys, while 10 multiply, it is
+the way to create values. Note that, it's often
+convenient to use the least element as a key and provide a way to fetch
+the value in the lambda. Zip provides you with a way to organize
+a couple of lists. It zips like a zipper the
+elements from two lists. It returns you a list of pairs
+where each pair contains one element from
+the first list and another element from
+the second list. If their initial list
+have different sizes, then the resulting
+list of pairs will have the length of
+the shortest list, the remaining elements from the longest list will be ignored. The frequent use case is to zip neighboring elements
+in the list. That can be done with the help of the zipWithNext function. It returns you a
+list of pairs where each pair consists of neighboring elements is
+from the initial list. Note that, each
+element except the first and the last one
+will belong two pairs. Like three in this example
+list is the second element in the second pair and the first
+element in the third pair. Both zip and zipWithNext have overloaded versions
+taking a lambda as an argument that specifies how each pair of elements
+must be transformed. Flatten is an extension function that must be called
+on a list of lists. It combines all the elements from the nested list and returns you a list of these elements
+as the result. We can say, it flattens the
+list of lists contents. Another useful
+function is flatMap. It combines two
+operations, map and flat. The argument to flatMap
+must be a lambda that converts each initial
+element to a list. Here, we first map each string
+into a list of characters. In the middle layer after applying the first
+map operations, we have at list of lists. Often, you'd prefer
+list of elements as a result instead and
+flatten does that. Here, flatMap returns a list of characters obtained
+from initial strings. You've learned
+the common functions used for manipulating
+collections. Next, you'll have
+the video quiz to practice to read and understand
+these functions in action.

@@ -1,0 +1,118 @@
+In the first section of this
+module called nullability, we're going to discuss
+nullable types in Kotlin. The problem of nullability is sometimes
+referred as billion dollar mistake. That's how Sir Tony Hoare the inventor of
+null reference later called his invention. The problem is that these
+null point exceptions problems are really hard to fix and
+even if you go for details, you often can see just sorry
+null point exception was thrown. And the current approach,
+the modern approach which is not unique to cutling is
+to convert these problems, these exceptions, from run-time,
+run-time exceptions, to compil- time errors,
+to make it compile time problems, so that we could prevent these
+exceptions when we write the code and compile it rather than
+later in production. Kotlin distinguishes nullable types and
+non-nullable types. If you use a regular
+type like string string, you can only store non-nullable objects
+there, you can't store null references. If you try to initialize a variable
+of a non-nullable type with null, the Kotlin compiler will complain. If you want to store null, you need to
+declare a variable of a nullable type. To make a type nullable add a question
+mark and at end of his name. In this example,
+after adding a question mark to string, you can store either null or
+non-null string value there. If you try to dereference a variable
+of a non-nullable type namely access its members or
+call extensions everything is fine. The Kotlin compiler doesn't complain
+because it's sure that the exact value is not null. However, if you try to dereference
+a variable of a nullable type, the Kotlin compiler
+says it's not possible. The value of the nullable type
+can be null under the hood, and such dereference operation will
+then throw null pointer exception. What can you do if you want to
+dereference an object of a Nullable Type? The easiest way is to check explicitly
+that your reference is not Null. After such a check, you can simply
+dereference the variable and access its members. However, ideally, you will suggest you have a better
+way to express the same logic. You can replace the if expression
+with a safe access expression. Safe access, or in other words,
+a safe call, consists of two characters. The question mark and the dot. It allows you to dereference
+a value in a safe manner. This operator first checks
+whether the receiver is not null. If it is the case, then the safe access
+operator calls the required member and returns the result. If the receiver is null,
+then null becomes the result. When you use the result of a safe call
+like return it or assign it to a variable, that is the same as using
+the following explicit if expression. The question for you is, what is the type
+of length variable in this example. What do you think? There answer is nullible Int. The length property of String returns
+to you a variable of Int type. But when you use safe access,
+that makes the results nullible. If s variable stores now,
+length will also be null. Because null might be stored only
+in variables of nullible types, the result type is nullible Int. If you want to make the type
+of lengths not nullable, you need to provide the default value for
+the case when s is null. When using if expression,
+you can simply say else 0. When using safe access, you can use so
+called Elvis separator and provide the default value that will
+be used when your expression is null. The following scheme illustrates
+how Elvis operator works. The result is either the left
+expression if it's not null, or the right expression if
+the left expression is null. Why score it like this? You can guess it if you read
+the operator as an emoticon. Elvis operator isn't a quarter invention. This name comes from Groovy. The whole bunch of nullability operators,
+including Elvis operator, comes from Groovy. They are proven to be very useful for
+working with expressions that can be null. The next question for you is,
+what will be printed here? In the first line, we sum up 0 and
+2, having 2 as a result. In the second line, because b is not null,
+we sum up 1 and 2, having 3 as the result. So the answer is 23. Let's now go back to our discussion of how
+we can work with expressions of Nullable types, the Kotlin compiler supposed
+to the control flow analysis. If you explicitly check that
+the reference is null and co-fail function which throws
+an exception or simply return, then afterward you can
+accessed without safe access. The compiler knows that s verbal is
+smart cost to a null nullable type. If you want you can explicitly throw
+called the null pointer exception. For this,
+you use this note null assertion, an operator consisting of
+two exclamation marks. It throws a null pointer exception
+if it's operand is null and returns the operand if it's not null. Note that after a not-null assertion, the
+value smart cost to a non-nullable type. And you can dereference it safely without
+the need to repeat this assertion. It's worth to warn against
+not-null assertion operator. By default, try to avoid it. We have it in the language, especially for
+other use cases where the Kotlin compiler isn't smart enough
+to infer the right time. There are situations when
+you have an assumption that the expression is not null but the kotlin
+compiler cannot infer that for you. And you would rather
+prefer an exception if for some reasons the assumption
+is not correct. The logic of assumption must then be
+localized so that it was hard to break it, or it can depend on external frameworks. In this example, the actionPerformed
+function is called only if the isEnabled function returns true. And we can safely use not-null
+assertion because the condition is checked is in another place. With not-null assertion operator, you explicitly emphasize where null
+pointer exception can be thrown. And if it's thrown, you can see
+directly what might be the cause. That means it doesn't
+make sense to put two or more not-null assertion
+operators in one line. As you won't to be able to say
+which one cause the exception. In general prefer using safe operators. Safe access. Elvis separator or
+explicit checks to cope with nullability. Use not null assertion only with care. The question for you to get used to nullable types
+is which lines won't compile? Which lines will produce compiler errors? Let's do it one by one. The first function takes
+the parameter of non-nullable type. The function is fine. But the problem is that we can't pass null
+whenever a non-nullable type is expected. The compiler error tells us
+that null cannot be a value of a non-nullable type name. If passing null to
+non-nullable parameter was allowed then we would have null
+point exception on the reference. The coding compiler doesn't allow that. Let's now look at the second function,
+which makes the parameter type null. Now, the implication is fine. It compiles. However, there is an error
+in the function body. Only safe calls or
+non-null asserted calls are allowed. You can't access expressions of nullable
+types without additional checks. So the line number two doesn't compile. The third function fixes this problem and
+this one is fine. We check explicitly that name is not
+now and then use smart cost value. The fourth function also compiles
+because we use safe access to get the value and
+then we compare it to the string, everything is fine thus the right answer
+is lines two and five don't compile. Another question for you. This one is not trivial. Such code might be confusing and
+sometimes called a puzzler. What will be printed here? The answers are rather unexpected. Keep that in mind. The possible options are one,
+two or three. The right answer is one. Operator precedence plays
+an important role here. If you need the parentheses, some operators take higher precedence
+than the other separators. That means that by default,
+the parenthesis surround plus, not Elvis separator. If you want to call Elvis separator first,
+then you put the parentheses explicitly. If you are not sure about the right amount
+of precedence and to make the code more readable, prefer the parentheses
+in all such confusing use cases. Now you know how to distinguish
+nullable types from non-nullable types. Determine the expression of variable
+types can store null references. In order to work with them you can use
+Safe Access separator,Elvis separator. You can enjoy smart cost or
+prefer throw a null pointer exception. But you have to use explicit syntax for
+that. Next, we're going to
+uncover the details and learn how nullable types
+are implemented under the hood.

@@ -1,0 +1,6 @@
+Would you call Kotlin a functional language? Well, it's not so easy to define what
+a functional language is for practical purposes. Kotlin is definitely not a purely functional
+language like Haskell for example. Modern mainstream languages tend to
+combine ideas from different paradigms, and Kotlin does so as well. So, we have OOP ideas, we have structural ideas, we have functional programming ideas combined in the same design. So, when you're using classes and interfaces, you're on the OOP side. But at the same time when you're using our function types and lambdas,
+and other functional features of Kotlin, you are doing something functional already. I would say it's more of a style issue, so it's not about being a functional language but it's about enabling the functional style of programming. For example, Kotlin promotes immutable data, so you are encouraged to use immutable things. But immutable things are also first-class citizens in Kotlin, you can use them freely whenever you like, it's a matter of style. So, I would say if you rely on immutability, if you use higher-order functions, and
+lambdas, and function types of course, you're doing Kotlin in the functional style. And it's very often beneficial, so I totally recommend it.

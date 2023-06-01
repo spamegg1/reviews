@@ -1,0 +1,36 @@
+In this video, you'll learn another language construct
+that uses question mark, a safe way to cast
+an expression to a type. In Java, you use
+a common pattern to do something with the variable only if it is of specific type. First, you use instanceof to check whether the variable
+is of the required type, then you cast it to this type of restoring the result
+in a new variable. Eventually, you call members of this type on
+this new variable. In Kotlin, you can do
+absolutely the same. Is is the analog of instanceof
+and s is the typecast. However, the explicit cast
+s is not really needed. You can simply use
+the initial variable afterward, because it's smart cast
+to the right type. In this case, you can call String members on the
+any variable directly. This example can be
+further improved. You can replace type
+cast with a safe cast. Type cast as, throws an exception if
+the expression can't be cast, while safe cast as question mark returns
+null in this case. The safe cast returns either the smart cast value or
+null as the result. If the value can be cast
+to the required type, then it is returned. Another way to express
+the same logic is to use if expression
+explicitly returning either the same
+expression or null. To better understand
+the difference between safe cast and the cast
+to a nullable type, solve the next task in the Kotlin playground
+right after the video. You need to declare variable so that the first line
+print at null, and the second one
+through an exception. Afterward, you can check the solution in
+the solution video. Now, you know how to use
+safe [inaudible] in Kotlin. The ones that allow you to return null if something went wrong instead of
+throwing an exception. The same approach might be beneficial in
+the regular code as well. For instance, you
+may prefer to call a function to internal on String, which returns
+your nullable values result instead of calling a function to String which
+can throw an exception. That mostly concludes
+our discussion about nullable types in Kotlin. We'll later also discuss how we can mix nullable types and Java. But for now, the next big topic for this module is
+Functional Programming.

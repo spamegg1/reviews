@@ -1,0 +1,105 @@
+Now let's talk about the next
+task finding smart passengers. The passengers who pay from the majority
+of their trips with a discount. I will start with some sample solution
+first and we'll try to improve them. Let's look at the first solution. Here we petition the whole list
+with of trips into two list. The first one contains all
+the trips with the discount, and the second contains
+the trips without discount. Note that the partition result
+is stored in a pair here. And given the variable
+is called simply pair, it's not at all obvious
+what is stored inside. We need to check the variable
+type explicitly. It's always better to use decoration
+syntax with partition and give meaningful names to
+the variables rather than use pair. In this case we'll do trips with
+discount and trips without discount. Then we apply filter to all the passengers
+and for each passenger compare the number of trips he or she made with discount and
+without discount. Only the passengers with the majority
+of the trips with discount remain. Another thing I want to highlight
+the solution is using is Double check for basically checking something for
+being not null. The more easy and straightforward
+check you can apply the better. Try not to overcomplicate things. The intention might be not clear
+when you use is Double here, you automatically as the reader assumes
+that it's not just null-able dabbles and believes much probably something else
+integer, so other types that's confusing. The most straightforward way to check
+something for being not null is unsurprisingly just to check for
+being not null without overcomplication. The last thing we can improve here
+is to replace contains call with in. In also checks whether you element
+belongs to a collection or list. Under the hood in calls contains,
+so basically they are the same. We can even navigate in and
+see that indeed contains is called. Like in the next module we will
+discuss how exactly it works. After you get used to it
+in looks more concise. Now let's look at
+the alternative solution. It's a bit overcomplicated solution. But it can exist, I will suggest
+just some small improvements here. We start with allPassengers and build the maps storing all the trips
+performed by each passenger. Then for each passenger we
+can pair the number of trips with the discount that here she made with
+the number of of trips without a discount. In the end, we keep only the passengers
+that have more trips with the discount. Let's see which we can improve here. The used groupBy function is the
+overloaded version of groupBy which takes not only the key selector as an argument,
+but also the way to fetch the value. In this way, instead of grouping the
+elements, we group the transformed values. The result is a map from a passenger
+to all the trips he or she performed. Note that groupBy here is
+probably not the best choice, because the key passenger is unique. But groupBy doesn't know that, and returns a map from passenger
+to a list of list of trips. To avoid this list of list of
+elements as the result value, it's better to use associateBy function. associateBy returns a map from key
+to the correspondent value directly. Note that we no longer need to call
+first letter to get the first element. First was used here because the med
+value is released with only one element. So first was used to get this element. Now it's no longer needed. But for this usecase, I would rather use another function,
+not associateBy but simply associate. It takes one lambda as an argument. You specify the pair
+from key to value which builds the values in the resulting map. In our case, the key is the passenger, and the value is all the trips
+that this passenger made. This way it's a bit more readable. The next simplification for
+the solution concerns this entries line. Associate returns as map and
+entries returns as set of address. But you rarely need to convert a map to
+a collection of entries of pairs since the majority of operations
+are available from maps directly. Instead of converting a map
+to a list of entries, you can call filter on a map directly. Then I would replace it
+with explicit parameter, because it's not that clear
+what is the type of it. Then I would use distraction
+declaration index instead of entry. Since we use only entry value we don't
+need a separate variable for entry key. And as we've already seen at the previous
+task, we can use filterValues instead. First we grouped the transformed
+values then we filtered map contains. At last we're interested in the set
+of keys in the resulting map. As before, we can directly use
+keys instead of mapping keys and calling to set. It's important to understand
+the difference between groupBy and associateBy. Prefer associate or
+associateBy if your key is unique. The last solution tries
+to be very concise. Probably too concise. Don't strive to put the whole
+function at one line. Even if we can do it
+doesn't mean you should. In this case is really unreachable. Even if you have a huge monitor reading
+it from another place is inconvenient. Even if you use self drops intelligent
+feature which might be switched on by view active editor use of traps, it's still not readable in comparison
+with a properly formatted solution. After we've be formatted this
+solution it became better. Don't neglect their possibility to
+extract variables with clear names. Even if you can't make this
+solution very concise and functional is important
+not to lose readability. And good variable names can great
+help to understand what's going on in a piece of code. Here we count the number of trips with
+discount and without discount for each passenger and compare these numbers. With clear names, the intention is
+easier to understand in comparison with version when you in line
+all the expressions. The resulting function is much better than
+the initial version written in one line. The next function
+findTheMostFrequentTripDurationPeriod. Again, I will show you a sample
+solution which we'll improve. Here we start with trips. Then we group trips by
+the duration period. However, there is a small repetition here. You repeat the expression of
+find the start of the duration. Extracting it into a variable and giving it a clearer name helps to
+understand what's going on here. I would also introduce another variable. And here now it's more clear
+that you group your trips by the range from start to end. Another thing I sometimes
+find on the code, I don't really understand why
+someone uses this syntax. You define a separate parameter name for
+lambda but you name it as it. That's not needed, if the name of your
+parameter is clear from the context, simpler and
+meet the parameter name it use it inside. In this case, another it refers
+to a trip in the other line. But here it means something else, so
+it's better to introduce a new name. Or whenever you see such, it -> syntax,
+you either base it with a specific name or leave only it inside. We even have the inspection for
+that which tell redundant lamda arrow. Don't ignore such inspections. If they work wrong for your use case file
+an issue which the Kotlin team will fix but don't ignore the suggestions. Note that to list here which converts
+a map to at list is needed because there is no sorted function on a map. toList returns list of
+entries as a list of pairs. Because we are only interested
+in the second value, we again can use distraction declaration
+syntax and specify the explicit name. Each group of trips corresponds
+to the specific trip duration. Another simplification here. There is no need to use sortedByDescending
+only to find the first value. Basically what we are doing
+here is where finding maximum. You don't need to sort
+all the rest element when you just need to the first value. Max or
+maxBy well be more perfomant for that. And you can call maxBy directly on a map.
