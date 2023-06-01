@@ -1,0 +1,22 @@
+In this video, I will introduce the Kotlin programming language, highlight some basic facts about it, and mention what we will and will not cover in this course. Kotlin is a general purpose language which supports both functional programming
+and object-oriented programming paradigms. It's an open-source project developed mainly
+by JetBrains with the help of the community. Like Java, Kotlin is a statically typed language. However, in Kotlin you can omit the types, and it often looks
+as concise as some other dynamically-typed languages. Kotlin is safe, it's even safer than Java in terms that, Kotlin compiler can help to prevent even more possible types of errors. One of the main characteristics of Kotlin is its good interoperability with Java. It's hard now to call Java a modern language. However, it has so huge ecosystem, that it would be really difficult
+to recreate it from scratch if you use a new language. That's not our goal, we really want to be able to reuse
+every Java library, every Java framework from Kotlin. And it really works like that. You often can improve your experience of working with some library, but you can use any library from Kotlin. JetBrains is a tooling company and you may expect
+a really good tooling support for Kotlin, and you’ll be right. In Kotlin, you can use all the same IDE support
+like completion, navigation, refactorings. All the same features that you used to have for Java will work. Kotlin is a pragmatic language for industry,
+it's not a research project that just tries some ideas. No. It is based on many existing languages
+and it tries to reuse what works there. You often can find what language was the source
+of inspiration for some Kotlin features. Kotlin project started at 2010 and it took it six years
+to achieve its mature state and the first release. Afterwards, it was acknowledged as a first-class citizen on Android, which really boosted the adoption. You can see the trend here, you can notice that peak. In this graph, you can find the number of GitHub lines and the StackOverflow questions. They show you the overall trend, which is quite optimistic right now. Android is an important platform for Kotlin. Note that this course won't cover specifically Android,
+it will cover Kotlin in general. But that will help you to better understand how it works
+and to use it successfully for Android. Many people now think that Kotlin is the language
+only for Android, and that's not true. Actually there are many server-side developers which
+already successfully use Kotlin for their projects. You can use Kotlin whenever you used Java before. But that's not only that, Kotlin is not only JVM or Android,
+we have other targets platforms as well. Of course JVM, is the first one, but also you can compile Kotlin code to JavaScript or even now into native code. For this course, the main target platform, the only one that we'll cover, is Kotlin JVM. Because it's the most mature one and the most used. But if you want to switch later, it will be quite
+easy because it's the same language. The main ultimate goal for having the several different target platforms, is being able to write a full stack application entirely in Kotlin. You can write the Kotlin code: the server side and the front end, and you can write application code in Kotlin. What's even more important goal, is to be able to share some
+business logic, some common code, between different platforms. You can check what's going on there, there are several online
+resources and videos with explanation of how that works. For now, this course won’t cover it. I just mention this picture, kind of the future,
+to share the whole picture with you. Right now in this course, we'll focus on Kotlin JVM. Let's start our Kotlin journey and I will try to explain you
+how Kotlin makes JVM a better place.

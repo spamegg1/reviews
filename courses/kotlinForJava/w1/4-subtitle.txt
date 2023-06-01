@@ -1,0 +1,10 @@
+Who develops Kotlin and how it's developed? The team at JetBrains is the main driver behind the Kotlin Project. We believe that for a pragmatic language
+to keep up with the needs of its users, it's most beneficial to have centralized design. So, I as a Lead Language Designer oversee
+all the changes that happen in Kotlin, but of course there are many more people
+involved with the language design. We have an open KEEP ("Kotlin enhancement and
+evolution process") out there on GitHub. We also understand that it's very important to evolve the language in a way that transition from one version to another remain smooth. So, there is something called Kotlin language committee. It's a group of people that double checks that every change that is made to the language doesn't obstruct the migration from one version to another. So, one can say that it's designed at JetBrains with the help
+of the community and some people on the committee. Development-wise, it's also JetBrains that invests a lot of effort, there is a team of full-time developers here, but we have a very open process and
+Kotlin has been open sourced very early in 2012, and since then we're receiving contributions in GitHub. You can contribute as well. So, Kotlin is developed by the team at JetBrains and the community as well. We keep roughly one big release per year
+in terms of release cadence. A big release means that there are language
+features added roughly once per year. And in between the feature releases there are smaller point updates that bring improvements to the tooling, performance
+enhancements, bug fixes, so on so forth. This keeps us in the constant feedback loop with our users. So, we listen to the feedback, the ideas, the interesting use cases people communicate to us and we try to integrate them as early as possible.

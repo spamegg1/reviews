@@ -1,0 +1,23 @@
+Hello, I'm Andrey Breslav,
+the lead language designer for Kotlin. I'll be your co-instructor for this course. As you learn the language, I’ll provide you some information on how it's used in real life. And explain the motivation behind some
+design decisions and language features. >> Tell us a bit about the history of the language. Why have you decided to create a new language in the first place? >> Well, obviously, creating a new language is no small undertaking. And it was not an easy decision for us to embark on this project. But over time, we as humanity accumulate
+new ideas about how to make programming languages, how to make them better. And it's always a question whether to
+integrate these ideas into existing languages, adding things, changing existing things, or to just start from scratch and create a new language. And actually it takes a lot more
+than simply creating a language, like writing a compiler because you
+have to create an ecosystem. And modern ecosystems of languages
+contain a lot of things: like libraries, learning materials, books,
+tools, organized user groups, so on, so forth. All that is of course a lot to do. But on the other hand, adding things to
+existing languages is not always easy. Sometimes things just don't fit with the old design, so you have to break old things to make new things work. And we know that some communities struggled a lot
+with incompatible changes between language versions where all programs broke and there were a lot of issues around this. So it's a difficult trade-off. Back in 2010, we were considering the JVM ecosystem. Kotlin started as a JVM language and
+only later expanded to other platforms. At that time, we were looking at so many Java developers that could
+benefit from a better programming experience, including ourselves. By the way, we had a lot of Java code at JetBrains. And we looked at many things that can be improved. And we wanted them improved for
+ourselves and other people alike. So we realized that it was probably worth
+it to try and create a new language. It was an experiment of course. But we focused on the use cases we knew about from
+our everyday work and from what other people told us. This is one of the principles JetBrains runs on:
+we dog-food all the tools we create. So we use everything that's produced by JetBrains
+on an everyday basis in our development. And Kotlin was also dog-fooded a lot. We also integrated things from outside JetBrains
+to understand many more use cases. So we knew that something that will improve our
+own experience, will be useful for people out there. We ended up with quite a flexible design that's good for industrial programmers
+who always were our primary audience. But it's also nice for other use cases like smaller projects,
+or research projects, and so forth. I personally like programming in Kotlin,
+and I hope you'll like it too.

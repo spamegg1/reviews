@@ -1,0 +1,11 @@
+Hi. Welcome to the Kotlin for Java Developers course. My name is Svetlana Isakova, I’ll be your instructor for this course. I'm a developer advocate at JetBrains and
+the co-author of two books about Kotlin, ”Kotlin in Action", and "Atomic Kotlin”. This course is for you if you're an experienced developer
+who knows Java and wants to learn Kotlin. I won’t explain programming fundamentals or Java basics. I will only highlight what is new and different. After this course, you'll be able to use Kotlin for your daily tasks. If you're a developer who learned Java many years ago
+and now uses some other languages, you may still decide to watch this course. However, note that you may need to check some Java concepts
+on your own in order to better understand what's going on. This course will consist of four modules
+which you can watch on your own pace. If you have a full-time job, you may decide to watch
+each module in two weeks or more, that's fine. If you, for instance, need to prepare to an interview,
+then you may decide to watch everything in a week. That's totally up to you. We’ll have many in-video questions. Note that sometimes these questions will introduce a new idea, not just ask you about something that I’ve already explained. In this case, even if you don't know the answer,
+just make a pause, think, and you may guess. And just afterwards, you will see the solution. Each question will be followed by the explanation directly in the video. We'll have many small tasks, which you can do directly in the browser. Note that these tasks are ungraded. You may just check yourself by ensuring
+that all the output is as expected. Each such task will be accompanied by the solution video. I’d recommend to watch these videos after doing the task. Sometimes these videos may highlight alternative solutions, compare different options, or introduce some new details. At the end of each module, we'll have one full assignment. Note that you may read the task, implement the solution and check the solution from IntelliJ Idea directly using the EduTools plugin. You'll find all the necessary installation instructions
+in the accompanying materials to this course.
