@@ -1,0 +1,101 @@
+In this video, you'll see some extensions
+defined in the standard library. In fact, you already saw most of
+them during the previous videos. But now you'll find out that
+they are actual extensions. Extensions play an important
+role in the language. In fact, Kotlin standard library
+is just Java standard library and a bunch of extensions
+that provides very smooth interoperability between Java code and
+Kotlin code. To illustrate that Java standard
+collections are used under the hood, let's create hash set, array list,
+and hash map in Kotlin, and check the classes of
+the created instances. To check the class,
+we call javaClass property. It's analogous to Java's set.getClass. You can see that Java standard collection
+classes from java.util package are used under the hood. When you create a collection using
+the functions from the Kotlin standard library, instances of Java
+standard classes are created. The Kotlin library simply provides
+extensions for regular Java collections. There is no such thing as Kotlin SDK. It's just our standard library
+plus a bunch of extensions. That gives us a couple
+of important benefits. At first, the size of
+the runtime jar that you have to add to your application when it starts
+using Kotlin is relatively small. The Kotlin doesn't duplicate
+the standard implementations from Java. It tries to reuse them. The Kotlin library simply
+adds a bunch of extensions. If your application doesn't
+use some of these extensions, they can be eliminated so
+that the added jar can get even smaller. The second important benefit is that using
+standard Java collections provides very easy interoperability with Java. You don't have to convert one
+collection type to another, they are the same types under the hood. If you call Java API from Kotlin, or vice versa, you call Kotlin from Java,
+that's very easy. You don't have to introduce any
+additional conversions for collections. Everything just works. We've already seen the majority
+of these functions, but now you'll learn that they
+are defined as extensions. The joinToString function allows you
+to get a nice string representation of a collection. In Java, the square brackets are added by default,
+which is not always what you need. joinToString allows you to
+change the default behavior by specifying the values for
+some of the algorithms. It's a regular extension
+function from the Kotlin library. Another function is getOrNull. We used it in one of the first
+videos of this module. We called the getOrNull on array. I've told you that under the hood, Kotlin
+array is the same array as in Java, but Java array lacks this getOrNull method. In Kotlin,
+getOrNull is defined as an extension, and that's why we can call it
+on a regular Java array. The similar function is available for
+list. It returns either an element or
+null if your index is wrong and the list contains fewer elements. We saw the nice syntax for
+iterating over a collection with index. The withIndex function
+is also an extension. We'll discuss later how exactly the syntax
+for iterating over two variables works. But the important thing for now is that withIndex is a function
+that is also provided as an extension. Having extensions in a language
+allows us to get new, nice syntactic features for
+standard Java types. Extensions are very powerful. Until is also an extension. The until function is defined as infix. You can either call it in a regular way,
+as in the first line, or you can call it in an infix form
+by omitting dot and parentheses. until looks like a built-in syntax,
+but it's not. It's just an extension function
+called in an infix form. Another function that we've
+already seen that is also an infix extension is to function. To in Kotlin simply
+returns a pair of values. Again, you can use it in a regular form,
+but no one does that. Everybody uses nicer infix form. Why it's called to? When you create a map of values, it's very convenient to enumerate
+key to value pairs using to. And it turned out that it can be
+used in other use cases as well. Whenever you need a pair of values,
+you can create it with to. There are many useful extension functions
+on Char, like isLetter or isDigit. You can look at what is available in
+the library using the completion list or just browsing the library. Now I want to highlight some
+extensions available for strings. Under the hood,
+Kotlin string is Java-like string. And the Kotlin library provides
+a bunch of useful extensions for it. Triple-quoted string literals is
+another interesting feature in Kotlin. An alternative way to call
+them is the multiline strings. You can't use any special
+characters there, but you can use strings to place inside them. If you try to form a triple-quoted
+strings in your code, you'll probably want to add the indent. But by default, this indent
+becomes the part of the string. There are some ways to crop this indent,
+and one of these ways is using
+the function trimMargin. Here the default margin is used, but you can specify another
+marginPrefix if needed. The marginPrefix is automatically
+cut out together with indent. You can call the trimIndent function
+directly, like in the second example. If there is the same indent for all the lines in your string,
+it will be automatically removed. Both trimIndent and trimMargin
+functions are defined as extensions. Another useful extension
+is the toRegex function. You can convert a string to the regex
+clause to present in regular expressions. After that, you can call, for instance, matches method on this
+regular expression clause. Note that for regular expressions, it's very
+convenient to use triple-quoted strings. You don't need to skip special characters
+there, including the backslash. The regular expression
+often becomes shorter. Another useful group of extensions allows
+you to convert strings to numbers. toInt and toDouble extension
+functions will try to convert string representations to Int and
+Double accordingly. Note, however, that if you try to convert
+something that doesn't make sense to an integer,
+you'll get NumberFormatException. But there is another extension available,
+toIntOrNull, which returns null if the string
+cannot be converted to an integer. In this course on Coursera,
+we'll use the eq extension for small tasks in the Kotlin playground. It lets us test what's going on. It's defined as a very simple extension
+function which checks whether the receiver equals its argument. It prints OK if they are equal, or
+it prints an error if they are not. When you do a task, usually you have to make sure that all
+of these equality checks print OK. We'll use this simple function instead of
+regular testing system for simplicity. Now the question for
+you, what do you think? What is the type of this
+a to 1.0 construct? The right type is Pair. to doesn't represent a type,
+it's a function used to create a Pair. Pair is a class defined in
+the Kotlin standard library. As I've said, the Kotlin library
+consists mostly of extensions, but we still need some new classes. The to function returns a pair of two
+values of the corresponding Pair type. You've seen a lot of examples of
+extensions functions from the standard library. Next, we are going to talk about
+how extensions are resolved. Which functions are called
+in different cases.

@@ -1,0 +1,82 @@
+In this video,
+you'll learn how to provide default
+values for arguments, or specify their names
+in a function call. Let's start with the question. What will be printed here? The 'joinToString' function joins the contents of a string
+in the desired way. You can specify a separator,
+prefix and postfix. The output should be
+quite straightforward. We simply join the content
+of the list by using an empty string
+as a separator, and surrounding it by the specified prefix
+and postfix: the parentheses. You can specify the names of
+the arguments directly in the code. That often makes
+the invocation more readable. It's easier to understand what
+the arguments are supposed to do, especially for arguments of basic types
+such as Int, Boolean, or String. Named arguments are often used
+together with default arguments. For 'joinToString', you can provide only the value for one of the arguments, for instance, 'postfix’. Looking at the output, we can understand that the
+default separator is comma, and an empty string is
+used by default as 'prefix'. You don't have to
+specify the values for all arguments each time. You can change the defaults,
+only if needed. Let's see how you can declare a function with default
+values for arguments. Here, the function
+'displaySeparator' prints a character by
+a given number of times. We use star as 'character' by default, and 10 as the default
+number of times. Afterward, you can call this function
+with different arguments values. For each argument with the default value, you can either provide another value
+or use a default one. However, note that if you need to provide only the value
+for the second argument, then you have to use
+named arguments syntax. By default, there is the
+direct correspondence between unnamed arguments and parameters according to their order. The next question to you is: What is printed in this case? The options are five three's, three five's, or the code you want to compile. What do you think? The right answer is, the code you want to compile. As I've told you, there is
+the direct correspondence between unnamed arguments and parameters. This code doesn't compile, because you can't pass Int
+constant whenever Char is expected. Similarly, you can't use character argument
+as Int parameter. In Kotlin, there are
+no implicit conversions. You can't implicitly convert an integer to a
+character or vice versa. You have to explicitly
+call 'toInt' or 'toChar' functions
+for such conversions. If you pass
+the arguments by name, you can change
+their order easily. In this case, we
+get what we expect. It prints character
+'5' by three times. In Java, if you want to
+achieve the same behavior, you will use the
+overloaded functions. To provide the functionality
+of default arguments, you will define
+several different overloads, and call one inside another
+by specifying default values. In Kotlin, you use the default
+arguments feature directly. You no longer need to
+provide several overloads. But there is
+an interesting question. How to call a function with
+default arguments from Java? When you call a Kotlin function with default arguments from Java, you have to specify the values
+for all the arguments. That happens to
+minimize the number of functions which are
+generated under the hood. By default, Kotlin generates
+the function with all the argument, and only one additional
+auxiliary function containing information about
+all the default values, which you can't call from Java. If you want to call
+the Kotlin function with default arguments from
+Java in a convenient way, then you can add
+'@JvmOverloads' annotation. After you annotate
+the function with default argument
+with @JvmOverloads, you can specify only some of the arguments when you
+call it from Java. The next question is not
+about @JvmOverloads annotation, but it will help later to understand how exactly it works. The 'sum' function has
+three arguments here. You can either specify each argument value
+or omit it and use the default value. How many argument
+combinations are possible when you call
+this function from Kotlin? The first combination is specifying only
+the first argument. The second one is specifying
+only the second argument. The third one is
+specifying both the first, and the second argument, and so on. The answer is eight, which is two to
+the power of three. In a general case, if we try to cover
+all the argument combinations, it will be too many functions. Two to the power of the number of arguments with default
+values might be too many. That's not how @JvmOverloads
+annotation works. @JvmOverloads annotation generates, in this case,
+only four functions. The one for each new argument with a default value. Note that if you don't use the function with default
+arguments from Java, there is no need to add
+the JvmOverloads annotation. Even if you use it
+occasionally from Java but you want to have only one function
+for performance reasons, you might want to leave
+it without annotation, and to specify the argument
+values explicitly in Java. That's your choice. We've discussed the syntax for named and
+default arguments in Kotlin. You saw a useful
+'joinToString' function that allows you to print list contents in the desired way. Also, we've discuss how to make usage of a function with default arguments, convenient from Java. This completes our discussion about functions and variables. Next, we're going to focus
+on control structures.

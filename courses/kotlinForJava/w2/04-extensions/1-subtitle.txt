@@ -1,0 +1,57 @@
+In this section, you will learn about extension functions. What are they? Why
+are they important? You'll see some examples. Extension function
+extends the class. It is defined outside
+of the class but can be called as a regular member
+to this class. Here, we define an
+extension function to string called lastChar, and we can use it as
+a member function. It's visible in completion, so it can be easily discovered. It's like a regular
+utility function defined outside of the class. But on the other hand,
+thanks to completion, it can be easily found and
+used like it was a member. Let's discuss how we define
+an extension function. The time that the function
+extends is called a Receiver. Here, string is the receiver
+of the lastChar function. In the body of this function, we can access the receiver
+by this reference. In our example, this
+refers to string. As usual for this reference,
+we can omit it. We can call members of the receiver inside
+an extension function without explicit this dot
+something specification. An important thing to
+note here is that you can't define an extension
+and use it everywhere. You have to import it explicitly. If you define an
+extension function lastChar somewhere and need to use it, you have to import it
+either as one function, or inside the whole contents
+of the package. By default, an extension function is not accessible in
+the whole project. It's visible in
+completion but to use it you have to put
+the explicit input. You can ask how to call
+an extension from Java. As we've already discussed, when you call a top-level
+function from Java, it's simply a static function. For extensions, it
+works in the same way. When you call an
+extension function from Java, you call it as
+a regular static function. You can add a static input and call it without
+specification, under the hood it's
+just a regular static function. The question to you,
+how many arguments does at these repeat extension function have if you call it from Java? It's an extension function
+to string which repeats the given string by the specified number of times, and the options are
+one, two, or three. Under the hood, at
+the basket level when this function is compiled
+to a static function, the receiver is transformed
+to the extra first parameter. When you call these
+extension function from Java, you pass String expression explicitly as the first argument. In Java, the code with extensions looks
+like a regular Java. In Kotlin, all the
+utility function become easily discoverable and
+the code overall looks nicer. Another question,
+what do you think, is it possible to call
+a private member of the class inside
+an extension to this class? Here we use String as an example. The answer is a simply yes or no. Of course, you cannot do it. As in Java, it's only possible to call a private member
+inside the same class. In Java, you can't call
+a private member from a static function defined
+outside of this class. Kotlin extension
+functions are most of the time top-level
+functions defined in a special extra file which content is compiled to
+the corresponding extra class. Therefore, it's not
+possible to call a private member of a class from an extension to this class. Extension functions
+don't give you any additional access rights
+to the class contents. The main benefit of extensions, is that you can call them in a nicer and more convenient way. You've learned how to declare
+and use extension function. Next, you'll see
+some more examples.

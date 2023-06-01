@@ -1,0 +1,37 @@
+Kotlin has the same basic
+loops as in Java; for, while, and do-while. In this video, you
+will learn about them and also learn
+about some niceties like iterating over
+a map using a for loop. In Kotlin, we have
+the same while, and do-while loops as in Java. Nothing more to say here. For loop looks a bit different. First, a different
+keyword is used to express iteration
+over something in. Second, where meets
+the element type. Probably is the case when the types are emitted most often. If you want you can specify
+the element type explicitly. Another difference
+is that in Kotlin you can iterate over
+the contents of a map. Here we assign key and value separately at
+each iteration loop, then printed the result. This syntax works
+not only for maps, it can be used to iterate
+over a collection with index. After we say with index, we can assign both index and element on
+each iteration turn. If you need to work
+with indexes directly, you can use ranges. There is no full form
+of for loop as in Java, you use over ranges instead. Here we iterate over range
+of numbers from one to nine. That's the result. You can also built over
+range using until function. The last number then
+will be excluded. The first range includes
+the upper bound and using until function
+excludes the upper bound. If you want you can build more complicated rangers
+like with iterating back first or over a step. You can even iterate
+over a string. What do you think?
+What is printed here? When we add a number
+to a character, it turns the character
+with increased code. The letters go one after another. So if we say character
+plus one for a, it will return the next slider
+in the alphabet b. Another question for you, which is the right way to write the following
+Java code in Kotlin? We have three options: using to, using regular range
+or using until. In Java this code prints
+numbers from zero to eight, is the same as using
+until in Kotlin. Note that the first line
+doesn't compile. Two creates a parent Kotlin not arrange and you can't
+iterate over a pair. We've discussed loops in Kotlin. When you need to
+iterate via indexes, you use ranges in Kotlin. In the next video, we're going to discuss ranges in more details.

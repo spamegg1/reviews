@@ -1,0 +1,57 @@
+In this video, you'll understand how
+extensions interact with inheritance and whether
+extensions can hide members. Let's say we have two classes, parent and child and
+child extends parent. We can define two similar
+extension functions. The first one to parent, the second one to child. We create an instance
+of a child and store it in a reference
+of the parent type. The question for you is which foo function will
+be called in this case? We can word it as what
+will be printed here, the options are parent or child. An important thing to
+keep in mind here is that extensions under the hood are regular Java static function. Parent is printed here. The resolution of
+which function should be called works in a similar manner as
+for Java static functions. You can convert
+this example into Java and answer the same question
+for static functions. Under the hood, these
+extension functions are compiled to Java
+static functions. The first one takes
+parent as a parameter, the second one takes
+child as a parameter. When extension
+functions are compiled, the type of the receiver
+is transformed to the type of the first
+additional parameter. Java resolves static
+function statically. It finds the right function to be called during the compilation. It only uses the type of the argument to choose
+the right function, thus the parent
+function is chosen here since the parent variable
+has the parent type. In general case, we don't know what is stored in
+the parent variable. It can be an instance
+of child or parent or another child and this
+wider works this way. The actual stored object at runtime doesn't change anything because the function
+to be called is already chosen
+during compilation. In Kotlin, it works in the same way as for
+static functions. Because extensions are
+static functions under the hood, there is no override
+for extensions, they cannot be
+overridden in Kotlin. When the compiler chooses the right function to be called, it only uses the type of
+the receiver expression, not the actual stored value. Now, the interesting
+question is what happens if we try to define an extension which
+duplicates a member? For instance, the string class
+has a member function get, which simply returns
+a character by its index. We tried to define an extension
+with the same signature. What do you think
+will be printed here? The options are star, a, or b. The right answer is b,
+member always wins. The indexation of string released content starts with
+zero as in Java. So in this case, the character returned by the first index is b. If you try to define extension with the same signature
+as a member, then you get a warning that
+an extension is shadowed, so the member will always
+be chosen instead. However, you can
+overload a member. If you define an extension
+with the different signature, different parameter types or the different number
+of parameters, your new function will be
+called if it fits better. In this video, you've learned
+that extensions can't be overridden because
+they're resolved the same way as
+static Java methods. An extension can't hide
+a member completely, but can overload it. That concludes our story about extensions and
+the whole first module. In the next module, we're going to
+discuss the topics of nullability and functional
+programming. Stay tuned.

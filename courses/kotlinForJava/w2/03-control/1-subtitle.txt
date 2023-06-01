@@ -1,0 +1,73 @@
+In this video, we're
+going to discuss the basic control
+structures in Kotlin. We'll start with if and when. You'll learn how when expression in Kotlin is different
+from switch in Java, which expressions can be
+used as when conditions, and what are
+smart casts in Kotlin. As we've already discussed, if is an expression in Kotlin. That means if returns a value which you can assign to
+a variable like here. In Kotlin, there is no ternary
+operator like in Java. If you need the logic, if condition is [inaudible]
+on one value, otherwise, return another value,
+you use if expression. We've already seen when. At first, it might be considered as an analogous of Java switch. When you have enum
+class with some values, you can perform actions or return a specific expression depending
+on the enum constant. When then takes enum value as an argument and checks
+all the enum constants. There is this similar code
+written in Java and in Kotlin. In Java, you have to use break or return if you want to stop operating inside
+this switch branch. Otherwise, you'll get
+the unexpected results like all the colors will
+be printed as blue. Note that this small example
+might be improved in Java by extracting
+a function returning color, but it nevertheless
+illustrates the difference. In Kotlin, you no longer
+need to use break to say that the operation
+should stop here. If the rank condition
+is satisfied, the result of their corresponding
+branch is returned. Note that you have to specify the paths to the
+enum constants explicitly, unless you import them. By default, you say, color blue, color orange. But you can import enum constant, and in this case you no longer need the explicit
+class specification. You use enum constants
+simply by names. You can check whether when argument equal to
+one of the values. You list several values
+separated by comma. You can use any expression, not only constants as
+branch conditions. Here we create
+a set of two colors and compared with
+three predefined sets. When Kotlin compares us by equality under the who
+did call set equals, which compares the content. We use sets here to ignore
+the order of the colors. If one of the branch
+condition is satisfied, return the corresponding result, the color after mix. Sometimes you have
+a type hierarchy, and need to check whether it's the sub-type
+or that subtype, and do actions accordingly. In Kotlin, you can
+use when for this. Is checks whether an argument
+is of a specific type. Is cat, is analogous to
+Java's, instance of cat. Note that you don't have
+to cost explicitly, the variable after you
+checked it's type, it's automatically smart cast
+to the right type. In Java, you cast the variable to the type
+after checking instance of. In Kotlin, you simply access its members as it was
+of the right type. For convenience,
+the smart cast expressions are highlighted by
+the colored background in id. Note also how in Kotlin we use when rather than
+the cascade of if else. Starting from Kotlin 1.3, you have the opportunity to
+introduce a new variable for when subject directly side
+of when expression. You often want to use the whole expression
+as the when subject. You can easily do it. However, the complicated
+expression can't then be accessed as
+one variable inside when, and since there is no variable, nothing will be smart cast
+even if you check its type. You need to explicitly introduce a new variable name
+like pet in is example. Then this variable is accessible also after when expression and it makes it possible to return when directly
+from a fractions, since it's two statements. Now it's improved,
+and you can introduce a new variable name right inside the parenthesis by
+using val keyword. Then, this variable name is
+visible only inside when, and also it's possible
+to use search when as the only function body. This when comes from our previous Java [inaudible]
+inversion example. Note that there is
+no when argument here. It's when expression
+without an argument. You can put
+any Boolean expression as the branch condition. If it's satisfied, then
+the corresponding branch code is executed or the
+corresponding expression is returned as a result. This is the analogous
+code written in Java as we've
+already seen before. What do you think? Is it true that you should
+always prefer when to if? No. You don't have to do that. When expression is especially useful for more than
+two branches. You can use it for
+two branches if you prefer, but you don't have to
+if it's still useful. We've learned how to use
+if and when expressions. Next, let's discuss Loops.
