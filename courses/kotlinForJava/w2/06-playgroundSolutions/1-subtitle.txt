@@ -1,0 +1,40 @@
+In this task, we need
+to check whether String is a valid
+identifier or not. I will show you a solution. Note that that is one
+of possible solutions. So that doesn't mean that our discussions are longer or so. You may compare it with
+your own way to do the same task and to choose the elements
+that probably you like or sometimes
+learn something new. Let's start implementing
+this function, with implementing
+function that checks whether a character is a
+valid character inside a String. Such function is
+a good candidate to be defined as a local function
+and put inside isValidIdentifier because
+it does make sense outside of this context,
+as an illustration. So in this case, it
+doesn't really matter. But as for illustration, let's define it as
+a local function. So we have isValidCharacter. We need to check
+that this character is either underscore or digit. We check whether a character is a valid digit by checking
+belonging to a range. Or we should check
+whether it's a letter, and we also will use
+belonging to range, and we check explicit separately, lowercase letters and
+upper case letters. So now we have this function. What we need to do next is, for every character in String to check whether it's
+valid character or not. If it's not valid character, then we return false and otherwise return
+true as the result. So let's check
+our function, how it works. We'll notice that we have
+forgotten something, and our output is
+not as expected. Because here you see we have true but that
+should be false. We forgot that empty string shouldn't be
+validity identifier and also validity
+identifier can't start with the digit. Let's fix that. Now we explicitly check
+that each string is empty or its first
+character is a digit, then we return false. Now, let's check,
+everything should work. Now the output is as expected. The other thing that I want to mention here is that this task was used for you to practice working with ranges
+here, all these checks. So that was expected solution. But in real life,
+you don't need to check that the character
+is a digit in such a way, you can call isDigit and we'll later discuss how
+this function is defined. The same works with letter, you can check that
+character is a letter, and also you see that we have isLetterOrDigit
+defined libraries. So in this case, we can
+just use isLetterOrDigit. Again, we'll see that
+that is as expected. That is my final solution.

@@ -1,0 +1,15 @@
+In this task, we need to
+change some functions, so it was defined
+as an extension. Because I use Intellij, I can two-tier and
+call an action, convert parameter
+to receiver that automatically will
+do the job for me. I'm going to section, and let's see what has changed. At first, row function is
+defined as an extension, so our list became the receiver. Now, we access this list by this reference inside
+the function body, and also the way how we call
+the function changed because now we call it as an extension. It looks like it was a member. Note that there is
+a word detection also in sake and virtual server
+two parameter or you can use this convert
+parameter through a searing and literacy
+search parameters for your own functions
+as well when you, for instance, want to convert a regular function
+to an extension.

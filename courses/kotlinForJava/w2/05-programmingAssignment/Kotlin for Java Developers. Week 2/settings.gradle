@@ -1,0 +1,25 @@
+static String sanitizeName(String name) {
+    return name.replaceAll("[ /\\\\:<>\"?*|()]", "_").replaceAll("(^[.]+)|([.]+\$)", "")
+}
+
+rootProject.name = 'Kotlin_for_Java_Developers._Week_2'
+
+rootProject.projectDir.eachDirRecurse {
+    if (!isTaskDir(it) || it.path.contains(".idea")) {
+        return
+    }
+    def taskRelativePath = rootDir.toPath().relativize(it.toPath())
+    def parts = []
+    for (name in taskRelativePath) {
+        parts.add(sanitizeName(name.toString()))
+    }
+    def moduleName =  parts.join("-")
+    include "$moduleName"
+    project(":$moduleName").projectDir = it
+}
+
+def isTaskDir(File dir) {
+    return new File(dir, "src").exists()
+}
+
+include 'util'

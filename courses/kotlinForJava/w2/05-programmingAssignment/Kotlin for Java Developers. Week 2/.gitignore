@@ -3,6 +3,9 @@
 /build/
 */Task/build/
 */Task/out/
+*/Task/assignmentKey
+*/Task/partId
+*/Task/task-info.yaml
 
 # Ignore Gradle GUI config
 gradle-app.setting
