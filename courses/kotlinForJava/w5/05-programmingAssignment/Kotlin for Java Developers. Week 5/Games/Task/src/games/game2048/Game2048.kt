@@ -13,7 +13,7 @@ import games.game.Game
  * After implementing it you can try to play the game running 'PlayGame2048'.
  */
 fun newGame2048(initializer: Game2048Initializer<Int> = RandomGame2048Initializer): Game =
-        Game2048(initializer)
+    Game2048(initializer)
 
 class Game2048(private val initializer: Game2048Initializer<Int>) : Game {
     private val board = createGameBoard<Int?>(4)
@@ -40,8 +40,12 @@ class Game2048(private val initializer: Game2048Initializer<Int>) : Game {
 /*
  * Add a new value produced by 'initializer' to a specified cell in a board.
  */
-fun GameBoard<Int?>.addNewValue(initializer: Game2048Initializer<Int>) {
-    TODO()
+fun GameBoard<Int?>.addNewValue(initializer: Game2048Initializer<Int>) { // TODO()
+    val attempt = initializer.nextValue(this)
+    if (attempt != null) {
+        val (cell, value) = attempt // smart cast
+        this[cell] = value
+    }
 }
 
 /*
@@ -53,7 +57,24 @@ fun GameBoard<Int?>.addNewValue(initializer: Game2048Initializer<Int>) {
  * Return 'true' if the values were moved and 'false' otherwise.
  */
 fun GameBoard<Int?>.moveValuesInRowOrColumn(rowOrColumn: List<Cell>): Boolean {
-    TODO()
+    // TODO()
+    val values = rowOrColumn.map { cell -> this[cell] }
+    val merge: (Int) -> Int = { it * 2 }
+    val mergedValues = values.moveAndMergeEqual(merge)
+    if (values.size == mergedValues.size || mergedValues.isEmpty()) return false
+
+    var index = 0
+    var mergedIndex = 0
+    while (index < rowOrColumn.size) {
+        if (index < mergedValues.size) {
+            this[rowOrColumn[index]] = mergedValues[mergedIndex]
+            mergedIndex++
+        } else {
+            this[rowOrColumn[index]] = null
+        }
+        index++
+    }
+    return true
 }
 
 /*
@@ -63,6 +84,23 @@ fun GameBoard<Int?>.moveValuesInRowOrColumn(rowOrColumn: List<Cell>): Boolean {
  * Use the 'moveValuesInRowOrColumn' function above.
  * Return 'true' if the values were moved and 'false' otherwise.
  */
-fun GameBoard<Int?>.moveValues(direction: Direction): Boolean {
-    TODO()
+fun GameBoard<Int?>.moveValues(direction: Direction): Boolean { // TODO()
+    return when (direction) {
+        Direction.RIGHT -> {
+            val rows = (1..width).map { i -> getRow(i, width downTo 1) }
+            rows.map { row -> moveValuesInRowOrColumn(row) }.any { it }
+        }
+        Direction.LEFT -> {
+            val rows = (1..width).map { i -> getRow(i, 1..width) }
+            rows.map { row -> moveValuesInRowOrColumn(row) }.any { it }
+        }
+        Direction.DOWN -> {
+            val cols = (1..width).map { j -> getColumn(width downTo 1, j) }
+            cols.map { col -> moveValuesInRowOrColumn(col) }.any { it }
+        }
+        Direction.UP -> {
+            val cols = (1..width).map { j -> getColumn(1..width, j) }
+            cols.map { col -> moveValuesInRowOrColumn(col) }.any { it }
+        }
+    }
 }
