@@ -65,6 +65,12 @@ case class Fork(
   val massY: Float = if mass == 0 then centerY else weightY / mass       // TODO
   val total: Int = nw.total + ne.total + sw.total + se.total             // TODO
 
+  // remember x grows to the right, y grows to the bottom.
+  //   nw  |  ne
+  // (-,-) | (+,-)
+  // -------------
+  //   sw  |  se
+  // (-,+) | (+,+)
   def insert(b: Body): Fork =                                            // TODO
     if b.x <= centerX && b.y <= centerY then
       Fork(nw.insert(b), ne, sw, se)
@@ -72,7 +78,7 @@ case class Fork(
       Fork(nw, ne, sw.insert(b), se)
     else if b.x >= centerX && b.y <= centerY then
       Fork(nw, ne.insert(b), sw, se)
-    else Fork(nw.insert(b), ne, sw, se.insert(b))
+    else Fork(nw, ne, sw, se.insert(b))
 
 case class Leaf(centerX: Float, centerY: Float, size: Float, bodies: coll.Seq[Body])
 extends Quad:
