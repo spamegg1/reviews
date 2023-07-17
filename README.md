@@ -1,6 +1,6 @@
 # Spam's CS Corner: Course Reviews
 
-Contact me: `spamegg#3510` on Discord, or [on Slack](https://join.slack.com/t/spamegg/shared_invite/zt-1vhzofzrl-ucBjeQEQkl9Ol3wpvL9VPw), or [on Matrix](https://matrix.to/#/!GQFJgtvxFByBVixTAi:matrix.org?via=matrix.org)
+Contact me: `spamegg1` on Discord, or [on Slack](https://join.slack.com/t/spamegg/shared_invite/zt-1vhzofzrl-ucBjeQEQkl9Ol3wpvL9VPw), or [on Matrix](https://matrix.to/#/!GQFJgtvxFByBVixTAi:matrix.org?via=matrix.org)
 
 > ***It soon became clear that the unconscious instincts for logic and language which had enabled me to succeed were not shared by the large majority of my students.*** - Susanna Epp (author of [Discrete Mathematics with Applications, 5th edition](https://www.amazon.com/Discrete-Mathematics-Applications-Susanna-Epp-ebook/dp/B07M87BWRC))
 
@@ -965,7 +965,7 @@ Videos have good length (not too long, not too short), good pace and good explan
 
 *Update:* Some of the assignments had issues and we reported them, they got fixed and updated. Here is [one example](https://www.coursera.org/learn/effective-scala/discussions/forums/EEaf8gS4EeyCYg7yKO-RDw/threads/jvdu35EPEeyLxAroUu5PRw).
 
-*Spam's recommendation:* This course is excellent, take it! Later parts are not beginner friendly but you should be OK.
+*Spam's recommendation:* (2023 update) I've changed my mind a bit about this course after talking to other students on Coursera discussion forums and seeing their struggles. I can see now that it's a tough course (especially in the last few weeks) that suffers from the same problem that all the Scala courses do: not making the prerequisites clear, and assuming a ton of abstract math knowledge, especially induction / recursion, and type theory.
 
 ### <a name="kotlin"></a> Kotlin for Java Developers
 
