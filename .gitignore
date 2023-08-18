@@ -3,6 +3,7 @@
 sml.json
 *.pyc
 .scalafix.conf
+.scalafmt.conf
 *.dat
 target/
 .bloop/
