@@ -4,6 +4,8 @@ Contact me: `spamegg1` on Discord, or [on Slack](https://join.slack.com/t/spameg
 
 > ***It soon became clear that the unconscious instincts for logic and language which had enabled me to succeed were not shared by the large majority of my students.*** - Susanna Epp (author of [Discrete Mathematics with Applications, 5th edition](https://www.amazon.com/Discrete-Mathematics-Applications-Susanna-Epp-ebook/dp/B07M87BWRC))
 
+[Bjarne Stroustrup on the importance of Mathematics and Computer Science fundamentals](https://www.youtube.com/watch?v=-QxI-RP6-HM)
+
 DISCLAIMER: These are my subjective personal opinions! Make your own judgment. Also, I will talk a lot about my feelings! You are warned.
 
 I keep mentioning something called OSSU. [Here it is](https://github.com/ossu/computer-science/) in case you haven't heard of it.
