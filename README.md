@@ -72,9 +72,13 @@ Updated June 2023 (Kotlin for Java Developers)
 
 #### Motivation, Mental Resilience
 
+- Consistency is key! No matter what, do not skip even one day, even if you study just 5-10 minutes that day.
+  - Have the marathon mentality.
+
+- Follow through and finish what you started! If you get bored and lose motivation, don't abandon it: stick to it a little bit every day (see above).
 - It's all about doing what you don't want/like to do. (Just like life in general) It's very difficult and usually not all that pleasant. It *has* to be a struggle; without struggle there is no growth.
 - Adjust your expectations! [Your expectations are almost always too high](https://www.youtube.com/watch?v=Zjl2vmy02As), and they are your enemy. Falling short of your unrealistically high expectations will demotivate you quickly. This applies both to your expectations from yourself, and from the language / tools you use.
-- You are always *behind*, despite getting stronger. That's OK. Because when you get stronger, you notice the harder problems and set your sights on higher challenges. You notice how much was *beyond your vision* previously. [It opens up a whole new world of more stuff you don't know](https://www.youtube.com/watch?v=TT81fe2IobI). You didn't know *how much stuff there was that you didn't know.* Now you have a much better idea of how much you didn't know (it's *a lot more* than you thought!).
+- You are always *behind*, despite getting stronger. That's OK. Because when you get stronger, you notice the harder problems and set your sights on higher challenges. You notice how much was *beyond your vision* previously. [It opens up a whole new world of more stuff you don't know](https://www.youtube.com/watch?v=TT81fe2IobI). You didn't know *how much stuff there was that you didn't know.* Now you have a much better idea of how much you didn't know (it's *a lot more* than you thought!). Some people call this the *"horizon effect"* or the *"horizon paradox."*
 - Don't focus on your perceived *deficiencies* ("I can't do this". "why can't I do this?", "why it takes me so long?", "why can't I see such a simple thing?"); instead remind yourself that you *are* growing over time, and the challenge is also growing along you. Knowing everything, solving everything easily would be very boring, wouldn't it?
 - Understand both positive and negative reinforcement, and use them both to your advantage.
 - Learn how to enjoy things you don't like, things that are too easy / hard, or things you find boring.
@@ -82,6 +86,10 @@ Updated June 2023 (Kotlin for Java Developers)
 #### Time
 
 - Stop endlessly comparing different resources and trying to find the "best" resource. Pick a good resource, and go with it. Don't worry about minuscule differences, or "what I will be missing out".
+     - You will *always* be missing out, always and forever.
+     - There are way too many resources out there, which leads to the paradox of choice, and choice paralysis.
+     - Perfect is the enemy of good! "Good enough" is almost always the best option. *Satisficers* are almost always happier than *optimizers.*
+     
 - Don't worry about time. Don't take the provided "time estimates" seriously, they don't mean anything. They are usually huge underestimations or huge overestimations.
 - Don't measure your success or failure in terms of time ("this one problem took me X hours/days to do!"), time often is a poor measurement of difficulty (one tiny piece of missing knowledge can cause days/months of getting stuck, gaining that piece can solve a huge problem instantly).
 - Measure it in terms of which concepts/ideas gave you an easy/hard time, what pieces of knowledge you gained or you were missing, how well and properly you handled the problems, how high/low was the complexity, whether you did it with solid understanding or not. Be metacognitive!
@@ -303,6 +311,10 @@ After you watch that, you might have better appreciation for Lambdas. Then, Rack
           (λ (slot) (have-slot? slot schedule))
           slots)]))
 ```
+
+**Yet another thought (September 2023):** This course gives students the very strong impression of being needlessly slow, boring, difficult. (They don't see the point of some things, they want to rush through it, use other languages / tools, etc.) Learning experts [here](https://youtu.be/oxZzoVp5jmI?t=677) mention that such slow, difficult ways of instruction are very good for *long term* retention and transfer of knowledge to other areas. 
+
+*Basically, the way the human brain works is the opposite of what we PERCEIVE or FEEL to be "good learning".* It's another one of those awful ironies in human life. Slow and difficult is much better! (in the long term), but the software world is absolutely obsessed with speed, then forgetting / abandoning, and recreating from scratch. (The software world is like that fish from [Finding Nemo](https://www.youtube.com/watch?v=tESffhWs8l0) that has short term memory loss.) That's why so much software (years of work, millions of dollars / man hours) goes unmaintained, abandoned, forgotten, and new ones are constantly recreated over and over. I wonder what a software company that focused on *maintaining humans, not code* would look like?
 
 *Spam's recommendation:* I am personally biased to like these courses. Definitely take if you are interested in pursuing functional programming. I've seen some people struggle with Programming Languages A, B, C without these courses (PLA uses ML to teach very similar functional programming principles, and PLB uses the same language, Racket) so definitely take at least the first of these two courses before PLABC if you've never seen functional programming, recursion and the like.
 

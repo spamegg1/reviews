@@ -38,15 +38,15 @@ fun get_substitutions1(lst: string list list, s: string): string list =
  *  assumes each list has no repetitions, is tail recursive  *)
 fun get_substitutions2(lst: string list list, s: string): string list =
     let
-        fun aux(lst, s, acc) =
-            case lst of
+        fun aux(l: string list list, acc: string list): string list =
+            case l of
                 [] => acc
             |   x :: xs =>
                 case all_except_option(s, x) of
-                    NONE   => aux(xs, s, acc)
-                |   SOME y => aux(xs, s, acc @ y)
+                    NONE   => aux(xs, acc)
+                |   SOME y => aux(xs, acc @ y)
     in
-        aux(lst, s, [])
+        aux(lst, [])
     end
 
 (*  returns list of full names that can be produced
