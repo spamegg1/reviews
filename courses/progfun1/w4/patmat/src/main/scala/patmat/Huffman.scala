@@ -159,19 +159,17 @@ trait Huffman extends HuffmanInterface:
    * and returns the resulting list of characters.
    */
   def decode(tree: CodeTree, bits: List[Bit]): List[Char] =              // TODO
-    def helper(t: CodeTree, b: List[Bit]): List[Char] =
-      t match
-        case Leaf(char, _) =>
-          if   b.isEmpty
-          then List(char)
-          else char :: helper(tree, b)                        // go back to root
+    @annotation.tailrec
+    def helper(t: CodeTree, b: List[Bit], acc: List[Char]): List[Char] = t match
+      case Leaf(char, _)           => b match
+        case Nil => char :: acc
+        case _   => helper(tree, b, char :: acc)                 // back to root
 
-        case Fork(left, right, _, _) =>
-          if   b.head == 0
-          then helper(left, b.tail)
-          else helper(right, b.tail)
+      case Fork(left, right, _, _) => b.head match // b should not be empty here
+        case 0 => helper(left, b.tail, acc)
+        case 1 => helper(right, b.tail, acc)
 
-    helper(tree, bits)
+    helper(tree, bits, Nil).reverse
 
   /**
    * A Huffman coding tree for the French language.

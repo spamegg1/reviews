@@ -7,20 +7,20 @@
    a set of mutally recursive functions for the states.
 *)
 fun match xs =
-let fun s_need_one xs =
-    case xs of
-        []       => true
-    |   1 :: xs' => s_need_two xs'
-    |   _        => false
+    let fun s_need_one xxs =
+        case xxs of
+            []       => true
+        |   1 :: xs' => s_need_two xs'
+        |   _        => false
 
-and s_need_two xs =
-    case xs of
-        []       => false
-    |   2 :: xs' => s_need_one xs'
-    |   _        => false
-in
-    s_need_one xs
-end
+    and s_need_two xxs =
+        case xxs of
+            []       => false
+        |   2 :: xs' => s_need_one xs'
+        |   _        => false
+    in
+        s_need_one xs
+    end
 
 (* mutual recursion works fine in ML provided you can put the functions
    "next to each other".  Otherwise there are workarounds...

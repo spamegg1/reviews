@@ -23,8 +23,8 @@ fun g f1 f2 p =
         case p of
             Wildcard          => f1 ()
         |   Variable x        => f2 x
-        |   TupleP ps         => List.foldl (fn (p,i) => (r p) + i) 0 ps
-        |   ConstructorP(_,p) => r p
+        |   TupleP ps         => List.foldl (fn (pp,i) => (r pp) + i) 0 ps
+        |   ConstructorP(_, pp) => r pp
         |   _                 => 0
     end
 
@@ -104,7 +104,7 @@ fun count_some_var(s: string, p: pattern): int =
     g (fn _ => 0) (fn x => if x = s then 1 else 0) p
 
 (*  returns true if all variable names in pattern are same  *)
-fun check_pat(p: pattern): bool =
+fun check_pat(q: pattern): bool =
 let
     fun get_var_strings(p: pattern): string list =
         (* returns list of strings occurring in variables in pattern *)
@@ -114,18 +114,18 @@ let
         |   UnitP        => []
         |   ConstP _     => []
         |   TupleP plist =>
-            List.foldl (fn (p, vs) => get_var_strings p @ vs) [] plist
+            List.foldl (fn (r, vs) => get_var_strings r @ vs) [] plist
         |   ConstructorP(_, pat)  => get_var_strings pat
 
     (* returns true if there are reps, false if no reps *)
     fun check_string_reps([]: string list): bool = false
     |   check_string_reps(s :: rest) = List.exists (fn x => s = x) rest
 in
-    not(check_string_reps(get_var_strings p))
+    not(check_string_reps(get_var_strings q))
 end
 
-fun match(v: valu, p: pattern): (string * valu) list option =
-    case (v, p) of
+fun match(v: valu, q: pattern): (string * valu) list option =
+    case (v, q) of
         (_, Wildcard)               => SOME []
     |   (_, Variable str)           => SOME [(str, v)]
     |   (Unit, UnitP)               => SOME []
@@ -134,9 +134,9 @@ fun match(v: valu, p: pattern): (string * valu) list option =
         if   List.length vlist = List.length plist
         then all_answers match (ListPair.zip(vlist, plist))
         else NONE
-    |   (Constructor(s1, v), ConstructorP(s2, p)) =>
+    |   (Constructor(s1, vv), ConstructorP(s2, p)) =>
         if   s1 = s2
-        then match(v, p)
+        then match(vv, p)
         else NONE
     |   (_, _)                      => NONE
 

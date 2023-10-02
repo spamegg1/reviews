@@ -4,6 +4,7 @@ sml.json
 *.pyc
 .scalafix.conf
 .scalafmt.conf
+.scala-build/
 *.dat
 target/
 .bloop/

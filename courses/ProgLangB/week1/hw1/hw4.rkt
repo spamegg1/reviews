@@ -48,9 +48,9 @@
 (define dan-then-dog
   (local [(define (aux flag)
             (lambda ()
-                    (cons (cond [flag "dan.jpg"]
-                                [else "dog.jpg"])
-                          (aux (not flag)))))]
+              (cons (cond [flag "dan.jpg"]
+                          [else "dog.jpg"])
+                    (aux (not flag)))))]
     (aux true)))
 
 ;; Stream -> Stream
@@ -77,13 +77,13 @@
 ;; allows vector elements not to be pairs, in which case it skips them
 (define (vector-assoc v vec)
   (if (= 0 (vector-length vec)) #f
-  (local [(define vlen (vector-length vec))
-          (define (aux i)
-            (local [(define vi (vector-ref vec i))]
-              (cond [(and (pair? vi) (equal? (car vi) v)) vi]
-                    [(< (+ i 1) vlen) (aux (+ i 1))]
-                    [else false])))]
-    (aux 0))))
+      (local [(define vlen (vector-length vec))
+              (define (aux i)
+                (local [(define vi (vector-ref vec i))]
+                  (cond [(and (pair? vi) (equal? (car vi) v)) vi]
+                        [(< (+ i 1) vlen) (aux (+ i 1))]
+                        [else false])))]
+        (aux 0))))
 
 ;; List Integer -> Function
 ;; produces function of one argument that acts like Racket's assoc,
