@@ -69,13 +69,11 @@ Updated June 2023 (Kotlin for Java Developers)
 #### Hitting the wall of meta-knowledge
 
 - Most people (not everyone) can do a decent amount of math / CS (not all of it), but usually proper instruction and proper thinking habits / patterns are missing. 
-
 - "I'm just bad at" it is not a good explanation. 
 
   - I've had students who were terrible, and then became very good within 1-2 months. 
     - Because some ideas started to click in their minds.
   - They were able to identify what their issue was, probably subconsciously.
-
 - There is something I'd like to call ***"hitting the wall of meta-knowledge"***: 
 
   - you're "bad at it", but repetition / exercise does not help much, and
@@ -92,7 +90,9 @@ Updated June 2023 (Kotlin for Java Developers)
     - They would solve one problem with help, but get stuck on another problem right after. 
     - They couldn't abstract or generalize the problem solving methods.
 
-- This goes into [*tacit, or implicit knowledge*](https://www.youtube.com/watch?v=jRc67mW1LKI).
+#### Implicit knowledge and meta-knowledge deadlock
+
+- The above goes into [*tacit, or implicit knowledge*](https://www.youtube.com/watch?v=jRc67mW1LKI).
 
   - Even most teachers don't know how to teach it. 
 
@@ -100,6 +100,12 @@ Updated June 2023 (Kotlin for Java Developers)
     - The general belief is that, with lots of practice, you'll eventually connect the dots.
       - Like walking through a very light, gentle rain and eventually getting soaked without even realizing it, 
       - also known as *learning by osmosis*.
+
+  - This is the *"expert blindness"* mentioned in the video linked above.
+
+    - The student and the teacher are stuck in a ***meta-knowledge deadlock:***
+      - The students *do not know what it is they don't know*, 
+      - and the teacher does not know what the students are missing either.
 
   - Some examples:
 
@@ -115,13 +121,16 @@ Updated June 2023 (Kotlin for Java Developers)
       - But instead he decided to put proofs by contradiction via the Well-Ordering Principle ahead of induction in the course to solve students' issues with induction, which did not help.
       - Came to a false conclusion "20% of students just won't get it no matter what."
 
+#### Breaking the deadlock and cl
+
 - So, what to do?
 
   - Stop drilling problems and look into studying the foundations!
     - Look beyond the surface level technical details, look for the reasoning patterns.
-  - Adopt a *teacher mentality* (below), try explaining it to someone else who is less knowledgeable than you. 
-    - Or a rubber ducky.
-    - *"Explain like I'm five".*
+  - Use ***EMPATHY!*** Like so:
+    - Adopt a *teacher mentality* (below), try explaining it to someone else who is less knowledgeable than you. 
+      - Or a rubber ducky.
+      - *"Explain like I'm five".*
     - If you can't teach it, you don't understand it well enough. 
     - Anticipate the ways they won't get it, assume they are missing the mental patterns you (subconsciously) have.
   - Even when you get it right, remain unsatisfied.
@@ -130,7 +139,10 @@ Updated June 2023 (Kotlin for Java Developers)
 
 #### Mental habits
 
-- Split your mind into two people: teacher and student. Assume the teacher's role and explain what you learned to the student. You can practice this anywhere, anytime (on the bus, in the shower, when you're exercising, etc.)
+- Split your mind into two people: teacher and student. 
+- Assume the teacher's role and explain what you learned to the student. 
+- You can practice this anywhere, anytime (on the bus, in the shower, when you're exercising, etc.)
+- It's a bit like talking to yourself, but instead of going crazy you get smarter.
 
 #### Motivation, Mental Resilience
 
