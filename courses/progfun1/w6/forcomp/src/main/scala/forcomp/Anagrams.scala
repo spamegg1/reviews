@@ -69,6 +69,7 @@ object Anagrams extends AnagramsInterface:
       .map(word => wordOccurrences(word) -> word)
       .groupMap(_._1)(_._2)
 
+
   /** Returns all the anagrams of a given word. */
   def wordAnagrams(word: Word): List[Word] =                             // TODO
     dictionaryByOccurrences(wordOccurrences(word))
@@ -121,8 +122,10 @@ object Anagrams extends AnagramsInterface:
   def subtract(x: Occurrences, y: Occurrences): Occurrences =            // TODO
     val yMap = y.toMap
     x
+      .view
       .map((char, int) => (char, int - yMap.getOrElse(char, 0)))
       .filter(_._2 > 0)
+      .toList
 
   /** Returns a list of all anagram sentences of the given sentence.
    *

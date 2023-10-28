@@ -34,7 +34,7 @@ trait Huffman extends HuffmanInterface:
     case Leaf(char, _) => List(char)
 
   def makeCodeTree(left: CodeTree, right: CodeTree) =
-    Fork(left, right, chars(left):::chars(right), weight(left) + weight(right))
+    Fork(left, right, chars(left) ::: chars(right), weight(left)+weight(right))
 
   // Part 2: Generating Huffman trees
 
@@ -90,8 +90,10 @@ trait Huffman extends HuffmanInterface:
    */
   def makeOrderedLeafList(freqs: List[(Char, Int)]): List[Leaf] =        // TODO
     freqs
+      .view
       .sortBy(_._2)
       .map(Leaf(_, _))
+      .toList
 
   /**
    * Checks whether the list `trees` contains only one single code tree.

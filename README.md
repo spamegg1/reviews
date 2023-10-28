@@ -66,6 +66,68 @@ Updated June 2023 (Kotlin for Java Developers)
 - Think "I'm trying to *prove* something", not "I'm trying to *do* something" (or make something *work*).
 - Take your hands off the keyboard, get pencil and paper, work it out first. Don't bang on the keyboard like a monkey trying to write Shakespeare.
 
+#### Hitting the wall of meta-knowledge
+
+- Most people (not everyone) can do a decent amount of math / CS (not all of it), but usually proper instruction and proper thinking habits / patterns are missing. 
+
+- "I'm just bad at" it is not a good explanation. 
+
+  - I've had students who were terrible, and then became very good within 1-2 months. 
+    - Because some ideas started to click in their minds.
+  - They were able to identify what their issue was, probably subconsciously.
+
+- There is something I'd like to call ***"hitting the wall of meta-knowledge"***: 
+
+  - you're "bad at it", but repetition / exercise does not help much, and
+  - you don't know the reason or what you're lacking, and
+  - you don't know where / how to learn it. 
+  - Or, you are able to "get through" the problems, but it *feels like* you're not really getting it, or why what you're doing is correct.
+  - You don't know *what it is that you don't know*, hence the name *"meta-knowledge"*.
+    - It is not necessarily something *explicit* like a topic or subject that you are missing. 
+    - It's more often something *implicit*, like a thinking pattern, connection, idea.
+  - I've seen people who skyrocketed once a good teacher solved this issue for them.
+  - I've also seen the opposite unfortunately: 
+    - some kept studying, struggling over and over for a long time without getting better. 
+    - They couldn't climb over the wall of meta-knowledge. 
+    - They would solve one problem with help, but get stuck on another problem right after. 
+    - They couldn't abstract or generalize the problem solving methods.
+
+- This goes into [*tacit, or implicit knowledge*](https://www.youtube.com/watch?v=jRc67mW1LKI).
+
+  - Even most teachers don't know how to teach it. 
+
+    - They "get it" but they don't know *why* they get it and their students don't.
+    - The general belief is that, with lots of practice, you'll eventually connect the dots.
+      - Like walking through a very light, gentle rain and eventually getting soaked without even realizing it, 
+      - also known as *learning by osmosis*.
+
+  - Some examples:
+
+    - > ***It soon became clear that the unconscious instincts for logic and language which had enabled me to succeed were not shared by the large majority of my students.*** - Susanna Epp
+
+      - It's not really instinctual; logical / mechanical / symbolic / abstract thinking is not very natural for human beings in general.
+      - But this shows that even the best teachers believe that it's instinctive and that not much can be done.
+
+    - Math for CS prof Albert Meyer could not figure out why 20% of his students were struggling with induction: 
+
+      - The reason was the implicit use of Modus Ponens, students told him "it feels like circular reasoning". 
+        - The course does not teach any deductive calculus. So the students are missing the underlying ideas, which are *implicitly assumed*.
+      - But instead he decided to put proofs by contradiction via the Well-Ordering Principle ahead of induction in the course to solve students' issues with induction, which did not help.
+      - Came to a false conclusion "20% of students just won't get it no matter what."
+
+- So, what to do?
+
+  - Stop drilling problems and look into studying the foundations!
+    - Look beyond the surface level technical details, look for the reasoning patterns.
+  - Adopt a *teacher mentality* (below), try explaining it to someone else who is less knowledgeable than you. 
+    - Or a rubber ducky.
+    - *"Explain like I'm five".*
+    - If you can't teach it, you don't understand it well enough. 
+    - Anticipate the ways they won't get it, assume they are missing the mental patterns you (subconsciously) have.
+  - Even when you get it right, remain unsatisfied.
+    - Think deeply about *why* it was right, *how* it could be wrong, whether it generalizes.
+  - When you don't get it right, try to identify the underlying idea or concept that you're not getting.
+
 #### Mental habits
 
 - Split your mind into two people: teacher and student. Assume the teacher's role and explain what you learned to the student. You can practice this anywhere, anytime (on the bus, in the shower, when you're exercising, etc.)
