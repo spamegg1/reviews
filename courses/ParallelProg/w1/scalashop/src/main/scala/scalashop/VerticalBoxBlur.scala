@@ -66,9 +66,9 @@ object VerticalBoxBlur extends VerticalBoxBlurInterface:
     // TODO implement using the `task` construct and the `blur` method
     // autograder complained about this being 0
     val stripSize: Int = math.max(src.width / numTasks, 1)
-    for
+    val tasks = for
       from <- 0 until src.width by stripSize
-    do
-      val end: Int = math.min(from + stripSize, src.width)
-      val mytask = task {blur(src, dst, from, end, radius)}
-      mytask.join()
+      endPt = math.min(from + stripSize, src.width) // careful!
+    yield
+      task {blur(src, dst, from, endPt, radius)}
+    tasks.map(_.join) // joining OUTSIDE for-loop necessary for parallelization

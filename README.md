@@ -69,7 +69,7 @@ Updated June 2023 (Kotlin for Java Developers)
 #### Hitting the wall of meta-knowledge
 
 - Most people (not everyone) can do a decent amount of math / CS (not all of it), but usually proper instruction and proper thinking habits / patterns are missing. 
-- "I'm just bad at" it is not a good explanation. 
+- "I'm just bad at it" is not a good explanation. 
 
   - I've had students who were terrible, and then became very good within 1-2 months. 
     - Because some ideas started to click in their minds.
@@ -79,7 +79,7 @@ Updated June 2023 (Kotlin for Java Developers)
   - you're "bad at it", but repetition / exercise does not help much, and
   - you don't know the reason or what you're lacking, and
   - you don't know where / how to learn it. 
-  - Or, you are able to "get through" the problems, but it *feels like* you're not really getting it, or why what you're doing is correct.
+  - Or, you are able to "get through" the problems, but it *feels like* you're not really getting it, or don't know *why* what you're doing is correct.
   - You don't know *what it is that you don't know*, hence the name *"meta-knowledge"*.
     - It is not necessarily something *explicit* like a topic or subject that you are missing. 
     - It's more often something *implicit*, like a thinking pattern, connection, idea.
@@ -119,12 +119,12 @@ Updated June 2023 (Kotlin for Java Developers)
       - The reason was the implicit use of Modus Ponens, students told him "it feels like circular reasoning". 
         - The course does not teach any deductive calculus. So the students are missing the underlying ideas, which are *implicitly assumed*.
       - But instead he decided to put proofs by contradiction via the Well-Ordering Principle ahead of induction in the course to solve students' issues with induction, which did not help.
-      - Came to a false conclusion "20% of students just won't get it no matter what."
+      - Came to a false conclusion "20% of students just can't get it no matter what."
 
-#### Breaking the deadlock and cl
+#### Breaking the deadlock and climbing the wall
 
 - So, what to do?
-
+  - Get expert feedback, from a human, not chatGPT.
   - Stop drilling problems and look into studying the foundations!
     - Look beyond the surface level technical details, look for the reasoning patterns.
   - Use ***EMPATHY!*** Like so:
@@ -136,6 +136,7 @@ Updated June 2023 (Kotlin for Java Developers)
   - Even when you get it right, remain unsatisfied.
     - Think deeply about *why* it was right, *how* it could be wrong, whether it generalizes.
   - When you don't get it right, try to identify the underlying idea or concept that you're not getting.
+  
 
 #### Mental habits
 
