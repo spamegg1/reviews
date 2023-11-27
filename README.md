@@ -22,6 +22,8 @@ Updated July 2021 (Effective Programming in Scala)
 
 Updated June 2023 (Kotlin for Java Developers)
 
+Updated November 2023 (C for Everyone)
+
 - [Learning tips](#tips)
 - [Harvard's CS50 (first half)](#cs50)
 - [CS50, second half, Final Project](#cs50-2)
@@ -57,6 +59,7 @@ Updated June 2023 (Kotlin for Java Developers)
 - [Introduction to Logic](#logic)
 - [Effective Programming in Scala](#eff)
 - [Kotlin for Java Developers](#kotlin)
+- [C for Everyone (non-review)](#c4e)
 
 ### <a name="tips"></a> Learning tips
 
@@ -1083,3 +1086,17 @@ Week 5 is about some advanced topics: inlining (pre-compiling and "baking into b
 Overall: some negative comments on [Coursera Discussion forums](https://www.coursera.org/learn/kotlin-for-java-developers/discussions/forums/97Ixctt_EeiPqwqncygcyA/threads/VG3AGCiGEey3ZhJLFvYuXQ) which I cannot help but agree with. You won't be learning much (it doesn't really teach you, but rather maps your existing knowledge), except just Kotlin syntax and Kotlin to Java conversions / compatibility. You won't learn any of the *Kool Kotlin stuff* like coroutines (lazy suspensions) and structured concurrency (these are promised in a later, advanced course but that does not exist yet). Although week 5 stuff is somewhat cool (with a lowercase `c`).
 
 *Spam's recommendation:* It's an OK-to-bad course. It's short and easy, if you already know what they expect you to know, which is *a lot* (it feels like it was made for JetBrains employees). It's strangely (dis)organized and has a weird selection of topics. The course is on the low-to-mid side in terms of substance and quality. It feels too shallow and too fast. Not recommended, except if you are already super knowledgeable in Java / Scala and want to spend 4 afternoons. [Learn Java first](https://java-programming.mooc.fi/), then [get a nice Kotlin book](https://www.oreilly.com/library/view/programming-kotlin/9781680507287/) (by my favorite Java guy Venkat).
+
+### <a name="c4e"></a> C for Everyone (non-review)
+
+https://www.coursera.org/learn/c-for-everyone
+
+Part 1 of a 4-part specialization on C and C++.
+
+It has a very rough start. There are no instructions given for installing and setting up the Tools. Just mentions `gcc` and that's it. But actually, getting a C compiler on Windows for example can be very difficult! You have to know about MinGW and get Bash-like terminal toolchain installed. I think Windows users would be screwed here, not knowing what to do at all. Then the first code example is shown on a pure white Terminal window in `vi` on Mac, with no syntax highlighting. Super rough. The prof is old-school indeed. How hard is it to just show some of the installation, and maybe use VS Code with the C/C++ extension? It's so easy... come on man, make some effort. He mentions Microsoft Word, then Notepad... :man_facepalming:
+
+After that, there is no file provided for the code in the videos either (and it specifically says *file included* :rofl:). So we have to pause the video, and type the code manually. The very first time coding in C, and nothing in the code is explained. Prof begins with an already existing code file, then modifies it. There is `scanf` with referencing operator `&` and `printf` with `%` formatting and newline characters `\n` going on, how is a beginner supposed to know or understand any of that? He deliberately makes some mistakes, then looks at some very confusing compiler error messages. (Compare this to the CS 50 approach, where they wrote a whole library to fix some of these basic issues and give friendly compiler errors.) Making a mistake can be good pedagogy but not like this. He pulls up some Wikipedia pages for Dennis Ritchie and just reads from it, followed by some horrible hand written slides. 
+
+The whole thing has a very low effort, casual, unprofessional feel to it. Sorry I could not continue this. As a fellow educator I felt disgusted. Maybe it gets better later? No... I looked at the following weeks, it's all the same, or worse. Basic syntax is explained only on Week 2. Functions are used a lot but only explained on Week 4. `extern, const, auto` poorly explained in an off-hand sentence or two. You still have to pause the videos to type a lot of code, "file included" is a lie. The code is not even properly indented, linted or spaced. At least he mentions Dijkstra's mantra "`goto` should be avoided". Also, even the peer-graded assignments require payment or free trial (credit card) to unlock. *Really?* Come on Coursera... :angry:
+
+*Spam's recommendation:* Not good. Not recommended. (To be fair, this is not a review.)
