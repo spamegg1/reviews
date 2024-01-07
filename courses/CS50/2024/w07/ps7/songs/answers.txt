@@ -1,0 +1,6 @@
+- If songs.db contains the top 100 songs of one listener from 2018, how would you characterize their audio aura?
+Not sure.
+
+- Hypothesize about why the way you’ve calculated this aura might not be very representative of the listener. What better ways of calculating this aura would you propose?
+Not sure.
+
