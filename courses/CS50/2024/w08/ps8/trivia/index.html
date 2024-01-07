@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+        <script>
+            // TODO: Add code to check answers to questions
+            // This is for the multiple-choice
+            function check(answer, element) {
+                var result = answer ? "Correct!" : "Incorrect";
+                var color = answer ? "green" : "red";
+                document.getElementById(element).innerHTML = result;
+                document.getElementById(element).style.color = color;
+            }
+
+            function multiple() {
+                var answer = event.target.id === 'correct';
+                check(answer, "multiple_choice");
+            }
+
+            function free() {
+                var field = document.querySelector('input');
+                var answer = field.value.toLowerCase() === "hello";
+                check(answer, "free_response");
+            }
+
+            document.addEventListener("DOMContentLoaded", function (event) {
+                var buttons = document.querySelectorAll(".button");
+                buttons.forEach(function (button) {
+                    button.addEventListener("click", multiple);
+                });
+
+                var submitButton = document.getElementById("response");
+                submitButton.addEventListener("click", free);
+            })
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+                <!-- TODO: Add multiple choice question here -->
+                <h3>Question</h3>
+                <h2 id="multiple_choice"></h2>
+                <button id="correct" class="button">Choice 1</button>
+                <button id="incorrect" class="button">Choice 2</button>
+                <button id="incorrect" class="button">Choice 3</button>
+                <button id="correct" class="button">Choice 4</button>
+
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <!-- TODO: Add free response question here -->
+                <h3>Question</h3>
+                <h2 id="free_response"></h2>
+                <input type="text">
+                <button id="response" class="input">Check Answer</button>
+            </div>
+        </div>
+    </body>
+</html>
