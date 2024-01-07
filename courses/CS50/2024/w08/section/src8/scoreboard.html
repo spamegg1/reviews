@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Scoreboard</title>
+        <style>
+
+            table {
+                border: 2px solid black;
+                border-collapse: collapse;
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+            }
+
+            td {
+                border: 2px solid black;
+            }
+        </style>
+    </head>
+    <body>
+
+        <table>
+            <tr>
+                <td>Team 1</td>
+                <td>Team 2</td>
+            </tr>
+            <tr>
+                <td id="score1">0</td>
+                <td id="score2">0</td>
+            </tr>
+            <tr>
+                <td>
+                    <button id="add1">+1</button>
+                </td>
+                <td>
+                    <button id="add2">+1</button>
+                </td>
+            </tr>
+        </table>
+
+        <script>
+            let team1 = 0;
+            let team2 = 0;
+
+            document.querySelector('#add1').onclick = function() {
+                team1 = team1 + 1;
+                document.querySelector('#score1').innerHTML = team1;
+            }
+
+            document.querySelector('#add2').onclick = function() {
+                team2 = team2 + 1;
+                document.querySelector('#score2').innerHTML = team2;
+            }
+
+    </script>
+  </body>
+</html>
