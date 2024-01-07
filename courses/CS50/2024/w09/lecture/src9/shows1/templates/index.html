@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+    <form action="/search" method="get">
+        <input autocomplete="off" autofocus name="q" placeholder="Query" type="search">
+        <button type="submit">Search</button>
+    </form>
+
+{% endblock %}
