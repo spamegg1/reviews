@@ -1,0 +1,9 @@
+In the video that you have just watched, we make a distinction between syntax or the form of sentences, and semantics, that is, the meaning of sentences.
+
+Some sequences of English words are grammatically correct, for example, modern airplanes fly quickly. this sentence consists of an adjective modern which modfies the noun airplanes to denote a kind of airplane.  Then there is a verb fly, which is the kind of thing that airplanes do.  Finally we have the adverb quickly, which describes the manner in which these planes fly.  The whole structure forms a sentence which make a claim, with which one may or may not agree.
+
+The sentence green ideas sleep furiously has exactly the same structure, the same syntax as the previous example, however it does not make a sensible claim.  Being green is not a property that ideas can have, and sleeping is not a thing that ideas do.
+
+This illustrates the difference between being syntactically correct and being meaningful.  It is required that sentences are syntactically correct, but that alone is not enough to make them meaningful.
+
+(The example sentence green ideas sleep furiously, is adapted from a famous example by the linguist Noam Chomsky).

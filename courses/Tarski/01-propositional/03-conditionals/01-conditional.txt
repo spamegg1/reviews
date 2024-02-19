@@ -1,0 +1,184 @@
+DAVE: If I'm Dave, then this is John.
+JOHN: And he's Dave.
+DAVE: In the last lecture, we discussed the Boolean connectives,
+conjunction, disjunction, and negation.
+In this lecture, we'll complete our collection of
+propositional connectives by introducing the conditionals.
+JOHN: The "material conditional" corresponds to the English expression,
+"if...then..." in many cases.
+And of course, there are other English expressions which will
+also translate into the conditional connective.
+The other conditional connective that we'll introduce is the "material biconditional".
+It's a little rarer in English.
+It's most often used by mathematicians and
+logicians who are trying to be very precise with language.
+DAVE: Our second main goal in this lecture is to introduce
+another way to think about the semantics of propositional connectives.
+The method involves a turn-taking game which asks you
+to say whether you believe that a sentence is true or false.
+And then reveals the beliefs that you must have
+about the truth of the component sentences.
+Now, whether you think about the semantics of the sentences by using the game,
+or by using truth tables,
+you'll get the same results.
+For now, having two methods for thinking about the semantics just
+provides some variety and two different perspectives on the same idea.
+JOHN: Now, the real payoff for the game will
+become apparent when we move to full first-order logic.
+In the second half of the course,
+we'll introduce "quantifiers" which are not truth functional.
+Consequently, the method of truth tables can't be used for sentences using quantifiers.
+But fortunately, the game semantics does
+generalize to the full language of first order logic.
+DAVE: Okay, to work. We're going to study the conditional connectives in this lecture.
+These connectives weren't studied by Boole,
+but they are part of the standard language of first order logic.
+Likes the Boolean connectives,
+the conditional connectives are truth functional and we'll
+describe their meanings at first using truth tables.
+JOHN: The first connective that we'll discuss is the material conditional.
+The main idea behind this connective is to
+capture the meaning of sentences involving "if-then".
+As we'll see this is actually quite tricky,
+and we'll have to make some stipulations about the particular kind
+of if-then claims that we can translate into FOL.
+DAVE: Right. One of the things that we typically expect of the use of
+conditional statements in natural language is that the parts of the statement have,
+or might have, some kind of connection to one another.
+For example, the sentence "If Quinn is at the library,
+then he's studying for his exam" sounds just fine.
+But the sentence "If Quinn is at the library,
+then two plus two equals four" seems strange at best.
+JOHN: And this intuition is probably right,
+but it indicates that this particular use of
+the phrase if-then can't be truth-functional.
+The idea that the components sentences have to be connected in
+some way is something that truth functionality can't take into account.
+And this is not so unusual.
+There are plenty of connectives in English that are not truth-functional.
+A really good example is the word "because".
+"Because" is a connective.
+It connects sentences together such as
+"Dave is upset because he received a parking ticket".
+But imagine a situation in which these things are true.
+"Dave is upset", "Dave received a parking ticket",
+"Dave is upset because he received a parking ticket". "John is happy".
+DAVE: Now, think about the sentence.
+"Dave is upset because he received a parking ticket".
+Both component sentences of this "because" statement are true.
+And we know that the "because" statement is also true.
+So if "because" were truth-functional,
+that would mean that any of the sentence is of the form
+"P because Q" is true when both "P" and "Q" are.
+But that means that in this situation the sentence "John is happy because
+Dave received a parking ticket" is also true
+because statements are true when both components sentences are true in this theory.
+But this isn't necessarily right,
+perhaps John is sympathetic to Dave.
+But in fact, he's just won
+the lottery and that's what accounts for the fact that he's happy.
+Some "because" statements are true when both components are true and others are not.
+And this means that no truth functional theory
+or logic can account for the connective "because".
+JOHN: "If-then" is a little different from "because" some English uses of "if-then" are
+not truth functional because we expect there to be
+a relevant connection between the two component sentences.
+Other uses though are truth-functional,
+or we can treat them as if they are without too much trouble.
+These are the cases when we read a conditional statement "if P then Q" as meaning.
+"If P is true then Q is also true",
+with no idea of causality or connection between "P" and "Q".
+DAVE: And that's why we call this the material conditional.
+There are many forms of conditional statements in English,
+or in natural languages more generally.
+And this is the only use that can be explained truth-functionally.
+We use the symbol "arrow" written between
+two FOL sentences to indicate the material conditional.
+We call the formula to the left of the arrow,
+the "antecedent" of the formula,
+and the formula to the right,
+the "consequent" of the conditional.
+In this sentence "P implies Q",
+"P" is the antecedent and "Q" is the consequent.
+Let's think about the truth table for this connective.
+JOHN: Well, about the only thing that is pretty obvious about this truth table,
+is that in a situation where "P" is true and "Q" is false,
+the implication "P arrow Q" had better be false.
+Since the sentence "P arrow Q" is intended to mean if "P" is true then "Q" is also true,
+then it's obviously false in a situation in which "P" is true and "Q" is false.
+DAVE: What about the situation in which both "P" and "Q" are true?
+Well, in this case,
+we expect the formula "P arrow Q" to be true too.
+This sentence says that if "P" is true then "Q" is true.
+P is true in this row and Q is true too.
+So the sentence says something true.
+JOHN: What should we do when the antecedent is false?
+If someone says that if "P" is true then "Q" is true too,
+and then we look and we see that "P" is false.
+what would we say about what this person said?
+Would we say that this person told the truth?
+Well, they didn't say anything obviously false.
+So in fact, they didn't say anything that applies to the situation that we're in at all.
+DAVE: And would be pretty mean to say that they lied.
+JOHN: Right. So in these two rows we're going to say that the conditional sentence is true.
+Notice that if we had decided to write false in both of these rows then
+we'd be saying that the meaning of the
+conditional is the same as that of the conjunction,
+which we know is obviously not right.
+DAVE: Our truth-functional account of conditional then has
+only one way in which a conditional statement can be false.
+And that's when the antecedent is true but the consequent is false.
+Notice that this means that the sentence "P arrow Q", "if P then Q",
+is equivalent to the sentence "not P or Q".
+The implication is true just when either the antecedent "P" is false,
+that is if "not P" is true,
+or if the consequent "Q" is true.
+DAVE: Like "P arrow Q" the only way "not P or Q" can be false is if both "not P" and "Q" are false.
+That is if "P" is true and "Q" is false.
+JOHN: We described this connective as being a way of translating if-then statements.
+But there are lots of other ways to make conditional claims in English.
+For example, we might say,
+"if Dave has a parking ticket then he's upset".
+"Dave is upset if he has a parking ticket".
+"Dave has a parking ticket only if he's upset".
+"Provided Dave has a parking ticket he's upset."
+DAVE: These are all forms of the conditional expressed in English.
+And as we observed before about the other connectives,
+even though these sentences have the same propositional content,
+we might use them in different circumstances for pragmatic reasons.
+One thing to notice about the two forms here where the
+conditional is written between the compound sentences.
+When I say, "Dave is upset if he has a parking ticket",
+notice that the "if" precedes the antecedent of the claim.
+If we use this kind of infix "if" the consequent comes first,
+and the antecedent second.
+The word "if" here introduces what we call a sufficient condition.
+If I say that "you'll pass this course if you turn in the homework",
+I'm saying that all you need to do to pass the course is to turn in the homework.
+Or another way of putting that is that
+turning in the homework is sufficient to pass the course.
+Now, this is a very weak statement.
+If it were true you wouldn't have to pass the exams,
+you wouldn't have to really do well on the homework,
+and all you'd have to do is turn something in.
+DAVE: On the other hand, when we say "only if"
+the antecedent comes first and the consequence second.
+If I say "you will pass the course only if you turn in the homework",
+then we're saying that turning in the homework is a necessary condition.
+You have to turn in the homework to pass the course if you don't, you won't pass.
+But even then you may have to do well on the homework and the exams too.
+The only thing that this statement really says is that if you
+don't turn in your homework you definitely won't pass.
+JOHN: There's one more common use of conditional statements in English.
+And these are statements that use the word "unless".
+So if I say that" Max is at the library unless Claire is at home",
+what I'm saying is that I know that Max is at the Library if Claire is not at home.
+This is just the implication.
+"If Claire's not at home,
+then Max is at the library".
+Or alternatively, Max is at the library if Claire is not at home.
+We translate the sentence "P unless Q" as "not Q
+arrow P". Notice what this sentence says when Claire is at home.
+If Claire is at home, then maybe Max is at the library or maybe he's not.
+Either way the sentence is true. [MUSIC]
+End of transcript. Skip to the start.

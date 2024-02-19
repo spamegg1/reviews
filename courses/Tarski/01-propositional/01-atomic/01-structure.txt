@@ -1,0 +1,90 @@
+[MUSIC] JOHN: Hi my name is John Etchemendy,
+and I have the property of being one of the instructors of this course.
+DAVE: I have a different name,
+it's Dave Barker-Plummer but I
+too have the property of being an instructor for this course.
+In this lecture we're going to introduce some of
+the basic building blocks of the language of first-order logic.
+By the end of this lecture,
+you will know how to build the simplest sentences of first-order logic.
+JOHN: We call these sentences "atomic sentences",
+because like atoms they form the basic components of larger structures.
+As we've said, the sentences of first-order logic make claims about the world.
+They're sentences which can be either true or false.
+Now atomic sentences are
+the smallest structures of our language which have this property.
+DAVE: So as you'll see, will be very precise in designing our language.
+One of the most important features of the language of first-order logic,
+is that the sentences you build must all be completely unambiguous.
+JOHN: Now like real atoms,
+atomic sentences are actually made up of smaller pieces.
+But none of the pieces on their own can be used to make a claim about the world.
+Only atomic sentences make claims.
+DAVE: We're going to begin the development of our language of
+first-order logic by considering these basic elements of the language.
+There are three elements that we're going to focus on right away;
+"names", "properties", and "relations".
+JOHN: Now, names serve a very basic function in the language.
+That is, they pick out objects in the world to focus our attention on the objects,
+and to make claims about them.
+One kind of claim involves saying that
+say a particular object has some property or other.
+I might say, for example,
+that "Dave is tall" or that "Dave is a logician".
+DAVE: At least one of these sentences is false.
+Now these sentences share the same form.
+They pick out an object in the world, namely me,
+and make a claim that I have a certain property,
+that I'm tall or that I'm a logician respectively.
+Other sentences express facts that certain relations hold between objects.
+For example the sentence;
+"John is taller than Dave",
+picks out two objects from the world,
+and makes a claim that relates those two objects to one another.
+JOHN: Relations may involve more than two objects.
+The sentence; "New York is between Boston and Washington DC",
+picks out three objects from the world, cities in this case,
+and asserts that some spatial relationship holds between them.
+DAVE: In most natural languages like English,
+there are a variety of ways of saying the same thing.
+For example, I might say;
+"Susan gave the ball to Mary".
+Or instead, I might say;
+"Mary was given the ball by Susan".
+In yet another formulation I might say;
+"The ball was given to Mary by Susan".
+JOHN: Now, in a sense all of these sentences mean exactly the same thing.
+They describe the same fact.
+If one of these sentences were true,
+then the others would have to be true too,
+since they all have the same factual content.
+But there are good reasons why we would choose to use the different sentences.
+For example, I might want to draw attention to the ball rather than Mary.
+I might choose one formulation in preference to the
+other depending on who I want to focus on.
+DAVE: In logic, we'll be concerned only with the statement that a sentence makes.
+We view sentences as conveying particular propositional information.
+That is, a sentence conveys a proposition, a claim that could be true.
+Any other features of the sentence such as the focus of the conversation is on Mary,
+or it is spoken in an excited tone of voice, for example,
+are not part of our concern.
+JOHN: We're going to reduce the variability of expressions in
+our formal language by choosing
+a particular standard representation for simple propositions.
+We view each proposition as a relationship that holds between a collection of objects.
+DAVE: We want to be very strict in designing our language.
+We want there to be no ambiguity about what the sentences of first-order logic mean.
+This requires spelling out at least three things very carefully.
+The first, is the relationship between names used in the sentence,
+and the objects in the world that they refer to.
+The second, is exactly what property is named by the words in the sentence.
+For example, what exactly do we mean by "tall"?
+What counts as tall?
+The third, is exactly how the objects mentioned are related by the property.
+Is it that Dave is taller than John or vice versa?
+JOHN: So we're going to consider each of these three issues in turn.
+But before we do that,
+we're going to introduce you to Tarski's World.
+The program that you'll be using to learn the language of first-order logic.
+[MUSIC]
+End of transcript. Skip to the start.

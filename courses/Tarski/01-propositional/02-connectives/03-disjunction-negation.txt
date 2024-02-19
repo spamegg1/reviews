@@ -1,0 +1,112 @@
+DAVE: When we assume that connectives are truth functional we get a really simple way to
+describe when sentences are true. We can write a table that displays how the truth
+values of the compound sentences depend on the truth values of the component sentences.
+JOHN: So we'll begin by writing down the general form of a conjunction.
+We write the conjunction symbol between its two conjuncts, and since it doesn't really matter
+which sentences the conjunction conjoins, we'll just write "P" and "Q" to represent these sentences.
+The truth value of the sentence "P and Q" depends on the truth values of the sentences "P" and "Q".
+We'll write a table with a column for each of the sentences "P" and "Q" on the left and a column for the
+compound sentence "P and Q" on the right. We'll call the columns for "P" and "Q" the "reference columns" and
+the column for the main sentence the "target column", and we separate them with a double line.
+DAVE: The idea is to describe how the truth value of the conjunction varies with the truth values of
+the two conjuncts. Each row of our table displays a particular combination of truth values for "P" and "Q".
+There are four different combinations. "P" and "Q" can both be true, "P" can be true and "Q"
+false, "P" can be false and "Q" true or they can both be false. We write these possible combinations
+in the four rows to the left of the double line. JOHN: Now, we can describe the truth values
+of the conjunction in these four different kinds of situations. We said that a conjunction is true
+only if both of its conjuncts are true. That's what conjunction really means. So in the first row, where
+both "P" and "Q" are true, we know that the conjunction is true. In each of the other rows the conjunction
+will be false, because at least one of the conjuncts is false in each of those rows.
+DAVE: So this handy table completely describes the conditions under which a conjunction is true.
+When we are given a conjunction, we can look at the truth value of its component sentences,
+find the corresponding row of the truth table, and read off the truth value of the conjunction.
+Now, you might want to make a copy of this table to keep. You might even like to get it tattooed
+on your left forearm. JOHN: That's where my copy is. DAVE: But if you do make sure to leave room for some other
+tables because we're going to see some more soon. You don't really need to keep a copy of the table
+if you understand how it's constructed though. This table is constructed from four rows each of
+which represents one of the four ways in which the truth values of the conjuncts can be true or false.
+And the conjunction is true only in the row which makes both conjuncts true.
+JOHN: There are a couple of more things to say here. One is that in all of the examples that we've
+given, we've used conjunction to join together two atomic sentences. Now it's not necessary
+that those sentences be atomic. Any sentence of FOL can play the role of the conjuncts.
+Right now we only know about atomic sentences and conjunctions, but we're going to shortly expand our
+repertory of connectives. Let's start by learning about the other Boolean connectives, disjunction
+and negation. JOHN: Right so disjunction corresponds roughly to the word "or" in English. We can say
+things like "Quinn is at home or Quinn is at the library". A sentence like this presents some
+alternatives concerning ways in which the sentence can be true. Like the word "and" the word "or" can also
+appear between nouns as in "Either Quinn or Ewan is at the ice cream store" and between properties
+as in "Ewan is at the ice cream store or at the library". JOHN: And I'll bet I know where he is.
+DAVE: Everything we said about this when we discussed conjunction also applies to the word "or". So
+we're not going to labor the point. We'll just pretend that uses of disjunction link together
+two sentences. But as we discussed before, you may have to do some work to get the English sentence
+into this form before translating into FOL. JOHN: So we're going to use the symbol "v" to represent
+disjunction. We'll call it either "v" or "or". If you want a handy way to remember how to
+distinguish between the conjunction symbol and the disjunction symbol, then the conjunction symbol is
+the one that kind of looks a lot like a capital "A" and that you can think of as a standing for "and".
+DAVE: So let's skip to the part where we describe the semantics of disjunction using a truth table. Just
+as before we build a table with reference columns for some sentences "P" and "Q" and on the target side
+we write the abstract sentence "P v Q" ("P or Q"). Just as before, we write four rows representing the
+possible combinations of the truth values of "P" and "Q". I think it's pretty clear, isn't it, that
+a disjunction is definitely false if both of the disjuncts are false? The sentence "Quinn is at home
+or Ewan is at the library" is definitely false if both of the disjuncts are false, perhaps because
+they're at the ice cream store. And we expect the disjunction to be true if one of the disjuncts
+are true. So we we know that in the middle two rows it's going to be true. But there's a question about
+a situation in which both disjuncts are true. Is the disjunction true in this case or is it false?
+DAVE: Well, when we think about how this works in English there are really two different uses of disjunction.
+JOHN: For example, when the server tells us that we can have soup or salad with our meal then
+we have a strong intuition that we can't have both. That's kind of the implication. We're being
+asked to choose between two alternatives but the server is not saying that we can have both.
+On the other hand, suppose that before Quinn gets home I say that he's either bought ice cream or
+he's been to the candy store. I don't think you would say I was wrong if he arrives home with
+both ice cream and candy. JOHN: So the evidence from English suggests that both uses are possible.
+We call the first kind of disjunction "exclusive disjunction" because the truth of one disjunct
+excludes the truth of the other if we're going to make a true statement. The other kind is
+called the "inclusive disjunction". In this case a disjunction is true if both disjuncts are true
+DAVE: So we're going to make a choice, and the choice is to put true in this row of the truth table. That
+is we're making a choice that disjunction in FOL is inclusive. A disjunction will be true if either
+or both disjuncts are true. JOHN: Now as we'll see later, this choice is essentially arbitrary.
+We can still express exclusive disjunctions in the language of FOL. It's just going to require
+a little more work. And if we had made the other choice, then we would have really not lost any
+ability either. The set of things that we can say in our language would still be the same either way.
+DAVE: The last Boolean connective is negation. Actually, calling it a connective is a little
+misleading since it doesn't connect together many sentences. It just acts on a single sentence. We
+say that conjunction and disjunction are "binary" connectives meaning they operate on two formulae,
+while negation is a "unary" connective operating on just one. JOHN: There are actually
+many ways of expressing a negation in English but the most obvious is to use the word "not".
+When we say a sentence like "Ewan is not at home", we mean to claim that the sentence "Ewan is at home"
+is false. Negation serves to reverse the truth value of the claim that we're making.
+DAVE: Now notice that the word "not" in this sentence is embedded within the sentence. It looks like it's
+part of the predicate or property of this sentence. We could however rephrase the sentence as "it is
+not the case that Ewan is at home" which makes it clear that the component sentence is "Ewan is at
+home" while the operation "it is not the case that" is being applied to that sentence to negate it.
+JOHN: In FOL, we use the symbol "not", "negation", and we always write the symbol in front of the sentence
+that we're negating. So this is the symbol that looks like a little line with a hook at the end.
+DAVE: Sometimes you'll hear people say it is not the case that..." in otherwise normal English.
+When you do, you can be pretty sure that the person has studied logic because normal people
+don't say things like that. JOHN: There are other ways to express negation in English. A sentence like
+"Quinn is unhappy" might be taken to mean that "Quinn is not happy" or "it is not the
+case that Quinn is happy". So the use of the prefix "un-" can often signal a use of negation.
+DAVE: Although perhaps there is a difference between being unhappy and not being happy, but for the
+purposes of this example we'll assume that everyone is either happy or not, and that
+unhappy is the negation of happy. The truth table for negation is very straightforward.
+First, there's just one sentence on the reference side "P"
+say, and the formula "not P" written with this symbol the line with the tail on it on the target side.
+There are just two choices for the truth value of "P", true and false. So the table has just two rows,
+and "not P" is false in the row where "P" is true and it's true in the row where "P" is false. JOHN: Another way
+in which negation is subtle in english is when we use two negations in a sentence. We call this
+"double negation". If you were to say that "Quinn is not unhappy" then this is a use of double negation.
+In everyday English, this does not imply that "Quinn is happy" but rather something different.
+Perhaps he's indifferent although we may have expected him to be unhappy.
+DAVE: Well sometimes you hear people saying things like "it doesn't make no difference"
+which means "it doesn't make a difference" which just has one negation.
+The first time Elvis Presley went into the recording studio he was asked who he sounded like,
+his response was "Man, i don't sound like nobody". i think that the intention here is to say that his
+sound is unique, not that he sounds like anybody. In uses like this, the double negation in English
+serves as an intensifier to really emphasize the point. In logic though, far from intensifying the
+effect, the second negation just has the effect of canceling out the first one. "It is not the
+case that it is not the case that Quinn is at home" just says the same thing as "Quinn is at home".
+These three connectives, conjunction , disjunction, and negation,
+are the Boolean connectives. Each is used to make a more complex sentence out of smaller sentences.
+We've seen how the truth values of the larger sentences can be worked out from the truth values
+of the smaller ones. The only things that we take into consideration are the truth values of these
+component sentences and the connective used. We call these connectives truth functional.

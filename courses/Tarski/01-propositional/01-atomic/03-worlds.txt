@@ -1,0 +1,66 @@
+[MUSIC] JOHN: The most obvious thing about the
+Tarski's World program is that it depicts objects on a checkerboard floating in space.
+DAVE: Now, this is a regular eight by eight checkerboard.
+JOHN: Except it's floating in space.
+DAVE: The blocks that can be found on the checkerboard are one of three kinds.
+They are cubes which are colored blue green,
+tetrahedra or pyramids that are kind of this kind of bright pink color,
+and dodecahedra which are yellow objects with 12 sides.
+JOHN: Each object is one of three sizes;
+small like this tetrahedron and this cube,
+medium-sized like these cubes and these tetrahedra,
+or large like this tetrahedron back in the back.
+DAVE: Every object can be found on a square of the board.
+Squares are not large enough to contain two objects
+and indeed large objects are so large you can't put another object next to them.
+JOHN: We call configurations of the blocks on the checkerboard, "worlds."
+Worlds are very simple.
+We choose to make them this simple because we want to provide an easy to
+understand set of situations that we
+can talk about using the sentences of first order logic.
+Nonetheless, the situations are actually complicated enough so that we can
+discuss the whole range of logically interesting ideas using just these worlds.
+DAVE: We'll shortly introduce our first-order language for talking about blocks worlds.
+But before we do,
+think about the range of things that you could say about these worlds;
+we can talk about the size of particular blocks,
+that "d" is medium-sized for example,
+we can talk about relative sizes using words like "larger" and "smaller",
+and relative positions using ideas like "to the left of" or "behind".
+All of these properties and relationships form part of
+the vocabulary that we use in the first order language that we use in Tarski's World.
+Tarski's World allows you to draw pictures of worlds like this,
+and write sentences in the language of first order logic.
+One of the important things that you'll learn is how to
+determine whether a sentence is true in a particular world.
+When we ask you to solve some exercises using Tarski's World,
+we may ask you to build a world which makes a set of sentences all true.
+One of the things you'll need to do then is to know how to create and edit worlds.
+JOHN: So let's start by creating a new world.
+You do that by using the New>New World command from the File menu.
+When you do that, you'll see, uh,
+new tab with an empty world that contains no blocks.
+DAVE: To create new blocks,
+click on the "New Block" button on the toolbar.
+It has a collection of shapes with a downward pointing arrow.
+Let's create four new blocks by clicking on the button four times.
+Now, what you'll see here depends on your preference settings,
+but by default, Tarski's World creates a block of random size and shape.
+We've set it up to create small cubes.
+JOHN: To move an object to a new position, you just drag it.
+Click down on the object and move it to its new position and let go.
+Be careful though because if you drag it off the board it's going to be deleted.
+DAVE: You can select an object by clicking on it.
+Objects change color to indicate that they're selected.
+You can change the shape of the selected object using the shape buttons in the toolbar,
+there is one for each of the shapes.
+The small, medium and large buttons,
+are used to change the size of the selected object.
+Then they're used in exactly the same way;
+large, medium and small.
+JOHN: There are two other operations that you can do
+to the world to help you see what's going on.
+These two arrows allow you to rotate the world either clockwise or counterclockwise.
+And this button here allows you to move into
+2D mode which lets you see the world from above.
+[MUSIC]

@@ -1,0 +1,220 @@
+[MUSIC] DAVE: So now that we've learned about all of the Boolean connectives,
+let's see how we can use them to write sentences in
+Tarskis World and get familiar with writing more complex sentences.
+JOHN: So, the first thing we want to point out is
+that the buttons for the conjunction, disjunction,
+and negation symbols can be found on the top row of the logic panel,
+right above the buttons for the names.
+There are three more symbols in that row and they are also propositional connectives,
+but we'll be getting to them later on.
+DAVE: Let's start by entering a sentence,
+which means that "a" is a cube which is to the left of "f". First,
+we have to unpack this sentence into something we can more directly translate into FOL.
+This sentence means the same thing as "a" is a cube,
+and "a" is to the left of "f",
+which we can see is the conjunction of two claims.
+JOHN: First, we enter the sentence "Cube(a)" by typing that "Cube" button and then the "a" button,
+then we press the conjunction button which then enters the conjunction symbol,
+and now we enter the sentence "LeftOf(a,f)",
+using "LeftOf", "a" and "f" buttons.
+DAVE: If you're playing along at home and you should be,
+then you've just entered your first conjunction.
+JOHN: Congratulations.
+DAVE: If you evaluate this sentence,
+then you'll see that it's true in this particular world.
+JOHN: Now, if you're a big fan of typing,
+you can actually type the conjunction symbol using
+the ampersand character on the keyboard.
+That's the "Shift-Seven" on a US keyboard.
+DAVE: You can enter the sentence "either a is a cube
+or a is to the left of f", similarly, except this time,
+of course you use the disjunction button,
+don't forget to add a new sentence slot before entering the new sentence.
+JOHN: Now, when you evaluate this sentence,
+it too will evaluate as true,
+because as we've just learned,
+both of the disjuncts are true,
+and the disjunction is true in this case because it's inclusive disjunction.
+The keyboard character that inserts the disjunction symbol is
+the vertical bar which is "shift backslash" on my particular keyboard.
+DAVE: As you can see, the button for
+the negation symbol is just to the right of the disjunction symbol on the logic panel.
+Let's write the sentence,
+"f is not a cube".
+Since negation is a prefix connective,
+it is written before the sentence it negates,
+we start our sentence by using
+the negation button and then follow with buttons for "Cube" and "f",
+making the sentence "Cube(f)".
+JOHN: That's easy enough.
+So when you evaluate this sentence,
+you'll see that it's true because "f" is not a cube in this world, it's a dodecahedron.
+DAVE: You might like to experiment with these sentences by
+modifying the world to make the component sentences false.
+For example, if you change the block "a" to be a tetrahedron,
+then the first conjunct of conjunction will be false and so will the conjunction.
+Similarly, you could move the cube or the
+dodecahedron to make the sentence "LeftOf(a,f)" false.
+You'll see that in all situations in which "a" is a cube and "a" is to the left of "f",
+this conjunction will be turn out to true,
+including some that are different from the original world.
+How about the disjunction?
+What do you have to do to make it false?
+Experiment with the world and be sure that you
+understand how the truth values of the component
+sentences impact the truth value of the conjunction and disjunction.
+JOHN: All of the examples that we've considered so far take
+atomic sentences and build more complex sentences out of them to make a larger sentence.
+This won't always be the case.
+Once we've built a compound sentence,
+one of these larger sentences,
+we can use it with
+a connective and other sentences to form an even more complex sentence.
+DAVE: The simplest example of this is when we take
+a negated sentence and prefix it with another negation.
+Suppose we add a negation symbol to the beginning
+of the sentence that we just wrote to make,
+"not not Cube(f)". This sentence has the same values as "Cube(f)" as we previously discussed.
+But the important thing to notice is that the outermost
+first negation symbol negates the sentence "not Cube(f)",
+which is itself a compound sentence.
+JOHN: We can do just the same thing with the other connectives and also mix and match them.
+There is, however, small wrinkle and maybe not so small.
+So, let's consider the sentence,
+"not Cube(f) and LeftOf(a,d)".
+Now, there are two possible ways to read this formula.
+Depending on what formula the negation sign is applied to.
+One possibility, maybe the most natural one,
+is that we wrote "Cube(f)" and we negated it,
+and then we conjoined that larger formula with" LeftOf(a,d)".
+In this case,
+the sentence means "f is not a cube and
+a is to the left of d". The other possibility though,
+is that we formed the conjunction of "Cube(f)" and "LeftOf(a,d)",
+and then we wanted to negate the whole conjunction.
+This sentence would mean that "it is not the case that
+both f is a cube and a is to the left of d".
+DAVE: We've introduced ambiguity into
+our language concerning where the negation symbol attaches.
+This matters a great deal because
+these two different sentences are true in different worlds.
+We solve this problem by making a rule.
+When you encounter a negation symbol,
+it governs the smallest formula that follows it.
+So in this case, the first reading,
+"f" is not a cube and "a" is to the left of "d",
+is the meaning of this sentence.
+So, the negation symbol attaches to the smallest formula following it, namely "Cube(f)".
+JOHN: But what if we wanted to write that other sentences with the conjunction negated.
+Well, in this case, we need to enclose the conjunction in
+parentheses to indicate that the negation symbol governs the whole conjunction.
+We use the word "scope" to talk about the formula that the negation symbol negates.
+So the scope of the negation symbol in the first sentence is just the atomic formula,
+"Cube(f)", and in the second sentence,
+the scope of the negation symbol is the entire conjunction.
+DAVE: When we evaluate these two sentences,
+you'll see that they have different truth values.
+The first formula with the smaller scope for negation symbol is false.
+It says that "f" is not a cube, which is true,
+and "a" is to the left of "d", which is false.
+Since the second conjunct is false,
+so is the conjunction.
+The second formula however, is true.
+It is the negation of the conjunction that "f" is a cube and "a" is to
+the left of "d". Both of these conjuncts are false,
+therefore, so is the conjunction,
+and this makes the negation of that conjunction true.
+JOHN: So the problem of ambiguity is not limited to the scope of just negation signs.
+Consider this formula:
+"Tet(a) and Dodec(f) or LeftOf(c, a)".
+Now, this sentence also has a structural ambiguity.
+Is it the conjunction of "Tet(a)" with a disjunction?
+Or is it the disjunction of a conjunction with a formula "LeftOf(c, a)"?
+So, we can write these two alternatives as the conjunction of "Tet(a)"
+with the disjunction "Dodec(f) or LeftOf(c, a)".
+That's alternative 1.
+An alternative 2 is that it's the conjunction "Tet(a) and Dodec(f)",
+disjoined with the atomic formula "LeftOf(c, a)".
+Notice that when we try to evaluate this formula, formula 6,
+the one that we said had a structural ambiguity,
+we don't get the truth value for this sentence.
+We don't see a "T" or an "F" by the side of it,
+rather we see a star, an asterisk.
+Part of the formula turns red.
+The star in Tarski's World means the expression in the sentence slot is not well formed.
+It is not a sentence of FOL because it breaks the rules of the FOL grammar.
+The point at which the sentence changes color
+is the character at which Tarski's World was able to detect that
+something was wrong and is usually the place to
+start when you want to start fixing a problem that arises like this.
+JOHN: Now, this is an error because we didn't make
+a rule which helps us to disambiguate between the two sentences that we might mean.
+We did this in the case of negation,
+negations have the smallest scope possible.
+But because this rule is intuitive and easy to learn,
+it's easy enough to abide by.
+But there's really no easy rule to learn for conjunction and disjunction.
+We could say something like,
+make conjunctions first and then disjunctions,
+but this would treat conjunctions and disjunctions differently,
+and believe me, it would be really confusing.
+DAVE: So, in order to disambiguate this sentence,
+you have to explicitly place parentheses around
+the conjunction or around the disjunction depending on what sentence you intend.
+In the absence of parentheses,
+this sentence is ambiguous and
+Tarski's World will not be able to understand how to evaluate it.
+Notice again that each of the two unambiguous sentences have different truth values
+making it clear that it's important that we make
+the distinction between the two different readings of the sentences.
+DAVE: Now, notice interestingly that there's no similar problem with just conjunction symbols.
+If we have a conjunction symbol,
+for example, in the sentence,
+"Tet(a) and Dodec(f) and Cube(c)". Here,
+you can see that the sentence is perfectly acceptable to Tarski's World.
+This sentence is potentially ambiguous in the same way as the previous sentences were.
+Is this the conjunction of the first two atoms combined with the last,
+or is it the conjunction of the first atom with the conjunction of the other two?
+DAVE: But in this case,
+it doesn't really matter.
+The truth values of the two different sentences are guaranteed to be the same,
+whichever of these alternatives we choose.
+This is a fact that goes by the fancy name of the "associativity of conjunction",
+and we'll be returning to how to show that this is true in a future lecture.
+For now, you need to know that both conjunction and disjunction are associative.
+That means that it doesn't matter how the components of a sentence with
+more than one conjunction symbol associate
+with one another when you're computing its truth value.
+In recognition of this fact,
+Tarskis World is happy to accept sentences with multiple conjuncts.
+We've done quite a lot of work in this video.
+First, we introduced the three Boolean connectives; conjunction, disjunction,
+and negation, and described how to write
+complex sentences by combining simpler sentences using these connectives.
+JOHN: Now, each connective corresponds to a number of different words in English.
+For example, there are many ways in English to
+say that both of a pair of sentences are true.
+We have only one connective in FOL to do this job and so translating
+from English into FOL is not necessarily going to be straightforward.
+DAVE: Right. You have to think carefully about which smaller claims are present and which words,
+if any, indicate the way in which these claims are
+connected before selecting the correct FOL connective.
+JOHN: We made an important philosophical assumption in the design of our language,
+and that is that the connectives behave truth functionally.
+That is, all that's necessary to work
+out the truth of a complex sentence built using one of
+these connectives is knowledge of the truth of
+the smaller sentences and which connective is being used.
+DAVE: Now, not all connectives in English are truth-functional.
+So we're limiting the expressivity of our first-order language by making this choice.
+But we do gain a very simple theory of how sentences combine,
+and in particular, we get the ability to use a very nice tool for
+displaying the semantics of connectives, namely truth tables.
+JOHN: In the next lecture,
+we'll be introducing the "conditional" connectives,
+two more connectives which will complete the language of first order logic.
+DAVE: We'll also be introducing a second method for explaining
+the semantics of connectives based on a simple turn-taking game.
+We hope that you'll join us then.
+[MUSIC]
+End of transcript. Skip to the start.

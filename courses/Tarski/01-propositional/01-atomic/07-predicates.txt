@@ -1,0 +1,210 @@
+[MUSIC] JOHN: One of the example sentences that we gave earlier was, "Dave is tall".
+Now, assuming that we know which Dave we're referring to,
+there's still another problem that we need to attend to.
+There's no generally accepted definition of what it means to be tall.
+Some people might think that Dave is tall, not many though.
+While other people might think that he's not.
+DAVE: This is another example of the kind of ambiguity that
+will need to take care of when we are trying to be precise in our statements.
+We could solve this problem by saying instead that "Dave is over six feet in height".
+Essentially, we've replaced the vague term "is tall",
+with something that can be factually tested using measuring tape, or lasers, or something.
+Whether I'm tall, may be a matter of opinion,
+but whether I'm taller than six feet is not.
+JOHN: So again, before working in first order logic, well,
+we'll need to have very clear precise boundaries
+for any properties and relationships that we discuss.
+Tarski's World illustrates this.
+Every block in a world is definitely either a tetrahedron,
+a cube, or a dodecahedron.
+There's no ambiguity about that.
+There are no blocks whose status is in doubt.
+Similarly, the different sizes are completely precisely bounded.
+DAVE: Now, this is a consequence of the way we designed the program.
+We might have arranged for you to be able to change the sizes of
+blocks continuously like by zooming in or out on them, for example.
+Making them larger and smaller by tiny amounts.
+Some of these in-between sizes would have
+resulted in the kinds of ambiguities that we just discussed,
+and which we're trying to get rid of.
+JOHN: So it makes sense that we don't have these in-between sizes then.
+DAVE: Right. But this is a general issue.
+Whenever you're using FOL to make claims about objects,
+the properties and relations that you mention must all be clearly defined.
+Every object must either definitely have or
+definitely not have that property, no gray areas.
+JOHN: When we write sentences in FOL, for example,
+when we translate the English sentence,
+"a is a tetrahedron" into FOL.
+We use a special syntax.
+The property "is a tetrahedron" is represented by a predicate symbol.
+We almost always use words beginning with a capital letter for predicate symbols.
+DAE: In Tarski's World, we enter sentences on the right-hand side of the window.
+There are tools at the top of this panel which make entering sentences more convenient.
+To say that "a is a tetrahedron",
+we click on the button marked "Tet",
+and the button marked "a".
+The result is an expression consisting of the word
+"Tet" followed by the name "a" enclosed in parentheses.
+This is a sentence of first-order logic.
+And it says, that the object whose name is "a" has the property named by the symbol "Tet".
+And in our case, the predicate symbol "Tet" denotes
+the property of being a tetrahedron, as you might expect.
+And so this sentence means that "a" is a tetrahedron.
+JOHN: Now, you can see in this world that "a" is in fact a cube.
+So this sentence happens to be false in this world.
+We can see this by clicking on the button at the top of the window labeled "T/F".
+If we do that, then the letter "F" appears to the left of
+the sentence indicating that that sentence is false in the world.
+This is the simplest kind of sentence of first-order logic.
+We call these atomic sentences.
+This sentence is particularly simple since it refers to only one object.
+Sentences like this assert that a particular object,
+"a" in this case,
+has some property or other, being a tetrahedron in this case.
+DAVE: Other predicate symbols that represent properties of the blocks in the world
+include "Cube" and "Dodec" which are immediately below the Tet button.
+and mean exactly what you probably expect. Just to the right are the predicate symbols "Small",
+"Medium", and "Large" which again mean what you might expect.
+We say that "a" is an argument to the predicate "Tet" in this sentence, "Tet(a)".
+This is not the usual meaning of the word "argument" in English when
+people exchange harsh words and sometimes fall out with one another.
+We're introducing a technical meaning.
+The arguments are the names required by a predicate symbol to complete a sentence.
+Each of the predicates for size and shape that we just talked about: "Tet", "Cube",
+"Dodec", "Small", "Medium", and "Large" need just one argument.
+We say that these are "unary" predicates.
+JOHN: We can create a new spot for- for a sentence by
+using the "Add After" button on the toolbar.
+The rule is that each sentence has to live in its own slot.
+You know that you have a new slot since each slot has a number,
+so this is Number 2.
+After creating this slot,
+we can click on the buttons "Cube" and "a" to make the claim that "a is a cube".
+We can also add a new slot and add a sentence "Small(b)"
+by clicking this "Small" button, followed by "b".
+DAVE: Both of these sentences are true.
+You can tell Tarski's World to work out the truth of all of the sentences at
+once by clicking on the button with a lot of "T"s and "F"s,
+next to the one we used before.
+By the way, you can enter sentences by typing using the keyboard if you wish.
+We recommend using the toolbar where possible though.
+The buttons insert parentheses into
+the sentence slot and make sure they're always balanced,
+this will become more important as the sentences become more complex.
+JOHN: There are lots of other buttons for predicate symbols on the toolbar.
+Let's take a look at them.
+At the bottom of the first column is the predicate symbol, "SameShape".
+This enables us to write sentences in FOL whose meaning is like the English sentence,
+"a is the same shape as b".
+These sentences are different from the kind we just looked
+at because they involve two objects,
+and they say that the objects have some relationship with one another.
+Being a tetrahedron is a property that one object has,
+being the same shape is a relationship between two objects in general.
+The "SameShape" predicate requires two arguments.
+We say that it's a "binary" predicate symbol.
+DAVE: Let's create a new sentence slot and enter the sentence,
+"a" is the same shape as "b".
+We do this by clicking on the "SameShape" button,
+then the "a" and then "b".
+Notice that when we click "SameShape",
+the predicate symbol appears followed by a pair of parentheses and a comma between them.
+The cursor goes before the comma,
+so that when we enter the "a",
+the "a" goes into the sentence,
+and the cursor skips over the comma,
+and the "b" is placed after the comma.
+JOHN: This is the general form of atomic sentences.
+The atomic sentence starts with a predicate symbol followed by parentheses.
+Each predicate symbol needs a particular number of arguments,
+and these are written within the parentheses separated by commas.
+This is the formal structure of atomic sentences in FOL.
+Notice that it is again,
+kind of backwards from English.
+Properties and relations are expressed by capitalized words,
+while names are not capitalized.
+Properties and relations precede their arguments where in English,
+properties normally follow the object, "Dave is tall".
+And relations in English often come between the arguments,
+"Dave is taller than John".
+DAVE: There's one special case that breaks all of these rules.
+The identity predicate "=" is written
+between its arguments and it doesn't begin with a capital letter.
+And you can find the identity predicate on
+the logic panel with the names and other logic symbols.
+Its meaning is that the two arguments refer to the same object.
+Let's enter "c = d" as a new sentence.
+And we do that by clicking on the button "c" then equals sign
+then "d". The meaning of
+this sentence is that the two arguments refer to the same object.
+This sentence says the object named "c" is the same object as that named by "d",
+and it's true in this world
+JOHN: It should be obvious what almost all of the remaining predicate symbols mean.
+The predicate "LeftOf", for example,
+refers to one block being to the left of another.
+The sentence "LeftOf(d,f)" is true in this world.
+Notice that it matters which order you write the arguments to the predicate symbol.
+"LeftOf(d,f)" means that "d" is to the left of "f" and not the other way around.
+This is important since some sentences like this one have
+different truth values if the arguments are reordered.
+DAVE: There are other binary predicates concerning the relative positions of blocks.
+"LeftOf", "RightOf", "FrontOf", "BackOf",
+and also "SameRow" and "SameColumn",
+all of which have the meanings that you might expect.
+The predicates, "Larger", "Smaller",
+and "SameSize" are used to relate the sizes of objects to one another.
+Two predicate symbols which deserves special mention are "Adjoins" and "Between".
+"Adjoins" means approximately, "next to".
+In our language, two blocks "adjoin" one another,
+if they stand on squares which share a side.
+If they're on squares which don't meet or which meet at a corner,
+then the two blocks do not adjoin one another.
+In this world, these two cubes on the left adjoin one another.
+But "d" does not adjoin this nearby tetrahedron,
+since their squares only meet at a corner.
+JOHN: "Between" is a predicate which has three arguments,
+it's a "ternary" predicate.
+The sentence "Between(a, b, c)"
+is true if the block named "a" is between the blocks
+named "b" and "c". We've given "Between" a very precise meaning in Tarski's World.
+The blocks must all be in the same row, the same column,
+or the same diagonal of the checkerboard with the object
+named in the first argument being between the other two.
+This makes it easy to tell when the "Between" relation holds between blocks
+DAVE: This small cube, for example,
+is between the medium cube behind it,
+and this unnamed tetrahedron in front of it.
+All three blocks are on the same column of
+the checkerboard with the small cube in the middle.
+On the other hand, this small tetrahedron on the right
+is not between the large tetrahedron and the dodec,
+it's not in the same column as those two blocks.
+So this lecture, has concerned two main topics.
+Most important, is the way you construct
+simple claims in the language of first-order logic.
+JOHN: We build atomic sentences by combining
+a predicate symbol with the appropriate number of arguments.
+Each of which is the name of an object.
+Names pick out objects in the world and
+the predicate symbols name def- definite properties.
+DAVE: An atomic sentence is either true or false,
+depending on whether the named objects have the named
+properties or relations.
+JOHN: The second topic is the use of the Tarski's World program.
+We use Tarski's World to illustrate the features of the language of first-order logic.
+As we build more and more complex sentences of FOL,
+we'll use the program to illustrate the subtleties of the language and to
+make clear exactly what sentences written in FOL mean.
+DAVE: We encourage you to use the program to explore
+the meanings of all of the predicate symbols in the blocks world language,
+and to become completely familiar with the way that it works.
+We'll be setting weekly exercises which require the use of the program,
+so it's good to get familiar with it as soon as you can.
+JOHN: In the next lecture,
+we'll be introducing a new family of elements of FOL called "connectives".
+These will enable us to build
+more complex claims in the language. We hope you'll join us.
+DAVE: See you then.
+[MUSIC].
+End of transcript. Skip to the start.

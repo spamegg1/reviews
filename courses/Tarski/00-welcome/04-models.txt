@@ -1,0 +1,7 @@
+In 1687, Sir Isaac Newton published his three laws of motion.  These are principles that describe the ways in which objects like cars, billiard balls and planets behave when subject to forces, like being pushed, or colliding one with another.    These laws form a model of the ways in which the world behaves.  We can understand and predict what happens when two billiard balls collide by applying Newton's laws of motion.
+
+Newton was a smart guy, but it turns out that his laws are not a completely accurate model of the world.  For example, they assume that objects do not change shape when collisions happen, and (speaking from experience) that's exactly what cars do when they collide.  Newtons laws do not accurately describe these situations.  We can think of Newton's laws as an approximation to the actual behavior of objects in the world.
+
+As we mentioned the situation with FOL is similar.  The semantic theory that we will present is a model of actual behavior.  Natural language sentences and FOL sentences behave similarly, but not identically.  Just as it is important to recognize the situations in which Newton's laws do no and do not apply, it is similarly important to recognize when it is appropriate to use the semantic theory and when it is not.
+
+Can you think of other examples of models which are accurate in some, but not all respects?

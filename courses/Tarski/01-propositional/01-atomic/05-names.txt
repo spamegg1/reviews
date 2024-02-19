@@ -1,0 +1,88 @@
+[MUSIC] DAVE: Objects in Tarski's World can have names.
+In this world, this cube is named "a" and the small tetrahedron in the back is named "b".
+This tetrahedron at the front has two names;
+"d" and "c". You give an object a name by selecting it,
+and then using one of the name buttons from the toolbar.
+This name buttons are labeled "a" through "f".
+JOHN: Names are used in language to pick out objects from the world.
+Now, Tarski's World makes it very obvious how names work.
+You assign a name to an object by using the editing controls just as Dave explained,
+the block is henceforth required to wear one of those
+awful name tags that people sometimes have to wear at social events.
+DAVE: In FOL, we will adopt the convention that names are words which begin with
+a lowercase letter from the beginning of
+the alphabet, up to and including the letter "s", to be precise.
+You'll use only the names "a" through "f" in the Tarski's World application though.
+We have to make clear precise conventions like
+this to enable us to decide which sequence of
+symbols are legal sentences of FOL.
+These conventions is similar to the rules of grammar in English, but more precise.
+Similar in the sense that they serve the same function.
+But notice that our convention for names, that they begin with
+lowercase letters in FOL, is the reverse of the convention in English.
+In English, we require that proper names are capitalized.
+There are other differences between English and FOL too,
+and we're going to take a little while to think about these.
+One of the skills that you will learn in this class is how to
+translate English sentences into FOL and vice versa.
+Understanding how various parts of FOL relate to
+their natural language counterparts is critical to allow you to do this.
+JOHN: So names in logic are governed by some simple rules.
+First, not all objects have names.
+This is exactly like the situation in natural language.
+Only very special objects have names; people,
+pets, cities, places more generally.
+But most objects actually don't have names.
+It's pretty unusual to give names to tables and chairs and
+almost unheard of to give names to the oxygen molecules in a room, for example.
+DAVE: Now, some objects can have more than one name there's an example in
+this world where this tetrahedron is named both "d" and "c". Again,
+this is like natural language.
+Think of Superman and Clark Kent.
+Or, Mark Twain, and Samuel Clemens,
+or JK Rowling, and Robert Galbraith, for example.
+JOHN: There's a slight difference between
+natural language and these examples of pseudonyms though.
+By convention in English,
+we think of one of these names as the real name of the person,
+and others as alternatives.
+The real name is usually one that is legally recognized in some way.
+In FOL though, all the names have equal standing.
+There's one thing that we don't allow in
+FOL which is slightly different from natural languages.
+And that is that we insist that each name refers to exactly one object.
+That is, we cannot have a world in which two blocks both have the name "a", for example.
+DAVE: And indeed the Tarski's World program will
+prevent you from getting into such a situation.
+It's pretty easy to see why we want to have this rule.
+When I say that "a is a cube",
+we want this to be a completely unambiguous claim,
+and part of what we need to make it unambiguous is
+the ability to pick out the unique object- object in the world that "a" refers to.
+If we can't do that,
+we don't have much of a chance of deciding whether the sentence is true.
+JOHN: Now, this is actually a little different from natural languages.
+In fact, it's a lot different.
+There are many people in the world called Dave,
+for example, and even more called John.
+A sentence like "Dave is taller than John" is ambiguous because,
+it may be referring to any of these various Dave's and John's.
+In general though, we have a variety of mechanisms in natural language that
+allow us to make sure that we know who or what we're talking about in a particular use.
+We use the context, for example.
+So we know that Dave in this context probably refers to
+Dave Barker-Plummer right now because he's sitting right next to me.
+And besides, he's the only person that
+is named Dave that we all know to be in this context.
+We use family names sometimes as a way of specifying which John we're referring to.
+And sometimes we can use descriptions like John from Stanford, for example.
+DAVE: This is really the only way that the use of names in
+first-order logic differs from normal usage in English.
+We have to specify before we interpret any sentences, which name refers to which object.
+When we're using the Tarski's World application,
+we do this using the name controls to attach names to blocks.
+JOHN: Next, we have to think about making claims about objects in the world.
+To do that, we need a notion of properties and relations.
+And this will be our next topic.
+[MUSIC]
+End of transcript. Skip to the start.

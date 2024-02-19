@@ -1,0 +1,88 @@
+JOHN: We'll learn the language of first order logic in two phases.
+In the first phase, we'll introduce a piece of
+the language that we call "propositional logic".
+At the end of this first phase,
+we'll investigate the properties of this small language
+before moving on to extend it to the complete language of FOL.
+DAVE: In some ways, the two parts of the language work quite
+differently and it's worth identifying
+the smaller language of propositional logic for two reasons.
+The first is that sometimes the language of
+propositional logic is just what you need for your particular purpose.
+The language is smaller and simpler,
+and you should use this tool alone when it's appropriate.
+The second reason is that propositional logic is
+much less expressive than first-order logic.
+So one way in which we can illustrate the power of
+the full language of FOL is by pointing out what it can do,
+that propositional logic alone cannot.
+JOHN: Now, FOL is a general purpose language.
+Once you know the language,
+you can use it to express ideas about any subject matter that you care to.
+DAVE: An astronomer might use the language to describe the ways in which stars,
+planets and moons relate to one another,
+describing precisely the relations between these objects.
+And an economist might describe supply and demand curves,
+equilibrium points and so on.
+DAVE And, a mathematician might describe topoi,
+tensors and other arcane mathy things.
+The point is that first order logic is
+a general purpose tool that could be used in a large number of situations,
+but it serves the same purpose in them all.
+Namely, to make clear and unambiguous statements about whatever the topic is at hand.
+JOHN: Now, while FOL is a general purpose language in the sense mentioned,
+it's also quite limited.
+While we can talk about any subject we care to,
+the things that we can say about that subject are quite limited.
+DAVE: To begin with, we can only state facts about the situation whatever it is.
+Sentences of first order logic have to make a claim about the world.
+They have to say something that's either true or false.
+For example, we can write a sentence like "John is to the left of Dave".
+This sentence makes a claim about the world.
+It's either true or false,
+and we can determine which.
+JOHN: Perfectly good English sentences like "ouch!" or "wow!"
+Are not expressible in FOL.
+They don't make claims about the world.
+One of the things that we will be investigating extensively is how we can tell
+whether a first-order sentence is true in a particular situation.
+More generally, we might ask under
+what conditions the first-order sentence would be true.
+DAVE: Now FOL is limited in other ways.
+Even some sentences that do make claims about the world are not formalizable in FOL.
+In particular, we assume that the situations that we talk about using FOL do not change.
+The situation is the way it is, as if we've taken a snapshot,
+and this is all we can talk about.
+A sentence like "John must be to the left of
+Dave" is not expressible in FOL for this reason.
+JOHN: For related reasons, a sentence like "Dave ought to be
+to the left of John" is not expressible in FOL.
+Both of these examples use what are known as modal constructions,
+and a more complex language than FOL is needed to analyze them.
+DAVE: FOL then is a formal model of a fragment of natural language.
+It's not the final word in logical languages,
+there are many extensions to FOL.
+We focus on FOL because it forms the basis of many of these advanced languages,
+because it's simple enough to present in an introductory course,
+and because the fragment of natural language that it does model is
+sufficiently interesting to enable the discussion of many important topics.
+JOHN: Now, it's very important to remember that FOL is a model of natural language.
+In constructing an artificial language in which to express claims about the world,
+we have to make many decisions.
+Each of these decisions impacts the degree to which
+the language FOL accurately models the natural language.
+Like all models, FOL is more or less faithful to the real thing.
+When the model makes predictions that are not borne out in the real world,
+it's the model that's deficient, not the real-world.
+If we were to build a model of the Eiffel Tower and the model
+resembled say a suspension bridge with two towers,
+then we would say that the model is not very good.
+Not that there was something wrong with the Eiffel Tower.
+DAVE: Similarly, if FOL says that a sentence is true under
+certain circumstances and native speakers of the language say that it's not,
+then it's our model, FOL that has failed us.
+As we proceed with the development of the language,
+we'll try to draw your attention to these decisions and their consequences.
+After all, it's important to know not only what our formal model can do,
+we also need to know what it cannot do.
+[MUSIC]

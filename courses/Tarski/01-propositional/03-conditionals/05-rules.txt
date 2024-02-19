@@ -1,0 +1,245 @@
+JOHN: We've now completed learning the set of propositional connectives in our language.
+We have the three Boolean connectives,
+"and", "or", and "not",
+together with the conditional connectives "material implication" and "biconditional".
+DAVE: Now you enter conditional and biconditional formulas
+using the toolbar buttons in exactly the way that you would expect.
+You enter the first formula,
+hit the button for the connective and then enter the second formula
+JOHN: You need to surround a conditional and biconditional sentences in
+parentheses if you're going to then use them within other sentences,
+even if those sentences are of the same type.
+The sentence "P biconditional Q
+biconditional R" is not well formed and neither is "if P then Q then R".
+DAVE: So let's add to our collection of sentences in this file,
+the one that we made last time.
+Create a new sentence slot,
+and enter the sentence,
+"Cube(a) implies Dodec(f)". Notice that in this world,
+both the antecedent and consequent are true and so this implication evaluates as true.
+JOHN: Suppose that we want to say that this conditional sentence implies that "d is a cube".
+We need to enter "parenthesis,
+Cube(a) arrow Dodec(f),
+end of parentheses, arrow,
+Cube(d)". Surrounding the implication which is now the antecedent with
+parentheses allows us to make sure that that sentence is not ambiguous.
+DAVE: This sentence is false.
+Since the antecedent implication is true as we just saw,
+but the consequent is false.
+JOHN: Let's quickly illustrate the use of biconditionals by entering the formula
+"Smaller(b,a) if and only if FrontOf(a, b)".
+In this world, both component sentences are true and
+so this sentence should also be true.
+DAVE: We want to spend the rest of this video describing
+another way to think about the semantics of propositional logic,
+An alternative method to
+the truth table method that we use to describe the meaning of the connectives.
+It's always good to have alternative ways of thinking about the same issue.
+So we want you to know about this new way which we call, "game semantics".
+JOHN: It's particularly important to know about game semantics
+once we get to the context of full first order logic,
+the truth table method actually applies pretty well in propositional logic,
+and we don't need game semantics for the propositional part of logic.
+We'll not be able to use truth tables, however,
+for some of the new ways of building sentences that we'll get to later,
+what we call "quantifiers".
+So game semantics can be used throughout the whole of
+first-order logic but it also works in propositional logic.
+DAVE: The idea behind games semantics is that one of
+the players has a certain belief about the truth value of the sentence.
+Suppose for example, that I believe that sentence seven in this file "Tet(a),
+and the disjunction Dodec(f),
+or LeftOf(c, a)", is false.
+Now this sentence is a conjunction.
+So since I believe that it's false,
+John might ask me to justify my belief.
+He would say-
+JOHN: Well Dave, since you believe this conjunction is false,
+you must believe that one or the other of the conjuncts is false.
+Because if you don't believe that one of
+them is false and you believe them both to be true,
+and then you would believe that the conjunction is true.
+So Dave, which conjunct do you think is false?
+DAVE: Then I would reply, you're right John,
+I do believe that one of the conjuncts is false.
+Specifically, I believe that "Tet(a)" is false.
+JOHN: To which I would reply, well Dave,
+you were correct "Tet(a)" is indeed false in this world,
+because we can see that "a" is a cube. Well done.
+DAVE: Thank you John. Now, it's very
+inconvenient to have to wait for John to be available to play the game with you,
+so we have enabled the Tarski's World program to play the game too.
+When you focus on sentence seven,
+and hit the "Play Game" button on the toolbar,
+just to the right of the evaluation buttons,
+Tarski's World is ready to play.
+JOHN: So you'll notice that the first thing that Tarski's World
+does is to ask what you believe about the truth value of the main sentence.
+Remember, Dave believes that it's false,
+and so that's what we say.
+DAVE: The first thing we see is Tarski's World confirming what we said.
+So you believe that this sentence is false. We say Okay.
+Now Tarski's World is telling us an additional commitment that we now have.
+We must believe that one of these two conjunct sentences are false.
+Either "Tet(a)" is false or "Dodec(f) or LeftOf(c,a)".
+Again, we agree.
+JOHN: So now, we get to choose which of these sentences we think is false.
+Remember that's what I made Dave do.
+If we choose "Tet(a)",
+then Tarski's World will confirm our choice and
+then we'll immediately win the game as before,
+since we are indeed correct.
+DAVE: So we can use this "Reconsider" button to
+investigate what would've happened if we'd make the other choice of conjunct.
+We might believe that the conjunction is false,
+because the formula "Dode(f) or LeftOf(c,a)" is false.
+Let's see what happens.
+JOHN: Okay. Again, Tarski's World confirms the choice.
+Before we take the next step,
+let's see if we can work out what will happen next.
+We've said that we believe that this disjunction is false.
+That means that we believe that both of the disjuncts are false.
+If Tarski's World can pick a disjunct that is true,
+then it will have proved us wrong.
+DAVE: That's what will happen. Tarski's will points out the
+we're committed to believing that both disjuncts are false,
+and then Tarski's well chooses the formula "LeftOf(c,a)",
+and tries to hold us to the commitment that this formula is false.
+We immediately lose because this formula is true and not false in the world.
+JOHN: If you're playing along at home,
+the game might not have gone exactly the same way for
+you because Tarski's World might have picked the other disjunct
+"Dodec(f)". This formula too is false in a world
+and Tarski's world knows that it will win if it picks this formula too.
+If there are many ways for Tarski's World to win,
+then it will pick one of those ways randomly.
+DAVE: So notice, in this particular play of the game,
+we were correct in our original judgment that the sentence is false.
+The first time we played,
+we picked the right path and we won the game.
+If our original belief is correct,
+there is always a way to win but you have to play correctly.
+If you make the wrong choice,
+you can lose even if your original belief was correct.
+You can still say that you believe something that isn't so.
+On the other hand, if you're incorrect in your initial assessment of the formula,
+there is no way that you can win.
+Tarski's World will beat you every time.
+JOHN: That's because it never makes any mistakes.
+So we know that it's not exactly World of Warcraft,
+but it is a game and it can be helpful in getting
+straight about the meaning of the first-order formulas.
+So when you're doing an exercise and you find that
+Tarski's World is saying that the sentence has
+a truth value that you really didn't expect,
+then that's a good time to play the game,
+just to see where you were going wrong.
+DAVE: Suppose that we start this game over,
+and this time we say that we believe that the sentence is true.
+Remember that it is in fact false in this world.
+Notice that as soon as we confirm our belief,
+Tarski's World says that we must believe both of the conjuncts are true.
+We believe that the conjunction is true,
+we must therefore believe that both of the conjuncts are true.
+Unlike in the original play of the game,
+Tarski's World will pick a conjunct this time.
+It will try to pick a false conjunct to prove that we're wrong.
+JOHN: We already know that this is possible.
+Tarski's World can pick the conjunct "Tet(a)",
+which is definitely false in the world.
+And, of course, we lose.
+DAVE: We've just looked at some examples of the game in different situations.
+Let's investigate now exactly what all of the rules of the game are.
+As we've seen, the rules of the game depend on the main connective of the formula,
+and what you believe about the truth of that formula.
+Given those two things,
+either you or the program will make a choice of a new commitment for the next play.
+We can summarize this in a table.
+JOHN: So the first case is that the formula is a disjunction and you believe that it's true.
+In this case, you will play and you'll have to choose some disjunct that's true.
+That's because for the disjunction to be true,
+one of the disjuncts has to be true and you have to pick it.
+DAVE: On the other hand, if you believe that the disjunction is false,
+then you believe that all of the disjuncts are false,
+and so it would be Tarski's World's job to
+try to pick some true disjunct to prove you wrong.
+JON: Now, the case of a conjunction is just the reverse.
+If you believe that a conjunction is true,
+then you must believe that all of the conjuncts are true.
+In that case, Tarski's World just has to pick
+a single false conj- conjunct to prove you wrong,
+so it's Tarski's World's turn.
+If on the other hand you believe that a conjunction is false,
+then all you have to do is choose some false conjunct to show that you're right,
+and Tarski's World will give you the opportunity to do that.
+DAVE: And the rule for negation is very simple.
+Whatever you believe about the formula,
+you must believe the reverse about the negated part.
+If you believe "not P" is true,
+then you believe that "P" is false and vice versa.
+There's no choice to be made.
+Just remove the negation symbol and switch belief,
+and Tarski's World will do that automatically for you.
+JOHN: So that's the Boolean connectives covered.
+The case of the conditional connectives is similar.
+We know that the formula "P arrow Q",
+if P then Q is equivalent to the formula "not P or Q".
+When you're playing the game and you come across an implication,
+an "if-then" statement,
+it's replaced by the disjunction form,
+and then the commitment stays the same because the sentences are equivalent.
+And if you believe one,
+you have to believe the other.
+DAVE: Similarly, the formula "P biconditional Q",
+P double arrow Q is equivalent to the conjunction of "P arrow Q",
+and "Q arrow P". When you encounter a formula like this,
+Tarski's World will substitute the longer formula and keep the same commitment.
+JOHN: So now we've covered the rules for all of the connectives.
+In the case of conjunction and disjunction,
+there are choices to be made, sometimes by you and sometimes by Tarski's World.
+In all of the other cases, there is no choice,
+you just replace the formula by
+a different one and either switch the commitment in the case of negation,
+or keep it the same in the case of the two conditionals.
+DAVE: Once again, you can get the game rules tattooed on your body for
+handy reference or carry a card with you at all times.
+But in fact, the rules follow directly from the semantics of the connectives,
+and you should be able to reconstruct them from
+first principles if you think about what it
+means to prove that a formula of each kind has the appropriate truth values.
+JOHN: In this lecture, we've completed the set of
+connectives in the language of propositional logic,
+the truth functional part of first-order logic
+ADVE: Right. We introduced both the material conditional and the material biconditional
+connectives which corresponds to approximately two conditional statements using "if then",
+and "if and only if" in English.
+We saw how this correspondence only works for some kinds of conditional statements,
+and so we have to be sensitive to the kind of
+English conditional being used before we translate into FOL.
+JOHN: We also threw in an extra bonus connective, Falsum.
+It has a really uninteresting truth table and we rarely have cause to use it.
+It's used to represent a sentence which is always false
+DAVE: The other main point of this lecture was
+the introduction of the game semantics for first-order logic.
+If we believe that the sentence has a particular truth value,
+then we must also have certain beliefs about the component sentences.
+For example, if we believe that a conjunction is true,
+then we must believe that all of the conjuncts are true.
+JOHN: Now this observation gives rise to game semantics by
+taking a commitment or belief about a complex statement,
+and decomposing that belief into beliefs about the smaller component sentences.
+Even if we're unsure about the truth value of the large sentence,
+eventually we'll decompose the sentence into components that are small enough,
+that we'll be able to immediately see our commitments to
+those sentences are correct or possibly mistaken.
+DAVE: We recommend that you use Tarski's World extensively to make sure that you fully
+understand the semantics of the connectives and exactly how the game works.
+In the next lecture, we'll be putting our language to work and defining
+some important concepts that our language now enables us to capture precisely.
+JOHN: These include the notions of logical truth, and logical consequence.
+A sentence is a logical truth if there's
+no logically possible way that it can ever be false.
+And one sentence is a logical consequence of another if
+it's truth is guaranteed by the truth of the other sentence.
+So until then, bye bye.
+[MUSIC]

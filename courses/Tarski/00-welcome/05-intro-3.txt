@@ -1,0 +1,92 @@
+[MUSIC] JOHN: As we've said,
+FOL can be used to speak about a wide variety of situations.
+Most of the time in this course,
+we'll use the language to describe simple situations that we call "Blocks Worlds".
+In each Blocks World,
+there's a collection of blocks which are placed on the squares of a checkerboard.
+Each block has a particular size and shape.
+DAVE: Now, we are not wildly interested in Blocks Worlds.
+They are not what you'd call fascinating or exciting.
+In fact, nothing ever happens there.
+But they are a particularly good tool for teaching.
+Blocks Worlds are simple situations,
+so they're easy to understand and talk about.
+But they are complex and varied enough that we can describe
+all the subtleties of the semantics of FOL using just these worlds.
+JOHN: In fact, we think that Blocks Worlds are such a good teaching tool that we've developed
+a computer program called Tarski's World
+that enables us to create and manipulate these worlds,
+and to make claims about them in FOL.
+DAVE: The program is named after Alfred Tarski,
+a Polish-American logician who pioneered
+the semantic approach to logic that you'll learn in this course.
+JOHN: You'll be spending a lot of time using Tarski's World.
+It's quite a simple program and fun.
+And we'll provide you with instructions on how to use it,
+so there's no need to worry.
+We'll use Tarski's World to illustrate all of the main concepts that we want to describe.
+And you'll use it to complete many of the exercises that we'll set as our assignments.
+DAVE: We'll be coming back to the subject of the assignments in a little while,
+but let's talk a little bit about what you'll do with
+Tarski's World and how it will help you learn the language of First-Order Logic.
+One of the main skills that we want you to learn is how to translate
+from natural languages such as English into FOL and back again.
+This skill is key to being able to use FOL to make statements
+about your subject of interest and to understand statements written by others.
+One common kind of exercise that you will do
+involves reading an English sentence and writing it in FOL.
+While you do this, you can look at the world and see
+perhaps the English sentence is true in this world.
+One test for whether your translation is correct is that
+the FOL sentence should also be true in
+the world and this is something the program can check for you.
+JOHN: But Tarski's World enables you to learn other important skills too.
+Sometimes we'll ask you to look at a world
+and directly write sentences that are true in the world.
+Yet other exercises allow you to read sentences about the world
+and then make modifications to the world which result in the sentences being true.
+Each of these depend on an understanding of the semantics of FOL,
+but they approach the ideas from different directions to provide new perspectives.
+The program, therefore, allows you to practice
+your skills in a variety of different ways,
+and together, they allow you to develop
+a more complex and nuanced understanding of the formal language.
+DAVE: There's one more feature of this course which we think will help you to develop
+a complete understanding of the semantics of the language of First-Order Logic.
+We've developed an online assessment service which allows you to
+receive feedback on your solutions to exercises at anytime day or night.
+This service is called the "Grade Grinder".
+And the best way to think of it is that the service is like
+a teaching assistant who's available 24 hours a day, seven days a week.
+When you've completed an exercise or assignment using Tarski's World,
+you can send your work to the Grade Grinder to get feedback on how you did.
+If it's perfect, then good.
+But the report might show that some of your answers are incorrect and in what way.
+The Grade Grinder will never tell you the correct answer,
+but it should give you enough information to help you
+think about what you need to change to fix the problem.
+JOHN: And once your work is perfect,
+you can send a final copy to us and
+your score will automatically appear on the course website.
+Our past students have found that these tools are enormously helpful in
+learning the language of First-Order Logic and the ideas and concepts that we teach.
+The Grade Grinder, in particular,
+can be used to avoid getting snagged on simple issues
+that are easily resolved once an error has been pointed out.
+DAVE: For more substantial issues and questions,
+we and our team of TAs are available to
+answer questions that arise in your work on the course.
+But don't forget the most important resource of all,
+your fellow students in the course.
+By becoming part of the community of learners,
+you'll be able to take advantage of a wide range of
+perspectives on the issues and problems that we set in the course.
+When you don't understand something,
+there will be somebody in the community who can help you.
+And you can help others with things that they want to discuss.
+Details on how to access the forums and reach us
+during the course are available on the course website.
+JOHN: And in the next class,
+we'll begin our journey studying the language of First-Order Logic.
+We'll see you then. [MUSIC]
+End of transcript. Skip to the start.

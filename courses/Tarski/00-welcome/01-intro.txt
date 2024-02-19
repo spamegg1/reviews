@@ -1,0 +1,85 @@
+[MUSIC] DAVE: Hi. I'm Dave Barker-Plummer.
+JOHN: And I'm John Etchemendy.
+Welcome to the Semantics of First-order Logic.
+DAVE: We're gonna go straight down to work. Are you're ready, John?
+JOHN: I certainly am, and we hope that you're ready too.
+DAVE: We use language for many things.
+To entertain by writing novels, plays, or poetry,
+to make jokes, to convince people of political positions,
+or to describe our emotions, for example.
+One important role of language is to communicate knowledge.
+In any field of study,
+we make statements about the situations that we're concerned with,
+describe regularities that we observe,
+and eventually, build theories that explain the world and its behavior.
+JOHN: In some circumstances, it's important to be
+extremely precise about the claims that you're making so
+that you can be sure that the people with whom you're talking understand
+exactly what you intend to say, and what you do not intend to say.
+Now, while natural languages like English are very useful in
+a wide variety of situations such as those that Dave just mentioned.
+It's difficult to be precise in these languages.
+DAVE: In fact, one of the strengths of natural language is that they allow us to be ambiguous,
+to use rhetorical devices such as hyperbole and metaphor and to
+suggest ideas not strictly contained in the words that we say.
+This is part of the power and attraction of natural languages.
+But there are circumstances in which the presence of ambiguity is
+not helpful when where complete precision is required.
+JOHN: The language of mathematics,
+with its inventory of symbols and associated meanings,
+is a striking example of a language that's defined to be completely precise.
+Mathematicians examining a piece of
+mathematics can be certain that they understand exactly
+what the claims are being made and whether or not they follow one from another.
+Computer programming languages are similarly precise,
+allowing programmers to decide exactly what sequence of
+actions they want the machine to carry out with no ambiguity.
+DAVE: In this course, we'll study the language of first-order logic which is
+designed to make precise statements about any topic.
+First-order logic is one of
+the most significant and most widely applied intellectual developments
+from the 20th century.
+First-order logic grew out of work in the philosophy of
+mathematics and has grown to be a tool used in many disciplines,
+from philosophy and mathematics, to linguistics,
+psychology, computer science, and artificial intelligence.
+JOHN: But before we go on,
+we've got to describe an unfortunate fact about your instructors.
+We agree that the expression "first-order logic" is long and cumbersome,
+and when we're writing,
+we often abbreviate this as the acronym FOL.
+What we don't agree on however is how to pronounce the acronym.
+I always say F-O-L,
+spelling out the letters of the acronym.
+Dave usually says FOL,
+because there's fewer syllables.
+Now, we're sorry about this,
+but you'll just have to get used to it.
+Just like Dave is used to saying tomayto when he really wants to say tomahto.
+DAVE: Anyway, first-order logic-
+FOL.
+FOL, is the basic logical language.
+It's based on a very small number of primitive concepts,
+so it's pretty easy to learn.
+It's also very powerful.
+You can use it to express many important notions.
+FOL is clearly the right starting point for anyone who wants to understand the logic.
+You've come to the right place.
+JOHN: By "syntax", we mean the grammar of the language.
+Essentially, the syntax of a language tells you what words or symbols
+you can place next to one another to create an expression of the language.
+When we discuss the syntax of FOL,
+we'll introduce ideas like "predicate" and" individual symbols",
+"connectives" and "quantifiers", and "formulas" and "sentences".
+These are names for the pieces of the language,
+like the words" verb" and "adjective" when discussing English.
+DAVE: By "semantics", we mean how expressions in the language come to have a meaning,
+in particular, what claim a sentence makes about the world.
+When we discuss semantics,
+we'll talk about "relations" and "individuals",
+"worlds" and "models", and "satisfaction" and "truth".
+The ideas in this second group,
+semantics, are the fundamental ideas that we want you to learn in this course.
+Syntax is a necessary evil which allows us to uncover those ideas.
+[MUSIC]
+End of transcript. Skip to the start.

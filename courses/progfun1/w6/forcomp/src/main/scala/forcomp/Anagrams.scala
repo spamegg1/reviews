@@ -191,14 +191,58 @@ object Anagrams extends AnagramsInterface:
 
     helper(occurrences)
 
+  def sentenceAnagramsMemo(sentence: Sentence): List[Sentence] =           // TODO
+    val occurrences: Occurrences = sentenceOccurrences(sentence)
+    val memo = collection.mutable.Map[Occurrences, List[Occurrences]]()
+
+    def helper(occ: Occurrences): List[Sentence] = occ match
+      case Nil => List(List())
+      case _   =>
+        for
+          combo <- memo.getOrElseUpdate(occ, combinations(occ))
+          word  <- dictionaryByOccurrences.getOrElse(combo, Nil)
+          rest  <- helper(subtract(occ, combo))
+        yield
+          word :: rest
+
+    helper(occurrences)
+
+  val memo = collection.mutable.Map[Sentence, List[Sentence]]()
+  def sentenceAnagramsMemo2(sentence: Sentence): List[Sentence] =        // TODO
+    def helper(occ: Occurrences): List[Sentence] = occ match
+      case Nil => List(List())
+      case _   =>
+        for
+          combo <- combinations(occ)
+          word  <- dictionaryByOccurrences.getOrElse(combo, Nil)
+          rest  <- helper(subtract(occ, combo))
+        yield
+          word :: rest
+    memo.getOrElseUpdate(sentence, helper(sentenceOccurrences(sentence)))
+
+  val sentenceMemo = collection.mutable.Map[Sentence, List[Sentence]]()
+  def sentenceAnagramsMemo3(sentence: Sentence): List[Sentence] =
+    val comboMemo = collection.mutable.Map[Occurrences, List[Occurrences]]()
+
+    def helper(occ: Occurrences): List[Sentence] = occ match
+      case Nil => List(List())
+      case _   =>
+        for
+          combo <- comboMemo.getOrElseUpdate(occ, combinations(occ))
+          word  <- dictionaryByOccurrences.getOrElse(combo, Nil)
+          rest  <- helper(subtract(occ, combo))
+        yield
+          word :: rest
+
+    sentenceMemo.getOrElseUpdate(sentence, helper(sentenceOccurrences(sentence)))
+
 object Dictionary:
   def loadDictionary: List[String] =
-    val wordstream = Option {
-      getClass.getResourceAsStream(List("forcomp", "linuxwords.txt")
-              .mkString("/", "/", ""))
-    } getOrElse {
-      sys.error("Could not load word list, dictionary file not found")
-    }
+    val resource = List("forcomp", "linuxwords.txt").mkString("/", "/", "")
+    val wordstream =
+      Option(getClass.getResourceAsStream(resource))
+      .getOrElse(sys.error("Could not load word list, dictionary file not found"))
+
     try
       val s = Source.fromInputStream(wordstream)(Codec.UTF8)
       s.getLines().toList

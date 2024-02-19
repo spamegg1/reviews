@@ -1,0 +1,70 @@
+[MUSIC] JOHN: The last propositional
+connective in our language is the biconditional connective.
+We use the double-headed arrow symbol,
+the arrow that points both ways, for this connective
+DAVE: Now the use of this symbol is suggestive.
+It looks like a conditional arrow but going in both directions,
+and that is indeed what it means.
+When we write "P double arrow Q",
+we are saying both "if P then Q" and "if Q then
+P". We often say that "P is true if and only if Q".
+Or that "P is true just in case Q is true".
+JOHN: What does a truth table for this biconditional look like?
+The easiest way to think about this connective is that it says that
+the two component statements have the same truth value.
+A biconditional sentence "P if and only if Q" or "P double arrow Q" is
+true provided either both "P" and "Q" are true or "P" and "Q" are both false.
+What about the close relationship with conditional?
+Well, another way to think of this is saying both "P implies Q" and "Q
+implies P". In the rows in which the sentences have different truth values,
+then one of these implications is false because one of them has the antecedent
+true and the consequent false. Since one of the implications is guaranteed to be false,
+so is the conjunction of the implications and
+so in rows where the "P" and "Q" have different truth values,
+then the biconditional sentence is false.
+In the row where both sentences are true,
+then both implications are true.
+Remember implications are true in rows in which the antecedent and consequent are both true.
+JOHN: Now, we're going to return to the close relationship between the material
+conditional and the material biconditional later on in the course.
+DAVE: Now, biconditional is an interesting connective in
+English because we rarely use it explicitly.
+In fact, mathematicians and logicians are
+about the only people who are careful about their use.
+In everyday English, we almost always use a conditional expression like "if then",
+even when we intend to say the stronger claim that these two claims are equivalent
+and we rely on context to let people understand that the biconditional is intended.
+JOHN: For example, I might say,
+"If you eat your spinach,
+then you can have ice cream for dessert."
+But then I might get the reply,
+"that means I can have dessert even if I don't eat my spinach".
+After all, conditional sentences are true when the antecedent is false.
+DAVE: Right. What you really need to say at least if you're talking to
+a logical kid is that "you can have ice cream if and only if you eat spinach".
+That is, if you eat your spinach,
+you can have ice cream,
+and if you don't eat the dreaded spinach,
+then you can't have ice cream.
+JOHN: There's one more symbol on
+the logic panel in Tarski's World that you'll sometimes need to use.
+This is the symbol that looks like an upside down capital T. People sometimes
+refer to this symbol as "bottom" or in logic it's sometimes more useful to say "falsum".
+This symbol is a special atomic formula,
+a formula that's always false.
+We wouldn't have much occasion to use it in
+the class but we will mention it a few times later.
+JOHN: Well. That's all of the symbols on the first row of the logic panel in Tarski's World.
+These are the truth functional connectives,
+and the language that we have just described is called propositional logic.
+Propositional logic is a sub-language of first-order logic.
+That is, we're going to add yet more to the language
+before we complete the study of first-order logic.
+DAVE: But we're going to pause here for a while and investigate
+some properties of this smaller language before we go further.
+But before we do that though,
+let's look at writing and evaluating conditional statements using
+Tarski's World and look at another way of thinking
+about the semantics of first-order sentences.
+[MUSIC]
+End of transcript. Skip to the start.

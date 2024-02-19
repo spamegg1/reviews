@@ -1,0 +1,156 @@
+[MUSIC] DAVE: Welcome back.
+I'm Dave Barker-Plummer.
+JOHN: And I'm John Etchemendy.
+DAVE: In this lecture, we're going to talk about how we can build
+more complex claims out of simple atomic sentences.
+We do this using "connectives",
+which as you might expect,
+connect together smaller sentences into larger ones.
+JOHN: Now, in English, we have words like "and", "not",
+"however", "but", and many more,
+and thi- those are connectives in- in English.
+Now, we're gonna introduce a small collection of connectives,
+five in total, which will do the job of all of these English words.
+DAVE: Now, a very important feature of
+the connectives of first-order logic is that they are "truth functional".
+And that means that you can determine the truth of a sentence formed with a connective
+simply by knowing the truth values of
+its component parts and the connective used to connect them.
+JOHN: Now, this is a very important feature of our language.
+It removes a lot of the complexity and the ambiguity of natural languages.
+Now, natural languages don't actually always have this property.
+It also allows us to clearly present the semantics of
+connective symbols using a device called "truth tables".
+DAVE: In this lecture, we're going to introduce three of these connectives.
+We call these the "Boolean" connectives since
+they were extensively studied by George Boole,
+an English logician from the 19th century.
+JOHN: Now, connectives in general connect
+together smaller sentences and they build larger sentences.
+For example, in English, we might say,
+"Ewan is at home and Quinn is at the library."
+This is a sentence which makes a claim about the world,
+but it contains two other claims within it.
+This kind of claim is what we call a "conjunction".
+It says that both of two smaller claims are true.
+DAVE: The word "and" is a clue that this sentence is a conjunction,
+but there are in fact, lots of ways to make a conjunctive claim in English.
+We might instead use the words "but" or "however" to express the same claim.
+As we saw when we talked about atomic sentences,
+there are lots of ways to say the same thing in English,
+to make the same claim.
+And we use different formulations for other reasons such as pragmatics.
+JOHN: If I'm asked whether Ewan and Quinn are both at home, I might answer,
+"Ewan is at home,
+but Quinn is at the library," to emphasize the contrast for example.
+Or I might say,
+"Quinn is at the library; however,
+Ewan is at home," if I wanted to emphasize Quinn's location.
+DAVE: From a logical perspective though,
+these sentences all make the same claim,
+the compound claim that both smaller claims that
+Quinn is at the library and that Ewan is at home are true.
+Consequently, we'll have a single way to express conjunction in logic.
+The connective "and" which looks like a capital "A" with the horizontal bar removed.
+We'll use this in each of the cases described above.
+JOHN: This means that translation between English and FOL might be quite tricky.
+You'll have to identify words in English
+that serve to form the conjunction of two claims.
+The word "and" will not always be there,
+but it often will be.
+DAVE: And even when the word "and" does appear and signals a conjunction,
+there will often be work to do.
+In these examples, we use the word "and" to conjoin two claims,
+Ewan is at home and Quinn is at the library.
+But the word "and" can be used in English to stand between two names.
+For example, "Quinn and Ewan are at the ice cream store".
+The word "and" appears between the words "Quinn" and "Ewan",
+and these are names not claims.
+JOHN: Now, logically, this sentence makes two claims.
+We could rewrite the sentences,
+"Quinn is at the ice cream store and Ewan is at the ice cream store".
+This sentence means the same thing as the previous one.
+It's longer and it's more cumbersome,
+but it makes the same logical claims.
+Now, our logical connective "and" will always join together two sentences.
+So it will sometimes be necessary to do this kind of
+rewriting to move the use of the word "and" from
+between two names or- or nouns more generally so that joins two sentences.
+DAVE: A similar thing happens with properties in English.
+You can say that Ewan is smart and funny,
+for example, which is a way of saying that Ewan is smart and that Ewan is funny.
+In the first example,
+the two objects shared the same property,
+being at the ice cream store.
+In this example, two properties are shared by the same object.
+JOHN: But the principle is the same,
+these sentences really express the conjunction of two claims.
+When we translate into FOL,
+we have to identify the two claims,
+translate each of them,
+and then form the conjunction of the two claims.
+And this is because connectives in FOL always connect together smaller claims.
+DAVE: Conjunction can sometimes be expressed in English
+without explicitly using any word to indicate it.
+For example, in the sentence "c is a small tetrahedron."
+This sentence means that "c" is both small and a tetrahedron.
+When you express it this way,
+the word "and" reappears and it becomes obvious that this is a conjunction in disguise.
+JOHN: So again, you have to be careful to identify the simplest possible claims and to
+rephrase the sentence to make these
+explicit before attempting to translate any sentence into FOL.
+DAVE: So we hope that you're beginning to get a sense of the purpose of
+developing a formal language for expressing claims.
+We haven't really begun to scratch the surface yet,
+but you can see that English and natural languages in general are very complicated.
+There are lots of alternative ways to say things and we choose
+among them any number of ways to do with convenience,
+or focus, or just variety.
+The language of FOL removes a lot of this complexity,
+allowing us to focus on the claims that sentences make,
+but it does make translating between English and FOL quite difficult.
+It's one of the important skills that you'll learn in this course.
+JOHN: There's one other aspect of conjunction in
+English that we want to draw your attention to.
+Consider the two sentences,
+"Ewan fell asleep and Quinn went home."
+And, "Quinn went home and Ewan fell asleep."
+Now, these two sentences don't really mean the same thing in English.
+The word "and" has a temporal component in these sentences.
+In the first, you have the suggestion that first,
+Ewan fell asleep and then later, Quinn went home.
+But in the second case,
+first Quinn went home,
+and then Ewan went to sleep.
+The order of the claims in the conjunction is
+significant in English to the meaning of the sentence.
+These two sentences are true in different circumstances.
+DAVE: In logic, we're going to analyze all sentences as making claims about the world,
+and we're going to analyze conjunctions as being
+true if both of the claims that are conjoined are true.
+In fact, our language of first order logic has the property that we will treat
+all of the propositional connectives as being "truth functional".
+JOHN: Now, this is a very important idea that
+makes our language a lot simpler than it might otherwise be.
+We use connectives to connect smaller claims together to make larger ones.
+The idea of truth functionality is that we can determine the truth of
+the larger claim by considering only the
+connective and the truth of the smaller claims that it connects.
+Specifically, in this, in the case of conjunction,
+a conjunction will be true only if both of the smaller claims,
+the conjuncts, are true.
+It'll be false if either of the conjuncts are false.
+DAVE: And this means that these two sentences about Ewan
+falling asleep and Quinn going home will be considered equivalent.
+They'll be true in situations in which Ewan did
+fall asleep and in which Quinn did go home,
+and false in any other situation.
+We do not take into account the order in which things happen.
+The only thing we can take into account when we work out the truth value of
+a truth-functional conjunction are the truth values of the conjuncts,
+and the fact that this is a conjunction.
+JOHN: Now, that's what it means for a propositional connectives to be truth functional.
+This is an assumption that we make in designing our language,
+which makes a lot of things much simpler than they would be if we
+tried to deal with the full richness of the English language.
+[MUSIC]

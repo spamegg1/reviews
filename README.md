@@ -24,6 +24,8 @@ Updated June 2023 (Kotlin for Java Developers)
 
 Updated November 2023 (C for Everyone)
 
+Updated February 2024 (Semantics of First Order Logic)
+
 - [Learning tips](#tips)
 - [Harvard's CS50 (first half)](#cs50)
 - [CS50, second half, Final Project](#cs50-2)
@@ -60,6 +62,7 @@ Updated November 2023 (C for Everyone)
 - [Effective Programming in Scala](#eff)
 - [Kotlin for Java Developers](#kotlin)
 - [C for Everyone (non-review)](#c4e)
+- [Semantics of First Order Logic](#tarski)
 
 ### <a name="tips"></a> Learning tips
 
@@ -71,43 +74,43 @@ Updated November 2023 (C for Everyone)
 
 #### Hitting the wall of meta-knowledge
 
-- Most people (not everyone) can do a decent amount of math / CS (not all of it), but usually proper instruction and proper thinking habits / patterns are missing. 
-- "I'm just bad at it" is not a good explanation. 
+- Most people (not everyone) can do a decent amount of math / CS (not all of it), but usually proper instruction and proper thinking habits / patterns are missing.
+- "I'm just bad at it" is not a good explanation.
 
-  - I've had students who were terrible, and then became very good within 1-2 months. 
+  - I've had students who were terrible, and then became very good within 1-2 months.
     - Because some ideas started to click in their minds.
   - They were able to identify what their issue was, probably subconsciously.
-- There is something I'd like to call ***"hitting the wall of meta-knowledge"***: 
+- There is something I'd like to call ***"hitting the wall of meta-knowledge"***:
 
   - you're "bad at it", but repetition / exercise does not help much, and
   - you don't know the reason or what you're lacking, and
-  - you don't know where / how to learn it. 
+  - you don't know where / how to learn it.
   - Or, you are able to "get through" the problems, but it *feels like* you're not really getting it, or don't know *why* what you're doing is correct.
   - You don't know *what it is that you don't know*, hence the name *"meta-knowledge"*.
-    - It is not necessarily something *explicit* like a topic or subject that you are missing. 
+    - It is not necessarily something *explicit* like a topic or subject that you are missing.
     - It's more often something *implicit*, like a thinking pattern, connection, idea.
   - I've seen people who skyrocketed once a good teacher solved this issue for them.
-  - I've also seen the opposite unfortunately: 
-    - some kept studying, struggling over and over for a long time without getting better. 
-    - They couldn't climb over the wall of meta-knowledge. 
-    - They would solve one problem with help, but get stuck on another problem right after. 
+  - I've also seen the opposite unfortunately:
+    - some kept studying, struggling over and over for a long time without getting better.
+    - They couldn't climb over the wall of meta-knowledge.
+    - They would solve one problem with help, but get stuck on another problem right after.
     - They couldn't abstract or generalize the problem solving methods.
 
 #### Implicit knowledge and meta-knowledge deadlock
 
 - The above goes into [*tacit, or implicit knowledge*](https://www.youtube.com/watch?v=jRc67mW1LKI).
 
-  - Even most teachers don't know how to teach it. 
+  - Even most teachers don't know how to teach it.
 
     - They "get it" but they don't know *why* they get it and their students don't.
     - The general belief is that, with lots of practice, you'll eventually connect the dots.
-      - Like walking through a very light, gentle rain and eventually getting soaked without even realizing it, 
+      - Like walking through a very light, gentle rain and eventually getting soaked without even realizing it,
       - also known as *learning by osmosis*.
 
   - This is the *"expert blindness"* mentioned in the video linked above.
 
     - The student and the teacher are stuck in a ***meta-knowledge deadlock:***
-      - The students *do not know what it is they don't know*, 
+      - The students *do not know what it is they don't know*,
       - and the teacher does not know what the students are missing either.
 
   - Some examples:
@@ -117,9 +120,9 @@ Updated November 2023 (C for Everyone)
       - It's not really instinctual; logical / mechanical / symbolic / abstract thinking is not very natural for human beings in general.
       - But this shows that even the best teachers believe that it's instinctive and that not much can be done.
 
-    - Math for CS prof Albert Meyer could not figure out why 20% of his students were struggling with induction: 
+    - Math for CS prof Albert Meyer could not figure out why 20% of his students were struggling with induction:
 
-      - The reason was the implicit use of Modus Ponens, students told him "it feels like circular reasoning". 
+      - The reason was the implicit use of Modus Ponens, students told him "it feels like circular reasoning".
         - The course does not teach any deductive calculus. So the students are missing the underlying ideas, which are *implicitly assumed*.
       - But instead he decided to put proofs by contradiction via the Well-Ordering Principle ahead of induction in the course to solve students' issues with induction, which did not help.
       - Came to a false conclusion "20% of students just can't get it no matter what."
@@ -131,20 +134,20 @@ Updated November 2023 (C for Everyone)
   - Stop drilling problems and look into studying the foundations!
     - Look beyond the surface level technical details, look for the reasoning patterns.
   - Use ***EMPATHY!*** Like so:
-    - Adopt a *teacher mentality* (below), try explaining it to someone else who is less knowledgeable than you. 
+    - Adopt a *teacher mentality* (below), try explaining it to someone else who is less knowledgeable than you.
       - Or a rubber ducky.
       - *"Explain like I'm five".*
-    - If you can't teach it, you don't understand it well enough. 
+    - If you can't teach it, you don't understand it well enough.
     - Anticipate the ways they won't get it, assume they are missing the mental patterns you (subconsciously) have.
   - Even when you get it right, remain unsatisfied.
     - Think deeply about *why* it was right, *how* it could be wrong, whether it generalizes.
   - When you don't get it right, try to identify the underlying idea or concept that you're not getting.
-  
+
 
 #### Mental habits
 
-- Split your mind into two people: teacher and student. 
-- Assume the teacher's role and explain what you learned to the student. 
+- Split your mind into two people: teacher and student.
+- Assume the teacher's role and explain what you learned to the student.
 - You can practice this anywhere, anytime (on the bus, in the shower, when you're exercising, etc.)
 - It's a bit like talking to yourself, but instead of going crazy you get smarter.
 
@@ -167,7 +170,7 @@ Updated November 2023 (C for Everyone)
      - You will *always* be missing out, always and forever.
      - There are way too many resources out there, which leads to the paradox of choice, and choice paralysis.
      - Perfect is the enemy of good! "Good enough" is almost always the best option. *Satisficers* are almost always happier than *optimizers.*
-     
+
 - Don't worry about time. Don't take the provided "time estimates" seriously, they don't mean anything. They are usually huge underestimations or huge overestimations.
 - Don't measure your success or failure in terms of time ("this one problem took me X hours/days to do!"), time often is a poor measurement of difficulty (one tiny piece of missing knowledge can cause days/months of getting stuck, gaining that piece can solve a huge problem instantly).
 - Measure it in terms of which concepts/ideas gave you an easy/hard time, what pieces of knowledge you gained or you were missing, how well and properly you handled the problems, how high/low was the complexity, whether you did it with solid understanding or not. Be metacognitive!
@@ -390,7 +393,7 @@ After you watch that, you might have better appreciation for Lambdas. Then, Rack
           slots)]))
 ```
 
-**Yet another thought (September 2023):** This course gives students the very strong impression of being needlessly slow, boring, difficult. (They don't see the point of some things, they want to rush through it, use other languages / tools, etc.) Learning experts [here](https://youtu.be/oxZzoVp5jmI?t=677) mention that such slow, difficult ways of instruction are very good for *long term* retention and transfer of knowledge to other areas. 
+**Yet another thought (September 2023):** This course gives students the very strong impression of being needlessly slow, boring, difficult. (They don't see the point of some things, they want to rush through it, use other languages / tools, etc.) Learning experts [here](https://youtu.be/oxZzoVp5jmI?t=677) mention that such slow, difficult ways of instruction are very good for *long term* retention and transfer of knowledge to other areas.
 
 *Basically, the way the human brain works is the opposite of what we PERCEIVE or FEEL to be "good learning".* It's another one of those awful ironies in human life. Slow and difficult is much better! (in the long term), but the software world is absolutely obsessed with speed, then forgetting / abandoning, and recreating from scratch. (The software world is like that fish from [Finding Nemo](https://www.youtube.com/watch?v=tESffhWs8l0) that has short term memory loss.) That's why so much software (years of work, millions of dollars / man hours) goes unmaintained, abandoned, forgotten, and new ones are constantly recreated over and over. I wonder what a software company that focused on *maintaining humans, not code* would look like?
 
@@ -1095,8 +1098,30 @@ Part 1 of a 4-part specialization on C and C++.
 
 It has a very rough start. There are no instructions given for installing and setting up the Tools. Just mentions `gcc` and that's it. But actually, getting a C compiler on Windows for example can be very difficult! You have to know about MinGW and get Bash-like terminal toolchain installed. I think Windows users would be screwed here, not knowing what to do at all. Then the first code example is shown on a pure white Terminal window in `vi` on Mac, with no syntax highlighting. Super rough. The prof is old-school indeed. How hard is it to just show some of the installation, and maybe use VS Code with the C/C++ extension? It's so easy... come on man, make some effort. He mentions Microsoft Word, then Notepad... :man_facepalming:
 
-After that, there is no file provided for the code in the videos either (and it specifically says *file included* :rofl:). So we have to pause the video, and type the code manually. The very first time coding in C, and nothing in the code is explained. Prof begins with an already existing code file, then modifies it. There is `scanf` with referencing operator `&` and `printf` with `%` formatting and newline characters `\n` going on, how is a beginner supposed to know or understand any of that? He deliberately makes some mistakes, then looks at some very confusing compiler error messages. (Compare this to the CS 50 approach, where they wrote a whole library to fix some of these basic issues and give friendly compiler errors.) Making a mistake can be good pedagogy but not like this. He pulls up some Wikipedia pages for Dennis Ritchie and just reads from it, followed by some horrible hand written slides. 
+After that, there is no file provided for the code in the videos either (and it specifically says *file included* :rofl:). So we have to pause the video, and type the code manually. The very first time coding in C, and nothing in the code is explained. Prof begins with an already existing code file, then modifies it. There is `scanf` with referencing operator `&` and `printf` with `%` formatting and newline characters `\n` going on, how is a beginner supposed to know or understand any of that? He deliberately makes some mistakes, then looks at some very confusing compiler error messages. (Compare this to the CS 50 approach, where they wrote a whole library to fix some of these basic issues and give friendly compiler errors.) Making a mistake can be good pedagogy but not like this. He pulls up some Wikipedia pages for Dennis Ritchie and just reads from it, followed by some horrible hand written slides.
 
 The whole thing has a very low effort, casual, unprofessional feel to it. Sorry I could not continue this. As a fellow educator I felt disgusted. Maybe it gets better later? No... I looked at the following weeks, it's all the same, or worse. Basic syntax is explained only on Week 2. Functions are used a lot but only explained on Week 4. `extern, const, auto` poorly explained in an off-hand sentence or two. You still have to pause the videos to type a lot of code, "file included" is a lie. The code is not even properly indented, linted or spaced. At least he mentions Dijkstra's mantra "`goto` should be avoided". Also, even the peer-graded assignments require payment or free trial (credit card) to unlock. *Really?* Come on Coursera... :angry:
 
 *Spam's recommendation:* Not good. Not recommended. (To be fair, this is not a review.)
+
+### <a name="tarski"></a> Semantics of First Order Logic
+
+https://www.edx.org/learn/logic/stanford-university-semantics-of-first-order-logic
+
+Finally a *good* logic course! Shockingly it's again from Stanford! But it's actually made by people from CSLI (Center for the Study of Language and Information). Somehow *these* Stanford logic people are not connected to *those* Stanford logic people... These put out some actually quality textbooks with online components, unlike those. There are two instructors, "John and Dave, the logic guys", who wrote the book and made the course together, they keep interacting back and forth in the videos, highly conversational style, very nice.
+
+The course uses a book named Tarski's world (less of a textbook, more of an exercise book) and an online tool with the same name (which evolved from a desktop app from 1990's). They created a dedicated website named GradeGrinder to go with their textbooks (this is not the only one). These are all outside of edX on an external site. Submission to the grader is not possible without paying. The tool uses files but they cannot be downloaded from / uploaded to the website. Thankfully all assignment files are included in the browser.
+
+There are four weeks. Weeks 1 & 2 are on Propositional Logic, then weeks 3 & 4 are on First Order Logic. Very basic stuff explained *properly and slowly*: connectives, truth tables, tautologies, equivalences, and eventually quantifiers, validity and so on. They *do* cover the idea of presenting proofs as a two-player game, which is great. The game is actually built into the software too! So you can play it "against the computer."
+
+You can open world files that are available, or create worlds and save them in your account. They look like this:
+
+![tarski-world](./courses/Tarski/tarski.png)
+
+The software is OK, it was clearly made in the 1990's for the Macintosh desktops, and then ported to Javascript for browsers later. These worlds include some basic relations to get you thinking: objects arranged on a grid have relations such as "... is to the left of ...", "... is a cube", "... is blue", etc. The assignments are easy and fun: drag the objects to the correct locations to satisfy given statements.
+
+Of couse the course stops short of "real" logic such as syntactic proofs, or quantifiers ranging over an infinite set, or deeply nested quantifiers, or stuff like that. I like that they keep it super simple and it's old school. This is the right approach, whereas the other Stanford course went way too far into advanced abstract ideas. Moreover this course is about semantics, tying logic into actual meaning / interpretation, whereas the other course was almost purely syntactic. *Semantics has to come first.*
+
+One minor complaint is that some of the handwritten parts in the videos are too small and difficult to read.
+
+*Spam's recommendation:* Very nice! Finally a decent logic course. Take it, it's fairly short; but you have to finish it *very quickly* within 1 month, since you lose all audit access. Good thing it's short. You'll still have to learn symbolic formal proofs elsewhere, but this is the right starting point on your logic journey. (I'd like to recreate elements of this with [Doodle](https://github.com/creativescala/doodle/) in Scala for my own curriculum one day.)

@@ -56,7 +56,7 @@ object StackOverflow extends StackOverflow:
     val grouped = groupedPostings(raw)
     val scored  = scoredPostings(grouped)
     val vectors = vectorPostings(scored)
-//    assert(vectors.count() == 1042132,
+// assert(vectors.count() == 1042132,
 //      "Incorrect number of vectors: " + vectors.count())
 
     val means   = kmeans(sampleVectors(vectors), vectors, debug = true)
@@ -72,7 +72,7 @@ class StackOverflow extends StackOverflowInterface with Serializable:
       "JavaScript", "Java", "PHP", "Python", "C#", "C++", "Ruby", "CSS",
       "Objective-C", "Perl", "Scala", "Haskell", "MATLAB", "Clojure", "Groovy")
 
-  /** K-means parameter: How "far apart" languages should be 
+  /** K-means parameter: How "far apart" languages should be
     * for the kmeans algorithm? */
   def langSpread = 50000
   assert(langSpread > 0,
