@@ -1,0 +1,131 @@
+DAVE: We're going to spend this section of the lecture making sure that
+the relationship between logical truth and tautologies
+is clear and then we're also going to introduce
+another class of sentences that we call "Tarski's World truths".
+Sentences that are true in every Tarski's World.
+We're going to investigate how these sentences too fit into our picture.
+JOHN: We're going to draw a diagram to represent
+the relationship between tautology and logical truth.
+We start by drawing a circle to represent the set of logical truths.
+We've drawn this circle with a fuzzy outline to represent
+the fact that we don't have a precise definition of the set of logical truths.
+Some sentences, logical truths,
+live inside this circle.
+Sentences which are not logical truths live outside the circle.
+DAVE: Now, let's extend this diagram to indicate the set of tautologies.
+Remember that if a sentence is a tautology,
+then it's definitely a logical truth.
+So a circle representing the tautologies must be
+completely inside the circle of logical truths.
+But since there are some logical truths that are not tautologies,
+then the circles are not the same.
+The two ideas do not mean the same thing.
+Notice, that the set of tautologies is precisely defined
+so this circle has a nice, clean, sharp edge.
+JOHN: To be sure that we understand the relationship between these circles,
+let's place some sentences in the diagram in the appropriate positions.
+So let's start with the sentence "(not B and either not A or B) implies not A".
+This was the first sentence that we used to demonstrate the truth table method,
+and this sentence if you recall is,
+in fact, a tautology.
+DAVE: So we can place this sentence in the diagram inside the circle for tautologies.
+Notice, that we can immediately see that this sentence is
+also a logical truth because it's inside the circle for logical truths.
+Okay. So how about the sentence "Tet(a)"?
+This sentence is not a logical truth.
+After all, there are logically possible situations in which "a" is not a tetrahedron.
+Consequently, we'll put "Tet(a)" outside the set of logical truths.
+Notice, we also know that it's not a tautology because it's outside both circles.
+Now, let's think about the sentence, "a = a".
+This is a logical truth,
+there's no way that this sentence can be false.
+The object named by "a"is definitely the same object as the object named by "a".
+However, this is not a tautology.
+You can use the truth table test to see if you want.
+If you made a truth table for "a = a",
+you'd find that there was a row in which it was false.
+This sentence so must be placed in a circle for logical truth,
+but it's got to be outside the circle of tautologies.
+DAVE: So our diagram now displays example of
+the three kinds of sentence that this diagram represents.
+Perhaps you'd like to think of where some other sentences go.
+Place them at the appropriate places in the diagram. How about these?
+"Tet(a) or not Tet(a)",
+"Smaller(a, b) implies Larger(b, a)",
+and "Cube(a) or Dodec(a) or Tet(a)".
+Let's spend a little bit of time now thinking about another set of sentences.
+The sentences that come out true in every possible Tarski's World.
+We'll call these sentences "Tarski's World truths" or TW truths for short.
+Where do we draw the circle that contains this set of sentences?
+DAVE: That's a good question.
+Every Tarski's World situation is a logically possible situation,
+there's nothing logically suspect about imagining blocks on a checkerboard.
+In fact, we've all probably encountered situations, that are at least similar,
+in real life with chess pieces and checkers instead of blocks.
+So the set of Tarski's World situations is
+contained in the set of logically possible situations,
+and that means that every logical truth must
+be a Tarski Word truth that is, true in every possible world.
+JOHN: But world has special kinds of situations,
+so they're highly constrained compared to general logically possible situations.
+As a consequence of these additional constraints,
+there are going to be sentences that are true in
+every world, that will not be true in a less constrained situation.
+DAVE: An obvious example is the sentence "Tet(a)
+or Cube(a) or Dodec(a)".
+This sentence is true in every Tarski's World,
+but it isn't necessarily true in every possible situation.
+It won't be true in situations where "a" is a sphere or an icosahedron or
+a lamppost or fish or pterodactyl because Tarski's World's contain only blocks,
+and these blocks are constrained to be either cubes, dodecahedron, or tetrahedra.
+This is a TW truth,
+but it's not a logical truth.
+So the circle for TW truths must be outside the circle for logical truths,
+but it must contain space for sentences like
+this one that are not logical truths but are Tarski's World truths.
+JOHN: In principle, we have a method for determining whether a sentence is a TW truth.
+We can simply look at every single world,
+and evaluate the sentence in that world.
+The problem with this approach is that there's
+a very large number of possible Tarski's Worlds.
+DAVE: Yep, it turns out that there are more than 100 billion trillion different arrangements
+of blocks on the checkerboard even when you
+don't consider the different arrangements of labels.
+A billion trillion, also known as a sextillion, is 10 to
+the power 23 or one followed by 23 zeros.
+It's about the number of stars in the observable universe I'm told.
+JOHN: So I guess that's not a practical procedure.
+And even if we did know that a sentence is a TW truth,
+this doesn't actually tell us about whether it's
+a logical truth which would be more interesting thing to know.
+It's actually more interesting to know when something is not a TW truth,
+not a Tarski's World Truth because that also tells us that it's not a logical truth.
+DAVE: To show that a sentence is not a TW truth,
+you simply have to construct a single world which makes the sentence false.
+One world that falsifies the sentence is
+sufficient to show that it's not true in all worlds.
+Now, this isn't trivial,
+but there are tricks to finding such a world.
+You have to keep in mind the conditions under which each of
+the propositional connectives in the sentence result in different truth values,
+and use those to guide the search for a world.
+JOHN: For example, if your sentence is an implication,
+then you know that its antecedent must be true,
+and it's consequent false in the world that you're looking for.
+DAVE: And if the consequent is a disjunction,
+then you know that it's false,
+only if all of the disjunctions are false and so on.
+JOHN: The result of all this work is that we now have
+two different approximations to the notion of logical truth.
+The first, tautology, is based on truth tables, and it undergenerates.
+That is, some sentences that are not tautologies,
+so they're still, in fact, logical truths.
+That's because the rows of the truth table for the sentence includes
+situations that are not logically possible sometimes.
+The second, Tarski's World truth,
+TW truth is based on worlds, and it over-generates.
+That is, some sentences that are TW truths are not logical truths.
+That's because the collection of worlds excludes
+some situations that are really logically possible.
+DAVE: But finally, we can say something about logical truths using these approximations.
+[MUSIC]

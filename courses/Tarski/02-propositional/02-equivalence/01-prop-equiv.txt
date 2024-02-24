@@ -1,0 +1,260 @@
+[MUSIC] JOHN: I'm John and this is Dave.
+DAVE: I'm Dave while is John.
+JOHN: Now, many times during the previous videos,
+we've remarked that one sentence means the same thing as another sentence.
+In the previous lecture,
+we made this idea precise introducing the idea of tautological equivalence.
+DAVE: In this video, we're going to be systematic and
+introduce a collection of pairs of equivalent sentences.
+One such pair, for example,
+is "not not P" and "P". These are tautologically equivalent sentences.
+Introducing these pairs of equivalent sentences is, of course,
+useful to help us understand how different sentences relate to one another,
+and to become familiar with the sentences which are
+disguised versions of other sentences so to speak.
+DAVE: But more importantly, we can draw some conclusions
+about our language by considering these equivalences.
+There are two things that we'll do with
+this collection of equivalences that we're going to describe.
+The first is to define a set of "normal forms".
+Normal form as a kind of standard way of presenting
+a sentence and we'll show that every sentence can be presented in the standard way.
+JOHN: Now, the second thing that we'll do is demonstrate that the language of
+propositional logic is as expressive as it's possible for a language,
+based on truth-functional connectives to be.
+That is, we can keep adding truth-functional connectives if we want to,
+but doing so will not enable us to express
+a proposition that we're not already able to express.
+New connectives may be convenient,
+but they don't add to the power of the language in any me- meaningful way.
+DAVE: That's an important result.
+But before we get to it, let's begin by thinking about
+the relationships between some of the sentences in our language.
+JOHN: In a recent video, we spoke about the idea of tautological equivalence.
+Two sentences are tautologically equivalent if
+they're true in exactly the same rows of the truth table.
+This is an idea that we referred to in passing before we introduced it formally.
+For example, when we introduced the negation connective,
+we said that double negations had the effect of canceling each other out.
+What we were really saying, of course,
+is that the sentence "not not P" is tautologically equivalent to
+the sentence "P". You should check this to get some practice using the truth table method.
+This is a simple example of how the language of
+propositional logic allows us to say the same things in different ways.
+We can use the sentence "not not P" to mean exactly the same thing as
+"P". The two sentences are true in exactly the same situations.
+JOHN: In this video, we're going to look at a number of different equivalences,
+which demonstrate that there are different ways to
+say the same thing in our propositional language.
+Later, we'll extend this observation to draw
+some conclusions about the expressiveness of our language.
+But for now, we'll focus on some simple equivalences.
+We're going to classify these equivalences according
+to the connectives that they involve,
+just as a way of organizing them.
+Now, because we're lazy,
+we're going to use this double arrow has a short way
+of writing the words "is tautologically equivalent to".
+This is not a new symbol of FOL,
+rather it's a symbol of the language that we use to talk about FOL.
+It's really an abbreviation for a bunch of English words.
+You'll never see this symbol in Tarski's World or in any sentence of FOL.
+This rule of double negation concerns just the negation connective.
+If we turn our attention to the conjunction connective,
+it will probably come as no surprise that the sentence "A and
+B" is tautologically equivalent to the sentence "B and A".
+This simple fact has actually a fancy name,
+"the commutativity of conjunction".
+A binary connective is commutative if
+the order of the formulas that it contains doesn't matter.
+We trust that you can build a truth table to
+demonstrate that these two sentences are equivalent.
+Remember, build a joint truth table for both sentences,
+and then check to see that the sentences are true in exactly the same rows.
+DAVE: Another fact about conjunction is that it's "associative".
+This means that the sentences "A and parenthesis B and C close parenthesis",
+and the sentence "open parenthesis A and B close parenthesis,
+and C" are equivalent.
+The sentences just differ in the position of
+the parentheses or how the conjunctions associate with one another.
+We'll demonstrate this fact by building a truth table.
+It's slightly more interesting and demanding than the case of commutativity.
+JOHN: First, we fill in the reference columns for the three atomic sentences.
+Remember that there are going to be eight rows in this case.
+DAVE: Now, we can fill in the values for the first sentence,
+and for the second.
+JOHN: Now, when we check the truth values for the two sentences,
+we notice that the sentences are true and exactly the same rows.
+The fact that conjunction is associative justifies the decision in
+our language not to require parentheses in sentences like this.
+So recall that, you can simply write "A and B,
+and C", in the Tarski's World program with no parentheses whatsoever.
+We should also mention that the sentence "A
+and A" is tautologically equivalent to just plain "A".
+If you form with a conjunction of a formula with itself,
+you're not adding any information;
+you're just repeating yourself.
+Disjunction has these very same three properties.
+Disjunction is also commutative, associative, and idempotent.
+JOHN: Now, let's think about the ways in which disjunction and
+conjunction can interact with one another in the same sentence.
+There's an important fact about conjunction and disjunction called distribution.
+It means that these two sentences are equivalent.
+"A and parenthesis B or C" is equivalent to" parenthesis A and B end parenthesis,
+or parenthesis A and C".
+DAVE: Before we demonstrate this fact,
+let's convince ourselves if it's plausible.
+If the first sentence "A and (B or C)" is true,
+then both the sentence "A" and the disjunction "B or C" must be true.
+For the disjunction to be true,
+then one of the disjuncts,
+"B" or "C", must be true.
+So this tells us that for the whole sentence to be true,
+either "A" and the disjunct "B" are both true,
+or "A" and the disjunct "C" are both true.
+That's exactly what the second sentence says.
+JOHN: So suppose I'm not convinced,
+that was pretty quick, Dave.
+So let's build a truth table just to be
+sure that what Dave told us was actually that case.
+DAVE: Okay. We write both sentences in the target spots for a joint truth table.
+Once again, there are three atomic sentences, and we,
+therefore, have eight rows in the truth table to complete.
+Let's fill in the columns for
+the disjunction in the first sentence and then the conjunction.
+JOHN: And now we can do the second sentence,
+starting with the two conjunctions,
+we fill in those, and then completing the table for the main disjunction.
+And lo and behold,
+the sentences have exactly the same truth values in each row of the truth table.
+DAVE: An important thing to notice about this equivalence is it provides a way to
+rearrange the connectives within the sentence without changing it's truth values.
+In the first of the sentences,
+the disjunction is embedded inside the scope of the conjunction and in the second,
+the disjunction is at the top level with the conjunction symbols embedded within it.
+You may recall in math class but don't worry if you don't,
+that "a times (b plus c)" is equal to
+"(a times b) plus (a times c)". This equivalence, the logical equivalence,
+has exactly the same form as the distribution law we just discussed,
+with conjunction playing the role of multiplication,
+and disjunction playing the role of addition.
+JOHN: Now, we're going to present a few more equivalent pairs of sentences in
+the remainder of this lecture but we're not going to show any more truth tables.
+You should be sure to complete them,
+particularly if you're unsure that the pairs of sentences are equivalent.
+If it's not obvious to you,
+then do the truth table.
+The next pair of equivalent sentences is just like the one we looked at,
+except the roles of the disjunction and conjunction are reversed.
+So this one says,
+"A or (B and C)" is equivalent to "(A or B)
+and (A or C)". This allows us to take a conjunction symbol that's embedded
+within a disjunction and move it so
+the conjunction symbol is at the top level of the formula.
+DAVE: Sadly, the analogy with mathematics breaks down here.
+If you replace disjunction with
+addition and conjunction with multiplication in this equivalence,
+the resulting math fact is not true.
+JOHN: In other words it's not a fact.
+DAVE: Yes.
+JOHN: Okay, conjunction and disjunction are more similar
+to one another than addition and multiplication.
+DAVE: So we've looked at equivalences involving just negations,
+double negation, just conjunctions,
+commutativity idempotence and associativity,
+just disjunctions, also idempotence commutativity and associativity,
+and a mixture of conjunctions and disjunctions,
+and these are called the distribution rules.
+Two very important rules relate all three Boolean connectives together.
+These are called "De Morgan's Laws" after the English logician who first studied them.
+JOHN: And I guess they're important because they're called laws.
+DAVE: De Morgan. Not just a good idea,
+it's the law. [LAUGHTER]
+JOHN: Okay. So the first De Morgan's law says that these two formulas are equivalent.
+"It's not the case that (A and B)" is equivalent to "not A or not B".
+So let's think about this for a moment.
+Think about what the sentences say.
+The first says, that it's not the case that both "A" and "B" are true.
+But if that's true,
+then at least one of" "A and "B" must not be true.
+That is either "A"s not true, or "B"s not true.
+Which of course, is exactly what the second sentence says.
+DAVE: De Morgan's second law is just like the first,
+except that it has the roles of conjunction and disjunction exchanged.
+The negation of "A or B" is equivalent to the negation of "A" and the negation of "B".
+If neither "A" nor "B" is true,
+then both "A" is not true and "B" is not true.
+Remember, you should build the truth tables to check what they're telling you for
+practice with the method and because a truth table a day keeps the doctor away.
+JOHN: Or something like that.
+Anyway, so we're going to return to
+these equivalences relating the Boolean connectives in the next part of this lecture.
+But before we do that,
+let's look at equivalences involving the conditional connectives.
+DAVE: We've already encountered one important equivalence which
+relates material implication to the Boolean connectives.
+One important observation that you can make about this equivalence,
+is that there was no need to introduce the conditional connective into our language.
+Anything that we can express using the material conditional connective,
+we can express using only Boolean connectives,
+in fact, using just disjunction and negation.
+JOHN: But this isn't to say that introducing the connective was not worthwhile.
+We need our language to do two things not just
+ensure that we can express everything that we want to say,
+but also that we can do it in a natural way.
+Since there are many English language expressions that involve conditionals, "if...then...",
+"... if ..." and so forth,
+it makes sense to have a connective in our language to naturally express these ideas.
+The structure of the FOL sentence can more naturally
+reflect or match the structure of the English sentence that they translate.
+DAVE: Right. It would be quite unnatural to translate,
+"if Max is at home then Claire's at the library",
+using the sentence, "not Home(max) or Library(claire)".
+The truth conditions of these two sentences are the same,
+but it's hard to see that they are equivalent.
+And having material conditional connective allows us
+to match the structure of the English, is quite convenient.
+JOHN: Another equivalence involving conditionals is the following,
+"not if P then Q" is logically equivalent to "P and not Q".
+We've said before that the only way in which the conditional statement is false
+is if the antecedent is true and the consequent false.
+This equivalence captures that idea.
+We can demonstrate this equivalence using a new technique.
+Rather than write a truth table for the two sentences,
+we can try to rewrite the first formula into the
+second using equivalences that we've already learned.
+DAVE: For example, we know that "not P implies Q" is too logically equivalent to "not,
+not P or Q", because we know that "P arrow Q" is equivalent to "not P or Q".
+So we can transform the sentence "not P arrow Q" into the sentence "not,
+not P or Q" and preserve the truth values.
+In the next step, we push the outer negation into the disjunction,
+using one of De Morgan's laws.
+Remember De Morgan's law tells us that the negation of
+a disjunction is the conjunction of the two negated formulae,
+so in this case, the formulae "not,
+not P" and "not Q".
+And finally, we can remove the double negation to obtain the formulae we want.
+Since each of these steps is based on an equivalence,
+each of the formulae in the sequence is guaranteed to be equivalent to all of the others.
+JOHN: Our final equivalence involving material conditional is called "contraposition".
+It says that, "if P then Q" is logically equivalent to, "if not Q,
+then not P". So this equivalence says that if "Q" is true
+provided that "P" is then "Q" will not be true implies that "P" is also not true.
+If it were true, then "Q" would have to be.
+We're going to leave this as an exercise to show that these are equivalent you should use
+either a truth table or come up with a chain of equivalences to demonstrate this.
+DAVE: We don't have very much to say about material biconditional.
+We already know that there is an equivalence involving
+the biconditional and conditional connectives,
+"P if and only if Q" is equivalent to "(P implies Q) and
+(Q implies P)". But there's one more equivalence that is worth mentioning.
+It is that "P if and only if Q" is equivalent to "either P and Q,
+or not P and not Q".
+This says that if the material biconditional is true,
+then either P and Q are both true, or both false.
+And also if they have the both- both have
+the same truth value then the biconditional is true.
+JOHN: In the next part of the course,
+we're going to put these equivalences to work.
+We'll show how to manipulate formulas to make them more easily understandable.
+[MUSIC]

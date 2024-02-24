@@ -132,9 +132,12 @@ trait Huffman extends HuffmanInterface:
    * the list of code trees contains only one single tree,
    * and then return that singleton list.
    */
-  def until(done : List[CodeTree] => Boolean,
-            merge: List[CodeTree] => List[CodeTree])
-           (trees: List[CodeTree]) : List[CodeTree] =                    // TODO
+  @annotation.tailrec
+  final def until(
+    done: List[CodeTree] => Boolean,
+    merge: List[CodeTree] => List[CodeTree]
+  )(trees: List[CodeTree]
+  ): List[CodeTree] =                                                    // TODO
     if   done(trees)
     then trees
     else until(done, merge)(merge(trees))

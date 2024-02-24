@@ -1,0 +1,212 @@
+DAVE: The last topic related to propositional logic that we want to
+discuss is called "Truth Functional Completeness".
+We've already discussed the fact that
+both the conditional and biconditional connectives have
+equivalent expressions which use only the Boolean connectives.
+JOHN: Right. But as we've said,
+we think it's still worth having these expressions because they allow us to
+translate certain English sentences into FOL sentences that obviously have the same form.
+They don't add anything to the expressiveness of the language in the sense that
+any sentence that we can express using
+them can also be expressed using the Boolean language.
+DAVE: As you know, we've learned all of the propositional connectives in our language.
+And this leaves an important question.
+Are there other propositional connectives which do express
+things that can't be expressed in the language that we've designed?
+There are, after all,
+lots of English expressions that we don't have single connectives for.
+For example, "if Max is at the library then Claire is at home unless Quinn is with her".
+Maybe the three words, "if", "then", "unless",
+make a connective attaching
+three sentences that we can't express in the Boolean language.
+JOHN: So it's conceivable that there's some connective,
+and maybe it's an obscure eight place connective,
+that allows us to express a thought that we can't
+express with just the Boolean connectives.
+If there is, then our language of propositional logic would be expressively incomplete.
+DAVE: Well spoiler alert.
+It turns out that there's no such connective.
+The language of propositional logic that we've designed is "truth functionally complete".
+Any truth functional connective that we could think of,
+whether it connects to formula or eight or 93,
+can be expressed using just the Boolean connectives.
+Personally, I think this is a pretty interesting result.
+And we're going to spend this part of the lecture proving that it's true.
+JOHN: The important consequence of this result is that we do not need
+to introduce any more truth functional connectives into our language.
+We can express everything that we need to already with the ones that we have.
+Though, of course, we might still like to introduce
+new connectives for the same reason that
+we introduced the conditional connectives just for convenience and naturalness.
+There's a very important part of this claim,
+and that is that we do not need more truth functional connectives.
+This implies that if we want to increase the expressive power of our language,
+then we'll need to find a way to do that which is not truth-functional.
+If we introduce new language items then the truth of sentences built using
+them will depend on something other than
+the truth values assigned to their component parts.
+DAVE: So we're going to do exactly that in
+the next part of the course when we introduce quantifiers.
+But for now, let's focus on demonstrating the claim
+that the Boolean language is truth functionally complete.
+We need to show that for every possible truth
+functional connective there is a sentence which uses
+only the Boolean connectives which have the same truth values
+as the sentence built with this connective in every row of the truth table.
+JOHN: So we're going to demonstrate how to do this by
+considering our old friend the material conditional.
+Now, we already know that it can be expressed using the Boolean connectives,
+but we'll do it a somewhat different way.
+Now, we're going to look at each row in the truth table for the material conditional.
+In the first row both of the sentences "P" and "Q" are true.
+Well, we know that the sentence "P" and "Q" is
+true in this row of the truth table and no others.
+So I'm going to write this sentence to the right of the row.
+DAVE: Now, we're going to repeat this for the remaining rows of
+the truth table that make "P" implies "Q" true.
+In each such row,
+we're going to write a sentence that is true in that row and in only that row.
+So the next row that makes "P
+arrow Q" true is row three.
+In this row "P" is false and "Q" is true.
+The sentence "not P and Q" is true in this row and no others.
+So we write this sentence next to the row.
+Okay. In the final row of this table both "P" and "Q" are false.
+Now, "not P and not Q" is a sentence that is true in exactly this row and only this row.
+So in general, how do we get these sentences?
+Well, we form a conjunction of values for each atomic sentence.
+If the atomic formula is true in this row then we add that formula as a conjunct.
+And if the atomic sentence is false in this row,
+then we add the negation of that atom as a conjunct.
+DAVE: Now, each row that makes the connective "P implies Q" formula true,
+has a conjunction associated with it.
+The conjunction has a conjunct for each reference column.
+The conjunct is negated if the reference column contains false in a row,
+and unnegated if true.
+The conjunction is guaranteed to be true in this row of the truth table,
+and only in this row of the truth table.
+JOHN: So importantly, these sentences,
+and we'll call these the row sentences,
+contain only conjunctions and negations.
+Now, here's the next step.
+Let's write a disjunction symbol between each of the row sentences.
+The result is a disjunction of these conjunctions.
+Now, this is a sentence in Disjunctive Normal Form, DNF.
+And we know that this is a sentence that is true if any of its disjuncts are true.
+So this sentence is true in each of the three rows that have row sentences.
+That is, it's true in each of the rows that make the conditional formula true.
+DAVE: What about the rows in which the conditional sentence is false?
+Well, each of the rows sentences is only true in the row to which it's attached.
+And so every disjunct is false in a row that has the conditional formula being false.
+So this disjunction is equivalent to the material implication.
+JOHN: And look, notice that it uses
+only the Boolean connectives: negation, conjunction, and disjunction.
+So this formula is equivalent to the original,
+and it's in the Boolean language.
+DAVE: Well, so what? We already knew that
+"P arrow Q" is equivalent to a Boolean formula.
+One which is a lot simpler than this one.
+JOHN: So that's true.
+But there's really a larger point.
+Notice that the procedure we've just outlined can be
+used for any truth functional connective that you can imagine.
+And because of that we've shown that
+any truth-functional connective can be expressed in terms of the Boolean connectives.
+DAVE: Let's imagine that we have a really complicated connective;
+perhaps, one that connects four formula.
+And let's use the symbol star to represent that connective.
+Here's a complex truth table.
+I just made up the truth values in this table so don't go looking for deep meaning.
+JOHN: So now, using this truth table,
+let's follow exactly the same procedure that we did for the material conditional.
+So we first looked to where a sentence is
+true that's in the first row of the truth table.
+And in that row, all of "A", "B", "C",
+and "D", the atomic formulas, are true.
+So the row sentence for this row is going to be the conjunction "A and B and C and D".
+DAVE: The next row in which the sentence is true is the third row.
+"A" and "B" are true here.
+"C" is false, and "D" is true.
+So the row sentence for this row is "A and B,
+and not C and D".
+The next row that makes the sentence true is the sixth.
+The row sentence in this row is "A, and not B,
+and C and not D". Because in this row "A" is true,
+"B" is false, "C" is true,
+and "D" is false.
+In row eight, "A" is true and the other components are false.
+So the row sentence for this row is "A and not B,
+and not C and not D".
+There are just two more rows in which this sentence is true,
+rows 11 and 14.
+In row 11 "A" is false,
+"B" is true, "C" false, and "D" true.
+So here's the row formula.
+And in the final row sentence is "not A and not B and C and not D".
+JOHN: Okay. Now, we have all of the row sentences.
+We know that each of these row sentences are
+true in just the row in which they're attached.
+And so the disjunction of all of these sentences is a single sentence that is
+true exactly when "star A,B,C,D" is true.
+So we definitely don't need the star connective
+to add to the expressive power of our language.
+We can already say everything using the Boolean connectives.
+DAVE: And you can see that this procedure will work for
+any truth functional connective however many places that you might want to have.
+So this construction demonstrates that the Boolean connectives together have all of
+the expressive power that we could obtain from any truth functional connective.
+The only thing that we need is a truth table describing how
+the sentence is built using the connective depends on its subformula.
+And we'll always have that if the connective is truth-functional.
+JOHN: So it really was no coincidence that both the material conditional and
+the material biconditional had equivalent forms using only the Boolean connectives.
+It was bound to happen.
+DAVE: That's right. We say that the Boolean connectives, conjunction, disjunction,
+and negation are a truth functionally complete set of connectives.
+In fact, it's even better than that.
+It turns out that we don't need both conjunction and disjunction.
+This fact is a consequence of DeMorgan's laws.
+Recall that the formula "not P and Q" is equivalent to "not P or not Q".
+It's an immediate consequence of this that "P and
+Q" is equivalent to the negation of "not P or not Q".
+And this shows that we could eliminate any use of
+the conjunction symbol in favor of just disjunction and negation.
+JOHN: So if we wanted to be really minimal we could just have
+a propositional language that just has the disjunction and negation connectives.
+Now, that would make sentences very long,
+and their structure would often be very
+different from the corresponding English sentence.
+DAVE: That's right. And the other DeMorgan's law tells us that we could if we wanted to
+eliminate disjunction and use just conjunction and negation instead.
+I don't think we would really want to use either of
+these minimal languages to try to translate English sentences though.
+In fact, these minimal languages are probably more
+useful for computers than for human beings.
+JOHN: In this lecture we introduced a collection of tautological equivalences.
+These equivalences show that our language is very
+flexible providing us with many ways to say the same thing.
+DAVE: In addition to demonstrating the flexibility of the language,
+we were able to define normal forms for the language.
+Standard ways of organizing sentences.
+We introduced three normal forms and showed
+not just that every sentence has an equivalent normal form sentence,
+but also how to obtain that sentence by transforming the original.
+JOHN: We also proved another very important result
+namely that our language is truth functionally complete.
+The fact that our language has this property means that we cannot make
+the language more expressive by adding new truth-functional connectives.
+DAVE: This lecture completes the study of propositional logic.
+And I hope you understand why.
+The fact that our language of propositional logic is
+truth functionally complete means that we can't increase
+the expressive power of the language without
+introducing elements that are not truth functional.
+JOHN: And that's exactly what we're going to do in the second half of the course.
+We'll introduce new elements into our language called "quantifiers".
+These will enable us to translate new pieces of English into FOL.
+And therefore, these actually increase the expressive power of the language.
+Quantifiers therefore are obviously not truth-functional.
+DAVE: Please join us for the next lecture where we will introduce
+these new elements into our language and begin to explore this more expressive language.
+JOHN: I can't wait. [MUSIC]
+End of transcript. Skip to the start.

@@ -1,0 +1,239 @@
+[MUSIC] JOHN: In this video
+we're going to show how to manipulate sentences into equivalent forms,
+forms which are often easier to understand.
+In all of the following discussion,
+we will assume that the sentences in question contain only the Boolean connectives,
+that's, conjunction disjunction and negation.
+DAVE: We've already discussed equivalences that allow us to replace sentences
+involving the conditional connectives with
+equivalent sentences that only involves Boolean connectives.
+So if you want to apply the ideas that we're about to
+present to a formula that contains conditional connectives,
+you should first start by eliminating all of them using these equivalences.
+So we're going to focus on the collection of equivalences
+that relate to Boolean connectives to one another.
+We're particularly going to exploit the rules of distribution and DeMorgan's law.
+JOHN: It can be helpful to have standard forms for writing sentences.
+If a sentence is written in a particular way,
+it can be easier to see the conditions under which the sentence is true.
+DAVE: Math analogy alert.
+This is a polynomial.
+You may have seen such expressions in math class.
+Don't worry if you don't remember.
+If this example isn't helpful then don't worry about it.
+JOHN: So this polynomial is written in a conventional form.
+Because addition is commutative,
+we could put the terms in any order we choose.
+But mathematicians always write polynomials with the highest power of
+x in the leftmost position decreasing to the lowest power on the right.
+DAVE: The highest power tells you about the shape of the graph of the polynomial.
+So it's good to know where to locate it and
+mathematicians always write it on the leftmost position.
+And when you add polynomials you have to add terms of the same power.
+So it helps if they're in the same order.
+JOHN: So the situation is kind of similar in logic.
+But it's much easier.
+We can define standard forms which makes
+sentences easier to understand and we can give
+procedures for taking any formula and turning it
+into an equivalent formula of this standard form.
+We call these standard forms "normal forms"
+and we're going to introduce three different types right now.
+DAVE: Three! What a deal!
+We can use DeMorgan's Laws to move negation symbols around within a sentence.
+In particular, we can use these rules to take a sentence with
+a binary connective within the scope of a negation symbol and write it,
+so the negation symbols have smaller scope.
+The binary symbol switches type and ends up with the largest scope.
+JOHN: Right. So DeMorgan's laws allow us to move the negations inside of
+either conjunctions or disjunctions and then we
+change the conjunctions to a disjunction and vice versa.
+If a negation symbol has a negation symbol immediately
+in it's scope then rule of double negation allows us to remove both of them.
+DAVE: One result of these three rules is that we can rewrite any sentence involving
+only the Boolean connectives as an equivalent sentence
+where the negation symbols apply only to atomic sentences.
+We say that a sentence like this is in "negation normal form".
+It's our first of the three forms that we're going to talk about.
+This is true because if we start with a sentence that has
+a negation symbol that doesn't apply to an atom,
+it must apply to either another negation or a conjunction or a disjunction.
+If it applies to another negation that's the easiest case.
+We can remove both by using the rule of double negation.
+In the case of conjunctions and disjunctions we can use
+the appropriate De Morgan's law to reduce the scope of the negation symbol.
+JOHN: Either the sentence that results is in negation normal form or there's
+a negation in the sentence that doesn't apply to an atomic sentence.
+In which case, we can repeat this process.
+DAVE: Let's see an example of this.
+We're going to consider this sentence for no particular reason.
+JOHN: Okay. So the first thing that you should notice is that there's a negation symbol,
+two in fact, that don't apply to atomic formulas.
+Now, that means that this formula is not a negation normal form as it stands.
+I'm going to choose to focus on the outermost negation symbol The
+one at the left whose scope is the whole formula.
+You can tell that because of the parentheses.
+DAVE: The immediate sub formula of this negation symbol that we've chosen is a conjunction.
+It's the conjunction whose left conjunct is "P" and
+whose right conjunct is this quite complicated formula involving "R", "S", "Q",
+and "T". But this is a negation applied to a conjunction,
+so we can use one of DeMorgan's laws to reduce the scope of this negation symbol.
+When we do, we see that the resulting formula is a disjunction whose left-hand disjunct
+is "not P" and whose right hand disjunct is
+the negation of that complicated formula involving "R", "S", "Q", and "T".
+We remove the outer negation symbol,
+turn the conjunction into a disjunction,
+and negate both of the disjuncts.
+JOHN: So the main connective of this new formula is a disjunction,
+and that negation symbol on the far left has as
+a scope just the single formula atomic formula "P".
+DAVE: So everything to the left of the disjunction symbol is in negation normal form,
+that negation symbol now applies to an atom.
+But the other negation symbol,
+the one that applies to this complicated formula,
+the negation symbol we just introduced
+has a scope that's bigger than just an atomic sentence.
+In fact, the scope of this negation is now
+the disjunction whose first disjunct is the formula "R and not S"
+and the second disjunct is the formula "not Q and
+T". We can use the other DeMorgan's law to simplify this formula.
+We remove the negation symbol,
+change the disjunction into conjunction,
+and negate both conjuncts to obtain the formula "not P or" (just as before),
+and then the conjunction "not R and not S and not not Q and T".
+JOHN: Now there's a pretty obvious thing to do now.
+Because notice that the rule of double negation will
+allow us to remove the pair of negations that we just created.
+That is the "not not" that appears in front of the formula "Q and
+T". So that gives us the simpler formula "not P or paran.
+not R and not S and Q and T".
+DAVE: Now, there's only one negation symbol that has a compound formula in its scope.
+The one dominating the conjunction "R and not S". Once again,
+we can apply one of DeMorgan's laws to allow
+us to move that disjunction and reduce its scope.
+We obtain the formula,
+so we're going to apply it to "not R and not S". So the conjunction is going
+to turn into a disjunction and we're going to obtain "not R or not not S".
+JOHN: Then we can again use the Double Negation Law to remove the pair of
+negations that dominated "S" and our final result is this much cleaner simpler sentence.
+"Not P or both not R or S and Q and T".
+Now we know that this is the final result because
+both negation symbols in this formula dominate only an atomic formula.
+"P" and "R" in this case.
+So this formula is in negation normal form.
+DAVE: So remember, a formula is in negation normal
+form if every negation symbol applies to only an atomic formula.
+There are no negations that negate conjunctions,
+disjunctions or other negations anywhere in the formula.
+If a formula is not a negation normal form,
+it can be put into negation normal form by selecting a negation symbol,
+which is out of place, so to speak,
+and applying the relevant equivalence to reduce the scope of the negation symbol.
+Double negation is used if the negation symbol has another negation inside it and
+the relevant DeMorgan's law is used when
+the negation symbol dominates either a conjunction or a disjunction.
+JOHN: So always use the equivalences so that you reduce the scope of the negation sign,
+and then you repeat as long as there are negation symbols out of place,
+and you'll eventually obtain a formula that's in a negation normal form.
+DAVE: Now, remember, this procedure only works for
+sentences which contain only Boolean connectives.
+We have assumed that you've removed the conditional connectives before we start.
+JOHN: Well, Dave, this formula is simpler than the one that we started with,
+but I have to say that it's not that much easier to understand.
+True. It's a little better but there's more that we can do.
+We will say that a sentence is in "conjunctive normal form" if it is
+a negation normal form and
+no conjunctions symbols occur within the scope of a disjunction symbol.
+So roughly, the sentences in conjunctive normal form if it is
+a conjunction and none of the conjuncts contain further conjunction symbols.
+Because we said that the formula also has to be a negation normal form,
+each of these conjuncts must be disjunctions.
+JOHN: Since a sentence in conjunctive normal form or "CNF" is a conjunction,
+it's true only if each of its conjuncts are true.
+Notice that this formula is a disjunction,
+it definitely is not in CNF.
+The first disjunct is just a negated atom,
+but the right is this complex formula,
+which is a conjunction.
+DAVE: What we want to do is exchange the position of the disjunction and conjunction symbols.
+To put the formula in CNF,
+we need to make the top-level connective a conjunction.
+Using the rule of distribution,
+we can change this formula into an equivalent form;
+the formula ("not P or (not R or S)),
+and (not P or (Q and T))". So here
+we've used the rule of distribution which is written "A or (B and C)",
+where "A" is the formula "not P",
+"B" is the formula "not R or S",
+and "C" is the formula of "Q and T". We've applied that rule
+so that we obtain "(A or B) and (A or C)" or,
+in this case, "(not P or (not R or S)) and (not P or (Q and T))".
+JOHN: Now that looks a little worse, in fact.
+But notice that this formula is now a conjunction.
+Further, the first left conjunct of this formula has only disjunctions in it.
+Because disjunction is associative,
+we can remove the inner parenthesis and obtain "parenthesis not P or not R
+or S" and "not P or (Q and T)". Now,
+it looks a little better.
+But there's still a mixture of conjunctions and disjunctions in the second conjunct.
+The formula is not in CNF because
+that conjunction is within the scope of a disjunction symbol.
+DAVE: So we can use that very same rule again.
+This case "A" is the formula "not P",
+and "B" is the formula "Q",
+and "T" is the formula "C",
+and we're going to rewrite this formula as just talking about
+the second conjunct "(not P or Q) and (not P or T)". Now,
+this sentence is beginning to look a lot simpler,
+particularly since we can drop the parentheses.
+So we end up with the conjunction of "(not P or not R or S),
+and (not P or Q)",
+and "not P or T".
+JOHN: Now, we can see that this sentence is the conjunction of
+three things and each of these components is a disjunction.
+We can tell that this formula can only be true if each of the conjuncts is true.
+Each of these conjuncts can only be true if one of their disjuncts is true.
+So we can immediately see that if "S", "Q",
+and "T" are all true,
+for example, then this formula will be too.
+DAVE: That's because "S" is a disjunct of the first conjunction,
+"Q" is a disjunct of the second conjunct,
+and "T" is a disjunct of the third conjunct.
+If those three things are true,
+then the three disjunctions are all true,
+and therefore, so is the whole formula.
+So this is an example of what we mean when
+we say that the formula is easier to understand.
+Because the connectives are organized within the formula,
+we can more easily see the conditions under which the formula is true.
+JOHN: By now, you've probably come to expect that everything that we say about
+conjunctions we'll also say in a similar way about disjunction.
+You would not be wrong.
+The third normal form that we will describe is "Disjunctive Normal Form", DNF.
+A sentence is in disjunctive normal form if it's in a negation normal form,
+and in addition, none of
+the disjunction connectives are within the scope of a conjunction.
+DAVE: So returning to our example formula in negation normal form,
+you can see that the sentence is not in disjunctive normal form either because
+the disjunction "not R or S" is within the scope of a conjunction symbol.
+Once again, the distribution rules will come into play.
+Focusing on the formula "(not R or S) and (Q and T)",
+we can apply the distribution rule to this formula to obtain "(not
+R and Q and T) or (S and Q and T)". In context,
+the whole formula becomes "not P,
+or (not R and Q and T),
+or (S and Q and T)".
+JOHN: This formula is, in fact,
+in disjunctive normal form.
+It's the disjunction of three disjuncts,
+each of these disjuncts is a conjunction.
+Well, the first disjunct is actually a conjunction with just one conjunct.
+We can easily see that there are three ways that this formula can be true,
+one for each of the disjuncts.
+Case one is that" "P is false.
+Case two, "R" is false,
+and "Q" and "T" are both true or case three.
+"S", "Q", and "T" are all true.
+Notice that this last case is the one that we pointed out was
+easily visible from the formula in CNF.
+[MUSIC]

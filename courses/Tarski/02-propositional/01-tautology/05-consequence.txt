@@ -1,0 +1,225 @@
+[MUSIC] JOHN: We sometimes have strong intuitions,
+that whenever some pieces of information are true,
+then some other information must necessarily be true too.
+When this happens, we say that
+the information is a "logical consequence" of the given information,
+or that the information "follows from" the givens.
+We want to say that one sentence is a "logical consequence" of some others,
+if every logically possible situation in which the given sentences are true,
+also makes this other sentence true.
+So like logical truth,
+the notion of logical consequence is not particularly well-defined,
+because it too relies on the idea of a logically possible situation.
+DAVE: But just as we developed the idea of tautology as
+a precise approximation for the imprecise notion of logical truth,
+we can develop a precise approximation of
+logical consequence based on the truth table method.
+As before, we use the rows of
+the truth table as representing different logically possible situations.
+We imagine that a row of the truth table,
+represents a collection of logically possible situations.
+All of those situations in which the formula have that combination of truth values.
+By considering what happens in all possible rows of the truth table,
+we automatically consider all logically possible situations.
+JOHN: We call the approximation of logical consequence that's
+based on truth tables "tautological consequence".
+We say that a sentence is a tautological consequences of some other sentences,
+if every row of the truth table which makes those premise sentences true,
+also makes the conclusion sentence true.
+DAVE: The method for testing tautological consequence,
+has a lot in common with the method for demonstrating that a sentence is a tautology.
+The main difference between the two tests,
+is that there will be many different sentences on the target side of the truth table.
+One for each of the premise sentences,
+and another for the conclusion sentence.
+The test for consequence will involve looking at
+the rows of the truth table which make all the premise sentences true,
+and asking whether the conclusion sentence is true in all of those rows.
+JOHN: That's the basic idea,
+but illustrating this with an example is probably going to make it clearer.
+So consider the following sentences.
+First sentence, "A or B".
+Second sentence, "not A or C". Now I claim from these two sentences.
+The sentence "B or C" follows and
+indeed is a tautological consequence of those two sentences.
+DAVE: You do, do you?
+JOHN:I certainly do.
+JOHN: Now we can test this claim by building a truth table,
+with these three sentences as the target sentences.
+So now we're gonna have three target sentences.
+First we write the target sentences in three columns on the right side of the table.
+Then we identify the atomic sentences that appear in any of the formula.
+So in this case,
+there are three atomic sentences "A",
+"B" and "C". And we write these in the reference columns.
+DAVE: Oh, I remember this part.
+If there are three reference columns,
+then they'll be eight rows of the truth table,
+which exhaust the possible combinations of truth values for these atoms.
+JOHN: That's right. So next thing that we do,
+is put the different combinations of the truth values under the reference columns.
+DAVE: We work through each of the sentences in turn,
+working out the truth values of the complete sentences,
+in each of the rows of the truth table.
+It's just like we did for the tautology case except we do at multiple times.
+Three times in this case.
+One for each sentence.
+The first sentence that we consider is the sentence "A or B".
+The sentences the disjunction of two atomic formulae,
+whose values we can look up in the reference columns.
+The sentence is true in each of the rows in which either "A" or "B" is true.
+It's false therefore only in rows 7 and 8 of this truth table.
+JOHN: The next sentence is slightly more complex,
+but we can work out the truth value of the whole sentence,
+if we just first work out the truth value of the formula "not A".
+We can look up the truth values for "A" in the reference column,
+and then "not A" is going to be false,
+in any case where "A" is true.
+So that's the first four rows of this table.
+And then it will be true and all the remaining rows.
+DAVE: Now we have the information that we need
+to complete the truth value of the second sentence.
+It's the disjunction of "not A" whose value we've just worked out,
+and "C" which we can look up in the reference column.
+JOHN: The last target sentences the disjunction,
+"B or C". We can look up the values for
+the component sentences "B" and "C" in the reference columns,
+and use the rule for disjunction to complete the table.
+DAVE: Now that we have the complete table,
+we can answer the question of whether the sentence "B or C",
+is a tautological consequence of the other two sentences.
+First, we identify the rows in which the premise sentences "A or B" and "not A or C",
+written in the first two columns of the table are both true.
+JOHN: Okay. The relevant rows of the table in which those two sentences are true,
+are row one, row three,
+row five and row six.
+Now we don't consider the others,
+because in rows two and four "not A or C" is false.
+And in rows 7 and 8,
+sentence "A or B" is false.
+Now we look at the truth value of the conclusion sentence "B or C" in these rows.
+We see that this sentence is true in all four of these chosen rows.
+And that means that the conclusion sentence is in
+fact a tautological consequence of the other sentences.
+Just as I claimed.
+DAVE: You were right, John. Here's the rule one more time.
+For a sentence "S" to be a tautological consequence of some other sentences,
+it must be true whenever those other sentences are true.
+So that's why we look only at the rows making the premise sentences true.
+The claim of tautological consequence,
+only cares about what happens when the premise sentences are true.
+The other rows are irrelevant.
+If the conclusion sentence is true,
+in all of the truth table rows making the premise sentences true.
+Then the conclusion sentence is a tautological consequence of the premises.
+If it's false in any of those rows,
+then it's not a tautological consequence.
+JOHN: We can actually use the same table to answer a different question.
+Is the sentence "A or B" in target column one,
+a tautological consequences of the other two sentences.
+"not A or C" and "B or C". So how would we answer this question.
+DAVE: Well, we already have the truth table for all three sentences.
+So we don't have to rewrite it.
+All we've done is to change the roles of the sentences.
+When we ask whether "A or B" is a tautological consequences of "not A or C",
+and "B or C". We are saying that we should identify the rows of the truth table,
+which makes these two formula target sentences
+two and three true and then see if "A or B" is true in those rows.
+JOHN: So examining the table tells us that both of these sentences are true in rows one,
+three, five, six, and seven of the truth table.
+So considering these rows,
+the sentence "A or B" in a target column one is true in rows one,
+three, five and six but it is false in row seven.
+This means that the sentence "A or B" is not a tautological consequence of the other two.
+There's at least one kind of situation which is described by row seven of this table,
+in which the premises are true and the purported conclusion is false
+DAVE: Now if a sentence is a tautological consequences of some other sentences,
+then it must be a logical consequence.
+That's because, every logically possible situation must at
+least assign truth values to each of the atomic formula in the sentences.
+Therefore, that situation is represented by a row of the truth table,
+and we know if the premises are true in that row then the conclusion is true.
+JOHN: However, it's always possible that some rows of the truth table do
+not represent logically possible situations
+if we're given some- given specific sentences.
+Just as we saw in the example with tautologies,
+we may have reason to believe that situations described by a row just cannot happen.
+DAVE: And if the only rows of the truth table in
+which the premises are true and the conclusion is false,
+are these kind of impossible rows
+Then, the sentence could still be a logical consequence of the premises.
+It's just not a tautological consequence.
+Once again, we see that the truth table method
+gives us a way of confirming logical consequence.
+If the sentence is a tautological consequence,
+that it definitely is a logical consequence.
+But even if a sentence fails this test it might still be a logical consequence.
+We may just need to find a sharper test.
+JOHN: And as you might expect a corresponding notion of Tarski's World consequence is stronger than we need.
+Some sentences are Tarski's World consequences of
+others even though they are not logical consequences.
+DAVE: Right. Every world that you can build in the program in which
+the sentence "a is not a cube and a is not a dodecahedron" is true.
+Is also a world in which "a is a tetrahedron" is true.
+But logically, just because something is not a cube and not a dodecahedron,
+it doesn't mean that it must be a tetrahedron.
+It could be a frying pan or an egg.
+The situation here, is just like we saw for tautologies.
+Logical truths and TW truths.
+JOHN: There's an important connection between tautologies and tautological consequence.
+If we know that a sentence "S" is
+a tautological consequences of some premises "P1" through "PN",
+then we know that the implication whose antecedent
+is the conjunction of the premises "P1" up to "PN",
+and whose consequent is "S" is a tautology.
+DAVE: Why do we know that this is true?
+Well, think about the sentence "P1 and through
+PN implies S". Suppose that it's not a tautology.
+That is, its false in some row of the truth table.
+Since this sentence is an implication,
+the only way that it could be false is if the antecedent conjunction is true,
+and the conclusion "S" is false.
+And that requires a row of the truth table in which each
+of the sentences "P1" through "PN" is true.
+Since that makes the conjunction true.
+And in that row, "S" also has to be false.
+But "S" is a tautological consequence of those "P" formulae.
+So we know that "S" is true not false in every row that makes all of the "Pi" true.
+So there's no row of the truth table making the implication false.
+That is, the implication's a tautology.
+JOHN: So this tells us that for every tautological consequence relation between formulas,
+there's a tautology that describes this relationship in a single formula.
+There's one other connection too but this one is a little more subtle.
+If "S" is a tautology,
+then it is a tautological consequence of any sentence you choose.
+DAVE: So if I have a tautology "S",
+then "S" is a tautological consequence of "Tet(a)".
+JOHN: That's right.
+DAVE: It's a tautological consequence of "two plus two equals four".
+JOHN: That's right.
+DAVE: Is it a tautological consequences of "two plus two equals five and the sky is pink".
+JOHN: It is, Dave. Yes. It's a tautological consequences of any sentence that you may choose.
+So suppose you choose a bunch of sentences.
+Any bunch of sentences.
+And you made a truth table for those sentences and the tautology "S".
+If "S" is a tautological consequences of those sentences,
+then every row that makes the sentences true must also make "S" true.
+But since "S" is a tautology it's true in every row
+including any rows that may make the premise sentences true.
+So "S" is a tautological consequence of those sentences.
+DAVE: Well what do you know. This even works if you choose no premises whatsoever.
+One way of thinking about a tautology,
+is that it's a tautological consequences of an empty collection of premises.
+If it weren't there would have to be a row of the truth table
+making these empty premises true and the conclusion false.
+But since the conclusion's a tautology,
+there were no rows like this simply because there are
+no rows that make the conclusion false.
+JOHN: So in this segment, we've introduced a truth table notion of
+consequence which we've called tautological consequence.
+If a sentence "S" is a tautological consequences some sentences,
+then it is definitely a logical consequence of those sentences.
+But if it's not a tautological consequence,
+then it might still be a logical consequence.
+There's still hope. We may need just to take more information into account.
+[MUSIC]

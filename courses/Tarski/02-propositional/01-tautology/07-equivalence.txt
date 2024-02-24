@@ -1,0 +1,82 @@
+There's one more kind of relationship between sentences that we're going to discuss and
+that's tautological equivalence. Tautological equivalence built on the same framework that
+we used to describe tautologies and tautological consequence. If you've understood those ideas then
+nothing about tautological equivalence will be surprising. That's right, so the observation here
+is that some pairs of sentences are true in exactly the same situations. If the first of
+the pair is true and so is the second and vice versa. We say that sentences like this
+are logically equivalent. We already alluded to this idea when we said that "if P then Q" means
+the same thing as the sentence "not P or Q", and that the sentence "P if and only if Q" means the
+same thing as the conjunction "if P then Q and if Q then P". Yeah, we introduced that idea without really
+saying what we mean and now we're going to pay that debt. Just as in the case of logical truth
+and logical consequence we're going to introduce a precisely defined approximation to the idea of
+logical equivalence based on the meaning of the propositional connectives. As you might
+expect we're going to call this tautological equivalence. The precise definition is that
+two sentences are tautologically equivalent provided that the sentences have the same truth
+values whatever the truth value is assigned to their component atomic formulas, or in terms of
+truth tables they're true in exactly the same rows of their joint truth table. Now we hope
+you can predict exactly what the procedure is going to be, given the description of this idea.
+Let's make good on our promise to show that the sentences "P arrow Q", "if P and Q", and "not P or Q"
+are logically equivalent, by showing that they're tautologically equivalent. So first we write both
+sentences down as target sentences for a joint truth table. Now we identify the atomic sentences
+"P" and "Q", in this case. We write and fill the reference columns in the usual way. Someone
+should write a computer program to do this. Now we can start to fill in the values of the target sentences.
+The first column just contains the implication and this has just one connective. We can fill
+the values of this column by referring to the reference columns, and to our knowledge of the
+truth table for material implication. Remember that this sentence is only false when the antecedent
+is true and the consequent false. The values in the other target sentence are only slightly more
+complicated. There we first fill in the values for the formula "not P" reversing the values in
+the reference column for "P". And now we can fill in the truth values as a disjunction using the
+values for the negation and the reference column for "Q". In other words you just use the
+usual procedure for filling out the truth table for these two sentences. Now, the test for tautological
+equivalence is pretty obvious and pretty straightforward. We look at the truth values for
+the two sentences and we see whether they are the same in every row of the truth table. If they're
+the same in every row, either both true or both false, then these sentences are tautologically
+equivalent. If there's any row in which their truth values are different then the sentences
+are not tautologically equivalent. So these two sentences are tautologically equivalent as we
+promised, since their truth values agree in every row. And that means that these sentences are logically
+equivalent because whatever we know about logically possible situations they must assign truth values
+to the atomic sentences and consequently every logically possible situation is represented by
+a row of the truth table. The sentences have the same value in that row and therefore they have
+the same value in that situation. But just like the situation for tautology and logical truth
+if two sentences are not tautologically equivalent then they may still be logically equivalent. That's
+because there may be logical reasons that some rows of the truth table cannot occur
+based on the meanings of the atomic formulas. Now suppose that this is the only row in which
+the sentences have different truth values then the sentences are true in all of the logically
+possible situations and that makes them logically equivalent but not tautologically equivalent. We
+strongly recommend going through the procedure that we just described to decide whether we were
+correct when we said that the sentence "P if and only if Q" is tautologically equivalent to the
+conjunction "P arrow Q and Q arrow P". And here's a hint, we were. We're going to show the completed
+truth table in just a moment. Pause the video now and take a few minutes to complete it for yourself.
+So does your truth table look like this one? We hope it does. Now notice that the two sentences
+are both true in the first and fourth rows, and both false in the second and third rows. Meaning that
+these sentences are tautologically equivalent. In this lecture we've put our language of first-order
+logic to work. We defined three important ideas. Each of these ideas is an approximation to a more
+philosophical notion, but unlike the corresponding general notion these ideas are precisely defined
+and we can easily determine whether the properties hold. Now the most fundamental property is that of
+tautological consequence which is our precisely defined analogue of logical consequence. In general,
+we're interested in whether one sentence follows from, or is a logical consequence of, others. What
+this means is that we want to be sure, given that some other sentences are true, that this
+sentence is true too. This is a really important idea when building an argument for a particular
+position. Our approximation to this idea is that of tautological consequence. We use a truth table
+to work out the truths of all of the sentences in every row of the truth table and then decide
+if the consequent sentence is true in every row which makes the given sentences true. Now
+this is an approximation to the more general notion but we can learn a lot from this test.
+In particular, if the sentence is a tautological consequence of others then it must be a logical
+consequence of those sentences. Similarly we've defined the notion of tautological equivalence. Two
+sentences are tautologically equivalent if each is a tautological consequence of the other. And a
+logical truth is a sentence which is true in every row of it's truth table or if you prefer a sentence
+which is a tautological consequence of any set of sentences. Now these ideas are very powerful.
+One of the things that we should be asking if we want to evaluate an argument to see whether we
+should be convinced of its conclusion, is whether that conclusion is a logical consequence of its
+assumptions. One thing that we could try to do, is translate the argument into first-order
+logic and then use the truth table method to see whether the conclusion is a tautological
+consequence of the givens. Of course we can do this only if the sentences translate into the
+propositional language that we've discussed so far, but this is the kind of tools that the study
+of logic provides. In the next lecture we're going to look at different equivalent ways
+of expressing similar propositions. We've already seen that certain propositions can be expressed
+in many ways and we'll be more systematic about investigating these equivalent forms. This will
+lead us to two important observations about our language. The first is that it's possible to put
+sentences into equivalent standard forms, while the second is that the language that we have
+so far discussed is, in an important sense, the most expressive language that we could
+develop using truth functional connectives. We hope you'll join us for the next lecture.
+End of transcript. Skip to the start.

@@ -1,0 +1,340 @@
+[MUSIC] DAVE: Welcome back, I'm Dave.
+JOHN: I'm John.
+DAVE: So now that we've introduced an expressive fragment of our language,
+we can start to explore some of the ideas that are central to the study of logic.
+One of these central ideas is that of a "logical truth".
+A logical truth is a sentence that must be true in every possible situation.
+For something that's so easily stated,
+this is a surprisingly deep philosophical idea.
+Among the important issues that we need to resolve is,
+what counts as a possible situation.
+JOHN: Now, rather than answer that question,
+we're going to develop a theory which is designed to approximate this idea.
+In this theory, we will use the notion of
+a "tautology" to stand for the idea of a logical truth.
+By the time you finish this lecture,
+you will know how to determine whether a sentence is tautology,
+when one sentence is "tautologically equivalent" to another,
+that is true in the same circumstances,
+and when one sentence is a "tautological consequences" of another.
+JOHN: Now each of these ideas is easily explained using
+a method based on truth tables,
+and each is precise-
+a precisely defined approximation of a more fundamental imprecise philosophical idea.
+So let's get started.
+DAVE: So we have a strong intuition that some statements are necessarily true,
+that there's no logically possible way that
+the world could be organized to make the sentence false.
+We call sentences like these "logical truths",
+but sadly, we don't have a precise definition of exactly what that means.
+But we do know how to build models or approximations to this idea.
+JOHN: So one reason that we don't have a precise definition of the idea of logical truth
+is that it's not clear what kinds of situations are logically possible.
+So it's not obvious what sentences are true in all logically possible situations.
+However, we are in a position to describe one of these approximations.
+This approximation is based on the ideas of propositional logic.
+In this model of logical truth,
+we say that every row of the truth table for
+a sentence corresponds to a logically possible situation.
+DAVE: Whatever a logically possible situation is,
+it must make every atomic formula either true or false.
+So one row of the truth table corresponds to some collection of situations,
+those that give the atomic sentences the particular truth values recorded in that row.
+To make sure that we distinguished between the general notion
+of logical truth and this approximation,
+we refer to sentences that are true in every row of that truth table as "tautologies".
+JOHN: A sentence is a tautology if it's true in every row of its truth table.
+If a sentence is a tautology,
+then it must be a logical truth.
+Now, that's because every logically possible situation
+must make every atomic sentence either true or false.
+Consequently, every situation is described
+by some row of the truth table for the sentence.
+If a sentence is true in every row of its truth table,
+then it's definitely true in every logically possible situation.
+That is, it's a logical truth.
+DAVE: Tautologies are great.
+Some of my favorite sentences are tautologies
+JOHN: Well, you either love them or you don't.
+DAVE: One of the many reasons that I love tautologies is that it's really
+straightforward to tell when a sentence is a tautology.
+In fact, we're going to teach you a procedure that you can follow that will enable you
+to quickly distinguish tautologies from sentences which are not tautologies.
+JOHN: Now in fact, you already know
+almost everything that there is to know about this procedure.
+It involves using truth tables, of course.
+Let's consider a simple sentence.
+As it happens this sentence is a tautology,
+and so we expect our test to demonstrate this fact.
+DAVE: The sentence that we're gonna look at is "not B and (not A or B) implies not A".
+Notice, we're just using letters as the atomic sentences for this formula.
+Because the method that we're going to use doesn't
+consider any information about the atomic sentences,
+the method would work just as well whatever we replace "A" and "B" by,
+provided that we do so consistently.
+When we say that a sentence like this is a tautology,
+we're really saying that any sentence that you can obtain by
+substituting sentences in any language for "A" and "B" is also a tautology.
+So if you replaced all of the occurrences of "A" with "Tet(a)"
+and all of the occurrences of
+"B" with "Dodec(b)",
+the resulting sentence would also be a tautology.
+We do have to assume that "a" and "b" denote objects in the situation though.
+JOHN: So it- it's probably not immediately obvious that this formula is a tautology but it is.
+We begin our procedure by writing this formula as the target formula of a truth table
+and creating reference columns for the atomic sentences that appear in this formula.
+In this case, that's just the two atomic sentences "A" and "B".
+DAVE: Now we fill the reference columns with
+all possible combinations of the truth values for these atomic sentences.
+So far, this looks exactly like the procedure for describing
+the truths conditions for connectives that we used in earlier lectures.
+But there are a couple of differences though.
+One is that earlier,
+the sentence that appeared in the target column just involved one
+connective applied to two atomic sentences or one in the case of negation.
+As you can see from this example,
+we write the tautology that we want to test in
+the target column and there's no limit to the complexity of this sentence.
+JOHN: And that leads to the second difference from the earlier procedure,
+and that is, that there may be many columns on the reference side, not just two.
+If the target formula contains say,
+four distinct atomic sentences,
+then we would need four reference columns not just two that we have here and,
+and that we've seen in the- your- earlier examples.
+JOHN: And that has a further consequence.
+Namely, that to display all of the possible combinations of truth values in the table,
+we may need more than four rows;
+the four rows that we had before when we were describing binary connectives.
+In fact, the number of rows that we need
+doubles each time we have an additional reference column.
+For the mathematically inclined,
+you need two to the power n rows for a table with n reference columns.
+JOHN: So that is if there are two reference columns,
+then you need two squared;
+that is two times two,
+which is equal to four rows.
+If there are three reference columns though,
+then you need two cubed two to- two times two times two,
+which is equal to eight rows.
+And if there are four reference columns,
+then you need two to the fourth; that is,
+two times two times two times two,
+which is equal to 16 rows.
+DAVE: When I write one of these truth tables,
+I start by writing alternate Ts and Fs in the rightmost reference column.
+Then I move to the left.
+But in this column,
+I write two Ts followed by two Fs switching every two rows.
+If there were another reference column,
+I would write alternate truth values every four rows, four Ts,
+four Fs, four Ts.
+And for the next, I would alternate every eight rows doubling the size of the groups,
+each time you move one column to the left.
+JOHN: Now, in this current example though,
+there are only two reference columns and so there are four rows.
+Our next step is to work out the truth value of the target formula in each of these rows.
+In our procedure,
+we identify a subformula of the target sentence,
+whose value we have enough information to work out from what we already know.
+In this example, we see that "not B" is a subformula of the target sentence.
+And since the truth value of "B" is recorded in the reference column,
+we can work out what the truth value of "not B" will be in each row.
+DAVE: So we create a new column on the target side below
+the negation symbol attached to "B" and
+write the value of "not B" in each row of the table.
+Obviously, the truth value of "not B" is just the negation of
+the truth value of "B" and we've just read that
+off from the corresponding reference column.
+DAVE: Notice that, "not A or B" is also a subformula of this sentence.
+But since we haven't written down the value of "not A" yet,
+we don't have enough information to work out
+the truth value of this disjunction subformula.
+Whenever we choose a subformula to work on,
+we choose one with the truth values of its immediate subformula already known.
+JOHN: But we can fill in with truth values for "not A",
+which we can compute by looking at the reference column for
+"A" and negating the value that we find there.
+DAVE: Now, we're in a position to work out the truth values for the disjunction,
+"not A or B".
+Since we've worked out the truth value of "not A"
+and we can read off the value of "B" from the reference column,
+this is a disjunction.
+And so we write true in this column when either the value of "not
+A" is true or the value of "B" is true or both.
+JOHN: So we're almost there.
+We now have enough information to fill the column for the conjunction,
+"not B and either not A or B" since we know
+the value for "not B" and we just worked out the truth values for the disjunction.
+So we create a column under the conjunction symbol and put a T in this column,
+only if there are Ts in both of the dependent columns in this row.
+DAVE: This formula has another occurrence of "not A".
+We can use either the reference column for "A" and negate the values from there,
+or we could just copy the values from the existing "not A" column within the disjunction.
+Notice, we could have filled this column at any earlier time,
+since it depends only on the values of "A".
+In general, you might find yourself in a position
+where you have a choice of columns that can be filled in next.
+When that happens, doesn't matter which one you choose,
+the result will be the same either way.
+JOHN: Now, finally, we can fill in the truth value for the entire target sentence.
+The main connective of this formula is the implication arrow,
+and the value for this column depends on the antecedent which
+is the conjunction "not B and (not A or B)",
+and the consequent "not B".
+Remember that we write F for an implication only
+if the antecedent is true and the consequent false,
+though as it turns out.
+If you look at this, there are no rows like that.
+DAVE: Now that we've completed the truth table,
+we can take a look and see what the outcome is.
+Take a look at the column of the truth table,
+which contains the truth values for the target sentence.
+This is the column under the implication symbol.
+This sentence is true in every single row of the truth table.
+Whatever combination of truth values that the atomic sentences in the formula has,
+the target sentence is true.
+And since every logically possible situation must
+assign true or false to every one of these atomic sentences,
+then the sentence is true in every logically possible situation.
+When this happens, we say that the target sentence is a tautology.
+It's true in every row of its truth table.
+JOHN: Okay. So let's take a look at another example sentence.
+This time, let's look at one that's not a tautology.
+That'll be a good way to practice executing the procedure
+and also a way to demonstrate that there are sentences obviously,
+which are not tautologies,
+and that's important for identification of this notion as going to have any importance.
+So let's consider this formula,
+"not A and (if A then B), then not B".
+DAVE: Our procedure is going to be just as before.
+First, we write the target sentence,
+and reference columns through the atomic sentences "A" and "B".
+And then we fill in the reference columns with
+all possible combinations of truth values for these two atomic formulae.
+JOHN: So for variety, let's start this time by filling in the column for the formula, "not B".
+We just reverse the values in the reference column for "B".
+DAVE: I vote that we fill the column for the implication "A implies B" now.
+This column just depends on the values for "A" and "B",
+and gets an F only if the value for "A" is true,
+and the value for "B" is false.
+JOHN: Okay. Now, I'm going to do the column for "not A",
+which of course contains just the negation of the values from the reference column for "A".
+DAVE: There are just two more columns to go.
+The main target sentence depends on both its antecedent,
+the conjunction, and the conclusion "not B".
+So it looks like we need to fill the column for the conjunction first.
+Of course, the values in this column is true only if both conjuncts have the value true.
+JOHN: And now, for the moment of truth,
+which is when we fill in the column for the main connective.
+Notice that we have an F in the third row of the table.
+The fact that this sentence is false in this row of
+the truth table means that the sentence is not a tautology.
+DAVE: Now, it's important to notice that this does not mean that
+this sentence is not a logical truth, it still might be.
+For some choices of atomic formula,
+this row may not actually represent a real logical possibility.
+The only things that we take into account when we consider whether
+a sentence is a tautology are the connective used in the formula,
+and the truth values of the atomic sentences in the row of the table.
+While every atomic sentence has a truth value in every logically possible situation,
+it's not necessarily the case that
+every combination of truth values is logically possible.
+If it is logically impossible for particular
+combinations of truth values of atomic sentences to occur,
+then this sentence may still be a logical truth,
+it's just not a tautology.
+JOHN: Now, as it turns out, there are some sentences that are logically true.
+But to see that they are logical truths,
+requires a closer examination of the sentence,
+than the truth table method provides.
+So let's look at an example because this is pretty abstract.
+Suppose we have this sentence,
+"Tet(a) and a = b, then Tet(b)".
+DAVE: Now, this sentence is definitely a logical truth.
+It says that if "a" is a tetrahedron,
+and "a" is the same object as "b",
+then "b" is a tetrahedron.
+It's hard to see how that could be a situation in which this sentence is false.
+But notice that this judgment depends
+crucially on the particular sub formula, "a = b".
+If we replace this with some other formula,
+then this sentence would not necessarily be true.
+And this observation is significant since recognizing a sentence is a tautology,
+doesn't take into account the meaning of the individual atomic sentences.
+The only things that matter for the method is the particular connectives in the sentence,
+and the way in which they connect the atomic formulas together.
+JOHN: Our prediction is that this sentence will not be recognized as a tautology.
+That's because the meaning of one of the atomic formulas within
+the sentence is critical to the observation that this sentence cannot be false,
+and that meaning is just ignored by the truth table method.
+DAVE: So let's see what happens when we follow the truth table method with this sentence.
+By now, this should be familiar.
+Write the sentence in the target position,
+and create reference columns through the atomic subformula.
+In this case, there are three atomic subformula.
+Remember, this means that there are going to be eight rows for
+all possible combinations of the truth values for these formula.
+JOHN: Now, we can start filling in the truth values for the target formula.
+We have to start with a conjunction,
+"Tet(a) and a = b".
+This formula depends only on the truth values of the atomic sentences.
+and we put T in every row in which both "Tet(a)" and "a = b" are true.
+DAVE: And now, we can fill in the column for the target sentence,
+since it depends only on the value of the conjunction that we just worked out,
+and the consequent which is atomic.
+Remember that we put false in any row
+which the antecedent is true and the consequent false.
+JOHN: Now, notice that as we predicted,
+this sentence is not a tautology.
+There's one row of the truth table in which this sentence has the value, false.
+However, take a look at that row.
+This is a row in which "Tet(a)" and "a = b" are both true,
+and "Tet(b)" is false.
+Because of the meaning of the formula "a = b",
+we know that this row simply doesn't reflect any logically possible situation.
+By the way, notice that the fact that
+the other sentences concern the property of being a tetrahedron is irrelevant,
+provided that both of these sentences refer to the same property,
+then there is a pro- there's same problem would arise.
+DAVE: So this is the moral of the story.
+We have an intuition that some sentences
+must be true in all logically possible situations.
+But since we don't know exactly what situations are logically possible,
+we need to devise models or approximations to this idea.
+In the theory of propositional logic,
+we choose to think of the rows of the truth table
+as representing logically possible situations.
+JOHN: Some sentences are true in every row of the truth table,
+we call these sentences, tautologies.
+If a sentence is true in every row of its truth table,
+then that's true in every logically possible situation.
+Since every situation corresponds to some row of the truth table or other,
+this means that all tautologies are logical truths.
+DAVE: But it's possible that the sentence is not a tautology,
+but is a logical truth nonetheless.
+That's because we consider
+all possible combinations of truth values when building our truth table,
+but some combinations may not occur in a logically possible situations.
+That means that not all logical truths are tautologies.
+JOHN: As a test for logical truth,
+a test for tautology is not sensitive enough.
+If the method judges a formula to be a tautology,
+then it is indeed a logical truth.
+But the method does not take into account all logically relevant information,
+such as the meaning of predicates in the formula.
+And so it may judge some logical truths to be not tautologies.
+DAVE: So this is a drawback of the tautology test.
+But on the other hand, the virtue of the test
+is that it's completely routine to carry out.
+There's a procedure to follow,
+and following the procedure will give
+a definite result that this formula either is or is not a tautology.
+The procedure is a little boring to carry out, and in fact,
+gets very cumbersome as the target formula contains more atomic formula.
+Remember that the number of rows doubles for each additional atomic formula.
+JOHN: This makes the procedure particularly good one to implement using a computer.
+Computers don't get bored even when they have a lot of repetitive tasks to do.
+But whether carried out by a computer or a human,
+the procedure is a completely spelled-out method for
+determining whether a sentence of propositional logic is a tautology.
+[MUSIC]
