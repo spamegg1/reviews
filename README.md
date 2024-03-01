@@ -26,6 +26,8 @@ Updated November 2023 (C for Everyone)
 
 Updated February 2024 (Semantics of First Order Logic)
 
+Updated March 2024 (Jetbrains Academy Functional Scala)
+
 - [Learning tips](#tips)
 - [Harvard's CS50 (first half)](#cs50)
 - [CS50, second half, Final Project](#cs50-2)
@@ -63,6 +65,7 @@ Updated February 2024 (Semantics of First Order Logic)
 - [Kotlin for Java Developers](#kotlin)
 - [C for Everyone (non-review)](#c4e)
 - [Semantics of First Order Logic](#tarski)
+- [Jetbrains Academy Functional Scala](#fpScala)
 
 ### <a name="tips"></a> Learning tips
 
@@ -1125,3 +1128,21 @@ Of couse the course stops short of "real" logic such as syntactic proofs, or qua
 One minor complaint is that some of the handwritten parts in the videos are too small and difficult to read.
 
 *Spam's recommendation:* Very nice! Finally a decent logic course. Take it, it's fairly short; but you have to finish it *very quickly* within 1 month, since you lose all audit access. Good thing it's short. You'll still have to learn symbolic formal proofs elsewhere, but this is the right starting point on your logic journey. (I'd like to recreate elements of this with [Doodle](https://github.com/creativescala/doodle/) in Scala for my own curriculum one day.)
+
+### <a name="fpScala"></a> Jetbrains Academy Functional Scala
+
+Another "inside your IDE" course, maybe more like a tutorial? It's text only. It assumes Scala knowledge already. It's impossible to find Scala learning materials for beginners. You need to either know Java, or Scala, or have lots of experience somehow.
+
+Poor first impressions: file tabs use red colors for file names, which makes it look like there are errors in the file. For some reason all the files are indented using... *3 spaces?* And "reindent file with 2 spaces" does not work. In fact, after I manually edit the file to use 2 spaces, "reindent file with 2 spaces" reindents the file with... 3 spaces! Moreover, the course is still using Scala 2 code, with `object Main` containing old-school C-style `def main(args: Array[String])`, all of which are wrapped with lots of curly braces. And no worksheets... Come on Jetbrains, clean up your Scala 3 game already... It improves later with using colon `:` and Python-style indentation instead of curly braces.
+
+Super basic things: what is a function? `val` vs. `def`. Then there are exercises of the "write a *very* slightly different version of functions in the text" type. You can copy/paste the code from the text, and change 1-2 things, done. They are checked directly inside the IDE.
+
+There are links to "additional materials" with links to... *blog posts* (come on...) and videos on Youtube explaining the subjec, which can be viewed directly inside the IDE! But if you click on the "Youtube" button, it opens a Chrome-like browser window that runs... ADS! Like WTF?! Then, why aren't the videos included by default to make it a *proper course*? This is just... so weird. They made videos to go with the material but hid them behind "additional materials" that open in a quasi-browser window with ads. Jetbrains has an extremely strange way of doing things. I really don't understand. I don't think these are deliberate, they are just awkward nerds probably.
+
+After some super baby stuff, things ramp up quite fast. The difficulty curve is way off... Ironically the IDE asks you to fill a "Computer Science learning curve" survey! We are told to "go read Scala documentation for collection methods" like `filter`, `map` etc. Then there is a big assignment with a ton of `enum` hierarchies. A `Cat` has a `Pattern` which has a `TriColor` which has a `TricolorSubtype` which can be one of `Calico` or `Tortie`. Similarly for other attributes of a `Cat`. Gotta track them through hierarchies. They didn't even make use of Scala's `???` for leaving things unimplemented for now but still compiling. So you have to fill all answers before you can check. Then exercises about the collection methods. `find`, `foreach`, `map`, `flatMap`, `foldLeft`. Difficulty again raises quite a lot here, especially with `foldLeft`.
+
+Following sections are about pattern matching, immutability, expressions. That's it. It's all well and good... but again it all reeks of asking you to do stuff without really properly teaching. That's part of the "go fast, kinda-sorta guess stuff, skip over some stuff, Google stuff, look up blogs, and muddle through" style "learning" culture in the software industry I guess... they just don't have the time. What can you do...
+
+IntelliJ was using *so much RAM* (more than 4GB) that my operating system started killing some apps to free some memory (`oom-killer`?). Some of the assignment instructions have typos, so they ask you to do wrong things, which then fails the tests. It's possible to peek at the solutions to see what is wrong. Some exercises are weirdly implemented. Like the typical "find max of a list" exercise. Normally you have to check for an empty list, and throw an exception. But not here... you have to use `Int.MinValue` apparently!
+
+*Spam's recommendation:* A bit pointless, and not of high quality (similar to the Kotlin course). It's OK I guess. You can skip it. If you are familiar with Scala, you would know all of this already. Maybe it's good for those coming from Java? I don't think so; since it does not cover Scala basics; they would not know what a `val` is! So, it does not do a good job of filling those gaps, but also of offering something good and new to Scala users either.

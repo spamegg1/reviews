@@ -1,0 +1,11 @@
+enum Color:
+  case Lavender
+  case White
+  case Cream
+  case Fawn
+  case Cinnamon
+  case Chocolate
+  case Orange
+  case Lilac
+  case Blue
+  case Black
