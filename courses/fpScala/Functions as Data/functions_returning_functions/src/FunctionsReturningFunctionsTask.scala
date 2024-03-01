@@ -1,8 +1,9 @@
 object FunctionsReturningFunctionsTask:
   // Implement a function `filterList` which returns another function.
   // You can use `filter` method in the implementation.
-  def filterList[A]/* Put the arguments of the function here */ =
+  def filterList[A](pred: A => Boolean)/* Put the arguments of the function here */ =
     /* Put implementation here */
+    (l: List[A]) => l.filter(pred)
 
   @main
   def main(): Unit =
@@ -17,4 +18,3 @@ object FunctionsReturningFunctionsTask:
     List(numbers1, numbers2, numbers3)
       .map(evenElements)
       .foreach(println)
-

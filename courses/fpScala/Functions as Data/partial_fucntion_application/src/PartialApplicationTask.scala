@@ -1,8 +1,10 @@
 object PartialApplicationTask:
   // Implement a function `filterList` which then can be partially applied.
   // You can use `filter` method in the implementation.
-  def filterList[A](/* Put the arguments of the function here */) =
+  def filterList[A](/* Put the arguments of the function here */
+                    pred: A => Boolean, l: List[A]) =
     /* Put the implementation here */
+    l.filter(pred)
 
   @main
   def main(): Unit =
