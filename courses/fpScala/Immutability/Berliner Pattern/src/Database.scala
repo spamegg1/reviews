@@ -65,6 +65,14 @@ class Database {
    */
   def changePassword(name: String, oldPassword: String, newPassword: String): Boolean =
     /* TODO */
+    get(name) match
+      case Some(user) =>
+        if user.verified && user.password == oldPassword then
+          users -= user
+          users += user.copy(password = newPassword)
+          true
+        else false
+      case _ => false
 
   /**
    * Removes the given user from the database.
@@ -75,4 +83,11 @@ class Database {
    */
   def removeUser(name: String): Boolean =
     /* TODO */
+    get(name) match
+      case Some(user) =>
+        if user.verified then
+          users -= user
+          true
+        else false
+      case _ => false
 }

@@ -16,8 +16,19 @@ object UsingTask:
       if x.length != y.length then x.length - y.length
       else x.compareTo(y)
 
-  def sort[A](xs: Array[A])/* put comparator parameter here */: Array[A] =
-    /* implement the function */
+  def sort[A](xs: Array[A])(using comparator: Comparator[A]): Array[A] =
+    val n = xs.length
+    var swapped: Boolean = true
+
+    while swapped do
+      swapped = false
+      for i <- 0 until n - 1 do
+        if comparator.compare(xs(i), xs(i + 1)) > 0 then
+          val temp = xs(i)
+          xs(i) = xs(i + 1)
+          xs(i + 1) = temp
+          swapped = true
+    xs
 
   @main
   def main() =
@@ -27,4 +38,3 @@ object UsingTask:
     val stringArray = Array("ca", "acc", "cc", "c", "b", "ac", "bb", "ab", "aac", "bab", "aab", "bba", "bc", "a", "aa", "abc", "cab", "ba", "cb", "aba")
     println(s"${sort(stringArray).mkString("\", \"")}")
     println(s"${sort(stringArray)(using StringLengthComparator).mkString("\", \"")}")
-

@@ -17,8 +17,18 @@ object BerlinerPatternTask:
    * @param httpClient a reference to the http client which you can use to call `setReadyForVerification`
    * @return either `NewUserResult.Success` or `NewUserResult.Failure(message)`
    */
-  def onNewUser(request: NewUserRequest, db: Database, httpClient: HttpClient): NewUserResult =
+  def onNewUser(
+    request: NewUserRequest,
+    db: Database,
+    httpClient: HttpClient
+  ): NewUserResult =
     /* TODO */
+    db.get(request.name) match
+      case Some(_) => NewUserResult.Failure("user already exists")
+      case None =>
+        db.add(User(request.name, request.password))
+        httpClient.setReadyForVerification(request.name)
+        NewUserResult.Success
 
   /**
    * This method should handle an incoming verification request
@@ -35,8 +45,15 @@ object BerlinerPatternTask:
    * @param httpClient a reference to the http client
    * @return either `VerificationResult.Success` or `VerificationResult.Failure`
    */
-  def onVerification(request: VerificationRequest, db: Database, httpClient: HttpClient): VerificationResult =
+  def onVerification(
+    request: VerificationRequest,
+    db: Database,
+    httpClient: HttpClient
+  ): VerificationResult =
     /* TODO */
+    if db.verify(request.name) then VerificationResult.Success
+    else VerificationResult.Failure
+
 
   /**
    *
@@ -55,8 +72,15 @@ object BerlinerPatternTask:
    * @param httpClient a reference to the http client
    * @return either `ChangePasswordResult.Success` or `ChangePasswordResult.Failure`
    */
-  def onChangePassword(request: ChangePasswordRequest, db: Database, httpClient: HttpClient): ChangePasswordResult =
+  def onChangePassword(
+    request: ChangePasswordRequest,
+    db: Database,
+    httpClient: HttpClient
+  ): ChangePasswordResult =
     /* TODO */
+    if db.changePassword(request.name, request.oldPassword, request.newPassword) then
+      ChangePasswordResult.Success
+    else ChangePasswordResult.Failure("cannot change password")
 
   /**
    * This method should handle an incoming remove user request
@@ -73,8 +97,14 @@ object BerlinerPatternTask:
    * @param httpClient
    * @return
    */
-  def onRemoveUser(request: RemoveUserRequest, db: Database, httpClient: HttpClient): RemoveUserResult =
+  def onRemoveUser(
+    request: RemoveUserRequest,
+    db: Database,
+    httpClient: HttpClient
+  ): RemoveUserResult =
     /* TODO */
+    if db.removeUser(request.name) then RemoveUserResult.Success
+    else RemoveUserResult.Failure("cannot remove user")
 
   def runScript(): Either[String, Unit] =
     val db = Database()

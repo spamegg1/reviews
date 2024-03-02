@@ -1,6 +1,15 @@
 object ViewTask:
-  def findLogMessage(messages: List[String], severity: String, errorCode: Int): Option[String] =
-/* TODO */
+  def findLogMessage(
+    messages: List[String],
+    severity: String,
+    errorCode: Int
+  ): Option[String] =
+    /* TODO */
+    messages
+      .view
+      .find(s => s.startsWith(s"$severity, $errorCode"))
+      .map(_.split(",").last)
+
 
   @main
   def main() =
@@ -13,4 +22,3 @@ object ViewTask:
     println(findLogMessage(logMessages, "Error", 1)) // Some( this is an error log entry)
     println(findLogMessage(logMessages, "Error", 2)) // None
     println(findLogMessage(logMessages, "Fatal", 0)) // Some( this is a fatal log entry)
-

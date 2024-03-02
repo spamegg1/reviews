@@ -12,3 +12,9 @@ object PureVsImpureTask:
 
   def calculateAndLogPure(data: List[Int], logs: List[String]): (Int, List[String]) =
     /* TODO */
+    val result = data.sum
+    (result,
+      s"Calculated sum: $result" ::
+      s"Received data of size: ${data.size}" ::
+      logs
+    )

@@ -5,7 +5,7 @@ object NestedTask:
         h()
       def i(): Unit =
         h()
-        def h(): Unit = ()
+      def h(): Unit = () // un-indented this one
 
   object Task2:
     def f(x: Int): Unit =
@@ -14,8 +14,8 @@ object NestedTask:
       def g(y: Int): Unit =
         def h(z: Int): Unit = ()
         h(x+y)
-      def h(): Unit =
-        g()
+    def h(): Unit = // un-indented this!
+      g()
     def g(): Unit = ()
 
   def f(x: Int, y: Int): Int =
