@@ -12,20 +12,25 @@ object NewtypePatternTask:
     // Assumes the distance is in the preferred units, converts it when necessary
     def trackDistanceInPreferredUnits(distance: Double) =
       /* TODO */
+      measurementSystem match
+        case MeasurementSystem.Metric => trackDistanceInMeters(distance)
+        case MeasurementSystem.Imperial => trackDistanceInFeet(distance)
 
     // Assumes the distance is in Feet, converts to Meters
     def trackDistanceInFeet(distance: Feet) =
       /* TODO */
+      distanceWalked += Feet.toMeters(distance)
 
     // Assumes the distance is in Meters
     def trackDistanceInMeters(distance: Meters) =
       /* TODO */
+      distanceWalked += distance
 
     def show() =
       val distanceWalkedAsString =
         measurementSystem match
-          case Metric => s"${/* put distanceWalked in meters here */}m"
-          case Imperial => s"${/* put distanceWalked in feet here */}ft"
+          case Metric => s"${distanceWalked}m" /* put distanceWalked in meters here */
+          case Imperial => s"${Meters.toFeet(distanceWalked)}ft" /* put distanceWalked in feet here */
       s"Total distance walked: $distanceWalkedAsString"
 
   // Define an opaque type for meters

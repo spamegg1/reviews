@@ -7,4 +7,10 @@ object CaseObjectTask:
 
   def move(bot: Bot, direction: Direction, coordinates: Coordinates): Coordinates =
     val delta = findDeltaCoord(bot, coordinates)
-    val newCoordinates = direction mat/* Compute the new coordinates */    newCoordinates
+    val newCoordinates = direction match
+      case East => Coordinates(coordinates.x - delta, coordinates.y)
+      case North => Coordinates(coordinates.x, coordinates.y + delta)
+      case South => Coordinates(coordinates.x, coordinates.y - delta)
+      case West => Coordinates(coordinates.x + delta, coordinates.y)
+      /* Compute the new coordinates */
+    newCoordinates

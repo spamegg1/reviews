@@ -6,17 +6,20 @@ object SealedTraitsTask:
 
   case class Branch[A](left: Tree[A], value: A, right: Tree[A]) extends Tree[A]:
     override val height = /* TODO */
+      math.max(left.height, right.height) + 1
     override val isBalanced = /* TODO */
+      left.isBalanced && right.isBalanced &&
+        math.abs(left.height - right.height) <= 1
     override def whoAmI: String = "I'm a branch!"
 
   case class Leaf[A](value: A) extends Tree[A]:
-    override val height = /* TODO */
-    override val isBalanced = /* TODO */
+    override val height = 1 /* TODO */
+    override val isBalanced = true /* TODO */
     override def whoAmI: String = "I'm a leaf!"
 
   case object Stump extends Tree[Nothing]:
-    override val height = /* TODO */
-    override val isBalanced = /* TODO */
+    override val height = 0 /* TODO */
+    override val isBalanced = true /* TODO */
     override def whoAmI: String = "I'm a stump!"
 
   val tree =

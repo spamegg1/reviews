@@ -7,8 +7,15 @@ object CaseClassCopyTask:
                  ):
 
     // `myCopy` should function in the exact same way as the auto-generated copy does.
-    def myCopy(/* put parameters here */): User =
+    def myCopy(firstName: String = this.firstName,
+               lastName: String = this.lastName,
+               email: Option[String] = this.email,
+               twitterHandle: Option[String] = this.twitterHandle,
+               instagramHandle: Option[String] = this.instagramHandle
+              ): User = /* put parameters here */
       /* put implementation here */
+      copy(firstName, lastName, email, twitterHandle, instagramHandle)
+
 
   @main
   def main() =

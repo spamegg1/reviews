@@ -3,11 +3,14 @@ object CaseClassTask:
   // Each dog should have a name, a breed, and a favorite toy.
   // Model these features as Strings for now.
   /* Define the case class here */
+  case class Dog(name: String, breed: String, toy: String)
+
 
   def introduceDog(dog: Dog): Unit =
     dog match
-      case /* Add a pattern here */ =>
-        println(s"This dog's name is $/* put the dog's name here */, it's a(n) $/* put the dog's breed here */, and its favorite toy is a(n) $/* put the dog's favorite toy here */.")
+      case Dog(name, breed, toy)/* Add a pattern here */ =>
+        println(
+          s"""This dog's name is $name, it's a(n) $breed, and its favorite toy is a(n) $toy.""".stripMargin)
 
 
   @main
@@ -17,4 +20,3 @@ object CaseClassTask:
     val bowser = Dog("Bowser", "Chow Chow", "dinosaur bone")
 
     List(yuki, hoops, bowser).foreach(introduceDog)
-

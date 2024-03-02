@@ -4,6 +4,12 @@ object EnumTask:
     case Leaf(value: A)
     case Stump
 
+    def height: Int = this match
+      case Tree.Branch(left, value, right) =>
+        math.max(left.height, right.height) + 1
+      case Tree.Leaf(value) => 1
+      case Tree.Stump => 0
+
   import Tree.*
 
   // Exercise: implement a function which checks if the tree is balanced.
@@ -13,6 +19,12 @@ object EnumTask:
   // * For each node its right subtree is a balanced binary tree
   def isTreeBalanced[A](tree: Tree[A]): Boolean =
     /* Put your implementation here */
+    tree match
+      case Tree.Branch(left, _, right) =>
+        isTreeBalanced(left) && isTreeBalanced(right) &&
+          math.abs(left.height - right.height) <= 1
+      case Tree.Leaf(_) => true
+      case Tree.Stump => true
 
   /*
       3
@@ -72,6 +84,3 @@ object EnumTask:
     println(isTreeBalanced(balancedTree))
     println(isTreeBalanced(fullTree))
     println(isTreeBalanced(degenerateTree))
-
-
-
