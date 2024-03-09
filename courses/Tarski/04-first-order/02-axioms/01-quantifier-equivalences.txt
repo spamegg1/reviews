@@ -1,0 +1,393 @@
+[MUSIC] DAVE: Welcome back. I'm Dave.
+JOHN: And I'm John.
+DAVE: In this video, we're going to investigate
+equivalences that hold between first-order sentences.
+Just as in propositional logic,
+first-order logic provides us with different ways to say the same thing.
+If you understand how different formulae relate to one another,
+then you'll obtain a firm understanding of the semantics of first-order sentences.
+In addition, when presented with a sentence in one form,
+you'll find that translating it into an equivalent form can
+help you simplify it and then understand what it says more directly.
+JOHN: We'll be considering equivalences of a couple of types.
+One type helps us explore the relationships
+between the quantifiers and the propositional connectives.
+An example of this is to ask what happens when you negate a quantified formula?
+The other type investigates the properties of
+quantifiers and the relationship between quantifiers.
+We've already seen that adjacent quantifiers of the same type can actually be exchanged.
+But the quantifiers of different types can't in general be exchanged.
+DAVE: We'll use the equivalences we learned about to
+define a new normal form for quantified formulae.
+Like CNF from propositional logic,
+"prenex normal form" defines a standard format for quantified formulae.
+Every first order formula is equivalent to one in prenex normal form.
+Sometimes, investigating the prenex form can make
+the truth conditions of a complex quantified sentence clearer.
+JOHN: Finally, in this class,
+we'll investigate a final class of formulas that we've called Tarskis World truths.
+We've mentioned these before,
+but we're now in a position to describe exactly how to
+tell whether a formula is a Tarskis World truth.
+We'll be getting to that later,
+but let's turn our attention to quantifier equivalences.
+DAVE: Let's start our discussion of equivalences involving
+the quantifiers by considering what happens when we negate a quantified sentence.
+JOHN: For example, consider the sentence,
+"not for all x Cube(x)".
+This sentence says that "it is not the case that every object is a cube" or more
+colloquially, that "not everything is a cube".
+DAVE: What would the world look like if the sentence were true?
+Well they would have to be some object in the world that does not satisfy "Cube(x)",
+since then for "all x Cube(x)" would be false and the negation would be true.
+So this sentence is true if some object does not satisfy "Cube(x)".
+That is, if there's some object in the world that is not a cube.
+JOHN: Aha. We have another way of saying
+that there is some object in the world that is not a cube,
+namely, "there is an x, not Cube(x)".
+DAVE: We sure do. This sentence too is true just
+in case there is an object in the world which fails to satisfy "Cube(x)".
+That object satisfies "not Cube(x)" and
+therefore makes the existentially quantified formula true.
+JOHN: Right. So let's do some experimentation with
+the Tarski's World application to convince ourselves that this is actually true.
+In this file, we have the two sentences that we have just been discussing.
+Let's see if it's possible to build a world in which one of the sentences is true,
+but the other is false.
+If we can, then they're obviously not equivalent.
+DAVE: Let's start by looking at this world in which all the blocks are cubes.
+In this world, the first sentence is false.
+Everything is a cube, so the claim that "not everything is a cube" must be false.
+Notice though, that the second sentence is also false.
+To be true, it would require that some object is not a cube,
+and there are no such objects.
+JOHN: Okay. So let's change one of the cubes into a dodecahedron.
+This should make the second sentence true.
+Now there is an object that satisfies "not Cube(x)".
+Sure enough, the second sentence is true now,
+and so is the first.
+It says that "not everything is a cube",
+and now that's true.
+What about if there are no cubes in the world.
+Suppose we changed them all to some other shape.
+DAVE: Well in this case, both of these sentences are true again.
+We still haven't managed to find a world in which one is
+true and the other's false. I'm very gullible.
+So I'm going to declare myself convinced by
+this experiment that these two sentences are equivalent.
+JOHN: If you feel like you need to be further convinced,
+then please experiment more with Tarskis World to see if you can construct
+a world in which one of these sentences is true while the other is false.
+DAVE: Of course, the use of the "Cube" predicate here is for
+the purposes of illustration what we've actually shown is that
+for any property "P", "not for all x P(x)" is equivalent to
+"there exists x not P(x)". That's our first equivalence involving the quantifiers.
+JOHN: Okay. So now let's look at another closely related equivalence.
+"Not there is an x,
+P(x)" is in fact,
+logically equivalent to "for all x not P(x)".
+This is just like the first except that
+the existential and universal quantifiers have changed place.
+DAVE: Again, let's think about what it would take for the left-hand side to be true.
+This says that the formula "there exists x P(x)" is false,
+which requires no object satisfies the property "P". But this is just the same as saying,
+every object satisfies "not P",
+and that's exactly what the right-hand formula says.
+JOHN: So let's add instances of these two sentences to our Tarskis World sentences.
+This time let's use "Small" as the predicate for variety.
+Evaluating these two sentences in this world shows that they're both false.
+So why is that?
+Well, the first sentence says that "there is no small object".
+This clearly false since there is a small tetrahedron.
+The second sentence says that every object satisfies "not Small(x)".
+This is clearly false since a small tetrahedron
+satisfies "Small(x)" and so fails to satisfy "not Small(x)".
+DAVE: Well, what about the case in which there are no small objects?
+Let's make that small tetrahedron, large.
+Now, both of our sentences are true.
+Everything satisfies "not Small(x)" making the second sentence true.
+But now of course there's no small objects,
+so the first sentence is true too.
+We're going to declare this an equivalence too.
+Again, if you're not convinced,
+please play with Tarskis World some more and see
+whether you can make the sentences have different truth values.
+If you can, let us know.
+JOHN: We encourage you to use Tarskis World software to test out pairs of
+formulas as we introduce new quantifier equivalences.
+Remember, playing with the game can often be informative as well.
+The sharp eyed among you may have noticed that we named
+this sentence- the sentence is file, "de Morgan's Sentences".
+Remember de Morgan's laws that we discussed in propositional logic?
+They were the laws that said "not parenthesis P and Q" is equivalent to "not P or not Q",
+and "not parenthesis P or Q" is equivalent to "not P and not Q".
+Each of these rules has a formula with an outermost negation on
+the left and is equivalent to a formula with the scope of the negation reduced,
+pushed inside so to speak,
+the connective switches between conjunction and disjunction.
+DAVE: Well the first-order equivalence is that we've just introduced have a similar form.
+The scope of the negation is reduced from left to right,
+and the quantifier switches type.
+It turns out that there's a very close relationship between
+the universal quantifier and conjunction in propositional logic.
+One way to easily see this is to think of
+a universal sentence like "for all x Cube(x)" as
+saying "this object is a cube and
+this object is a cube and this object is a cube" and so on.
+Similarly, a formula such as "there is an x,
+Cube(x)" says that "either this object is a cube
+or that object is a cube or that object is a cube" and so on.
+So there's a similar close relationship
+between the existential quantifier and disjunction.
+DAVE: So one way to think about these equivalencies that we've just
+introduced is as De Morgan's laws for quantifiers.
+This helps to remember what they say and this connection
+between the quantifiers and Boolean connectives will appear again.
+One consequence of these first-order equivalences is that we can see
+immediately that there's going to be a negation normal form for first-order logic.
+JOHN: Recall that a sentence is in negation normal form if
+any negation symbols are attached only to atomic formulas.
+In propositional logic, we showed how to push the negation symbol inside
+Boolean connectives using the De Morgan's laws and double negation.
+With the addition of De Morgan's laws for quantifiers,
+we can see how to reduce the scope of negation symbols that fall outside the quantifiers.
+And so we can still obtain a negation normal form in first-order logic.
+DAVE: Incidentally, notice that the De Morgan's laws for
+quantifiers also immediately allows us to
+notice that we don't need both the universal and existential quantifiers in our language.
+Since "not for all x P(x)" is equivalent to "exist x not P(x)".
+Then putting the negation symbol on the other side,
+"for all x P(x)" is equivalent to "not there exist x not P(x)".
+So any expression involving a universal quantifier has
+an equivalent sentence that uses only the existential quantifier.
+JOHN: And importantly, a couple of negations.
+Now, of course, the other De Morgan equivalence can be used to show that we can
+dispense with the existential quantifier and only
+use the universal quantifier if we wanted to.
+Once again, we think that the language with
+two quantifiers allows us to better preserve the structure of
+English sentences when translating into FOL so we want to have both of these.
+But it is important to understand that we don't
+get added expressive power by adding two of them,
+we could get rid of either one of them.
+DAVE: Now, let's turn our attention to how the quantifier symbols interact
+with the Boolean conjunction and disjunction connectives.
+Look at these two sentences.
+This equivalence between "for all x (Small(x) and
+Cube(x))" and "for all x Small(x) and for all x Cube(x)" on the other hand.
+The left-hand sentence of this path says that every object is a small cube.
+Every object satisfies the property "Small(x) and Cube(x)".
+If all of the objects are small cubes then every object is small
+and every object is a cube which is what the right-hand sentence of the pair says.
+JOHN: In general, if every object has both of the pair of properties "P" and "Q",
+then every object has the property "P" and every object has the property "Q" and vice versa.
+So we have for "all x (P(x) and Q(x))" is logically equivalent
+to "for all x P(x) and for all x Q(x)".
+If some object is not a small cube making the left-hand side false,
+then it is because either that object is not small or because it's not a cube.
+In this case, one of the conjuncts on the right-hand side will be false.
+Either not everything is a cube or not everything is
+small and so the right-hand conjunction will be false too.
+DAVE: I like to think of this as the universal quantifier plays nice with conjunction.
+Sadly the situation with disjunction is not as nice.
+Consider these pair of sentences,
+"for all x (Small(x) or Cube(x))" and "for all x Small(x) or for all x Cube(x)".
+This is exactly the same with conjunction replaced by disjunction.
+The first says that every object is either small or is a cube.
+But if this sentence is true,
+it doesn't mean that the second sentence is true.
+It isn't necessarily the case that either everything is small or everything is a cube.
+JOHN: So let's think about these sentences.
+The first sentence can be true in a world in which some objects are
+small and then the remainder of the objects are cubes.
+But this isn't enough to make the second sentence true.
+So let's modify our world to look like that.
+DAVE: Okay. So in this world, we've got two cubes and one small object, the tetrahedron,
+JOHN: Okay. So you can see that the first sentence is
+true and the second one turns out to be false.
+Every object in the world is either a cube or it's small but it isn't
+the case that everything is a cu- cube
+and it's not the case either that everything is small.
+DAVE: Interestingly, if we build a world in which the second sentence is
+true then the first sentence will be true too.
+For example, if everything is a cube,
+then everything is a cube sentence six here is
+true because of the ri- right-hand disjunct is true
+but also sentence five is true too because every object
+satisfies the disjunction at least by being a cube.
+So although these sentences are not equivalent,
+the formula with the narrow scoped quantifiers,
+the ones with the disjunction on the outside,
+does imply the formula with
+the wider scope quantifier with the disjunction inside the quantifier.
+JOHN: The situation with the existential quantifier is similar.
+Although, as you might expect with a conjunction and disjunction, symbols exchanged.
+So for example, "there is an x,
+(Small(x) or Cube(x))" is equivalent to
+either" there is something that's small or there is something that's a cube".
+This equivalence does hold.
+DAVE: Right. If some object is either small or is
+a cube then some object is small or some object is a cube.
+To see this, let's imagine that the left-hand sentence is true.
+This sentence is true if there's some object in the world,
+let's call it "Julia" which is either a cube or is small.
+Let's suppose that Julia is small.
+Well Julia will satisfy "Small(x)" and so
+there "exists x Small(x)" will be true making the right-hand formula true.
+Of course, if Julia is a cube that's not small then the second disjunct will be true.
+JOHN: And Julia must be one or the other, otherwise,
+she would not satisfy the left-hand side in the fi- in the first place.
+A similar argument which you should try to construct will show that if
+the right-hand side is true then the left-hand side must be true too.
+Together they show that the two formulas are equivalent.
+Again, there's nothing special about the properties "Small" and "Cube" here.
+We can- we can express equivalence as "there is an x parenthesis P(x) or Q(x)"
+is logically equivalent to" there is an x P(x) or there is an x Q(x)".
+DAVE: Now, the final case, which is also bad,
+where we have an existential quantifier and
+the conjunction connective consider is- this pair of sentences,
+for example, "there exist x,
+(Small(x) and Cube(x))" and the sentence "there is a Small(x) and there is a Cube(x)".
+Suppose the world has two objects,
+one is a small dodecahedron and the other is a large cube.
+This world contains no small cubes,
+so the first of these sentences is false.
+However, there is a small object and there is a cube,
+so the second sentence is true.
+JOHN: So let's see that in Tarski's World.
+Okay, here we have that world,
+and when I play the game with the second sentence and a commitment to
+true and Tarski's World chooses
+a conjunct and I'm asked to choose a witness to make the conjunct true,
+and I can do that easily whichever conjunct Tarski's World selects.
+DAVE: So, for example, in this play of the game Tarski's World has selected the conjunct.
+"there exists x Small(x)" and we're being asked to pick an object that is small,
+so we can pick the dodecahedron and that we would succeed.
+Had Tarski's World picked the other disjunct,
+we would have been asked to pick an object that's a cube,
+and again, we would've been able to succeed.
+JOHN: So no problem, we're going to win.
+Now, if I play with the first sentence and I commit to true,
+Tarski's World is going to ask us to choose a small cube.
+DAVE: That's right.
+JOHN: And while I tried to do that,
+I'm out of luck.
+DAVE: It's gonna be difficult because there is no small cube,
+there's a small thing than a cube but nothing that satisfies both properties.
+But just as in the other case,
+if the first sentence is true,
+if there is a small cube,
+then surely there is both a small thing and a cube.
+We can choose the sma- the small cube as the witness for either of the conjuncts.
+So in this case again,
+the formula are not equivalent but one implies the other.
+We have- if there exist an x that's both "P" and "Q",
+then there exist "P" and there exist some object that is "Q".
+JOHN: There are a couple of really simple quantifier equivalences
+that we want to cover before we close this video.
+The first is a little odd but it turns out that it is quite important.
+It concerns a situation in which the variable of
+quantification does not occur in the scope of the quantifier.
+DAVE: A simple example is this formula.
+"there exist an x Cube(b)".
+JOHN: Huh, that's a surprise.
+DAVE: Yeah, there are no free occurrences of
+the variable "x" in the formula inside the quantifier.
+As John said, this is an odd sentence,
+but it is a first order sentence according to our rules.
+The rule for placing a quantifier in front of a formula doesn't
+require that the variable following the quantifier occurs anywhere inside that formula.
+JOHN: And what's more, this formula is even a sentence since it contains no free variables.
+So how do we determine whether this formula is true?
+Well, we need to work out if every object in the domain satisfies the formula "Cube(b)".
+Suppose that I have a tetrahedron in the domain named "Julian",
+remember Julia from just now? This is her brother.
+So the first step in determining whether Julian satisfies the formula is to substitute
+every occurrence of "x" in the formula "Cube(b)" with the name Julian.
+But when we do that, we obtain the formula "Cube(b)" since there's no occurrence of "x".
+DAVE: So Julian satisfies "Cube(b)" just in case the sentence "Cube(b)" is true,
+and obviously, that sentence is true just in case b is a cube.
+So suppose that b is a cube,
+then Julian satisfies "Cube(b)" and so there's an object satisfying "Cube(b)" and,
+therefore, "there exist Cube(b)" is true.
+JOHN: Obviously, the only thing that determines whether
+Julian satisfies "Cube(b)" is whether "b" is a cube or not.
+If it is, then Julian, or any other object for that matter, satisfies the formula.
+If "b" is not a cube,
+then no object will satisfy this formula.
+What this means is that "there is an x Cube(b)" is equivalent to "Cube(b)" or more generally,
+that "there is an x P" is logically equivalent to "P" if "P" doesn't contain "x" free.
+The quantifier does not- does no work in such a formula.
+DAVE: And a similar argument will lead to the other equivalence "for
+all x P" is equivalent to "P" if "P" doesn't contain "x" free.
+Again, if "P" is true,
+then every object will satisfy "P" and so "for all x P" will be true.
+If "P" is false,
+then no object will satisfy "P" and the universal formula will be false.
+We call this Vacuous Quantification.
+JOHN: This probably seems like a weird fact that is true but might be useless.
+But it turns out that it is actually
+a quite important fact and one that we will exploit in the next video.
+So file it away for the moment and we'll come back to it.
+DAVE: Another equivalence between first-order sentences is probably more intuitive.
+It says that the choice of the name of
+the bound variable in a quantified formula is arbitrary.
+For example, these two sentences are equivalent "for all x Cube(x)" and "for all y Cube(y)".
+JOHN: Right. So intuitively, the purpose of a variable is to associate
+a quantifier with a corresponding spots in the formula.
+The particular choice of variable that we use
+for this purpose really doesn't make any difference.
+So we can read this rule is allowing us to change
+the variable of quantification to whatever we would like,
+but, as is usually true,
+there's a slight wrinkle to this rule,
+which concerns the choice of the new variable that we might
+want to use when we change the name of the variable.
+DAVE: We must make sure that the variable that we choose as
+the new variable name is not already being used in the sentence.
+For example, consider the sentence "for all x there exist y not SameSize(x,y)".
+For all objects, there is an object that's not the same size as it.
+It would be true, for example,
+if there were two objects one large and one small.
+JOHN: Now it's all- it's perfectly okay to
+change this sentence to be "for all z there is a y,
+such that not SameSize(z,y)" changing the variable from "x" to "z".
+This sentence has the same meaning as before,
+but notice, it isn't correct to change the "x" to "y".
+We can't change this formula to "for all y there is a y,
+such that not SameSize(y,y)".
+DAVE: In this case, the new variable that we chose,
+"y", was already in use in the sentence.
+The problem is that when we made this change,
+the quantifier associated with the variable "x" is changed.
+In the original sentence,
+the occurrence in the first argument position of the
+predicate is associated with the universal quantifier.
+But in this new form,
+the variable that used to be "x" is bound by the existential quantifier
+because it's the quantifier with the smallest scope using the variable "y".
+JOHN: In fact, the universal quantifier does not have the chance to bind fair-
+the variable "y" because it's been bound by the existential quantifier.
+This is an example of the situation that we just discussed,
+where a quantifier dominates a formula that does not contain any of its variable free.
+DAVE: As we saw,
+sentences like this are equivalent to the formula inside the vacuous quantifier.
+In this case, "for all y,
+there exist y not SameSize(y,y)".
+It's just equivalent to "there exist y not SameSize(y,y)",
+we can drop the universal quantifier.
+This second sentence says that "there's
+some object that is not the same size as itself",
+a sentence which clearly can't be true in any world.
+Since our original sentence could be true in some world and this sentence can't,
+these sentences are not equivalent.
+JOHN: So the moral of the story is that it's
+okay to change the variable associated with a quantifier,
+provided the new variable that you choose is not already in use in the sentence.
+If you use a new variable,
+the result will be equivalent to the original.
+But if you use a variable that is in use,
+then you run the risk of producing a new sentence,
+which is not equivalent to the original.
+[MUSIC]
+End of transcript. Skip to the start.

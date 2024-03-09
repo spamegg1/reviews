@@ -1,0 +1,224 @@
+[MUSIC] DAVE: In propositional logic,
+we said that tautology was our model of logical truth.
+In first-order logic, the analogous idea is that of a first-order validity.
+A first-order validity is a sentence which we can see must always be true,
+because of the meanings of the connectives and quantifiers
+that appear inside it and its structure.
+Oh, and we also take into account the meaning of the equality predicate.
+JOHN: Just as in propositional logic,
+there are two other important ideas in first-order logic, consequence and equivalence.
+We will say that if the two first-order sentences are "first-order equivalent",
+if they're true in exactly the same logically possible situations
+as defined for first-order logic.
+This is exactly analogous to the notion of
+tautological equivalence from propositional logic.
+DAVE: And as you should expect,
+we'll say that a sentence is
+a "first-order consequence" of some other collection of sentences.
+When the truth of those sentences is sufficient to
+guarantee the truth of the sentence in every logically possible situation.
+So this is how it is;
+the first row of this table names the philosophical concepts that we're interested in,
+the second row contains the names of their models in
+propositional logic an approximation to the general idea,
+and the third row gives the names of the same when modeled in first-order logic.
+JOHN: All of these ideas hinge on the particular way that we've modeled
+a situation in the theory of first-order semantics.
+As we've seen, we model logically possible situations by imagining
+a collection of objects possibly with names assigned to them,
+with properties, and with relations between them.
+DAVE: Tarski's Worlds are logically possible situations in this sense.
+There's a collection of objects with properties like being
+cubes in relations like being to the left of another object,
+and some objects, of course, have names.
+JOHN: Of course, not every logically possible situation is a Tarski's World.
+There are other logically possible situations which
+contain people in relationships with one another.
+DAVE: Like Romeo and Juliet.
+JOHN: Or like the real world.
+We can even think of mathematical situations where
+the objects are numbers with properties like "being even",
+and are- they are related by relations like "being greater than".
+Each of these are logically possible situations.
+DAVE: We've already explained that a sentence is
+a first-order validity if it's true in every situation or conversely,
+if we can construct a situation which makes the sentence false,
+then the sentence is not a first-order validity.
+The notions of first-order equivalence and consequence should be pretty clear too.
+JOHN: We say that two sentences are first-order equivalent when they
+have the same truth value in every logically possible situation.
+DAVE: To demonstrate that two sentences of first-order logic are equivalent,
+we would need to look in all of the logically possible situations,
+and see whether the two sentences have
+the same truth value or construct some argument which indicates that this must happen.
+Conversely, to show that two sentences are not first-order equivalent,
+we simply show that there's a situation in which one of
+the sentences is true and the other false.
+The existence of a single situation like this is
+sufficient to show that the sentences are not first-order equivalent.
+JOHN: If the sentences are "S" and "T",
+then "S" and "T" are first-order equivalent if and only if
+"S biconditional T" is a first-order validity.
+If "S" and "T" have the same truth value in every situation,
+then the equivalence will be true in
+every situation because of the truth table for biconditional.
+DAVE: We say that a sentence "S" is a first-order consequence of a collection of sentences,
+"T1" through "Tn", if every situation that makes the formulae "T1" through "Tn" true,
+also makes the formula "S" true.
+So to show that "S" follows from these formulae,
+we look at each situation.
+We first work out whether the premise sentences are true in this situation.
+If they aren't, then we're not interested in the situation.
+We only care about the truth value of "S"
+in situations where the premise sentences are true.
+JOHN: If this situation makes the premise sentences true,
+then we look at the truth value of "S". If "S" is false,
+then we have found a counterexample situation and
+"S" is not a first-order consequence of the premises.
+But on the other hand, if "S" is true,
+we have to keep looking for a counterexample situation.
+If we don't find one,
+then we don't know whether there isn't one that we
+just haven't come across or that we're not creative enough.
+But if there is absolutely no possible situation in which "T1" through "Tn" are all true,
+and "S" is false,
+then we know that "S" is a first-order consequence of the premise sentences, "T1" through "Tn".
+Equivalently, if "S" is a first-order consequence of "T1" through "Tn",
+then the formula conjunction "T1" and up to
+"Tn" implies "S". That's gonna to be a first-order validity.
+And again, this is because of the truth value- the truth
+functional meanings of the connectives, conjunction, and implication.
+JOHN: We're going to finish this lecture by considering this collection of sentences.
+"It's not the case that there is an x Smaller(a, x)".
+"It's not the case, there is an x Smaller(x,b)",
+"Smaller(c,d)", and "Smaller(b,a)".
+We're going to ask whether the sentence "Smaller(b,a)"
+follows from the other three sentences.
+DAVE: It turns out that it's not a consequence of those sentences as we'll demonstrate.
+The first thing we have to do is rename the predicates in
+these sentences so that we don't assume a particular meaning for them.
+The sentences contain just one predicate symbol, namely "Smaller".
+So we duplicate the argument but using
+the uninterpreted predicate symbol "R" in place of "Smaller".
+So now we have the sentences,
+"not there exists x R(a,x)",
+"not there exists x R(x,b)",
+"R(c,d)", and our question is whether "R(b,a)" follows.
+JOHN: Now, here's a picture of a counterexample situation.
+We've drawn arcs between the objects related by the relation "R",
+whatever we decide it means.
+And in this situation,
+the first three formulas are true and the conclusion formula is false.
+DAVE: This example demonstrates two things.
+The first is the method for determining whether
+one sentence is a first-order consequence of others.
+Just as for validity,
+we first replace predicates with meaningless letters and then build a situation.
+In the case of consequence,
+we build a situation in which the premise formulae
+are all true and the conclusion is false.
+And this is a counterexample to
+the claim that the sentence is a consequence of the others.
+Since if it were a consequence,
+every situation making the premises true would also make the conclusion sentence true.
+JOHN: Let's go back to the picture that we drew at
+the end of the section on propositional logic.
+Recall that this picture shows a circle
+which is supposed to contain the set of logical truths.
+Because we're uncertain about the scope of the circle,
+we have drawn it with a fuzzy boundary.
+DAVE: But we have two approximations to the idea of logical truth.
+On the one hand, we have the idea of tautology.
+This is a sharply defined set of sentences in
+propositional logic that are true in every row of their truth table.
+Every tautology is a logical truth,
+and so the circle containing the tautologies is within the set of logical truths.
+JOHN: On the other hand,
+we have the idea of Tarski's World validity.
+This too is a precisely defined set of sentences.
+The sentences that are true in every Tarski's World.
+Now, as we discussed,
+there are finitely many such words,
+and so it's theoretically possible to look at all of them to
+check whether a sentence is Tarski's World, TW validity.
+DAVE: But remember there was some sentences that are
+Tarski's World validities which are not logical truths.
+They happen to be true in all Tarski's World,
+but that's only because of the worlds have a lot of
+constraints such that every object is either a tetrahedron,
+a cube, or dodecahedron.
+So the set of Tarski's World validities includes
+all of the logical truths with some more sentences besides.
+JOHN: Now, we can consider where the circle for first-order validities fits into this picture.
+Now, as we've seen, there are first-order validities that are not tautologies.
+The example that we gave before was the formula "for all x,
+(Cube(x), or not Cube(x))".
+Everything is either a cube or not a cube.
+DAVE: This tells us that the circle for first-order validities should
+be larger than the circle for tautologies, which is good.
+JOHN: Now, is the set of first-order validities the same as the set of logical truths?
+That is, does the idea of first-order validity
+capture exactly the philosophical concept of logical truth?
+JOHN: Well, the answer sadly is no.
+The problem is that first-order logic is not
+expressive enough to say many things that we can say in English,
+and indeed, some of these sentences are logical truths.
+DAVE: Here's an example sentence.
+"If most cubes are small and green,
+then most cubes are small".
+You should take a moment to convince yourself that this is logically true,
+but imagine a situation in which there are
+a 100 objects in the world and say 50 of them are cubes.
+Let's be precise and say that "most" means "more than half".
+So the antecedent "most cubes are small and green"
+means that at least 26 of the cubes are small green cubes.
+Now, it's possible that there are some other small cubes,
+but at the very least there are 26 small cubes,
+namely the ones that are also green.
+And so the consequent is definitely true.
+And this sentence is, therefore, a logical truth.
+Notice that nothing here depends on the meanings that the predicates cube and green.
+DAVE: Now, it's an interesting fact about FOL that there's no way
+to express the quantifier "most" in the language.
+There is nothing odd about the quantifier "most".
+It's just that the language of FOL lacks the resources required to express it.
+There's no sentence in FOL that means "most cubes are small".
+And this fact, that we won't prove,
+is sufficient to show that there are logical truths which are not
+first-order validities simply because they can't be expressed in FOL.
+JOHN: Now, this means that the circle representing the set of
+first-order validities must be inside the circle for logical truths.
+DAVE: In this video, we've described new notions based on first-order logic.
+A sentence is a first-order validity if it's true
+however you interpret the predicate and constant symbols appearing in the sentence.
+This is a better approximation to logical truth than tautology is
+in the sense that some logical truths that are not tautologies are,
+in fact, first-order validities.
+JOHN: But the unhappy truth about the test for whether a sentence is
+a first-order validity is that the test is very difficult to carry out.
+DAVE: Which is a bit of an understatement.
+Not only is it difficult for a human to carry out,
+but there's no possible procedure that can be
+followed that's guaranteed to give a definite answer to this question.
+And that's true whether it's a human or a computer carrying out the test.
+JOHN: Or maybe a Martian.
+DAVE: Even a Martian. So although we can sometimes definitely shows that
+a sentence is not a first-order validity by producing a counter-example,
+we're out of luck in general.
+We'll need to be creative in coming up with the proposed counterexamples,
+and even then, we might not be able to do so.
+Exactly the same observations apply to the notions of
+first-order equivalence and first-order consequence too.
+JOHN: In our next lecture, we're going to talk about some important first-order equivalences.
+These will show how sentences of first-order logic relate to each other.
+Among other things, this will have the consequence that we can
+show that the language of first-order logic is redundant.
+Like the language of propositional logic,
+we don't need all the symbols that we have
+introduced for the expressive power that we've obtained.
+DAVE: And in addition, we'll be able to define a normal form for
+quantified formulae similar to the kind of normal forms for propositional logic.
+We hope that you'll join us for the next lecture. Until then.
+JOHN: Bye-bye.
+[MUSIC].
+End of transcript. Skip to the start.

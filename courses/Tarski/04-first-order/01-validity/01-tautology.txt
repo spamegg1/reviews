@@ -1,0 +1,144 @@
+DAVE: Welcome back. I'm Dave.
+JOHN: And I'm still John.
+DAVE: In this video, we're going to revisit our discussion of the concepts of logical truth,
+logical equivalence, and logical consequence in
+the context of the full language of first order logic.
+JOHN: Now, recall that these ideas are informal and we don't have precise definitions for them.
+However, in propositional logic,
+we had an approximation to the ideas that we called
+tautology and tautological equivalence and tautological consequence.
+These approximations gave us a positive test.
+Every tautology is a logical truth, for example,
+but not an exact test,
+some logical truths happen not to be tautologies.
+DAVE: So now that we have an expanded more expressive language,
+we need to define new approximations to
+logical truth and friends based on this new language.
+We'll see first that we can still use the propositional theory for the expanded language.
+Some sentence will be tautologies even though they contain quantifiers.
+JOHN: But the bulk of this lecture consists of describing a new test for
+logical truth which takes into account the quantifier symbols.
+We'll see that the increased expressive power of first-order logic leads
+to a better approximation of the underlying concepts of logical truth,
+logical consequences, and so forth.
+But this comes at a cost,
+namely that the test that we need to carry out is much more complex.
+DAVE: So let's get to it.
+JOHN: In the lectures on propositional logic,
+we introduced the very important notion of a tautology
+and the notion of tautological consequences and tautological equivalence.
+DAVE: One thing that we want to consider is how
+these ideas can be extended into our new language.
+Does it make sense to say a sentence of
+first order logic is a tautology and if so, under what circumstances?
+JOHN: Well, the method that we've introduced for determining whether a sentence is a tautology
+depended crucially on the fact that the propositional connectives are truth-functional.
+And since quantifiers don't have this property,
+it's at the very least not obvious that
+the idea is going to translate over into the new context.
+DAVE: On the other hand, we did say that a formula like "P or
+not P" is a tautology regardless of the formula that we replace "P" with.
+For example, "Cube(a) or not Cube(a)" is a tautology and
+"(Small(c) and Cube(c)) or not (Small(c) and Cube(c))" are tautologies by this principle.
+JOHN: If we substitute a quantified formula here,
+then we will still get a tautology.
+After all the fact that this is a tautology depends only on the fact that the formula
+is repeated within this particular configuration of propositional connectives.
+So the sentence, "for all x Cube(x) or not for all x Cube(x)" is still a tautology.
+It says that "either everything is a cube or it is not the case that everything is a cube".
+DAVE: And sentences don't get much more tautological than that.
+The key thing to notice here is that the quantifiers in the sentence
+appear in a position within
+the propositional connectives that define the tautological form.
+The formula is an instance of the form "P or not P" and
+all instances of this form are tautologies
+including instances that contain quantified formulae.
+JOHN: This first-order sentence, while it looks similar presents a more difficult case,
+"for all x (Cube(x) or not Cube(x))".
+Whatever a logically possible situation is it contains a bunch of objects.
+There are only two possibilities for each object,
+either it satisfies "Cube(x)" or it doesn't.
+And so every object satisfies the disjunction whatever the situation looks like.
+So this sentence is a logical truth,
+however it's really not a tautology.
+DAVE: One way to see how this can't be
+a tautology is to think about how we might build the truth table for this formula.
+The first step in that process is to identify the atomic sentences in the formula,
+so that we can build columns for these formulae and consider their possible truth values,
+but this sentence has no atomic subsentences.
+Remember, "Cube(x)" isn't a sentence but a formula since it contains
+a free variable and can't have
+truth values and so couldn't appear as a column of the truth table.
+JOHN: Now, what we've discovered here is actually a good thing in a couple of ways.
+One is that we can keep the notion of tautology and
+tautological consequences and tautological equivalence
+in the context of first-order logic.
+If a sentence containing quantifiers is an instance of a tautological form,
+then that sentence is still a tautology.
+But the other part is that there are sentences such as the one that we've just looked
+at that are logical truths, but not tautologies.
+And that's good because it means that our theory of first-order logic is stronger
+and more sensitive to the form of sentences than propositional logic was.
+DAVE: We can provide a modified version of the tautology test and its cousins for
+consequence and equivalence for first-order sentences in a pretty straightforward way.
+The key observation is that first-order sentences have
+truth values just as atomic propositional sentences do.
+So when we want to tell whether a sentence of first-order logic is a tautology,
+we can simply treat any quantified sentence
+embedded within it as if it were an atomic formula.
+We'll make a reference column for
+the distinct quantified subsentences in the sentence just as we do for atomic formulae,
+and then we proceed with the truth table method as usual.
+JOHN: So if we apply this test to the sentence for
+"all x Cube(x) or not for all x Cube(x)" to see that it's a tautology,
+we build a truth table with one reference column for- "for
+all x Cube(x)" and then proceed as usual.
+And here is the truth table.
+DAVE: Now notice this is exactly one reference column and
+that reference column refers to the complex
+quantified sentence "for all x Cube(x)" because
+that's the only thing in the sub-component that has a truth value.
+Now, when we consider the formula "for all x (Cube(x) or not Cube(x)))",
+then this whole formula must be treated as if it were atomic,
+it gets a reference column just for the whole formula.
+And we get this truth table which has two possibilities for
+the whole quantified formula and
+therefore two possibilities for the formula as a whole because those are the same thing.
+That demonstrates that this sentence is not a tautology,
+it's false in some row of its truth table.
+There's a small subtlety concerning sentences containing
+quantifiers embedded within quantifiers.
+Consider, for example, the sentence,
+"for all x there is a y LeftOf(x,y)
+or it's not the case that for all x there is y LeftOf(x,y)".
+The sentence for" all x there is a y LeftOf(x,y)"
+is treated as an atomic formulas we've just discussed,
+and that means that we do not need to think about
+the existentially quantified form- subformula.
+It's just a part of the larger formula which we are essentially treating as a black box.
+All we care about is whether it's either true or false.
+DAVE: So the principle here is that you can continue to
+use the methods for determining whether a sentence is
+a tautology or whether a sentence is taulogically equivalent to
+another or a tautological consequences of some others in first-order logic.
+The only thing to remember is that quantified formulae are
+treated exactly like atomic formulae when building the truth table.
+We analyze them no further than they have a truth value,
+either true or it's false.
+And we do that because from the point of view of the truth table,
+they're just components of the sentence with
+no true functional subparts exactly like atomic formulae.
+JOHN: And the same principle is going to apply to determining whether formulas of
+first-order logic are tautological consequences or tautologically equivalent.
+In both cases, we simply treat the quantified sentences that appear in
+them as subformulas as if they were atoms.
+Like atoms, we know that they have truth values even if some of their components don't.
+We just use the appropriate procedure that we previously described with
+a possibility that reference columns are going to be headed
+by more complex quantified sentences.
+DAVE: In the next part of this lecture,
+we'll be considering the remaining problem,
+namely how to determine whether a formula of
+first-order logic is a logical truth even if it's not a tautology.
+[MUSIC].
+End of transcript. Skip to the start.

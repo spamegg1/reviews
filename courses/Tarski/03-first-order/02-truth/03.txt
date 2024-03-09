@@ -1,0 +1,242 @@
+[MUSIC] JOHN: Reecall that when we describe the semantics of propositional logic.
+We use two methods.
+The first was to give a semantics based on
+truth tables and the second was to develop a game in Tarski's World,
+which would help to explain the semantics of sentences.
+DAVE: Now, because the first-order quantifiers are not truth-functional,
+we don't have the option of using truth tables semantics.
+A truth table is just a way of describing a truth-functional connective,
+and quantifiers don't work that way.
+But the good news is that
+the Henkin-Hintikka game can be extended to first order logic.
+And we're going to describe how in this video.
+JOHN: I'm sure that you remember that the game is played by making a commitment to the truth of
+a formula and then being challenged by
+your opponent to justify your belief in that commitment,
+in terms of commitments about subformulas.
+The game is extended to FOL by adding
+new rules to the game that apply to the quantified formula.
+The propositional game rules still remain the same as they were before.
+DAVE: So, John, if I told you that I believe that a universally quantified formula is true,
+what would you challenge me to do?
+JOHN: Well, since you believe that a universally quantified formula is true,
+then you believe that all of the objects in
+the domain satisfy its immediate subformula.
+I guess that I tried to select an object from the domain
+that I believe does not satisfy the formula.
+DAVE: Exactly. Suppose I believe that the universal formula that
+says "everything is large," you could prove me wrong by
+selecting a small or medium-sized object and challenging me
+to show that the subformula is satisfied by that object.
+If you can pick such an object,
+then obviously my belief is wrong and you would have demonstrated my bone headedness.
+If you can't pick such an object, then perhaps I'm right.
+JOHN: That's the basic idea of the game rules for quantifiers.
+A belief in the truth or falsity of a quantified claim is a belief
+about which objects satisfy the immediate subformulas,
+and the challenge will be to select objects that either support or refute that belief.
+There are four cases,
+whether I believe a universal quantifier to be true or false,
+and whether I believe an existentially quantified formula to be true or false.
+DAVE: So let's look at some examples using Tarski's World.
+We'll start by examining the first of these sentences,
+"for all x Cube(x)",
+which says, of course, that "every object in the domain is a cube".
+Let's start to play the game,
+and I'm going to say that I believe that this sentence is true,
+obviously its not,
+since there are test and dodecs in this world.
+So I'm wrong in this belief.
+JOHN: Tarski's World first asks you to confirm your belief.
+Perhaps it thinks it couldn't possibly be serious.
+But then it tells you what it's going to do.
+It says that since you believe that the sentence is true,
+you believe that every object satisfies "Cube(x)",
+and that it is going to try to prove you wrong by choosing a block that does not.
+When you say to proceed,
+Tarski's World does exactly what it says it would and it chooses a block.
+It has lots of blocks to choose from and it does so randomly.
+If a block that it chooses has no name,
+then it gives it a name.
+DAVE: So now, Tarski's World has assigned this large tetrahedron the name "n1".
+And I'm being asked to confirm that I believe the sentence "Cube(n1)" is true.
+If I proceed, Tarski's World immediately tells me that I
+lost because the sentence is false,
+not true as I claimed.
+"Cube(n1)" is not true of this object which Tarski's World chose, it's a tetrahedron.
+JOHN: Now, let's see what happens if you claim correctly that the sentence is false.
+Well, last time you believed that the sentence was true,
+so Tarski's World tried to prove that it was false.
+This time, you're trying to prove that the sentence is false.
+And so your strategy is to do exactly what Tarski's World did before.
+Tarski's World says that you have to choose a block which does
+not satisfy the formula "Cube(x)".
+Right. This large tetrahedron that Tarski's World
+picked before doesn't satisfy the formula "Cube(x)" as we know.
+Since it doesn't have a name,
+Tarski's World picked one for me again, "n1".
+And now I'm asked to confirm that I believe that "Cube(n1)" is false.
+And I'm happy to do that because I'll win.
+"Cube(n1)" is indeed false. It's a tetrahedron.
+JOHN: Now, back up, and suppose that instead of choosing that tetrahedron,
+you instead choose that large cube at the back left.
+DAVE: Why would I do that, John?
+JOHN: Well, obviously you wouldn't do that on purpose.
+But perhaps you misunderstand or maybe you're
+trying to explain to someone what would happen if you did choose it.
+DAVE: Okay. So if I choose this large cube,
+then Tarski's World asks me to confirm that I believe that "Cube(n1)" is false.
+And when I do, Tarski's World says that I lose.
+I can almost hear the gloating tone in its voice.
+But it even tells me that though I lost,
+I could've won because I was right to believe that the original sentence was false.
+JOHN: You just picked the wrong cube.
+JOHN: So let's turn our attention to the second sentence.
+"There is an x Cube(x)",
+which we're using to illustrate the rules for the existentially quantified sentences.
+Now, suppose I say that I believe that this sentence is true,
+I believe that there is a cube.
+In this case, Tarski's World challenges me to find a block that satisfies the formula.
+That is, it satisfies the formula "Cube(x)". I know that only cubes satisfy this formula,
+and so I choose one of the cubes,
+say, the small one at the front, and I continue.
+DAVE: After naming that block "n1",
+Tarski's World asks me to confirm that I believe
+the sentence "Cube(n1)" is true, which it is.
+And we win. Well done, John.
+JOHN: Of course, if I had picked something that was not a cube,
+then I would have lost,
+even though I was correct to believe that the original sentence was true.
+DAVE: And finally, let's consider the case when you
+believe that an existential sentence is false.
+In this case, Tarski's World will try to prove you wrong.
+How could it do that?
+Well, we'd have to find an object in the world which is a cube.
+That would be a counterexample to the claim that there is no such cube.
+In this case, Tarski's World has plenty of blocks to choose from.
+So it can win the game.
+You're wrong to believe that there is no cubes since there are cubes. Three, in fact.
+JOHN: Okay.
+We looked at some examples.
+Let's see if we can summarize the rules for the quantifiers.
+In the case of universal formulas,
+the goal is always to find a block which does not satisfy the subformula.
+If you believe that the sentence is true,
+then it's Tarski's World's job to do this because if it can win,
+if it can, it will have proved you wrong.
+If you believe that the sentence is false,
+then you get to do this.
+And if you can, then you'll have demonstrated that you are indeed correct in your belief.
+DAVE: And in the case of existentially quantified sentences,
+the goal is always to choose an object that does satisfy the formula.
+If you believe that the sentence is true,
+then it's your job to do this because it'll demonstrate you're correct.
+Otherwise, its Tarski's World's job to do this
+since doing so will demonstrate that you are incorrect.
+JOHN: Now, the examples that we've just gone through are
+the simplest kind since there's a single quantifier.
+The subformula is atomic,
+and there's only one occurrence of the free variable in the subformula.
+This can get a lot more complicated when
+the subformulas have multiple occurrences of the variable,
+and the subformulas are complicated,
+including cases where there are further quantifiers in the formula.
+DAVE: We're going to look at one slightly more complex example before we finish this video.
+But you should spend some time playing the game with
+some complex sentences to ensure that you have a firm grasp on these game rules.
+Playing the game would be a useful tool to help you understand
+the semantics of first-order quantifiers
+as we go through the rest of the course.
+JOHN: Okay. So let's look at the sentence.
+"There is an x, (Medium(x) and Cube(x))".
+So there is at least one medium cube.
+Let's first think about what this sentence means.
+Well, the inner formula will be satisfied by any object named
+"n" that makes the sentence "Medium(n) and Cube(n)" true.
+And we know that for this sentence to be true,
+both conjuncts have to be true.
+So "n" must be a medium cube.
+So this sentence says, as I said,
+that there is some object which is both medium and a cube,
+or more naturally, "there is a medium cube".
+DAVE: Well, if we look in this world,
+we'll see that there is no such medium cube,
+or we'll fail to see that there is a medium cube.
+So they expect this sentence to evaluate to false,
+which it does.
+JOHN: So let's suppose that we're surprised by this and
+we play the game saying that we believe that the formula is true.
+Well, in that case,
+we must believe that some objects satisfies the formula "Medium(x) and Cube(x)",
+and Tarski's World challenges us to pick such an object.
+Suppose that we choose this small cube at the front of the world.
+Tarski's World gave this block the name "n1" and points out that I must
+believe that the sentence "Cube(n1) and Medium(n1)" is true.
+And that further entails that I believe that
+both the formulae "Medium(n1)" and "Cube(n1)" are true.
+Tarski's World gets to choose one of these formulas as false.
+So it tries to prove me wrong by choosing the formula "Medium(n1)" and saying,
+of course, that since I believe both Medium(n1) and Cube(n1),
+I must believe Medium(n1).
+Obviously, that's false.
+So I lose the game.
+JOHN: Obviously, we should choose
+a medium-sized object to convince Tarski's World that we're right.
+So let's back up and do that.
+This time, let's pick the medium dodecahedron "f" at the front of the board.
+DAVE: I don't think this is going to work, John.
+Tarski's World says that we must believe the sentence "Medium(f) and
+Cube(f)". And that means that I must believe
+both that "Medium(f)" is true and that "Cube(f)" is true.
+This time, Tarski's World gets to pick
+the formula "Cube(f)" because we believe that this formula is true when it's in fact false.
+JOHN: We encourage you to play around with the game to see how the quantifier game rules work.
+For now, just use sentences with a single quantifier.
+There's some exercises in the textbook for you to do,
+and I'm sure that you'll be able to make up some on your own.
+Remember that whenever you encounter the sentences that
+evaluate differently from what you expect,
+you should play the game to see why they have the value that they do.
+DAVE: We're gonna look at some more examples sentences in the next video.
+In particular, we're going to talk about how to
+translate commonly occurring kinds of sentences from
+English into FOL so that you can learn to take
+advantage of the power of the expanded language.
+In this video, we've completed the project of defining
+the syntax and semantics of first-order sentences.
+JOHN: And so that's a major achievement.
+DAVE: Yep. There were lots of pieces to this process.
+First, on the syntax side,
+we introduced quantifier symbols and their associated variables,
+and then we described which expressions counted
+as sentences by considering the notion of bound and free variables.
+JOHN: With the definition of sentence in hand,
+we were then able to spend this video to det-
+defining how to determine the truth value of first-order sentences.
+Since the first-order quantifiers make claims about collections of objects,
+we first had to define which objects are under consideration.
+What we call the domain.
+DAVE: In natural language we never do this,
+relying on shared intuition.
+But in logic, we have to be explicit about the range of objects under consideration.
+JOHN: Since the subformula of
+a quantified sentence is not typically itself a sentence,
+we needed to introduce an auxiliary notion called satisfaction.
+This is a relationship between objects and expressions containing one free variable.
+DAVE: So such expressions describe properties,
+and an object satisfies the expression if and only if the object has that property.
+We can tell whether it does by replacing all occurrences of the free
+variable with the name of the object and then seeing if we have a true sentence.
+JOHN: Finally, we were able to say that a universally quantified sentence is
+true if and only if all the objects in the domain satisfy the subexpression.
+Similarly, an existentially quantified sentence is
+true if some object in the domain satisfies the expression.
+DAVE: We recommend that you spend some time practicing
+evaluating first-order expressions using Tarski's World.
+There are exercises on this in the textbook,
+and of course, we'll be assigning some of them.
+JOHN: It's very important to become familiar with the process of
+translating between sentences of natural language and first-order logic.
+Our next video will be devoted to developing that skill.
+So until then. [MUSIC]
+End of transcript. Skip to the start.

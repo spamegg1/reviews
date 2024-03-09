@@ -1,0 +1,144 @@
+[MUSIC] DAVE: Hi, I'm Dave.
+JOHN: I guess I'm John.
+DAVE: So in our first videos concerning the full language of FOL,
+we've explained how to write formulae using the new quantifier and variable symbols.
+JOHN: And we've also explained how variables become bound by quantifiers.
+This binding tells us how the variables in the formula are
+associated with quantifiers that appear elsewhere in the formula.
+And these quantifiers tell us how to interpret the variables.
+DAVE: The last part of this sequence is to tell how to work
+out when a sentence involving quantifiers is true or false.
+Remember though that not all well-formed expressions of FOL are sentences.
+Sentences are just those expressions which contain no free variables.
+Now this presents a problem.
+Remember that when we worked out the truth of sentences in propositional logic,
+we determined the truth of the components of that sentence
+and combined them to work out the truth of the complete sentence.
+JOHN: So our task is to describe a method for
+determining the truth of sentences of first-order logic.
+Now this will involve looking at the collection of
+objects that are under discussion and asking about the properties
+of these objects in a way which is similar to the way in
+which we evaluate the truth of atomic sentences in Tarski's World.
+DAVE: Because quantifiers are not truth functional we aren't
+able to describe the semantics of quantifiers using truth tables.
+Instead we'll describe rules of the game which will help us to
+explain how first-order sentences come to have their truth values.
+JOHN: So let's get started.
+Consider the simple sentence for "all x Cube(x)".
+Even though this is a sentence because the variable "x" is not free in the entire formula,
+the subformula "Cube(x)" is not a sentence because "x" is free in that formula.
+DAVE: As we said only sentences have truth values.
+Since "Cube(x)" does not have a truth value,
+so we can't work out the truth of
+the entire sentence using the truth value of that subexpression.
+It doesn't have one. We need a different way.
+JOHN: Now the intended meaning of the expression "for all
+x Cube(x)" is to say that "everything is a cube".
+In the interest of precision,
+we first need to say what we mean by "everything".
+Usually when we have a conversation in natural language,
+we have in mind a range of things that we're talking about.
+When we say "everything" we're referring to everything in that range.
+DAVE: Suppose I'm walking down the street and I see a parking lot full of blue cars,
+I turn to you and I say,
+"Look, all the cars are blue."
+You'll probably agree with me since the context tells you that
+when I say "all the cars" I mean all the cars in the parking lot.
+Fact that there's a red car somewhere else,
+perhaps even on the street beside me,
+is not a counterexample to my claim.
+Implicitly, the claim I'm making is only about the cars in the parking lot.
+JOHN : Now logicians don't like that kind of implicit thinking.
+So when we use quantified expressions like "every block is a cube" or "some block is a cube",
+we like to be explicit about the range of objects that we're talking about.
+We call this range of objects the "domain" of the quantifier.
+It's the set of all the objects that we're
+considering when we consider the truth of quantified claims.
+DAVE: So when you make quantified claims in Tarski's World,
+the domain is always just the blocks that you can see in the world.
+This is the easiest case.
+We use the program to tell us what the domain is.
+When you make quantified claims in other situations,
+then it would be important to specify the domain as part of that logical situation.
+In this world, the domain consists of three objects: the cube "a",
+dodec "b", and a tetrahedron with no name.
+JOHN: Suppose that we have a first-order sentence which
+begins with a quantifier like "for all x Cube(x)",
+for example, the subformula within that sentence has at most one free variable.
+This is because the quantifier binds exactly one variable.
+If the main expression is a sentence i.e.
+it has no free variables,
+then the embedded expression can have at most one free variable.
+We can't say that this expression is true or
+false but we're instead going to ask a related question;
+which objects "satisfy" the expression?
+DAVE: Suppose we have a formula with one free variable and a named object,
+that object "satisfies" the formula if the sentence that
+results from replacing all of the occurrence of the free variable with that name is true.
+If the resulting sentence is false,
+then the object "does not satisfy" the formula.
+Notice that since the formula has only one free variable,
+replacing all occurrences of that variable with a name results in a sentence.
+JOHN: So in this current situation,
+the cube "a" satisfies the formula "Cube(x)".
+Because when we replace the variable "x" with the name "a",
+we obtain the sentence "Cube(a)" which is true in the current world.
+The dodecahedron, named "b",
+does not satisfy the formula "Cube(x)" since when you
+replace "x" by" "b you obtain the sentence "Cube(b)",
+which is false in this world.
+DAVE: So that's the basic idea of satisfaction.
+There are two important things to notice.
+The first is that there may be more one,
+more than one occurrence of the free variable in
+the formula and they must all be replaced by the name of the object.
+So for example, the object "a" satisfies
+the formula "SameSize(x,x)" because when you replace all of the occurrences of "x" by "a",
+you obtain the sentence "SameSize(a,a)" which is true in this world,
+"b" satisfies this formula too as well of course.
+JOHN: The second wrinkle is that we can even ask whether unnamed objects satisfy a formula.
+To decide whether this unnamed tetrahedron in the middle satisfies the formula "Cube(x)",
+we simply pretend that it has a name.
+Let's call it "joanna".
+We give the tetrahedron the name "joanna" and then
+ask whether it satisfies the formula "Cube(x)".
+Sadly, "joanna" does not satisfy this formula since "Cube(joanna)" is false in this world.
+Even so, provided we pick a name that is not in use elsewhere in the world,
+this is a perfectly good test for satisfaction.
+We now have a procedure for determining which objects in
+a world or in a domain more generally,
+satisfy which formulas with one free variable.
+DAVE: And so finally, we've come to the moment that we've all been waiting for.
+How do we tell whether a sentence of FOL is true or false?
+But it's pretty easy from here on in.
+We say that a sentence,
+"for all x P(x)",
+is true just in case every object in the domain satisfies the formula "P(x)".
+So the sentence, "for all x Cube(x)" is false in our example
+world because there are objects in the world that don't satisfy "Cube(x)".
+JOHN: And the sentence, "there is an x P(x)" is true just in case
+some object in the domain satisfies the formula "P(x)".
+The sentence" there is an x Cube(x)" is true in this world,
+the world we have in front of us,
+because some object namely "a" satisfies the formula "Cube(x)".
+Now this definition obviously gives us what we want.
+We said that a sentence like "for all x Cube(x)" is intended to mean "everything is a cube".
+What we've said is that this sentence is true if every object satisfies "Cube(x)".
+And an object satisfies "Cube(x)" just in case if you had a name and applied it,
+and then the sentence resulting from putting that name in where the "x" is would be
+true and obviously that sentence is only going to be true if that object is a cube.
+So if every object satisfies "Cube(x)",
+then every object is in fact a cube.
+DAVE: And similarly we intend there "exists x
+Cube(x)" to mean that some object in the domain is a cube.
+So if there's some object that satisfies the formula "Cube(x)",
+then the formula that results from replacing "x" with the name of that object,
+if it has one or an invented name, is true.
+And that means that object must be a cube.
+The sentence, "for all x SameSize(x,x)"
+is true in this world,
+indeed in every world, because every object in
+the world satisfies the formula "SameSize(x,x)".
+[MUSIC]
+End of transcript. Skip to the start.

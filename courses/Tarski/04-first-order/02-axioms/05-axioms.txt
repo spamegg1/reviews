@@ -1,0 +1,297 @@
+[MUSIC] DAVE: We've spent a lot of
+time in this class talking about logical truth and related ideas.
+Early in the class,
+we contrasted logical truths with
+tautologies on the one hand and with Tarski's World truths on the other.
+JOHN: In this video, we're going to return to the notion of Tarski's.
+World truths and about exactly what we mean when we describe this class of sentences.
+DAVE: So the basic idea behind Tarski's World truths is that these sentences are
+true in every world that you can build using the Tarski's World application.
+Now, obviously, every logical truth is a Tarski's World truth.
+That's because a logical truth is true in
+every possible situation and worlds are logically possible situations.
+JOHN: Of course, this tells us that every tautology and
+every first-order validity is also true in every world,
+so these are Tarski's World truths.
+But there are some sentences that are true in
+every world that are not necessarily logical truths,
+an example of this is the sentence, "for all x,
+x is either at Tet or a cube or a dodec".
+DAVE: Now this sentence is obviously true in every world.
+The only kinds of objects in Tarski's World are tetrahedra, cubes, and dodecahedra.
+But in some logically possible situations, for example,
+the actual world, there are other kinds of objects including crucially people.
+So this sentence isn't logically true.
+This tells us that the set of
+Tarski's World truths is bigger than the set of logical truths.
+JOHN: This is the opposite of the situation with tautologies and first order validities.
+These sets are included in the set of logical truths but they omit some.
+DAVE: Now, our goal in this video is to say exactly how the set
+of Tarski's World truths is related to these other sets.
+In particular, to the set of first order validities.
+JOHN: The key observation is that worlds are logically
+possible situations that have additional features.
+These features strongly constrain the worlds to be a particular way.
+For example, to contain only cubes, tetrahedra, dodecahedra.
+The sentences that are true in every world are sentences that must be true in
+any situation that meets these additional constraints.
+Because these constraints limit the kinds of situations that are under consideration,
+the number of truths is much larger than for situations in general.
+DAVE: So when we are saying that the sentence is a Tarski's World truth,
+what we're saying is,
+it's true whenever these additional constraints hold.
+If we could describe these constraints for example as a set of first-order sentences,
+then we will have another characterization of Tarski's World truths.
+Tarski's World truths are just the sentences that are
+first-order consequences of these additional sentences describing how worlds must be.
+Logicians have a name for this kind of sentence that prescribes how a world must be,
+we call them "axioms".
+JOHN: So one way to think about the axioms is that they provide
+meanings to the predicates or at least facts about the predicate which must hold,
+and these facts hold of the predicates as they are used in Tarski's World.
+DAVE: So if you think about the procedure for determining first-order consequence,
+we're allowed to interpret the predicates under consideration in any way we want to.
+When we add the additional axioms as background assumptions,
+we're saying that we're only going to consider
+situations in which these sentences are true and
+that means we limit the number of different situations
+we're considering when we look for a counter-example.
+JOHN: These additional axioms are background assumptions.
+When we say that every world makes some sentence true, we're saying that,
+provided the situation meets these additional assumptions then the sentence must be true.
+These additional assumptions are just the rules of the game that we presented to
+you when we first described the nature of the worlds constructed in Tarski's World.
+So a sentence is a TW-truth,
+at Tarski's world truth, just in case,
+it's a consequence of the axioms that describe what Tarski's worlds are like.
+DAVE: Now, there's nothing special about axioms.
+They are just first-order sentences.
+But we use them to describe particular classes of
+situations that we're interested in at a particular point of time.
+JOHN: Now this is a quite general idea.
+If you wanted to describe the world of astronomy,
+you might have axioms that say that everything is either a star, a planet,
+a moon or a black hole say and another axiom might
+say that any object orbiting a planet is a moon and so on.
+Then you might look at all of the sentences that are
+true given these background assumptions and
+come up with the class of astronomical truths or astronomy truths.
+DAVE: Now, astronomers are guided by observations about
+the real universe while we designed Tarski's World, the program.
+Coming up with a set of axioms that describes what
+a Tarski's World is like is relatively straightforward.
+Let's start by thinking about some of the first facts we told you about Tarski's World.
+We've already been considered one of them,
+namely that every object is either a Tet,
+a cube or a dodec.
+That was pretty much the first thing we said.
+JOHN: Okay. Now, because the predicate symbols indicate the shapes
+of the objects that follows that nothing can have two of these properties.
+There's nothing that can be both a tetrahedron and a cube for example.
+So we'll say that "it's not the case that there is
+an x such that x is both at tetrahedron and a cube".
+Of course, there are other sentences which say that no objects can be
+both a tetrahedron and a dodecahedron and the same for dodecahedra and cubes.
+So we'll write those.
+These three sentences are also true in every Tarski's World.
+They prevent any object from having two shapes at the same time.
+DAVE: Now, the program is designed so that you
+can't create an object with two shapes at the same time.
+Making an object into a cube changes it from whatever it was before.
+So these axioms reflect that design decision and more fundamentally,
+both reflect the fact that no object can have two shapes at the same time.
+JOHN: We could not have designed Tarski's World so that
+objects could have two shapes at the same time,
+and so these axioms are required to make the predicates mean what we want them to mean.
+By contrast, we could have designed the program to have additional shapes, spheres say.
+This was an arbitrary choice on our part.
+But given that we have made that choice,
+the first axiom must also be true.
+DAVE: Now corresponding to the three shape predicates,
+there are three size predicates.
+Again, we said that there are only three sizes and so we have the axiom "for all x
+(Small(x) or Medium(x) or Large(x))".
+Because an object can only have one size at a time,
+we need the sentences to say that "it's not
+the case there is an object that is small and medium".
+"There's no object that small and large" and
+"there's no object that simultaneously medium and large".
+JOHN: So here's an example of a Tarski's World truth; "for all x,
+parenthesis, if x is not small,
+then x is either medium or large".
+If an object isn't small,
+then it must be either medium or large.
+It's a Tarski's World truth.
+It's also a first-order consequence of the axioms governing the size predicates.
+DAVE: So our idea is to build a set of
+sentences which completely capture the rules governing Tarski's World.
+Then we'll have a test for Tarski's World truth.
+We'll reduce the problem to showing that
+a sentence is a first-order consequences of these axioms.
+We aren't going to present a complete set of axioms,
+but we are going to talk about a few more.
+JOHN: There are some other size related predicates, namely;
+"Larger", "Smaller", and "SameSize".
+Here are some axioms that describe how the "SameSize" predicate works.
+The first says that we have- "if we have two objects that are both small,
+then these objects are the same size".
+This clearly describes part of the meaning of the "SameSize" predicate.
+There are two more similar sentences for the other sizes.
+"If two objects are medium,
+they're the same size" and so forth.
+These sentences tell us when we can say that two shapes are the same size.
+But what if we already know that they are?
+This sentence says that "if two blocks are
+the same size and one is small then the other is too".
+"For all x for all y, if x is small and x is the same size as y,
+then y is small",
+and of course the same is true for the other sizes.
+DAVE: The first group of these axioms tells us how to tell when two objects are the same size,
+if they're both small then they're the same size and so on.
+The second group tells us how to use the fact that two objects are the same size.
+If we know that one object is large and it's the same size as another object,
+then we know that other object is also large.
+The two remaining size predicates,
+"Smaller" and "Larger" are closely related.
+In fact, we can describe this relationship using a formula,
+"for all x and for all y,
+if x is larger than y,
+it's equivalent to being- to y being smaller than x".
+JOHN: Right. So using this fact means that we
+only have to provide axioms for one of these predicates.
+Here are the axioms for "Larger".
+"For all x and all y,
+if x is large and y is not large,
+then x is larger than y".
+And "for all x, for all y,
+if x is not small and y is small,
+then x is larger than y".
+And similarly, "for all x and all y,
+if x is larger than y,
+then x can't be small and y can't be large".
+And "for all x and all y,
+if x is larger than y and y is medium,
+then x is large".
+And "for all x and all y,
+if x is larger than y and x is medium,
+then y is small".
+Again, the first pair of axioms allow us to infer that one object is larger than another,
+and the second to use- is- gives- allows us to use that fact.
+DAVE: It turns out,
+and this is probably not obvious,
+that these axioms completely describe the "Larger" relation.
+Of course, there are many alternative equivalent formulations for this,
+but we think that these axioms are pretty clear.
+JOHN: By now, we hope that you can see how you might go about extending this set of
+axioms to a set of rules for completely describing the properties of Tarski's worlds.
+It's unfortunately, not smooth sailing.
+There are many interactions between the position predicates; particularly,
+"Between" and "Adjoins" that put the exhibition of
+the complete set of axioms for Tarski's World beyond the scope of this lecture.
+We're going to finish by talking about some of the simpler axioms for
+position predicates and there will be exercises that investigate this further.
+So let's think about the predicates just the predicates "LeftOf",
+"RightOf", and "SameColumn".
+The first predicate we'll consider is "SameColumn".
+So all of these are obvious properties of the "SameColumn" predicate.
+"Every object is in the same column as itself".
+"If x is in the same column as y, then y is in the same column as x".
+And "if x and y are in the same column and y and z are in the same column,
+then x and z must be in the same column".
+JOHN: The "LeftOf" predicate has a quite dissimilar set of properties.
+"No object is to the left of itself".
+"If x is to the left of y,
+then y is definitely not to the left of x".
+But like "SameColumn", "if x is to the left of y and y is to the left of z,
+then x is to the left of z".
+DAVE: As we did for "Larger" and "Smaller",
+we can simply observe that "LeftOf" and "RightOf", are
+inv- inverses and avoid providing explicit axioms for "RightOf",
+provided we have the axiom "for all x,
+for all y, LeftOf(x,y) is equivalent to RightOf(y,x)".
+And you should notice that the predicates "FrontOf", "BackOf",
+and "SameRow" are exactly analogous to "LeftOf",
+"RightOf", and "SameColumn" and,
+therefore, give another similar collection of axioms.
+JOHN: At this point, things get complicated.
+For example, the "LeftOf" and "SameColumn" predicates interact.
+It's a fact that, uh, "if a is to the left of b and b is in the same column as c,
+then a is to the left of c". So we could go on for all-
+all day listing all of the various facts that relate these and other predicates and,
+eventually, we'd come up with a complete set of axioms.
+But that's not the real takeaway from this lecture.
+DAVE: Right. The real thing we want you to take away is that we can
+define all kinds of specialized notions of truth for different domains.
+Facts that are true in number theory,
+facts that are true in astronomy,
+things that are true in economics, and so on.
+What we mean is given a particular set of axioms that
+describe how the particular area of study behaves,
+then the things that are true in that domain are just the things
+that are first-order consequences of the relevant axioms,
+things that are true in every situation like that.
+JOHN: Tarski's World truths are just a special case of this.
+Tarski's World truths are sentences that are first-order consequences of
+the axioms that describe the way that Tarski's worlds are designed to work.
+But the idea behind this,
+called "the axiomatic method",
+is an important principle which enables us to use the techniques of
+first-order logic and apply them to a wide variety of subject matter.
+DAVE: In this last video of the class,
+we've put our knowledge of first-order logic to work.
+We've investigated equivalences that hold between quantified sentences.
+First, we investigated equivalences involving the first-order quantifiers,
+together with the propositional connectives.
+JOHN: The first of these were the De Morgan laws for quantifiers.
+These describe how the quantifiers work together with the negation connective.
+One of the consequences of these laws is that it is immediately possible to see that we
+do not need both the universal and existential quantifier in our language.
+These quantifiers are inter-definable,
+and having both does not increase the expressive power of the language.
+DAVE: But if we didn't have both quantifiers,
+the translations of many common natural language sentences would be very unnatural.
+We define our language to contain both the quantifiers so that
+these English sentences will have direct translations.
+JOHN: We also investigated the relationships between
+the quantifiers and the binary conjunction and disjunction connectives.
+We discovered that there were elegant equivalences
+involving the universal quantifier and conjunction,
+and also the existential quantifier and disjunction.
+But the relationship between the other pairings is not so nice.
+DAVE: We also investigated
+some surprisingly useful equivalences involving
+vacuous quantification and bound variable renaming.
+Now, all of these equivalences together could be used to define
+a normal form for quantified sentences that we called prenex normal form.
+When a sentence is in prenex form,
+it consists of a collection of quantifiers,
+the prefix, dominating a single propositional formula.
+Each sentence of FOL is equivalent to a formula in prenex normal form,
+in fact, to many.
+JOHN: The final topic of this lecture concerned Tarski's World truths.
+We introduced this notion early on in the course.
+The sentences of Tarski's World truth if it's true in
+every world that can be built using the Tarski's World program.
+Now, every logical truth is a Tarski's World truth,
+but some Tarski's World truths are not logical truths.
+That's because Tarski's Worlds are governed by much stricter rules than other situations,
+including the real-world or other imaginary kinds of situations.
+DAVE: We described how it's possible to
+describe these additional rules using first-order sentences.
+These sentences describe rules which govern
+the predicates of Tarski's World and the properties of the worlds.
+A Tarski's World truth is a sentence which is true in
+any world or any situation that obeys these additional rules,
+or it's a sentence, which is a first-order consequence of the conjunction of those rules.
+JOHN: A Tarski's World truth is a first-order consequences of the set
+of rules which describe exactly what Tarski's Worlds are like.
+DAVE: Well, we've reached the end of this course.
+We have one more video in which we summarize the work that we've
+done in the entire course and the key results that we've obtained.
+JOHN: And, of course,
+you'll need to complete the final exam.
+The summary video would be a good place to start when you're studying for that exam.
+We'll see you over at the final video. Until then.
+DAVE: Bye-bye.
+[MUSIC].
+End of transcript. Skip to the start.

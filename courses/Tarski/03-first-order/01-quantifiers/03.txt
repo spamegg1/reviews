@@ -1,0 +1,143 @@
+[MUSIC] JOHN: So the next thing that
+we have to do is describe which well-formed formulas are sentences.
+That is, expressions that actually make claims about the world.
+We've already said that the sentences of
+propositional logic will also be sentences of first-order logic,
+but we need to have some new ones.
+Otherwise, what would be the point?
+DAVE: But as we've also said expressions that contain variables are not always sentences.
+It is possible to be a well-formed formula,
+but not a first-order sentence.
+So we have to describe which well-formed formula are also sentences.
+JOHN: Earlier, we said that variables are a bit like the word "it."
+Sometimes you can use the word "it" and make a perfectly good sentence.
+But unless your audience knows how to interpret "it",
+then the sentence won't make sense.
+In the case of first-order logic,
+it's the association between quantifier symbols and
+variables that provide this missing information.
+The information about how to interpret the variables.
+As you might guess, the variable that's written
+next to the quantifier is the key to this idea.
+DAVE: We need to introduce two new ideas.
+The idea is of "free" and "bound" variables.
+Intuitively, a variable is bound if we know how to interpret it, and free otherwise.
+The rules are fairly intuitive even though they're a bit technical to state.
+The first rule is that every variable in an atomic well-formed formula is free.
+That's intuitive. There are no quantifiers to
+tell us how to interpret any of the variables.
+JOHN: The next rules concern the propositional connectives.
+Every variable that is free in the formula "P" is
+free in the formula "not P" since no new quantifiers have gotten introduced.
+The free variables of "P and Q", "P or Q",
+"P arrow Q", and "P biconditional Q",
+is the set of variables that are free in either "P" or "Q".
+These rules say that the propositional connectives
+don't affect the set of free variables.
+In particular, a variable is free in "P and Q" if it's free in "P" or if it's free in "Q".
+DAVE: Now, the rules for quantifiers are the most important.
+Basically, the idea is that the variable that follows
+the quantifier becomes bound by that quantifier,
+and it's no longer free in that quantified sentence.
+So the set of variables that are free in for "all x P",
+is just the set of variables that are free in "P" with the exception of the variable "x",
+the variable that is associated with the quantifier symbol.
+JOHN: Before we look at some examples,
+we'll just say that any well-formed formula that has no free variables is a "sentence".
+That is, such an expression makes a claim about the world.
+If there are no free variables,
+then we know how to interpret every variable in
+the sentence because they're all bound by some quantifier or other,
+and we'll come back to this point.
+DAVE: So let's look at this example expression in slot number 8,
+"for all x Cube(x)".
+The rule is that every variable in an atomic well-formed formula is free.
+So "x" is a free variable in the atomic wff "Cube(x)".
+Indeed it's the only free variable in that expression.
+The rules for expressions formed with
+the universal quantifier is that the free variables of the quantified expression,
+are just those that are free into sub-formula except that
+the variable associated with the quantifier is not free in the formula.
+So in this case,
+the free variable "x" in "Cube(x)" is not free
+in "for all x Cube(x)" because it's been bound by the quantifier.
+There are no free variables in the larger expression.
+Now, that we know that the variable is associated with the universal quantifier,
+we can imagine how the sentence might come to mean,
+"everything is a cube".
+JOHN: The next sentence is similar.
+In this case, we can see that "y" is free in the formula "Small(y)",
+and in the formula "Cube(y)".
+The variables free in the conjunction are just those free in either conjunct,
+and so the only free variable in the conjunction is "y".
+The existential quantifier has the variable "y" beside it,
+and so we know that this quantifier binds "y".
+Therefore, no free variables in the entire expression.
+It's a sentence. Now, as we'll see,
+this sentence means that "there is some small cube".
+DAVE: The next sentence is much more complicated.
+Looking at the consequent of the implication,
+we see that "z" is free in the sub-formula "LeftOf(a, z)",
+and that "x" and "z" are both free in the sub-formula "RightOf(x, z)".
+This means that the conjunction "LeftOf(a,z)
+and RightOf(z,x)"
+has both "x" and "z" free,
+but the existential quantifier binds "z".
+Which means that the quantified formula there "exists z (LeftOf a, z)
+and RightOf(z,x)"
+has only "x" free in it.
+The antecedent to the implication "Dodec(z)" contains the variable ""z free,
+and so in this whole formula,
+both "x" and "z" are free.
+Since there are free variables left when the,
+we have computed the variables for the entire expression,
+this is not a sentence.
+JOHN: We'll leave it to you to work out
+the free variables of the component formulas in the next example.
+We'll give you the hint that the whole formula is indeed a sentence,
+but you should take the time to work out which variables are free in which sub-formulas.
+The last sentence, "for all x for all y Likes(x,w)",
+has one quantifier immediately inside another.
+The formula "Likes(x,w)"
+has both "x" and "w" free.
+The variable "y" actually doesn't appear in the formula "Likes(x,w)",
+so it has no effect on the free variables.
+"x" and "w" are both free in "for all y Likes(x,w)",
+but the quantifier "for all x" does bind the variable "x".
+This means that the only remaining free variable in the final sentence is "w".
+DAVE: So this has been a very technical lecture,
+but it has a very important outcome.
+We've explained how the variables in the sentence get
+associated with quantifier symbols which appear elsewhere in the sentence.
+This association happens by "binding".
+If the variable that is free in an expression,
+and that expression is in the scope of a quantifier for that variable,
+then the variable is bound by that quantifier.
+And this is how we know how to interpret the variables within the expression.
+JOHN: We're going to cash in the value of this idea in the next lecture,
+when we explain how to work out the truth of
+sentences in the full language of first-order logic.
+DAVE: In this lecture, we've begun our study of the full language of
+first-order logic by introducing the syntax of the expanded language.
+JOHN: We introduced both variables and quantifiers,
+which work hand in hand to enable us to build sentences of the extended language.
+Variables occupy argument positions within the scope of predicate symbols,
+and quantifiers and an associated variable prefix an expression to create a larger one.
+DAVE: Since quantifiers tell us how to interpret the variables within their scope,
+we want to ensure that every variable has an associated quantifier.
+If it doesn't, then the sentence doesn't make a claim about
+the world because we don't know how to understand that variable.
+JOHN: Variables that are governed by a corresponding quantifier are called bound variables,
+while those that are not are called free.
+A well-formed expression which has
+no free variables is a sentence and it makes a claim about the world.
+DAVE: While we haven't given a formal semantics of these sentences yet,
+we have probably said enough to give you an idea of how this is going to work.
+In the next video, we'll make this completely precise.
+We'll give formal rules for determining
+the truth value of a sentence that involve quantifiers,
+and therefore allow us to say which sentences are true,
+and which are false in a particular situation.
+JOHN: So please join us for that lecture.
+DAVE: Until then. [MUSIC]
+End of transcript. Skip to the start.

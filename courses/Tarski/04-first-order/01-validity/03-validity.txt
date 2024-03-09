@@ -1,0 +1,229 @@
+[MUSIC] DAVE: As we have seen,
+there are sentences of first-order logic which are
+logically true but which are not tautologies.
+JOHN: In this lecture, we're going to describe a notion
+analogous to tautology but for first-order sentences.
+We say that a sentence is a "first-order validity" if it's always
+true because of the way it's built out of the components of first-order logic.
+What we mean by this is that we determine the truth of
+a sentence by considering only the propositional connectives,
+the quantifiers, and the uses of the equality predicate which occur in the sentence,
+and then the way that the formulas are built up from those parts.
+DAVE: That's complicated. But one way of thinking about it
+is that we're using the- everything that propositional logic considered,
+and in addition, the quantifiers and the meaning of the identity predicate.
+Or yet another way is that we consider everything about the sentence
+except the meaning of the predicate symbols which appear within the formula.
+But we do consider the meaning of identity.
+JOHN: So a first-order validity is
+the first-order analog of the propositional notion of tautology.
+And to go with this idea are the related ideas of
+first-order consequence and first-order equivalence.
+DAVE: Our overall approach in this class is a little different to most logic textbooks.
+The main difference is that because we want to use
+the blocks world and Tarski's World to provide example sentences,
+we use an "interpreted" language,
+one in which the predicate symbols have concrete meaning.
+Other classes might use "uninterpreted" languages
+which typically have meaningless predicates like "P" and "Q".
+JOHN: Using an interpreted language is great because you can see
+example blocks worlds and use the Tarski's World Program to try out the, the, sentences.
+But when we consider first-order validity,
+we're not allowed to take in the consideration the meanings of the predicates.
+So the first part of our procedure for testing
+for first-order validity is to remove the blocks
+world predicates from the sentence so they won't confuse
+us and replace them with meaningless predicate letters.
+DAVE: In some sense, this isn't really necessary.
+We could just pretend that the predicates don't have their usual meanings.
+But making this replacement
+clarifies the sentence that we are considering as a first-order validity.
+It's a lot like replacing the atomic formula with letters in the truth table method.
+When we know that "P or not P" is a tautology,
+we know that every instance is.
+Similarly, when we know that the first-order sentence
+involving predicates "P" and" "Q is a validity,
+then we'll know that any instance of such a formula is also a validity.
+JOHN: So let's consider this sentence.
+"For all x, for all y,
+LeftOf(x,y) implies RightOf(y,x)".
+Now, this sentence is true in every blocks world.
+Okay. That's pretty obvious.
+But is it a first-order validity?
+Well, our first step is to replace the blocks world
+predicate symbols with meaningless letters.
+We obtain "for all x, for all y,
+P(x,y) implies Q(y,x)".
+Just as in the propositional case,
+we make this substitution uniformly so that if
+the sentence had contained multiple occurrences of the predicate "LeftOf"
+then all of them would have been replaced by "P" and, and so on.
+DAVE: Now we have a new sentence.
+And if this one is a first-order validity,
+then so is the original.
+If a sentence is a first-order validity,
+then whatever the world looks like,
+however, many objects there are,
+how they are named and so on,
+and whatever the predicates "P" and "Q" mean,
+then that formula would have to be true.
+JOHN: So to show that a sentence is not a first-order validity,
+we have to exhibit a single situation,
+something a bit like a world,
+and a way of interpreting the predicates so that
+the sentence is false under that interpretation.
+DAVE: Right. If a validity is true in every possible situation,
+then it only takes one possible situation in which the sentence
+is false to show that that sentence is not a validity.
+JOHN: Right. So imagine that we have a world in which there's just two objects.
+This is our domain.
+Perhaps these objects are people,
+maybe John and Dave.
+And let's imagine that the predicate "P" means "is taller than".
+And the predicate "Q" means "is more po- popular than".
+So our sentence now with all those interpretations say that "for all objects x and y,
+if x is taller than y,
+then y is more popular than x".
+But imagine that in this world,
+John is taller than Dave,
+but that Dave is not more popular than John.
+This is a perfectly consistent situation.
+There's no logical reason why it can't happen.
+DAVE: We're stressing that this is not the actual world, obviously.
+JOHN: [LAUGHTER] Well, maybe.
+So this is a,
+a logically consistent situation in which this sentence comes out false.
+And so it can't be a first-order validity.
+This logically consistent situation is
+a counterexample situation to the validity of the first-order sentence.
+DAVE: Now, let's look at another example.
+We said earlier that the sentence "for all x,
+Cube(x) or not Cube(x)" is a logical truth even though it is not a tautology.
+Again, our first move is to replace
+the predicate "Cube" with a meeting- meaningless letter.
+Let's use "S" this time.
+So that formula is "for all x,
+S(x) or not S(x)".
+If this is a validity, so is the original.
+Let's look for a counterexample to this sentence.
+JOHN: I don't know.
+Let's suppose that the domain has one object in it,
+and that object has the property "S". Well,
+in that situation, the sentence is true.
+So this isn't a counterexample situation at all.
+But if the single object did not have property "S",
+then of course, the sentence would still be true
+and so that's not a counterexample either.
+DAVE: Well, if there's a counterexample,
+it must have more than one object in the domain then.
+Let's suppose there are two.
+Let's suppose that one of them has the property "S" and the other doesn't.
+JOHN: Nope. That's still not a counterexample.
+DAVE: What about if we had 100 objects and
+only three have the property "S", and the others don't?
+JOHN: All right. That will surely do it.
+[LAUGHTER] No. That's not a counterexample either, Dave.
+DAVE: I have a feeling we're going to be here for a long time.
+We're not gonna find a counterexample, are we?
+DAVE: And I think you're right, Dave.
+It should be pretty obvious that however hard we look,
+we're not going to be able to construct a counterexample.
+And this sentence is going to turn out to be a first-order validity.
+And that's because every object either has the property "S"
+satisfying the first disjunct of the embedded formula, and therefore,
+the whole formula, making the whole formula true,
+or it doesn't have the property "S",
+in which case it satisfies the second disjunct of the formula,
+making the whole formula true.
+JOHN: So that's gonna be our method for determining whether a sentence is a first-ord- uh,
+first-order logic is a validity.
+First, remove any meaningful predicates except for
+the identity predicate in favor of meaningless letters,
+and then try to find a counterexample situation.
+A situation in which the sentence is false.
+Now, we have to reinterpret the letters.
+We can interpret them any way we want.
+And we have to find a situation that makes the resulting sentence false.
+If you find one, then the sentence is not a logical truth.
+And when we say that you find a situation,
+we may mean just let there be as many objects
+as you like with the predicates meaning whatever you want,
+and the names attached in any way that you want them attached.
+DAVE: But wait. There's a real problem here.
+This is very different from the truth table method.
+In propositional logic, we had a procedure that we
+could follow and after some number of steps,
+depending on the number of atomic formulae in the sentence,
+we would have a definite result.
+The method that we just described for
+first-order logic is not a procedure in the same sense.
+The first part is straightforward,
+just translating the letters.
+But there are a lot of situations that we have to
+consider to try to find a counterexample.
+In fact, there are infinitely many possible situations.
+You can have as many blocks in them as we want,
+but the objects in them as we want.
+We can't consider them all and be sure that
+we've eliminated every possible one as a counterexample.
+JHN: Right. And that's a real problem.
+We might consider 10 situations and not find a counterexample,
+we might consider 100.
+We might even consider
+9,743,652 different situations and not find a single counterexample.
+But how do we know that the very next one that we
+think of isn't going to turn out to be a counterexample?
+DAVE: If we haven't yet found a counterexample,
+we may just not have considered enough situations.
+We may have been unlucky, not creative enough,
+but if only we'd tried harder,
+we might have found one.
+JOHN: And actually, this is the bad news from this class.
+There's no procedure that will be guaranteed to tell
+us whether a sentence is a first-order validity or not.
+The method that we described can't do this.
+It can allow you to determine that a sentence is not
+a validity if you turn up a counterexample,
+but if you haven't yet turned up a counterexample,
+you'll never quite know whether you've just been
+unlucky and should keep looking because there is one,
+or whether they're just isn't a counter-example because the sentence is a validity.
+DAVE: And we want to stress something important.
+It's not just that there is a way to do
+this but we want you to take another course before we tell you.
+There's no secret handshake.
+JOHN: And it's not that we don't know the procedure,
+but if you took a course from a more talented or better-looking logicians,
+they would be able to tell you.
+DAVE: And it's not even that humanity doesn't yet know a procedure
+for doing this and everyone is working really hard to find ways to do it.
+JOHN: It's in fact that, as bad as it could possibly be,
+there is a proof that there is
+no such procedure and no such procedure like that can possibly exist.
+Determining whether a sentence of first-order logic is
+a validity is what's called an "undecidable" problem.
+There is no procedure that'll allow you to do it.
+DAVE: In fact, the problem is what's known as "semi-decidable".
+It means there are procedures, like the one we gave,
+which will eventually t- turn up a counterexample if there is one,
+but which you may never finish if the sentence is a validity.
+JOHN: Now, there are ways that you can show that
+a first-order sentence does not have a counterexample,
+that is, that the sentence is a first-order validity.
+To do this, you have to construct a proof that the sentence is a validity
+using a collection of proof rules which manipulate sentences to do this.
+DAVE: And this isn't a topic that we're going to cover in this class.
+You may need to take a second class in logic to learn about proof.
+But even so, the existence of proofs doesn't get around the general problem.
+Like searching for counterexamples,
+searching for proofs is also undecidable.
+Proofs do however provide a way of demonstrating
+that sentences are validities and have no counterexample.
+JOHN: Well, on that happy note,
+we're going to end this video.
+In the next section, we're going to consider
+the related notions of first-order consequence and first-order equivalence.
+These are the first-order analogs of
+tautological consequence and tautological equivalence.
+[MUSIC]
+End of transcript. Skip to the start.

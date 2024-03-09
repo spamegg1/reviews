@@ -1,0 +1,104 @@
+[MUSIC] DAVE: We turned our attention to the full language of FOL.
+This is an extension of the propositional language with new elements called quantifiers.
+The quantifiers together with auxiliary elements called variables,
+allow us to make claims saying that all objects in the domain have
+a particular property or that some object in the domain has a particular property.
+JOHN: Now, quantifiers are not truth functional,
+meaning that they genuinely extend the expressiveness of our language.
+In order to determine the truth of a sentence built using a quantifier,
+we must examine the objects that make up the domain of discourse.
+DAVE: Being precise about the domain of discourse is another way in
+which FOL tightens the conventions of natural language.
+In natural language we usually rely on
+context to determine the collection of objects under discussion,
+but in FOL we're required to spell this out explicitly.
+JOHN: Suppose you want to tell whether a first-order sentence
+containing quantifiers is always true.
+That is, it is a logical truth.
+In propositional logic this is relatively simple.
+Since the only thing that matters is the truth of the atomic sub formulas,
+we can consider all of the possible situations by considering
+a complete set of possible combinations of truth values for these atomic sentences.
+DAVE: But in full first-order logic,
+the situation is much more complex.
+Since the number of objects in the domain and
+their properties play a role in determining the truth of the sentence,
+we have to consider way more situations.
+We need to examine all of the domains with one object considering
+all possible combinations of the properties and names that that object might have.
+Then we have to do the same with domains that contain two objects,
+then three, and so on.
+JOHN: In fact, we discovered but didn't prove that there's
+no procedure for determining whether a sentence of
+full first order logic is a logical truth.
+That is there's no sequence of instructions that we can
+follow that will take a finite amount of time and
+which will result in a definite yes or no answer
+that the sentence is or is not a logical truth.
+DAVE: So although the language of first-order logic allows
+us to better approximate the notion of full logical consequence,
+that ability comes with a price.
+Much more complicated tasks must
+be carried out to determine whether a sentence is a truth,
+whether two sentences are equivalent or
+whether one sentence is a logical consequence of another.
+JOHN: When we said that first-order logic is
+a good starting point for understanding natural languages,
+this is what we were alluding to.
+Things only get worse if we attempt to model larger fragments of natural language.
+The tasks of determining logical truth and consequence become even more difficult.
+DAVE: Like the language of propositional logic,
+it turns out that the language of full first-order logic is also redundant.
+Although we chose to introduce both the universal
+and an existential quantifier, these are inter-definable.
+We could choose to have a language with just one of
+these quantifiers without losing expressive power.
+And also like propositional logic,
+there are equivalent pairs of sentences
+within the full first-order language which means that
+we can express the same propositions
+in different ways using the resources of the language.
+JOHN: Those are the topics that we've studied in this course but it's worth
+spending a few moments to mention some things that we didn't study.
+One major topic in first-order logic that we did not
+discuss is the development of proof theory.
+Proofs provide us with an alternative way of
+demonstrating that one sentence is a consequence of others.
+DAVE: A proof is a document that shows that
+one sentence flows from others by exhibiting a sequence of
+steps each of which are obviously
+correct inferences which lead from the given information to the conclusion.
+JOHN: We cover this topic in detail in our online course,
+"Language, Proof and Logic".
+So that would be a place to start if you're interested in learning about proofs.
+DAVE: We have alluded to the idea that there are other formal languages often extensions of
+first-order logic that can model a wider range of natural language sentences.
+These include, modal logics which allow us to consider
+hypothetical alternative situations as well as the actual one.
+Evaluating the truth of a natural language sentence like "Dave is always talking".
+requires us not just to consider the actual situation in which I am in fact talking.
+It's also necessary to consider a collection of
+other past and future situations in which you must look to see if I'm talking.
+JOHN: That requires an extension,
+both to the language of FOL to provide a way of representing
+"always" and a way of describing the semantics of that operator.
+Traveling further afield, we might also consider situations in
+which information is presented in forms other than sentences.
+Perhaps we're given a map of a location or a spreadsheet representing book sales.
+These alternative representations are
+no different from sentences in the sense that they're
+sources of information that can be said to make claims about particular situations.
+DAVE: Diagrammatic logic is an area of logic that John and I are both interested in.
+Our book, "Reasoning With Diagrams and Sentences",
+explores some of these ideas and shows how to build a proof theory which
+involves both diagrams and sentences as sources of information.
+JOHN: As you can see,
+there's much more to explore in the area of logic.
+First-order logic is a great place to start your studies.
+We hope you've enjoyed this course and will continue in the field
+of logic by reading other books and taking more classes.
+DAVE: And of course you should complete the final exam for
+this course to obtain your credential. I'm Dave.
+JOHN: And I'm John. Good bye.
+Good bye. [MUSIC]
+End of transcript. Skip to the start.

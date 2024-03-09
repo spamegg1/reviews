@@ -1,0 +1,317 @@
+[MUSIC] JOHN: The Aristotelian forms give us
+a handy tool kit for translating
+some commonly occurring sentence forms into first-order logic.
+But there are many sentences that do not obviously fit into these forms.
+DAVE: Some sentences are in fact in these forms,
+but can be hard to see.
+Then again, there are sentences that just simply aren't of this type.
+Let's think first of all about sentences of the first type,
+sentences that disguised Aristotelian forms.
+JOHN: So one important trick when translating sentences into FOL,
+is to recognize that the formula playing the roles of "P" and
+"Q" in the Aristotelian forms can be actually quite complex.
+All of the examples that we've used so far,
+have had really simple atomic formulas playing these roles.
+But we can get more fancy with these formulas.
+For example, suppose we want to translate the English sentence.
+"Every cube is to the left of a and to the right of b" into FOL.
+Now this sentence is of the form "all Ps are Qs".
+That is, it's of the form,
+the first Aristotelian form that we've discussed.
+In this case, the property that is playing the role of
+"Q" is this complex property of "being to the left of a and to the right of b".
+Recall that we've said that a formula with
+a single free variable could be thought of as representing a property,
+the property that the object must have to satisfy the formula.
+So the property of being to the left of "a" and to the right of "b",
+is expressed as the complex formula "LeftOf(x,a)
+and RightOf(x, b)".
+So if we want to say that every cube has that property,
+then we say for "all x parenthesis,
+if x is a cube,
+then parenthesis LeftOf(x,a)
+and RightOf(x, b)".
+This is just the Aristotelian form, "all Ps are Qs",
+with a complex property represented by a non-atomic formula,
+in the consequent of the implication.
+DAVE: And of course, we can put complex formula into
+the other forms or into the antecedent position of this form or both.
+Consider this sentence, "some small cubes do not adjoin b".
+Okay. So that one's a fun one.
+This sentence is of the form,
+"some Ps are not Qs".
+That is we want to translate it as "there is an x,
+(P(x) and not Q(x))".
+Where "P" is the property of being a small cube,
+and "Q" is the property of adjoining "b".
+DAVE: So the required sentence is,
+"there exists x ((Small(x) and Cube(x)) and not Adjoins(x, b))".
+We've included parentheses around the formula playing the role of
+"P". Even though this isn't necessary to make the sentence well formed,
+it does better show the relationship between
+the original sentence and the translation though.
+JOHN: We're going to come back to the Aristotelian forms in a little while.
+But before we do that,
+we should consider what happens when we have multiple quantifiers in a sentence.
+All of the examples that we've looked at so far have just contained a single quantifier.
+DAVE: Right. But of course, sentences can contain multiple quantifiers.
+These quantifiers can appear anywhere within a complex formula.
+We're going to start with the simplest cases
+of sentences that contain multiple quantifiers.
+These are sentences with two quantifiers,
+that quantifiers of the same type,
+either both universal or both existential.
+And further, we're going to assume that they're outside of
+the sentence not embedded within some complex structure.
+JOHN: Okay. So here's a good example of,
+of such a sentence,
+"for all x, for all y, Likes(x,y)".
+So what does this sentence mean?
+DAVE: Well, remember that sentences with one free variable represent a property,
+and a universal quantifier says that every object has that property.
+So this formula "for all x,
+for all y, Likes(x, y)", is true,
+just when every object has the property "for all y Likes(x, y)".
+That is, every object has the property that it likes every object.
+JOHN: Why? Because every object has to satisfy the property.
+So for example, a has to satisfy the property.
+That is, it must be the case that "for all y Likes(a,
+y)", has to be true.
+And this is only true if "a" likes every object.
+So the original formula is true just when every object likes every object.
+DAVE: Going in the other direction,
+suppose we start with an English sentence.
+"Everything adjoins everything".
+This is just like the previous sentence.
+It's translated as "for all x,
+for all y, Adjoins(x, y)".
+Every object has some property.
+Which property? The property that it adjoins everything.
+JOHN: So Dave is it possible for that sentence to be true in Tarski's World?
+Mh, let's see. How about
+a situation like this in which there are two blocks that adjoin one another.
+Do you think that the sentence is true in this world?
+JOHN: Well, it looks like it's a possibility.
+So let's find out.
+When we evaluate the sentence, Tarski's World says that it's false.
+So how can that be?
+So let's play the game to find out.
+DAVE: Okay. We'll play the game committed to the idea that the sentence should have been true.
+Tarski's World says, that we have to believe that
+every object x satisfies "for all y Adjoins(x,y)".
+Tarski's World chooses a block and calls it "n1".
+We have to believe that every blog adjoins this "n1".
+JOHN: And that means, that we must believe that every block has to satisfy "Adjoins(n1,y)".
+But notice that Tarski's World selects the same block again,
+and says that we must believe that this block adjoins itself. That's cheating.
+DAVE: Aha, no object adjoins itself.
+So this sentence is false.
+We were wrong in saying that the original sentence is true.
+This illustrates the point that
+both universal quantifiers range over the same set of objects,
+the whole domain, all of the objects.
+It's tempting to read our original sentence as saying,
+that every object adjoins every _other_ block,
+but that's not what it says.
+We'll see how to translate that sentence in a second.
+JOHN: Okay. So another possibility is that there are two existential quantifiers in a sentence.
+For example, consider the sentence.
+"There is an x, there is a y, Likes(x, y)".
+Take a moment to see if you can decide what this sentence means.
+You can pause the video if you want.
+DAVE: Now, roughly this sentence means that "someone likes someone".
+First of all, how can this sentence be true. Well, it's true.
+Just when there's some object in the domain that satisfies this formula,
+"there exists y Likes(x, y)".
+This formula represents the property of liking somebody, "x" likes somebody.
+Any object that satisfies this property likes someone or in logic speak,
+an object satisfies this formula if there's some object that that object likes.
+JOHN: Again, this sentence would be true if there's an object that likes itself.
+Both "x" and "y", remember,
+can be satisfied by the same object.
+DAVE: But suppose we wanted to translate the sentence,
+some object likes some other different object,
+then we need to modify the property that we need to be satisfied by "x".
+Instead, we need the property,
+"there's a y that's different from x, that x Like"s.
+That is, "there exists y, open parenthesis,
+x is not identical to y and Likes(x, y)".
+The complete sentence that we want then is "there exists x,
+there exists y, (x is not equal to y and Likes(x, y))".
+JOHN: Notice that this is similar to one of the Aristotelian forms.
+The in- inner formula says that some "P" is
+"Q" where "P" is the property of being different from "x",
+and "Q" is the property of being liked by "x".
+DAVE: So if we wanted to say that every object likes every other object,
+then this is also similar to the Aristotelian form,
+"all P's are Q's",
+where "P" is the property of being different from "x",
+and "Q" is the property of being liked by "x".
+So the sentence is "for all x for all y,
+open parenthesis, x not equal to y implies Likes(x, y))".
+"Every x has the property that everything different
+from x is liked by x."
+Incidentally, the identity predicate turns out to be critical
+to expressing these kinds of claims and many others.
+That's why we consider it to be an essential part of FOL unlike the "Cube" predicate say.
+JOHN: Okay. Now, it's time to consider a more difficult case.
+When a sentence has mixed quantifiers,
+mixed quantifiers meaning that it
+has more than one quantifier and they're of different types.
+In the next example,
+we'll consider the situation in which there's
+one universal quantifier and one existential quantifier,
+and that these quantifiers are not embedded within
+a complex formula apart from the other quantifier
+DAVE: Okay. Suppose we want to say that there's some person that likes everyone.
+The situation that I'm imagining is that there's this person,
+John say, and that John likes everyone in the domain.
+Perhaps everyone in the recording studio or something.
+How would we translate that sentence, "John likes everyone"?
+Something like this.
+"For all y Likes(john, y)".
+JOHN: Now, the original sentence didn't say that I like everyone.
+Only that there is a person- some person that likes everyone.
+And so the sentence that we would like is the following. "There is an x.
+For all y Likes(x,y)".
+So there is something such that- that thing likes everything.
+DAVE: Now, there's something very important about sequences of quantifiers of mixed type.
+Sequences like this, there exists for all.
+This sentence does not mean the same thing as
+the superficially similar sentence "for all y there exists x Likes(x,y)".
+This sentence is obtained just by switching the order of
+a quant- universal and existential quantifiers
+leaving the rest of the sentence unchanged.
+Can you see what the sentence says?
+JOHN: Okay. Take a minute to consider the sentence.
+Pause the video if necessary.
+And while you work out what you think it says- it means, we'll wait.
+Okay. So the way to read this sentence is that it says,
+every object y has some property.
+And what is that property?
+Well, it's the property that someone "x" likes them.
+So roughly, we would say that "everybody has someone who likes them".
+It should be clear that this doesn't mean the same thing as the previous sentence,
+that some particular person likes everyone.
+For example, this new sentence is true if John likes himself and I like myself,
+and we're the only people in the domain.
+The new sentence says that everyone domain like someone.
+I like myself, John like himself,
+this sentence is true.
+JOHN: But in this situation,
+and we stress that this is purely hypothetical,
+neither of us likes the other.
+And so there's no one in the domain who likes
+everyone, which is what is required to make the first sentence true.
+Switching the order of the quantifiers of different types within
+a sequence of quantifiers changes the meaning of the sentence.
+Two sentences obtained like this are not logically equivalent.
+They are not true in the same situations as we've just seen.
+DAVE: Now, we didn't say this earlier.
+The switching the order of quantifiers of the same type within
+a sentence does in fact preserve the meaning of the sentence.
+JOHN: Now, we're going to return to a discussion of the Aristotelian forms.
+But this time, with complex, and in particular,
+quantified formula's expressing the properties that play a role in the forms.
+This will result in a situation in which there may be many quantifiers of mixed types
+within a sentence not all nicely gathered
+together as in the examples that we've used so far.
+DAVE: Spoiler alert. It's a fact that any sentence which has quantifiers embedded within it in
+arbitrary positions is equivalent to a formula which consists of a sequence of
+quantifiers which are outside of a formula which is completely free of further quantifiers.
+A sentence like this is said to be in "prenex" form,
+and we'll be discussing this result and demonstrating its truth in a later lecture.
+JOHN: So right now though,
+we're just gonna focus on translation and on how to
+translate some more complex sentences involving quantifiers.
+Suppose we want to translate the sentence,
+"Every small green cube is cold".
+Well, this is an example of an Aristotelian form "all P's of Q's".
+But the "P" in this case is the noun phrase "small green cube".
+JOHN: Let's start by thinking about the sentence.
+"a is a small green cube".
+This just says that "a" has the conjunction of the properties small, green, and cube.
+So this would be translated as "Small(a)
+and Green(a) and Cube(a)".
+So the property of being a small green cube is represented by the formula "Small(z)
+and Green(z) and Cube(z)".
+JOHN: So to say that every object that has this property is
+also cold is just the sentence "for all z,
+parenthesis, if z is small,
+and z is green,
+and z is a cube,
+then z is cold".
+DAVE: So you can see that the sentences in the, uh,
+different positions in the Aristotelian form can get quite complicated.
+Now, suppose we want to say "everything to the left of some cube is a dodecahedron".
+Notice that this has two quantifier words in it, "everything" and "some".
+So we might expect that to be two quantifiers in the translation of this formula.
+But basically, this is of the Aristotelian form,
+every object with some property has some other property "all P's are Q's".
+In this case, every object that has the property of being to the left
+of some cube has the additional property of being a dodecahedron.
+JOHN: And this is pretty complicated.
+How do we say that an object has the property of being to the left of a cube?
+Well, one way to think about this is to think about the related sentence,
+"a is to the left of some cube".
+So what this says is that there is
+some object which is a cube and "a" is to the left of it,
+and this is an Aristotelian form which paraphrases the example.
+So the property of being to the left of some cube would be expressed as,
+"there is a y, (Cube(y)
+and LeftOf(x, y))".
+Objects which satisfy this formula for the "x" must have a cube to their left.
+DAVE: So returning to our example sentence,
+we want to say that every object that has
+this property also has the property of being a dodecahedron.
+Well, "all P's are Q's",
+now we have our "P", "exist y,
+Cube(y) and LeftOf(x, y)".
+And so the resulting sentence is "for all x,
+if there exists a y, such that y is a cube and x is to the left of y,
+then x is a dodecahedron".
+JOHN: Okay. So we're getting pretty complex.
+The important thing here is that
+quite complex sentences can be analyzed using the Aristotelian forms,
+and that such an analysis can help us to translate
+these sentences from English into first-order logic.
+In this video, we've talked about the task of
+translating between first-order logic and natural language
+DAVE: We first introduced the Aristotelian forms.
+These are sentences that occur quite commonly,
+and they're both interesting in their own right and can also
+serve as building blocks to build more complex sentences.
+Right. These forms relate two properties to one another.
+These- these properties can sometimes be described by simple atomic expressions,
+sometimes by more complicated propositional forms like conjunctions.
+And of course, sometimes, they might be first-order expressions themselves.
+Since the Aristotelian forms are quite common,
+they often appear embedded within larger forms.
+DAVE: And in the second half of the lecture,
+we talked about some common pitfalls when dealing with quantified sentences.
+The first was the observation that when you have
+a sentence involving both universal and existential quantifiers,
+it makes a huge difference which is inside the scope of the other.
+JOHN: This is very important and doubly difficult.
+Because in natural language,
+we do not typically make these relations explicit,
+we rely on context to make the determination.
+But when translating into FOL,
+we have to consider the relationship between the quantifiers and make that explicit.
+DAVE: And finally, we pointed out a common error in
+understanding sentences with two universal quantifiers.
+It's often tempting to treat a formula like this as
+saying for every "x" and for every other "y".
+To write a sentence that says that,
+you have to explicitly say that "x" and "y" have to
+be satisfied by different objects in the sentence,
+and you do this by using a negated equality between the objects.
+JOHN: The quantifiers range over every object in the domain.
+They don't know that they're in the scope of other quantifiers.
+DAVE: That's it for this lecture.
+In the next one, we'll return to the topic of logical consequence.
+We now have a new approximation to the notion of logical consequence,
+and we'll investigate the properties of that approximation,
+that theory, next time.
+JOHN: See you then. [MUSIC]
+End of transcript. Skip to the start.

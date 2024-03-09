@@ -1,0 +1,198 @@
+[MUSIC] DAVE: Someone here is called John, and it isn't me.
+JOHN: And everyone who is not called John, is called Dave.
+DAVE: In this lecture, we're going to begin the expansion of
+the propositional language that we've so far been
+discussing to the full language of first order logic.
+JOHN: So since we learned that the language of
+propositional logic is truth functionally complete,
+this will involve adding new elements to
+our language whose semantics are not truth-functional.
+These elements are called "quantifiers" and in order to use
+them we also need to introduce a new item called a "variable".
+Quantifiers and variables work hand in
+hand to allow us to write new quantified sentences.
+DAVE: In this lecture, we're going to focus on the syntax of these new expressions,
+that is how we organize the symbols in
+the expressions so that they're grammatically correct.
+So just as we told you that conjunction symbols
+must stand between two propositional sentences,
+we'll explain how to form new expressions using quantifiers and variables.
+JOHN: Now, unlike the case of propositional logic,
+there are grammatically correct expressions of first-order logic which are not sentences.
+That is they're grammatically correct,
+we'll say that they're "well-formed",
+but they don't make claims about the world.
+So a second topic of this lecture will be how to tell the difference between
+expressions which are also sentences and those which are not.
+As a piece of syntax,
+variables are a lot like constant symbols or names.
+A variable symbol can appear anywhere that a constant symbol can.
+That is, they appear as arguments to predicate symbols.
+Because of this, we need a way to distinguish between variables and constants.
+In general, we'll use lowercase letters from near the end of the alphabet,
+for example "x", "y", "z" as variable symbols.
+We'll say that any single letter from "t" onward will be a variable,
+and that any other letter will indicate a constant.
+DAVE: It'll be rare but we'll sometimes use subscripts and
+say "x1" and "x2" to give us some more variables.
+These variables can appear anywhere that a constant symbol can appear,
+that is they appear as arguments to predicate symbols.
+But it's very important to remember that they are not interpreted as names,
+rather, their denotation varies when we interpret them.
+JOHN: And that's why they're called variables.
+DAVE: Indeed.
+JOHN: So constant symbols are called constants because they
+always pick out the same single object.
+When we use variables,
+they can denote any object,
+there denotation varies so to speak.
+DAVE: You can find buttons for the variables "u" through
+"z" on the logic toolbar of Tarski's world.
+These are the variables that we'll usually use.
+Six variables is typically enough for our purposes.
+If you need "t" or "x7" for some reason,
+then you'll have to type them.
+JOHN: It's going to take a moment before we can see how we use variables,
+so so be patient.
+But you now know that expressions like these are
+permitted expressions in our expanded language.
+"Tet(x)" is an expression of our language,
+since the "x" appears as an argument to the predicate "Tet".
+Expressions can contain multiple variables as in "SameSize(x, y)".
+DAAVE: You can mix constants and variables within the same sentence.
+As in "Smaller(a x)",
+or "Between(a, x, z)".
+And of course, "Cube(a)" is still an expression of our language.
+Its the only expression among these five that make a claim about the world,
+its the only expression that's a sentence.
+It makes the very same claim that it always has, that "a" is a cube.
+JOHN: The remaining expressions, the ones that contain variables,
+we won't call sentences of the language.
+They don't make a claim,
+for the moment think of variables as being like the word 'it' in English.
+You need to know how to interpret the word 'it' before you
+can evaluate the truth of a sentence involving this word.
+So far, we haven't said anything about how a variable will be interpreted,
+and so it's like a pronoun whose referent we just don't know.
+DAVE: If you try to evaluate one of these expressions,
+you will see that a star appears where the value usually does.
+If you evaluate the expression again,
+you'll see a dialog that says 'formula is not a sentence',
+"it has free variables" and it will tell you the names of the variables that are free,
+that is- um, don't have a quantifier associated with them in the sentence.
+JOHN: These are expressions of the language of FOL though.
+For example, any of them could appear as a subformula of a larger formula.
+And as we'll see, the larger formula might even be a sentence.
+We call these expressions "well-formed formulas".
+A well-formed formula is like a sentence except that it may contain variables.
+Sometimes, we abbreviate the expression,
+well-formed formula, by the more convenient "wff" or Woof.
+Even if there's no variables the expression is still a well-formed formulas.
+So all propositional sentences are also well formed formulas of the larger language.
+DAVE: Here are some of the rules for deciding whether something is a well formed formula.
+A predicate symbol applied to the correct number of
+arguments, variables or constants is a well formed formula.
+If "P" is a well formed formula,
+then so is "not P". And if "P" and "Q" are well-formed formula,
+then so are the expressions "P and Q",
+"P or Q", "P arrow Q",
+and "P biconditional Q".
+JOHN: These rules are exactly like the corresponding rules for forming propositional formula.
+The only difference is that all of these rules allow
+a formula to contain variables as arguments to predicates.
+DAVE: So if a well formed formula contains no variables,
+then it's a sentence.
+This means that all of the sentences in propositional logic,
+are sentences of the expanded language.
+And since we haven't changed anything about the propositional connectives,
+they will all be interpreted as meaning exactly what they always did.
+JOHN: The second piece of syntax that we're going to need are the "quantifier symbols".
+There are two of these, and they're written with rotated
+letters "A" and "E". So it's upside down
+"A" and upside down "E". You can find these symbols on
+the logic toolbar on the row above the variable symbols.
+The first of these symbols,
+the one that looks like a capital A is called the "universal quantifier".
+It's used to express English words like "every" and "all",
+as in the sentence,
+"every block is large" and "all of the cubes are small".
+DAVE: The second symbol is the rotated capital letter "E",
+and it's called the "existential quantifier".
+It can be used to express English words like "some", and "there is".
+As in the sentences,
+"some block is small",
+and "there is a small cube".
+The best way to remember how to distinguish between these two quantifier symbols is to
+remember universal quantifier symbol looks like a capital A for the word "all",
+while the existential quantifier looks like the letter E for the word "exists".
+JOHN: Okay so now we're going to show how to use
+the quantifier symbols to make a new well-formed formula from smaller ones.
+These are additional rules that extend the set that we've just described.
+First, if "P" is a well formed formula and "x" is a variable,
+then the expressions for "all x P" and "there is an x P", are well-formed formulas.
+DAVE: Like negation, the existential and universal quantifiers are prefix operators,
+they go before their subformula.
+We take an expression and place the quantifier and variable in the beginning.
+Just as in the case of negation,
+this creates a possible ambiguity.
+If we see a quantifier followed by a conjunction,
+does the quantifier apply to the whole conjunction or just to the first conjunct?
+JOHN: We answer this question for quantifiers,
+exactly the way we did for negation.
+A quantifier applies to the smallest formula that follows.
+And if we need to apply it to a larger expression then that
+expression needs to be placed inside parentheses.
+So, "there is an x Cube(x) and Small(x)",
+is constructed by taking the formula "Cube(x)",
+then making the formula.
+"There is an x Cube(x)",
+and then by conjoining it to the formula "Small(x)".
+While, the sentence, "there is an x (Cube(x) and Small(x))"
+is made by applying the quantifier to the conjunction "Cube(x) and Small(x)".
+DAVE: It's really important to understand the distinction between these two expressions.
+This is exactly like the difference between "not P and Q",
+and the expression "not (P and Q)".
+JOHN: As we will shortly see,
+the second of these quantified expressions is a sentence,
+and says that there is a small cube.
+The first though is not a sentence and it makes no claim about the world
+DAVE: So here are some examples of
+well-formed formula that use quantifiers in their construction.
+"For all x Cube(x)" is
+a well formed formula and that's because "Cube(x)" is a well formed formula,
+and a new well-formed formula is obtained by
+preceding a well formed formula with a quantifier and variable.
+JOHN: The next formula is "Dodec(z),
+then, implies, there is a z ( LeftOf(a,z),
+and RightOf(z,x)".
+Now, "Dodec(z)" is a well formed formula and so
+is the formula beginning with the existential quantifier.
+Joining two WFFs with an implication arrow makes a WFF, a well-formed formula.
+Now, why is the existential part a well-formed formula?
+Well, it's just like the previous example,
+except that we have an existential quantifier.
+Notice that this formula contains a mixture of constants and variables,
+and involves two place predicates.
+DAVE: The next example, "for all
+w (Cube(w) and
+not there exists y,
+Dodec(y))" has two quantifiers.
+It's made by starting with the wff "Dodec(y)",
+and preceding that with "exists y" to create a new wff.
+That wff is negated to form the second conjunct of the conjunction.
+The first conjunct is "Cube(w)" which we know is a wff.
+And therefore, since "Cube(w)" is a wff and "not there exist y Dodec(y)" is a wff,
+the conjunction of those two formula is a well-formed formula.
+And again, preceding that whole well-formed formula with "all
+w". Placing that formula in parenthesis also makes a well-formed formula.
+JOHN: Now, for our final example let's take this sentence.
+"For all x, for all y,
+Likes(x,w)". That starts with the wff "Likes(x,w)",
+and precedes it with for "all y" to obtain a new wff,
+and this wff has for "all x" prepended to it to get a larger wff.
+DAVE: So now you know the rules for creating well formed formula of first order logic.
+We haven't yet said anything about what these sentences might mean,
+and the circumstances under which they make claims about the world,
+that's going to be our next topic.
+[MUSIC]
+End of transcript. Skip to the start.

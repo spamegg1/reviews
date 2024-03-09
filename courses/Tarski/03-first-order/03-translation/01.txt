@@ -1,0 +1,280 @@
+[MUSIC] JOHN: Hi I'm John and that's boring.
+DAVE: And I'm Dave, equally boring [LAUGHTER].
+In the last few videos,
+we've introduced the expanded language of FOL.
+We've described the syntax of the new language,
+introducing variables and quantifier symbols.
+JOHN: So we've described how to tell whether expressions
+constructed using these symbols are sentences,
+and how to tell whether these sentences are true or false in particular situations.
+DAVE: We're going to start thinking about how we can use
+this new language to translate English sentences into FOL.
+We want to think about what we can say in the new language and how
+to translate fluently from English into FOL and back.
+JOHN: In the next two videos,
+we're going to describe some ideas about how to do this.
+We begin by considering a class of sentences that were first
+studied by the ancient Greek philosopher, Aristotle.
+Although Aristotle did not have the idea of a quantifier,
+these sentences translate into quantified formula of the first order logic.
+DAVE: These quantified sentences are important in their own right,
+but they also provide some building blocks for
+translating complex natural language sentences into FOL.
+Many natural language sentences can be built using this kind of sentence.
+JOHN: Now we'll also draw attention to some of the pitfalls that you'll
+encounter when translating from natural language into FOL.
+One important issue is,
+how to determine when one quantifier falls into the- in scope of another.
+DAVE: In natural language, we often don't make this clear
+relying on context to facilitate our understanding,
+but of course in FOL, we'll need to be precise about this issue.
+And that's the topic we'll take up later in this lecture.
+For now, let's turn our attention to the Aristotelian forms.
+JOHN: Now we've already seen the simplest sentences constructed using the language.
+These are sentences with just one quantifier with an atomic subformula.
+The sentence "for all x Cube(x)",
+says that everything is a cube.
+While the sentence, "there is an x,
+Large(x)" says that something is large.
+DAVE: So it's actually more usual to make claims about
+a range of objects within the domain rather than about every object in the domain.
+For example, we might want to say that "all of
+the cubes are small" or that "there is a large dodecahedron".
+The ancient Greek philosopher Aristotle,
+the founder of the study of Logic,
+investigated these special forms of
+quantified sentences and two others that are closely related.
+We call these the "Aristotelian forms".
+Sentences in these forms are not only commonly occurring on their own,
+but they often form building blocks from which we can build more complex sentences.
+JOHN: Aristotle sente- studies sentences which take the following four forms.
+"All P's are Qs".
+"Some Ps are Qs",
+"no P's are Qs" and "some Ps are not Qs".
+In these schematic sentences,
+we intend "P" and "Q" to be arbitrary properties like being a cube,
+being large or being to the left of a large tetrahedron.
+JOHN: The English sentence, "all cubes are small",
+is if the first form.
+It uses the property "is a cube" in place of the property "P",
+and the property "Q" is replaced by "is small".
+One important observation is that we can think of
+FOL expressions which contain one free variable,
+the standing for properties.
+The expression "Cube(x)" is a way of referring to the property of being a cube.
+The objects that satisfy
+this expression are just those objects that have this property.
+JOHN: We translate sentences of the form "all Ps are Qs" using FOL sentences that look like this,
+"for all x, if P(x) then Q(x)".
+So the sentence, "all cubes are small" would be written as "for all x,
+if x is a cube then x is small".
+DAVE: So let's think about why this is the right translation of the English sentence.
+Well, this sentence is true if
+every object in the world satisfies the embedded implication.
+That's what the universal quantifier means.
+Suppose that the world contains a small cube with the name "s". This object satisfies
+the formula "Cube(x) implies Small(x)" because the formula "Cube(s) implies Small(s)" is true.
+"s" is a small cube so "Cube(s)" is true and "Small(s)" is true,
+and that makes the implication true.
+So "s" or indeed any small cube will satisfy the formula.
+JOHN: Now suppose we have an object that's not a cube.
+Let's suppose that it's a dodecahedron and it's called
+"d". This block also satisfies the formula.
+That's because the sentence "Cube(d)" is false.
+"d" is a dodecahedron after all.
+Since "Cube(d)" is false,
+then the implication "Cube(d) implies Small(d)" is true.
+Remember implications are always true if the antecedent is false.
+So "d" or indeed any block that is not a cube satisfies the formula.
+The only other kind of object that we might have is a cube that's not small.
+A block like this,
+does not satisfy the embedded formula.
+Suppose that the world contains a large cube,
+say "l". The sentence "Cube(l) implies Small(l)" is false,
+since the antecedent is true "l" is a cube but the consequent is false.
+So "l" doesn't satisfy this formula and nor does any other cube that is not small.
+JOHN: So what this means is that the only way in which a sentence "for all x, Cube(x),
+then Small(x)" can be false is if the domain contains
+a cube that is not small or put another way,
+if not all of the cubes are small.
+The sentence will be true if all of the blocks in the world are small,
+just like the corresponding English sentence,
+"all cubes are small".
+DAVE: We can use Tarski's World to help us to see this.
+Let's begin by evaluating this sentence "for all x (Cube(x) implies
+Small(x))" in the world in which there are only small cubes.
+As we expect, this sentence is true in this world.
+We'll play the game to see what happens if we
+pretend to believe that the sentence is false in this situation.
+So we'll start the game and commit to false.
+JOHN: Okay. So supposing that we think it's false,
+then Tarski's World is going to ask us to
+choose an object that does not satisfy the formula,
+"Cube(x) then Small(x)".
+It doesn't matter which object we pick, obviously,
+so let's choose this one, Tarski's world would now name "n1", okay?
+So Tarski's World writes the sentence as "not Cube(n1) or Small(n1)",
+since that's the equivalent form and points out
+that we believe that this sentence is false, which we do.
+If we believe the whole thing is false.
+So you must now believe that both "not Cube(n1)" and "Small(n1)" are false.
+Obviously, "Small(n1)" is true not false,
+and so we're incorrect.
+Notice that if TW had chosen the sentence,
+"not Cube(n1)", then we would have won since "n1" is indeed a cube.
+But Tarski's World is not that stupid.
+DAVE: Which is good because the formula is in fact true in this world.
+Now let's consider a situation in which there are blocks that are not cubes.
+Let's change the world so that there's a small dodecahedron and a medium tetrahedron.
+When we evaluate the formula,
+you can see that it's still true.
+That's because all- all of the cubes in this world are small,
+so that's what we were hoping for.
+Again, let's see what happens when we play the game trying
+to defend the position that the sentence is false.
+JOHN: Okay. So we- we claim the sentence is false,
+and the game proceeds exactly the same way except that we have
+more choices when we try to choose objects that don't satisfy the formula.
+So let's play choosing the small dodecahedron as our counter example object.
+The game proceeds just as before,
+but it's even worse for us.
+We believe both that "not Cube(n1)" is false, that is,
+we have to believe that "n1" is a cube which obviously isn't,
+and we believe that "Small(n1)" is false,
+which, again, is not false but true.
+DAVE: If we play again,
+but this time choose the medium-sized tetrahedron,
+then things go equally badly.
+"not Cube(n1)" is false,
+that is we have to believe that "n1" is a cube,
+but is in fact a tetrahedron.
+The fact that "Small(n1)" is false,
+isn't gonna help us because Tarski's World is gonna choose the formula "not Cube(n1)".
+It can choose either formula because we believe that both are false.
+JOHN: Okay. So let's now make one of the cubes,
+one of the blocks, into a- a middle-sized cube.
+When we evaluate the sentence in this world,
+we're going to see that its, surprise, it's false.
+Now, if we play the game committed to its being false,
+we'll be able to pick a block that's a counterexample to
+the claim because we can choose this medium cube.
+The game proceeds as before,
+when we must believe that it is cube and that is not small and these are,
+in fact, true of this block.
+So we've seen that the sentence is true,
+unless there is a cube in the world that's not small.
+That is, the sentence is true,
+if every cube is small,
+which is what we wanted to translate.
+The only blocks that do not satisfy
+the embedded formula are those which make the antecedent of the implication true,
+that is they are cubes,
+but that make the consequent false,
+i.e, they're not small.
+JOHN: So going back to our sentences.
+The second Aristotelian form is "some Ps are Qs",
+will translate this into FOL using the sentence.
+"There is an x (P(x) and Q(x))".
+DAVE: Again, "P" and" "Q stand for any property that we might care to name.
+Let's imagine that we wanted to translate this sentence.
+"Some tetrahedron is medium-sized".
+We would translate this sentence as,
+"there exists x, (Tet(x) and Medium(x))".
+JOHN: Notice that this sentence is not like the universally quantified form "for all Ps or Qs".
+This sentence has a conjunction in the embedded formula, not an implication.
+DAVE: That might not be so surprising actually.
+Notice that the sentence,
+"all cubes are small",
+say something very different from the sentence,
+"all small things are cubes".
+This is reflected in the use of the implication connective which is not commutative.
+That is, it's sensitive to the choice of which property is
+used in the antecedent and which is used as the consequent.
+On the other hand, the sentence,
+"there is a small cube",
+says exactly the same thing as,
+"there is a small thing, that's a cube".
+Since both things must be true of an object to make the sentence true,
+it doesn't matter which order we place the two properties.
+The fact that conjunction is commutative connective, reflects this observation.
+JOHN: Okay. So why does this formula a good translation of the English sentence?
+The first-order sentence is true only if some objects satisfies the embedded formula,
+"Tet(x) and Small(x)".
+Since this is a conjunction,
+such an object would have to satisfy both "Tet(x)" and "Small(x)",
+that is, it would have to be both small and a tetrahedron.
+So the sentence is true only if there's a small tetrahedron in the domain,
+which is, in fact,
+exactly what the English sentence claims.
+DAVE: Again, we can use Tarski's World to help us
+investigate the truth conditions of the sentence.
+If we play assuming that the sentence is true,
+then Tarski's World will require us to select an object satisfying "Cube(x) and Small(x)".
+We believe that the sentence, "there exists x,
+(Tet(x) and Small(x))" is true,
+so we must believe that some object satisfies "Tet(x) and Small(x)".
+And so we will be asked to choose a block that does,
+in fact, satisfy "Tet(x) and Small(x)".
+In fact, there is none that satisfies that formula.
+Maybe we select the small dodecahedron.
+So that means we must believe that that object we
+selected is both a tetrahedron and small.
+And of course, that fails because that block is not a tetrahedron.
+JOHN: Okay. So let's try to play committed to the sentence being false.
+Then Tarski's World will attempt to prove us wrong by selecting a small tetrahedron,
+which it will be able to do if there is,
+in fact, a small tetrahedron in the world.
+That is, if the sentence is,
+in fact, true, will contradict in our claim.
+DAVE: But it turns out that in this world, of course,
+there is no such block for Tarski's World to pick.
+So it's picked, again,
+it picked the same dodecahedron that we did, uh,
+but it will lose the game because we believe for example,
+"Tet(n1)" is false,
+when it picked this block.
+The other two Aristotelian forms are closely related to the two that we've just discussed.
+First, "no Ps are Qs".
+We could think of the sentence of the form "no Ps are Qs" in one of two different ways.
+One, is that there's no object which is both a "P" and a "Q".
+This will give us the formula;
+"it's not the case that there exists x,
+(P(x) and Q(x))".
+JOHN: But another way to think about this sentence is that it says that
+every object that is a "P" is not also a "Q".
+In this way of thinking about things,
+we obtain the sentence;
+"for all x, if x is a P,
+then it's not a Q".
+When we discuss the notion of first-order equivalence in the next lecture,
+we will see that these two formulas are, in fact, equivalent.
+That, of course, means that either is
+a good translation of the or-original English sentence.
+DAVE: So we've written the implicational form here on the screen,
+but we'll come back to the possibility of the, ah,
+conjunction form being existential form being,
+ah, a good translation later.
+Perhaps you'll find one of these formulas
+a more intuitive translation of the English sentence, that's fine.
+Stick with one you feel comfortable with,
+at least until we demonstrate that the forms are equivalent.
+JOHN: Right. And I actually think that the- the negative existential are more common,
+is a more natural form.
+DAVE: Ah, this is another thing which we disagree.
+JOHN: We disagree, I know. [LAUGHTER] Okay.
+So the final sentence form that we haven't talked about yet is;
+"some Ps are not Qs".
+Now, this says that there's some object which has
+the property "P" which does not have the property "Q".
+The natural translation of this sentence is the following;
+"there is an x, (P(x) and not Q(x))",
+and I bet we agree on that, Dave.
+DAVE: We do agree on that John [LAUGHTER].
+So we're not gonna to present more examples of these sentences
+but you should be able to go back to Tarski's World,
+and play the game with sentences of these kinds,
+to make sure that you understand how formal sentences of this form track
+the meaning of their English counterparts
+just as we did for the first two kinds of sentences.
+[MUSIC]
+End of transcript. Skip to the start.

@@ -1,0 +1,77 @@
+
+Inclusive and Exclusive Disjunction
+
+When we were out in the neighborhood the other day, John and I saw a sign in a restaurant window, which we reproduce below,
+Special Offer
+
+If you come to our restaurant on
+Monday or Friday
+
+then you will receive a free appetizer of
+Soup or Salad
+
+As you can imagine, being logicians, our attention was drawn to the two uses of the word or in this text.  First we reasoned that if we were to go to the restaurant on both Monday and Friday we would receive a free appetizer.  So, we realized the use of or in the phrase "Monday or Friday" was intended to be inclusive.  And so it turned out, we went to the restaurant both days, and received the special offer on both occasions.  The phrase "Monday or Friday" implicitly has an additional "or both" added to it.
+
+Unfortunately though the use of the word or in the phrase "Soup or Salad" is exclusive.  We did try, but we were unable to persuade the owner to give us both soup and salad (well, Dave got soup and John got salad, but neither of us got both).  The phrase "Soup or Salad" implicitly has an additional "but not both" attached to it.
+
+In this question, we will explore some of the properties of exclusive and inclusive disjunction.
+
+Aristotelean Forms
+
+Do you remember the Aristotelean forms?  These are four types of very common first order sentences which were studied by the philosopher Aristotle.  There are four forms:
+
+∀ ∃ ∧ ∨ → ↔ ⊥ ⊢ ¬
+
+All Ps are Qs:      ∀x(P(x)→Q(x))
+Some Ps are Qs:     ∃x(P(x)∧Q(x))
+No Ps are Qs:       ∀x(P(x)→ ¬Q(x))
+Some Ps are not Qs: ∃x(P(x)∧¬Q(x))
+
+In the class we studied the idea of logical consequence.  If we present some premises, and a conclusion sentence, such that the conclusion is a consequence of the premises, we say that the argument from the premises to the conclusion is valid.  If an argument is valid you know that if the premises are true then the conclusion is true too.
+
+Knowing that an argument is valid is useful, but it is even more useful to know that it is sound.  We say that an argument is sound, when the argument is valid and in addition the premises are true.  This, of course, means that the conclusion must be true too.
+
+Validity is a property of arguments, but soundness is a property of arguments used in a particular situation.  It is the situation that tells us whether sentences are true.
+
+Syllogisms
+
+A syllogism is an argument which has two premise sentences and a conclusion, and each of the sentences are one of the Aristotelean forms.
+
+The classic example of a syllogism is, from:
+
+    All Ps are Qs, and
+    All Qs are Rs
+
+conclude that All Ps are Rs.
+
+This syllogism is valid.  It can be used in the following way.
+
+from:
+
+    All tautologies are logical truths, and
+    All logical truths are sentences.
+
+conclude that All tautologies are sentences. Since the premise sentences are true, this argument is sound and we must believe the conclusion.
+
+
+A Changing World
+
+In first-order logic we assume that there is a single static world that sentences refer to.
+
+We can mimic change, for example the passage of time, by considering the truth of sentences in a number of different worlds.  We can consider these different worlds as representing the states of affairs of a single changing situation at different times.
+
+In this question we ask you to consider what happens to the truth of sentences in the blocks world language as the world changes.  In particular, we consider situations where objects are added or removed from a world.  We do this by considering the truth of a single sentence is two different worlds, related by the addition or removal of objects.
+
+
+Final Thoughts
+
+We hope that you enjoyed our course, and that what you have learned will useful to you.  For some, this introduction to logic will be enough, but if you plan to continue to study logic, or a related-field, then here are some suggestions for what to do next,
+
+First, we have only required a small fraction of the exercises in the Tarski's World book for completion of this course.  Perhaps you have additionally done the optional suggested exercises, but there are still more.  Completing as many of these exercises as you like will help solidify your learning from this class.
+
+As we indicated, we have only covered a small part of the study of logic in this class.  In particular, we have not presented any proof techniques.  Proof theory is a large part of the study of logic, and if you proceed sooner or later you will need to tackle this topic.  Many introductory logic texts cover this topic, but of course we think that our Language, Proof and Logic text does a pretty good job.  There is an EdX course based on that text book, and it would make a fine next step in your studies.  Language, Proof and Logic covers everything in this class, and in addition develops a proof theory which provides a method for demonstrating consequence that relies on the syntax, not semantics, of sentences.  One major result of the course is that the semantic method for determining consequence that you learned here, and the proof method, agree on the notion of consequence.  Like this course, Language, Proof and Logic is supported by software and the Grade Grinder assessment service.
+
+However you choose to proceed, we wish you success and enjoyment in your future studies.
+
+John and Dave — the Logic Guys.
+

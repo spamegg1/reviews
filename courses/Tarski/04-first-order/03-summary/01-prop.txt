@@ -1,0 +1,138 @@
+[MUSIC] JOHN: Hi. By now,
+you don't need me to tell you my name.
+DAVE: [LAUGHTER] Me either.
+We've come to the last video in our course on the semantics of FOL.
+In this video, we're going to present a summary of the main points of the course.
+You can use it as the basis of your study for
+the final exam or you can return to it in the future if you need a reminder.
+JOHN: And of course, this video will serve to show how much ground we've covered in the course.
+Perhaps you remember when we started out by discussing atomic formulas.
+DAVE: I hope so.
+JOHN: This was where we began the formulation of first-order logic.
+We started by identifying the simplest possible propositions
+in the natural language and building a model of them in FOL.
+By simplest possible, we mean that these sentences have
+no smaller parts that can make claims about the world.
+DAVE: So even formalizing the simplest possible sentences,
+required us to make some important decisions.
+We had to insist that every name that's used picks out just one object
+or any property or relation that we use is precisely defined.
+We insist on these constraints in order to make FOL
+well-behaved in the sense that it's more precise than English.
+These constraints already begin to reveal that FOL is
+an approximation to or a model of natural language in its full glory.
+DAVE: The next step in the development was to devise a way to connect sentences together
+to make more complex sentences to express more complex claims.
+To do this, we introduced the propositional connectives;
+the Boolean connectives, conjunction, disjunction,
+and negation, and the conditional connectives
+known as material implication and material equivalence.
+JOHN: We introduced another important idea with propositional connectives,
+the idea of truth functionality.
+We said that we could work out the truth value of a complex sentence by
+considering only the truth values of
+the component sentences and then the connectives that join them.
+DAVE: This is a really simple and important idea and it
+makes the theory of propositional logic quite easy to understand.
+One of the results of this decision is that we get to use
+truth tables to describe the semantics of the propositional connectives.
+And also, there is a nice procedure for working out the truth of
+an arbitrarily complex sentence just
+from the knowledge of the truth of the atomic subformula.
+It turns out that there are downsides to this decision too as you know.
+Nonetheless, we adopt the notion of
+truth functionality even while we're well aware of its drawbacks.
+JOHN: With our theory of propositional logic in hand,
+we can start to examine some of the key ideas that are central to the
+course. The most important idea is logical consequence.
+We're interested in the question of when one formula follows from another.
+And we use our theory to model this intuitive idea.
+DAVE: Now intuitively, we say that one sentence, the consequence,
+follows from another premise sentence just when
+the truth of the premise sentence guarantees the truth of the consequence sentence.
+Or equivalently, when it's impossible for
+the premise formula to be true and the consequence formula false.
+Given the theory of propositional logic,
+it's easy to test to see when this relationship holds.
+We translate our sentences into FOL and then build
+a truth table for both of the sentences together.
+JOHN: Each row of the truth table represents
+a possible combination of truth values for the atomic formula in sentences.
+For any such row,
+we can determine the truth of our larger sentences.
+By constructing a truth table with one row for each possible combination,
+we can consider all the possible situations that the sentences might be used in.
+If in every row that makes the premise sentence true,
+the consequence sentence is also true,
+then we say that the consequence sentence is
+a logical consequence of the premise sentence.
+DAVE: Now, to distinguish between the intuitive notion of
+logical consequence and the precise test that John just described,
+we gave the result of the precise test a new name.
+We called it tautological consequence.
+One sentence is a tautological consequence of
+another if it's true in every row that the other sentence is.
+If one sentence is a tautological consequence of another,
+then it's definitely a logical consequence.
+That's because every genuine situation must be represented by a row of the truth table.
+After all, it must make every atomic subformula either true or false.
+JOHN: But the reverse is not the case.
+If a sentence is not a tautological consequence of another,
+then it might still be a logical consequence.
+That's because any of the rows in which the premise sentence is true and
+the consequence sentence is false might not represent a genuine situation.
+There may be good reasons why this row does not represent
+a truly logically possible situation.
+DAVE: To go along with the notion of tautological consequence,
+we developed two additional similar ideas.
+One corresponds to the idea of a logical truth.
+A logical truth is a sentence that can't possibly be false.
+Our propositional logic analogy of this is tautology.
+A sentence is a tautology if it's true in every row of it's truth table.
+As for consequence, being a tautology is an approximation to being a logical truth.
+All tautologies are logical truths.
+But some sentences that are not tautologies may still be logical truths.
+JOHN: Finally, we introduced the concept of tautological equivalence.
+Two sentences are tautologically equivalence if they're
+true in the exact same rows of their truth table.
+DAVE: With the notion of tautological equivalence in hand,
+we were able to show that certain pairs of
+sentences in the propositional language are, in fact, equivalent.
+That means that our formal language, like natural language,
+gives us many different ways of saying
+the same thing or at least different ways of expressing the same proposition.
+JOHN: That's not a terrible thing.
+As we've noted, natural languages give us different ways of saying the same thing.
+And we want to retain the possibility that the structure of
+the translated sentence matches the structure of the original natural language sentence.
+DAVE: One thing that we did notice about our language is that it's redundant,
+that is, we don't need all five of the propositional connectives in our language.
+Every proposition that can be expressed in
+our language can be expressed in a language with fewer connectives.
+Propositional equivalences such as
+the DeMorgan's laws make it particularly easy to see this.
+If we had fewer connectives,
+we could still express the same propositions,
+but the structure of the FOL sentences may not so
+obviously match the structure of their corresponding natural language sentences.
+JOHN: Going to the other extreme,
+we could imagine adding yet more connectives to
+the language to model the structure of natural language sentences more and more closely.
+But the resulting language would be unwieldy.
+We think that the propositional language that we've
+described balances these two concerns pretty well.
+DAVE: Speaking of adding new connectives.
+The most important result of the propositional part of our course is
+that the language that we designed is truth functionally complete.
+What this means is that adding any more truth
+functional connectives to the language won't increase the expressive power.
+We'll still be able to express the same set
+of propositions that we can express using our original language,
+more conveniently perhaps, but the same set nonetheless.
+JOHN: If there are propositions that can't be expressed in our language,
+then adding more connectives won't solve that problem.
+And adding more truth-functional connectives certainly won't make
+tautological consequences any better as an approximation to logical consequence.
+We'll need to follow a new course.
+[MUSIC]
+End of transcript. Skip to the start.

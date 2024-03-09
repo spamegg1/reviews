@@ -1,0 +1,326 @@
+JOHN: When we studied propositional logic,
+we introduced the notion of a normal form for sentences.
+In particular, we talked about negation normal form,
+conjunctive normal form, CNF and disjunctive normal form DNF.
+We discussed how it can sometimes be convenient to put
+sentences into normal forms like CNF and DNF,
+because this can make the truth conditions for the sentence
+easier to understand.
+DAVE: We're going to introduce a new kind of normal form in this video.
+This form is called "prenex normal form".
+Once again, the goal of putting a sentence into this normal form
+will make the truth conditions of the sentence easier to understand.
+A sentence is in prenex normal form,
+if none of the quantifiers are within the scope of a propositional connective.
+Or to put it another way,
+the sentence consists of a string of quantifiers at the beginning.
+And these quantifiers all apply to a single formula which
+itself contains no quantifiers.
+JOHN: Actually it's an interesting fact about first-order sentences.
+That you can measure their complexity by the number of times the quantifiers in
+the prenex- in the prefix switch between universal and existential
+and back again.
+These are so-called quantifier alternations.
+A sentence that has only existential or only universal quantifiers,
+contains no alternations.
+If there's a string of existential quantifiers
+followed by a string of universal quantifiers,
+and then the main formula,
+then it has one alternation and so on.
+DAVE: So we're not going to talk about this idea further.
+The focus of this video,
+is to show that any sentence can be placed into prenex normal form.
+This process uses the quantifier equivalences that
+we discussed in the previous video.
+We'll be using these equivalences so that we
+increase the scope of each quantifier every time we use one.
+So that eventually, all of the quantifiers are
+outside the scope of all of the propositional connectives.
+JOHN: Now, as we did in propositional logic,
+we're going to assume that we've gotten rid of
+all the conditional connectives in favor of their Boolean equivalents.
+This means that we just have to worry about the relationships
+between the quantifiers and the Boolean connectives.
+We learned enough equivalences last time to cover all these cases.
+DAVE: So a sentence that is not in prenex normal form has
+at least one occurrence of
+a quantifier symbol within the scope of a propositional connective.
+We're going to say that those quantifiers are "out of place".
+Now, there may be many quantifiers that are out of place,
+and our procedure is simpler if we choose among these quantifiers carefully.
+JOHN: Our procedure is to choose a quantifier that's out of place but which
+is not in the scope of another quantifier which is out of place.
+So the quantifier we choose is not in
+the prefix because it's in the scope of a propositional connective.
+But in addition, it's not in the scope of another quantifier,
+unless those quantifiers are in the prefix.
+DAVE: So let's be clear about this.
+Let's look at this schematic formula where each of the "Q" are
+quantifiers and the ellipses represent fragments of the formula.
+In this formula, the quantifiers associated with "v" and "w" are in the prefix.
+We're going to leave them alone.
+They're in place.
+JOHN: The remaining quantifiers though are all out of place.
+Now, notice that "Qy" is inside the scope of "Qx".
+This is not a quantifier that we can choose because "Qx" is itself out of place.
+The other two quantifiers are just in the scope of the prefix.
+And so we can choose either of those to work on.
+DAVE: The reason we want to choose a quantifier like this
+is that we can gradually move it towards the prefix.
+Every time we move it up,
+it will either be in the scope of a new propositional connective.
+Or- or it will have reached the prefix.
+It will never bump into another quantifier that is also out of place.
+We will do this repeatedly,
+until none of the quantifiers are in the scope of a connective.
+That is until the sentence is in prenex normal form.
+JOHN: We're going to consider each of the propositional connectives
+in turn and think about the rule that
+we'll- that we'll use to increase the scope of
+the quantifier when it's dominated by that kind of connective.
+The case for negation is easiest of course.
+If we have a quantifier immediately in the scope of a negation symbol,
+then we know that we can use De Morgan's Laws for that quantifier.
+DAVE: So if a universal quantifier is within the immediate scope of a negation symbol,
+then we can use the first De Morgan's Law to increase
+the scope of the quantifier.
+The formula on the right has
+the existential quantifier outside the scope of the negation.
+If this occurrence of "not for
+all x P(x)" is the most deeply nested quantifier that's out of place,
+then the formula "for all x P(x)" is in prenex normal form.
+But the whole formula is not because of the negation symbol.
+After applying the rule,
+the whole formula is in prenex form.
+Since "P(x)" contains no misplaced quantifiers and now,
+the existential quantifier is now well-placed.
+DAVE: Of course, if you have an existential quantifier within the scope of a negation,
+then you can use the second De Morgan law. This is going well.
+There are three propositional connectives and we've already
+handled one of them.
+So we're a third of the way there.
+Unfortunately though the conjunction and
+disjunction connectives are not quite so easy to deal with.
+JOHN: Still it's not too difficult,
+provided you remember the equivalences that we've already discussed.
+You might expect that we're going to use the equivalences involving
+conjunction and disjunction that we discussed in the last video.
+DAVE: But we actually won't use these exclusively.
+It's the change of bound variable and vacuous quantification rules
+that we will use most of all. The reason is simple.
+First, two of these rules are not equivalences and
+can't be used to modify our formula to get a new equivalent formula.
+And the second is that the two equivalences only apply in a very special case.
+Namely, when both of the subformally are universally quantified.
+Or when both are existentially quantified.
+In general, we need to be able to lift a quantifier over a conjunction for example,
+when the other formula is not known to be a quantified formula.
+JOHN: So having established what we're not going to do,
+let's investigate what we are going to do.
+Let's suppose that our formula looks like this.
+"for all x P(x) and Q".
+There's a universal quantifier in the scope of a conjunction symbol.
+So this formula is not in prenex form.
+DAVE: Now suppose the "Q" is free of the variable "x".
+That is it contains no free occurrences of "x".
+Then" "Q is equivalent to "for all x Q".
+Because of the strange vacuous quantification rule that we talked about.
+So now we have the formula,
+"for all x P(x) and for all x Q".
+And we're gonna apply the rule governing universal quantifiers and conjunction.
+To obtain "for all x (P(x) and Q)".
+And now, the universal quantifier is outside of the scope of the conjunction.
+JOHN: But what if "Q" is not free of "x"?
+Suppose "Q" contains- actually contains some free occurrences of "x".
+In this case, we can't slap the quantifier on and just go on blithely.
+So the formula looks something like this,
+"for all x P(x) and Q(x)",
+with "Q(x)" signaling that "Q" contains "x" free.
+There's some quantifier outside this subformula must bind these free "x"'s.
+Now, notice, of course,
+that the "x"'s in "Q(x)" are not bound by the quantifier that you can see,
+but by a quantifier with the whole conjunction in it's scope.
+DAVE: Right. We can't forge on blithely or otherwise.
+However, we can do something a little sneaky.
+JOHN: And I like sneaky.
+DAVE: Well, you'll like this then. We can rename
+the bound variable and the quantified formula "for all x P(x)"
+to be something different.
+If we use a variable that's not free in "Q",
+then we'll be able to go ahead just as we did before.
+So for example, we change the quantified formula to
+be in the variable "z", "for all z P(z),
+and Q(x)".
+And then we can go ahead and get "for all z and,
+uh, the conjunction P(z) and Q(x)",
+with the larger scope for the quantifier.
+JOHN: Okay. That is really sneaky.
+So we have to be careful how we choose the new bound variable though.
+Remember that the new bound variable shouldn't be free in "Q(x)",
+so that we can include "Q(x)" in its scope.
+Also, the new bound variable should not be free in "P(x)" either.
+Remember that this is a condition on the rule
+for renaming bound variables whenever you do it.
+DAVE: So the result of this is that we have shown that we can increase
+the scope of the quantifier when there is
+a conjunction dominating the universal quantifier.
+By the way, the fact that conjunction and disjunction are commutative,
+mean that we don't have to separately consider the case
+where the quantified formula is the second conjunct.
+JOHN: So to recap the general rule,
+when you have a formula like one of these "for all x P(x) and Q",
+you transform it first to "for all z P(z) and Q" where "Q" is free of "z".
+And then widen the scope of the quantifier to get "for all z parentheses,
+P(z) and Q".
+If "Q" doesn't contain "x" free,
+then you can skip the first step completely.
+DAVE: Now, here's the interesting thing.
+The very same procedure works,
+whatever combination of quantifier and connective you have.
+If you have a universal quantifier and conjunction,
+a universal quantifier and disjunction,
+or an existential quantifier with either disjunction or conjunction,
+the procedure works in every case.
+A combination of the vacuous quantification rule and
+the bound variable renaming rule,
+allows us to lift quantifiers of either type over both conjunction and disjunction.
+JOHN: And the De Morgan's Laws for quantifiers allow us to lift quantifiers over negations,
+and so we can put any formula into prenex normal form.
+DAVE: Let's put this together by showing how to work an example,
+putting a complex formula into prenex form.
+Here's our example.
+"There exists x P(x) implies,
+there exists y Q(y)".
+JOHN: Okay. So the first thing to notice is that the formula contains a material conditional,
+and we'll remove that by using its definition
+in terms of the Boolean connectives.
+So what we're going to get is,
+"it's not the case that there is an x P(x) or there is a y Q(y)".
+Now, notice that both quantifiers are out of place.
+We're going to arbitrarily choose
+the quantifier in the scope of the negation symbol first.
+We can use the Morgan's Laws to move this negation symbol
+inside the scope to obtain "for all x not P(x),
+or there is a y Q(y)".
+Now, both of the quantifiers are in the scope of the disjunction.
+Let's choose to do the existential quantifier first for no particular reason.
+Notice that the left disjunct has no free occurrences of "y".
+And so we can just go ahead and expand its scope to obtain,
+"there exists y parentheses for all x not P(x) or Q(y)".
+And now the final step,
+the disjunct "Q(y)" is free of "x",
+and so we can lift the quantifier over the disjunction.
+And we get, "there is a y for all x parentheses not P(x) or Q(y)".
+And now we have the formula in prenex normal form.
+We could have treated the two disjuncts in either order.
+And if we had, we would have gotten
+a superficially different formula with
+the existential and universal quantifiers switched.
+JOHN: In general, you can't switch
+a universal and existential quantifier and maintain equivalence.
+But with this formula, you can because of the pattern
+of occurrences of the variables in the embedded formula.
+Incidentally, this shows that it's possible, and indeed common,
+for a formula to be equivalent to many different sentences in prenex form.
+DAVE: Now that we've gotten our feet wet,
+let's look at a more complex example.
+Here we have the formula, uh,
+"it's not the case that in parentheses,
+there exists x P(x) or R(b)
+or for all x in parentheses P(x) and there exists x Q(x)".
+JOHN: Notice that this formula has three quantifiers,
+and they all have the variable "x" associated with them.
+It's pretty clear that we'll have trouble unless we do some renaming.
+The quantified formula, "there is an x Q(x)",
+is within the scope of a larger quantifier,
+and so we can't choose to work on it first.
+Neither of the other two quantifiers have
+this problem and so we could choose to work on either one of them.
+We're going to start with the other existential quantifier.
+DAVE: Now, that quantifier is in the scope of a disjunction connective.
+But fortunately, the second disjunct does not contain the variable "x",
+and so we can immediately increase the scope
+of the quantifier using vacuous quantification.
+We will obtain this new formula.
+"It's not the case that there exists x in parentheses P(x) or R(b)
+Or for all x in parentheses P(x),
+and there exists x Q(x)".
+JOHN: Now, this quantifier is immediately in the scope of the negation symbol,
+and so we can use De Morgan's laws to fix that problem,
+so then we get "for all x not parentheses P(x),
+or R(b),
+or the rest of the formula".
+DAVE: Now, continuing to work with the same quantifier.
+It's now immediately in the scope of the top-level disjunction.
+Notice that the right-hand disjunct has no free occurrences of "x".
+This is easy to spot because that formula is
+headed by a universal quantifier associated with "x",
+and it therefore binds all of occurrences of "x" in that formula.
+The result of that observation is that we can use
+the vacuous quantification rules to lift
+the leftmost universal quantifier over the disjunction symbol.
+It is now part of the prefix, and we're done with it.
+Then we have the formula "for all x in parentheses not P(x) or R(b),
+or for all x P(x),
+and there exists x Q(x)".
+JOHN: Okay. So one quantifier down and we have two left to go.
+Next, we have to deal with the other universal quantifier.
+It's immediately in the scope of a disjunction symbol.
+And this time, the left disjunct contains the variable "x" free.
+That left disjunct is "not parentheses P(x) or R(b)".
+So we need to rename this quantifier.
+Since "x" is the only variable free in the antecedent,
+we can pick any other variable that we like.
+I'm going to choose "y".
+DAVE: Very creative.
+JOHN: Why, thank you.
+DAVE: So renaming that variable to "y" gives us the new formula,
+"for all x in parentheses not P(x) or R(b),
+or for all y P(y),
+and there exists x Q(x)".
+And we can now lift that universal quantifier over
+this disjunction since the left disjunct is free of "y".
+The resulting formula "for all x, for all y,
+open parentheses not P(x) or R(b),
+or P(y),
+and thereexists x Q(x)".
+JOHN: Okay. So we're almost done,
+now we can deal with the existential quantifier
+since it's the only quantifier that is out of place.
+It's dominated by the conjunction symbol,
+and the other conjunct is free of "x".
+So we can just lift the quantifier over the conjunction,
+that gives us "for all x, for all y,
+parentheses not P(x) or R(b),
+or there is an x P(y) and Q(x)".
+DAVE: In the final step, we need to lift
+the existential quantifier over the disjunction connective.
+Again, "x" is free in the left disjunct,
+so we will need to rename the variable.
+"y" isn't a choice this time since
+the formula inside the existential quantifier contains "y" free.
+So I'm gonna choose-
+JOHN: And let me guess.
+DAVE: Go ahead.
+JOHN: z?.
+DAVE: No, John, I'm going to choose "v".
+JOHN: What a dumb choice.
+[LAUGHTER] Okay.
+DAVE: So we get the new formula, "for all x,
+for all y in parentheses",
+and the left disjunct is "not P(x) or R(b)".
+And the right disjunct is, "there exists v open parentheses P(y) and Q(v)".
+And now we can lift the existential quantifier
+over this disjunction to obtain the final formula.
+JOHN: Ta-da.
+DAVE: "For all x, for all y,
+there exists a v", and then this whole formula, uh,
+now propositional, "not P(x) or R(b),
+or P(y) and Q(v)".
+In fact, one more thing that you might notice.
+And that is that the embedded formula is of the form "not P or Q",
+and we can replace this with
+the implication that was originally in the sentence when we started.
+If we do that, we get "for all x, for all y,
+there is a v parentheses P(x) or R(b) implies P(y) and Q(v)". [MUSIC]
+End of transcript. Skip to the start.
