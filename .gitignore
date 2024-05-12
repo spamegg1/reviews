@@ -10,6 +10,7 @@ target/
 .bloop/
 .metals/
 compiled/
+gradle/
 project/target/
 project/project/
 resources/
