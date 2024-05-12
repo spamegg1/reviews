@@ -73,7 +73,7 @@ object ParallelParenthesesBalancing extends ParallelParenthesesBalancingInterfac
       then traverse(from, until, 0, 0)
       else
         val mid: Int = (until - from) / 2 + from
-        val ((l1, r1), (l2, r2)) = parallel(reduce(from, mid), reduce(mid + 1, until))
+        val ((l1, r1), (l2, r2)) = parallel(reduce(from, mid), reduce(mid, until))
         val left = math.max(l1 - r2, 0)
         val right = math.max(r2 - l1, 0)
         (left + l2, right + r1)
