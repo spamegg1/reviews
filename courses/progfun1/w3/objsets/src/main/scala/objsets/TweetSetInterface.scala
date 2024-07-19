@@ -1,9 +1,8 @@
 package objsets
 
-/**
- * The interface used by the grading infrastructure. Do not change
- * signatures or your submission will fail with a NoSuchMethodError.
- */
+/** The interface used by the grading infrastructure. Do not change signatures or your
+  * submission will fail with a NoSuchMethodError.
+  */
 trait TweetSetInterface:
   def incl(tweet: Tweet): TweetSet
   def remove(tweet: Tweet): TweetSet
