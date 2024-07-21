@@ -23,8 +23,7 @@ class BlurSuite extends munit.FunSuite:
       )
 
   test(
-    "boxBlurKernel should return the correct value on an " +
-      "interior pixel of a 3x4 image with radius 1"
+    "boxBlurKernel should return the correct value on an interior pixel of a 3x4 image with radius 1"
   ):
     val src = new Img(3, 4)
     src(0, 0) = 0; src(1, 0) = 1; src(2, 0) = 2
@@ -40,8 +39,7 @@ class BlurSuite extends munit.FunSuite:
     )
 
   test(
-    "HorizontalBoxBlur.blur with radius 1 " +
-      "should correctly blur the entire 3x3 image"
+    "HorizontalBoxBlur.blur with radius 1 should correctly blur the entire 3x3 image"
   ):
     val w = 3
     val h = 3
@@ -88,8 +86,7 @@ class BlurSuite extends munit.FunSuite:
     check(3, 2, 6)
 
   test(
-    "HorizontalBoxBlur.parBlur with radius 2 " +
-      "should correctly blur the entire 4x3 image"
+    "HorizontalBoxBlur.parBlur with radius 2 should correctly blur the entire 4x3 image"
   ):
     val w = 4
     val h = 3
@@ -115,8 +112,7 @@ class BlurSuite extends munit.FunSuite:
     check(3, 2, 6)
 
   test(
-    "VerticalBoxBlur.parBlur with radius 2 should " +
-      "correctly blur the entire 4x3 image with 4 tasks"
+    "VerticalBoxBlur.parBlur with radius 2 should correctly blur the entire 4x3 image with 4 tasks"
   ):
     val w = 4
     val h = 3
@@ -142,8 +138,7 @@ class BlurSuite extends munit.FunSuite:
     check(3, 2, 6)
 
   test(
-    "VerticalBoxBlur.parBlur with radius 2 should " +
-      "correctly blur the entire 4x3 image with 3 tasks"
+    "VerticalBoxBlur.parBlur with radius 2 should correctly blur the entire 4x3 image with 3 tasks"
   ):
     val w = 4
     val h = 3
