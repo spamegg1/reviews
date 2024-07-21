@@ -3,25 +3,24 @@ package reductions
 import org.scalameter.*
 
 object LineOfSightRunner:
-
   val standardConfig = config(
     Key.exec.minWarmupRuns := 40,
     Key.exec.maxWarmupRuns := 80,
     Key.exec.benchRuns := 100,
     Key.verbose := false
-  ) withWarmer (Warmer.Default())
+  ).withWarmer(Warmer.Default())
 
-  def main(args: Array[String]): Unit =
+  def main: Unit =
     val length = 10000000
     val input = (0 until length).map(_ % 100 * 1.0f).toArray
     val output = new Array[Float](length + 1)
-    val seqtime = standardConfig.measure(LineOfSight.lineOfSight(input, output))
 
+    val seqtime = standardConfig.measure(LineOfSight.lineOfSight(input, output))
     println(s"sequential time: $seqtime")
 
     val partime = standardConfig.measure(LineOfSight.parLineOfSight(input, output, 10000))
-
     println(s"parallel time: $partime")
+
     println(s"speedup: ${seqtime.value / partime.value}")
 
 enum Tree(val maxPrevious: Float):
@@ -30,7 +29,6 @@ enum Tree(val maxPrevious: Float):
       extends Tree(maxPrevious)
 
 object LineOfSight extends LineOfSightInterface:
-
   def lineOfSight(input: Array[Float], output: Array[Float]): Unit = // TODO
     output(0) = 0
     var maximum: Float = 0
@@ -40,10 +38,9 @@ object LineOfSight extends LineOfSightInterface:
       output(i) = maximum
       i = i + 1
 
-  /** Traverses the specified part of the array and returns the maximum angle.
-    */
-  def upsweepSequential(input: Array[Float], from: Int, until: Int): Float =
-    var maximum: Float = 0 // TODO
+  /* Traverses the specified part of the array and returns the maximum angle. */
+  def upsweepSequential(input: Array[Float], from: Int, until: Int): Float = // TODO
+    var maximum: Float = 0
     var i: Int = from
     while i < until do
       maximum = math.max(maximum, input(i) / i)
@@ -51,12 +48,10 @@ object LineOfSight extends LineOfSightInterface:
     maximum
 
   /** Traverses the part of the array starting at `from` and until `end`, and returns the
-    * reduction tree for that part of the array.
-    *
-    * The reduction tree is a `Tree.Leaf` if the length of the specified part of the array
-    * is smaller or equal to `threshold`, and a `Tree.Node` otherwise. If the specified
-    * part of the array is longer than `threshold`, then the work is divided and done
-    * recursively in parallel.
+    * reduction tree for that part of the array. The reduction tree is a `Tree.Leaf` if
+    * the length of the specified part of the array is smaller or equal to `threshold`,
+    * and a `Tree.Node` otherwise. If the specified part of the array is longer than
+    * `threshold`, then the work is divided and done recursively in parallel.
     */
   def upsweep(input: Array[Float], from: Int, end: Int, threshold: Int): Tree = // TODO
     if end - from <= threshold then // if I use < only, I get stackOverFlow

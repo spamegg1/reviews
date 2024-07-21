@@ -12,37 +12,30 @@ object ParallelParenthesesBalancingRunner:
     Key.exec.maxWarmupRuns := 80,
     Key.exec.benchRuns := 120,
     Key.verbose := false
-  ) withWarmer (Warmer.Default())
+  ).withWarmer(Warmer.Default())
 
-  def main(args: Array[String]): Unit =
+  def main: Unit =
     val length = 100000000
     val threshold = 10000
-
     val openParens = Array.fill(length / 4)('(')
     val closeParens = Array.fill(length / 4)(')')
-
     val chars = openParens ++ closeParens ++ openParens ++ closeParens
     // val chars = new Array[Char](length)
 
-    val seqtime = standardConfig measure {
+    val seqtime = standardConfig.measure:
       seqResult = ParallelParenthesesBalancing.balance(chars)
-    }
-
     println(s"sequential result = $seqResult")
     println(s"sequential balancing time: $seqtime")
 
-    val fjtime = standardConfig measure {
+    val fjtime = standardConfig.measure:
       parResult = ParallelParenthesesBalancing.parBalance(chars, threshold)
-    }
-
     println(s"parallel result = $parResult")
     println(s"parallel balancing time: $fjtime")
+
     println(s"speedup: ${seqtime.value / fjtime.value}")
 
 object ParallelParenthesesBalancing extends ParallelParenthesesBalancingInterface:
-
-  /** Returns `true` iff the parentheses in the input `chars` are balanced.
-    */
+  /* Returns `true` iff the parentheses in the input `chars` are balanced. */
   def balance(chars: Array[Char]): Boolean = // TODO
     @annotation.tailrec
     def helper(left: Int, right: Int, chars: Array[Char]): Boolean =
@@ -55,8 +48,7 @@ object ParallelParenthesesBalancing extends ParallelParenthesesBalancingInterfac
           case _                    => helper(left, right, chars.tail)
     helper(0, 0, chars)
 
-  /** Returns `true` iff the parentheses in the input `chars` are balanced.
-    */
+  /* Returns `true` iff the parentheses in the input `chars` are balanced. */
   def parBalance(chars: Array[Char], threshold: Int): Boolean = // TODO
     @annotation.tailrec
     def traverse(idx: Int, until: Int, arg1: Int, arg2: Int): (Int, Int) =
@@ -69,8 +61,7 @@ object ParallelParenthesesBalancing extends ParallelParenthesesBalancingInterfac
           case _                => traverse(idx + 1, until, arg1, arg2)
 
     def reduce(from: Int, until: Int): (Int, Int) = // TODO
-      if until - from <= threshold
-      then traverse(from, until, 0, 0)
+      if until - from <= threshold then traverse(from, until, 0, 0)
       else
         val mid: Int = (until - from) / 2 + from
         val ((l1, r1), (l2, r2)) = parallel(reduce(from, mid), reduce(mid, until))
