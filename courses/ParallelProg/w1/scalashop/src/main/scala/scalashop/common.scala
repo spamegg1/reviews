@@ -2,7 +2,6 @@ package scalashop
 
 import java.util.concurrent.*
 import scala.util.DynamicVariable
-
 import org.scalameter.*
 
 /** The value of every pixel is represented as a 32 bit integer. */
@@ -26,9 +25,7 @@ def rgba(r: Int, g: Int, b: Int, a: Int): RGBA =
 
 /** Restricts the integer into the specified range. */
 def clamp(v: Int, min: Int, max: Int): Int =
-  if v < min then min
-  else if v > max then max
-  else v
+  if v < min then min else if v > max then max else v
 
 /** Image is a two-dimensional matrix of pixel values. */
 class Img(val width: Int, val height: Int, private val data: Array[RGBA]):
@@ -37,14 +34,12 @@ class Img(val width: Int, val height: Int, private val data: Array[RGBA]):
   def update(x: Int, y: Int, c: RGBA): Unit = data(y * width + x) = c
 
 /** Computes the blurred RGBA value of a single pixel of the input image. */
-def boxBlurKernel(src: Img, x: Int, y: Int, radius: Int): RGBA =
-
-  // TODO implement using while loops
+def boxBlurKernel(src: Img, x: Int, y: Int, radius: Int): RGBA = // TODO
+  // implement using while loops
   /* declare variables for the 4 averages and neighbor count */
   var rnew, gnew, bnew, anew, nghCount = 0
 
-  /* define bounds for the while loops by clamping down on 
-   * x -+ radius, y -+ radius */
+  /* define bounds for the while loops by clamping down on x -+ radius, y -+ radius */
   val xmin: Int = clamp(x - radius, 0, src.width - 1)
   val xmax: Int = clamp(x + radius, 0, src.width - 1)
   val ymin: Int = clamp(y - radius, 0, src.height - 1)
@@ -55,12 +50,8 @@ def boxBlurKernel(src: Img, x: Int, y: Int, radius: Int): RGBA =
   var j: Int = ymin
 
   /* get neighbors within clamped borders */
-  while
-    i <= xmax
-  do
-    while
-      j <= ymax
-    do
+  while i <= xmax do
+    while j <= ymax do
       val neighbor: RGBA = src(i, j)
       nghCount = nghCount + 1
 
@@ -72,17 +63,17 @@ def boxBlurKernel(src: Img, x: Int, y: Int, radius: Int): RGBA =
       j = j + 1
 
     i = i + 1
-    j = ymin                                                 // back to leftmost
+    j = ymin // back to leftmost
 
   /* average the 4 channels and create a new RGBA value out of them */
-  rgba(rnew / nghCount, gnew / nghCount , bnew / nghCount, anew / nghCount)
+  rgba(rnew / nghCount, gnew / nghCount, bnew / nghCount, anew / nghCount)
 
 val forkJoinPool = ForkJoinPool()
 
 abstract class TaskScheduler:
   def schedule[T](body: => T): ForkJoinTask[T]
   def parallel[A, B](taskA: => A, taskB: => B): (A, B) =
-    val right = task { taskB }
+    val right = task(taskB)
     val left = taskA
     (left, right.join())
 
@@ -93,23 +84,25 @@ class DefaultTaskScheduler extends TaskScheduler:
 
     Thread.currentThread match
       case wt: ForkJoinWorkerThread => t.fork()
-      case _ => forkJoinPool.execute(t)
+      case _                        => forkJoinPool.execute(t)
 
     t
 
-val scheduler =
-  DynamicVariable[TaskScheduler](DefaultTaskScheduler())
+val scheduler = DynamicVariable[TaskScheduler](DefaultTaskScheduler())
 
-def task[T](body: => T): ForkJoinTask[T] =
-  scheduler.value.schedule(body)
+def task[T](body: => T): ForkJoinTask[T] = scheduler.value.schedule(body)
 
 def parallel[A, B](taskA: => A, taskB: => B): (A, B) =
   scheduler.value.parallel(taskA, taskB)
 
-def parallel[A, B, C, D](taskA: => A, taskB: => B,
-                         taskC: => C, taskD: => D): (A, B, C, D) =
-  val ta = task { taskA }
-  val tb = task { taskB }
-  val tc = task { taskC }
+def parallel[A, B, C, D](
+    taskA: => A,
+    taskB: => B,
+    taskC: => C,
+    taskD: => D
+): (A, B, C, D) =
+  val ta = task(taskA)
+  val tb = task(taskB)
+  val tc = task(taskC)
   val td = taskD
   (ta.join(), tb.join(), tc.join(), td)

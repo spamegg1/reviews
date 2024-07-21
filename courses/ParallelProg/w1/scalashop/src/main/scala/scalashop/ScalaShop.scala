@@ -9,15 +9,13 @@ import scala.collection.mutable.ArrayBuffer
 import scala.reflect.ClassTag
 
 object ScalaShop:
-
   class ScalaShopFrame extends JFrame("ScalaShop\u2122"):
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)
     setSize(1024, 600)
     setLayout(BorderLayout())
 
     val rightpanel = JPanel()
-    rightpanel.setBorder(
-      BorderFactory.createEtchedBorder(border.EtchedBorder.LOWERED))
+    rightpanel.setBorder(BorderFactory.createEtchedBorder(border.EtchedBorder.LOWERED))
     rightpanel.setLayout(BorderLayout())
     add(rightpanel, BorderLayout.EAST)
 
@@ -28,10 +26,12 @@ object ScalaShop:
     val filterLabel = JLabel("Filter")
     controls.add(filterLabel)
 
-    val filterCombo = JComboBox(Array(
-      "horizontal-box-blur",
-      "vertical-box-blur"
-    ))
+    val filterCombo = JComboBox(
+      Array(
+        "horizontal-box-blur",
+        "vertical-box-blur"
+      )
+    )
     controls.add(filterCombo)
 
     val radiusLabel = JLabel("Radius")
@@ -47,22 +47,20 @@ object ScalaShop:
     controls.add(tasksSpinner)
 
     val stepbutton = JButton("Apply filter")
-    stepbutton.addActionListener(new ActionListener {
-      def actionPerformed(e: ActionEvent): Unit = {
-        val time = measure {
-          canvas.applyFilter(getFilterName, getNumTasks, getRadius)
-        }
-        updateInformationBox(time.value)
-      }
-    })
+    stepbutton.addActionListener(
+      new ActionListener:
+        def actionPerformed(e: ActionEvent): Unit =
+          val time = measure:
+            canvas.applyFilter(getFilterName, getNumTasks, getRadius)
+          updateInformationBox(time.value)
+    )
     controls.add(stepbutton)
 
     val clearButton = JButton("Reload")
-    clearButton.addActionListener(new ActionListener {
-      def actionPerformed(e: ActionEvent): Unit = {
-        canvas.reload()
-      }
-    })
+    clearButton.addActionListener(
+      new ActionListener:
+        def actionPerformed(e: ActionEvent): Unit = canvas.reload()
+    )
     controls.add(clearButton)
 
     val info = JTextArea("   ")
@@ -73,18 +71,21 @@ object ScalaShop:
 
     val fileMenu = JMenu("File")
     val openMenuItem = JMenuItem("Open...")
-    openMenuItem.addActionListener(new ActionListener:
-      def actionPerformed(e: ActionEvent): Unit =
-        val fc = JFileChooser()
-        if fc.showOpenDialog(ScalaShopFrame.this) == JFileChooser.APPROVE_OPTION
-        then { canvas.loadFile(fc.getSelectedFile.getPath) })
+    openMenuItem.addActionListener(
+      new ActionListener:
+        def actionPerformed(e: ActionEvent): Unit =
+          val fc = JFileChooser()
+          if fc.showOpenDialog(ScalaShopFrame.this) == JFileChooser.APPROVE_OPTION
+          then canvas.loadFile(fc.getSelectedFile.getPath)
+    )
 
     fileMenu.add(openMenuItem)
 
     val exitMenuItem = JMenuItem("Exit")
-    exitMenuItem.addActionListener(new ActionListener:
-      def actionPerformed(e: ActionEvent): Unit =
-        sys.exit(0))
+    exitMenuItem.addActionListener(
+      new ActionListener:
+        def actionPerformed(e: ActionEvent): Unit = sys.exit(0)
+    )
 
     fileMenu.add(exitMenuItem)
     mainMenuBar.add(fileMenu)
@@ -92,11 +93,15 @@ object ScalaShop:
     val helpMenu = JMenu("Help")
     val aboutMenuItem = JMenuItem("About")
 
-    aboutMenuItem.addActionListener(new ActionListener:
-      def actionPerformed(e: ActionEvent): Unit =
-        JOptionPane.showMessageDialog(null,
-          "ScalaShop, the ultimate image manipulation tool\n" +
-          "Brought to you by EPFL, 2015"))
+    aboutMenuItem.addActionListener(
+      new ActionListener:
+        def actionPerformed(e: ActionEvent): Unit =
+          JOptionPane.showMessageDialog(
+            null,
+            "ScalaShop, the ultimate image manipulation tool\n" +
+              "Brought to you by EPFL, 2015"
+          )
+    )
 
     helpMenu.add(aboutMenuItem)
     mainMenuBar.add(helpMenu)
@@ -108,24 +113,17 @@ object ScalaShop:
     add(scrollPane, BorderLayout.CENTER)
     setVisible(true)
 
-    def updateInformationBox(time: Double): Unit =
-      info.setText(s"Time: $time")
-
+    def updateInformationBox(time: Double): Unit = info.setText(s"Time: $time")
     def getNumTasks: Int = tasksSpinner.getValue.asInstanceOf[Int]
-
     def getRadius: Int = radiusSpinner.getValue.asInstanceOf[Int]
+    def getFilterName: String = filterCombo.getSelectedItem.asInstanceOf[String]
 
-    def getFilterName: String =
-      filterCombo.getSelectedItem.asInstanceOf[String]
-
-
-  try
-    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
+  try UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
   catch
     case _: Exception =>
       println("Cannot set look and feel, using the default one.")
 
   val frame = ScalaShopFrame()
 
-  def main(args: Array[String]): Unit = frame.repaint()
-
+  @main
+  def main: Unit = frame.repaint()
