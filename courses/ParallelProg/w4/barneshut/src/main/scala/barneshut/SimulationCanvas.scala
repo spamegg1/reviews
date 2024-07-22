@@ -6,9 +6,7 @@ import javax.swing.*
 import javax.swing.event.*
 
 class SimulationCanvas(val model: SimulationModel) extends JComponent:
-
   val MAX_RES = 3000
-
   val pixels = Array[Int](MAX_RES * MAX_RES)
 
   override def paintComponent(gcan: Graphics) =
@@ -37,28 +35,41 @@ class SimulationCanvas(val model: SimulationModel) extends JComponent:
     // for debugging purposes, if the number of bodies is small, output their locations
     val g = img.getGraphics.asInstanceOf[Graphics2D]
     g.setColor(Color.GRAY)
-    if model.bodies.length < 350 then for b <- model.bodies do
-      def round(x: Float) = (x * 100).toInt / 100.0f
-      val px = ((b.x - model.screen.minX) / model.screen.width * width).toInt
-      val py = ((b.y - model.screen.minY) / model.screen.height * height).toInt
-      if px >= 0 && px < width && py >= 0 && py < height then
-        g.drawString(s"${round(b.x)}, ${round(b.y)}", px, py)
+    if model.bodies.length < 350 then
+      for b <- model.bodies do
+        def round(x: Float) = (x * 100).toInt / 100.0f
+        val px = ((b.x - model.screen.minX) / model.screen.width * width).toInt
+        val py = ((b.y - model.screen.minY) / model.screen.height * height).toInt
+        if px >= 0 && px < width && py >= 0 && py < height then
+          g.drawString(s"${round(b.x)}, ${round(b.y)}", px, py)
 
     // render quad if necessary
     if model.shouldRenderQuad then
-      g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON)
+      g.setRenderingHint(
+        RenderingHints.KEY_ANTIALIASING,
+        RenderingHints.VALUE_ANTIALIAS_ON
+      )
       val green = Color(0, 225, 80, 150)
       val red = Color(200, 0, 0, 150)
       g.setColor(green)
       def drawQuad(depth: Int, quad: Quad): Unit =
-        def drawRect(fx: Float, fy: Float, fsz: Float, q: Quad, fill: Boolean = false): Unit =
+        def drawRect(
+            fx: Float,
+            fy: Float,
+            fsz: Float,
+            q: Quad,
+            fill: Boolean = false
+        ): Unit =
           val x = ((fx - model.screen.minX) / model.screen.width * width).toInt
           val y = ((fy - model.screen.minY) / model.screen.height * height).toInt
           val w = ((fx + fsz - model.screen.minX) / model.screen.width * width).toInt - x
-          val h = ((fy + fsz - model.screen.minY) / model.screen.height * height).toInt - y
+          val h =
+            ((fy + fsz - model.screen.minY) / model.screen.height * height).toInt - y
           g.drawRect(x, y, w, h)
           if fill then g.fillRect(x, y, w, h)
           if depth <= 5 then g.drawString("#:" + q.total, x + w / 2, y + h / 2)
+        end drawRect
+
         quad match
           case Fork(nw, ne, sw, se) =>
             val cx = quad.centerX
@@ -72,65 +83,62 @@ class SimulationCanvas(val model: SimulationModel) extends JComponent:
             drawQuad(depth + 1, ne)
             drawQuad(depth + 1, sw)
             drawQuad(depth + 1, se)
-          case Empty(_, _, _) | Leaf(_, _, _, _) =>
-            // done
+          case Empty(_, _, _) | Leaf(_, _, _, _) => // done
+      end drawQuad
       drawQuad(0, model.quad)
 
     gcan.drawImage(img, 0, 0, null)
+  end paintComponent
 
   // zoom on mouse rotation
-  addMouseWheelListener(new MouseAdapter {
-    override def mouseWheelMoved(e: MouseWheelEvent): Unit = {
-      val rot = e.getWheelRotation
-      val cx = model.screen.centerX
-      val cy = model.screen.centerY
-      val w = model.screen.width
-      val h = model.screen.height
-      val factor = {
-        if rot > 0 then 0.52f
-        else if rot < 0 then 0.48f
-        else 0.5f
-      }
-      model.screen.minX = cx - w * factor
-      model.screen.minY = cy - h * factor
-      model.screen.maxX = cx + w * factor
-      model.screen.maxY = cy + h * factor
-      repaint()
-    }
-  })
+  addMouseWheelListener(
+    new MouseAdapter:
+      override def mouseWheelMoved(e: MouseWheelEvent): Unit =
+        val rot = e.getWheelRotation
+        val cx = model.screen.centerX
+        val cy = model.screen.centerY
+        val w = model.screen.width
+        val h = model.screen.height
+        val factor = if rot > 0 then 0.52f else if rot < 0 then 0.48f else 0.5f
+
+        model.screen.minX = cx - w * factor
+        model.screen.minY = cy - h * factor
+        model.screen.maxX = cx + w * factor
+        model.screen.maxY = cy + h * factor
+        repaint()
+  )
 
   // reset the last known mouse drag position on mouse press
   var xlast = Int.MinValue
   var ylast = Int.MinValue
-  addMouseListener(new MouseAdapter {
-    override def mousePressed(e: MouseEvent): Unit = {
-      xlast = Int.MinValue
-      ylast = Int.MinValue
-    }
-  })
+  addMouseListener(
+    new MouseAdapter:
+      override def mousePressed(e: MouseEvent): Unit =
+        xlast = Int.MinValue
+        ylast = Int.MinValue
+  )
 
   // update the last known mouse drag position on mouse drag,
   // update the boundaries of the visible area
-  addMouseMotionListener(new MouseMotionAdapter {
-    override def mouseDragged(e: MouseEvent): Unit = {
-      val xcurr = e.getX
-      val ycurr = e.getY
-      if xlast != Int.MinValue then {
-        val xd = xcurr - xlast
-        val yd = ycurr - ylast
-        val w = model.screen.width
-        val h = model.screen.height
-        val cx = model.screen.centerX - xd * w / 1000
-        val cy = model.screen.centerY - yd * h / 1000
-        model.screen.minX = cx - w / 2
-        model.screen.minY = cy - h / 2
-        model.screen.maxX = cx + w / 2
-        model.screen.maxY = cy + h / 2
-        println(model.screen)
-      }
-      xlast = xcurr
-      ylast = ycurr
-      repaint()
-    }
-  })
+  addMouseMotionListener(
+    new MouseMotionAdapter:
+      override def mouseDragged(e: MouseEvent): Unit =
+        val xcurr = e.getX
+        val ycurr = e.getY
+        if xlast != Int.MinValue then
+          val xd = xcurr - xlast
+          val yd = ycurr - ylast
+          val w = model.screen.width
+          val h = model.screen.height
+          val cx = model.screen.centerX - xd * w / 1000
+          val cy = model.screen.centerY - yd * h / 1000
+          model.screen.minX = cx - w / 2
+          model.screen.minY = cy - h / 2
+          model.screen.maxX = cx + w / 2
+          model.screen.maxY = cy + h / 2
+          println(model.screen)
 
+        xlast = xcurr
+        ylast = ycurr
+        repaint()
+  )

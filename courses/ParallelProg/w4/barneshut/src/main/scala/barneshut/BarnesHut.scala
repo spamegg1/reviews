@@ -10,11 +10,8 @@ import scala.collection.mutable.ArrayBuffer
 import scala.reflect.ClassTag
 
 object BarnesHut:
-
   val model = SimulationModel()
-
   var simulator: Simulator = uninitialized
-
   def initialize(parallelismLevel: Int, pattern: String, nbodies: Int): Unit =
     model.initialize(parallelismLevel, pattern, nbodies)
     model.timeStats.clear()
@@ -40,65 +37,63 @@ object BarnesHut:
     val items = (1 to Runtime.getRuntime.availableProcessors).map(_.toString).toArray
     val parcombo = JComboBox[String](items)
     parcombo.setSelectedIndex(items.length - 1)
-    parcombo.addActionListener(new ActionListener {
-      def actionPerformed(e: ActionEvent) = {
-        initialize(getParallelism, "two-galaxies", getTotalBodies)
-        canvas.repaint()
-      }
-    })
+    parcombo.addActionListener(
+      new ActionListener:
+        def actionPerformed(e: ActionEvent) =
+          initialize(getParallelism, "two-galaxies", getTotalBodies)
+          canvas.repaint()
+    )
     controls.add(parcombo)
 
     val bodiesLabel = JLabel("Total bodies")
     controls.add(bodiesLabel)
 
     val bodiesSpinner = JSpinner(SpinnerNumberModel(25000, 32, 1000000, 1000))
-    bodiesSpinner.addChangeListener(new ChangeListener {
-      def stateChanged(e: ChangeEvent) = {
-        if frame != null then {
-          initialize(getParallelism, "two-galaxies", getTotalBodies)
-          canvas.repaint()
-        }
-      }
-    })
+    bodiesSpinner.addChangeListener(
+      new ChangeListener:
+        def stateChanged(e: ChangeEvent) =
+          if frame != null then
+            initialize(getParallelism, "two-galaxies", getTotalBodies)
+            canvas.repaint()
+    )
     controls.add(bodiesSpinner)
 
     val stepbutton = JButton("Step")
-    stepbutton.addActionListener(new ActionListener {
-      def actionPerformed(e: ActionEvent): Unit = {
-        stepThroughSimulation()
-      }
-    })
+    stepbutton.addActionListener(
+      new ActionListener:
+        def actionPerformed(e: ActionEvent): Unit = stepThroughSimulation()
+    )
     controls.add(stepbutton)
 
     val startButton = JToggleButton("Start/Pause")
-    val startTimer = javax.swing.Timer(0, new ActionListener {
-      def actionPerformed(e: ActionEvent): Unit = {
-        stepThroughSimulation()
-      }
-    })
-    startButton.addActionListener(new ActionListener {
-      def actionPerformed(e: ActionEvent): Unit = {
-        if startButton.isSelected then startTimer.start()
-        else startTimer.stop()
-      }
-    })
+    val startTimer = javax.swing.Timer(
+      0,
+      new ActionListener:
+        def actionPerformed(e: ActionEvent): Unit = stepThroughSimulation()
+    )
+    startButton.addActionListener(
+      new ActionListener:
+        def actionPerformed(e: ActionEvent): Unit =
+          if startButton.isSelected then startTimer.start()
+          else startTimer.stop()
+    )
     controls.add(startButton)
 
     val quadcheckbox = JToggleButton("Show quad")
-    quadcheckbox.addActionListener(new ActionListener {
-      def actionPerformed(e: ActionEvent): Unit = {
-        model.shouldRenderQuad = quadcheckbox.isSelected
-        repaint()
-      }
-    })
+    quadcheckbox.addActionListener(
+      new ActionListener:
+        def actionPerformed(e: ActionEvent): Unit =
+          model.shouldRenderQuad = quadcheckbox.isSelected
+          repaint()
+    )
     controls.add(quadcheckbox)
 
     val clearButton = JButton("Restart")
-    clearButton.addActionListener(new ActionListener {
-      def actionPerformed(e: ActionEvent): Unit = {
-        initialize(getParallelism, "two-galaxies", getTotalBodies)
-      }
-    })
+    clearButton.addActionListener(
+      new ActionListener:
+        def actionPerformed(e: ActionEvent): Unit =
+          initialize(getParallelism, "two-galaxies", getTotalBodies)
+    )
     controls.add(clearButton)
 
     val info = JTextArea("   ")
@@ -114,15 +109,15 @@ object BarnesHut:
       frame.info.setText("--- Statistics: ---\n" + text)
 
     def stepThroughSimulation(): Unit =
-      SwingUtilities.invokeLater(new Runnable {
-        def run() = {
-          val (bodies, quad) = simulator.step(model.bodies)
-          model.bodies = bodies
-          model.quad = quad
-          updateInformationBox()
-          repaint()
-        }
-      })
+      SwingUtilities.invokeLater(
+        new Runnable:
+          def run() =
+            val (bodies, quad) = simulator.step(model.bodies)
+            model.bodies = bodies
+            model.quad = quad
+            updateInformationBox()
+            repaint()
+      )
 
     def getParallelism =
       val selidx = parcombo.getSelectedIndex
@@ -132,13 +127,9 @@ object BarnesHut:
 
     initialize(getParallelism, "two-galaxies", getTotalBodies)
 
-  try
-    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
-  catch
-    case _: Exception => println("Cannot set look and feel, using the default one.")
+  try UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
+  catch case _: Exception => println("Cannot set look and feel, using the default one.")
 
   val frame = BarnesHutFrame()
 
-  def main(args: Array[String]): Unit =
-    frame.repaint()
-
+  def main: Unit = frame.repaint()

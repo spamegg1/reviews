@@ -10,57 +10,55 @@ import scala.collection.parallel.mutable.ParHashSet
 import scala.collection.parallel.CollectionConverters.*
 
 class Simulator(val taskSupport: TaskSupport, val timeStats: TimeStatistics):
-
   def updateBoundaries(boundaries: Boundaries, body: Body): Boundaries = // TODO
     val newMinX: Float = math.min(body.x, boundaries.minX)
     val newMaxX: Float = math.max(body.x, boundaries.maxX)
     val newMinY: Float = math.min(body.y, boundaries.minY)
     val newMaxY: Float = math.max(body.y, boundaries.maxY)
     val newBd: Boundaries = new Boundaries
-    newBd.minX = newMinX            // these 4 are vars in the Boundaries class!
+    newBd.minX = newMinX // these 4 are vars in the Boundaries class!
     newBd.maxX = newMaxX
     newBd.minY = newMinY
     newBd.maxY = newMaxY
     newBd
 
-  def mergeBoundaries(a: Boundaries, b: Boundaries): Boundaries =        // TODO
+  def mergeBoundaries(a: Boundaries, b: Boundaries): Boundaries = // TODO
     val newBd: Boundaries = new Boundaries
-    newBd.minX = math.min(a.minX, b.minX)     // these 4 are vars in Boundaries!
+    newBd.minX = math.min(a.minX, b.minX) // these 4 are vars in Boundaries!
     newBd.maxX = math.max(a.maxX, b.maxX)
     newBd.minY = math.min(a.minY, b.minY)
     newBd.maxY = math.max(a.maxY, b.maxY)
     newBd
 
   def computeBoundaries(bodies: coll.Seq[Body]): Boundaries =
-    timeStats.timed("boundaries") {
+    timeStats.timed("boundaries"):
       val parBodies = bodies.par
       parBodies.tasksupport = taskSupport
       parBodies.aggregate(Boundaries())(updateBoundaries, mergeBoundaries)
-    }
 
-  def computeSectorMatrix(bodies: coll.Seq[Body], boundaries: Boundaries)
-                         : SectorMatrix = timeStats.timed("matrix") {
-    val parBodies = bodies.par
-    parBodies.tasksupport = taskSupport
-    parBodies.aggregate(                                                 // TODO
-      new SectorMatrix(boundaries, SECTOR_PRECISION))(
-      (secMat, bod) => secMat += bod, (secM1, secM2) => secM1.combine(secM2)
-    )
-  }
-
-  def computeQuad(sectorMatrix: SectorMatrix): Quad = timeStats.timed("quad") {
-    sectorMatrix.toQuad(taskSupport.parallelismLevel)
-  }
-
-  def updateBodies(bodies: coll.Seq[Body], quad: Quad): coll.Seq[Body] =
-    timeStats.timed("update") {
+  def computeSectorMatrix(bodies: coll.Seq[Body], boundaries: Boundaries): SectorMatrix =
+    timeStats.timed("matrix"):
       val parBodies = bodies.par
       parBodies.tasksupport = taskSupport
-      parBodies.map(body => body.updated(quad)).seq                      // TODO
-    }
+      parBodies.aggregate(new SectorMatrix(boundaries, SECTOR_PRECISION))( // TODO
+        (secMat, bod) => secMat += bod,
+        (secM1, secM2) => secM1.combine(secM2)
+      )
 
-  def eliminateOutliers(bodies: coll.Seq[Body], sectorMatrix: SectorMatrix,
-                        quad: Quad): coll.Seq[Body] = timeStats.timed("eliminate") {
+  def computeQuad(sectorMatrix: SectorMatrix): Quad = timeStats.timed("quad"):
+    sectorMatrix.toQuad(taskSupport.parallelismLevel)
+
+  def updateBodies(bodies: coll.Seq[Body], quad: Quad): coll.Seq[Body] =
+    timeStats.timed("update"):
+      val parBodies = bodies.par
+      parBodies.tasksupport = taskSupport
+      parBodies.map(body => body.updated(quad)).seq // TODO
+
+  def eliminateOutliers(
+      bodies: coll.Seq[Body],
+      sectorMatrix: SectorMatrix,
+      quad: Quad
+  ): coll.Seq[Body] = timeStats.timed("eliminate"):
     def isOutlier(b: Body): Boolean =
       val dx = quad.massX - b.x
       val dy = quad.massY - b.y
@@ -77,6 +75,7 @@ class Simulator(val taskSupport: TaskSupport, val timeStats: TimeStatistics):
           -relativeSpeed > 2 * escapeSpeed
         else false
       else false
+    end isOutlier
 
     def outliersInSector(x: Int, y: Int): Combiner[Body, ParHashSet[Body]] =
       val combiner = ParHashSet.newCombiner[Body]
@@ -84,35 +83,34 @@ class Simulator(val taskSupport: TaskSupport, val timeStats: TimeStatistics):
       combiner
 
     val sectorPrecision = sectorMatrix.sectorPrecision
-    val horizontalBorder = for x <- 0 until sectorPrecision; y <- Seq(0, sectorPrecision - 1) yield (x, y)
-    val verticalBorder = for y <- 1 until sectorPrecision - 1; x <- Seq(0, sectorPrecision - 1) yield (x, y)
+    val horizontalBorder =
+      for
+        x <- 0 until sectorPrecision
+        y <- Seq(0, sectorPrecision - 1)
+      yield (x, y)
+    val verticalBorder =
+      for
+        y <- 1 until sectorPrecision - 1
+        x <- Seq(0, sectorPrecision - 1)
+      yield (x, y)
     val borderSectors = horizontalBorder ++ verticalBorder
 
-    // compute the set of outliers
-    val parBorderSectors = borderSectors.par
+    val parBorderSectors = borderSectors.par // compute the set of outliers
     parBorderSectors.tasksupport = taskSupport
-    val outliers = parBorderSectors.map({ case (x, y) => outliersInSector(x, y) }).reduce(_ combine _).result()
+    val outliers = parBorderSectors
+      .map(outliersInSector)
+      .reduce(_ combine _)
+      .result()
 
     // filter the bodies that are outliers
     val parBodies = bodies.par
     parBodies.filter(!outliers(_)).seq
-  }
+  end eliminateOutliers
 
   def step(bodies: coll.Seq[Body]): (coll.Seq[Body], Quad) =
-    // 1. compute boundaries
-    val boundaries = computeBoundaries(bodies)
-
-    // 2. compute sector matrix
-    val sectorMatrix = computeSectorMatrix(bodies, boundaries)
-
-    // 3. compute quad tree
-    val quad = computeQuad(sectorMatrix)
-
-    // 4. eliminate outliers
-    val filteredBodies = eliminateOutliers(bodies, sectorMatrix, quad)
-
-    // 5. update body velocities and positions
-    val newBodies = updateBodies(filteredBodies, quad)
-
+    val boundaries = computeBoundaries(bodies) // 1. compute boundaries
+    val sectorMatrix = computeSectorMatrix(bodies, boundaries) // 2. compute sector matrix
+    val quad = computeQuad(sectorMatrix) // 3. compute quad tree
+    val filteredBodies = eliminateOutliers(bodies, sectorMatrix, quad) // 4. elim outliers
+    val newBodies = updateBodies(filteredBodies, quad) // 5. update body velocities / pos
     (newBodies, quad)
-
