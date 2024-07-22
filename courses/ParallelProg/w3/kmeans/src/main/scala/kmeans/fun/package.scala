@@ -1,6 +1,5 @@
 package kmeans.fun
 
-
 /** The value of every pixel is represented as a 32 bit integer. */
 type RGBA = Int
 
@@ -19,15 +18,13 @@ def blue(c: RGBA): Double = ((0x000000ff & c) >>> 0).toDouble / 256
 /** Used to create an RGBA value from separate components. */
 def rgba(r: Double, g: Double, b: Double, a: Double): RGBA =
   (clamp((a * 256).toInt, 0, 255) << 24) |
-  (clamp((r * 256).toInt, 0, 255) << 16) |
-  (clamp((g * 256).toInt, 0, 255) <<  8) |
-  (clamp((b * 256).toInt, 0, 255) <<  0)
+    (clamp((r * 256).toInt, 0, 255) << 16) |
+    (clamp((g * 256).toInt, 0, 255) << 8) |
+    (clamp((b * 256).toInt, 0, 255) << 0)
 
 /** Restricts the integer into the specified range. */
 def clamp(v: Int, min: Int, max: Int): Int =
-  if v < min then min
-  else if v > max then max
-  else v
+  if v < min then min else if v > max then max else v
 
 /** Image is a two-dimensional matrix of pixel values. */
 class Img(val width: Int, val height: Int, private val data: Array[RGBA]):
