@@ -1,7 +1,7 @@
 course := "bigdata"
 assignment := "wikipedia"
 
-// HAS TO BE: sbt 1.7.0, spark 3.2.0, Java 11. Does not work otherwise.
+// HAS TO BE: Java 11. Does not work otherwise.
 scalaVersion := "3.4.2"
 scalacOptions ++= Seq("-language:implicitConversions", "-deprecation")
 libraryDependencies ++= Seq(
