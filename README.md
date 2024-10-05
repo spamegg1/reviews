@@ -146,7 +146,6 @@ Updated March 2024 (Jetbrains Academy Functional Scala)
     - Think deeply about *why* it was right, *how* it could be wrong, whether it generalizes.
   - When you don't get it right, try to identify the underlying idea or concept that you're not getting.
 
-
 #### Mental habits
 
 - Split your mind into two people: teacher and student.
@@ -170,16 +169,16 @@ Updated March 2024 (Jetbrains Academy Functional Scala)
 #### Time
 
 - Stop endlessly comparing different resources and trying to find the "best" resource. Pick a good resource, and go with it. Don't worry about minuscule differences, or "what I will be missing out".
-     - You will *always* be missing out, always and forever.
-     - There are way too many resources out there, which leads to the paradox of choice, and choice paralysis.
-     - Perfect is the enemy of good! "Good enough" is almost always the best option. *Satisficers* are almost always happier than *optimizers.*
+  - You will *always* be missing out, always and forever.
+  - There are way too many resources out there, which leads to the paradox of choice, and choice paralysis.
+  - Perfect is the enemy of good! "Good enough" is almost always the best option. *Satisficers* are almost always happier than *optimizers.*
 
 - Don't worry about time. Don't take the provided "time estimates" seriously, they don't mean anything. They are usually huge underestimations or huge overestimations.
 - Don't measure your success or failure in terms of time ("this one problem took me X hours/days to do!"), time often is a poor measurement of difficulty (one tiny piece of missing knowledge can cause days/months of getting stuck, gaining that piece can solve a huge problem instantly).
 - Measure it in terms of which concepts/ideas gave you an easy/hard time, what pieces of knowledge you gained or you were missing, how well and properly you handled the problems, how high/low was the complexity, whether you did it with solid understanding or not. Be metacognitive!
 - Go slowly. Completing fast is NOT an achievement. Completing slowly usually is.
 - *Those who proceed only very slowly can make much greater progress, provided they always follow the right path, than those who hurry and stray from it.*
-     - Rene Descartes, Discourse on Method
+  - Rene Descartes, Discourse on Method
 
 #### Long term memory
 
@@ -212,7 +211,7 @@ Updated March 2024 (Jetbrains Academy Functional Scala)
 
 ### <a name="cs50"></a> Harvard's CS50 (first half)
 
-https://cs50.harvard.edu/
+<https://cs50.harvard.edu/>
 
 This was my first course. In 2018 this was the "intro/beginner" course on OSSU curriculum. For the sake of completeness I took the whole course at once, including the [second half](#cs50-2). It's pretty challenging for a beginner course, because that's how Harvard does it. In terms of college course numbering, they go with 050 but it feels more like a 200-level class.
 
@@ -229,7 +228,7 @@ I think it's a challenging beginner course. These days Python is the preferred l
 *Spam's Recommendation:* Take it. It's good!
 
 ### <a name="cs50-2"></a> CS50, second half, Final Project
-https://cs50.harvard.edu/
+<https://cs50.harvard.edu/>
 
 OK, this was a total mess. (Apparently they improved it later with "tracks" you can follow, like Android, game, web, iOS.)
 
@@ -253,8 +252,8 @@ I spent about 5 weeks making my project after "finishing" CS50. I'm pretty sure 
 
 ### <a name="how-to-code"></a> How to Code 1 & 2
 
-https://www.edx.org/course/how-to-code-simple-data
-https://www.edx.org/course/how-to-code-complex-data
+<https://www.edx.org/course/how-to-code-simple-data>
+<https://www.edx.org/course/how-to-code-complex-data>
 
 These courses are intended for absolute beginners but in OSSU they come after some other introductory courses. Personally I think it's more appropriate as someone's first course. Experienced functional programming teachers and academics claim that it's much easier for someone to learn FP if they were NOT exposed to programming before, but those used to procedural programming have a harder time.
 
@@ -412,8 +411,8 @@ I have the following advice but it still does not work for many people due to po
 
 ### <a name="softcons"></a> Software Construction 1, 2
 
-https://www.edx.org/course/software-construction-data-abstraction
-https://www.edx.org/course/software-construction-object-oriented-design
+<https://www.edx.org/course/software-construction-data-abstraction>
+<https://www.edx.org/course/software-construction-object-oriented-design>
 
 These were the follow-up courses to How to Code 1,2. They have NOTHING in common with HtC courses. They do not follow up on or build up on HtC in any way. Completely orthogonal. I think that was the intention actually. Functional versus OOP. The courses are supposed to have 2 instructors but we only see one. The other lady with the short hair appears only once or twice in an interview style video.
 
@@ -429,9 +428,9 @@ The second course finishes with a project that is some sort of Twitter app. You 
 
 ### <a name="plabc"></a> Programming Languages A, B, C
 
-https://www.coursera.org/learn/programming-languages
-https://www.coursera.org/learn/programming-languages-part-b
-https://www.coursera.org/learn/programming-languages-part-c
+<https://www.coursera.org/learn/programming-languages>
+<https://www.coursera.org/learn/programming-languages-part-b>
+<https://www.coursera.org/learn/programming-languages-part-c>
 
 I loved these courses! These were right around the time of my grandmother passing away, so they really helped me pick up my spirits afterwards. Dan Grossman (Mr. PhD in programming languages jumping up and down waving his arms LOL) is an awesome instructor! He is rated as a Top Instructor on Coursera (4.9/5.0). Congrats to him and his wife on their baby boy. Grossman explains very well why he chose ML, Racket and Ruby (and not Haskell or Java), why there are 3 courses, and why there is a strong bias towards functional languages (in Week 4 of first course), which was an awesome surprise for me; because I love them due to my math background but I thought that the world considered FP to be some useless academic thing.
 
@@ -451,9 +450,9 @@ The concepts I learned here carried me all the way through; in fact in my Scala 
 
 *Spam's recommendation:* Drop what you are doing and take these now! They will serve you forever. Many people struggle hard with these courses if they skip How to Code classes. So take those first!
 
-### <a name="lpn"></a> Learn Prolog Now!
+### <a name="lpn"></a> Learn Prolog Now
 
-https://www.let.rug.nl/bos/lpn//lpnpage.php?pageid=online
+<https://www.let.rug.nl/bos/lpn//lpnpage.php?pageid=online>
 
 This is a text-only course, like a textbook. There is a book version of it too I believe. No videos. There are some interactive widgets that can run Prolog code but they did not work well on my browser. I resorted to [this IDE for Windows](https://arbeitsplattform.bildung.hessen.de/fach/informatik/swiprolog/indexe.html). For Mac and Linux there is an Eclipse plug-in.
 
@@ -461,7 +460,7 @@ If you are one of those people who like to debate programming languages and para
 
 It is so very different! You have to think in a completely different way: Unification/Resolution and Backtracking. You have to think in terms of search trees. Even some simple exercises will trip you up. It helps that it has recursion, so it has some familiarity at least. Also you think of your programs as knowledge bases, to which you make queries: a bit database-like, declarative-style programming. So there is some familiarity there too if you used SQL. But I must admit that Logic programming is not suitable for most problems out there. It can also be computationally inefficient. It's super cool though.
 
-Backtracking is used in some "normal" programs in "normal" (non-Logic) languages too. For example you will write a brute-force Sudoku puzzle solver in How to Code 2 and then also in Udacity's Software Testing. The straightforward, non-clever solution necessitates backtracking. Another example of backtracking in "normal" programs is maze solvers: https://github.com/mikepound/mazesolving and https://www.youtube.com/watch?v=rop0W4QDOUI
+Backtracking is used in some "normal" programs in "normal" (non-Logic) languages too. For example you will write a brute-force Sudoku puzzle solver in How to Code 2 and then also in Udacity's Software Testing. The straightforward, non-clever solution necessitates backtracking. Another example of backtracking in "normal" programs is maze solvers: <https://github.com/mikepound/mazesolving> and <https://www.youtube.com/watch?v=rop0W4QDOUI>
 
 This was right up my alley, because the language works exactly like a [proof tree](https://www.quora.com/What-are-proof-trees) which I studied in Mathematical Logic. Oh and the Cut Rule! (to stop backtracking) goes back to Gentzen's 1934 [theorem](https://en.wikipedia.org/wiki/Cut-elimination_theorem).
 
@@ -471,7 +470,7 @@ Originally Prolog was created by a linguist, so the main application is studying
 
 ### <a name="cs212"></a> Design of Computer Programs
 
-https://www.udacity.com/course/design-of-computer-programs--cs212
+<https://www.udacity.com/course/design-of-computer-programs--cs212>
 
 I took this course twice! Once a few years before I started OSSU. I had to quit because it was too hard and I was frustrated. It totally kicked my ass and wiped the floor with it. The second time around I finished it.
 
@@ -487,7 +486,7 @@ The assignments are very hard. Definitely up there with Algorithms or even Advan
 
 ### <a name="haskell"></a> Functional Programming in Haskell
 
-https://www.futurelearn.com/courses/functional-programming-haskell
+<https://www.futurelearn.com/courses/functional-programming-haskell>
 
 This was a 6-week "course" that cannot really be called a course. It was more like a few short tutorials put together. It was so insanely short I finished it in one day. I think the last "week" was just some interview videos with some academics. In week 6 they jump into Monads (which you won't understand), because for some reason FP people MUST mention Monads! What's cool is that it's from U of Glasgow, the creators of Haskell. You get to meet Simon Peyton Jones. They talk about the history of the ML-family of languages from the 70s and 80s. They talk about Alonzo Church, Stephen Kleene and lambda calculus too. History is cool.
 
@@ -495,7 +494,7 @@ This was a 6-week "course" that cannot really be called a course. It was more li
 
 ### <a name="hpffp"></a> Haskell Programming from First Principles
 
-https://haskellbook.com/
+<https://haskellbook.com/>
 
 I didn't pay for this. $59? Are you kidding? My Specialization cost me $0, please. In my country I can eat for a month with $59 (local currency crap against the mighty dollar). It's a great book though. Although SUPER SUPER SUPER LONG! Like 1900 pages. I think I quit at page 1700 or so, after Applicative. I already knew about and used Monads.
 
@@ -511,7 +510,7 @@ You might try (I haven't) [Learn You a Haskell for a Great Good!](http://www.lea
 
 ### <a name="n2t"></a> Nand2Tetris 1,2
 
-https://www.nand2tetris.org/
+<https://www.nand2tetris.org/>
 
 This was my favorite course ever (until I took Algorithms)! It's purely project focused. No lectures or academic topics, no quizzes or exams. It probably won't be directly useful in real life, but the ideas/systems will indirectly help you understand computers at every level: machine instructions/assembly/VM/compilers.
 
@@ -547,7 +546,7 @@ Each topic had so many nitty gritty technical details, it's impossible to keep t
 
 ### <a name="ostep"></a> Operating Systems: Three Easy Pieces
 
-http://pages.cs.wisc.edu/~remzi/OSTEP/
+<http://pages.cs.wisc.edu/~remzi/OSTEP/>
 
 This is a textbook, not a course. But it became a course and replaced Hack the Kernel in OSSU. I read this whole book and did all of its exercises since HtK totally sucked and I could not understand anything.
 
@@ -561,7 +560,7 @@ Check the author's site as he is planning an update and some other excellent fre
 
 ### <a name="mit6001x"></a> Intro to CS and Programming with Python
 
-https://www.edx.org/course/introduction-computer-science-mitx-6-00-1x-10
+<https://www.edx.org/course/introduction-computer-science-mitx-6-00-1x-10>
 
 This is probably the best intro course ever. This is much gentler than CS50 as an intro class, obviously. I took it one year into my studies, because it got added to the OSSU curriculum one year after I started, and I wanted to do it for completeness. Obviously at that point I was not a beginner so this course was very easy and fun. I think it took me 6 days. It went so quickly because I was having so much fun.
 
@@ -573,11 +572,11 @@ Assignments were: finding a longest substring, a Hangman game, a dictionary word
 
 ### <a name="coretheory"></a> Algorithms (Tim Roughgarden)
 
-https://www.coursera.org/learn/algorithms-divide-conquer
-https://www.coursera.org/learn/algorithms-graphs-data-structures
-https://www.coursera.org/learn/algorithms-greedy
-https://www.coursera.org/learn/algorithms-npcomplete
-https://algorithmsilluminated.org
+<https://www.coursera.org/learn/algorithms-divide-conquer>
+<https://www.coursera.org/learn/algorithms-graphs-data-structures>
+<https://www.coursera.org/learn/algorithms-greedy>
+<https://www.coursera.org/learn/algorithms-npcomplete>
+<https://algorithmsilluminated.org>
 
 These courses are right up there with Nand2Tetris and PLABC as THE BEST. I took this right after my 6 month long Hack the Kernel fiasco, and boy, what a soul-saver this was! Super awesome amazing courses. Filled with mathematical beauty that brings tears to my eyes. These are now listed as 4 courses but when I took them at Stanford's Lagunita platform there were 2 courses: the first 2 combined into 1, and the last 2 combined into 1. If you don't like Coursera you can go straight to Tim's page where there are links to videos and finish his textbooks.
 
@@ -618,7 +617,7 @@ You will write TONS AND TONS of queries. Some of the exercises are quite hard! M
 *Spam's recommendation:* Probably this is as good as a pure Databases course can be made. But I think this (writing hundreds and thousands of query exercises) is a wrong way to learn databases. Learn it by doing a web project instead. You don't have to take all 14 mini-courses; take the most relevant, important ones (SQL, JSON).
 
 ### <a name="graphics"></a> Computer Graphics
-https://www.edx.org/course/computer-graphics-uc-san-diegox-cse167x
+<https://www.edx.org/course/computer-graphics-uc-san-diegox-cse167x>
 
 This course was very uneven. Some great parts and some awful parts. Also at the time I took it, edX started doing this thing: they cut off your audit access in one month. So I was under a lot of time pressure to finish this quickly, but it's actually tough material. Also you can't submit assignments for grading unless you pay (I didn't, even students who paid were complaining about their experiences with the grader). The discussion boards under the videos were full of unanswered questions from frustrated students. It's possible to test with the provided code but it requires some eye-balling: you have to stare at your images versus the reference solution images.
 
@@ -642,7 +641,7 @@ I took a look at some people's solutions and holy hell... it would have taken me
 
 ### <a name="ml"></a> Machine Learning
 
-https://www.coursera.org/learn/machine-learning
+<https://www.coursera.org/learn/machine-learning>
 
 Wow, this was one of the BEST courses I took ever. So good. The instructor Andrew Ng is, if I understand correctly, the founder of Coursera. His teaching style is great. The material, PDFs/notes, videos, assignments are all top-notch quality. They also introduced me to the awesome free MATLAB alternative, GNU Octave, which I ended up using later again for another course.
 
@@ -656,7 +655,7 @@ You also need to spend some time thinking about how to correctly "vectorize" the
 
 ### <a name="crypt"></a> Cryptography 1
 
-https://www.coursera.org/learn/crypto/
+<https://www.coursera.org/learn/crypto/>
 
 Wow this course was HARD. The easiest part for me was close to the ending where it goes into number theory (Euler phi function and such). The last part of the course is just setting you up for Cryptography 2, the next course, which I'm told is even more math heavy. Yikes!
 
@@ -674,7 +673,7 @@ What I said above sounds all very negative, but it's a really good course and th
 
 ### <a name="softproc"></a> Software Processes
 
-https://www.coursera.org/learn/software-processes
+<https://www.coursera.org/learn/software-processes>
 
 I decided to take this when I realized [Software Engineering: Introduction](https://www.edx.org/course/software-engineering-introduction-ubcx-softeng1x) is behind a pay-wall. That course was talking about Software Methodologies, so I took this.
 
@@ -683,19 +682,18 @@ Another verbal course. You learn about all the cool catchphrases, ahem, I mean, 
 *Spam's recommendation:* Skip it. The exams are behind a pay-wall anyway. You can see the questions though. Just can't submit.
 
 ### <a name="softarch"></a> Software Architecture
-https://www.coursera.org/learn/software-architecture
+<https://www.coursera.org/learn/software-architecture>
 
 I decided to take this when I realized [Software Engineering: Introduction](https://www.edx.org/course/software-engineering-introduction-ubcx-softeng1x) is behind a pay-wall. I didn't know at the time but this is a repetition of Software Construction 1 and Udacity's Software Architecture and Design.
 
 Another verbal course. It's like a literature class. [Words, words, words, words, words.](https://www.youtube.com/watch?v=-lqqDvWF45w) They hired a nice young acting or dance major student to read all the text from the teleprompter for a nice presentation. She clearly has no idea what she is saying.
-
 
 This one makes you draw a ton of UML diagrams using some online tools. There are more than 20 kinds of UML diagrams. Oh my god. I felt like I was taking an art class. It was kinda fun at first. These assignments are all peer-graded. You get a free certificate at the end, no pay-wall, but it feels pretty meaningless.
 
 *Spam's recommendation:* What do you think? Skip it, of course.
 
 ### <a name="compilers"></a> Compilers
-https://www.udacity.com/course/compilers-theory-and-practice--ud168
+<https://www.udacity.com/course/compilers-theory-and-practice--ud168>
 
 I took this because the Stanford compilers course became unavailable. This course has no programming assignments, only quizzes, which was OK by me. I'm interested in compilers but not that much. It's a pretty good course. Especially the beginning parts that teach you the theory of regular expressions and deterministic/non-deterministic finite state machines, and later, context-free grammars. It's a very long course, and it gets super complicated towards the end when you deal with low-level code generation matters. However the problems involved are extremely interesting and hard, like parse trees, register allocation and control flow graphs. This is some truly hardcore Computer Science. I will learn these properly WHEN I GROW UP!
 
@@ -704,7 +702,7 @@ I took this because the Stanford compilers course became unavailable. This cours
 ***Update Feb 2021:*** Looks like I was wrong, you should probably take this course. I was working on updating a [complex web application](https://futurecoder.io) to a newer version of Python, and one of the [dependencies](https://github.com/gristlabs/asttokens/) was about abstract syntax trees. The dependent package was failing some tests, and it required AST (abstract syntax tree) knowledge and understanding on my part to fix the broken tests.
 
 ### <a name="debug"></a> Software Debugging
-https://www.udacity.com/course/software-debugging--cs259
+<https://www.udacity.com/course/software-debugging--cs259>
 
 Short sweet course. The instructor is great! Very funny guy with lots of interesting stories. For example, did you know that a software bug killed people by giving them an overdose of radiation? He is some sort of debugging expert and wrote books on the subject. I was surprised that [DDD](https://savannah.gnu.org/projects/ddd) that I have installed on my PC came from him and one of his PhD students years ago! There are also some other pioneers in [automated bug fixing](https://web.eecs.umich.edu/~weimerw/) (he taught [CS262](https://www.udacity.com/course/programming-languages--cs262)).
 
@@ -719,7 +717,7 @@ Some of the programming assignments have issues and bugs. There are some notes b
 *Spam's recommendation:* You can't really lose much by taking it. It's pretty short. It has some very cool ideas I haven't seen elsewhere. The instructor claims they are adopted by industry. Too bad it doesn't really deliver on its promise.
 
 ### <a name="test"></a> Software Testing
-https://www.udacity.com/course/software-testing--cs258
+<https://www.udacity.com/course/software-testing--cs258>
 
 Another short sweet course. Very closely tied to Software Debugging.
 
@@ -737,7 +735,7 @@ In the final exam you write a fuzzer/random tester for a text viewing applicatio
 
 ### <a name="softdesg"></a> Software Architecture & Design
 
-https://www.udacity.com/course/software-architecture-design--ud821
+<https://www.udacity.com/course/software-architecture-design--ud821>
 
 This was quite atrocious. There are 30 Lessons, each with 25-50 videos. Some videos are so short (like 3 seconds) it gets incredibly annoying to go through the in-between-video transitions.
 
@@ -747,11 +745,11 @@ This is a purely verbal course. No programming assignments, no homeworks, just a
 
 There was only one useful Lesson. It's a scenario where two instructors are play-acting as software engineer and client. They go through the design decisions of a Library ID card/book checkout system. It actually made a lot of sense. This was extremely similar to what they did in the Software Construction 1,2 classes.
 
-*Spam's recommendation:* Do not take this. Total waste of time. You can listen to [The Joy of Painting with Bob Ross](https://www.youtube.com/user/BobRossInc) if you have trouble going to sleep. Software architecture is obviously a serious topic, it's not a joke; but this is a terrible way to teach it. Check out these books instead: https://aosabook.org/en/index.html
+*Spam's recommendation:* Do not take this. Total waste of time. You can listen to [The Joy of Painting with Bob Ross](https://www.youtube.com/user/BobRossInc) if you have trouble going to sleep. Software architecture is obviously a serious topic, it's not a joke; but this is a terrible way to teach it. Check out these books instead: <https://aosabook.org/en/index.html>
 
 ### <a name="laff"></a> LAFF - On programming for Correctness
 
-https://www.edx.org/course/laff-on-programming-for-correctness
+<https://www.edx.org/course/laff-on-programming-for-correctness>
 
 This course was very strange and uneven. It has 6 weeks. Week 1 is purely dedicated to Logic review, which I skipped. Week 2 starts with the core idea of the course: obtaining correctness proofs of algorithms along with deriving the algorithm itself, hand in hand.
 
@@ -775,7 +773,7 @@ Correctness proofs are provided only for EXTREMELY SIMPLE algorithms that all fo
 
 ### <a name="cs344"></a> Intro to Parallel Programming
 
-https://classroom.udacity.com/courses/cs344
+<https://classroom.udacity.com/courses/cs344>
 
 This was the hardest course after Hack the Kernel. But it's insanely cool! However, this course is deprecated/abandoned by Udacity (you can't find it in their course catalog, only accessible if you know a certain URL). So there is no support at all. The auto-graders do not work (the GPU time-sharing they rented from Amazon no longer exists, the back-end of the grader is GONE). The forums are dead (I searched through thousands of posts to find anything relevant at all). The other MANY ways I tried to run the code on my machine did not work either:
 
@@ -799,7 +797,7 @@ The instructors are great! I always thought Udacity is the only one that got onl
 *Spam's recommendation:* DO NOT TAKE THIS! It's abandon ware. Super hard, and you are all alone. You'll go through so much pain and frustration. It's too bad though, because it's actually an awesome course. Very sad, and shame on Udacity. Take [Parallel Programming](https://www.coursera.org/learn/parprog1).
 
 ### <a name="scala"></a> Functional Programming in Scala (5 courses)
-https://www.coursera.org/specializations/scala
+<https://www.coursera.org/specializations/scala>
 
 **Update (July 2021):** The first 3 courses have been [updated to Scala 3](https://scala-lang.org/blog/2021/05/17/effective-programming-scala-course.html).
 
@@ -865,9 +863,9 @@ It's broken into 6 Milestones. The first 2 were the hardest, the last 2 went sup
 
 ### <a name="game"></a> Game Theory 1
 
-https://www.coursera.org/learn/game-theory-1
+<https://www.coursera.org/learn/game-theory-1>
 
-http://www.game-theory-class.org/
+<http://www.game-theory-class.org/>
 
 This course is an advanced elective in OSSU. It's a math course, usually taught in Econ departments, and it's supposed to be related to AI, but I could hardly see any connections between this course and computer science. There is *Algorithmic Game Theory* but that is more academic and research focused. There is brief mention of algorithms in this course, but those algorithms are used *to solve the games presented in the course* (rather than *using* games to *do* something in CS).
 
@@ -891,7 +889,7 @@ There is also a [second course](http://www.game-theory-class.org/game-theory-II.
 *Spam's recommendation: If you are into math, econ, games and cool fun stuff, definitely take it! It's a great course. It will make you look at everything in life differently. Otherwise you might want to take some other electives that are more relevant to CS.*
 
 ### <a name="concept"></a> Formal Concept Analysis
-https://www.coursera.org/learn/formal-concept-analysis
+<https://www.coursera.org/learn/formal-concept-analysis>
 
 Very tough and abstract course. It's a graduate level math class. It is primarily a specialized version of Lattice Theory (a branch of Set Theory, which is a branch of Mathematical Logic). Also uses ideas like models, theories and implications from Model Theory (another branch of Mathematical Logic).
 
@@ -929,7 +927,7 @@ Week 6 is a bit self-defeating but it shows the self-awareness of the theory. Th
 
 ### <a name="fsopen"></a> Fullstack Open
 
-https://fullstackopen.com/en/
+<https://fullstackopen.com/en/>
 
 *Consider this the equivalent of an Advanced Application/Final Project in OSSU.*
 
@@ -1007,7 +1005,7 @@ Another downside is how we keep bulldozing over code we have previously written,
 
 ### <a name="logic"></a> Introduction to Logic
 
-https://www.coursera.org/learn/logic-introduction/
+<https://www.coursera.org/learn/logic-introduction/>
 
 Let me start by saying that I've studied quite a bit of Mathematical Logic before. So I can do this course in my sleep. (And on many occasions I did. Fun dreams!) I took this course to help out some others who were having trouble. I finished in 3-4 days.
 
@@ -1095,7 +1093,7 @@ Overall: some negative comments on [Coursera Discussion forums](https://www.cour
 
 ### <a name="c4e"></a> C for Everyone (non-review)
 
-https://www.coursera.org/learn/c-for-everyone
+<https://www.coursera.org/learn/c-for-everyone>
 
 Part 1 of a 4-part specialization on C and C++.
 
@@ -1109,11 +1107,11 @@ The whole thing has a very low effort, casual, unprofessional feel to it. Sorry 
 
 ### <a name="tarski"></a> Semantics of First Order Logic
 
-https://www.edx.org/learn/logic/stanford-university-semantics-of-first-order-logic
+<https://www.edx.org/learn/logic/stanford-university-semantics-of-first-order-logic>
 
 Finally a *good* logic course! Shockingly it's again from Stanford! But it's actually made by people from CSLI (Center for the Study of Language and Information). Somehow *these* Stanford logic people are not connected to *those* Stanford logic people... These put out some actually quality textbooks with online components, unlike those. There are two instructors, "John and Dave, the logic guys", who wrote the book and made the course together, they keep interacting back and forth in the videos, highly conversational style, very nice.
 
-The course uses a book named Tarski's world (less of a textbook, more of an exercise book) and an online tool with the same name (which evolved from a desktop app from 1990's). They created a dedicated website named GradeGrinder to go with their textbooks (this is not the only one). These are all outside of edX on an external site. Submission to the grader is not possible without paying. The tool uses files but they cannot be downloaded from / uploaded to the website. Thankfully all assignment files are included in the browser.
+The course uses a book named Tarski's world (less of a textbook, more of an exercise book) and an online tool with the same name, which evolved from a desktop app from 1990's. (I just learned that Barwise died in 2000, so the videos were recorded in the 90s too!) They created a dedicated website named GradeGrinder to go with their textbooks (this is not the only one). These are all outside of edX on an external site. Submission to the grader is not possible without paying. The tool uses files but they cannot be downloaded from / uploaded to the website. Thankfully all assignment files are included in the browser.
 
 There are four weeks. Weeks 1 & 2 are on Propositional Logic, then weeks 3 & 4 are on First Order Logic. Very basic stuff explained *properly and slowly*: connectives, truth tables, tautologies, equivalences, and eventually quantifiers, validity and so on. They *do* cover the idea of presenting proofs as a two-player game, which is great. The game is actually built into the software too! So you can play it "against the computer."
 
