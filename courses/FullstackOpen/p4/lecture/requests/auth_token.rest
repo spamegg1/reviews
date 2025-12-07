@@ -1,8 +1,0 @@
-post http://localhost:3001/api/notes
-Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1sdXVra2FpIiwiaWQiOiI2MDg1NWQ0Yjc3ODg0ODhkZjFhN2JhZmEiLCJpYXQiOjE2MTkzNTk5MDB9.Ahefdn9Xi1qsJPpNpIM7Fo-6IQwXQ26mA_xZ4syQHKc
-
-{
-  "content": "Single page apps use token authentication (from VS Code REST client)",
-  "important": true
-}
